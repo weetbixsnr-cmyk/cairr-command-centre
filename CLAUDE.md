@@ -55,3 +55,8 @@ Shows what needs his attention, what's in progress, what agents are doing.
 - The file at `/Users/cairr/.openclaw/workspace/dashboard.html` (Feb 27 2026) is the golden master.
 - ANY layout change requires Adam's explicit approval with a screenshot of the proposed change.
 - File is chmod 444 (read-only). Must be unlocked before any edit.
+
+## 🚫 Brain Does NOT Touch Dashboard Data
+- CC agent owns ALL data updates to dashboard.html
+- Brain audits CC agent output, commits and pushes — NEVER edits dashboard content directly
+- If dashboard data is wrong, Brain tells CC agent what to fix via sessions_send
