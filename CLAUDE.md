@@ -47,3 +47,11 @@ Shows what needs his attention, what's in progress, what agents are doing.
 ## Security
 - Password protected (Basic Auth), no search engine indexing
 - No caching, session cookies (7-day), HTTPS only (Vercel)
+
+## 🔒 DESIGN LOCK — CONSTITUTIONAL
+- **dashboard.html is the LOCKED design. NEVER change its layout, style, or structure.**
+- Data updates ONLY — swap text/numbers inside existing elements.
+- NO new sections. NO removing sections. NO changing colors, fonts, spacing, borders.
+- The file at `/Users/cairr/.openclaw/workspace/dashboard.html` (Feb 27 2026) is the golden master.
+- ANY layout change requires Adam's explicit approval with a screenshot of the proposed change.
+- File is chmod 444 (read-only). Must be unlocked before any edit.

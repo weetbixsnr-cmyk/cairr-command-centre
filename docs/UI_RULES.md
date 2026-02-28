@@ -31,3 +31,8 @@
 - Body: regular, readable on mobile
 - Status: emoji + short text
 - No walls of text — tables and bullets only
+
+## 🔒 DESIGN LOCK (28 Feb 2026)
+The dashboard.html layout is FROZEN. Only data inside existing elements may change.
+Golden master: /Users/cairr/.openclaw/workspace/dashboard.html
+chmod 444 enforced. Unlock requires Adam's approval.
