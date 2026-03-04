@@ -1,5 +1,5 @@
 # Pipeline: v3dn
 **Status:** ⚠️ 1 WARNINGS
-**Timestamp:** 2026-03-04 21:02
+**Timestamp:** 2026-03-04 21:22
 **Checks:** 19/20 passed | 1 failed | 0 blocked
-**Report:** /Users/cairr/.openclaw/agents/v3dn/workspace/output/audit-report-2026-03-04_210236.md
+**Report:** /Users/cairr/.openclaw/agents/v3dn/workspace/output/audit-report-2026-03-04_212156.md
