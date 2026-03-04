@@ -1,13 +1,15 @@
 # Pipeline Audit Report
-**Agent:** alpha
-**Target:** /Users/cairr/.openclaw/agents/alpha/workspace
-**Timestamp:** Wed Mar  4 22:02:37 AEDT 2026
+**Agent:** northern-beaches-hot-water
+**Target:** /Users/cairr/AI/cairr/clients/northern-beaches-hot-water/
+**Timestamp:** Wed Mar  4 22:17:25 AEDT 2026
 ---
 
 # Stage 1: Location
 
 ## [S1] location-check
 ```
+/Users/cairr/.openclaw/workspace/scripts/pipeline/location-check.sh: line 24: [:        0
+0: integer expression expected
 ✅ LOCATION-CHECK: PASS
 ```
 
@@ -82,8 +84,7 @@ declare: usage: declare [-afFirtx] [-p] [name[=value] ...]
 
 ## [S5] docs-check
 ```
-❌ DOCS-CHECK: FAIL
-❌ No README.md found
+✅ DOCS-CHECK: PASS
 ```
 
 ## [S5] build-check
@@ -128,7 +129,7 @@ WEEKLY HEALTH REPORT:
 ---
 ## Summary
 - **Total checks:** 20
-- **Passed:** 19
-- **Failed:** 1
+- **Passed:** 20
+- **Failed:** 0
 - **Blocked:** 0
-- **Result: ⚠️ 1 WARNINGS (non-blocking)**
+- **Result: ✅ ALL CHECKS PASSED**

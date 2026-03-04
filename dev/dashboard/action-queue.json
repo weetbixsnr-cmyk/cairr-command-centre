@@ -1,14 +1,5 @@
 [
   {
-    "id": "aq-001",
-    "type": "reminder",
-    "priority": "high",
-    "source": "brain",
-    "title": "Message Russell Lister for his email \u2014 Parriwi quote ready to send",
-    "created": "2026-03-02T21:28+11:00",
-    "status": "pending"
-  },
-  {
     "id": "aq-002",
     "type": "invoice",
     "priority": "medium",
