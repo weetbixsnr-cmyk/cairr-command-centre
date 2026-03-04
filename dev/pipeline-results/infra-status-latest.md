@@ -1,6 +1,5 @@
-# Infrastructure Status — 2026-03-01 21:04
+# Infrastructure Status — 2026-03-02 05:02
 
-✅ fswatch daemon: running (PID 70134
-70137)
-✅ OpenClaw gateway: running (PID 43513)
-✅ Next.js dev server(s): running
+❌ fswatch daemon: NOT RUNNING
+   Fix: nohup bash /Users/cairr/.openclaw/workspace/scripts/pipeline/watch-agents.sh > /tmp/pipeline-watcher.log 2>&1 &
+✅ OpenClaw gateway: running (PID 21816)
