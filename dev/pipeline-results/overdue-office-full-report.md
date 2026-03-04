@@ -1,7 +1,7 @@
 # Pipeline Audit Report
 **Agent:** overdue-office
 **Target:** /Users/cairr/.openclaw/agents/overdue-office/workspace
-**Timestamp:** Sun Mar  1 18:53:28 AEDT 2026
+**Timestamp:** Wed Mar  4 12:02:27 AEDT 2026
 ---
 
 # Stage 1: Location
@@ -75,6 +75,16 @@ declare: usage: declare [-afFirtx] [-p] [name[=value] ...]
 ✅ LICENSE-CHECK: PASS (no package.json)
 ```
 
+## [S4] comms-check
+```
+✅ COMMS-CHECK: PASS
+```
+
+## [S4] report-template
+```
+✅ REPORT-TEMPLATE: PASS
+```
+
 # Stage 5: Quality
 
 ## [S5] dead-code
@@ -92,6 +102,29 @@ declare: usage: declare [-afFirtx] [-p] [name[=value] ...]
 ✅ BUILD-CHECK: PASS
 ```
 
+## [S5] ui-check
+```
+✅ UI-CHECK: PASS
+```
+
+## [S5] seo-content
+```
+/Users/cairr/.openclaw/workspace/scripts/pipeline/seo-content.sh: line 48: [: 0
+0: integer expression expected
+/Users/cairr/.openclaw/workspace/scripts/pipeline/seo-content.sh: line 49: [: 0
+0: integer expression expected
+/Users/cairr/.openclaw/workspace/scripts/pipeline/seo-content.sh: line 64: [: 0
+0: integer expression expected
+/Users/cairr/.openclaw/workspace/scripts/pipeline/seo-content.sh: line 64: [: 0
+0: integer expression expected
+⚠️ SEO-CONTENT: ISSUES FOUND
+❌ layout.tsx:
+    Missing canonical URL
+
+❌ homepage.tsx:
+    Missing canonical URL
+```
+
 # Stage 6: Verification
 
 ## [S6] url-verify
@@ -99,10 +132,27 @@ declare: usage: declare [-afFirtx] [-p] [name[=value] ...]
 ✅ URL-VERIFY: PASS (no URLs found)
 ```
 
+## [S6] line-limit
+```
+/Users/cairr/.openclaw/workspace/scripts/pipeline/line-limit.sh: line 8: declare: -A: invalid option
+declare: usage: declare [-afFirtx] [-p] [name[=value] ...]
+```
+
+## [S6] weekly-health
+```
+WEEKLY HEALTH REPORT:
+✅ SSL the-overdue-office.vercel.app expires: May 27 06:28:02 2026 GMT
+✅ SSL command-centre-nine.vercel.app expires: May 27 06:28:02 2026 GMT
+📦 the-overdue-office: 9
+? outdated deps
+📦 command-centre: 3
+? outdated deps
+```
+
 ---
 ## Summary
-- **Total checks:** 14
-- **Passed:** 13
-- **Failed:** 1
+- **Total checks:** 20
+- **Passed:** 18
+- **Failed:** 2
 - **Blocked:** 0
-- **Result: ⚠️ 1 WARNINGS (non-blocking)**
+- **Result: ⚠️ 2 WARNINGS (non-blocking)**
