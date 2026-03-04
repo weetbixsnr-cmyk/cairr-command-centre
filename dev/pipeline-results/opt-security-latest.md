@@ -1,5 +1,5 @@
 # Pipeline: opt-security
 **Status:** ⚠️ 1 WARNINGS
-**Timestamp:** 2026-03-05 00:54
+**Timestamp:** 2026-03-05 01:07
 **Checks:** 19/20 passed | 1 failed | 0 blocked
-**Report:** /Users/cairr/.openclaw/agents/opt-security/workspace/output/audit-report-2026-03-05_005145.md
+**Report:** /Users/cairr/.openclaw/agents/opt-security/workspace/output/audit-report-2026-03-05_010510.md
