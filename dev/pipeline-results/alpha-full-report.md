@@ -1,6 +1,6 @@
 # Pipeline Audit Report
-**Agent:** bts
-**Target:** /Users/cairr/.openclaw/agents/bts/workspace
+**Agent:** alpha
+**Target:** /Users/cairr/.openclaw/agents/alpha/workspace
 **Timestamp:** Wed Mar  4 11:55:11 AEDT 2026
 ---
 

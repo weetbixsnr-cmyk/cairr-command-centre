@@ -1,7 +1,7 @@
 # Pipeline Audit Report
-**Agent:** bts
-**Target:** /Users/cairr/.openclaw/agents/bts/workspace
-**Timestamp:** Wed Mar  4 11:55:11 AEDT 2026
+**Agent:** gridpilot
+**Target:** /Users/cairr/.openclaw/agents/gridpilot/workspace
+**Timestamp:** Wed Mar  4 11:55:20 AEDT 2026
 ---
 
 # Stage 1: Location
