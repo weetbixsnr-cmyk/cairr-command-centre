@@ -1,7 +1,7 @@
 # Pipeline Audit Report
 **Agent:** nbhw-accounts
 **Target:** /Users/cairr/.openclaw/agents/nbhw-accounts/workspace
-**Timestamp:** Thu Mar  5 03:24:21 AEDT 2026
+**Timestamp:** Thu Mar  5 03:52:08 AEDT 2026
 ---
 
 # Stage 1: Location
