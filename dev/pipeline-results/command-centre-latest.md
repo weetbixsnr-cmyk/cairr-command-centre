@@ -1,5 +1,5 @@
 # Pipeline: command-centre
 **Status:** ⚠️ 5 WARNINGS
-**Timestamp:** 2026-03-05 06:02
+**Timestamp:** 2026-03-05 06:03
 **Checks:** 15/20 passed | 5 failed | 0 blocked
-**Report:** /Users/cairr/.openclaw/agents/command-centre/workspace/output/audit-report-2026-03-05_060248.md
+**Report:** /Users/cairr/.openclaw/agents/command-centre/workspace/output/audit-report-2026-03-05_060254.md
