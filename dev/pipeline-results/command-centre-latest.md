@@ -2,4 +2,4 @@
 **Status:** ⚠️ 5 WARNINGS
 **Timestamp:** 2026-03-05 06:02
 **Checks:** 15/20 passed | 5 failed | 0 blocked
-**Report:** /Users/cairr/.openclaw/agents/command-centre/workspace/output/audit-report-2026-03-05_060241.md
+**Report:** /Users/cairr/.openclaw/agents/command-centre/workspace/output/audit-report-2026-03-05_060248.md
