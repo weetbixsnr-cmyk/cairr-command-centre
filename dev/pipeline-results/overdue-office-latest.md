@@ -1,5 +1,5 @@
 # Pipeline: overdue-office
 **Status:** ⚠️ 2 WARNINGS
-**Timestamp:** 2026-03-05 07:05
+**Timestamp:** 2026-03-05 07:21
 **Checks:** 18/20 passed | 2 failed | 0 blocked
-**Report:** /Users/cairr/.openclaw/agents/overdue-office/workspace/output/audit-report-2026-03-05_070514.md
+**Report:** /Users/cairr/.openclaw/agents/overdue-office/workspace/output/audit-report-2026-03-05_072142.md
