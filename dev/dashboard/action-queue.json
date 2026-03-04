@@ -4,7 +4,7 @@
     "type": "reminder",
     "priority": "high",
     "source": "brain",
-    "title": "Message Russell Lister for his email \u2014 Parriwi quote ready to send",
+    "title": "Message Russell Lister for his email — Parriwi quote ready to send",
     "created": "2026-03-02T21:28+11:00",
     "status": "pending"
   },
@@ -13,7 +13,7 @@
     "type": "invoice",
     "priority": "medium",
     "source": "nbhw",
-    "title": "Invoice Ryan @ Rounga \u2014 $350+GST ($385) \u2014 need work description, GST confirmation, business name",
+    "title": "Invoice Ryan @ Rounga — $350+GST ($385) — need work description, GST confirmation, business name",
     "created": "2026-03-01",
     "status": "pending"
   },
@@ -31,7 +31,7 @@
     "type": "task",
     "priority": "high",
     "source": "nbhw",
-    "title": "Harvey major boiler service \u2014 order parts & book in",
+    "title": "Harvey major boiler service — order parts & book in",
     "created": "2026-02-27",
     "status": "pending"
   },
@@ -40,7 +40,7 @@
     "type": "approval",
     "priority": "high",
     "source": "nbhw",
-    "title": "NBHW Email Cleanup - 50% reduction (202\u2192102 emails)",
+    "title": "NBHW Email Cleanup - 50% reduction (202→102 emails)",
     "created": "2026-03-03T21:08+1100",
     "status": "pending"
   },
@@ -49,8 +49,37 @@
     "type": "approval",
     "priority": "high",
     "source": "nbhw",
-    "title": "NBHW Email Cleanup Round 2 - 102\u219222 emails (80 deleted)",
+    "title": "NBHW Email Cleanup Round 2 - 102→22 emails (80 deleted)",
     "created": "2026-03-04T02:51+1100",
     "status": "pending"
+  },
+  {
+    "id": "aq-005",
+    "type": "reminder",
+    "priority": "medium",
+    "source": "gridpilot",
+    "title": "GridPilot domain (gridpilot.com.au) — 1 year hosting paid. Renewal due ~Mar 2027.",
+    "created": "2026-03-04T19:50+11:00",
+    "status": "pending"
+  },
+  {
+    "id": "aq-006",
+    "type": "task",
+    "priority": "medium",
+    "source": "gridpilot",
+    "title": "Contact Frank from Manly — once GridPilot is live",
+    "created": "2026-03-04T19:50+11:00",
+    "status": "pending",
+    "trigger": "gridpilot-live"
+  },
+  {
+    "id": "aq-007",
+    "type": "task",
+    "priority": "medium",
+    "source": "gridpilot",
+    "title": "Contact Paul from Collaroy — once GridPilot is live",
+    "created": "2026-03-04T19:50+11:00",
+    "status": "pending",
+    "trigger": "gridpilot-live"
   }
 ]

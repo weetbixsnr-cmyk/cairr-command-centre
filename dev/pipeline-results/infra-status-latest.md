@@ -1,5 +1,8 @@
-# Infrastructure Status — 2026-03-02 05:02
+# Infrastructure Status — 2026-03-04 19:46
 
-❌ fswatch daemon: NOT RUNNING
-   Fix: nohup bash /Users/cairr/.openclaw/workspace/scripts/pipeline/watch-agents.sh > /tmp/pipeline-watcher.log 2>&1 &
-✅ OpenClaw gateway: running (PID 21816)
+✅ fswatch daemon: RUNNING (PID 72970)
+✅ OpenClaw gateway: running
+✅ OpenRouter API key: working (updated 4 Mar)
+✅ WhatsApp gateway: connected
+✅ All 13 agents: healthy
+✅ Governance: locked, no drift
