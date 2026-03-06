@@ -1,7 +1,7 @@
 # Pipeline Audit Report
 **Agent:** opt-compliance
 **Target:** /Users/cairr/.openclaw/agents/opt-compliance/workspace
-**Timestamp:** Fri Mar  6 19:02:39 AEDT 2026
+**Timestamp:** Fri Mar  6 19:09:54 AEDT 2026
 ---
 
 # Stage 1: Location
