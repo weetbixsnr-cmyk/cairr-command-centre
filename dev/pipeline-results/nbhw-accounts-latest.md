@@ -1,5 +1,5 @@
 # Pipeline: nbhw-accounts
 **Status:** ⚠️ 1 WARNINGS
-**Timestamp:** 2026-03-06 15:05
+**Timestamp:** 2026-03-06 15:10
 **Checks:** 19/20 passed | 1 failed | 0 blocked
-**Report:** /Users/cairr/.openclaw/agents/nbhw-accounts/workspace/output/audit-report-2026-03-06_150548.md
+**Report:** /Users/cairr/.openclaw/agents/nbhw-accounts/workspace/output/audit-report-2026-03-06_151029.md
