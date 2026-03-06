@@ -1,5 +1,5 @@
 # Pipeline: opt-compliance
 **Status:** ⚠️ 1 WARNINGS
-**Timestamp:** 2026-03-06 23:07
+**Timestamp:** 2026-03-06 23:22
 **Checks:** 19/20 passed | 1 failed | 0 blocked
-**Report:** /Users/cairr/.openclaw/agents/opt-compliance/workspace/output/audit-report-2026-03-06_230239.md
+**Report:** /Users/cairr/.openclaw/agents/opt-compliance/workspace/output/audit-report-2026-03-06_231357.md
