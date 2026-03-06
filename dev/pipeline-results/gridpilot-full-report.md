@@ -1,7 +1,7 @@
 # Pipeline Audit Report
 **Agent:** gridpilot
 **Target:** /Users/cairr/.openclaw/agents/gridpilot/workspace
-**Timestamp:** Thu Mar  5 08:09:16 AEDT 2026
+**Timestamp:** Thu Mar  5 08:33:33 AEDT 2026
 ---
 
 # Stage 1: Location
@@ -70,7 +70,14 @@ declare: usage: declare [-afFirtx] [-p] [name[=value] ...]
 
 ## [S4] report-template
 ```
-✅ REPORT-TEMPLATE: PASS
+❌ REPORT-TEMPLATE: FAIL
+❌ audit-improved_optimizer.md:
+    Vague language found:
+      17:5. **No look-ahead optimisation** — decisions are greedy (best action now). A rolling LP or DP over the forecast window would capture significantly more arbitrage value.
+
+❌ audit-presets.md:
+    Vague language found:
+      14:2. **Specs may be stale or approximate** — e.g. Powerwall 3 is listed at 13.5kWh/5kW but the real PW3 has 13.5kWh capacity with 11.5kW continuous power. Several entries look like rough estimates rather than verified datasheets.
 ```
 
 # Stage 5: Quality
@@ -128,7 +135,7 @@ WEEKLY HEALTH REPORT:
 ---
 ## Summary
 - **Total checks:** 20
-- **Passed:** 19
-- **Failed:** 1
+- **Passed:** 18
+- **Failed:** 2
 - **Blocked:** 0
-- **Result: ⚠️ 1 WARNINGS (non-blocking)**
+- **Result: ⚠️ 2 WARNINGS (non-blocking)**
