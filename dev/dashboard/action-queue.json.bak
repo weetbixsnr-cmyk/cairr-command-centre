@@ -1,0 +1,87 @@
+[
+  {
+    "id": "aq-002",
+    "type": "invoice",
+    "priority": "medium",
+    "source": "nbhw",
+    "title": "Invoice Ryan @ Rounga \u2014 $350+GST ($385) \u2014 need work description, GST confirmation, business name",
+    "created": "2026-03-01",
+    "status": "pending"
+  },
+  {
+    "id": "aq-003",
+    "type": "task",
+    "priority": "high",
+    "source": "nbhw",
+    "title": "FINISH AARON STORMWATER",
+    "created": "2026-03-02T21:38+11:00",
+    "status": "pending"
+  },
+  {
+    "id": "aq-004",
+    "type": "task",
+    "priority": "high",
+    "source": "nbhw",
+    "title": "Harvey major boiler service \u2014 order parts & book in",
+    "created": "2026-02-27",
+    "status": "pending"
+  },
+  {
+    "id": "aq-1772532489",
+    "type": "approval",
+    "priority": "high",
+    "source": "nbhw",
+    "title": "NBHW Email Cleanup - 50% reduction (202\u2192102 emails)",
+    "created": "2026-03-03T21:08+1100",
+    "status": "completed",
+    "note": "Superseded \u2014 NBHW agent now runs autonomous email cleanup on Kimi K2.5"
+  },
+  {
+    "id": "aq-1772553105",
+    "type": "approval",
+    "priority": "high",
+    "source": "nbhw",
+    "title": "NBHW Email Cleanup Round 2 - 102\u219222 emails (80 deleted)",
+    "created": "2026-03-04T02:51+1100",
+    "status": "completed",
+    "note": "Superseded \u2014 NBHW agent now runs autonomous email cleanup on Kimi K2.5"
+  },
+  {
+    "id": "aq-005",
+    "type": "reminder",
+    "priority": "medium",
+    "source": "gridpilot",
+    "title": "GridPilot domain (gridpilot.com.au) \u2014 $25 rego, 1 year paid. Renewal ~Mar 2027.",
+    "created": "2026-03-04T19:50+11:00",
+    "status": "pending"
+  },
+  {
+    "id": "aq-006",
+    "type": "task",
+    "priority": "medium",
+    "source": "gridpilot",
+    "title": "Contact Frank from Manly \u2014 once GridPilot is live",
+    "created": "2026-03-04T19:50+11:00",
+    "status": "pending",
+    "trigger": "gridpilot-live"
+  },
+  {
+    "id": "aq-007",
+    "type": "task",
+    "priority": "medium",
+    "source": "gridpilot",
+    "title": "Contact Paul from Collaroy \u2014 once GridPilot is live",
+    "created": "2026-03-04T19:50+11:00",
+    "status": "pending",
+    "trigger": "gridpilot-live"
+  },
+  {
+    "id": "aq-008",
+    "type": "reminder",
+    "priority": "medium",
+    "source": "gridpilot",
+    "title": "GridPilot Google Workspace email \u2014 $11.80/mo (Adam paying)",
+    "created": "2026-03-04T21:53+11:00",
+    "status": "pending"
+  }
+]
