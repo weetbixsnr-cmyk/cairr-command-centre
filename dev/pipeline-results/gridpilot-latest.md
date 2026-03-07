@@ -1,5 +1,5 @@
 # Pipeline: gridpilot
 **Status:** ⚠️ 2 WARNINGS
-**Timestamp:** 2026-03-07 11:34
+**Timestamp:** 2026-03-07 12:00
 **Checks:** 18/20 passed | 2 failed | 0 blocked
-**Report:** /Users/cairr/.openclaw/agents/gridpilot/workspace/output/audit-report-2026-03-07_113426.md
+**Report:** /Users/cairr/.openclaw/agents/gridpilot/workspace/output/audit-report-2026-03-07_120008.md
