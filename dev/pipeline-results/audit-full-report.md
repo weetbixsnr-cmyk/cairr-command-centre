@@ -1,7 +1,7 @@
 # Pipeline Audit Report
 **Agent:** audit
 **Target:** /Users/cairr/.openclaw/agents/audit/workspace
-**Timestamp:** Sat Mar  7 16:44:35 AEDT 2026
+**Timestamp:** Sat Mar  7 17:02:41 AEDT 2026
 ---
 
 # Stage 1: Location
@@ -50,7 +50,9 @@ declare: usage: declare [-afFirtx] [-p] [name[=value] ...]
 
 ## [S4] seo-compliance
 ```
-✅ SEO-COMPLIANCE: PASS
+❌ SEO-COMPLIANCE: FAIL
+⚠️ POSSIBLE KEYWORD STUFFING in /Users/cairr/.openclaw/agents/audit/workspace/dev/audit-log.md:
+15 x patterns
 ```
 
 ## [S4] gdpr-check
@@ -128,7 +130,7 @@ WEEKLY HEALTH REPORT:
 ---
 ## Summary
 - **Total checks:** 20
-- **Passed:** 19
-- **Failed:** 1
+- **Passed:** 18
+- **Failed:** 2
 - **Blocked:** 0
-- **Result: ⚠️ 1 WARNINGS (non-blocking)**
+- **Result: ⚠️ 2 WARNINGS (non-blocking)**

@@ -1,5 +1,5 @@
 # Pipeline: audit
-**Status:** ⚠️ 1 WARNINGS
-**Timestamp:** 2026-03-07 16:44
-**Checks:** 19/20 passed | 1 failed | 0 blocked
-**Report:** /Users/cairr/.openclaw/agents/audit/workspace/output/audit-report-2026-03-07_164435.md
+**Status:** ⚠️ 2 WARNINGS
+**Timestamp:** 2026-03-07 17:02
+**Checks:** 18/20 passed | 2 failed | 0 blocked
+**Report:** /Users/cairr/.openclaw/agents/audit/workspace/output/audit-report-2026-03-07_170241.md
