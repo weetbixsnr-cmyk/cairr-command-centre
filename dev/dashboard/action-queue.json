@@ -83,5 +83,24 @@
     "title": "GridPilot Google Workspace email \u2014 $11.80/mo (Adam paying)",
     "created": "2026-03-04T21:53+11:00",
     "status": "pending"
+  },
+  {
+    "id": "aq-009",
+    "type": "task",
+    "priority": "high",
+    "source": "nbhw",
+    "title": "Order Frank heat pump \u2014 Frenchs Forest (due Tuesday 11 Mar)",
+    "created": "2026-03-07T18:59+11:00",
+    "status": "pending",
+    "due_date": "2026-03-11"
+  },
+  {
+    "id": "aq-010",
+    "type": "invoice",
+    "priority": "medium",
+    "source": "nbhw",
+    "title": "Send deposit invoice \u2014 Frank heat pump Frenchs Forest",
+    "created": "2026-03-07T18:59+11:00",
+    "status": "pending"
   }
 ]
