@@ -1,7 +1,7 @@
 # Pipeline Audit Report
 **Agent:** audit
 **Target:** /Users/cairr/.openclaw/agents/audit/workspace
-**Timestamp:** Sat Mar  7 18:48:35 AEDT 2026
+**Timestamp:** Sat Mar  7 19:55:39 AEDT 2026
 ---
 
 # Stage 1: Location
@@ -52,7 +52,7 @@ declare: usage: declare [-afFirtx] [-p] [name[=value] ...]
 ```
 ❌ SEO-COMPLIANCE: FAIL
 ⚠️ POSSIBLE KEYWORD STUFFING in /Users/cairr/.openclaw/agents/audit/workspace/dev/audit-log.md:
-15 x patterns
+18 x patterns
 ```
 
 ## [S4] gdpr-check
