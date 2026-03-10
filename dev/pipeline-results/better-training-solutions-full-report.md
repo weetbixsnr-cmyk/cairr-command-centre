@@ -1,13 +1,15 @@
 # Pipeline Audit Report
-**Agent:** gridpilot
-**Target:** /Users/cairr/.openclaw/agents/gridpilot/workspace
-**Timestamp:** Mon Mar  9 08:56:59 AEDT 2026
+**Agent:** better-training-solutions
+**Target:** /Users/cairr/AI/cairr/clients/better-training-solutions/
+**Timestamp:** Mon Mar  9 14:25:00 AEDT 2026
 ---
 
 # Stage 1: Location
 
 ## [S1] location-check
 ```
+/Users/cairr/.openclaw/workspace/scripts/pipeline/location-check.sh: line 24: [:        0
+0: integer expression expected
 ✅ LOCATION-CHECK: PASS
 ```
 
@@ -70,27 +72,7 @@ declare: usage: declare [-afFirtx] [-p] [name[=value] ...]
 
 ## [S4] report-template
 ```
-❌ REPORT-TEMPLATE: FAIL
-❌ audit-improved_optimizer.md:
-    Vague language found:
-      17:5. **No look-ahead optimisation** — decisions are greedy (best action now). A rolling LP or DP over the forecast window would capture significantly more arbitrage value.
-
-❌ audit-presets.md:
-    Vague language found:
-      14:2. **Specs may be stale or approximate** — e.g. Powerwall 3 is listed at 13.5kWh/5kW but the real PW3 has 13.5kWh capacity with 11.5kW continuous power. Several entries look like rough estimates rather than verified datasheets.
-
-❌ existing-test-updates.md:
-    Missing date
-
-❌ simulator-timestamp-patch.md:
-    Missing date
-
-❌ task4-battery-degradation-spec.md:
-    Vague language found:
-      33:- Temperature effects are significant — don't ignore them
-
-❌ task5-rob-powell-backtest-spec.md:
-    Missing date
+✅ REPORT-TEMPLATE: PASS
 ```
 
 # Stage 5: Quality
@@ -148,7 +130,7 @@ WEEKLY HEALTH REPORT:
 ---
 ## Summary
 - **Total checks:** 20
-- **Passed:** 18
-- **Failed:** 2
+- **Passed:** 19
+- **Failed:** 1
 - **Blocked:** 0
-- **Result: ⚠️ 2 WARNINGS (non-blocking)**
+- **Result: ⚠️ 1 WARNINGS (non-blocking)**

@@ -1,7 +1,7 @@
 # Pipeline Audit Report
 **Agent:** property
 **Target:** /Users/cairr/.openclaw/agents/property/workspace
-**Timestamp:** Sat Mar  7 21:05:37 AEDT 2026
+**Timestamp:** Sat Mar  7 21:28:48 AEDT 2026
 ---
 
 # Stage 1: Location

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adam's Command Centre</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #e0e0e0; padding: 16px; }
+  
+  h1 { font-size: 18px; color: #fff; display: inline; }
+  .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .meta { font-size: 9px; color: #444; }
+  
+  .grid { display: grid; grid-template-columns: repeat(7, 1fr); grid-auto-rows: auto; gap: 10px; }
+  
+  /* MOBILE RESPONSIVE */
+  @media (max-width: 768px) {
+    body { padding: 8px; }
+    .grid { grid-template-columns: 1fr; gap: 8px; }
+    .health-card { grid-column: 1; flex-direction: column; text-align: center; }
+    .health-card > div:last-child { border-left: none; border-top: 1px solid #222; padding-left: 0; padding-top: 8px; margin-left: 0; margin-top: 8px; }
+    .reports-card { grid-column: 1; max-height: 150px; }
+    .dates-card { grid-column: 1; }
+    .dates-inner { flex-direction: column; gap: 12px; }
+    .dates-right { border-left: none; border-top: 1px solid #1a1a1a; padding-left: 0; padding-top: 12px; }
+    .personal { grid-column: 1; }
+    .p-grid { grid-template-columns: 1fr; gap: 8px; }
+    h1 { font-size: 16px; }
+    .meta { font-size: 8px; }
+  }
+  
+  @media (max-width: 480px) {
+    body { padding: 6px; }
+    .grid { gap: 6px; }
+    .card { padding: 10px 8px 12px; min-height: auto; }
+    .health-card { padding: 8px 10px; }
+    .reports-card { padding: 8px 10px; max-height: 120px; }
+    .dates-card { padding: 8px 10px; }
+    .personal { padding: 8px 10px; }
+    h1 { font-size: 14px; }
+    .health-pct { font-size: 24px; }
+    .pills { flex-wrap: wrap; gap: 3px; }
+    .pill { font-size: 8px; padding: 2px 6px; }
+    .card-name { font-size: 11px; }
+    .tag { font-size: 6px; }
+    .r { font-size: 9px; }
+    .sec-t { font-size: 8px; }
+    .cron-row { font-size: 8px; }
+    .rpt-row { font-size: 9px; }
+    .d-text { font-size: 10px; }
+    .c-name { font-size: 9px; }
+  }
+  
+  .health-card { grid-column: 1 / 3; background: #111; border: 1px solid #222; border-radius: 10px; padding: 12px 14px; display: flex; align-items: center; gap: 12px; }
+  .health-pct { font-size: 28px; font-weight: 700; color: #f59e0b; }
+  .health-lbl { font-size: 10px; color: #555; margin-bottom: 4px; }
+  .pills { display: flex; gap: 5px; }
+  .pill { font-size: 9px; padding: 3px 8px; border-radius: 6px; font-weight: 600; }
+  .pill.r { background: #3b1010; color: #ef4444; }
+  .pill.y { background: #2a2000; color: #f59e0b; }
+  .pill.g { background: #0a2a1a; color: #10b981; }
+  
+  .reports-card { grid-column: 3 / 5; background: #111; border: 1px solid #222; border-radius: 10px; padding: 10px 14px; overflow-y: auto; align-self: start; max-height: 200px; }
+  .rpt-row { display: flex; align-items: center; gap: 6px; padding: 3px 0; border-bottom: 1px solid #1a1a1a; }
+  .rpt-row:last-child { border-bottom: none; }
+  .rpt-open { width: 14px; height: 14px; border-radius: 3px; background: #1a1a1a; border: 1px solid #333; color: #666; font-size: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; text-decoration: none; }
+  .rpt-open:hover { background: #2a2a2a; color: #f59e0b; border-color: #f59e0b; }
+
+  .dates-card { grid-column: 5 / 8; background: #111; border: 1px solid #222; border-radius: 10px; padding: 10px 14px; align-self: start; }
+  .dates-title { font-size: 9px; color: #444; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .dates-inner { display: flex; gap: 20px; }
+  .dates-left { flex: 1; }
+  .dates-right { flex: 1; border-left: 1px solid #1a1a1a; padding-left: 16px; }
+  .d-row { display: flex; gap: 10px; padding: 4px 0; border-bottom: 1px solid #1a1a1a; }
+  .d-row:last-child { border-bottom: none; }
+  .d-label { color: #f59e0b; font-weight: 600; font-size: 10px; min-width: 70px; }
+  .d-text { color: #888; font-size: 11px; }
+  .c-row { display: flex; gap: 6px; padding: 3px 0; align-items: center; }
+  .c-time { color: #3b82f6; font-weight: 600; font-size: 9px; min-width: 38px; }
+  .c-name { color: #3b82f6; font-size: 10px; }
+  .c-dot { width: 4px; height: 4px; border-radius: 50%; background: #3b82f6; flex-shrink: 0; }
+  
+  .card { background: #111; border: 1px solid #222; border-radius: 10px; padding: 16px 14px 20px; display: flex; flex-direction: column; min-height: 420px; }
+  .card-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .card-name { font-size: 12px; font-weight: 600; color: #fff; }
+  .tag { font-size: 7px; padding: 2px 5px; border-radius: 5px; font-weight: 600; }
+  .tag.live { background: #0a2a1a; color: #10b981; border: 1px solid #10b981; }
+  .tag.build { background: #0e1a2e; color: #3b82f6; border: 1px solid #3b82f6; }
+  .tag.new { background: #1a0a2e; color: #a855f7; border: 1px solid #a855f7; }
+  .tag.paying { background: #1a2a0a; color: #84cc16; border: 1px solid #84cc16; }
+  .tag.parked { background: #1a1a1a; color: #555; border: 1px solid #333; }
+  .tag.pipeline { background: #2a1a0a; color: #f59e0b; border: 1px solid #f59e0b; }
+  .card-sub { font-size: 8px; color: #444; margin-bottom: 6px; }
+  
+  .sec-t { font-size: 9px; color: #666; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; margin-top: 12px; font-weight: 600; border-bottom: 1px solid #1a1a1a; padding-bottom: 3px; }
+  .sec-t:first-of-type { margin-top: 0; }
+  .r { font-size: 10px; color: #aaa; padding: 2.5px 0; display: flex; align-items: baseline; gap: 4px; line-height: 1.5; }
+  .d { width: 4px; height: 4px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+  .d.g { background: #10b981; }
+  .d.y { background: #f59e0b; }
+  .d.re { background: #ef4444; }
+  .d.b { background: #3b82f6; }
+  .d.x { background: #333; }
+  
+  .cron-row { font-size: 9px; color: #3b82f6; padding: 2px 0; display: flex; align-items: center; gap: 4px; }
+  .cron-row .cron-time { font-weight: 600; min-width: 50px; }
+  .cron-row .cron-name { color: #5b9cf6; }
+  
+  .bar { height: 2px; background: #1a1a1a; border-radius: 1px; margin-top: auto; padding-top: 6px; }
+  .bar-inner { height: 2px; border-radius: 1px; }
+  .bar-inner.g { background: #10b981; }
+  .bar-inner.b { background: #3b82f6; }
+  .bar-inner.y { background: #f59e0b; }
+  
+  .personal { grid-column: 1 / -1; background: #0d0d0d; border: 1px solid #1a1a1a; border-radius: 10px; padding: 12px 14px; }
+  .personal h2 { font-size: 12px; color: #555; margin-bottom: 8px; }
+  .p-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .personal .r { color: #555; font-size: 9px; }
+  .personal .sec-t { color: #333; }
+  
+  .footer { font-size: 8px; color: #222; text-align: right; margin-top: 12px; }
+</style>
+</head>
+<body>
+
+<div class="top">
+  <h1>🎯 Adam's Command Centre</h1>
+  <span class="meta">28 Feb 2026 · Ricky-Jnr 🤙</span>
+</div>
+
+<div class="grid">
+
+  <!-- HEALTH - 2 cols -->
+  <div class="health-card">
+    <div>
+      <span class="health-pct">72%</span>
+      <div class="health-lbl">System Health</div>
+      <div class="pills">
+        <span class="pill r">2 Critical</span>
+        <span class="pill y">4 Medium</span>
+        
+      </div>
+    </div>
+    <div style="border-left:1px solid #222; padding-left:12px; margin-left:auto;">
+      <div style="font-size:9px; color:#444; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">Cron Jobs</div>
+      <div style="font-size:10px; color:#10b981;">● 43 Active</div>
+      <div style="font-size:9px; color:#666; margin-top:2px;">Last heartbeat: OK</div>
+      <div style="font-size:9px; color:#666;">WhatsApp: Connected</div>
+    </div>
+  </div>
+
+  <!-- REPORTS - 2 cols -->
+  <div class="reports-card" id="reports-list">
+    <div style="font-size:9px; color:#444; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Recent Reports</div>
+    <div class="rpt-row"><a href="reports/alpha-audit-2026-02-27.pdf" class="rpt-open">↗</a><span style="font-size:10px;flex:1;">27 Feb — Alpha Governance Audit ⚠️ (Research deliverables stale)</span></div>
+    <div class="rpt-row"><a href="reports/governance-audit-2026-02-27.pdf" class="rpt-open">↗</a><span style="font-size:10px;flex:1;">27 Feb — V3DN + Portfolio + Alpha Audit ⚠️</span></div>
+    <div class="rpt-row"><a href="reports/executive-governance-2026-02-25.html" class="rpt-open">↗</a><span style="font-size:10px;flex:1;">25 Feb — Executive Governance Audit ⚠️</span></div>
+    <div class="rpt-row"><span class="d b"></span><span style="font-size:10px;flex:1;">24 Feb — MYOB Acumatica (in progress)</span></div>
+    <div class="rpt-row"><span class="d b"></span><span style="font-size:10px;flex:1;">24 Feb — AI-CAD Research (in progress)</span></div>
+    <div class="rpt-row"><span class="d y"></span><span style="font-size:10px;flex:1;">24 Feb — GridPilot Governance Audit ⚠️</span></div>
+  </div>
+
+  <!-- DATES + GLOBAL CRONS - 3 cols -->
+  <div class="dates-card">
+    <div class="dates-inner">
+      <div class="dates-left">
+        <div class="dates-title">Key Dates & Overdue</div>
+        <div class="d-row"><span class="d-label">OVERDUE</span><span class="d-text">Parriwi Rd quote · Reddit/Whirlpool · Domain review</span></div>
+        <div class="d-row"><span class="d-label">1 MAR</span><span class="d-text">Dashboard data pipeline live</span></div>
+        <div class="d-row"><span class="d-label">1 MAR</span><span class="d-text">Agent fleet fully operational</span></div>
+        <div class="d-row"><span class="d-label">3 MAR</span><span class="d-text">First BTS weekly report due</span></div>
+        <div class="d-row"><span class="d-label">16 MAR</span><span class="d-text">Battery install — GoodWe hybrid + battery</span></div>
+        <div class="d-row"><span class="d-label">APR W1</span><span class="d-text">BTS courses start</span></div>
+      </div>
+      <div class="dates-right">
+        <div class="dates-title">Global Crons (Daily)</div>
+        <div class="c-row"><span class="c-dot"></span><span class="c-time">12AM</span><span class="c-name">Governance Audit (rotating)</span></div>
+        <div class="c-row"><span class="c-dot"></span><span class="c-time">3AM</span><span class="c-name">Community & Reddit Research</span></div>
+        <div class="c-row"><span class="c-dot"></span><span class="c-time">4AM</span><span class="c-name">Email Cleanup</span></div>
+        <div class="c-row"><span class="c-dot"></span><span class="c-time">5AM</span><span class="c-name">Self-Improvement Research</span></div>
+        <div class="c-row"><span class="c-dot"></span><span class="c-time">6AM</span><span class="c-name">CAIRR & Business Research</span></div>
+        <div class="c-row"><span class="c-dot"></span><span class="c-time">7AM</span><span class="c-name">Morning Brief (WhatsApp)</span></div>
+        <div class="c-row"><span class="c-dot"></span><span class="c-time">8,12,16,20</span><span class="c-name">Parriwi Rd Reminder</span></div>
+        <div class="c-row"><span class="c-dot"></span><span class="c-time">12PM</span><span class="c-name">Midday Check-in</span></div>
+        <div class="c-row"><span class="c-dot"></span><span class="c-time">6PM</span><span class="c-name">End of Day Wrap</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NBHW -->
+  <div class="card">
+    <div class="card-head"><span class="card-name">🔧 NBHW</span><span class="tag live">Live</span></div>
+    <div class="card-sub">Plumbing · northernbeacheshotwater.com.au</div>
+    <div class="sec-t">Tasks</div>
+    <div class="r"><span class="d re"></span>Security — no admin auth</div>
+    <div class="r"><span class="d re"></span>Supabase RLS too permissive</div>
+    <div class="r"><span class="d re"></span>SPA rendering kills SEO</div>
+    <div class="r"><span class="d b"></span>14 old blogs to rewrite</div>
+    <div class="r"><span class="d b"></span>New keyword-targeted blogs</div>
+    <div class="r"><span class="d b"></span>Services grid (committed, not pushed)</div>
+    <div class="r"><span class="d b"></span>Competitor analysis</div>
+    <div class="r"><span class="d y"></span>LeadChat cancel</div>
+    <div class="r"><span class="d y"></span>Lead source tracking (UTM)</div>
+    <div class="sec-t">Crons</div>
+    <div class="cron-row"><span class="cron-time">Daily 6AM</span><span class="cron-name">Supabase Keepalive</span></div>
+    <div class="cron-row"><span class="cron-time">Mon 5AM</span><span class="cron-name">Blog Drafts (2x: 1 old + 1 new)</span></div>
+    <div class="cron-row"><span class="cron-time">Tue 8AM</span><span class="cron-name">Google Monitoring (GA+GSC+GBP)</span></div>
+    <div class="cron-row"><span class="cron-time">Wed 6AM</span><span class="cron-name">Site Health Check</span></div>
+    <div class="cron-row"><span class="cron-time">Thu 5AM</span><span class="cron-name">Blog Drafts (2x: 1 old + 1 new)</span></div>
+    <div class="bar"><div class="bar-inner y" style="width:60%"></div></div>
+  </div>
+
+  <!-- BTS -->
+  <div class="card">
+    <div class="card-head"><span class="card-name">📚 BTS</span><span class="tag paying">£300/mo</span></div>
+    <div class="card-sub">CAIRR — Sunny · bettertrainingsolutions.co.uk</div>
+    <div class="sec-t">Tasks</div>
+    <div class="r"><span class="d b"></span>Site audit (after live 25 Feb)</div>
+    <div class="r"><span class="d b"></span>SEO keyword research</div>
+    <div class="r"><span class="d b"></span>Google Ads campaign draft</div>
+    <div class="r"><span class="d b"></span>Directory listings</div>
+    <div class="r"><span class="d y"></span>Gas Safe postcodes — Sunny</div>
+    <div class="r"><span class="d y"></span>Confirm "Advanced for Training"</div>
+    <div class="sec-t">Scope (11 services)</div>
+    <div class="r"><span class="d b"></span>SEO · Competitor · Keywords · On-page</div>
+    <div class="r"><span class="d b"></span>Content · GBP · Ads · Traffic · Social</div>
+    <div class="r"><span class="d b"></span>Directories · Maintenance</div>
+    <div class="sec-t">Crons</div>
+    <div class="cron-row"><span class="cron-time">Mon 6AM</span><span class="cron-name">Blog Drafts (2x targeted)</span></div>
+    <div class="cron-row"><span class="cron-time">Mon 7AM</span><span class="cron-name">Weekly Competitor Report</span></div>
+    <div class="cron-row"><span class="cron-time">Thu 6AM</span><span class="cron-name">Blog Drafts (2x targeted)</span></div>
+    <div class="cron-row"><span class="cron-time">Every 30m</span><span class="cron-name">Site Live Check</span></div>
+    <div class="cron-row"><span class="cron-time">1st/month</span><span class="cron-name">Invoice → Adam approval → Sunny</span></div>
+    <div class="bar"><div class="bar-inner g" style="width:70%"></div></div>
+  </div>
+
+  <!-- GridPilot -->
+  <div class="card">
+    <div class="card-head"><span class="card-name">⚡ GridPilot</span><span class="tag build">0→1</span></div>
+    <div class="card-sub">Battery SaaS</div>
+    <div class="sec-t">Tasks</div>
+    <div class="r"><span class="d re"></span>Fix Turbopack build error</div>
+    <div class="r"><span class="d b"></span>Phase 1 engine</div>
+    <div class="r"><span class="d y"></span>GitHub — Adam</div>
+    <div class="r"><span class="d y"></span>Amber — Adam</div>
+    <div class="r"><span class="d y"></span>Domain — Adam</div>
+    <div class="sec-t">Audit — 24 Feb</div>
+    <div class="r"><span class="d re"></span>Code 40% (build broken)</div>
+    <div class="sec-t">Crons</div>
+    <div class="cron-row"><span class="cron-time">Daily 2AM</span><span class="cron-name">GridPilot Dev (autonomous)</span></div>
+    <div class="bar"><div class="bar-inner y" style="width:76%"></div></div>
+  </div>
+
+  <!-- CAIRR -->
+  <div class="card">
+    <div class="card-head"><span class="card-name">🏗️ CAIRR</span><span class="tag build">Active</span></div>
+    <div class="card-sub">AI consultancy · cairr.ai · £300 MRR</div>
+    <div class="sec-t">SEO Setup Tasks (27 Feb)</div>
+    <div class="r"><span class="d y"></span>Deploy cairr.ai live (approve dev site)</div>
+    <div class="r"><span class="d y"></span>Google Business Profile setup</div>
+    <div class="r"><span class="d y"></span>Google Analytics & Search Console</div>
+    <div class="r"><span class="d y"></span>Domain/email finalization</div>
+    <div class="r"><span class="d y"></span>First blog post approval</div>
+    <div class="sec-t">Tasks</div>
+    <div class="r"><span class="d y"></span>Stripe setup (needs ABN)</div>
+    <div class="r"><span class="d b"></span>NIST/CMMC research</div>
+    <div class="r"><span class="d b"></span>Onboard 3 mates</div>
+    <div class="sec-t">Pipeline</div>
+    <div class="r"><span class="d b"></span>Sohrab (TWPG) — office visit next</div>
+    <div class="r"><span class="d x"></span>Stone Plus — early convo</div>
+    <div class="sec-t">Setup Task Routing</div>
+    <div class="sec-t">Crons</div>
+    <div class="cron-row"><span class="cron-time">Mon 6AM</span><span class="cron-name">SEO Week 1: Analysis & Strategy</span></div>
+    <div class="cron-row"><span class="cron-time">Tue 6AM</span><span class="cron-name">SEO Week 2: Content & Technical</span></div>
+    <div class="cron-row"><span class="cron-time">Wed 6AM</span><span class="cron-name">SEO Week 3: Authority & Local</span></div>
+    <div class="cron-row"><span class="cron-time">Thu 6AM</span><span class="cron-name">SEO Week 4: Monitoring & Reports</span></div>
+    <div class="cron-row"><span class="cron-time">7AM Daily</span><span class="cron-name">SEO Health & Rankings Monitor</span></div>
+    <div class="cron-row"><span class="cron-time">8PM M/W/F</span><span class="cron-name">Google Business Profile Posts</span></div>
+    <div class="cron-row"><span class="cron-time">1st/month</span><span class="cron-name">Monthly SEO Report (PDF)</span></div>
+    <div class="bar"><div class="bar-inner g" style="width:85%"></div></div>
+  </div>
+
+  <!-- Finchley -->
+  <div class="card">
+    <div class="card-head"><span class="card-name">🇬🇧 Finchley</span><span class="tag parked">Waiting</span></div>
+    <div class="card-sub">CAIRR — boilers UK (Hilton)</div>
+    <div class="sec-t">Tasks</div>
+    <div class="r"><span class="d y"></span>Deploy token — Hilton</div>
+    <div class="r"><span class="d y"></span>Phone — Hilton</div>
+    <div class="r"><span class="d x"></span>Competitor analysis</div>
+    <div class="sec-t">Audit — 23 Feb</div>
+    <div class="r"><span class="d y"></span>UK/GDPR review due</div>
+    <div class="sec-t">Crons</div>
+    <div class="cron-row"><span class="cron-time">—</span><span class="cron-name">None (waiting on Hilton)</span></div>
+    <div class="bar"><div class="bar-inner g" style="width:90%"></div></div>
+  </div>
+
+  <!-- V3DN + Portfolio -->
+  <div class="card">
+    <div class="card-head"><span class="card-name">💰 V3DN</span><span class="tag live">Live</span></div>
+    <div class="card-sub">Crypto · <a href="https://v3dn-portfolio-dash.vercel.app" target="_blank" style="color:#60a5fa;text-decoration:none;font-size:9px;">Dashboard ↗</a></div>
+    <div class="sec-t">Tasks</div>
+    <div class="r"><span class="d re"></span>Legal disclaimers ($67k risk)</div>
+    <div class="r"><span class="d b"></span>Launch script</div>
+    <div class="r"><span class="d b"></span>Alerts bot</div>
+    <div class="r"><span class="d y"></span>DeBank key — revoke needed</div>
+    <div class="sec-t">Audit — 27 Feb</div>
+    <div class="r"><span class="d y"></span>Legal 75% (disclaimers needed)</div>
+    <div class="sec-t">Crons</div>
+    <div class="cron-row"><span class="cron-time">Thu 12AM</span><span class="cron-name">V3DN + Portfolio Audit</span></div>
+    <div class="bar"><div class="bar-inner y" style="width:85%"></div></div>
+  </div>
+
+  <!-- SSOB -->
+  <div class="card">
+    <div class="card-head"><span class="card-name">🏘️ SSOB</span><span class="tag live">Live</span></div>
+    <div class="card-sub">Property · <a href="https://ssob-properties-dash.vercel.app" target="_blank" style="color:#60a5fa;text-decoration:none;font-size:9px;">Dashboard ↗</a></div>
+    <div class="sec-t">Scan Status (27 Feb)</div>
+    <div class="r"><span class="d g"></span><b>44 total properties</b> across 7 states</div>
+    <div class="sec-t">🔥 Top Recommendations</div>
+    <div class="r"><span class="d g"></span><b>32 Bingara Rd, Moree</b> $300k · 18.29% yield</div>
+    <div class="r"><span class="d g"></span><b>2/147 Balo St, Moree</b> $180k · 10.98% yield</div>
+    <div class="r"><span class="d g"></span><b>Shop 1&2 Furzer St, ACT</b> $360k · 10% yield</div>
+    <div class="r"><span class="d g"></span><b>3/147 Balo St, Moree</b> $160k · 9.43% yield</div>
+    <div class="r"><span class="d g"></span><b>Karratha Stadium 26</b> $667k · 7.75% (tenant to 2029)</div>
+    <div class="r"><span class="d y"></span><b>Hamilton VIC $110k</b> — lowest entry, needs inspection</div>
+    <div class="sec-t">🧠 Insights</div>
+    <div class="r"><span class="d b"></span>Mining towns = highest yields (Moree, Karratha)</div>
+    <div class="r"><span class="d b"></span>SA completely blocked — need manual agent calls</div>
+    <div class="r"><span class="d b"></span>Moree Real Estate = best single source (10 properties)</div>
+    <div class="r"><span class="d y"></span>Contact agents for rental appraisals on VIC/TAS</div>
+    <div class="sec-t">Crons</div>
+    <div class="cron-row"><span class="cron-time">Daily 5AM</span><span class="cron-name">SSOB Morning Report</span></div>
+    <div class="bar"><div class="bar-inner g" style="width:90%"></div></div>
+  </div>
+
+  <!-- TWPG Pipeline -->
+  <div class="card">
+    <div class="card-head"><span class="card-name">🚢 TWPG</span><span class="tag pipeline">Pipeline</span></div>
+    <div class="card-sub">Sohrab Fataar · Boat building · Govt contracts</div>
+    <div class="sec-t">Research</div>
+    <div class="r"><span class="d b"></span>MYOB Acumatica deep dive</div>
+    <div class="r"><span class="d b"></span>AI-CAD for boat building</div>
+    <div class="r"><span class="d b"></span>NIST/CMMC compliance</div>
+    <div class="r"><span class="d b"></span>Local/self-hosted AI options</div>
+    <div class="sec-t">Next Steps</div>
+    <div class="r"><span class="d y"></span>Office visit — date TBC</div>
+    <div class="r"><span class="d x"></span>Don't pitch until office visit</div>
+    <div class="sec-t">Crons</div>
+    <div class="cron-row"><span class="cron-time">Tonight 1AM</span><span class="cron-name">NIST/CMMC Research (one-shot)</span></div>
+    <div class="bar"><div class="bar-inner b" style="width:20%"></div></div>
+  </div>
+
+  <!-- Alpha -->
+  <div class="card">
+    <div class="card-head"><span class="card-name">🏠 Alpha</span><span class="tag parked">Concept</span></div>
+    <div class="card-sub">Property analytics · No codebase yet</div>
+    <div class="sec-t">Research Gaps (All Stale)</div>
+    <div class="r"><span class="d re"></span>Market Research (⬜ Not done)</div>
+    <div class="r"><span class="d re"></span>Competitor Analysis (⬜ Not done)</div>
+    <div class="r"><span class="d re"></span>Technical Architecture (⬜ Not done)</div>
+    <div class="r"><span class="d re"></span>Legal/Compliance (⬜ Not done)</div>
+    <div class="sec-t">Recommendations</div>
+    <div class="r"><span class="d y"></span>Commission market research to define MVP</div>
+    <div class="r"><span class="d y"></span>Technical architecture design before coding</div>
+    <div class="r"><span class="d y"></span>Legal review for property analytics compliance</div>
+    <div class="r"><span class="d y"></span>Competitor analysis to validate opportunity</div>
+    <div class="sec-t">Audit — 27 Feb</div>
+    <div class="r"><span class="d b"></span>Security 🔵 (Future - Supabase RLS needed)</div>
+    <div class="r"><span class="d x"></span>Code 🔵 (No codebase - concept stage)</div>
+    <div class="r"><span class="d re"></span>Docs ⚠️ (Research deliverables all stale)</div>
+    <div class="sec-t">Crons</div>
+    <div class="cron-row"><span class="cron-time">Fri 12AM</span><span class="cron-name">Alpha Audit</span></div>
+    <div class="bar"><div class="bar-inner y" style="width:75%"></div></div>
+  </div>
+
+  <!-- PERSONAL -->
+  <div class="personal">
+    <h2>🏠 Personal</h2>
+    <div class="p-grid">
+      <div>
+        <div class="sec-t">Money</div>
+        <div class="r"><span class="d y"></span>Parriwi Rd quote</div>
+        <div class="r"><span class="d y"></span>Debra tax</div>
+        <div class="r"><span class="d y"></span>Subs review</div>
+      </div>
+      <div>
+        <div class="sec-t">Admin</div>
+        <div class="r"><span class="d y"></span>Reddit + Whirlpool signups</div>
+        <div class="r"><span class="d y"></span>Domain review</div>
+        <div class="r"><span class="d y"></span>Security (2FA, 1Pass)</div>
+        <div class="r"><span class="d re"></span>ABN for CAIRR</div>
+        <div class="r"><span class="d re"></span>Stripe setup (needs ABN + cairr.ai email)</div>
+        <div class="r"><span class="d b"></span>CAIRR invoice template (tonight)</div>
+        <div class="r"><span class="d b"></span>Upload bank CSV monthly</div>
+        <div class="r"><span class="d y"></span>LeadChat cancel</div>
+      </div>
+      <div>
+        <div class="sec-t">House</div>
+        <div class="r"><span class="d x"></span>Kitchen · Ollie's room</div>
+        <div class="r"><span class="d x"></span>Econogrid front</div>
+        <div class="r"><span class="d x"></span>Fence · Deck</div>
+        <div class="r"><span class="d x"></span>External shower</div>
+      </div>
+      <div>
+        <div class="sec-t">Boat & Fishing</div>
+        <div class="r"><span class="d x"></span>Clean & polish</div>
+        <div class="r"><span class="d x"></span>Gelcoat repair</div>
+        <div class="r"><span class="d x"></span>Gear · Gun racks</div>
+        <div class="r"><span class="d x"></span>Reef trip w/ Piet</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">Ricky-Jnr 🤙 · 43 cron jobs · Mon=CAIRR · Tue=GridPilot · Wed=Exec · Thu=V3DN · Fri=Alpha · Sat=Summary</div>
+
+</body>
+</html>

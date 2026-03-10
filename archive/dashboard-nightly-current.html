@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adam's Command Centre</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #e0e0e0; padding: 16px; }
+  
+  h1 { font-size: 18px; color: #fff; display: inline; }
+  .top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .meta { font-size: 9px; color: #444; }
+  
+  /* 7 column grid for everything */
+  .grid { display: grid; grid-template-columns: repeat(7, 1fr); grid-auto-rows: auto; gap: 10px; }
+  
+  /* Health - 2 cols wide */
+  .health-card { grid-column: 1 / 3; background: #111; border: 1px solid #222; border-radius: 10px; padding: 12px 14px; display: flex; align-items: center; gap: 12px; }
+  .health-pct { font-size: 28px; font-weight: 700; color: #f59e0b; }
+  .health-lbl { font-size: 10px; color: #555; margin-bottom: 4px; }
+  .pills { display: flex; gap: 5px; }
+  .pill { font-size: 9px; padding: 3px 8px; border-radius: 6px; font-weight: 600; }
+  .pill.r { background: #3b1010; color: #ef4444; }
+  .pill.y { background: #2a2000; color: #f59e0b; }
+  .pill.g { background: #0a2a1a; color: #10b981; }
+  
+  /* Dates - 5 cols wide */
+  .dates-card { grid-column: 3 / 8; background: #111; border: 1px solid #222; border-radius: 10px; padding: 10px 14px; }
+  .dates-title { font-size: 9px; color: #444; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .dates-inner { display: flex; gap: 20px; }
+  .dates-left { flex: 1; }
+  .dates-right { flex: 1; border-left: 1px solid #1a1a1a; padding-left: 16px; }
+  .d-row { display: flex; gap: 10px; padding: 4px 0; border-bottom: 1px solid #1a1a1a; }
+  .d-row:last-child { border-bottom: none; }
+  .d-label { color: #f59e0b; font-weight: 600; font-size: 10px; min-width: 70px; }
+  .d-text { color: #888; font-size: 11px; }
+  .c-row { display: flex; gap: 6px; padding: 3px 0; align-items: center; }
+  .c-time { color: #3b82f6; font-weight: 600; font-size: 9px; min-width: 38px; }
+  .c-name { color: #666; font-size: 10px; }
+  .c-dot { width: 4px; height: 4px; border-radius: 50%; background: #10b981; flex-shrink: 0; }
+  
+  /* Project cards - each 1 col */
+  .card { background: #111; border: 1px solid #222; border-radius: 10px; padding: 16px 14px 20px; display: flex; flex-direction: column; min-height: 420px; }
+  .card-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .card-name { font-size: 12px; font-weight: 600; color: #fff; }
+  .tag { font-size: 7px; padding: 2px 5px; border-radius: 5px; font-weight: 600; }
+  .tag.live { background: #0a2a1a; color: #10b981; border: 1px solid #10b981; }
+  .tag.build { background: #0e1a2e; color: #3b82f6; border: 1px solid #3b82f6; }
+  .tag.new { background: #1a0a2e; color: #a855f7; border: 1px solid #a855f7; }
+  .tag.parked { background: #1a1a1a; color: #555; border: 1px solid #333; }
+  .card-sub { font-size: 8px; color: #444; margin-bottom: 6px; }
+  
+  .sec-t { font-size: 9px; color: #666; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 4px; margin-top: 12px; font-weight: 600; border-bottom: 1px solid #1a1a1a; padding-bottom: 3px; }
+  .sec-t:first-of-type { margin-top: 0; }
+  .r { font-size: 10px; color: #aaa; padding: 2.5px 0; display: flex; align-items: baseline; gap: 4px; line-height: 1.5; }
+  .d { width: 4px; height: 4px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+  .d.g { background: #10b981; }
+  .d.y { background: #f59e0b; }
+  .d.re { background: #ef4444; }
+  .d.b { background: #3b82f6; }
+  .d.x { background: #333; }
+  
+  .bar { height: 2px; background: #1a1a1a; border-radius: 1px; margin-top: auto; padding-top: 6px; }
+  .bar-inner { height: 2px; border-radius: 1px; }
+  .bar-inner.g { background: #10b981; }
+  .bar-inner.b { background: #3b82f6; }
+  .bar-inner.y { background: #f59e0b; }
+  
+  /* Personal - full width */
+  .personal { grid-column: 1 / -1; background: #0d0d0d; border: 1px solid #1a1a1a; border-radius: 10px; padding: 12px 14px; }
+  .personal h2 { font-size: 12px; color: #555; margin-bottom: 8px; }
+  .p-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .personal .r { color: #555; font-size: 9px; }
+  .personal .sec-t { color: #333; }
+  
+  .footer { font-size: 8px; color: #222; text-align: right; margin-top: 12px; }
+</style>
+</head>
+<body>
+
+<div class="top">
+  <h1>🎯 Adam's Command Centre</h1>
+  <span class="meta">19 Feb 2026 · Ricky-Jnr 🤙</span>
+</div>
+
+<div class="grid">
+
+  <!-- HEALTH - 2 cols -->
+  <div class="health-card">
+    <div>
+      <span class="health-pct">69%</span>
+      <div class="health-lbl">System Health</div>
+      <div class="pills">
+        <span class="pill r">0 Critical</span>
+        <span class="pill y">5 Medium</span>
+        <span class="pill g">7 Pass</span>
+      </div>
+    </div>
+    <div style="border-left:1px solid #222; padding-left:12px; margin-left:auto;">
+      <div style="font-size:9px; color:#444; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">Nightly Sync</div>
+      <div style="font-size:10px; color:#10b981;">● ON</div>
+      <div style="font-size:9px; color:#666; margin-top:2px;">Last: 19 Feb 2026</div>
+      <div style="font-size:9px; color:#666;">Next: 06:30 AM</div>
+    </div>
+  </div>
+
+  <!-- DATES + CRON - 5 cols -->
+  <div class="dates-card">
+    <div class="dates-inner">
+      <div class="dates-left">
+        <div class="dates-title">Key Dates & Overdue</div>
+        <div class="d-row"><span class="d-label">OVERDUE</span><span class="d-text">Parriwi Rd quote · Task list cleanup (114 lines)</span></div>
+        <div class="d-row"><span class="d-label">16 MAR</span><span class="d-text">Battery install — GoodWe hybrid + battery</span></div>
+        <div class="d-row"><span class="d-label">NIGHTLY</span><span class="d-text">Audit rotation · Property scout · Research</span></div>
+        <div class="d-row"><span class="d-label">DAILY 7AM</span><span class="d-text">Morning brief (WhatsApp)</span></div>
+        <div class="d-row"><span class="d-label">MON 24</span><span class="d-text">Cook GridPilot with Chaddy</span></div>
+        <div class="d-row"><span class="d-label">TUE 25 12PM</span><span class="d-text">Meeting: Sohrab Fataar (TWPG) — AI for operations</span></div>
+        <div class="d-row"><span class="d-label">THU 4PM</span><span class="d-text">API usage resets</span></div>
+      </div>
+      <div class="dates-right">
+        <div class="dates-title">Nightly Cron Jobs</div>
+        <div class="c-row"><span class="c-dot"></span><span class="c-time">12AM</span><span class="c-name">Governance Audit (rotating)</span></div>
+        <div class="c-row"><span class="c-dot"></span><span class="c-time">2AM</span><span class="c-name">GridPilot Dev</span></div>
+        <div class="c-row"><span class="c-dot"></span><span class="c-time">3AM</span><span class="c-name">Community & Reddit Research</span></div>
+        <div class="c-row"><span class="c-dot"></span><span class="c-time">4AM</span><span class="c-name">Email Cleanup</span></div>
+        <div class="c-row"><span class="c-dot"></span><span class="c-time">5AM</span><span class="c-name">Self-Improvement Research</span></div>
+        <div class="c-row"><span class="c-dot"></span><span class="c-time">6AM</span><span class="c-name">CAIRR & Business Research</span></div>
+        <div class="c-row"><span class="c-dot"></span><span class="c-time">7AM</span><span class="c-name">Morning Brief (WhatsApp)</span></div>
+        <div class="c-row"><span class="c-dot"></span><span class="c-time">12PM</span><span class="c-name">Midday Check-in</span></div>
+        <div class="c-row"><span class="c-dot"></span><span class="c-time">6PM</span><span class="c-name">End of Day Wrap</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3-4: 7 project cards -->
+
+  <!-- GridPilot -->
+  <div class="card">
+    <div class="card-head"><span class="card-name">⚡ GridPilot</span><span class="tag build">0→1</span></div>
+    <div class="card-sub">Battery SaaS</div>
+    <div class="sec-t">Tasks</div>
+    <div class="r"><span class="d b"></span>Phase 1 engine</div>
+    <div class="r"><span class="d g"></span>SEO done ✅</div>
+    <div class="r"><span class="d y"></span>GitHub — Adam</div>
+    <div class="r"><span class="d y"></span>Amber — Adam</div>
+    <div class="r"><span class="d y"></span>Domain — Adam</div>
+    <div class="r"><span class="d x"></span>NDA + Pty Ltd</div>
+    <div class="sec-t">Audit</div>
+    <div class="r"><span class="d x"></span>Next: Tue</div>
+    <div class="sec-t">Security</div>
+    <div class="r"><span class="d g"></span>Clean</div>
+    <div class="sec-t">Legal</div>
+    <div class="r"><span class="d y"></span>NDA pending</div>
+    <div class="r"><span class="d g"></span>No cust data</div>
+    <div class="bar"><div class="bar-inner b" style="width:25%"></div></div>
+  </div>
+
+  <!-- NBHW -->
+  <div class="card">
+    <div class="card-head"><span class="card-name">🔧 NBHW</span><span class="tag live">Live</span></div>
+    <div class="card-sub">Plumbing</div>
+    <div class="sec-t">Tasks</div>
+    <div class="r"><span class="d g"></span>Invoices ✅</div>
+    <div class="r"><span class="d b"></span>Services grid</div>
+    <div class="r"><span class="d b"></span>48 blogs</div>
+    <div class="r"><span class="d b"></span>Email cleanup</div>
+    <div class="r"><span class="d y"></span>GBP — access</div>
+    <div class="sec-t">Audit — 17 Feb</div>
+    <div class="r"><span class="d g"></span>5/8 pass</div>
+    <div class="r"><span class="d re"></span>Security ❌</div>
+    <div class="r"><span class="d y"></span>Legal ⚠️</div>
+    <div class="sec-t">Security</div>
+    <div class="r"><span class="d re"></span>4 critical vulns</div>
+    <div class="sec-t">Legal</div>
+    <div class="r"><span class="d y"></span>No privacy/TOS</div>
+    <div class="bar"><div class="bar-inner g" style="width:80%"></div></div>
+  </div>
+
+  <!-- Finchley -->
+  <div class="card">
+    <div class="card-head"><span class="card-name">🇬🇧 Finchley</span><span class="tag live">Live</span></div>
+    <div class="card-sub">CAIRR — boilers UK</div>
+    <div class="sec-t">Tasks</div>
+    <div class="r"><span class="d y"></span>Deploy — Hilton</div>
+    <div class="r"><span class="d y"></span>Phone — Hilton</div>
+    <div class="r"><span class="d x"></span>Competitor analysis</div>
+    <div class="sec-t">Audit — 17 Feb</div>
+    <div class="r"><span class="d g"></span>6/8 pass</div>
+    <div class="r"><span class="d y"></span>Docs · Legal ⚠️</div>
+    <div class="sec-t">Security</div>
+    <div class="r"><span class="d g"></span>SSH · 0 vulns</div>
+    <div class="r"><span class="d y"></span>PAT revoke</div>
+    <div class="sec-t">Legal</div>
+    <div class="r"><span class="d g"></span>GDPR aware</div>
+    <div class="r"><span class="d y"></span>Compliance docs</div>
+    <div class="bar"><div class="bar-inner g" style="width:90%"></div></div>
+  </div>
+
+  <!-- BTS -->
+  <div class="card">
+    <div class="card-head"><span class="card-name">📚 BTS</span><span class="tag new">New</span></div>
+    <div class="card-sub">CAIRR — SEO (Sunny)</div>
+    <div class="sec-t">Tasks</div>
+    <div class="r"><span class="d y"></span>Brain dump — wait</div>
+    <div class="r"><span class="d b"></span>SEO drafted</div>
+    <div class="r"><span class="d x"></span>Site audit</div>
+    <div class="sec-t">Audit — 17 Feb</div>
+    <div class="r"><span class="d g"></span>7/8 pass</div>
+    <div class="r"><span class="d y"></span>Docs ⚠️</div>
+    <div class="sec-t">Security</div>
+    <div class="r"><span class="d g"></span>Consult only</div>
+    <div class="sec-t">Legal</div>
+    <div class="r"><span class="d g"></span>GDPR · Clean</div>
+    <div class="bar"><div class="bar-inner y" style="width:15%"></div></div>
+  </div>
+
+  <!-- CAIRR -->
+  <div class="card">
+    <div class="card-head"><span class="card-name">🏗️ CAIRR</span><span class="tag build">Found</span></div>
+    <div class="card-sub">AI consultancy</div>
+    <div class="sec-t">Tasks</div>
+    <div class="r"><span class="d b"></span>Onboard 3 mates</div>
+    <div class="r"><span class="d b"></span>Onboarding flow</div>
+    <div class="r"><span class="d x"></span>Stone Plus</div>
+    <div class="sec-t">Audit</div>
+    <div class="r"><span class="d x"></span>Next: Mon</div>
+    <div class="sec-t">Security</div>
+    <div class="r"><span class="d y"></span>No 1Pass · UPS · Backup</div>
+    <div class="sec-t">Legal</div>
+    <div class="r"><span class="d g"></span>Anthropic OK</div>
+    <div class="bar"><div class="bar-inner y" style="width:20%"></div></div>
+  </div>
+
+  <!-- V3DN -->
+  <div class="card">
+    <div class="card-head"><span class="card-name">💰 V3DN</span><span class="tag live">Live</span></div>
+    <div class="card-sub">$39k deployed</div>
+    <div class="sec-t">Tasks</div>
+    <div class="r"><span class="d b"></span>Launch script</div>
+    <div class="r"><span class="d b"></span>Alerts bot</div>
+    <div class="r"><span class="d x"></span>Arb bot — parked</div>
+    <div class="sec-t">Audit — 19 Feb</div>
+    <div class="r"><span class="d g"></span>4/5 pass</div>
+    <div class="r"><span class="d y"></span>Missing README</div>
+    <div class="sec-t">Security</div>
+    <div class="r"><span class="d g"></span>Clean · No secrets</div>
+    <div class="r"><span class="d y"></span>Tax (Chanel)</div>
+    <div class="bar"><div class="bar-inner g" style="width:80%"></div></div>
+  </div>
+
+  <!-- Alpha -->
+  <div class="card">
+    <div class="card-head"><span class="card-name">🏠 Alpha</span><span class="tag build">Ready</span></div>
+    <div class="card-sub">Property analytics</div>
+    <div class="sec-t">Tasks</div>
+    <div class="r"><span class="d y"></span>Stripe activation</div>
+    <div class="r"><span class="d y"></span>NSW Planning API</div>
+    <div class="r"><span class="d b"></span>QLD expansion</div>
+    <div class="sec-t">Audit — 19 Feb</div>
+    <div class="r"><span class="d g"></span>3/5 pass</div>
+    <div class="r"><span class="d y"></span>Uncommitted changes</div>
+    <div class="sec-t">Security</div>
+    <div class="r"><span class="d g"></span>Clean · .env safe</div>
+    <div class="r"><span class="d y"></span>Git cleanup needed</div>
+    <div class="bar"><div class="bar-inner g" style="width:85%"></div></div>
+  </div>
+
+  <!-- PERSONAL -->
+  <div class="personal">
+    <h2>🏠 Personal</h2>
+    <div class="p-grid">
+      <div>
+        <div class="sec-t">Money</div>
+        <div class="r"><span class="d g"></span>Michelle ✅</div>
+        <div class="r"><span class="d g"></span>Michael ✅</div>
+        <div class="r"><span class="d g"></span>Hope St ✅</div>
+        <div class="r"><span class="d y"></span>Parriwi Rd quote</div>
+        <div class="r"><span class="d y"></span>Debra tax</div>
+        <div class="r"><span class="d y"></span>Subs review</div>
+      </div>
+      <div>
+        <div class="sec-t">Admin</div>
+        <div class="r"><span class="d y"></span>Task list cleanup (43% over limit)</div>
+        <div class="r"><span class="d y"></span>Archive daily notes (6 files oversized)</div>
+        <div class="r"><span class="d y"></span>Security Q's (2FA, firewall, 1Pass)</div>
+        <div class="r"><span class="d y"></span>Agent alert signups</div>
+        <div class="r"><span class="d y"></span>Reddit + Whirlpool</div>
+      </div>
+      <div>
+        <div class="sec-t">House</div>
+        <div class="r"><span class="d x"></span>Kitchen · Ollie's room</div>
+        <div class="r"><span class="d x"></span>Econogrid front</div>
+        <div class="r"><span class="d x"></span>Fence · Deck</div>
+        <div class="r"><span class="d x"></span>External shower</div>
+      </div>
+      <div>
+        <div class="sec-t">Boat & Fishing</div>
+        <div class="r"><span class="d x"></span>Clean & polish</div>
+        <div class="r"><span class="d x"></span>Gelcoat repair</div>
+        <div class="r"><span class="d x"></span>Gear · Gun racks</div>
+        <div class="r"><span class="d x"></span>Reef trip w/ Piet</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">Ricky-Jnr 🤙 · Mon=CAIRR · Tue=GridPilot · Wed=Exec · Thu=V3DN · Fri=Alpha · Sat=Summary</div>
+
+</body>
+</html>
