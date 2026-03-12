@@ -23,3 +23,19 @@ This folder is yours. All reads/writes stay here. `dev/` = your working area. `o
 - No secrets in output. No PII. No unverified claims.
 - `trash` > `rm`. Ask before destructive actions.
 - Don't touch files outside your workspace.
+
+## Failure Log
+- Before trying a fix, search `memory/failures.md` for past failures on the same problem.
+- After a failure, log it: `## [CATEGORY] Description` + date + what happened + lesson.
+- Max 30 entries. Prune oldest when full. Successes go in git, not here.
+
+## Decision Log
+- When you change a workflow, pick an approach, or set a new rule → log it in `memory/decision-log.md`
+- Format: `| date | decision | why | scope | expiry |`
+- One line per decision. Keep it searchable.
+
+## Session Writeback
+- Before ending any meaningful task: append key facts to `memory/YYYY-MM-DD.md`
+- Write durable lessons to `MEMORY.md` only if they truly matter long-term
+- Log process/policy changes to `memory/decision-log.md`
+- Don't dump transcripts — short bullets, what changed, what's next.

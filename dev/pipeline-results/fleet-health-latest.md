@@ -1,14 +1,12 @@
-# Fleet Health — 2026-03-07 15:52
+# Fleet Health — 2026-03-11 05:00
 ✅ alpha: healthy
 ✅ audit: healthy
 ✅ bts: healthy
-✅ command-centre: healthy
+❌ command-centre:
+  ℹ️        2 .bak files (can be cleaned up)
+
 ✅ gridpilot: healthy
 ✅ nbhw: healthy
-✅ nbhw-accounts: healthy
-✅ opt-compliance: healthy
-✅ opt-quality: healthy
-✅ opt-security: healthy
 ✅ overdue-office: healthy
 ✅ property: healthy
 ✅ v3dn: healthy

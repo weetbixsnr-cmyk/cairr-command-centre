@@ -24,6 +24,15 @@ Single pane of glass for Adam. Aggregate all agent activity into a live dashboar
 - output/dashboard.md (text version)
 - output/dashboard.html (visual version)
 
+## Key Facts
+- Dashboard app: dashboard-secure/ (Next.js 14, port 3333, auth via middleware.js)
+- Dashboard is 100% hardcoded from 27 Feb — needs live data wiring
+- Data sources: dev/pipeline-results/*.md, dev/dashboard/action-queue.json, openclaw status
+- All heartbeats currently DISABLED across fleet
+- Don't access other agent workspaces — ask Brain for cross-agent data
+- Adam = weetbix on Discord. Not a coder. Practical. One change at a time.
+- Brain = Ricky-Jnr (named after Adam's son Ricky)
+
 ## What Has Worked
 - (Update as patterns emerge)
 
