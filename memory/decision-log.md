@@ -9,3 +9,4 @@ One line per workflow/process/policy decision. Searchable reference for "why did
 | 2026-03-13 | All new work goes in dev/ first, never direct to dashboard-secure/ | Brain correction — broke workflow | all | permanent |
 | 2026-03-13 | ONE change at a time, show Adam, wait for approval | Brain correction — batched 8 files without approval | all | permanent |
 | 2026-03-13 | Dashboard arch: Mac Mini pushes JSON snapshot → Vercel KV → Vercel site reads | Adam wants access from multiple computers, needs password-gated Vercel site | dashboard | permanent |
+| 2026-03-15 | I own dashboard deploy end-to-end (build, test, deploy) | Adam's decision — wants me to control it all, no waiting on Brain | dashboard | permanent |

@@ -1,11 +1,25 @@
-# Governance Drift — 2026-03-13 04:00
-✅ alpha: matches template, locked
-✅ audit: matches template, locked
-✅ bts: matches template, locked
-✅ command-centre: matches template, locked
-✅ gridpilot: matches template, locked
-✅ nbhw: matches template, locked
-✅ overdue-office: matches template, locked
-✅ property: matches template, locked
-✅ v3dn: matches template, locked
+# Governance Drift — 2026-03-15 04:00
+❌ alpha:
+  ⚠️ HEARTBEAT.md is 21 lines (limit 20)
+
+✅ audit: governance aligned
+❌ bts:
+  ⚠️ HEARTBEAT.md is 33 lines (limit 20)
+
+❌ command-centre:
+  ⚠️ HEARTBEAT.md is 25 lines (limit 20)
+
+❌ gridpilot:
+  ⚠️ HEARTBEAT.md is 21 lines (limit 20)
+
+❌ nbhw:
+  ⚠️ HEARTBEAT.md is 32 lines (limit 20)
+
+✅ overdue-office: governance aligned
+❌ property:
+  ⚠️ HEARTBEAT.md is 34 lines (limit 20)
+
+❌ v3dn:
+  ⚠️ HEARTBEAT.md is 30 lines (limit 20)
+
 

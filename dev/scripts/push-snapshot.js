@@ -244,6 +244,7 @@ const snapshot = {
   infra: parseInfra(readFile(path.join(PIPELINE, 'infra-status-latest.md'))),
   tokenSpend: parseTokenSpend(readFile(path.join(PIPELINE, 'token-spend-latest.md'))),
   agentReports: parseAgentReports(),
+  nbhwSeo: readJSON(path.join(PIPELINE, 'nbhw-seo-latest.json')),
   fullReports: parseFullReports(),
   sessions: parseSessions(openclawStatus),
   gateway: parseGateway(openclawStatus),

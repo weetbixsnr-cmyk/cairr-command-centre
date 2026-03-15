@@ -44,9 +44,28 @@ function CtxBar({ pct }) {
 export default function Dashboard() {
   const { data: snap } = useSnapshot()
 
+  const [actionFeedback, setActionFeedback] = useState(null)
+
+  const handleAction = async (id, action) => {
+    try {
+      const res = await fetch('/api/action', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, action })
+      })
+      const data = await res.json()
+      if (data.success) {
+        setActionFeedback(`${action}: ${id}`)
+        // Refresh snapshot to pick up change
+        setTimeout(() => { setActionFeedback(null) }, 2000)
+      }
+    } catch {}
+  }
+
   const now = new Date().toLocaleDateString('en-AU', { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' })
   const staleMinutes = snap?.timestamp ? Math.floor((Date.now() - new Date(snap.timestamp).getTime()) / 60000) : null
   const isStale = staleMinutes !== null && staleMinutes > 10
+  const isBundled = snap?._source === 'bundled'
 
   // Fleet health
   const fh = snap?.fleetHealth
@@ -126,6 +145,13 @@ export default function Dashboard() {
           .badge { font-size:7px; padding:1px 5px; border-radius:4px; font-weight:600; }
           .badge.overdue { background:#3b1010; color:#ef4444; }
           .badge.high { background:#2a2000; color:#f59e0b; }
+          .action-btns { display:flex; gap:3px; flex-shrink:0; }
+          .action-btn { font-size:8px; padding:2px 6px; border-radius:4px; border:1px solid #333; background:#1a1a1a; color:#888; cursor:pointer; font-weight:600; transition:all .15s; }
+          .action-btn:hover { border-color:#555; color:#fff; }
+          .action-btn.approve { color:#10b981; border-color:#10b981; } .action-btn.approve:hover { background:#0a2a1a; }
+          .action-btn.reject { color:#ef4444; border-color:#ef4444; } .action-btn.reject:hover { background:#3b1010; }
+          .action-btn.complete { color:#3b82f6; border-color:#3b82f6; } .action-btn.complete:hover { background:#0e1a2e; }
+          .action-btn.snooze { color:#f59e0b; border-color:#f59e0b; } .action-btn.snooze:hover { background:#2a2000; }
 
           .token-card { grid-column:1/4; background:#111; border:1px solid #222; border-radius:10px; padding:10px 14px; }
           .token-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(100px,1fr)); gap:6px; margin-top:6px; }
@@ -165,8 +191,8 @@ export default function Dashboard() {
             <span className="live-dot" style={{ background: isStale ? '#ef4444' : '#10b981' }}></span>
             <h1>🎯 Adam's Command Centre</h1>
           </div>
-          <span className={`meta ${isStale ? 'stale' : ''}`}>
-            {now} · {isStale ? `⚠️ DATA STALE (${staleMinutes}m old)` : 'Live'} · Last sync: {snap?.timestamp ? timeAgo(snap.timestamp) : '—'} · Overwatch
+          <span className={`meta ${isStale || isBundled ? 'stale' : ''}`}>
+            {now} · {isBundled ? '📦 BUNDLED (deploy-time snapshot — KV not connected)' : isStale ? `⚠️ DATA STALE (${staleMinutes}m old)` : 'Live'} · Last sync: {snap?.timestamp ? timeAgo(snap.timestamp) : '—'} · Overwatch
           </span>
         </div>
 
@@ -174,6 +200,7 @@ export default function Dashboard() {
         <div className="nav">
           <a href="/fleet">🏢 Fleet View</a>
           <a href="/system">🔌 System Map</a>
+          <a href="/nbhw-seo">🔧 NBHW SEO</a>
         </div>
 
         <div className="grid">
@@ -244,6 +271,16 @@ export default function Dashboard() {
                   <span className={`action-text ${item.overdue ? 'action-overdue' : ''}`}>{item.title}</span>
                   {item.overdue && <span className="badge overdue">OVERDUE</span>}
                   {!item.overdue && item.priority === 'high' && <span className="badge high">HIGH</span>}
+                  <div className="action-btns">
+                    {item.type === 'approval' && (
+                      <>
+                        <button className="action-btn approve" onClick={(e) => { e.preventDefault(); handleAction(item.id, 'approve') }}>✓</button>
+                        <button className="action-btn reject" onClick={(e) => { e.preventDefault(); handleAction(item.id, 'reject') }}>✗</button>
+                      </>
+                    )}
+                    <button className="action-btn complete" onClick={(e) => { e.preventDefault(); handleAction(item.id, 'complete') }}>Done</button>
+                    {item.overdue && <button className="action-btn snooze" onClick={(e) => { e.preventDefault(); handleAction(item.id, 'snooze') }}>+24h</button>}
+                  </div>
                 </div>
               ))}
           </div>
@@ -347,6 +384,77 @@ export default function Dashboard() {
                 )
               })}
             </div>
+          </div>
+
+          {/* ── Row 4: Quick Status / Personal Tasks ── */}
+          <div className="eos-card" style={{gridColumn:'1/8'}}>
+            <div className="sec-t">Quick Status</div>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(180px, 1fr))',gap:12,marginTop:8}}>
+              <div>
+                <div className="sec-t" style={{color:'#10b981',borderColor:'#0a2a1a'}}>CAIRR</div>
+                <div className="r"><Light status="ok" /> Website ready</div>
+                <div className="r"><Light status="ok" /> SEO automation live</div>
+                <div className="r"><Light status="ok" /> Dashboard deployed</div>
+              </div>
+              <div>
+                <div className="sec-t" style={{color:'#3b82f6',borderColor:'#0e1a2e'}}>Active Scans</div>
+                <div className="r"><Light status="ok" /> NBHW SEO — Wave 1 active</div>
+                <div className="r"><Light status="ok" /> Fleet monitoring live</div>
+                <div className="r"><Light status={null} /> Property scan paused</div>
+              </div>
+              <div>
+                <div className="sec-t" style={{color:'#f59e0b',borderColor:'#2a2000'}}>Clients</div>
+                <div className="r"><Light status="ok" /> BTS: £300/mo ✅</div>
+                <div className="r"><Light status="warn" /> TWPG: Pipeline</div>
+                <div className="r"><Light status={null} /> Stone Plus: Early</div>
+              </div>
+              <div>
+                <div className="sec-t" style={{color:'#ef4444',borderColor:'#3b1010'}}>Priority</div>
+                {overdueItems.length > 0 
+                  ? overdueItems.map(item => (
+                      <div className="r" key={item.id}><Light status={false} /> {item.title.substring(0, 40)}{item.title.length > 40 ? '...' : ''}</div>
+                    ))
+                  : <div className="r"><Light status="ok" /> No overdue items</div>
+                }
+                {pendingItems.filter(i => i.priority === 'high' && !i.overdue).slice(0, 2).map(item => (
+                  <div className="r" key={item.id}><Light status="warn" /> {item.title.substring(0, 40)}{item.title.length > 40 ? '...' : ''}</div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* ── Row 5: Key Dates ── */}
+          <div style={{gridColumn:'1/4',background:'#111',border:'1px solid #222',borderRadius:10,padding:'10px 14px'}}>
+            <div className="sec-t">Key Dates</div>
+            {pendingItems.filter(i => i.due_date).sort((a,b) => new Date(a.due_date) - new Date(b.due_date)).slice(0, 5).map(item => (
+              <div key={item.id} style={{display:'flex',gap:8,padding:'3px 0',borderBottom:'1px solid #1a1a1a',fontSize:10}}>
+                <span style={{color: item.overdue ? '#ef4444' : '#f59e0b',fontWeight:600,minWidth:60}}>
+                  {item.overdue ? 'OVERDUE' : new Date(item.due_date).toLocaleDateString('en-AU',{day:'numeric',month:'short'})}
+                </span>
+                <span style={{color:'#888'}}>{item.title}</span>
+              </div>
+            ))}
+            {pendingItems.filter(i => !i.due_date).length > 0 && (
+              <div style={{fontSize:8,color:'#333',marginTop:4}}>{pendingItems.filter(i => !i.due_date).length} items without due dates</div>
+            )}
+          </div>
+
+          {/* Reminders */}
+          <div style={{gridColumn:'4/8',background:'#111',border:'1px solid #222',borderRadius:10,padding:'10px 14px'}}>
+            <div className="sec-t">Reminders & Recurring</div>
+            {pendingItems.filter(i => i.type === 'reminder').map(item => (
+              <div key={item.id} style={{display:'flex',gap:8,padding:'3px 0',borderBottom:'1px solid #1a1a1a',fontSize:10}}>
+                <span style={{color:'#3b82f6',fontWeight:600,minWidth:50,textTransform:'uppercase',fontSize:8}}>{item.source}</span>
+                <span style={{color:'#888'}}>{item.title}</span>
+              </div>
+            ))}
+            {pendingItems.filter(i => i.trigger).map(item => (
+              <div key={item.id} style={{display:'flex',gap:8,padding:'3px 0',borderBottom:'1px solid #1a1a1a',fontSize:10}}>
+                <span style={{color:'#a855f7',fontWeight:600,minWidth:50,fontSize:8}}>TRIGGER</span>
+                <span style={{color:'#888'}}>{item.title}</span>
+                <span style={{fontSize:8,color:'#555'}}>({item.trigger})</span>
+              </div>
+            ))}
           </div>
         </div>
 

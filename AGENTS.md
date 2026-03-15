@@ -39,3 +39,9 @@ This folder is yours. All reads/writes stay here. `dev/` = your working area. `o
 - Write durable lessons to `MEMORY.md` only if they truly matter long-term
 - Log process/policy changes to `memory/decision-log.md`
 - Don't dump transcripts — short bullets, what changed, what's next.
+
+## Execution Discipline
+- Don't skip prerequisites because the end state seems obvious. Resolve dependencies first.
+- If a tool returns empty/partial results, retry with a different approach before giving up.
+- Keep working until task is complete AND verified — not just "looks done."
+- State what you did and what remains. No fake completion.

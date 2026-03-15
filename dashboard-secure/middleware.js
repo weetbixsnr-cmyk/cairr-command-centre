@@ -18,11 +18,12 @@ export function middleware(request) {
     const [user, pass] = Buffer.from(auth, 'base64').toString().split(':')
     
     if (user === process.env.DASHBOARD_USER && pass === process.env.DASHBOARD_PASS) {
-      // Set session cookie and redirect to remove auth header from URL
-      const response = NextResponse.redirect(new URL('/', request.url))
+      // Set session cookie and allow through
+      const response = NextResponse.next()
       response.cookies.set('dashboard-auth', process.env.DASHBOARD_SESSION_TOKEN, {
         httpOnly: true,
         secure: true,
+        sameSite: 'lax',
         maxAge: 60 * 60 * 24 * 7 // 7 days
       })
       return response

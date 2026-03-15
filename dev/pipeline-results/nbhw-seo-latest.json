@@ -1,0 +1,55 @@
+{
+  "lastUpdated": "2026-03-14T05:00:00Z",
+  "source": "nbhw-agent",
+  "coreKeywords": [
+    { "keyword": "hot water plumber northern beaches", "position": 1, "status": "defending" },
+    { "keyword": "hot water repair northern beaches", "position": 1, "status": "defending" },
+    { "keyword": "emergency hot water plumber northern beaches", "position": 1, "status": "defending" },
+    { "keyword": "heat pump installation northern beaches", "position": 1, "status": "defending" },
+    { "keyword": "northern beaches hot water", "position": 1, "status": "defending" },
+    { "keyword": "hot water system replacement northern beaches", "position": 2, "status": "defending" }
+  ],
+  "suburbKeywords": [
+    { "keyword": "hot water Freshwater", "position": 50, "status": "not-ranking" },
+    { "keyword": "hot water Narrabeen", "position": 50, "status": "not-ranking" },
+    { "keyword": "hot water Dee Why", "position": 50, "status": "not-ranking" },
+    { "keyword": "hot water Manly", "position": 50, "status": "not-ranking" },
+    { "keyword": "hot water Frenchs Forest", "position": 50, "status": "not-ranking" },
+    { "keyword": "heat pump Freshwater", "position": 50, "status": "not-ranking" },
+    { "keyword": "heat pump Frenchs Forest", "position": 50, "status": "not-ranking" }
+  ],
+  "competitors": [
+    { "name": "hotwaternorthernbeaches.com.au", "position": "2-3 core", "threat": "high" },
+    { "name": "crystalhotwater.com.au", "position": "#1 suburb terms", "threat": "high" },
+    { "name": "pureplumbingpros.com.au", "position": "top 5 everywhere", "threat": "medium" },
+    { "name": "fixnflow.com.au", "position": "consistent presence", "threat": "medium" }
+  ],
+  "suburbCoverage": {
+    "summary": { "totalSuburbs": 37, "keywordsPerSuburb": 10, "withBlogCoverage": 21, "servicePages": 0, "zeroCoverage": 16 },
+    "waves": [
+      { "id": 1, "status": "active", "suburbs": ["Dee Why", "Freshwater", "Narrabeen"], "servicePages": 0, "servicePagesTotal": 3, "blogs": 9, "scope": "3 service pages + ~8 blogs" },
+      { "id": 2, "status": "planned", "suburbs": ["Collaroy", "Frenchs Forest", "Manly", "Cromer", "Mosman"], "servicePages": 0, "servicePagesTotal": 5, "blogs": 13, "scope": "service pages + blogs" },
+      { "id": 3, "status": "planned", "suburbs": ["Balgowlah", "Newport", "Warriewood", "Allambie Heights", "Belrose"], "servicePages": 0, "servicePagesTotal": 5, "blogs": 0, "scope": "service pages + blogs" },
+      { "id": 4, "status": "future", "suburbs": [], "servicePages": 0, "servicePagesTotal": 16, "blogs": 0, "scope": "16 suburbs with 0-1 blogs" }
+    ]
+  },
+  "framework": {
+    "strategy": "Systematic suburb-by-suburb gap filling, Dee Why outward",
+    "urlStructure": "/hot-water/[suburb]",
+    "contentRules": ["Real photos only", "No duplicate content", "Review integration", "Internal linking"],
+    "weeklyCadence": "Mon-Fri defined actions",
+    "reviewCoaching": true
+  },
+  "assets": {
+    "googleReviews": 29,
+    "unusedPhotos": 183,
+    "photoCategories": 10
+  },
+  "todayWins": [
+    "Fixed SEO bug: 3 pages self-canonicalising to homepage (commit a78cbdd)",
+    "Technical SEO audit: site health all green, 0 broken links",
+    "Built master suburb×keyword matrix",
+    "Build: 70 pre-rendered pages (was 67)",
+    "Future-proofed generate-html.mjs — new service pages auto-get SEO metadata"
+  ]
+}
