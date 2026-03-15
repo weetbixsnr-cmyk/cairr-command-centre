@@ -1,13 +1,13 @@
-# Token Spend Report — 2026-03-15 09:00
+# Token Spend Report — 2026-03-16 08:00
 
 ## Sessions (last 24hrs)
-- **main:** 1195 log entries
+- **main:** 1229 log entries
 - **bts:** 75 log entries
 - **nbhw:** 17600 log entries
 - **v3dn:** 7 log entries
 - **property:** 10 log entries
-- **command-centre:** 201 log entries
-- **gridpilot:** 367 log entries
+- **command-centre:** 219 log entries
+- **gridpilot:** 388 log entries
 - **alpha:** 4 log entries
 - **overdue-office:** 5 log entries
 - **audit:** 1714 log entries

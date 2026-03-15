@@ -73,7 +73,7 @@ export default function AgentPage() {
         <title>{name || 'Agent'} — Command Centre</title>
         <style>{`
           *{margin:0;padding:0;box-sizing:border-box}
-          body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a0a0a;color:#e0e0e0;padding:16px;max-width:900px;margin:0 auto}
+          body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a0a0a;color:#e0e0e0;padding:16px 24px}
           a{color:#3b82f6;text-decoration:none}a:hover{text-decoration:underline}
           .back{font-size:12px;margin-bottom:16px;display:inline-block}
           .header{display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap}
@@ -83,7 +83,8 @@ export default function AgentPage() {
           .tag.fail{background:#3b1010;color:#ef4444;border:1px solid #ef4444}
           .tag.warn{background:#2a2000;color:#f59e0b;border:1px solid #f59e0b}
           .tag.off{background:#1a1a1a;color:#555;border:1px solid #333}
-          .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+          .grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:14px}
+          @media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}
           @media(max-width:600px){.grid{grid-template-columns:1fr}}
           .card{background:#111;border:1px solid #222;border-radius:10px;padding:12px}
           .card-title{font-size:10px;color:#555;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-weight:600}

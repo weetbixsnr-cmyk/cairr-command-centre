@@ -96,7 +96,7 @@ export default function NbhwSeoPage() {
         <title>NBHW SEO — Command Centre</title>
         <style>{`
           *{margin:0;padding:0;box-sizing:border-box}
-          body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a0a0a;color:#e0e0e0;padding:16px;max-width:1000px;margin:0 auto}
+          body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a0a0a;color:#e0e0e0;padding:16px 24px}
           a{color:#3b82f6;text-decoration:none}a:hover{text-decoration:underline}
           .back{font-size:12px;margin-bottom:16px;display:inline-block}
           .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:8px}
