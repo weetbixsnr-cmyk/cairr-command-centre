@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 /**
- * push-snapshot.js — Bundle all dashboard data into JSON and push to Vercel KV
+ * push-snapshot.js — Bundle all dashboard data into JSON and push to Vercel Blob
  * Run via OpenClaw cron every 5 minutes:
  *   node /Users/cairr/.openclaw/agents/command-centre/workspace/dev/scripts/push-snapshot.js
+ * 
+ * Requires: BLOB_READ_WRITE_TOKEN env var (from Vercel Blob store)
  */
 
 const fs = require('fs')
@@ -14,6 +16,15 @@ const PIPELINE = path.join(WORKSPACE, 'dev', 'pipeline-results')
 const DASHBOARD_DATA = path.join(WORKSPACE, 'dev', 'dashboard')
 const SNAPSHOTS_DIR = path.join(WORKSPACE, 'dev', 'snapshots')
 const SNAPSHOT_FILE = path.join(SNAPSHOTS_DIR, 'latest.json')
+
+// Load blob token from dashboard-secure/.env.local if not in env
+if (!process.env.BLOB_READ_WRITE_TOKEN) {
+  try {
+    const envFile = fs.readFileSync(path.join(WORKSPACE, 'dashboard-secure', '.env.local'), 'utf8')
+    const match = envFile.match(/BLOB_READ_WRITE_TOKEN="?([^"\n]+)"?/)
+    if (match) process.env.BLOB_READ_WRITE_TOKEN = match[1]
+  } catch {}
+}
 
 // ── Helpers ──────────────────────────────────────────────────
 
@@ -102,20 +113,14 @@ function parseInfra(raw) {
 function parseTokenSpend(raw) {
   if (!raw) return null
   const result = { agents: {}, budgets: {} }
-  
-  // Parse session log entries
   const entryMatches = raw.matchAll(/\*\*(\w[\w-]*):\*\*\s*([\d,]+)\s*log entries/g)
   for (const m of entryMatches) {
     result.agents[m[1]] = { logEntries: parseInt(m[2].replace(/,/g, '')) }
   }
-  
-  // Parse budget table
   const budgetMatches = raw.matchAll(/\|\s*(\w[\w-]*)\s*\|\s*([<>$\d\w]+)\s*\|\s*(🟢|🟡|🔴)\s*\|/g)
   for (const m of budgetMatches) {
-    const name = m[1].toLowerCase()
-    result.budgets[name] = { limit: m[2], status: m[3] === '🟢' ? 'ok' : m[3] === '🟡' ? 'warn' : 'over' }
+    result.budgets[m[1].toLowerCase()] = { limit: m[2], status: m[3] === '🟢' ? 'ok' : m[3] === '🟡' ? 'warn' : 'over' }
   }
-  
   return result
 }
 
@@ -125,7 +130,6 @@ function parseAgentReports() {
     const files = fs.readdirSync(PIPELINE).filter(f => f.endsWith('-latest.md'))
     for (const file of files) {
       const key = file.replace('-latest.md', '')
-      // Skip meta reports
       if (['fleet-health', 'governance-drift', 'infra-status', 'token-spend', 'email-cleanup'].includes(key)) continue
       const raw = readFile(path.join(PIPELINE, file))
       if (!raw) continue
@@ -256,22 +260,55 @@ fs.writeFileSync(SNAPSHOT_FILE, JSON.stringify(snapshot))
 const sizeKB = Math.round(fs.statSync(SNAPSHOT_FILE).size / 1024)
 console.log(`Snapshot written: ${SNAPSHOT_FILE} (${sizeKB}KB)`)
 
-// ── Push to Vercel KV ────────────────────────────────────────
+// ── Push to Vercel Blob ──────────────────────────────────────
 
-const KV_URL = process.env.KV_REST_API_URL
-const KV_TOKEN = process.env.KV_REST_API_TOKEN
+const BLOB_TOKEN = process.env.BLOB_READ_WRITE_TOKEN
 
-if (KV_URL && KV_TOKEN) {
+if (BLOB_TOKEN) {
+  const snapshotJSON = JSON.stringify(snapshot)
   try {
-    // Vercel KV uses Upstash Redis REST API
-    const payload = JSON.stringify(['SET', 'dashboard:snapshot', JSON.stringify(snapshot)])
-    const result = execSync(`curl -s -X POST "${KV_URL}" -H "Authorization: Bearer ${KV_TOKEN}" -H "Content-Type: application/json" -d '${payload.replace(/'/g, "'\\''")}'`, {
-      timeout: 10000, encoding: 'utf8'
-    })
-    console.log('Pushed to Vercel KV:', result.trim())
+    // 1. List existing blobs to clean up old ones
+    const listResult = execSync(
+      `curl -s "https://blob.vercel-storage.com?prefix=dashboard-snapshot" ` +
+      `-H "Authorization: Bearer ${BLOB_TOKEN}" ` +
+      `-H "x-api-version: 7"`,
+      { timeout: 10000, encoding: 'utf8' }
+    )
+    const existing = JSON.parse(listResult)
+    if (existing.blobs && existing.blobs.length > 0) {
+      // Delete old blobs
+      const urls = existing.blobs.map(b => b.url)
+      const deletePayload = JSON.stringify({ urls })
+      execSync(
+        `curl -s -X POST "https://blob.vercel-storage.com/delete" ` +
+        `-H "Authorization: Bearer ${BLOB_TOKEN}" ` +
+        `-H "Content-Type: application/json" ` +
+        `-H "x-api-version: 7" ` +
+        `--data-binary @-`,
+        { input: deletePayload, timeout: 10000, encoding: 'utf8' }
+      )
+      console.log(`🧹 Cleaned ${urls.length} old blob(s)`)
+    }
+
+    // 2. Upload new snapshot
+    const result = execSync(
+      `curl -s -X PUT "https://blob.vercel-storage.com/dashboard-snapshot.json" ` +
+      `-H "Authorization: Bearer ${BLOB_TOKEN}" ` +
+      `-H "Content-Type: application/json" ` +
+      `-H "x-api-version: 7" ` +
+      `-H "x-content-type: application/json" ` +
+      `--data-binary @-`,
+      { input: snapshotJSON, timeout: 15000, encoding: 'utf8' }
+    )
+    const parsed = JSON.parse(result)
+    if (parsed.url) {
+      console.log(`✅ Pushed to Vercel Blob: ${parsed.url} (${sizeKB}KB)`)
+    } else {
+      console.log('Blob response:', result)
+    }
   } catch (e) {
-    console.error('Failed to push to KV:', e.message)
+    console.error('❌ Failed to push to Blob:', e.message)
   }
 } else {
-  console.log('KV credentials not set — local snapshot only')
+  console.log('⚠️  BLOB_READ_WRITE_TOKEN not set — local snapshot only')
 }
