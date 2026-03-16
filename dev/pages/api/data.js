@@ -1,25 +1,15 @@
 /**
  * /api/data — Single API endpoint for all dashboard data
- * Reads from Vercel KV in production, falls back to local snapshot file
- * 
- * Query params:
- *   ?section=fleetHealth     — just fleet health
- *   ?section=governance      — just governance
- *   ?section=actionQueue     — just action queue
- *   ?section=sessions        — just sessions
- *   ?section=agentReports    — all agent reports
- *   ?agent=bts               — include full report for specific agent
- *   (no params)              — returns everything
+ * Reads from Vercel Blob in production, falls back to bundled snapshot
  */
 
 import fs from 'fs'
 import path from 'path'
+import { list } from '@vercel/blob'
 
-// In production (Vercel), use KV. Locally, read snapshot file.
-// Fallback chain: KV → local file → bundled static snapshot
 const IS_VERCEL = process.env.VERCEL === '1'
 
-// Try to load bundled snapshot at build time (baked into deploy)
+// Bundled snapshot as last-resort fallback
 let BUNDLED_SNAPSHOT = null
 try {
   const bundledPath = path.resolve(process.cwd(), 'public', 'snapshot.json')
@@ -29,25 +19,30 @@ try {
 } catch {}
 
 async function getSnapshot() {
-  // 1. Try Vercel KV (live data, updated every 5 min by Mac Mini cron)
-  if (IS_VERCEL && process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN) {
+  // 1. Try Vercel Blob (live data, updated every 5 min by Mac Mini cron)
+  if (process.env.BLOB_READ_WRITE_TOKEN) {
     try {
-      const res = await fetch(`${process.env.KV_REST_API_URL}/get/dashboard:snapshot`, {
-        headers: { Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}` }
-      })
-      const data = await res.json()
-      if (data.result) {
-        return JSON.parse(data.result)
+      const { blobs } = await list({ prefix: 'dashboard-snapshot', limit: 10, token: process.env.BLOB_READ_WRITE_TOKEN })
+      if (blobs.length > 0) {
+        const latest = blobs.sort((a, b) => new Date(b.uploadedAt) - new Date(a.uploadedAt))[0]
+        const res = await fetch(latest.url)
+        if (res.ok) {
+          return await res.json()
+        }
       }
-    } catch {}
+    } catch (e) {
+      console.error('Blob read failed:', e.message)
+    }
   }
 
   // 2. Try local snapshot file (dev mode on Mac Mini)
-  const snapshotPath = path.resolve(process.cwd(), '..', 'dev', 'snapshots', 'latest.json')
-  try {
-    const raw = fs.readFileSync(snapshotPath, 'utf8')
-    return JSON.parse(raw)
-  } catch {}
+  if (!IS_VERCEL) {
+    const snapshotPath = path.resolve(process.cwd(), '..', 'dev', 'snapshots', 'latest.json')
+    try {
+      const raw = fs.readFileSync(snapshotPath, 'utf8')
+      return JSON.parse(raw)
+    } catch {}
+  }
 
   // 3. Fall back to bundled snapshot (baked into deploy — stale but better than empty)
   if (BUNDLED_SNAPSHOT) {
@@ -58,6 +53,8 @@ async function getSnapshot() {
 }
 
 export default async function handler(req, res) {
+  res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=300')
+  
   try {
     const snapshot = await getSnapshot()
     if (!snapshot) {
@@ -66,14 +63,12 @@ export default async function handler(req, res) {
 
     const { section, agent } = req.query
 
-    // If specific section requested, return just that
     if (section && snapshot[section] !== undefined) {
       return res.json({ [section]: snapshot[section], timestamp: snapshot.timestamp })
     }
 
-    // If specific agent requested, include full report
     if (agent && snapshot.fullReports?.[agent]) {
-      const agentData = {
+      return res.json({
         report: snapshot.agentReports?.[agent] || null,
         fullReport: snapshot.fullReports[agent],
         session: snapshot.sessions?.byAgent?.[agent] || null,
@@ -81,11 +76,9 @@ export default async function handler(req, res) {
         health: snapshot.fleetHealth?.agents?.find(a => a.name === agent) || null,
         governance: snapshot.governance?.agents?.find(a => a.name === agent) || null,
         timestamp: snapshot.timestamp
-      }
-      return res.json(agentData)
+      })
     }
 
-    // Return full snapshot (minus full reports to keep payload small)
     const { fullReports, ...light } = snapshot
     res.json(light)
   } catch (e) {
