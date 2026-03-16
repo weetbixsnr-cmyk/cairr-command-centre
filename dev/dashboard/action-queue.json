@@ -102,5 +102,14 @@
     "title": "Send deposit invoice \u2014 Frank heat pump Frenchs Forest",
     "created": "2026-03-07T18:59+11:00",
     "status": "pending"
+  },
+  {
+    "id": "aq-011",
+    "type": "reminder",
+    "priority": "high",
+    "source": "v3dn",
+    "title": "Lent $400 from 7089 wallet to Dad wallet \u2014 needs repaying",
+    "created": "2026-03-17T06:57+11:00",
+    "status": "pending"
   }
 ]

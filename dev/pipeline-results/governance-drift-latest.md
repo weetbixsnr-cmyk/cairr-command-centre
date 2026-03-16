@@ -1,26 +1,13 @@
-# Governance Drift — 2026-03-16 04:00
-❌ alpha:
-  ⚠️ HEARTBEAT.md is 21 lines (limit 20)
-
+# Governance Drift — 2026-03-17 04:00
+✅ alpha: governance aligned
 ✅ audit: governance aligned
-❌ bts:
-  ⚠️ HEARTBEAT.md is 33 lines (limit 20)
-
-❌ command-centre:
-  ⚠️ HEARTBEAT.md is 25 lines (limit 20)
-
-❌ gridpilot:
-  ⚠️ HEARTBEAT.md is 21 lines (limit 20)
-
+✅ bts: governance aligned
+✅ command-centre: governance aligned
+✅ gridpilot: governance aligned
 ❌ nbhw:
-  ⚠️ MEMORY.md is 81 lines (limit 80)
-  ⚠️ HEARTBEAT.md is 32 lines (limit 20)
+  ⚠️ MEMORY.md is 86 lines (limit 80)
 
 ✅ overdue-office: governance aligned
-❌ property:
-  ⚠️ HEARTBEAT.md is 34 lines (limit 20)
-
-❌ v3dn:
-  ⚠️ HEARTBEAT.md is 30 lines (limit 20)
-
+✅ property: governance aligned
+✅ v3dn: governance aligned
 
