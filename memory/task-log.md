@@ -44,7 +44,37 @@ _Record every task result here. This builds institutional knowledge._
 ## 2026-03-15
 ### Task: Session startup + readback
 - **Result:** success
-- **Method:** Read all workspace files, memory, architecture docs, current dashboard code. Identified: exec was allowlisted not full (now fixed by Brain), KV not connected, no cron pushing data, hardcoded Quick Status section.
+- **Method:** Read all workspace files, memory, architecture docs, current dashboard code. Identified gaps.
 - **Failures:** Exec allowlist blocked git/find/ls commands — resolved by Brain confirming full exec in config.
 - **Learnings:** If exec seems blocked after config change, /new to pick up fresh session config.
-- **Output:** This task-log backfill
+
+### Task: Connect Vercel Blob for live data
+- **Result:** success
+- **Method:** Created Vercel Blob store (dashboard-final, store_53Nq4Uvhd3nTkg2q) via CLI + API. Rewrote push-snapshot.js to push to Blob with old-blob cleanup. Rewrote api/data.js to read from Blob with static import + explicit token. Installed @vercel/blob. Deployed.
+- **Failures:** (1) Vercel CLI interactive prompts for blob store linking couldn't be automated — used `vercel api` REST endpoint instead. (2) Dynamic import of @vercel/blob failed silently on Vercel serverless — switched to static import with explicit token param.
+- **Learnings:** Always pass token explicitly to @vercel/blob functions. Don't rely on dynamic imports for critical paths in serverless.
+- **Output:** dev/scripts/push-snapshot.js, dev/pages/api/data.js, dashboard-secure/ deployed
+- **Git:** 9e1aca31
+
+### Task: Set up cron for snapshot push
+- **Result:** success
+- **Method:** `openclaw cron add` — every 5m, Haiku, isolated session, light context, no-deliver
+- **Output:** Cron ID d1a8036e-d3d5-4358-94a4-2e280d923107
+
+### Task: Remove duplicate sections from main dashboard
+- **Result:** success
+- **Method:** Removed Quick Status (hardcoded), Key Dates, Reminders & Recurring — all duplicated by action queue + scorecards
+- **Git:** 291ac11b
+
+### Task: Full-width all pages
+- **Result:** success
+- **Method:** Removed max-width caps from agent/[name].js (900px) and nbhw-seo.js (1000px). Widened agent grid to 4-col.
+- **Git:** 8d0628c5
+
+## 2026-03-16
+### Task: Fix deploy-prep overwriting Blob API route
+- **Result:** success
+- **Method:** Root cause: edited dashboard-secure/pages/api/data.js (deploy target) instead of dev/pages/api/data.js (source). deploy-prep copies dev/pages/ → dashboard-secure/pages/, so every deploy reverted to old KV reader. Fixed by updating the source file.
+- **Failures:** Dashboard showed "8hr stale" because live site fell back to bundled snapshot after a deploy overwrote the Blob reader.
+- **Learnings:** ALWAYS edit files in dev/pages/ — never directly in dashboard-secure/pages/. deploy-prep overwrites everything.
+- **Git:** 7cda8689

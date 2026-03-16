@@ -23,3 +23,8 @@ Categories: [SEO] [ENGINE] [EMAIL] [TRADING] [DASHBOARD] [DEPLOY] [API] [AUTH] [
 **Date:** 2026-03-15
 **What happened:** Built dashboard across Mar 12-14, never logged any tasks. Brain flagged it — FRAMEWORK §4 requires session writeback.
 **Lesson:** Log tasks DURING the session, not after. Backfilling is worse than logging live.
+
+## [DEPLOY] deploy-prep overwrote Blob API route with old KV version — 2026-03-16
+- **What happened:** Dashboard showed "8hr stale" because live site fell back to bundled snapshot
+- **Root cause:** I edited `dashboard-secure/pages/api/data.js` (the deploy target) instead of `dev/pages/api/data.js` (the source). deploy-prep.sh copies from dev/pages/ → dashboard-secure/pages/, so every deploy clobbered my fix.
+- **Lesson:** ALWAYS edit files in `dev/pages/` — never directly in `dashboard-secure/pages/`. deploy-prep overwrites everything.
