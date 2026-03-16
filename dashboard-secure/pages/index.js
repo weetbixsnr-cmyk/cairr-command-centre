@@ -112,7 +112,7 @@ export default function Dashboard() {
           
           @media(max-width:768px) {
             .grid { grid-template-columns:1fr; gap:16px; }
-            .health-card,.reports-card,.action-card,.token-card,.cron-card,.fleet-card,.gov-card,.sys-card,.eos-card { grid-column:1 !important; }
+            .health-card,.reports-card,.action-card,.cron-card,.fleet-card,.gov-card,.sys-card,.eos-card { grid-column:1 !important; }
             body { padding:12px; }
             h1 { font-size:20px !important; }
             .meta { font-size:12px !important; }
@@ -153,19 +153,12 @@ export default function Dashboard() {
           .action-btn.complete { color:#3b82f6; border-color:#3b82f6; } .action-btn.complete:hover { background:#0e1a2e; }
           .action-btn.snooze { color:#f59e0b; border-color:#f59e0b; } .action-btn.snooze:hover { background:#2a2000; }
 
-          .token-card { grid-column:1/4; background:#111; border:1px solid #222; border-radius:10px; padding:10px 14px; }
-          .token-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(100px,1fr)); gap:6px; margin-top:6px; }
-          .token-agent { padding:6px 8px; background:#0a0a0a; border-radius:6px; border:1px solid #1a1a1a; cursor:pointer; transition:border-color .2s; }
-          .token-agent:hover { border-color:#3b82f6; }
-          .token-name { font-size:9px; color:#888; margin-bottom:2px; }
-          .token-pct { font-size:14px; font-weight:700; }
-
-          .cron-card { grid-column:4/6; background:#111; border:1px solid #222; border-radius:10px; padding:10px 14px; }
+          .cron-card { grid-column:1/4; background:#111; border:1px solid #222; border-radius:10px; padding:10px 14px; }
           .cron-stat { display:flex; gap:12px; margin-bottom:6px; }
           .cron-num { font-size:18px; font-weight:700; }
           .cron-lbl { font-size:9px; color:#555; }
 
-          .fleet-card { grid-column:6/8; background:#111; border:1px solid #222; border-radius:10px; padding:10px 14px; }
+          .fleet-card { grid-column:4/8; background:#111; border:1px solid #222; border-radius:10px; padding:10px 14px; }
           .fleet-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(90px,1fr)); gap:4px; margin-top:6px; }
           .fleet-agent { display:flex; align-items:center; gap:4px; padding:3px 6px; background:#0a0a0a; border-radius:4px; border:1px solid #1a1a1a; cursor:pointer; transition:border-color .2s; }
           .fleet-agent:hover { border-color:#3b82f6; }
@@ -285,47 +278,7 @@ export default function Dashboard() {
               ))}
           </div>
 
-          {/* ── Row 2: Token Spend / Crons / Fleet Grid ── */}
-
-          {/* Token / Context Card */}
-          <div className="token-card">
-            <div className="sec-t">Context & Token Spend</div>
-            {!sess && <div className="loading">Loading...</div>}
-            
-            {/* Budget status */}
-            {snap?.tokenSpend?.budgets && (
-              <div style={{display:'flex', gap:8, marginBottom:8, flexWrap:'wrap'}}>
-                {Object.entries(snap.tokenSpend.budgets).map(([name, b]) => (
-                  <div key={name} style={{fontSize:'9px', padding:'3px 8px', borderRadius:6, fontWeight:600,
-                    background: b.status==='ok'?'#0a2a1a':b.status==='warn'?'#2a2000':'#3b1010',
-                    color: b.status==='ok'?'#10b981':b.status==='warn'?'#f59e0b':'#ef4444'
-                  }}>
-                    {name.toUpperCase()} {b.limit} {b.status==='ok'?'✅':b.status==='warn'?'⚠️':'🔴'}
-                  </div>
-                ))}
-              </div>
-            )}
-            
-            <div className="token-grid">
-              {sess?.byAgent && Object.entries(sess.byAgent)
-                .sort((a, b) => (b[1].avgContextPct || 0) - (a[1].avgContextPct || 0))
-                .map(([name, data]) => {
-                  const pct = data.avgContextPct || 0
-                  const color = pct > 80 ? '#ef4444' : pct > 50 ? '#f59e0b' : '#10b981'
-                  const spend = snap?.tokenSpend?.agents?.[name]
-                  return (
-                    <a href={`/agent/${name}`} key={name} style={{textDecoration:'none'}}>
-                      <div className="token-agent">
-                        <div className="token-name">{name} · {data.sessions?.length || 0}s</div>
-                        <div className="token-pct" style={{color}}>{pct}%</div>
-                        <CtxBar pct={pct} />
-                        {spend && <div style={{fontSize:'7px',color:'#444',marginTop:2}}>{spend.logEntries?.toLocaleString()} logs/24h</div>}
-                      </div>
-                    </a>
-                  )
-                })}
-            </div>
-          </div>
+          {/* ── Row 2: Crons / Fleet Grid ── */}
 
           {/* Cron Card */}
           <div className="cron-card">
