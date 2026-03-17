@@ -263,6 +263,14 @@ function DetailPanel({ name, snap, onClose }) {
             </a>
           </div>
         )}
+        {name === 'bts' && (
+          <div className="panel-section">
+            <div className="ps-title">🔗 Tools</div>
+            <a href="/bts-seo" style={{ display: 'block', padding: '6px 8px', background: '#111', borderRadius: 6, border: '1px solid #1a1a1a', fontSize: 11, color: '#3b82f6', fontWeight: 600 }}>
+              🎓 BTS SEO Dashboard →
+            </a>
+          </div>
+        )}
         
         {/* Memory summary */}
         {ws.memorySummary && (
