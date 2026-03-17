@@ -108,7 +108,7 @@ export default function Dashboard() {
           .nav a { font-size:10px; padding:4px 10px; background:#111; border:1px solid #222; border-radius:6px; }
           .nav a:hover { border-color:#3b82f6; }
           
-          .grid { display:grid; grid-template-columns:repeat(7,1fr); grid-auto-rows:auto; gap:10px; }
+          .grid { display:grid; grid-template-columns:repeat(7,1fr); grid-auto-rows:auto; gap:10px; align-items:stretch; }
           
           @media(max-width:768px) {
             .grid { grid-template-columns:1fr; gap:16px; }
@@ -123,7 +123,7 @@ export default function Dashboard() {
             h1 { font-size:24px !important; }
           }
 
-          .health-card { grid-column:1/3; background:#111; border:1px solid #222; border-radius:10px; padding:12px 14px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+          .health-card { grid-column:1/3; background:#111; border:1px solid #222; border-radius:10px; padding:12px 14px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; align-self:stretch; }
           .health-pct { font-size:28px; font-weight:700; }
           .health-lbl { font-size:10px; color:#555; margin-bottom:4px; }
           .pills { display:flex; gap:5px; flex-wrap:wrap; }
@@ -132,11 +132,11 @@ export default function Dashboard() {
           .pill.y { background:#2a2000; color:#f59e0b; }
           .pill.g { background:#0a2a1a; color:#10b981; }
 
-          .reports-card { grid-column:3/5; background:#111; border:1px solid #222; border-radius:10px; padding:10px 14px; overflow-y:auto; max-height:220px; }
+          .reports-card { grid-column:3/5; background:#111; border:1px solid #222; border-radius:10px; padding:10px 14px; overflow-y:auto; align-self:stretch; }
           .rpt-row { display:flex; align-items:center; gap:6px; padding:3px 0; border-bottom:1px solid #1a1a1a; }
           .rpt-row:last-child { border-bottom:none; }
 
-          .action-card { grid-column:5/8; background:#111; border:1px solid #222; border-radius:10px; padding:10px 14px; max-height:250px; overflow-y:auto; }
+          .action-card { grid-column:5/8; background:#111; border:1px solid #222; border-radius:10px; padding:10px 14px; overflow-y:auto; align-self:stretch; }
           .action-row { display:flex; gap:8px; padding:4px 0; border-bottom:1px solid #1a1a1a; align-items:baseline; }
           .action-row:last-child { border-bottom:none; }
           .action-src { font-size:8px; color:#3b82f6; font-weight:600; min-width:50px; text-transform:uppercase; }
