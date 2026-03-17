@@ -362,6 +362,20 @@ function getAgentWorkspaceData() {
       })
     }
     
+    // Weekly stats (EOS scorecard)
+    try {
+      const weekCommits = execSync(`cd "${ws}" && git log --since="1 week ago" --oneline 2>/dev/null | wc -l`, { timeout: 5000, encoding: 'utf8' }).trim()
+      agent.weeklyCommits = parseInt(weekCommits) || 0
+    } catch { agent.weeklyCommits = 0 }
+    
+    // Count failures from last 7 days
+    if (agent.failures) {
+      const weekAgo = new Date(Date.now() - 7 * 86400000).toISOString().slice(0, 10)
+      agent.weeklyFailures = agent.failures.filter(f => f.date && f.date >= weekAgo).length
+    } else {
+      agent.weeklyFailures = 0
+    }
+    
     // Current tasks (from memory/tasks.md)
     const tasksFile = readFile(path.join(ws, 'memory', 'tasks.md'))
     if (tasksFile) {

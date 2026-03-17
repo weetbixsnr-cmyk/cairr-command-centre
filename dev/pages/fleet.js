@@ -179,6 +179,30 @@ function DetailPanel({ name, snap, onClose }) {
           </div>
         </div>
         
+        {/* EOS Scorecard */}
+        <div className="panel-section">
+          <div className="ps-title">📊 Weekly Scorecard</div>
+          <div className="score-grid">
+            <div className="score-item">
+              <div className="score-val" style={{ color: (d.sess?.sessions?.length || 0) > 0 ? '#10b981' : '#555' }}>{d.sess?.sessions?.length || 0}</div>
+              <div className="score-lbl">Sessions</div>
+            </div>
+            <div className="score-item">
+              <div className="score-val" style={{ color: (ws.weeklyCommits || 0) >= 2 ? '#10b981' : (ws.weeklyCommits || 0) >= 1 ? '#f59e0b' : '#ef4444' }}>{ws.weeklyCommits || 0}</div>
+              <div className="score-lbl">Commits (7d)</div>
+            </div>
+            <div className="score-item">
+              <div className="score-val" style={{ color: (ws.weeklyFailures || 0) === 0 ? '#10b981' : '#ef4444' }}>{ws.weeklyFailures || 0}</div>
+              <div className="score-lbl">Failures (7d)</div>
+            </div>
+            <div className="score-item">
+              <div className="score-val" style={{ color: (ws.decisions?.length || 0) > 0 ? '#3b82f6' : '#555' }}>{ws.decisions?.length || 0}</div>
+              <div className="score-lbl">Decisions</div>
+            </div>
+          </div>
+          <div className="score-owner">Owner: 🧠 Brain</div>
+        </div>
+        
         {/* Git */}
         {ws.git && (
           <div className="panel-section">
@@ -386,6 +410,12 @@ export default function FleetPage() {
           .pip-current .pip-inner{box-shadow:0 0 8px #10b981}
           .pip-label{font-size:6px;color:#444}
           .pip-dot+.pip-dot::before{content:'';display:none}
+          
+          .score-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:6px}
+          .score-item{text-align:center;background:#111;border:1px solid #1a1a1a;border-radius:6px;padding:6px 4px}
+          .score-val{font-size:18px;font-weight:800}
+          .score-lbl{font-size:7px;color:#555;text-transform:uppercase;letter-spacing:0.5px}
+          .score-owner{font-size:8px;color:#444;text-align:right}
           
           .footer{font-size:8px;color:#1a1a1a;text-align:right;margin-top:24px}
         `}</style>
