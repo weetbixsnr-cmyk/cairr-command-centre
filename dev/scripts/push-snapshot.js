@@ -17,14 +17,7 @@ const DASHBOARD_DATA = path.join(WORKSPACE, 'dev', 'dashboard')
 const SNAPSHOTS_DIR = path.join(WORKSPACE, 'dev', 'snapshots')
 const SNAPSHOT_FILE = path.join(SNAPSHOTS_DIR, 'latest.json')
 
-// Load blob token from dashboard-secure/.env.local if not in env
-if (!process.env.BLOB_READ_WRITE_TOKEN) {
-  try {
-    const envFile = fs.readFileSync(path.join(WORKSPACE, 'dashboard-secure', '.env.local'), 'utf8')
-    const match = envFile.match(/BLOB_READ_WRITE_TOKEN="?([^"\n]+)"?/)
-    if (match) process.env.BLOB_READ_WRITE_TOKEN = match[1]
-  } catch {}
-}
+
 
 // ── Helpers ──────────────────────────────────────────────────
 
@@ -279,6 +272,34 @@ function getCronJobs() {
   }
 }
 
+// ── CodexBar (Claude cost data) ──────────────────────────────
+
+function getCodexBarCost() {
+  try {
+    const raw = execSync('codexbar cost --provider claude --json 2>&1', { timeout: 10000, encoding: 'utf8' })
+    const data = JSON.parse(raw)
+    if (Array.isArray(data) && data.length > 0) {
+      const d = data[0]
+      return {
+        provider: d.provider,
+        source: d.source,
+        updatedAt: d.updatedAt,
+        last30Days: { cost: d.totals?.totalCost || 0, tokens: d.totals?.totalTokens || 0 },
+        session: { cost: d.sessionCostUSD || 0, tokens: d.sessionTokens || 0 },
+        daily: (d.daily || []).slice(-7).map(day => ({
+          date: day.date,
+          cost: day.totalCost,
+          tokens: day.totalTokens,
+          models: day.modelsUsed || []
+        }))
+      }
+    }
+  } catch (e) {
+    console.warn('Could not get CodexBar cost:', e.message)
+  }
+  return null
+}
+
 // ── Build snapshot ───────────────────────────────────────────
 
 console.log('Building dashboard snapshot...')
@@ -304,65 +325,43 @@ const snapshot = {
   gateway: parseGateway(openclawStatus),
   vercelProjects: getVercelProjects(),
   cronJobs: getCronJobs(),
-  // Static services config — updated manually
+  claudeCost: getCodexBarCost(),
   services: readJSON(path.join(DASHBOARD_DATA, 'services.json')),
 }
 
-// ── Write local snapshot ─────────────────────────────────────
+// ── Write snapshot + bundle into dashboard ───────────────────
 
 fs.writeFileSync(SNAPSHOT_FILE, JSON.stringify(snapshot))
+const BUNDLE_PATH = path.join(WORKSPACE, 'dashboard-secure', 'public', 'snapshot.json')
+fs.writeFileSync(BUNDLE_PATH, JSON.stringify(snapshot))
 const sizeKB = Math.round(fs.statSync(SNAPSHOT_FILE).size / 1024)
 console.log(`Snapshot written: ${SNAPSHOT_FILE} (${sizeKB}KB)`)
+console.log(`Bundled into: ${BUNDLE_PATH}`)
 
-// ── Push to Vercel Blob ──────────────────────────────────────
+// ── Deploy to Vercel ─────────────────────────────────────────
 
-const BLOB_TOKEN = process.env.BLOB_READ_WRITE_TOKEN
-
-if (BLOB_TOKEN) {
-  const snapshotJSON = JSON.stringify(snapshot)
+const DEPLOY = process.env.DEPLOY !== '0' // set DEPLOY=0 to skip
+if (DEPLOY) {
   try {
-    // 1. List existing blobs to clean up old ones
-    const listResult = execSync(
-      `curl -s "https://blob.vercel-storage.com?prefix=dashboard-snapshot" ` +
-      `-H "Authorization: Bearer ${BLOB_TOKEN}" ` +
-      `-H "x-api-version: 7"`,
-      { timeout: 10000, encoding: 'utf8' }
-    )
-    const existing = JSON.parse(listResult)
-    if (existing.blobs && existing.blobs.length > 0) {
-      // Delete old blobs
-      const urls = existing.blobs.map(b => b.url)
-      const deletePayload = JSON.stringify({ urls })
-      execSync(
-        `curl -s -X POST "https://blob.vercel-storage.com/delete" ` +
-        `-H "Authorization: Bearer ${BLOB_TOKEN}" ` +
-        `-H "Content-Type: application/json" ` +
-        `-H "x-api-version: 7" ` +
-        `--data-binary @-`,
-        { input: deletePayload, timeout: 10000, encoding: 'utf8' }
-      )
-      console.log(`🧹 Cleaned ${urls.length} old blob(s)`)
-    }
-
-    // 2. Upload new snapshot
+    console.log('Deploying to Vercel...')
+    // Copy pages from dev/ to dashboard-secure/
+    const PAGES_SRC = path.join(WORKSPACE, 'dev', 'pages')
+    const PAGES_DST = path.join(WORKSPACE, 'dashboard-secure', 'pages')
+    execSync(`cp -r ${PAGES_SRC}/* ${PAGES_DST}/`, { timeout: 5000 })
+    
     const result = execSync(
-      `curl -s -X PUT "https://blob.vercel-storage.com/dashboard-snapshot.json" ` +
-      `-H "Authorization: Bearer ${BLOB_TOKEN}" ` +
-      `-H "Content-Type: application/json" ` +
-      `-H "x-api-version: 7" ` +
-      `-H "x-content-type: application/json" ` +
-      `--data-binary @-`,
-      { input: snapshotJSON, timeout: 15000, encoding: 'utf8' }
+      'npx vercel --prod --yes 2>&1',
+      { cwd: path.join(WORKSPACE, 'dashboard-secure'), timeout: 120000, encoding: 'utf8' }
     )
-    const parsed = JSON.parse(result)
-    if (parsed.url) {
-      console.log(`✅ Pushed to Vercel Blob: ${parsed.url} (${sizeKB}KB)`)
+    const aliasMatch = result.match(/Aliased:\s*(https:\/\/\S+)/)
+    if (aliasMatch) {
+      console.log(`✅ Deployed: ${aliasMatch[1]}`)
     } else {
-      console.log('Blob response:', result)
+      console.log('Deploy output:', result.split('\n').slice(-3).join('\n'))
     }
   } catch (e) {
-    console.error('❌ Failed to push to Blob:', e.message)
+    console.error('❌ Deploy failed:', e.message?.split('\n').slice(0, 3).join('\n'))
   }
 } else {
-  console.log('⚠️  BLOB_READ_WRITE_TOKEN not set — local snapshot only')
+  console.log('⏭️  Deploy skipped (DEPLOY=0)')
 }

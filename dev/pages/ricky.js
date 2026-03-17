@@ -321,6 +321,42 @@ export default function RickyPage() {
             )}
           </Section>
 
+          {/* ── Claude Cost (CodexBar) ── */}
+          <Section title="Claude Cost (CodexBar)">
+            {snap?.claudeCost ? (
+              <>
+                <div style={{ display: 'flex', gap: 24, marginBottom: 12, flexWrap: 'wrap' }}>
+                  <div>
+                    <div style={{ fontSize: 9, color: '#555', textTransform: 'uppercase' }}>Today / Session</div>
+                    <div style={{ fontSize: 22, fontWeight: 700, color: '#f59e0b' }}>${snap.claudeCost.session.cost.toFixed(2)}</div>
+                    <div style={{ fontSize: 9, color: '#444' }}>{(snap.claudeCost.session.tokens / 1000000).toFixed(1)}M tokens</div>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 9, color: '#555', textTransform: 'uppercase' }}>Last 30 Days</div>
+                    <div style={{ fontSize: 22, fontWeight: 700, color: '#10b981' }}>${snap.claudeCost.last30Days.cost.toFixed(2)}</div>
+                    <div style={{ fontSize: 9, color: '#444' }}>{(snap.claudeCost.last30Days.tokens / 1000000).toFixed(1)}M tokens</div>
+                  </div>
+                </div>
+                {snap.claudeCost.daily?.length > 0 && (
+                  <table>
+                    <thead><tr><th>Date</th><th>Cost</th><th>Tokens</th><th>Models</th></tr></thead>
+                    <tbody>
+                      {snap.claudeCost.daily.map((d, i) => (
+                        <tr key={i}>
+                          <td style={{ color: '#fff' }}>{d.date}</td>
+                          <td style={{ color: '#f59e0b', fontWeight: 600 }}>${d.cost.toFixed(2)}</td>
+                          <td>{(d.tokens / 1000000).toFixed(1)}M</td>
+                          <td style={{ fontSize: 8 }}>{d.models.map(m => m.replace('claude-', '')).join(', ')}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+                <div style={{ fontSize: 8, color: '#333', marginTop: 8 }}>Source: CodexBar local JSONL · Updated: {timeAgo(snap.claudeCost.updatedAt)}</div>
+              </>
+            ) : <div style={{ color: '#555', fontSize: 11 }}>CodexBar data not available</div>}
+          </Section>
+
           {/* ── Bitwarden Vault ── */}
           <Section title="Bitwarden Vault (Folders)">
             {svc.bitwarden?.folders?.map((f, i) => (
