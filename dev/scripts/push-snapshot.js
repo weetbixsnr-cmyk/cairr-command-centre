@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 /**
- * push-snapshot.js — Bundle all dashboard data into JSON and push to Vercel Blob
- * Run via OpenClaw cron every 5 minutes:
+ * push-snapshot.js — Bundle all dashboard data into JSON and deploy to Vercel
+ * Run via OpenClaw cron:
  *   node /Users/cairr/.openclaw/agents/command-centre/workspace/dev/scripts/push-snapshot.js
  * 
- * Requires: BLOB_READ_WRITE_TOKEN env var (from Vercel Blob store)
+ * Generates snapshot → bundles into public/snapshot.json → deploys via vercel --prod
  */
 
 const fs = require('fs')
