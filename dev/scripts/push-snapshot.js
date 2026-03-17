@@ -229,6 +229,56 @@ function parseGateway(statusOutput) {
   }
 }
 
+// ── Vercel Projects ──────────────────────────────────────────
+
+function getVercelProjects() {
+  try {
+    const raw = execSync('cd /Users/cairr/.openclaw/agents/command-centre/workspace/dashboard-secure && vercel projects ls 2>&1', { timeout: 15000, encoding: 'utf8' })
+    const projects = []
+    const lines = raw.split('\n').filter(l => l.trim() && !l.includes('Fetching') && !l.includes('Projects found') && !l.includes('Project Name'))
+    for (const line of lines) {
+      const parts = line.trim().split(/\s{2,}/)
+      if (parts.length >= 2) {
+        projects.push({
+          name: parts[0],
+          url: parts[1] !== '--' ? parts[1] : null,
+          updated: parts[2] || null,
+          nodeVersion: parts[3] || null
+        })
+      }
+    }
+    return projects
+  } catch (e) {
+    console.warn('Could not get Vercel projects:', e.message)
+    return null
+  }
+}
+
+// ── Cron Jobs ────────────────────────────────────────────────
+
+function getCronJobs() {
+  try {
+    const raw = execSync('openclaw cron list --json 2>&1', { timeout: 15000, encoding: 'utf8' })
+    const data = JSON.parse(raw)
+    return (data.jobs || []).map(j => ({
+      id: j.id,
+      name: j.name,
+      enabled: j.enabled,
+      agentId: j.agentId,
+      schedule: j.schedule?.cron || j.schedule?.kind || '?',
+      everyMs: j.schedule?.everyMs || null,
+      model: j.payload?.model || null,
+      lastStatus: j.state?.lastStatus || null,
+      lastRunAt: j.state?.lastRunAtMs ? new Date(j.state.lastRunAtMs).toISOString() : null,
+      nextRunAt: j.state?.nextRunAtMs ? new Date(j.state.nextRunAtMs).toISOString() : null,
+      sessionTarget: j.sessionTarget || null
+    }))
+  } catch (e) {
+    console.warn('Could not get cron jobs:', e.message)
+    return null
+  }
+}
+
 // ── Build snapshot ───────────────────────────────────────────
 
 console.log('Building dashboard snapshot...')
@@ -252,6 +302,10 @@ const snapshot = {
   fullReports: parseFullReports(),
   sessions: parseSessions(openclawStatus),
   gateway: parseGateway(openclawStatus),
+  vercelProjects: getVercelProjects(),
+  cronJobs: getCronJobs(),
+  // Static services config — updated manually
+  services: readJSON(path.join(DASHBOARD_DATA, 'services.json')),
 }
 
 // ── Write local snapshot ─────────────────────────────────────

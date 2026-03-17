@@ -194,6 +194,7 @@ export default function Dashboard() {
           <a href="/fleet">🏢 Fleet View</a>
           <a href="/system">🔌 System Map</a>
           <a href="/nbhw-seo">🔧 NBHW SEO</a>
+          <a href="/ricky">🧠 Ricky</a>
         </div>
 
         <div className="grid">

@@ -1,0 +1,53 @@
+{
+  "hosting": [
+    { "name": "Vercel", "plan": "Hobby (Free)", "cost": "$0/mo", "notes": "19 projects, dashboard-secure is primary" },
+    { "name": "Railway", "plan": "NBHW backend", "cost": "$5/mo", "notes": "NBHW service" },
+    { "name": "Supabase", "plan": "Free tier", "cost": "$0/mo", "notes": "Database for various projects" }
+  ],
+  "domains": [
+    { "name": "cairr.ai", "registrar": "Crazy Domains", "cost": "~$144/yr", "renewal": "TBC" },
+    { "name": "gridpilot.com.au", "registrar": "?", "cost": "$25/yr", "renewal": "~Mar 2027" }
+  ],
+  "comms": [
+    { "name": "Google Workspace", "account": "cairr.ai", "cost": "$11.80/mo", "notes": "Email" },
+    { "name": "Twilio", "plan": "Trial", "cost": "$0", "notes": "SMS trial — not yet in production" },
+    { "name": "Discord", "plan": "Bot", "cost": "$0", "notes": "Gateway channel for all agents" },
+    { "name": "WhatsApp", "plan": "Gateway", "cost": "$0", "notes": "Via OpenClaw gateway" }
+  ],
+  "ai": [
+    { "name": "Anthropic", "plan": "Max 20x", "notes": "Primary — Claude Opus/Sonnet/Haiku" },
+    { "name": "OpenAI", "plan": "API", "notes": "GPT-5 series, Codex" },
+    { "name": "OpenRouter", "plan": "API", "notes": "Fallback — DeepSeek, Gemini, Kimi" }
+  ],
+  "repos": [
+    { "name": "cairr-command-centre", "visibility": "private", "branch": "agent/command-centre" },
+    { "name": "cairr-brain", "visibility": "private" },
+    { "name": "nbhw-website", "visibility": "private" },
+    { "name": "bts-website", "visibility": "private" },
+    { "name": "gridpilot", "visibility": "private" },
+    { "name": "overdue-office", "visibility": "private" },
+    { "name": "v3dn", "visibility": "private" },
+    { "name": "cairr-website", "visibility": "private" }
+  ],
+  "infra": {
+    "macMini": { "ip": "192.168.0.70", "os": "macOS", "chip": "Apple Silicon", "role": "Primary host — all agents, gateway, crons" },
+    "ports": [
+      { "port": 3000, "service": "NBHW dev" },
+      { "port": 3001, "service": "BTS dev" },
+      { "port": 3002, "service": "GridPilot dev" },
+      { "port": 3003, "service": "Overdue Office dev" },
+      { "port": 3004, "service": "CAIRR website dev" },
+      { "port": 3333, "service": "Dashboard dev" }
+    ]
+  },
+  "bitwarden": {
+    "folders": [
+      { "name": "AI Providers", "items": "~5" },
+      { "name": "Discord Bots", "items": "~3" },
+      { "name": "Integrations", "items": "~4" },
+      { "name": "Crypto", "items": "~3" },
+      { "name": "Dashboard", "items": "~2" },
+      { "name": "Infrastructure", "items": "~5" }
+    ]
+  }
+}
