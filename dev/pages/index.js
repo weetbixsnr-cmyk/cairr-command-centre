@@ -167,11 +167,6 @@ export default function Dashboard() {
           .aq-btn.complete{color:#3b82f6;border-color:#3b82f6}.aq-btn.complete:hover{background:#0e1a2e}
           .aq-btn.snooze{color:#f59e0b;border-color:#f59e0b}.aq-btn.snooze:hover{background:#2a2000}
 
-          /* ── Bottom row ── */
-          .bottom{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-          @media(max-width:700px){.bottom{grid-template-columns:1fr}}
-          .bottom-card{background:#0d0d10;border:1px solid #1a1a22;border-radius:10px;padding:12px 14px}
-
           .footer{font-size:8px;color:#1a1a1a;text-align:right;margin-top:16px}
         `}</style>
       </Head>
@@ -331,33 +326,7 @@ export default function Dashboard() {
             ))}
         </div>
 
-        {/* ── Bottom: Key Dates + Clients ── */}
-        <div className="bottom">
-          <div className="bottom-card">
-            <div className="sec-t">Key Dates</div>
-            {pendingItems.filter(i => i.due_date).sort((a, b) => new Date(a.due_date) - new Date(b.due_date)).slice(0, 5).map(item => (
-              <div key={item.id} style={{ display: 'flex', gap: 8, padding: '3px 0', borderBottom: '1px solid #111', fontSize: 10 }}>
-                <span style={{ color: item.overdue ? '#ef4444' : '#f59e0b', fontWeight: 600, minWidth: 60 }}>
-                  {item.overdue ? 'OVERDUE' : new Date(item.due_date).toLocaleDateString('en-AU', { day: 'numeric', month: 'short' })}
-                </span>
-                <span style={{ color: '#888' }}>{item.title}</span>
-              </div>
-            ))}
-            {pendingItems.filter(i => i.due_date).length === 0 && <div style={{ fontSize: 9, color: '#333' }}>No dated items</div>}
-          </div>
-          <div className="bottom-card">
-            <div className="sec-t">Clients</div>
-            <div style={{ display: 'flex', gap: 8, padding: '4px 0', borderBottom: '1px solid #111', fontSize: 10, alignItems: 'center' }}>
-              <Light s="ok" /> <span style={{ color: '#fff', fontWeight: 600 }}>BTS</span> <span style={{ color: '#666' }}>£300/mo — SEO active</span>
-            </div>
-            <div style={{ display: 'flex', gap: 8, padding: '4px 0', borderBottom: '1px solid #111', fontSize: 10, alignItems: 'center' }}>
-              <Light s="warn" /> <span style={{ color: '#fff', fontWeight: 600 }}>TWPG</span> <span style={{ color: '#666' }}>Pipeline</span>
-            </div>
-            <div style={{ display: 'flex', gap: 8, padding: '4px 0', fontSize: 10, alignItems: 'center' }}>
-              <Light s={null} /> <span style={{ color: '#fff', fontWeight: 600 }}>Stone Plus</span> <span style={{ color: '#666' }}>Early</span>
-            </div>
-          </div>
-        </div>
+
 
         <div className="footer">🎯 Command Centre · Auto-refresh 30s · {snap?.timestamp ? timeAgo(snap.timestamp) : 'No data'}</div>
       </div>
