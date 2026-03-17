@@ -456,6 +456,11 @@ if (DEPLOY) {
     const PAGES_SRC = path.join(WORKSPACE, 'dev', 'pages')
     const PAGES_DST = path.join(WORKSPACE, 'dashboard-secure', 'pages')
     execSync(`cp -r ${PAGES_SRC}/* ${PAGES_DST}/`, { timeout: 5000 })
+    // Copy middleware if exists
+    const mwSrc = path.join(WORKSPACE, 'dev', 'middleware.js')
+    if (fs.existsSync(mwSrc)) {
+      fs.copyFileSync(mwSrc, path.join(WORKSPACE, 'dashboard-secure', 'middleware.js'))
+    }
     
     const result = execSync(
       'npx vercel --prod --yes 2>&1',
