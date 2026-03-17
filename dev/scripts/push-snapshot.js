@@ -300,6 +300,87 @@ function getCodexBarCost() {
   return null
 }
 
+// ── Agent Workspace Data ─────────────────────────────────────
+
+const AGENTS_ROOT = '/Users/cairr/.openclaw/agents'
+const AGENT_NAMES = ['main', 'command-centre', 'nbhw', 'bts', 'v3dn', 'gridpilot', 'alpha', 'property', 'overdue-office', 'audit']
+
+function getAgentWorkspaceData() {
+  const result = {}
+  for (const name of AGENT_NAMES) {
+    const ws = path.join(AGENTS_ROOT, name, 'workspace')
+    if (!fs.existsSync(ws)) { result[name] = { exists: false }; continue }
+    
+    const agent = { exists: true }
+    
+    // Git info
+    try {
+      const gitLog = execSync(`cd "${ws}" && git log --oneline -1 2>/dev/null`, { timeout: 5000, encoding: 'utf8' }).trim()
+      const parts = gitLog.match(/^(\S+)\s+(.*)$/)
+      if (parts) { agent.git = { hash: parts[1], message: parts[2] } }
+      const branch = execSync(`cd "${ws}" && git branch --show-current 2>/dev/null`, { timeout: 3000, encoding: 'utf8' }).trim()
+      if (branch) agent.git = { ...agent.git, branch }
+      // Last commit time
+      const commitTime = execSync(`cd "${ws}" && git log -1 --format=%cI 2>/dev/null`, { timeout: 3000, encoding: 'utf8' }).trim()
+      if (commitTime) agent.git = { ...agent.git, lastCommitAt: commitTime }
+    } catch {}
+    
+    // Identity
+    const identity = readFile(path.join(ws, 'IDENTITY.md'))
+    if (identity) {
+      const nameMatch = identity.match(/\*\*Name:\*\*\s*(.+)/); if (nameMatch) agent.identity = nameMatch[1].trim()
+      const emojiMatch = identity.match(/\*\*Emoji:\*\*\s*(.+)/); if (emojiMatch) agent.emoji = emojiMatch[1].trim()
+    }
+    
+    // MEMORY.md summary (first 5 lines after header)
+    const mem = readFile(path.join(ws, 'MEMORY.md'))
+    if (mem) {
+      const lines = mem.split('\n').filter(l => l.trim() && !l.startsWith('#')).slice(0, 3)
+      agent.memorySummary = lines.join(' ').substring(0, 200)
+    }
+    
+    // Decision log (last 5 entries)
+    const decLog = readFile(path.join(ws, 'memory', 'decision-log.md'))
+    if (decLog) {
+      const rows = decLog.split('\n').filter(l => l.startsWith('|') && !l.includes('Date') && !l.includes('---'))
+      agent.decisions = rows.slice(-5).map(r => {
+        const cols = r.split('|').map(c => c.trim()).filter(Boolean)
+        return { date: cols[0], decision: cols[1], why: cols[2] }
+      })
+    }
+    
+    // Failure log (last 3 entries)
+    const failLog = readFile(path.join(ws, 'memory', 'failures.md'))
+    if (failLog) {
+      const entries = failLog.split(/^## /m).filter(e => e.trim() && !e.startsWith('Failure Log') && !e.includes('Max 30'))
+      agent.failures = entries.slice(-3).map(e => {
+        const lines = e.split('\n')
+        const title = lines[0]?.trim() || ''
+        const dateMatch = e.match(/\*\*Date:\*\*\s*(.+)/)
+        const lessonMatch = e.match(/\*\*Lesson:\*\*\s*(.+)/)
+        return { title, date: dateMatch?.[1], lesson: lessonMatch?.[1] }
+      })
+    }
+    
+    // Latest daily note
+    const memDir = path.join(ws, 'memory')
+    try {
+      const dailyFiles = fs.readdirSync(memDir).filter(f => f.match(/^2026-\d{2}-\d{2}/)).sort().reverse()
+      if (dailyFiles[0]) {
+        agent.lastDailyNote = dailyFiles[0].replace('.md', '')
+        const noteContent = readFile(path.join(memDir, dailyFiles[0]))
+        if (noteContent) {
+          const lines = noteContent.split('\n').filter(l => l.trim() && !l.startsWith('#')).slice(0, 3)
+          agent.lastDailyNoteSummary = lines.join(' ').substring(0, 200)
+        }
+      }
+    } catch {}
+    
+    result[name] = agent
+  }
+  return result
+}
+
 // ── Build snapshot ───────────────────────────────────────────
 
 console.log('Building dashboard snapshot...')
@@ -327,6 +408,7 @@ const snapshot = {
   cronJobs: getCronJobs(),
   claudeCost: getCodexBarCost(),
   services: readJSON(path.join(DASHBOARD_DATA, 'services.json')),
+  agentWorkspaces: getAgentWorkspaceData(),
 }
 
 // ── Write snapshot + bundle into dashboard ───────────────────
