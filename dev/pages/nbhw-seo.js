@@ -78,6 +78,7 @@ function TabButton({ active, label, onClick }) {
 export default function NbhwSeoPage() {
   const snap = useSnapshot()
   const seo = snap?.nbhwSeo
+  const comp = snap?.nbhwCompetitors
   const [tab, setTab] = useState('rankings')
 
   const coreAt1 = seo?.coreKeywords?.filter(k => k.position === 1).length || 0
@@ -156,6 +157,7 @@ export default function NbhwSeoPage() {
           <TabButton active={tab==='rankings'} label="📊 Rankings" onClick={() => setTab('rankings')} />
           <TabButton active={tab==='matrix'} label="📍 Coverage Matrix" onClick={() => setTab('matrix')} />
           <TabButton active={tab==='framework'} label="📋 Framework" onClick={() => setTab('framework')} />
+          <TabButton active={tab==='competitors'} label="🏆 Competitors" onClick={() => setTab('competitors')} />
         </div>
 
         {/* TAB 1: Rankings */}
@@ -285,6 +287,111 @@ export default function NbhwSeoPage() {
                   <div style={{fontSize:9,color:'#555'}}>Photo Categories</div>
                 </div>
               </div>
+            </div>
+          </>
+        )}
+
+        {/* TAB 4: Competitors */}
+        {tab === 'competitors' && (
+          <>
+            {/* Competitor Cards */}
+            <div className="section">
+              <div className="sec-title">Competitor Watch ({comp?.competitors?.length || 0})</div>
+              {(comp?.competitors || []).map((c, i) => {
+                const threatColor = c.threat === 'high' ? '#ef4444' : c.threat === 'medium' ? '#f59e0b' : '#10b981'
+                return (
+                  <div key={i} style={{ background: '#111', border: '1px solid #222', borderRadius: 8, padding: 12, marginBottom: 8, borderLeft: `3px solid ${threatColor}` }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+                      <ThreatDot level={c.threat} />
+                      <span style={{ fontSize: 13, fontWeight: 700, color: '#fff', flex: 1 }}>{c.name}</span>
+                      <span style={{ fontSize: 9, color: '#3b82f6' }}>{c.domain}</span>
+                      <span style={{ fontSize: 8, fontWeight: 700, textTransform: 'uppercase', color: threatColor, background: c.threat === 'high' ? '#3b1010' : c.threat === 'medium' ? '#2a2000' : '#0a2a1a', padding: '2px 6px', borderRadius: 4 }}>
+                        {c.threat} THREAT
+                      </span>
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 8 }}>
+                      <div>
+                        <div style={{ fontSize: 8, color: '#555', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 3, fontWeight: 600 }}>Strengths</div>
+                        {c.strengths?.map((s, j) => (
+                          <div key={j} style={{ fontSize: 9, color: '#ef4444', padding: '2px 0', display: 'flex', gap: 4 }}>
+                            <span>⚠️</span> {s}
+                          </div>
+                        ))}
+                      </div>
+                      <div>
+                        <div style={{ fontSize: 8, color: '#555', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 3, fontWeight: 600 }}>Weaknesses</div>
+                        {c.weaknesses?.map((w, j) => (
+                          <div key={j} style={{ fontSize: 9, color: '#10b981', padding: '2px 0', display: 'flex', gap: 4 }}>
+                            <span>✅</span> {w}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {c.suburbsRanking?.length > 0 && (
+                      <div style={{ marginBottom: 6 }}>
+                        <span style={{ fontSize: 8, color: '#555', fontWeight: 600 }}>RANKING IN: </span>
+                        {c.suburbsRanking.map(s => (
+                          <span key={s} style={{ fontSize: 8, padding: '2px 6px', borderRadius: 4, background: '#3b1010', color: '#ef4444', marginRight: 4, fontWeight: 600 }}>{s}</span>
+                        ))}
+                      </div>
+                    )}
+
+                    <div style={{ fontSize: 8, color: '#555', marginBottom: 4, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>Gap Opportunities</div>
+                    {c.gapOpportunities?.map((g, j) => (
+                      <div key={j} style={{ fontSize: 9, color: '#3b82f6', padding: '2px 0', display: 'flex', gap: 4 }}>
+                        <span>🎯</span> {g}
+                      </div>
+                    ))}
+
+                    <div style={{ display: 'flex', gap: 12, marginTop: 6, fontSize: 8, color: '#444' }}>
+                      <span>Pages: {c.contentStrategy?.servicePagesEstimate || '?'}</span>
+                      <span>Blogs: {c.contentStrategy?.blogEstimate || '?'}</span>
+                      <span>Updates: {c.contentStrategy?.updateFrequency || '?'}</span>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+
+            {/* Key Keyword Gaps */}
+            <div className="section">
+              <div className="sec-title">Keyword Gaps — Where They Beat Us</div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Keyword</th>
+                    <th>Our Position</th>
+                    <th>Top Competitor</th>
+                    <th>Their Position</th>
+                    <th>Opportunity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {(comp?.keyGaps || []).map((gap, i) => (
+                    <tr key={i}>
+                      <td style={{ color: '#fff', fontWeight: 600 }}>{gap.keyword}</td>
+                      <td style={{ color: '#ef4444', fontWeight: 700 }}>{gap.ourPosition}</td>
+                      <td>{gap.topCompetitor}</td>
+                      <td style={{ color: '#10b981', fontWeight: 700 }}>{gap.competitorPosition}</td>
+                      <td style={{ fontSize: 9 }}>{gap.opportunity}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {!comp && (
+              <div className="section">
+                <div style={{ color: '#555', fontSize: 11, fontStyle: 'italic', padding: 16, textAlign: 'center' }}>
+                  Competitor data not loaded yet — will appear on next snapshot refresh
+                </div>
+              </div>
+            )}
+
+            <div style={{ fontSize: 8, color: '#333', marginTop: 8, textAlign: 'right' }}>
+              Scan status: {comp?.scanStatus || 'pending'} · Updated: {comp?.updatedAt ? timeAgo(comp.updatedAt) : '—'}
             </div>
           </>
         )}

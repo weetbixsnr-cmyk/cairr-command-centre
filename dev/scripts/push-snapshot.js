@@ -433,6 +433,7 @@ const snapshot = {
   claudeCost: getCodexBarCost(),
   services: readJSON(path.join(DASHBOARD_DATA, 'services.json')),
   agentWorkspaces: getAgentWorkspaceData(),
+  nbhwCompetitors: readJSON(path.join(PIPELINE, 'nbhw-competitors.json')),
   btsSeo: readJSON(path.join(PIPELINE, 'bts-seo-plan.json')),
   btsBlogInventory: readJSON(path.join(PIPELINE, 'bts-blog-inventory.json')),
 }

@@ -26,10 +26,11 @@ Every agent maintains `memory/failures.md` in their workspace.
 - Categories: `[SEO] [ENGINE] [EMAIL] [TRADING] [DASHBOARD] [DEPLOY] [API] [AUTH] [CONFIG] [DATA] [OPS]`
 - Search YOUR failures first before trying something new. Brain cross-references.
 
-## 4. Session Writeback
+## 4. Session Writeback + Git Commit
 Before ending any task, agents MUST save key context to their workspace:
 - Decisions → `memory/decision-log.md` | Failures → `memory/failures.md` | Progress → daily note
 - Context dies on compaction. Files survive. Write it down.
+- **Git commit after EVERY completed task.** Not end of session — after EACH piece of work. Push to your agent branch immediately. No uncommitted work sitting around.
 
 ## 5. Dev-First Workflow
 ```
