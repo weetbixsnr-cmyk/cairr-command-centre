@@ -1,0 +1,37 @@
+{
+  "client": "Better Training Solutions",
+  "site": "bettertrainingsolutions.co.uk",
+  "updatedAt": "2026-03-17T23:27:00+11:00",
+  "published": 0,
+  "drafts": 0,
+  "planned": [
+    {
+      "id": "bts-blog-001",
+      "title": "ACS Training in High Wycombe — What to Expect & How to Book",
+      "service": "Initial ACS",
+      "keywords": ["ACS training High Wycombe", "ACS training near me"],
+      "status": "not-started"
+    },
+    {
+      "id": "bts-blog-002",
+      "title": "Gas Training Courses Near You — South East England Guide",
+      "service": "All gas services",
+      "keywords": ["gas training near me", "gas training South East"],
+      "status": "not-started"
+    },
+    {
+      "id": "bts-blog-003",
+      "title": "Heat Pump Training in Buckinghamshire — Your Route to Certification",
+      "service": "Heat Pump",
+      "keywords": ["heat pump training Buckinghamshire", "heat pump training near me"],
+      "status": "not-started"
+    },
+    {
+      "id": "bts-blog-004",
+      "title": "ACS Reassessment Near Reading, Oxford & the M40 Corridor",
+      "service": "ACS Reassessment",
+      "keywords": ["ACS reassessment near Reading", "ACS reassessment near me"],
+      "status": "not-started"
+    }
+  ]
+}
