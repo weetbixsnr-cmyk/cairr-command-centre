@@ -1,0 +1,103 @@
+{
+  "lastUpdated": "2026-03-17T23:33:00+11:00",
+  "source": "bts-agent",
+  "client": "Better Training Solutions",
+  "owner": "Sunny",
+  "revenue": "£300/mo",
+  "site": "bettertrainingsolutions.co.uk",
+  "coreKeywords": [
+    { "keyword": "ACS training High Wycombe", "position": 99 },
+    { "keyword": "gas training courses Buckinghamshire", "position": 99 },
+    { "keyword": "ACS reassessment near me", "position": 99 },
+    { "keyword": "heat pump training Buckinghamshire", "position": 99 },
+    { "keyword": "WRAS training near me", "position": 99 },
+    { "keyword": "G3 unvented training", "position": 99 },
+    { "keyword": "LPG changeover training", "position": 99 },
+    { "keyword": "legionella testing training", "position": 99 },
+    { "keyword": "managed learning program plumbing", "position": 99 }
+  ],
+  "locationKeywords": [
+    { "keyword": "ACS training Marlow", "position": 99 },
+    { "keyword": "gas training Aylesbury", "position": 99 },
+    { "keyword": "ACS training Beaconsfield", "position": 99 },
+    { "keyword": "gas training Reading", "position": 99 },
+    { "keyword": "heat pump training Oxford", "position": 99 },
+    { "keyword": "ACS training Maidenhead", "position": 99 },
+    { "keyword": "gas training Milton Keynes", "position": 99 },
+    { "keyword": "ACS training Slough", "position": 99 },
+    { "keyword": "gas training near me South East", "position": 99 },
+    { "keyword": "ACS training Amersham", "position": 99 },
+    { "keyword": "heat pump training Hemel Hempstead", "position": 99 },
+    { "keyword": "gas training Watford", "position": 99 }
+  ],
+  "competitors": [
+    { "name": "Logic4training", "position": "1-3", "threat": "high" },
+    { "name": "Gasmark Training", "position": "3-8", "threat": "high" },
+    { "name": "Gastec Training", "position": "5-10", "threat": "medium" }
+  ],
+  "locationCoverage": {
+    "summary": {
+      "totalLocations": 17,
+      "withContent": 0,
+      "zeroCoverage": 17,
+      "servicePages": 0,
+      "keywordsPerLocation": 8
+    },
+    "waves": [
+      {
+        "id": 1,
+        "status": "active",
+        "locations": ["High Wycombe", "Marlow"],
+        "servicePages": 0,
+        "servicePagesTotal": 2,
+        "blogs": 0,
+        "scope": "2 location pages + 2 blogs — ACS + gas training"
+      },
+      {
+        "id": 2,
+        "status": "planned",
+        "locations": ["Aylesbury", "Beaconsfield", "Amersham", "Chesham", "Maidenhead", "Slough", "Reading"],
+        "servicePages": 0,
+        "servicePagesTotal": 7,
+        "blogs": 0,
+        "scope": "7 location pages + heat pump + ACS reassessment content"
+      },
+      {
+        "id": 3,
+        "status": "future",
+        "locations": ["Oxford", "Hemel Hempstead", "Watford", "Uxbridge", "Milton Keynes", "Luton"],
+        "servicePages": 0,
+        "servicePagesTotal": 6,
+        "blogs": 0,
+        "scope": "6 location pages + Water Regs + G3 content"
+      },
+      {
+        "id": 4,
+        "status": "future",
+        "locations": ["Buckinghamshire", "Berkshire", "M40 corridor", "South East England"],
+        "servicePages": 0,
+        "servicePagesTotal": 4,
+        "blogs": 0,
+        "scope": "Broad geographic pages + LPG + Legionella content"
+      }
+    ]
+  },
+  "framework": {
+    "strategy": "Location-by-location content build, High Wycombe outward by tier",
+    "urlStructure": "/training/[service]/[location]",
+    "contentRules": [
+      "Location-specific content — not generic",
+      "Service + location in title and H1",
+      "Internal linking between related services",
+      "CTA for booking on every page"
+    ],
+    "weeklyCadence": "Mon + Thu drafts, weekly GBP posts, Friday rankings",
+    "reviewCoaching": false
+  },
+  "assets": {
+    "googleReviews": 0,
+    "courseCertifications": 8,
+    "trainingServices": 8
+  },
+  "todayWins": []
+}

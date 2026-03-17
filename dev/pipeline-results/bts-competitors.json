@@ -1,0 +1,116 @@
+{
+  "updatedAt": "2026-03-17T23:33:00+11:00",
+  "scanStatus": "baseline",
+  "competitors": [
+    {
+      "name": "Logic4training",
+      "domain": "logic4training.co.uk",
+      "threat": "high",
+      "strengths": [
+        "Market leader in UK gas/plumbing training",
+        "Massive content library — blogs, guides, course pages",
+        "Strong domain authority, established brand",
+        "Multiple training centres across UK"
+      ],
+      "weaknesses": [
+        "National focus — less local targeting",
+        "Generic content, not tailored to Buckinghamshire",
+        "Large company — slower to target niche queries"
+      ],
+      "locationsRanking": ["London", "Manchester", "Birmingham"],
+      "contentStrategy": {
+        "servicePagesEstimate": "100+ course pages",
+        "blogEstimate": "regular — weekly+",
+        "updateFrequency": "weekly"
+      },
+      "gapOpportunities": [
+        "Local Buckinghamshire content — they don't target it",
+        "'Near me' queries for M40 corridor",
+        "Small business personal touch vs corporate"
+      ]
+    },
+    {
+      "name": "Gasmark Training",
+      "domain": "gasmarktraining.co.uk",
+      "threat": "high",
+      "strengths": [
+        "Based in Maidenhead — local competitor",
+        "Strong for Berkshire/Thames Valley gas training",
+        "Established local reputation"
+      ],
+      "weaknesses": [
+        "Limited content/blog strategy",
+        "Focused mainly on gas — weak on heat pumps",
+        "Smaller digital presence"
+      ],
+      "locationsRanking": ["Maidenhead", "Reading", "Slough"],
+      "contentStrategy": {
+        "servicePagesEstimate": "15-20 pages",
+        "blogEstimate": "minimal",
+        "updateFrequency": "monthly or less"
+      },
+      "gapOpportunities": [
+        "Heat pump training — they don't offer/target it",
+        "Blog content for informational queries",
+        "Buckinghamshire targeting — they focus on Berkshire"
+      ]
+    },
+    {
+      "name": "Gastec Training",
+      "domain": "gastectraining.co.uk",
+      "threat": "medium",
+      "strengths": [
+        "Based in Milton Keynes — Bucks competitor",
+        "Good ACS/gas training reputation",
+        "Closer to Buckinghamshire market"
+      ],
+      "weaknesses": [
+        "Limited online content",
+        "No location-targeted SEO visible",
+        "Weak blog presence"
+      ],
+      "locationsRanking": ["Milton Keynes"],
+      "contentStrategy": {
+        "servicePagesEstimate": "10-15 pages",
+        "blogEstimate": "minimal",
+        "updateFrequency": "rarely"
+      },
+      "gapOpportunities": [
+        "Every location keyword they're not targeting",
+        "Content marketing — they have none",
+        "Heat pump + renewable training content",
+        "M40 corridor targeting"
+      ]
+    }
+  ],
+  "keyGaps": [
+    {
+      "keyword": "ACS training [location]",
+      "ourPosition": "not ranking",
+      "topCompetitor": "Gasmark Training",
+      "competitorPosition": "3-8",
+      "opportunity": "Build location-targeted ACS content — immediate ranking potential"
+    },
+    {
+      "keyword": "gas training near me",
+      "ourPosition": "not ranking",
+      "topCompetitor": "Logic4training",
+      "competitorPosition": "1-3",
+      "opportunity": "Near me content + GBP optimisation — high volume query"
+    },
+    {
+      "keyword": "heat pump training [location]",
+      "ourPosition": "not ranking",
+      "topCompetitor": "None strong",
+      "competitorPosition": "10+",
+      "opportunity": "First-mover advantage — no competitor targets heat pump + location"
+    },
+    {
+      "keyword": "ACS reassessment Buckinghamshire",
+      "ourPosition": "not ranking",
+      "topCompetitor": "Gastec Training",
+      "competitorPosition": "5-10",
+      "opportunity": "Specific reassessment content for Bucks area"
+    }
+  ]
+}
