@@ -1,11 +1,11 @@
-# Governance Drift — 2026-03-17 04:00
+# Governance Drift — 2026-03-18 04:00
 ✅ alpha: governance aligned
 ✅ audit: governance aligned
 ✅ bts: governance aligned
 ✅ command-centre: governance aligned
 ✅ gridpilot: governance aligned
 ❌ nbhw:
-  ⚠️ MEMORY.md is 86 lines (limit 80)
+  ⚠️ MEMORY.md is 93 lines (limit 80)
 
 ✅ overdue-office: governance aligned
 ✅ property: governance aligned
