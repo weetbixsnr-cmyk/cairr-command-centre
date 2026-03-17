@@ -27,14 +27,15 @@ Now owns dashboard deploys end-to-end (exec: full, Vercel auth inherited from sy
 
 ## Dashboard
 - **App:** `dashboard-secure/` (Next.js 14, deployed to Vercel)
-- **Deploy:** `bash dev/scripts/deploy-prep.sh` then `cd dashboard-secure && npx vercel --prod`
-- **Data:** Snapshot JSON at `dev/snapshots/latest.json` + pushed to Vercel Blob every 5 min
-- **Architecture:** Mac Mini cron → `push-snapshot.js` → Vercel Blob → API route reads Blob → site shows live data
-- **Blob Store:** `dashboard-final` (store_53Nq4Uvhd3nTkg2q) — linked to dashboard-secure project
-- **Cron:** "Dashboard Snapshot Push" every 5m via Haiku (isolated session, light context)
+- **Deploy:** `node dev/scripts/push-snapshot.js` (generates snapshot + copies pages + deploys to Vercel)
+- **Data:** Snapshot JSON at `dev/snapshots/latest.json` bundled into `public/snapshot.json` at deploy time
+- **Architecture:** Mac Mini cron → `push-snapshot.js` → bundle snapshot → vercel --prod → API reads bundled file
+- **Cron:** "Dashboard Snapshot Push" every 5m via Haiku (isolated session, light context, timeout 180s)
 - **Auth:** Basic auth via middleware.js, creds in `.env.local` (NOT committed to git)
 - **URL:** <https://dashboard-secure-one.vercel.app>
-- **Status:** LIVE — confirmed working 2026-03-15. No longer shows bundled/stale data.
+- **Pages:** Dashboard (scorecards), Fleet (office floor), System (pipeline flow), Ricky (Brain ops), NBHW SEO (via NBHW panel)
+- **Snapshot size:** ~78KB (includes agent workspaces, Vercel projects, crons, CodexBar cost)
+- **Status:** LIVE — Blob REMOVED 2026-03-17, deploy-time snapshots only.
 
 ## Key Facts
 - All heartbeats currently DISABLED across fleet (by design — §12 FRAMEWORK.md)
@@ -51,6 +52,7 @@ Now owns dashboard deploys end-to-end (exec: full, Vercel auth inherited from sy
 
 ## What Has NOT Worked
 - JSX placed outside grid container caused SWC build failure (2026-03-15)
-- Dynamic import of @vercel/blob failed silently on Vercel — had to use static import + explicit token param
-- Vercel KV approach abandoned — Blob storage simpler, no Redis needed
-- Vercel CLI interactive prompts (blob store add) can't be automated easily — used vercel api instead
+- Vercel Blob store suspended (billing inactive) — removed entirely 2026-03-17
+- Vercel KV approach abandoned — too complex
+- Vercel CLI interactive prompts can't be automated — used vercel api instead
+- Deploy-time bundled snapshots are simpler and more reliable than any live store
