@@ -30,7 +30,7 @@ function hoursAgo(d) {
 
 const AGENT_META = {
   'main': { label: 'Brain', emoji: '🧠', desc: 'Orchestrator', group: 'Core', goal: 'Coordinate all agents, enforce FRAMEWORK.md' },
-  'command-centre': { label: 'Overwatch', emoji: '🎯', desc: 'Dashboard & Monitoring', group: 'Core', goal: 'Single pane of glass for Adam' },
+  'command-centre': { label: 'Command Centre', emoji: '🎯', desc: 'Dashboard & Monitoring', group: 'Core', goal: 'Single pane of glass for Adam' },
   'audit': { label: 'Audit', emoji: '🔍', desc: 'Quality Gates', group: 'Core', goal: 'Review all agent work before deploy' },
   'nbhw': { label: 'NBHW', emoji: '🔧', desc: 'Plumbing Site & SEO', group: 'NBHW', goal: 'Rank #1 for NB suburb plumbing keywords' },
   'bts': { label: 'BTS', emoji: '🎓', desc: 'Training Site & SEO', group: 'CAIRR', goal: 'SEO & content for Better Training Solutions (£300/mo)' },
@@ -109,6 +109,14 @@ function AgentDesk({ name, snap, onClick }) {
       <CtxBar pct={d.sess?.avgContextPct} />
       
       <div className="desk-goal">{meta.goal}</div>
+      
+      <PipelineStage stage="dev/" />
+      
+      {d.ws?.currentTasks?.[0] && (
+        <div className="desk-task">
+          <span className="task-label">Now:</span> {d.ws.currentTasks[0].substring(0, 50)}
+        </div>
+      )}
       
       {d.ws?.git?.message && (
         <div className="desk-task">

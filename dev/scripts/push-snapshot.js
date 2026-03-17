@@ -362,6 +362,16 @@ function getAgentWorkspaceData() {
       })
     }
     
+    // Current tasks (from memory/tasks.md)
+    const tasksFile = readFile(path.join(ws, 'memory', 'tasks.md'))
+    if (tasksFile) {
+      const openTasks = tasksFile.split('\n')
+        .filter(l => l.match(/^[-*]\s*\[[ ]\]/) || (l.match(/^[-*]\s/) && !l.match(/\[x\]/i)))
+        .map(l => l.replace(/^[-*]\s*(\[[ ]\]\s*)?/, '').trim())
+        .filter(Boolean)
+      if (openTasks.length > 0) agent.currentTasks = openTasks.slice(0, 3)
+    }
+    
     // Latest daily note
     const memDir = path.join(ws, 'memory')
     try {
