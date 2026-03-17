@@ -132,7 +132,6 @@ export default function RickyPage() {
           <a href="/">🎯 Dashboard</a>
           <a href="/fleet">🏢 Fleet</a>
           <a href="/system">🔌 System</a>
-          <a href="/nbhw-seo">🔧 NBHW SEO</a>
           <a href="/ricky" className="active">🧠 Ricky</a>
         </div>
 

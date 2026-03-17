@@ -193,7 +193,6 @@ export default function Dashboard() {
         <div className="nav">
           <a href="/fleet">🏢 Fleet View</a>
           <a href="/system">🔌 System Map</a>
-          <a href="/nbhw-seo">🔧 NBHW SEO</a>
           <a href="/ricky">🧠 Ricky</a>
         </div>
 

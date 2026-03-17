@@ -254,6 +254,16 @@ function DetailPanel({ name, snap, onClose }) {
           </div>
         )}
         
+        {/* Agent-specific links */}
+        {name === 'nbhw' && (
+          <div className="panel-section">
+            <div className="ps-title">🔗 Tools</div>
+            <a href="/nbhw-seo" style={{ display: 'block', padding: '6px 8px', background: '#111', borderRadius: 6, border: '1px solid #1a1a1a', fontSize: 11, color: '#3b82f6', fontWeight: 600 }}>
+              📊 NBHW SEO Dashboard →
+            </a>
+          </div>
+        )}
+        
         {/* Memory summary */}
         {ws.memorySummary && (
           <div className="panel-section">
@@ -426,7 +436,6 @@ export default function FleetPage() {
           <a href="/">🎯 Dashboard</a>
           <a href="/fleet" className="active">🏢 Fleet</a>
           <a href="/system">🔌 System</a>
-          <a href="/nbhw-seo">🔧 NBHW SEO</a>
           <a href="/ricky">🧠 Ricky</a>
         </div>
 
