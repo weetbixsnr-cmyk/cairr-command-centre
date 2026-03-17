@@ -225,7 +225,14 @@ export default function Dashboard() {
             const rpt = snap?.agentReports?.[agent.name]
             
             const hasSessions = agentSess?.sessions?.length > 0
-            const lastActive = agentWs.git?.lastCommitAt || rpt?.lastUpdated
+            // Most recent of: git commit, session activity, agent activity, report
+            const actCandidates = [
+              agentWs.git?.lastCommitAt,
+              agentSess?.lastSessionActivity ? new Date(agentSess.lastSessionActivity).toISOString() : null,
+              agentSess?.lastAgentActivity ? new Date(agentSess.lastAgentActivity).toISOString() : null,
+              rpt?.lastUpdated
+            ].filter(Boolean)
+            const lastActive = actCandidates.length > 0 ? actCandidates.reduce((a, b) => new Date(a) > new Date(b) ? a : b) : null
             const hAgo = lastActive ? (Date.now() - new Date(lastActive).getTime()) / 3600000 : Infinity
             const status = !agent.healthy ? 'error' : (hasSessions && hAgo < 1) ? 'active' : hAgo < 24 ? 'recent' : 'idle'
             const statusClass = status === 'active' ? 'active' : status === 'error' ? 'error' : status === 'idle' ? 'idle' : ''
@@ -288,7 +295,7 @@ export default function Dashboard() {
                   )}
 
                   <div className="acard-footer">
-                    {agentSess?.model && <span className="acard-model">{agentSess.model.split('/').pop().replace('claude-', '')}</span>}
+                    {(agentSess?.configModel || agentSess?.model) && <span className="acard-model">{(agentSess.configModel || agentSess.model).split('/').pop().replace('claude-', '')}</span>}
                     <span>{lastActive ? timeAgo(lastActive) : 'dormant'}</span>
                   </div>
                 </div>

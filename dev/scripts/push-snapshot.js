@@ -176,13 +176,79 @@ function parseSessions(statusOutput) {
 
   const byAgent = {}
   for (const s of sessions) {
-    if (!byAgent[s.agent]) byAgent[s.agent] = { sessions: [], totalContextPct: 0, count: 0, model: s.model }
+    if (!byAgent[s.agent]) byAgent[s.agent] = { sessions: [], totalContextPct: 0, count: 0, model: null }
     byAgent[s.agent].sessions.push(s)
     if (s.contextPct !== null) { byAgent[s.agent].totalContextPct += s.contextPct; byAgent[s.agent].count++ }
+    // Primary model = non-cron session model (cron keys contain 'cron:')
+    if (!s.key.includes('cron:') && !byAgent[s.agent].model) {
+      byAgent[s.agent].model = s.model
+    }
   }
-  for (const a of Object.values(byAgent)) {
+  for (const [name, a] of Object.entries(byAgent)) {
     a.avgContextPct = a.count > 0 ? Math.round(a.totalContextPct / a.count) : null
+    // Fallback: if no non-cron session found, use first session model
+    if (!a.model && a.sessions.length > 0) a.model = a.sessions[0].model
   }
+  
+  // Get session updatedAt + accurate model from JSON status
+  try {
+    const jsonStatus = execSync('openclaw status --json 2>&1', { timeout: 10000, encoding: 'utf8' })
+    const statusData = JSON.parse(jsonStatus)
+    const recentSessions = statusData?.sessions?.recent || []
+    
+    // Track primary model per agent (non-cron session)
+    const primaryModels = {}
+    
+    for (const s of recentSessions) {
+      const agent = s.agentId
+      if (!agent) continue
+      if (!byAgent[agent]) byAgent[agent] = { sessions: [], totalContextPct: 0, count: 0, model: null, avgContextPct: null }
+      
+      const ts = s.updatedAt
+      if (ts && (!byAgent[agent].lastSessionActivity || ts > byAgent[agent].lastSessionActivity)) {
+        byAgent[agent].lastSessionActivity = ts
+      }
+      
+      // Primary model = non-cron session
+      const key = s.key || ''
+      if (!key.includes('cron:') && s.model && !primaryModels[agent]) {
+        primaryModels[agent] = s.model
+      }
+    }
+    
+    // Override model with primary (non-cron) model
+    for (const [agent, model] of Object.entries(primaryModels)) {
+      if (byAgent[agent]) byAgent[agent].model = model
+    }
+    
+    // Hardcoded config models — source of truth from agent configs
+    // These are the DEFAULT models set in each agent's config, not session models
+    const CONFIG_MODELS = {
+      'main': 'claude-opus-4-6',
+      'command-centre': 'claude-opus-4-6',
+      'nbhw': 'claude-opus-4-6',
+      'bts': 'claude-opus-4-6',
+      'v3dn': 'claude-opus-4-6',
+      'gridpilot': 'claude-opus-4-6',
+      'audit': 'claude-sonnet-4-20250514',
+      'alpha': 'claude-sonnet-4-20250514',
+      'property': 'claude-sonnet-4-20250514',
+      'overdue-office': 'claude-sonnet-4-20250514',
+    }
+    for (const [agent, model] of Object.entries(CONFIG_MODELS)) {
+      if (!byAgent[agent]) byAgent[agent] = { sessions: [], totalContextPct: 0, count: 0, model: null, avgContextPct: null }
+      byAgent[agent].configModel = model
+    }
+    
+    // Also grab agents list for lastUpdatedAt
+    const agentsList = statusData?.agents?.agents || []
+    for (const a of agentsList) {
+      if (a.id) {
+        if (!byAgent[a.id]) byAgent[a.id] = { sessions: [], totalContextPct: 0, count: 0, model: null, avgContextPct: null }
+        if (a.lastUpdatedAt) byAgent[a.id].lastAgentActivity = a.lastUpdatedAt
+      }
+    }
+  } catch {}
 
   const heartbeats = {}
   const hbLine = statusOutput.match(/Heartbeat\s*│\s*(.+?)│/s)

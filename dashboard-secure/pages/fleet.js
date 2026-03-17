@@ -52,7 +52,14 @@ function getAgentStatus(snap, name) {
   const gov = snap?.governance?.agents?.find(a => a.name === name)
 
   const hasSessions = sess?.sessions?.length > 0
-  const lastActive = ws?.git?.lastCommitAt || rpt?.lastUpdated
+  // Most recent of: git commit, session activity, agent activity, report update
+  const candidates = [
+    ws?.git?.lastCommitAt,
+    sess?.lastSessionActivity ? new Date(sess.lastSessionActivity).toISOString() : null,
+    sess?.lastAgentActivity ? new Date(sess.lastAgentActivity).toISOString() : null,
+    rpt?.lastUpdated
+  ].filter(Boolean)
+  const lastActive = candidates.length > 0 ? candidates.reduce((a, b) => new Date(a) > new Date(b) ? a : b) : null
   const hAgo = hoursAgo(lastActive)
   
   let status = 'idle'
@@ -104,7 +111,7 @@ function AgentDesk({ name, snap, onClick }) {
       
       <div className="desk-desc">{meta.desc}</div>
       
-      {d.sess?.model && <div className="desk-model">{d.sess.model.split('/').pop().replace('claude-', '')}</div>}
+      {(d.sess?.configModel || d.sess?.model) && <div className="desk-model">{(d.sess.configModel || d.sess.model).split('/').pop().replace('claude-', '')}</div>}
       
       <CtxBar pct={d.sess?.avgContextPct} />
       
@@ -171,7 +178,7 @@ function DetailPanel({ name, snap, onClose }) {
           </div>
           <div className="panel-card">
             <div className="pc-label">Model</div>
-            <div className="pc-val" style={{ fontSize: 11 }}>{d.sess?.model?.split('/').pop() || '—'}</div>
+            <div className="pc-val" style={{ fontSize: 11 }}>{(d.sess?.configModel || d.sess?.model)?.split('/').pop() || '—'}</div>
           </div>
           <div className="panel-card">
             <div className="pc-label">Last Active</div>
