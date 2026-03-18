@@ -78,6 +78,7 @@ export default function BtsSeoPage() {
   const snap = useSnapshot()
   const seo = snap?.btsSeo
   const comp = snap?.btsCompetitors
+  const pub = snap?.btsPublishLog
   const [tab, setTab] = useState('rankings')
 
   const coreRanking = seo?.coreKeywords?.filter(k => k.position <= 10).length || 0
@@ -138,16 +139,16 @@ export default function BtsSeoPage() {
             <div className="stat-lbl">Location Keywords in Top 10</div>
           </div>
           <div className="stat-card">
-            <div className="stat-val" style={{color:'#3b82f6'}}>{seo?.locationCoverage?.summary?.withContent || 0}</div>
-            <div className="stat-lbl">Locations with Content</div>
+            <div className="stat-val" style={{color:'#10b981'}}>{totalServicePages}</div>
+            <div className="stat-lbl">Location Pages Live</div>
           </div>
           <div className="stat-card">
-            <div className="stat-val" style={{color:'#f59e0b'}}>{seo?.locationCoverage?.summary?.servicePages || 0}</div>
-            <div className="stat-lbl">Service Pages Built</div>
+            <div className="stat-val" style={{color:'#3b82f6'}}>{totalBlogs}</div>
+            <div className="stat-lbl">Blog Posts Live</div>
           </div>
           <div className="stat-card">
-            <div className="stat-val" style={{color:'#ef4444'}}>{seo?.locationCoverage?.summary?.zeroCoverage || 0}</div>
-            <div className="stat-lbl">Locations Zero Coverage</div>
+            <div className="stat-val" style={{color:'#ef4444'}}>{totalServicePagesNeeded - totalServicePages}</div>
+            <div className="stat-lbl">Locations Remaining</div>
           </div>
         </div>
 
@@ -157,6 +158,7 @@ export default function BtsSeoPage() {
           <TabButton active={tab==='matrix'} label="📍 Coverage Matrix" onClick={() => setTab('matrix')} />
           <TabButton active={tab==='framework'} label="📋 Framework" onClick={() => setTab('framework')} />
           <TabButton active={tab==='competitors'} label="🏆 Competitors" onClick={() => setTab('competitors')} />
+          <TabButton active={tab==='safety'} label={`🛡️ Google Safety${pub?.status === 'at_limit' ? ' 🔴' : pub?.status === 'caution' ? ' 🟡' : ''}`} onClick={() => setTab('safety')} />
         </div>
 
         {/* TAB 1: Rankings */}
@@ -215,16 +217,16 @@ export default function BtsSeoPage() {
           <>
             <div style={{display:'flex',gap:12,marginBottom:16,flexWrap:'wrap'}}>
               <div className="stat-card" style={{minWidth:100}}>
+                <div className="stat-val" style={{fontSize:18,color:'#10b981'}}>{totalServicePages}</div>
+                <div className="stat-lbl">Location Pages Live</div>
+              </div>
+              <div className="stat-card" style={{minWidth:100}}>
                 <div className="stat-val" style={{fontSize:18,color:'#3b82f6'}}>{totalBlogs}</div>
-                <div className="stat-lbl">Total Blogs</div>
+                <div className="stat-lbl">Blog Posts Live</div>
               </div>
               <div className="stat-card" style={{minWidth:100}}>
-                <div className="stat-val" style={{fontSize:18,color:'#f59e0b'}}>{totalServicePages}/{totalServicePagesNeeded}</div>
-                <div className="stat-lbl">Service Pages</div>
-              </div>
-              <div className="stat-card" style={{minWidth:100}}>
-                <div className="stat-val" style={{fontSize:18,color:'#10b981'}}>{seo?.locationCoverage?.summary?.totalLocations || 0}</div>
-                <div className="stat-lbl">Locations Mapped</div>
+                <div className="stat-val" style={{fontSize:18,color:'#f59e0b'}}>{totalServicePagesNeeded - totalServicePages}</div>
+                <div className="stat-lbl">Locations Remaining</div>
               </div>
               <div className="stat-card" style={{minWidth:100}}>
                 <div className="stat-val" style={{fontSize:18,color:'#a855f7'}}>{seo?.locationCoverage?.summary?.keywordsPerLocation || 0}</div>
@@ -233,9 +235,38 @@ export default function BtsSeoPage() {
             </div>
             <div className="section">
               <div className="sec-title">Execution Waves</div>
-              {seo?.locationCoverage?.waves?.map(wave => (
-                <WaveBar key={wave.id} wave={wave} />
-              ))}
+              {seo?.locationCoverage?.waves?.map(wave => {
+                const pct = wave.servicePagesTotal > 0 ? Math.round((wave.servicePages / wave.servicePagesTotal) * 100) : 0
+                const color = pct === 100 ? '#10b981' : pct > 0 ? '#f59e0b' : '#333'
+                const label = pct === 100 ? '✅ COMPLETE' : pct > 0 ? '🟡 IN PROGRESS' : wave.status === 'active' ? '🔴 ACTIVE' : '⬜ NOT STARTED'
+                return (
+                  <div key={wave.id} style={{background:'#111',border:'1px solid #222',borderRadius:8,padding:10,marginBottom:6,borderLeft:`3px solid ${color}`}}>
+                    <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:4}}>
+                      <span style={{fontSize:12,fontWeight:600,color:'#fff'}}>Wave {wave.id}</span>
+                      <span style={{fontSize:9,color:color,fontWeight:600}}>{label}</span>
+                      <span style={{fontSize:9,color:'#555',marginLeft:'auto'}}>{wave.servicePages}/{wave.servicePagesTotal} pages · {wave.blogs || 0} blogs</span>
+                    </div>
+                    <div style={{height:4,background:'#1a1a1a',borderRadius:2,marginBottom:6,overflow:'hidden'}}>
+                      <div style={{height:4,width:`${pct}%`,background:color,borderRadius:2,minWidth:pct > 0 ? 4 : 0,transition:'width 0.3s'}}></div>
+                    </div>
+                    <div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:4}}>
+                      {wave.locations?.map(s => {
+                        const isLive = wave.servicePages > 0 && wave.locations.indexOf(s) < wave.servicePages
+                        return (
+                          <span key={s} style={{fontSize:9,padding:'2px 6px',borderRadius:4,
+                            background: isLive ? '#0a2a1a' : '#1a1a1a',
+                            border: `1px solid ${isLive ? '#10b981' : '#333'}`,
+                            color: isLive ? '#10b981' : '#555'
+                          }}>
+                            {isLive ? '✅' : '⬜'} {s}
+                          </span>
+                        )
+                      })}
+                    </div>
+                    <div style={{fontSize:9,color:'#555'}}>{wave.scope}</div>
+                  </div>
+                )
+              })}
             </div>
           </>
         )}
@@ -390,6 +421,137 @@ export default function BtsSeoPage() {
             <div style={{ fontSize: 8, color: '#333', marginTop: 8, textAlign: 'right' }}>
               Scan status: {comp?.scanStatus || 'pending'} · Updated: {comp?.updatedAt ? timeAgo(comp.updatedAt) : '—'}
             </div>
+          </>
+        )}
+
+        {/* TAB 5: Google Safety Meter */}
+        {tab === 'safety' && (
+          <>
+            {/* Status Banner */}
+            <div style={{
+              background: pub?.status === 'at_limit' ? '#3b1010' : pub?.status === 'caution' ? '#2a2000' : '#0a2a1a',
+              border: `1px solid ${pub?.status === 'at_limit' ? '#ef4444' : pub?.status === 'caution' ? '#f59e0b' : '#10b981'}`,
+              borderRadius: 10, padding: 16, marginBottom: 16, textAlign: 'center'
+            }}>
+              <div style={{ fontSize: 18, fontWeight: 700, color: pub?.status === 'at_limit' ? '#ef4444' : pub?.status === 'caution' ? '#f59e0b' : '#10b981' }}>
+                {pub?.statusLabel || '🟢 No content published yet — safe to start'}
+              </div>
+              {pub?.nextSafeDate && pub?.status === 'at_limit' && (
+                <div style={{ fontSize: 11, color: '#f59e0b', marginTop: 6 }}>Next safe publish: {pub.nextSafeDate}</div>
+              )}
+            </div>
+
+            {/* Gauges */}
+            <div className="grid2" style={{ marginBottom: 16 }}>
+              <div className="card">
+                <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>Pages Published This Week</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
+                  <div style={{ fontSize: 36, fontWeight: 800, color: pub?.status === 'at_limit' ? '#ef4444' : pub?.status === 'caution' ? '#f59e0b' : '#10b981' }}>
+                    {pub?.publishedThisWeek?.length || 0}
+                  </div>
+                  <div style={{ fontSize: 14, color: '#555' }}>/ {pub?.weeklyLimit || 3}</div>
+                </div>
+                <div style={{ height: 8, background: '#1a1a1a', borderRadius: 4, overflow: 'hidden' }}>
+                  <div style={{
+                    height: 8, borderRadius: 4,
+                    width: `${Math.min(100, ((pub?.publishedThisWeek?.length || 0) / (pub?.weeklyLimit || 3)) * 100)}%`,
+                    background: pub?.status === 'at_limit' ? '#ef4444' : pub?.status === 'caution' ? '#f59e0b' : '#10b981',
+                    transition: 'width 0.3s'
+                  }}></div>
+                </div>
+              </div>
+
+              <div className="card">
+                <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>GBP Posts This Week</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
+                  <div style={{ fontSize: 36, fontWeight: 800, color: pub?.gbpStatus === 'at_limit' ? '#ef4444' : pub?.gbpStatus === 'caution' ? '#f59e0b' : '#10b981' }}>
+                    {pub?.gbpThisWeek?.length || 0}
+                  </div>
+                  <div style={{ fontSize: 14, color: '#555' }}>/ {pub?.gbpWeeklyLimit || 3}</div>
+                </div>
+                <div style={{ height: 8, background: '#1a1a1a', borderRadius: 4, overflow: 'hidden' }}>
+                  <div style={{
+                    height: 8, borderRadius: 4,
+                    width: `${Math.min(100, ((pub?.gbpThisWeek?.length || 0) / (pub?.gbpWeeklyLimit || 3)) * 100)}%`,
+                    background: pub?.gbpStatus === 'at_limit' ? '#ef4444' : pub?.gbpStatus === 'caution' ? '#f59e0b' : '#10b981',
+                    transition: 'width 0.3s'
+                  }}></div>
+                </div>
+              </div>
+            </div>
+
+            {/* Published this week */}
+            {pub?.publishedThisWeek?.length > 0 && (
+              <div className="section">
+                <div className="sec-title">Published This Week</div>
+                <div className="card">
+                  <table>
+                    <thead><tr><th>Date</th><th>Type</th><th>Page</th><th>Status</th></tr></thead>
+                    <tbody>
+                      {pub.publishedThisWeek.map((p, i) => (
+                        <tr key={i}>
+                          <td style={{ color: '#fff', fontWeight: 600 }}>{p.date}</td>
+                          <td>{p.type}</td>
+                          <td>{p.page}</td>
+                          <td>{p.status}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+
+            {/* Queue */}
+            {pub?.queue?.length > 0 && (
+              <div className="section">
+                <div className="sec-title">Queue — Do Not Publish Yet</div>
+                <div className="card">
+                  {pub.queue.map((q, i) => (
+                    <div key={i} style={{ fontSize: 11, color: '#aaa', padding: '5px 0', borderBottom: '1px solid #1a1a1a', display: 'flex', gap: 6 }}>
+                      <span style={{ color: '#f59e0b' }}>⏳</span> {q}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Previous weeks */}
+            {pub?.previousWeeks?.length > 0 && (
+              <div className="section">
+                <div className="sec-title">Publish History</div>
+                <div className="card">
+                  <table>
+                    <thead><tr><th>Week</th><th>Pages Published</th><th>Type</th></tr></thead>
+                    <tbody>
+                      {pub.previousWeeks.map((w, i) => (
+                        <tr key={i}>
+                          <td style={{ color: '#fff' }}>{w.week}</td>
+                          <td>{w.pages}</td>
+                          <td style={{ fontSize: 9, color: '#555' }}>{w.type}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+
+            {/* Warning callout */}
+            {pub?.warningStatus?.length > 0 && (
+              <div style={{ background: '#3b1010', border: '1px solid #ef4444', borderRadius: 8, padding: 12, marginTop: 12 }}>
+                <div style={{ fontSize: 10, fontWeight: 700, color: '#ef4444', textTransform: 'uppercase', marginBottom: 6 }}>⚠️ Active Warning</div>
+                {pub.warningStatus.map((w, i) => (
+                  <div key={i} style={{ fontSize: 11, color: '#f59e0b', padding: '2px 0' }}>{w}</div>
+                ))}
+              </div>
+            )}
+
+            {!pub && (
+              <div style={{ color: '#555', fontSize: 11, fontStyle: 'italic', padding: 16, textAlign: 'center' }}>
+                No publish log yet — BTS content pipeline hasn't started publishing. This tab will populate automatically once the BTS agent creates a publish log.
+              </div>
+            )}
           </>
         )}
 
