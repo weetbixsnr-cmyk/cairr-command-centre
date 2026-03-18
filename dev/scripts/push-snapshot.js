@@ -471,6 +471,88 @@ function getAgentWorkspaceData() {
   return result
 }
 
+// ── NBHW Publish Log (Google Safety) ─────────────────────────
+
+function parsePublishLog() {
+  const raw = readFile('/Users/cairr/.openclaw/agents/nbhw/workspace/dev/seo/publish-log.md')
+  if (!raw) return null
+
+  const result = {
+    weeklyLimit: 3,
+    gbpWeeklyLimit: 3,
+    publishedThisWeek: [],
+    gbpThisWeek: [],
+    previousWeeks: [],
+    queue: [],
+    warningStatus: null,
+    nextSafeDate: null
+  }
+
+  // Parse current week entries from the table
+  const currentWeekMatch = raw.match(/## Current Week[^\n]*\n[\s\S]*?\n((?:\|[^\n]+\n)+)/i)
+  if (currentWeekMatch) {
+    const rows = currentWeekMatch[1].split('\n').filter(r => r.startsWith('|') && !r.includes('Date') && !r.includes('---') && !r.includes('TOTAL'))
+    for (const row of rows) {
+      const cols = row.split('|').map(c => c.trim()).filter(Boolean)
+      if (cols.length >= 3) {
+        const entry = { date: cols[0], type: cols[1], page: cols[2], status: cols[3] || '' }
+        if (entry.type?.toLowerCase().includes('gbp')) {
+          result.gbpThisWeek.push(entry)
+        } else {
+          result.publishedThisWeek.push(entry)
+        }
+      }
+    }
+  }
+
+  // Parse previous weeks
+  const prevMatch = raw.match(/## Previous Weeks[^\n]*\n[\s\S]*?\n((?:\|[^\n]+\n)+)/i)
+  if (prevMatch) {
+    const rows = prevMatch[1].split('\n').filter(r => r.startsWith('|') && !r.includes('Week') && !r.includes('---'))
+    for (const row of rows) {
+      const cols = row.split('|').map(c => c.trim()).filter(Boolean)
+      if (cols.length >= 2) {
+        result.previousWeeks.push({ week: cols[0], pages: cols[1], type: cols[2] || '' })
+      }
+    }
+  }
+
+  // Parse queue
+  const queueMatch = raw.match(/## Queue[^\n]*\n((?:[-*][^\n]+\n?)+)/i)
+  if (queueMatch) {
+    result.queue = queueMatch[1].split('\n').filter(l => l.match(/^[-*]/)).map(l => l.replace(/^[-*]\s*/, '').trim())
+  }
+
+  // Parse warning status
+  const warnMatch = raw.match(/## ⚠️ WARNING STATUS\n([\s\S]*?)(?=\n##|\n$|$)/i)
+  if (warnMatch) {
+    result.warningStatus = warnMatch[1].trim().split('\n').filter(l => l.trim()).map(l => l.replace(/^[🔴🟡🟢⚠️]\s*\**/, '').replace(/\**/g, '').trim())
+  }
+
+  // Extract next safe date
+  const dateMatch = raw.match(/(?:Wait until|earliest)\s*\**(\d{1,2}\s+\w+(?:\s+\d{4})?)\b/i)
+  if (dateMatch) result.nextSafeDate = dateMatch[1]
+
+  // Calculate status
+  const pubCount = result.publishedThisWeek.length
+  const remaining = result.weeklyLimit - pubCount
+  if (remaining <= 0) {
+    result.status = 'at_limit'
+    result.statusLabel = '🔴 AT LIMIT — wait until ' + (result.nextSafeDate || 'next week')
+  } else if (remaining === 1) {
+    result.status = 'caution'
+    result.statusLabel = '🟡 1 left this week — proceed with caution'
+  } else {
+    result.status = 'safe'
+    result.statusLabel = '🟢 Space to publish (' + remaining + ' remaining)'
+  }
+
+  const gbpRemaining = result.gbpWeeklyLimit - result.gbpThisWeek.length
+  result.gbpStatus = gbpRemaining <= 0 ? 'at_limit' : gbpRemaining === 1 ? 'caution' : 'safe'
+
+  return result
+}
+
 // ── Build snapshot ───────────────────────────────────────────
 
 console.log('Building dashboard snapshot...')
@@ -499,6 +581,7 @@ const snapshot = {
   claudeCost: getCodexBarCost(),
   services: readJSON(path.join(DASHBOARD_DATA, 'services.json')),
   agentWorkspaces: getAgentWorkspaceData(),
+  nbhwPublishLog: parsePublishLog(),
   nbhwCompetitors: readJSON(path.join(PIPELINE, 'nbhw-competitors.json')),
   btsSeo: readJSON(path.join(PIPELINE, 'bts-seo-latest.json')),
   btsSeoplan: readJSON(path.join(PIPELINE, 'bts-seo-plan.json')),

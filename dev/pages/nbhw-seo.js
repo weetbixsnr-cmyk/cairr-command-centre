@@ -79,6 +79,7 @@ export default function NbhwSeoPage() {
   const snap = useSnapshot()
   const seo = snap?.nbhwSeo
   const comp = snap?.nbhwCompetitors
+  const pub = snap?.nbhwPublishLog
   const [tab, setTab] = useState('rankings')
 
   const coreAt1 = seo?.coreKeywords?.filter(k => k.position === 1).length || 0
@@ -158,6 +159,7 @@ export default function NbhwSeoPage() {
           <TabButton active={tab==='matrix'} label="📍 Coverage Matrix" onClick={() => setTab('matrix')} />
           <TabButton active={tab==='framework'} label="📋 Framework" onClick={() => setTab('framework')} />
           <TabButton active={tab==='competitors'} label="🏆 Competitors" onClick={() => setTab('competitors')} />
+          <TabButton active={tab==='safety'} label={`🛡️ Google Safety${pub?.status === 'at_limit' ? ' 🔴' : pub?.status === 'caution' ? ' 🟡' : ''}`} onClick={() => setTab('safety')} />
         </div>
 
         {/* TAB 1: Rankings */}
@@ -393,6 +395,139 @@ export default function NbhwSeoPage() {
             <div style={{ fontSize: 8, color: '#333', marginTop: 8, textAlign: 'right' }}>
               Scan status: {comp?.scanStatus || 'pending'} · Updated: {comp?.updatedAt ? timeAgo(comp.updatedAt) : '—'}
             </div>
+          </>
+        )}
+
+        {/* TAB 5: Google Safety Meter */}
+        {tab === 'safety' && (
+          <>
+            {/* Status Banner */}
+            <div style={{
+              background: pub?.status === 'at_limit' ? '#3b1010' : pub?.status === 'caution' ? '#2a2000' : '#0a2a1a',
+              border: `1px solid ${pub?.status === 'at_limit' ? '#ef4444' : pub?.status === 'caution' ? '#f59e0b' : '#10b981'}`,
+              borderRadius: 10, padding: 16, marginBottom: 16, textAlign: 'center'
+            }}>
+              <div style={{ fontSize: 18, fontWeight: 700, color: pub?.status === 'at_limit' ? '#ef4444' : pub?.status === 'caution' ? '#f59e0b' : '#10b981' }}>
+                {pub?.statusLabel || '⏳ Loading...'}
+              </div>
+              {pub?.nextSafeDate && pub?.status === 'at_limit' && (
+                <div style={{ fontSize: 11, color: '#f59e0b', marginTop: 6 }}>Next safe publish: {pub.nextSafeDate}</div>
+              )}
+            </div>
+
+            {/* Gauges */}
+            <div className="grid2" style={{ marginBottom: 16 }}>
+              {/* Pages gauge */}
+              <div className="card">
+                <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>Pages Published This Week</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
+                  <div style={{ fontSize: 36, fontWeight: 800, color: pub?.status === 'at_limit' ? '#ef4444' : pub?.status === 'caution' ? '#f59e0b' : '#10b981' }}>
+                    {pub?.publishedThisWeek?.length || 0}
+                  </div>
+                  <div style={{ fontSize: 14, color: '#555' }}>/ {pub?.weeklyLimit || 3}</div>
+                </div>
+                <div style={{ height: 8, background: '#1a1a1a', borderRadius: 4, overflow: 'hidden' }}>
+                  <div style={{
+                    height: 8, borderRadius: 4,
+                    width: `${Math.min(100, ((pub?.publishedThisWeek?.length || 0) / (pub?.weeklyLimit || 3)) * 100)}%`,
+                    background: pub?.status === 'at_limit' ? '#ef4444' : pub?.status === 'caution' ? '#f59e0b' : '#10b981',
+                    transition: 'width 0.3s'
+                  }}></div>
+                </div>
+              </div>
+
+              {/* GBP gauge */}
+              <div className="card">
+                <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>GBP Posts This Week</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
+                  <div style={{ fontSize: 36, fontWeight: 800, color: pub?.gbpStatus === 'at_limit' ? '#ef4444' : pub?.gbpStatus === 'caution' ? '#f59e0b' : '#10b981' }}>
+                    {pub?.gbpThisWeek?.length || 0}
+                  </div>
+                  <div style={{ fontSize: 14, color: '#555' }}>/ {pub?.gbpWeeklyLimit || 3}</div>
+                </div>
+                <div style={{ height: 8, background: '#1a1a1a', borderRadius: 4, overflow: 'hidden' }}>
+                  <div style={{
+                    height: 8, borderRadius: 4,
+                    width: `${Math.min(100, ((pub?.gbpThisWeek?.length || 0) / (pub?.gbpWeeklyLimit || 3)) * 100)}%`,
+                    background: pub?.gbpStatus === 'at_limit' ? '#ef4444' : pub?.gbpStatus === 'caution' ? '#f59e0b' : '#10b981',
+                    transition: 'width 0.3s'
+                  }}></div>
+                </div>
+              </div>
+            </div>
+
+            {/* Published this week */}
+            {pub?.publishedThisWeek?.length > 0 && (
+              <div className="section">
+                <div className="sec-title">Published This Week</div>
+                <div className="card">
+                  <table>
+                    <thead><tr><th>Date</th><th>Type</th><th>Page</th><th>Status</th></tr></thead>
+                    <tbody>
+                      {pub.publishedThisWeek.map((p, i) => (
+                        <tr key={i}>
+                          <td style={{ color: '#fff', fontWeight: 600 }}>{p.date}</td>
+                          <td>{p.type}</td>
+                          <td>{p.page}</td>
+                          <td>{p.status}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+
+            {/* Queue */}
+            {pub?.queue?.length > 0 && (
+              <div className="section">
+                <div className="sec-title">Queue — Do Not Publish Yet</div>
+                <div className="card">
+                  {pub.queue.map((q, i) => (
+                    <div key={i} style={{ fontSize: 11, color: '#aaa', padding: '5px 0', borderBottom: '1px solid #1a1a1a', display: 'flex', gap: 6 }}>
+                      <span style={{ color: '#f59e0b' }}>⏳</span> {q}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Previous weeks */}
+            {pub?.previousWeeks?.length > 0 && (
+              <div className="section">
+                <div className="sec-title">Publish History (Last 30 Days)</div>
+                <div className="card">
+                  <table>
+                    <thead><tr><th>Week</th><th>Pages Published</th><th>Type</th></tr></thead>
+                    <tbody>
+                      {pub.previousWeeks.map((w, i) => (
+                        <tr key={i}>
+                          <td style={{ color: '#fff' }}>{w.week}</td>
+                          <td>{w.pages}</td>
+                          <td style={{ fontSize: 9, color: '#555' }}>{w.type}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+
+            {/* Warning callout */}
+            {pub?.warningStatus?.length > 0 && (
+              <div style={{ background: '#3b1010', border: '1px solid #ef4444', borderRadius: 8, padding: 12, marginTop: 12 }}>
+                <div style={{ fontSize: 10, fontWeight: 700, color: '#ef4444', textTransform: 'uppercase', marginBottom: 6 }}>⚠️ Active Warning</div>
+                {pub.warningStatus.map((w, i) => (
+                  <div key={i} style={{ fontSize: 11, color: '#f59e0b', padding: '2px 0' }}>{w}</div>
+                ))}
+              </div>
+            )}
+
+            {!pub && (
+              <div style={{ color: '#555', fontSize: 11, fontStyle: 'italic', padding: 16, textAlign: 'center' }}>
+                Publish log not loaded — NBHW agent hasn't created publish-log.md yet
+              </div>
+            )}
           </>
         )}
 
