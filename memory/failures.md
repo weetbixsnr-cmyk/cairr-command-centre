@@ -1,6 +1,7 @@
-## [DEPLOY] Vercel deployment failure (PERSISTENT)
-**Date:** 2026-03-18 06:31 AEDT (failures at: 00:04, 00:31, 06:31)
-**What happened:** Dashboard snapshot generated successfully (92KB) but Vercel deploy failed with "Command failed: npx vercel --prod --yes 2>&1"
-**Context:** Cron job d1a8036e-d3d5-4358-94a4-2e280d923107 - routine dashboard push
-**Lesson:** Snapshot generation is working, deployment pipeline broken for 6+ hours - NEEDS ESCALATION
-**Status:** 🔴 Snapshot ready but dashboard not updating - requires manual intervention
+## Dashboard Deployment Failures
+
+### 2026-03-19 08:31 - Vercel Deploy Timeout
+- **What:** Dashboard snapshot push script failed during Vercel deployment
+- **Error:** `spawnSync /bin/sh ETIMEDOUT`  
+- **Status:** Snapshot generated OK (112KB), deployment timed out
+- **Next:** Check Vercel CLI auth, network connectivity, or deployment script timeout settings

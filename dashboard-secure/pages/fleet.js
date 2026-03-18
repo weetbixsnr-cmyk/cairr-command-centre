@@ -206,7 +206,18 @@ function DetailPanel({ name, snap, onClose }) {
               <div className="score-val" style={{ color: (ws.decisions?.length || 0) > 0 ? '#3b82f6' : '#555' }}>{ws.decisions?.length || 0}</div>
               <div className="score-lbl">Decisions</div>
             </div>
+            <div className="score-item">
+              <div className="score-val" style={{ color: (d.sess?.compactionCount || 0) >= 2 ? '#ef4444' : (d.sess?.compactionCount || 0) >= 1 ? '#f59e0b' : '#10b981' }}>
+                {d.sess?.compactionCount || 0}
+              </div>
+              <div className="score-lbl">Compactions{(d.sess?.compactionCount || 0) >= 2 ? ' ⚠️' : ''}</div>
+            </div>
           </div>
+          {(d.sess?.compactionCount || 0) >= 2 && (
+            <div style={{ background: '#3b1010', border: '1px solid #ef4444', borderRadius: 6, padding: '4px 8px', marginTop: 4, fontSize: 9, color: '#ef4444', fontWeight: 600 }}>
+              ⚠️ 2+ compactions — start a new session soon
+            </div>
+          )}
           <div className="score-owner">Owner: 🧠 Brain</div>
         </div>
         

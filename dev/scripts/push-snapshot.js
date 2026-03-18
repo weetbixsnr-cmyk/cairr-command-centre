@@ -240,6 +240,27 @@ function parseSessions(statusOutput) {
       byAgent[agent].configModel = model
     }
     
+    // Read compaction counts from session files
+    for (const s of recentSessions) {
+      const agent = s.agentId
+      if (!agent || !byAgent[agent]) continue
+      const sessFile = path.join(AGENTS_ROOT, agent, 'sessions', 'sessions.json')
+      try {
+        const sessData = JSON.parse(fs.readFileSync(sessFile, 'utf8'))
+        // Find the matching session by key
+        const key = s.key
+        if (sessData[key]) {
+          const cc = sessData[key].compactionCount || 0
+          // Only track non-cron sessions (primary Discord sessions)
+          if (!key.includes('cron:')) {
+            if (!byAgent[agent].compactionCount || cc > byAgent[agent].compactionCount) {
+              byAgent[agent].compactionCount = cc
+            }
+          }
+        }
+      } catch {}
+    }
+
     // Also grab agents list for lastUpdatedAt
     const agentsList = statusData?.agents?.agents || []
     for (const a of agentsList) {
