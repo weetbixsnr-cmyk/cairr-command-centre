@@ -553,6 +553,61 @@ function parsePublishLog() {
   return result
 }
 
+// ── NBHW Keyword Tracker ─────────────────────────────────────
+
+function parseKeywordTracker() {
+  const raw = readFile('/Users/cairr/.openclaw/agents/nbhw/workspace/dev/seo/keyword-tracker.md')
+  if (!raw) return null
+  
+  const result = { lastUpdated: null, campaigns: [], keywords: [], competitors: [] }
+  
+  // Last updated
+  const updMatch = raw.match(/\*\*Last Updated:\*\*\s*(.+)/)
+  if (updMatch) result.lastUpdated = updMatch[1].trim()
+  
+  // Parse all keyword tables
+  const tableRegex = /###\s*(.*?)\n\|[^\n]+\n\|[-| ]+\n((?:\|[^\n]+\n)*)/g
+  let match
+  while ((match = tableRegex.exec(raw)) !== null) {
+    const sectionTitle = match[1].trim()
+    const rows = match[2].trim().split('\n')
+    for (const row of rows) {
+      const cols = row.split('|').map(c => c.trim()).filter(Boolean)
+      if (cols.length >= 4 && cols[0] !== 'Keyword' && cols[0] !== 'Competitor') {
+        // Keyword row
+        const baseline = cols[1]?.replace(/\*\*/g, '').replace('#', '').trim()
+        const latest = cols[2]?.replace('#', '').trim()
+        result.keywords.push({
+          keyword: cols[0],
+          baseline: baseline === '50+' ? 99 : parseInt(baseline) || 99,
+          latest: latest === '50+' ? 99 : parseInt(latest) || 99,
+          trend: cols[3]?.trim() || '—',
+          url: cols[4]?.trim() || null,
+          section: sectionTitle
+        })
+      }
+    }
+  }
+  
+  // Parse campaigns
+  const campRegex = /### Campaign \d+:\s*(.+)\n\*\*Started:\*\*\s*(.+?)\s*\|\s*\*\*Goal:\*\*\s*(.+)\s*\n\*\*Status:\*\*\s*(.+)/g
+  while ((match = campRegex.exec(raw)) !== null) {
+    result.campaigns.push({
+      name: match[1].trim(),
+      started: match[2].trim(),
+      goal: match[3].trim(),
+      status: match[4].trim()
+    })
+  }
+  
+  // Top 10 = sort by best position
+  result.top10 = [...result.keywords]
+    .sort((a, b) => a.latest - b.latest)
+    .slice(0, 10)
+  
+  return result
+}
+
 // ── NBHW Live Site Auto-Detection ────────────────────────────
 
 function detectNbhwLivePages() {
@@ -695,6 +750,7 @@ const snapshot = {
   services: readJSON(path.join(DASHBOARD_DATA, 'services.json')),
   agentWorkspaces: getAgentWorkspaceData(),
   nbhwPublishLog: parsePublishLog(),
+  nbhwKeywords: parseKeywordTracker(),
   nbhwLive: detectNbhwLivePages(),
   nbhwCompetitors: readJSON(path.join(PIPELINE, 'nbhw-competitors.json')),
   btsSeo: readJSON(path.join(PIPELINE, 'bts-seo-latest.json')),

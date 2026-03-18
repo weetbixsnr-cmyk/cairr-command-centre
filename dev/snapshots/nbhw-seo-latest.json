@@ -1,0 +1,91 @@
+{
+  "timestamp": "2026-03-18T20:48:54Z",
+  "suburbPages": {
+    "live": 6,
+    "list": [
+      "collaroy",
+      "dee-why",
+      "frenchs-forest",
+      "freshwater",
+      "manly",
+      "narrabeen"
+    ]
+  },
+  "blogs": {
+    "live": 55,
+    "list": [
+      "all-in-one-heat-pump-install-collaroy",
+      "electric-hot-water-repair-freshwater",
+      "electric-hot-water-repair-radiant",
+      "emergency-hot-water-burst-rheem",
+      "emergency-hot-water-installation-freshwater-storm",
+      "freshwater-autumn-hot-water-maintenance-guide",
+      "gas-continuous-flow-vs-storage-which-is-right",
+      "gas-hot-water-installation-bilgola-plateau",
+      "gas-hot-water-installation-newport-internal",
+      "gas-hot-water-service-vulcan",
+      "heat-pump-installation-bayview",
+      "heat-pump-installation-cromer",
+      "heat-pump-installation-frenchs-forest",
+      "heat-pump-installation-freshwater-locals-switching",
+      "heat-pumps-what-are-they-why-switching",
+      "hot-water-installation-allambie-rheem-250l",
+      "hot-water-installation-anzac-day",
+      "hot-water-installation-balgowlah-under-stairs",
+      "hot-water-installation-frenchs-forest-granny-flat",
+      "hot-water-installation-manly-storm",
+      "hot-water-installation-north-narrabeen-80l",
+      "hot-water-installation-terry-hills-flood",
+      "hot-water-repair-collaroy-plateau",
+      "hot-water-repair-newport-wedding",
+      "hot-water-replacement-dee-why-wall-hung",
+      "hot-water-replacement-killarney-heights",
+      "hot-water-running-costs-nsw",
+      "hot-water-service-allambie-heights",
+      "hot-water-service-belrose",
+      "hot-water-service-collaroy",
+      "hot-water-service-frenchs-forest-annual",
+      "hot-water-service-mosman-yearly",
+      "hot-water-service-queenscliff",
+      "hot-water-system-cost-2026",
+      "hydronic-heating-avalon",
+      "hydronic-heating-repair-clontarf-baxi-boiler",
+      "hydronic-heating-repair-dee-why",
+      "hydronic-heating-repair-mona-vale",
+      "hydronic-heating-repair-mosman-korean",
+      "leaking-hot-water-system-north-narrabeen",
+      "no-hot-water-what-to-check",
+      "nsw-government-rebates-hot-water",
+      "plumbing-maintenance-pymble",
+      "plumbing-maintenance-warriewood-pump",
+      "reclaim-heat-pump-install-dee-why",
+      "reclaim-heat-pump-review-northern-beaches-installer",
+      "regular-maintenance-save-hot-water-heater",
+      "rinnai-infinity-continuous-flow-install-manly",
+      "rinnai-installation-cromer-bosch-replacement",
+      "rinnai-installation-warriewood-gas-to-instantaneous",
+      "rusty-hot-water",
+      "solar-hot-water-repair-balgowlah-tpr",
+      "solar-hot-water-service-mosman-solarhart",
+      "sydney-gas-ban-northern-beaches",
+      "yearly-hydronic-hot-water-service"
+    ]
+  },
+  "publishRate": {
+    "last7days": 1,
+    "max": 3,
+    "status": "\ud83d\udfe2 SAFE",
+    "slotsRemaining": 2
+  },
+  "git": {
+    "lastCommit": "2026-03-18 16:56:12 +1100 | merge: Collaroy suburb page + photo optimisation + Frenchs Forest + Manly (staged)",
+    "commitsLast7d": 39
+  },
+  "featureBranches": [
+    "feature/collaroy-suburb-page",
+    "feature/suburb-pages",
+    "collaroy-suburb-page",
+    "suburb-pages"
+  ],
+  "keywordMatrix": true
+}

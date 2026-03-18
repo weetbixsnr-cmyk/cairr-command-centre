@@ -81,6 +81,7 @@ export default function NbhwSeoPage() {
   const comp = snap?.nbhwCompetitors
   const pub = snap?.nbhwPublishLog
   const live = snap?.nbhwLive
+  const kw = snap?.nbhwKeywords
   const [tab, setTab] = useState('rankings')
 
   const coreAt1 = seo?.coreKeywords?.filter(k => k.position === 1).length || 0
@@ -167,6 +168,56 @@ export default function NbhwSeoPage() {
         {/* TAB 1: Rankings */}
         {tab === 'rankings' && (
           <>
+            {/* Top 10 Tracked Keywords */}
+            {kw?.top10?.length > 0 && (
+              <div className="section" style={{marginBottom:16}}>
+                <div className="sec-title">🏆 Top 10 Tracked Keywords</div>
+                <div className="card">
+                  <table>
+                    <thead><tr><th>Keyword</th><th>Baseline</th><th>Current</th><th>Trend</th><th>URL</th></tr></thead>
+                    <tbody>
+                      {kw.top10.map((k, i) => {
+                        const improved = k.latest < k.baseline
+                        const dropped = k.latest > k.baseline
+                        return (
+                          <tr key={i}>
+                            <td style={{color:'#fff',fontWeight:600}}>{k.keyword}</td>
+                            <td><PosCell pos={k.baseline} /></td>
+                            <td><PosCell pos={k.latest} /></td>
+                            <td style={{fontSize:11}}>
+                              {improved ? <span style={{color:'#10b981'}}>📈 ↑{k.baseline - k.latest}</span> :
+                               dropped ? <span style={{color:'#ef4444'}}>📉 ↓{k.latest - k.baseline}</span> :
+                               <span style={{color:'#555'}}>—</span>}
+                            </td>
+                            <td style={{fontSize:9,color:'#3b82f6'}}>{k.url || '—'}</td>
+                          </tr>
+                        )
+                      })}
+                    </tbody>
+                  </table>
+                  <div style={{fontSize:8,color:'#333',marginTop:6,textAlign:'right'}}>
+                    Source: keyword-tracker.md · Updated: {kw.lastUpdated || '—'}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Active Campaigns */}
+            {kw?.campaigns?.length > 0 && (
+              <div className="section" style={{marginBottom:16}}>
+                <div className="sec-title">Active Campaigns</div>
+                <div style={{display:'flex',gap:8,flexWrap:'wrap'}}>
+                  {kw.campaigns.map((c, i) => (
+                    <div key={i} className="card" style={{flex:'1 1 250px'}}>
+                      <div style={{fontSize:12,fontWeight:700,color:'#fff',marginBottom:4}}>{c.name}</div>
+                      <div style={{fontSize:9,color:'#555',marginBottom:4}}>Started: {c.started} · Goal: {c.goal}</div>
+                      <div style={{fontSize:10}}>{c.status}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div className="grid2">
               <div className="section">
                 <div className="sec-title">Core Keywords — Defending #1</div>
@@ -531,6 +582,43 @@ export default function NbhwSeoPage() {
                     background: pub?.gbpStatus === 'at_limit' ? '#ef4444' : pub?.gbpStatus === 'caution' ? '#f59e0b' : '#10b981',
                     transition: 'width 0.3s'
                   }}></div>
+                </div>
+              </div>
+            </div>
+
+            {/* Safety Rules Reference */}
+            <div className="grid2" style={{ marginBottom: 16 }}>
+              <div className="card">
+                <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>📄 Website Page Limits</div>
+                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
+                  <span style={{color:'#fff',fontWeight:600}}>Max new pages/week:</span> 3 (suburb + blogs combined)
+                </div>
+                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
+                  <span style={{color:'#fff',fontWeight:600}}>Max suburb pages/week:</span> 1-2
+                </div>
+                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
+                  <span style={{color:'#fff',fontWeight:600}}>Cool-down after bulk:</span> 7 days
+                </div>
+                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0' }}>
+                  <span style={{color:'#fff',fontWeight:600}}>Rule:</span> Log EVERY publish with date
+                </div>
+              </div>
+              <div className="card">
+                <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>📍 Google Business Profile Limits</div>
+                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
+                  <span style={{color:'#fff',fontWeight:600}}>Max GBP posts/week:</span> 2-3
+                </div>
+                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
+                  <span style={{color:'#fff',fontWeight:600}}>Post types:</span> Updates, Offers, Events
+                </div>
+                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
+                  <span style={{color:'#fff',fontWeight:600}}>Photo uploads/week:</span> 3-5 max
+                </div>
+                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
+                  <span style={{color:'#fff',fontWeight:600}}>Review replies/day:</span> 2-3 (stagger, don't batch)
+                </div>
+                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0' }}>
+                  <span style={{color:'#fff',fontWeight:600}}>⚠️ Avoid:</span> Bulk photo uploads, keyword-stuffed posts, same-day post spam
                 </div>
               </div>
             </div>
