@@ -80,15 +80,17 @@ export default function NbhwSeoPage() {
   const seo = snap?.nbhwSeo
   const comp = snap?.nbhwCompetitors
   const pub = snap?.nbhwPublishLog
+  const live = snap?.nbhwLive
   const [tab, setTab] = useState('rankings')
 
   const coreAt1 = seo?.coreKeywords?.filter(k => k.position === 1).length || 0
   const coreTotal = seo?.coreKeywords?.length || 0
   const suburbRanking = seo?.suburbKeywords?.filter(k => k.position <= 10).length || 0
   const suburbTotal = seo?.suburbKeywords?.length || 0
-  const totalServicePages = seo?.suburbCoverage?.waves?.reduce((a, w) => a + (w.servicePages || 0), 0) || 0
+  // Use live detection data when available, fall back to static JSON
+  const totalServicePages = live?.totalSuburbPages || seo?.suburbCoverage?.waves?.reduce((a, w) => a + (w.servicePages || 0), 0) || 0
   const totalServicePagesNeeded = seo?.suburbCoverage?.waves?.reduce((a, w) => a + (w.servicePagesTotal || 0), 0) || 0
-  const totalBlogs = seo?.suburbCoverage?.waves?.reduce((a, w) => a + (w.blogs || 0), 0) || 0
+  const totalBlogs = live?.totalBlogPages || seo?.suburbCoverage?.waves?.reduce((a, w) => a + (w.blogs || 0), 0) || 0
 
   return (
     <>
@@ -140,16 +142,16 @@ export default function NbhwSeoPage() {
             <div className="stat-lbl">Suburb Keywords in Top 10</div>
           </div>
           <div className="stat-card">
-            <div className="stat-val" style={{color:'#3b82f6'}}>{seo?.suburbCoverage?.summary?.withBlogCoverage || 0}</div>
-            <div className="stat-lbl">Suburbs with Content</div>
+            <div className="stat-val" style={{color:'#10b981'}}>{live?.totalSuburbPages || seo?.suburbCoverage?.summary?.servicePages || 0}</div>
+            <div className="stat-lbl">Suburb Pages Live</div>
           </div>
           <div className="stat-card">
-            <div className="stat-val" style={{color:'#f59e0b'}}>{seo?.suburbCoverage?.summary?.servicePages || 0}</div>
-            <div className="stat-lbl">Service Pages Built</div>
+            <div className="stat-val" style={{color:'#3b82f6'}}>{live?.totalBlogPages || seo?.suburbCoverage?.summary?.withBlogCoverage || 0}</div>
+            <div className="stat-lbl">Blog Posts Live</div>
           </div>
           <div className="stat-card">
-            <div className="stat-val" style={{color:'#ef4444'}}>{seo?.suburbCoverage?.summary?.zeroCoverage || 0}</div>
-            <div className="stat-lbl">Suburbs Zero Coverage</div>
+            <div className="stat-val" style={{color:'#ef4444'}}>{totalServicePagesNeeded - totalServicePages}</div>
+            <div className="stat-lbl">Suburbs Remaining</div>
           </div>
         </div>
 
@@ -218,28 +220,105 @@ export default function NbhwSeoPage() {
           <>
             <div style={{display:'flex',gap:12,marginBottom:16,flexWrap:'wrap'}}>
               <div className="stat-card" style={{minWidth:100}}>
+                <div className="stat-val" style={{fontSize:18,color:'#10b981'}}>{totalServicePages}</div>
+                <div className="stat-lbl">Suburb Pages Live</div>
+              </div>
+              <div className="stat-card" style={{minWidth:100}}>
                 <div className="stat-val" style={{fontSize:18,color:'#3b82f6'}}>{totalBlogs}</div>
-                <div className="stat-lbl">Total Blogs</div>
+                <div className="stat-lbl">Blog Posts Live</div>
               </div>
               <div className="stat-card" style={{minWidth:100}}>
-                <div className="stat-val" style={{fontSize:18,color:'#f59e0b'}}>{totalServicePages}/{totalServicePagesNeeded}</div>
-                <div className="stat-lbl">Service Pages</div>
-              </div>
-              <div className="stat-card" style={{minWidth:100}}>
-                <div className="stat-val" style={{fontSize:18,color:'#10b981'}}>{seo?.suburbCoverage?.summary?.totalSuburbs || 0}</div>
-                <div className="stat-lbl">Suburbs Mapped</div>
+                <div className="stat-val" style={{fontSize:18,color:'#f59e0b'}}>{totalServicePagesNeeded - totalServicePages}</div>
+                <div className="stat-lbl">Suburbs Remaining</div>
               </div>
               <div className="stat-card" style={{minWidth:100}}>
                 <div className="stat-val" style={{fontSize:18,color:'#a855f7'}}>{seo?.suburbCoverage?.summary?.keywordsPerSuburb || 0}</div>
                 <div className="stat-lbl">Keywords/Suburb</div>
               </div>
             </div>
-            <div className="section">
-              <div className="sec-title">Execution Waves</div>
-              {seo?.suburbCoverage?.waves?.map(wave => (
-                <WaveBar key={wave.id} wave={wave} />
-              ))}
-            </div>
+
+            {/* Live-detected wave status */}
+            {live?.waveStatus && (
+              <div className="section">
+                <div className="sec-title">Execution Waves — Live Detection</div>
+                {Object.entries(live.waveStatus).map(([num, ws]) => {
+                  const color = ws.complete ? '#10b981' : ws.live > 0 ? '#f59e0b' : '#333'
+                  const label = ws.complete ? '✅ COMPLETE' : ws.live > 0 ? '🟡 IN PROGRESS' : '⬜ NOT STARTED'
+                  return (
+                    <div key={num} style={{background:'#111',border:'1px solid #222',borderRadius:8,padding:10,marginBottom:6,borderLeft:`3px solid ${color}`}}>
+                      <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:4}}>
+                        <span style={{fontSize:12,fontWeight:600,color:'#fff'}}>Wave {num}</span>
+                        <span style={{fontSize:9,color:color,fontWeight:600}}>{label}</span>
+                        <span style={{fontSize:9,color:'#555',marginLeft:'auto'}}>{ws.live}/{ws.total} suburbs live</span>
+                      </div>
+                      <div style={{height:4,background:'#1a1a1a',borderRadius:2,marginBottom:6,overflow:'hidden'}}>
+                        <div style={{height:4,width:`${ws.pct}%`,background:color,borderRadius:2,minWidth:ws.live > 0 ? 4 : 0,transition:'width 0.3s'}}></div>
+                      </div>
+                      <div style={{display:'flex',gap:4,flexWrap:'wrap'}}>
+                        {ws.liveSuburbs?.map(s => (
+                          <span key={s} style={{fontSize:9,padding:'2px 6px',borderRadius:4,background:'#0a2a1a',border:'1px solid #10b981',color:'#10b981'}}>
+                            ✅ {s.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
+                          </span>
+                        ))}
+                        {ws.remaining?.map(s => (
+                          <span key={s} style={{fontSize:9,padding:'2px 6px',borderRadius:4,background:'#1a1a1a',border:'1px solid #333',color:'#555'}}>
+                            ⬜ {s.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )
+                })}
+                <div style={{fontSize:8,color:'#333',marginTop:4}}>Auto-detected from file system · {live.lastDetected ? `Scanned: ${new Date(live.lastDetected).toLocaleTimeString()}` : ''}</div>
+              </div>
+            )}
+
+            {/* Live suburb pages */}
+            {live?.liveSuburbs?.length > 0 && (
+              <div className="section">
+                <div className="sec-title">Live Suburb Pages ({live.totalSuburbPages})</div>
+                <div className="card">
+                  <table>
+                    <thead><tr><th>Suburb</th><th>URL</th><th>Built</th></tr></thead>
+                    <tbody>
+                      {live.liveSuburbs.map((s, i) => (
+                        <tr key={i}>
+                          <td style={{color:'#10b981',fontWeight:600}}>✅ {s.name}</td>
+                          <td style={{fontSize:9}}><a href={`https://northernbeacheshotwater.com.au/hot-water/${s.slug}`} target="_blank" rel="noopener">/hot-water/{s.slug}</a></td>
+                          <td style={{fontSize:9,color:'#555'}}>{s.builtAt ? new Date(s.builtAt).toLocaleDateString() : '—'}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+
+            {/* Git publish history */}
+            {live?.publishHistory?.length > 0 && (
+              <div className="section">
+                <div className="sec-title">Git Publish History</div>
+                <div className="card">
+                  {live.publishHistory.map((h, i) => (
+                    <div key={i} style={{fontSize:10,color:'#aaa',padding:'4px 0',borderBottom:'1px solid #1a1a1a',display:'flex',gap:8}}>
+                      <span style={{color:'#555',fontFamily:'monospace',fontSize:9,minWidth:50}}>{h.hash}</span>
+                      <span style={{color:'#3b82f6',minWidth:85}}>{h.date ? new Date(h.date).toLocaleDateString() : '—'}</span>
+                      <span>{h.message}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Fallback to static waves if no live data */}
+            {!live?.waveStatus && seo?.suburbCoverage?.waves && (
+              <div className="section">
+                <div className="sec-title">Execution Waves (Static — ⚠️ may be stale)</div>
+                {seo.suburbCoverage.waves.map(wave => (
+                  <WaveBar key={wave.id} wave={wave} />
+                ))}
+              </div>
+            )}
           </>
         )}
 

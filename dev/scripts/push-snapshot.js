@@ -553,6 +553,119 @@ function parsePublishLog() {
   return result
 }
 
+// ── NBHW Live Site Auto-Detection ────────────────────────────
+
+function detectNbhwLivePages() {
+  const NBHW_REPO = '/Users/cairr/.openclaw/agents/nbhw/workspace/dev/nbhw-repo'
+  const DIST_SUBURBS = path.join(NBHW_REPO, 'frontend/dist/hot-water')
+  const DIST_BLOGS = path.join(NBHW_REPO, 'frontend/dist/blog')
+  const PUBLISH_LOG = '/Users/cairr/.openclaw/workspace/output/publish-history.log'
+  
+  const result = {
+    liveSuburbs: [],
+    liveBlogs: [],
+    totalSuburbPages: 0,
+    totalBlogPages: 0,
+    publishHistory: [],
+    lastDetected: new Date().toISOString()
+  }
+
+  // Detect live suburb pages from dist/
+  try {
+    const suburbs = fs.readdirSync(DIST_SUBURBS).filter(f => {
+      const indexPath = path.join(DIST_SUBURBS, f, 'index.html')
+      return fs.existsSync(indexPath)
+    })
+    for (const slug of suburbs) {
+      const entry = { slug, name: slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') }
+      // Get git commit date for this suburb
+      try {
+        const gitDate = execSync(
+          `cd "${NBHW_REPO}" && git log -1 --format=%cI -- "frontend/src/lib/suburbs.js" --diff-filter=M -S "${slug}" 2>/dev/null || git log --oneline --all -- frontend/src/lib/suburbs.js 2>/dev/null | grep -i "${slug.replace(/-/g, '.')}" | head -1 | awk '{print $1}' | xargs -I{} git show -s --format=%cI {} 2>/dev/null`,
+          { timeout: 5000, encoding: 'utf8' }
+        ).trim()
+        if (gitDate) entry.publishedAt = gitDate
+      } catch {}
+      // File mtime as fallback
+      try {
+        const stat = fs.statSync(path.join(DIST_SUBURBS, slug, 'index.html'))
+        entry.builtAt = stat.mtime.toISOString()
+      } catch {}
+      result.liveSuburbs.push(entry)
+    }
+    result.totalSuburbPages = result.liveSuburbs.length
+  } catch {}
+
+  // Detect blog pages from dist/
+  try {
+    const blogs = fs.readdirSync(DIST_BLOGS).filter(f => {
+      return fs.existsSync(path.join(DIST_BLOGS, f, 'index.html'))
+    })
+    result.liveBlogs = blogs.map(slug => {
+      const entry = { slug }
+      try {
+        const stat = fs.statSync(path.join(DIST_BLOGS, slug, 'index.html'))
+        entry.builtAt = stat.mtime.toISOString()
+      } catch {}
+      return entry
+    })
+    result.totalBlogPages = result.liveBlogs.length
+  } catch {}
+
+  // Git history for suburb page commits
+  try {
+    const gitLog = execSync(
+      `cd "${NBHW_REPO}" && git log --oneline --all -- frontend/src/lib/suburbs.js 2>/dev/null | grep -i 'suburb\\|wave' | head -20`,
+      { timeout: 5000, encoding: 'utf8' }
+    ).trim()
+    if (gitLog) {
+      for (const line of gitLog.split('\n')) {
+        const hashMatch = line.match(/^(\S+)\s+(.*)$/)
+        if (hashMatch) {
+          try {
+            const date = execSync(`cd "${NBHW_REPO}" && git show -s --format=%cI ${hashMatch[1]} 2>/dev/null`, { timeout: 3000, encoding: 'utf8' }).trim()
+            result.publishHistory.push({ date, message: hashMatch[2], hash: hashMatch[1] })
+          } catch {}
+        }
+      }
+    }
+  } catch {}
+
+  // Read publish-history.log
+  try {
+    const pubLog = readFile(PUBLISH_LOG)
+    if (pubLog) {
+      result.publishLog = pubLog.split('\n').filter(l => l.trim()).map(l => {
+        const parts = l.split('|')
+        return { date: parts[0], agent: parts[1], item: parts[2] }
+      })
+    }
+  } catch {}
+
+  // Auto-update wave statuses based on what's actually live
+  const WAVE_SUBURBS = {
+    1: ['dee-why', 'freshwater', 'narrabeen'],
+    2: ['collaroy', 'frenchs-forest', 'manly', 'cromer', 'mosman'],
+    3: ['balgowlah', 'newport', 'warriewood', 'allambie-heights', 'belrose'],
+  }
+  const liveSlugs = new Set(result.liveSuburbs.map(s => s.slug))
+  result.waveStatus = {}
+  for (const [waveNum, suburbs] of Object.entries(WAVE_SUBURBS)) {
+    const live = suburbs.filter(s => liveSlugs.has(s))
+    const total = suburbs.length
+    result.waveStatus[waveNum] = {
+      live: live.length,
+      total,
+      complete: live.length === total,
+      liveSuburbs: live,
+      remaining: suburbs.filter(s => !liveSlugs.has(s)),
+      pct: Math.round((live.length / total) * 100)
+    }
+  }
+
+  return result
+}
+
 // ── Build snapshot ───────────────────────────────────────────
 
 console.log('Building dashboard snapshot...')
@@ -582,6 +695,7 @@ const snapshot = {
   services: readJSON(path.join(DASHBOARD_DATA, 'services.json')),
   agentWorkspaces: getAgentWorkspaceData(),
   nbhwPublishLog: parsePublishLog(),
+  nbhwLive: detectNbhwLivePages(),
   nbhwCompetitors: readJSON(path.join(PIPELINE, 'nbhw-competitors.json')),
   btsSeo: readJSON(path.join(PIPELINE, 'bts-seo-latest.json')),
   btsSeoplan: readJSON(path.join(PIPELINE, 'bts-seo-plan.json')),
