@@ -1,8 +1,11 @@
-# Fleet Health — 2026-03-15 12:38
+# Fleet Health — 2026-03-19 04:06
 ✅ alpha: healthy
 ✅ audit: healthy
 ✅ bts: healthy
-✅ command-centre: healthy
+❌ command-centre:
+  ❌ No pipeline hook installed
+  ℹ️        1 .bak files (can be cleaned up)
+
 ✅ gridpilot: healthy
 ✅ nbhw: healthy
 ✅ overdue-office: healthy
