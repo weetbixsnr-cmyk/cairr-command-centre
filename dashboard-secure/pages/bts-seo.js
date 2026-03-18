@@ -79,6 +79,7 @@ export default function BtsSeoPage() {
   const seo = snap?.btsSeo
   const comp = snap?.btsCompetitors
   const pub = snap?.btsPublishLog
+  const kw = snap?.btsKeywords
   const [tab, setTab] = useState('rankings')
 
   const coreRanking = seo?.coreKeywords?.filter(k => k.position <= 10).length || 0
@@ -164,6 +165,41 @@ export default function BtsSeoPage() {
         {/* TAB 1: Rankings */}
         {tab === 'rankings' && (
           <>
+            {/* Top 10 Tracked Keywords */}
+            {kw?.top10?.length > 0 && (
+              <div className="section" style={{marginBottom:16}}>
+                <div className="sec-title">🏆 Top 10 Tracked Keywords</div>
+                <div className="card">
+                  <table>
+                    <thead><tr><th>Keyword</th><th>Baseline</th><th>Current</th><th>Trend</th><th>Category</th></tr></thead>
+                    <tbody>
+                      {kw.top10.map((k, i) => {
+                        const hasData = k.latest !== null && k.baseline !== null
+                        const improved = hasData && k.latest < k.baseline
+                        const dropped = hasData && k.latest > k.baseline
+                        return (
+                          <tr key={i}>
+                            <td style={{color:'#fff',fontWeight:600}}>{k.keyword}</td>
+                            <td>{k.baseline ? <PosCell pos={k.baseline} /> : <span style={{color:'#555'}}>—</span>}</td>
+                            <td>{k.latest ? <PosCell pos={k.latest} /> : <span style={{color:'#555'}}>—</span>}</td>
+                            <td style={{fontSize:11}}>
+                              {improved ? <span style={{color:'#10b981'}}>📈 ↑{k.baseline - k.latest}</span> :
+                               dropped ? <span style={{color:'#ef4444'}}>📉 ↓{k.latest - k.baseline}</span> :
+                               <span style={{color:'#555'}}>{k.trend || '—'}</span>}
+                            </td>
+                            <td style={{fontSize:8,color:'#555'}}>{k.section?.replace(/[🔴🟡🟢🟣📍]\s*/,'')}</td>
+                          </tr>
+                        )
+                      })}
+                    </tbody>
+                  </table>
+                  <div style={{fontSize:8,color:'#333',marginTop:6,textAlign:'right'}}>
+                    {kw.keywords?.length || 0} keywords tracked · Updated: {kw.lastUpdated || '—'} · First baseline scan pending
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className="grid2">
               <div className="section">
                 <div className="sec-title">Core Service Keywords</div>
@@ -476,6 +512,43 @@ export default function BtsSeoPage() {
                     background: pub?.gbpStatus === 'at_limit' ? '#ef4444' : pub?.gbpStatus === 'caution' ? '#f59e0b' : '#10b981',
                     transition: 'width 0.3s'
                   }}></div>
+                </div>
+              </div>
+            </div>
+
+            {/* Safety Rules Reference */}
+            <div className="grid2" style={{ marginBottom: 16 }}>
+              <div className="card">
+                <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>📄 Website Page Limits</div>
+                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
+                  <span style={{color:'#fff',fontWeight:600}}>Max new pages/week:</span> 3 (location + blogs combined)
+                </div>
+                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
+                  <span style={{color:'#fff',fontWeight:600}}>Max location pages/week:</span> 1-2
+                </div>
+                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
+                  <span style={{color:'#fff',fontWeight:600}}>Cool-down after bulk:</span> 7 days
+                </div>
+                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0' }}>
+                  <span style={{color:'#fff',fontWeight:600}}>Rule:</span> Log EVERY publish with date
+                </div>
+              </div>
+              <div className="card">
+                <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>📍 Google Business Profile Limits</div>
+                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
+                  <span style={{color:'#fff',fontWeight:600}}>Max GBP posts/week:</span> 2-3
+                </div>
+                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
+                  <span style={{color:'#fff',fontWeight:600}}>Post types:</span> Updates, Offers, Events
+                </div>
+                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
+                  <span style={{color:'#fff',fontWeight:600}}>Photo uploads/week:</span> 3-5 max
+                </div>
+                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
+                  <span style={{color:'#fff',fontWeight:600}}>Review replies/day:</span> 2-3 (stagger, don't batch)
+                </div>
+                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0' }}>
+                  <span style={{color:'#fff',fontWeight:600}}>⚠️ Avoid:</span> Bulk photo uploads, keyword-stuffed posts, same-day post spam
                 </div>
               </div>
             </div>

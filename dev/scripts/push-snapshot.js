@@ -608,6 +608,44 @@ function parseKeywordTracker() {
   return result
 }
 
+function parseBtsKeywordTracker() {
+  const raw = readFile('/Users/cairr/.openclaw/agents/bts/workspace/dev/seo/keyword-tracker.md')
+  if (!raw) return null
+
+  const result = { lastUpdated: null, keywords: [], campaigns: [] }
+
+  const updMatch = raw.match(/\*\*Last Updated:\*\*\s*(.+)/)
+  if (updMatch) result.lastUpdated = updMatch[1].trim()
+
+  const tableRegex = /###\s*(.*?)\n\|[^\n]+\n\|[-| ]+\n((?:\|[^\n]+\n)*)/g
+  let match
+  while ((match = tableRegex.exec(raw)) !== null) {
+    const sectionTitle = match[1].trim()
+    const rows = match[2].trim().split('\n')
+    for (const row of rows) {
+      const cols = row.split('|').map(c => c.trim()).filter(Boolean)
+      if (cols.length >= 4 && cols[0] !== 'Keyword' && cols[0] !== 'Date') {
+        const baseline = cols[1]?.replace(/\*\*/g, '').replace('#', '').replace('—', '').trim()
+        const latest = cols[2]?.replace('#', '').replace('—', '').trim()
+        result.keywords.push({
+          keyword: cols[0],
+          baseline: baseline === '50+' ? 99 : (parseInt(baseline) || null),
+          latest: latest === '50+' ? 99 : (parseInt(latest) || null),
+          trend: cols[3]?.trim() || '—',
+          url: cols[4]?.trim() || null,
+          section: sectionTitle
+        })
+      }
+    }
+  }
+
+  result.top10 = [...result.keywords]
+    .sort((a, b) => (a.latest || 999) - (b.latest || 999))
+    .slice(0, 10)
+
+  return result
+}
+
 // ── NBHW Live Site Auto-Detection ────────────────────────────
 
 function detectNbhwLivePages() {
@@ -757,6 +795,7 @@ const snapshot = {
   btsSeoplan: readJSON(path.join(PIPELINE, 'bts-seo-plan.json')),
   btsBlogInventory: readJSON(path.join(PIPELINE, 'bts-blog-inventory.json')),
   btsCompetitors: readJSON(path.join(PIPELINE, 'bts-competitors.json')),
+  btsKeywords: parseBtsKeywordTracker(),
 }
 
 // ── Write snapshot + bundle into dashboard ───────────────────
