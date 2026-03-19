@@ -47,12 +47,12 @@ export default function BtsLogin() {
           .login-card{background:#0d0d10;border:1px solid #1a1a22;border-radius:16px;padding:40px 36px;width:min(400px,90vw);text-align:center}
           .logo{font-size:36px;margin-bottom:8px}
           h1{font-size:18px;color:#fff;margin-bottom:4px;font-weight:700}
-          .subtitle{font-size:11px;color:#555;margin-bottom:28px}
+          .subtitle{font-size:11px;color:#999;margin-bottom:28px}
           .field{margin-bottom:14px;text-align:left}
-          .field label{display:block;font-size:9px;color:#555;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;font-weight:600}
+          .field label{display:block;font-size:9px;color:#999;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;font-weight:600}
           .field input{width:100%;padding:10px 12px;background:#111;border:1px solid #222;border-radius:8px;color:#fff;font-size:13px;outline:none;transition:border-color .2s}
           .field input:focus{border-color:#10b981}
-          .field input::placeholder{color:#333}
+          .field input::placeholder{color:#777}
           .btn{width:100%;padding:12px;background:#10b981;border:none;border-radius:8px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;margin-top:8px}
           .btn:hover{background:#0d9668}
           .btn:disabled{opacity:0.5;cursor:not-allowed}

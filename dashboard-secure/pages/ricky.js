@@ -79,7 +79,7 @@ export default function RickyPage() {
           a{color:#3b82f6;text-decoration:none}a:hover{text-decoration:underline}
           .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px}
           .top h1{font-size:18px;color:#fff}
-          .meta{font-size:9px;color:#444}
+          .meta{font-size:9px;color:#888}
           .nav{display:flex;gap:8px;margin-bottom:16px}
           .nav a{font-size:10px;padding:4px 10px;background:#111;border:1px solid #222;border-radius:6px}
           .nav a:hover{border-color:#3b82f6}
@@ -93,10 +93,10 @@ export default function RickyPage() {
           .full{grid-column:1/-1}
 
           .section{background:#111;border:1px solid #222;border-radius:10px;padding:12px 14px;overflow-x:auto}
-          .sec-t{font-size:10px;color:#666;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px;font-weight:600;border-bottom:1px solid #1a1a1a;padding-bottom:4px}
+          .sec-t{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px;font-weight:600;border-bottom:1px solid #1a1a1a;padding-bottom:4px}
 
           table{width:100%;border-collapse:collapse;font-size:10px}
-          th{text-align:left;color:#555;font-weight:600;padding:4px 8px;border-bottom:1px solid #222;text-transform:uppercase;font-size:8px;letter-spacing:0.5px}
+          th{text-align:left;color:#999;font-weight:600;padding:4px 8px;border-bottom:1px solid #222;text-transform:uppercase;font-size:8px;letter-spacing:0.5px}
           td{padding:4px 8px;border-bottom:1px solid #1a1a1a;color:#aaa}
           tr:hover td{background:#0d0d0d}
 
@@ -105,7 +105,7 @@ export default function RickyPage() {
           .tag.warn{background:#2a2000;color:#f59e0b}
           .tag.err{background:#3b1010;color:#ef4444}
           .tag.dup{background:#1a0a2a;color:#a855f7}
-          .tag.off{background:#1a1a1a;color:#555}
+          .tag.off{background:#1a1a1a;color:#999}
           .tag.stale{background:#3b1010;color:#ef4444}
           .tag.aging{background:#2a2000;color:#f59e0b}
           .tag.fresh{background:#0a2a1a;color:#10b981}
@@ -113,7 +113,7 @@ export default function RickyPage() {
           .svc-row{display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid #1a1a1a;font-size:10px}
           .svc-row:last-child{border-bottom:none}
           .svc-name{color:#fff;font-weight:600;min-width:120px}
-          .svc-detail{color:#666;flex:1}
+          .svc-detail{color:#aaa;flex:1}
           .svc-cost{color:#f59e0b;font-weight:600;min-width:80px;text-align:right}
 
           .footer{font-size:8px;color:#222;text-align:right;margin-top:16px}

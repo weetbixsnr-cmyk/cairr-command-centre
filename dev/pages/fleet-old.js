@@ -75,9 +75,9 @@ export default function FleetPage() {
           .summary{display:flex;gap:12px}
           .sum-item{padding:6px 12px;background:#111;border:1px solid #222;border-radius:8px;text-align:center}
           .sum-val{font-size:18px;font-weight:700}
-          .sum-lbl{font-size:9px;color:#555;margin-top:2px}
+          .sum-lbl{font-size:9px;color:#999;margin-top:2px}
           .group{margin-bottom:16px}
-          .group-title{font-size:11px;color:#555;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid #1a1a1a}
+          .group-title{font-size:11px;color:#999;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid #1a1a1a}
           .agent-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px}
           @media(max-width:600px){.agent-grid{grid-template-columns:1fr}}
           .card{background:#111;border:1px solid #222;border-radius:10px;padding:12px;cursor:pointer;transition:border-color .2s}
@@ -85,11 +85,11 @@ export default function FleetPage() {
           .card.bad{border-color:#ef4444}
           .card-top{display:flex;align-items:center;gap:6px;margin-bottom:4px}
           .card-name{font-size:13px;font-weight:600;color:#fff;flex:1}
-          .card-desc{font-size:9px;color:#555;margin-bottom:6px}
-          .card-meta{display:flex;gap:8px;flex-wrap:wrap;font-size:8px;color:#666}
+          .card-desc{font-size:9px;color:#999;margin-bottom:6px}
+          .card-meta{display:flex;gap:8px;flex-wrap:wrap;font-size:8px;color:#aaa}
           .card-meta span{display:flex;align-items:center;gap:3px}
           .tag{font-size:7px;padding:2px 6px;border-radius:4px;font-weight:600}
-          .tag.off{background:#1a1a1a;color:#555}
+          .tag.off{background:#1a1a1a;color:#999}
           .tag.on{background:#0a2a1a;color:#10b981}
           .tag.err{background:#3b1010;color:#ef4444}
         `}</style>

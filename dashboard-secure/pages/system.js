@@ -167,7 +167,7 @@ export default function SystemPage() {
           
           .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:8px}
           .header h1{font-size:22px;color:#fff;letter-spacing:-0.5px}
-          .meta{font-size:9px;color:#444}
+          .meta{font-size:9px;color:#888}
           
           /* Pipeline flow */
           .pipeline{position:relative;padding-left:40px}
@@ -180,22 +180,22 @@ export default function SystemPage() {
           .step-dot{position:absolute;left:-30px;top:20px;width:14px;height:14px;border-radius:50%;border:2px solid;display:flex;align-items:center;justify-content:center;z-index:1;background:#08080a}
           
           /* Arrow between steps */
-          .step-arrow{position:absolute;left:-26px;bottom:-8px;font-size:10px;color:#333;z-index:2}
+          .step-arrow{position:absolute;left:-26px;bottom:-8px;font-size:10px;color:#777;z-index:2}
           
           .step-card{background:#0d0d10;border:1px solid #1a1a22;border-radius:10px;padding:14px 16px;transition:border-color .2s}
-          .step-card:hover{border-color:#333}
+          .step-card:hover{border-color:#777}
           
           .step-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
           .step-icon{font-size:20px}
           .step-label{font-size:14px;font-weight:700;color:#fff}
-          .step-num{font-size:9px;color:#555;background:#1a1a1a;padding:1px 6px;border-radius:4px;font-weight:600}
+          .step-num{font-size:9px;color:#999;background:#1a1a1a;padding:1px 6px;border-radius:4px;font-weight:600}
           
-          .step-desc{font-size:10px;color:#666;margin-bottom:10px}
+          .step-desc{font-size:10px;color:#aaa;margin-bottom:10px}
           
           .step-items{display:flex;flex-direction:column;gap:4px}
           .step-item{display:flex;align-items:flex-start;gap:8px;font-size:10px;padding:4px 8px;background:#0a0a0d;border-radius:6px;border:1px solid #151518}
           .step-item-label{color:#fff;font-weight:600;min-width:140px;flex-shrink:0}
-          .step-item-detail{color:#555}
+          .step-item-detail{color:#999}
           
           @media(max-width:600px){
             .step-item{flex-direction:column;gap:2px}
@@ -204,14 +204,14 @@ export default function SystemPage() {
           
           /* Data flow section */
           .flow-section{margin-top:32px;background:#0d0d10;border:1px solid #1a1a22;border-radius:10px;padding:16px}
-          .flow-title{font-size:10px;color:#555;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;margin-bottom:12px}
+          .flow-title{font-size:10px;color:#999;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;margin-bottom:12px}
           .flow-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:6px}
           @media(max-width:600px){.flow-grid{grid-template-columns:1fr}}
           .flow-row{display:flex;align-items:center;gap:8px;padding:6px 10px;background:#0a0a0d;border-radius:6px;border:1px solid #151518;font-size:10px}
           .flow-from{font-weight:700;min-width:100px}
-          .flow-arrow{color:#333;font-size:12px}
+          .flow-arrow{color:#777;font-size:12px}
           .flow-to{font-weight:700;min-width:100px}
-          .flow-detail{color:#555;flex:1;font-size:9px}
+          .flow-detail{color:#999;flex:1;font-size:9px}
           
           /* Infra section */
           .infra-section{margin-top:16px;background:#0d0d10;border:1px solid #1a1a22;border-radius:10px;padding:16px}

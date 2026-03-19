@@ -44,7 +44,7 @@ function WaveBar({ wave }) {
         <span style={{fontSize:9,color:wave.status === 'active' ? '#ef4444' : '#555',fontWeight:600,textTransform:'uppercase'}}>
           {wave.status === 'active' ? '🔴 NOW' : wave.status === 'planned' ? '🟡 PLANNED' : '⬜ FUTURE'}
         </span>
-        <span style={{fontSize:9,color:'#555',marginLeft:'auto'}}>
+        <span style={{fontSize:9,color:'#999',marginLeft:'auto'}}>
           {wave.servicePages}/{wave.servicePagesTotal} pages · {wave.blogs || 0} blogs
         </span>
       </div>
@@ -58,7 +58,7 @@ function WaveBar({ wave }) {
           ))}
         </div>
       )}
-      <div style={{fontSize:9,color:'#555'}}>{wave.scope}</div>
+      <div style={{fontSize:9,color:'#999'}}>{wave.scope}</div>
     </div>
   )
 }
@@ -103,18 +103,18 @@ export default function BtsSeoPage() {
           .back{font-size:12px;margin-bottom:16px;display:inline-block}
           .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:8px}
           .header h1{font-size:20px;color:#fff}
-          .meta{font-size:9px;color:#444}
+          .meta{font-size:9px;color:#888}
           .stats{display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap}
           .stat-card{padding:12px 16px;background:#111;border:1px solid #222;border-radius:10px;text-align:center;min-width:120px}
           .stat-val{font-size:24px;font-weight:700}
-          .stat-lbl{font-size:9px;color:#555;margin-top:2px}
+          .stat-lbl{font-size:9px;color:#999;margin-top:2px}
           .section{margin-bottom:20px}
-          .sec-title{font-size:12px;color:#666;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-weight:600;border-bottom:1px solid #1a1a1a;padding-bottom:4px}
+          .sec-title{font-size:12px;color:#aaa;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-weight:600;border-bottom:1px solid #1a1a1a;padding-bottom:4px}
           .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
           @media(max-width:600px){.grid2{grid-template-columns:1fr}}
           .card{background:#111;border:1px solid #222;border-radius:10px;padding:12px}
           table{width:100%;border-collapse:collapse;font-size:11px}
-          th{text-align:left;font-size:9px;color:#555;text-transform:uppercase;letter-spacing:1px;padding:4px 8px;border-bottom:1px solid #222}
+          th{text-align:left;font-size:9px;color:#999;text-transform:uppercase;letter-spacing:1px;padding:4px 8px;border-bottom:1px solid #222}
           td{padding:5px 8px;border-bottom:1px solid #1a1a1a;color:#aaa}
           tr:last-child td{border-bottom:none}
           .win{display:flex;align-items:center;gap:6px;padding:4px 0;font-size:10px;color:#aaa;border-bottom:1px solid #1a1a1a}
@@ -180,20 +180,20 @@ export default function BtsSeoPage() {
                         return (
                           <tr key={i}>
                             <td style={{color:'#fff',fontWeight:600}}>{k.keyword}</td>
-                            <td>{k.baseline ? <PosCell pos={k.baseline} /> : <span style={{color:'#555'}}>—</span>}</td>
-                            <td>{k.latest ? <PosCell pos={k.latest} /> : <span style={{color:'#555'}}>—</span>}</td>
+                            <td>{k.baseline ? <PosCell pos={k.baseline} /> : <span style={{color:'#999'}}>—</span>}</td>
+                            <td>{k.latest ? <PosCell pos={k.latest} /> : <span style={{color:'#999'}}>—</span>}</td>
                             <td style={{fontSize:11}}>
                               {improved ? <span style={{color:'#10b981'}}>📈 ↑{k.baseline - k.latest}</span> :
                                dropped ? <span style={{color:'#ef4444'}}>📉 ↓{k.latest - k.baseline}</span> :
-                               <span style={{color:'#555'}}>{k.trend || '—'}</span>}
+                               <span style={{color:'#999'}}>{k.trend || '—'}</span>}
                             </td>
-                            <td style={{fontSize:8,color:'#555'}}>{k.section?.replace(/[🔴🟡🟢🟣📍]\s*/,'')}</td>
+                            <td style={{fontSize:8,color:'#999'}}>{k.section?.replace(/[🔴🟡🟢🟣📍]\s*/,'')}</td>
                           </tr>
                         )
                       })}
                     </tbody>
                   </table>
-                  <div style={{fontSize:8,color:'#333',marginTop:6,textAlign:'right'}}>
+                  <div style={{fontSize:8,color:'#777',marginTop:6,textAlign:'right'}}>
                     {kw.keywords?.length || 0} keywords tracked · Updated: {kw.lastUpdated || '—'} · First baseline scan pending
                   </div>
                 </div>
@@ -280,7 +280,7 @@ export default function BtsSeoPage() {
                     <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:4}}>
                       <span style={{fontSize:12,fontWeight:600,color:'#fff'}}>Wave {wave.id}</span>
                       <span style={{fontSize:9,color:color,fontWeight:600}}>{label}</span>
-                      <span style={{fontSize:9,color:'#555',marginLeft:'auto'}}>{wave.servicePages}/{wave.servicePagesTotal} pages · {wave.blogs || 0} blogs</span>
+                      <span style={{fontSize:9,color:'#999',marginLeft:'auto'}}>{wave.servicePages}/{wave.servicePagesTotal} pages · {wave.blogs || 0} blogs</span>
                     </div>
                     <div style={{height:4,background:'#1a1a1a',borderRadius:2,marginBottom:6,overflow:'hidden'}}>
                       <div style={{height:4,width:`${pct}%`,background:color,borderRadius:2,minWidth:pct > 0 ? 4 : 0,transition:'width 0.3s'}}></div>
@@ -299,7 +299,7 @@ export default function BtsSeoPage() {
                         )
                       })}
                     </div>
-                    <div style={{fontSize:9,color:'#555'}}>{wave.scope}</div>
+                    <div style={{fontSize:9,color:'#999'}}>{wave.scope}</div>
                   </div>
                 )
               })}
@@ -342,15 +342,15 @@ export default function BtsSeoPage() {
               <div className="card" style={{display:'flex',gap:16,flexWrap:'wrap'}}>
                 <div style={{textAlign:'center'}}>
                   <div style={{fontSize:20,fontWeight:700,color:'#f59e0b'}}>{seo?.assets?.googleReviews || 0}</div>
-                  <div style={{fontSize:9,color:'#555'}}>Google Reviews</div>
+                  <div style={{fontSize:9,color:'#999'}}>Google Reviews</div>
                 </div>
                 <div style={{textAlign:'center'}}>
                   <div style={{fontSize:20,fontWeight:700,color:'#3b82f6'}}>{seo?.assets?.courseCertifications || 0}</div>
-                  <div style={{fontSize:9,color:'#555'}}>Course Certifications</div>
+                  <div style={{fontSize:9,color:'#999'}}>Course Certifications</div>
                 </div>
                 <div style={{textAlign:'center'}}>
                   <div style={{fontSize:20,fontWeight:700,color:'#10b981'}}>{seo?.assets?.trainingServices || 0}</div>
-                  <div style={{fontSize:9,color:'#555'}}>Training Services</div>
+                  <div style={{fontSize:9,color:'#999'}}>Training Services</div>
                 </div>
               </div>
             </div>

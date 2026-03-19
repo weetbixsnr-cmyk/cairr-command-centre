@@ -98,7 +98,7 @@ export default function Dashboard() {
           a{color:#3b82f6;text-decoration:none}a:hover{text-decoration:underline}
           .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px}
           h1{font-size:18px;color:#fff}
-          .meta{font-size:9px;color:#444}
+          .meta{font-size:9px;color:#888}
           .stale{color:#ef4444 !important}
           .live-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:6px;animation:pulse 2s infinite}
           @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
@@ -110,7 +110,7 @@ export default function Dashboard() {
           .strip{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
           .strip-item{background:#0d0d10;border:1px solid #1a1a22;border-radius:8px;padding:8px 14px;display:flex;align-items:center;gap:8px;flex:1;min-width:120px}
           .strip-val{font-size:18px;font-weight:800}
-          .strip-lbl{font-size:8px;color:#555;text-transform:uppercase;letter-spacing:0.8px}
+          .strip-lbl{font-size:8px;color:#999;text-transform:uppercase;letter-spacing:0.8px}
 
           /* ── Agent Scorecards (main content) ── */
           .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;margin-bottom:14px}
@@ -132,25 +132,25 @@ export default function Dashboard() {
           .s-idle{background:#333}
           @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
 
-          .acard-goal{font-size:9px;color:#555;margin-bottom:8px}
+          .acard-goal{font-size:9px;color:#999;margin-bottom:8px}
 
           .acard-build{background:#0a0a0d;border:1px solid #151518;border-radius:6px;padding:8px;margin-bottom:8px}
-          .build-label{font-size:7px;color:#444;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:3px;font-weight:700}
+          .build-label{font-size:7px;color:#888;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:3px;font-weight:700}
           .build-text{font-size:10px;color:#ccc;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-          .build-sub{font-size:9px;color:#555;margin-top:2px}
+          .build-sub{font-size:9px;color:#999;margin-top:2px}
 
           .acard-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:6px}
           .acard-stat{text-align:center;background:#0a0a0d;border-radius:4px;padding:4px 2px}
           .acard-stat-val{font-size:14px;font-weight:800}
-          .acard-stat-lbl{font-size:6px;color:#555;text-transform:uppercase;letter-spacing:0.5px}
+          .acard-stat-lbl{font-size:6px;color:#999;text-transform:uppercase;letter-spacing:0.5px}
 
           .acard-ctx{margin-bottom:6px}
           .acard-model{font-size:8px;color:#a855f7;background:#1a0a2a;padding:2px 6px;border-radius:4px;display:inline-block;font-weight:600}
-          .acard-footer{display:flex;justify-content:space-between;align-items:center;font-size:8px;color:#444;padding-top:4px;border-top:1px solid #151518}
+          .acard-footer{display:flex;justify-content:space-between;align-items:center;font-size:8px;color:#888;padding-top:4px;border-top:1px solid #151518}
 
           /* ── Action Queue ── */
           .aq{background:#0d0d10;border:1px solid #1a1a22;border-radius:10px;padding:14px;margin-bottom:14px}
-          .sec-t{font-size:9px;color:#666;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:6px;font-weight:600;border-bottom:1px solid #1a1a1a;padding-bottom:3px}
+          .sec-t{font-size:9px;color:#aaa;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:6px;font-weight:600;border-bottom:1px solid #1a1a1a;padding-bottom:3px}
           .aq-row{display:flex;gap:8px;padding:5px 0;border-bottom:1px solid #111;align-items:center;font-size:10px}
           .aq-row:last-child{border-bottom:none}
           .aq-src{font-size:8px;color:#3b82f6;font-weight:600;min-width:50px;text-transform:uppercase}
@@ -161,7 +161,7 @@ export default function Dashboard() {
           .badge.high{background:#2a2000;color:#f59e0b}
           .aq-btns{display:flex;gap:3px;flex-shrink:0}
           .aq-btn{font-size:8px;padding:2px 6px;border-radius:4px;border:1px solid #333;background:#1a1a1a;color:#888;cursor:pointer;font-weight:600;transition:all .15s}
-          .aq-btn:hover{border-color:#555;color:#fff}
+          .aq-btn:hover{border-color:#999;color:#fff}
           .aq-btn.approve{color:#10b981;border-color:#10b981}.aq-btn.approve:hover{background:#0a2a1a}
           .aq-btn.reject{color:#ef4444;border-color:#ef4444}.aq-btn.reject:hover{background:#3b1010}
           .aq-btn.complete{color:#3b82f6;border-color:#3b82f6}.aq-btn.complete:hover{background:#0e1a2e}
