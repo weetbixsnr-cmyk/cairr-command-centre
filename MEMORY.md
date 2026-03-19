@@ -17,6 +17,7 @@ Now owns dashboard deploys end-to-end (exec: full, Vercel auth inherited from sy
 | overdue-office | Sonnet 4 | Overdue Office website | ❌ disabled |
 | audit | Sonnet 4 | Quality gate | ✅ enabled |
 | nbhw-accounts | Sonnet 4 | NBHW invoicing | ❌ disabled |
+| raec | Sonnet 4 | RA Electrical quoting (CAIRR client) | ✅ enabled |
 
 ## Budget Thresholds
 - BTS: <$52/mo
