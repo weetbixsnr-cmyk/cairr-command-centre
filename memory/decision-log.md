@@ -14,3 +14,4 @@ One line per workflow/process/policy decision. Searchable reference for "why did
 | 2026-03-15 | Cron pushes snapshot every 5 min via Haiku (light context) | Keeps data fresh without full agent spin-up | dashboard | permanent |
 | 2026-03-15 | Removed Quick Status / Key Dates / Reminders sections | Adam flagged as duplicates of action queue + scorecards | dashboard | permanent |
 | 2026-03-16 | Source of truth for pages is dev/pages/ — NEVER edit dashboard-secure/pages/ directly | deploy-prep copies dev/ → dashboard-secure/, direct edits get overwritten | all | permanent |
+| 2026-03-19 | DEPLOY GATE: CC does NOT deploy. Commit+push → send AUDIT REQUEST → Audit deploys on PASS | Brain constitutional rule, fleet-wide. FRAMEWORK.md §6 | all | permanent |

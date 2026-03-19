@@ -4,7 +4,7 @@
  * Run via OpenClaw cron:
  *   node /Users/cairr/.openclaw/agents/command-centre/workspace/dev/scripts/push-snapshot.js
  * 
- * Generates snapshot → bundles into public/snapshot.json → deploys via vercel --prod
+ * Generates snapshot → bundles into public/snapshot.json → pages copied to dashboard-secure/ (Audit deploys)
  */
 
 const fs = require('fs')
@@ -899,35 +899,21 @@ const sizeKB = Math.round(fs.statSync(SNAPSHOT_FILE).size / 1024)
 console.log(`Snapshot written: ${SNAPSHOT_FILE} (${sizeKB}KB)`)
 console.log(`Bundled into: ${BUNDLE_PATH}`)
 
-// ── Deploy to Vercel ─────────────────────────────────────────
+// ── Deploy Gate ──────────────────────────────────────────────
+// DEPLOY GATE (2026-03-19): CC does NOT deploy directly.
+// Flow: commit+push → send AUDIT REQUEST → Audit agent deploys on PASS.
+// See FRAMEWORK.md §6, decision-log 2026-03-19.
 
-const DEPLOY = process.env.DEPLOY !== '0' // set DEPLOY=0 to skip
-if (DEPLOY) {
-  try {
-    console.log('Deploying to Vercel...')
-    // Copy pages from dev/ to dashboard-secure/
-    const PAGES_SRC = path.join(WORKSPACE, 'dev', 'pages')
-    const PAGES_DST = path.join(WORKSPACE, 'dashboard-secure', 'pages')
-    execSync(`cp -r ${PAGES_SRC}/* ${PAGES_DST}/`, { timeout: 5000 })
-    // Copy middleware if exists
-    const mwSrc = path.join(WORKSPACE, 'dev', 'middleware.js')
-    if (fs.existsSync(mwSrc)) {
-      fs.copyFileSync(mwSrc, path.join(WORKSPACE, 'dashboard-secure', 'middleware.js'))
-    }
-    
-    const result = execSync(
-      'npx vercel --prod --yes 2>&1',
-      { cwd: path.join(WORKSPACE, 'dashboard-secure'), timeout: 120000, encoding: 'utf8' }
-    )
-    const aliasMatch = result.match(/Aliased:\s*(https:\/\/\S+)/)
-    if (aliasMatch) {
-      console.log(`✅ Deployed: ${aliasMatch[1]}`)
-    } else {
-      console.log('Deploy output:', result.split('\n').slice(-3).join('\n'))
-    }
-  } catch (e) {
-    console.error('❌ Deploy failed:', e.message?.split('\n').slice(0, 3).join('\n'))
+// Still copy pages to dashboard-secure/ so they're ready for Audit to deploy
+const PAGES_SRC = path.join(WORKSPACE, 'dev', 'pages')
+const PAGES_DST = path.join(WORKSPACE, 'dashboard-secure', 'pages')
+try {
+  execSync(`cp -r ${PAGES_SRC}/* ${PAGES_DST}/`, { timeout: 5000 })
+  const mwSrc = path.join(WORKSPACE, 'dev', 'middleware.js')
+  if (fs.existsSync(mwSrc)) {
+    fs.copyFileSync(mwSrc, path.join(WORKSPACE, 'dashboard-secure', 'middleware.js'))
   }
-} else {
-  console.log('⏭️  Deploy skipped (DEPLOY=0)')
+  console.log('📦 Pages bundled into dashboard-secure/ (deploy via Audit)')
+} catch (e) {
+  console.warn('Could not bundle pages:', e.message)
 }
