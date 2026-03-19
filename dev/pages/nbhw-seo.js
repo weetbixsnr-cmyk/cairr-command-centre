@@ -80,6 +80,7 @@ export default function NbhwSeoPage() {
   const seo = snap?.nbhwSeo
   const comp = snap?.nbhwCompetitors
   const pub = snap?.nbhwPublishLog
+  const ledger = snap?.nbhwPublishLedger
   const live = snap?.nbhwLive
   const kw = snap?.nbhwKeywords
   const [tab, setTab] = useState('rankings')
@@ -162,7 +163,7 @@ export default function NbhwSeoPage() {
           <TabButton active={tab==='matrix'} label="📍 Coverage Matrix" onClick={() => setTab('matrix')} />
           <TabButton active={tab==='framework'} label="📋 Framework" onClick={() => setTab('framework')} />
           <TabButton active={tab==='competitors'} label="🏆 Competitors" onClick={() => setTab('competitors')} />
-          <TabButton active={tab==='safety'} label={`🛡️ Google Safety${pub?.status === 'at_limit' ? ' 🔴' : pub?.status === 'caution' ? ' 🟡' : ''}`} onClick={() => setTab('safety')} />
+          <TabButton active={tab==='safety'} label={`🛡️ Google Safety${ledger?.status === 'red' ? ' 🔴' : ledger?.status === 'amber' ? ' 🟡' : ''}`} onClick={() => setTab('safety')} />
         </div>
 
         {/* TAB 1: Rankings */}
@@ -528,171 +529,136 @@ export default function NbhwSeoPage() {
           </>
         )}
 
-        {/* TAB 5: Google Safety Meter */}
+        {/* TAB 5: Google Safety Meter (Ledger-driven) */}
         {tab === 'safety' && (
           <>
             {/* Status Banner */}
-            <div style={{
-              background: pub?.status === 'at_limit' ? '#3b1010' : pub?.status === 'caution' ? '#2a2000' : '#0a2a1a',
-              border: `1px solid ${pub?.status === 'at_limit' ? '#ef4444' : pub?.status === 'caution' ? '#f59e0b' : '#10b981'}`,
-              borderRadius: 10, padding: 16, marginBottom: 16, textAlign: 'center'
-            }}>
-              <div style={{ fontSize: 18, fontWeight: 700, color: pub?.status === 'at_limit' ? '#ef4444' : pub?.status === 'caution' ? '#f59e0b' : '#10b981' }}>
-                {pub?.statusLabel || '⏳ Loading...'}
-              </div>
-              {pub?.nextSafeDate && pub?.status === 'at_limit' && (
-                <div style={{ fontSize: 11, color: '#f59e0b', marginTop: 6 }}>Next safe publish: {pub.nextSafeDate}</div>
-              )}
-            </div>
+            {(() => {
+              const st = ledger?.status || 'green'
+              const bgC = st === 'red' ? '#3b1010' : st === 'amber' ? '#2a2000' : '#0a2a1a'
+              const brC = st === 'red' ? '#ef4444' : st === 'amber' ? '#f59e0b' : '#10b981'
+              return (
+                <div style={{ background: bgC, border: `1px solid ${brC}`, borderRadius: 10, padding: 16, marginBottom: 16, textAlign: 'center' }}>
+                  <div style={{ fontSize: 18, fontWeight: 700, color: brC }}>{ledger?.statusLabel || '⏳ Loading...'}</div>
+                </div>
+              )
+            })()}
 
             {/* Gauges */}
             <div className="grid2" style={{ marginBottom: 16 }}>
-              {/* Pages gauge */}
               <div className="card">
-                <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>Pages Published This Week</div>
+                <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>Suburb Pages — Last 7 Days</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
-                  <div style={{ fontSize: 36, fontWeight: 800, color: pub?.status === 'at_limit' ? '#ef4444' : pub?.status === 'caution' ? '#f59e0b' : '#10b981' }}>
-                    {pub?.publishedThisWeek?.length || 0}
+                  <div style={{ fontSize: 36, fontWeight: 800, color: (ledger?.last7d?.pages || 0) >= (ledger?.weeklyPageLimit || 3) ? '#ef4444' : '#10b981' }}>
+                    {ledger?.last7d?.pages || 0}
                   </div>
-                  <div style={{ fontSize: 14, color: '#555' }}>/ {pub?.weeklyLimit || 3}</div>
+                  <div style={{ fontSize: 14, color: '#555' }}>/ {ledger?.weeklyPageLimit || 3}</div>
                 </div>
                 <div style={{ height: 8, background: '#1a1a1a', borderRadius: 4, overflow: 'hidden' }}>
                   <div style={{
                     height: 8, borderRadius: 4,
-                    width: `${Math.min(100, ((pub?.publishedThisWeek?.length || 0) / (pub?.weeklyLimit || 3)) * 100)}%`,
-                    background: pub?.status === 'at_limit' ? '#ef4444' : pub?.status === 'caution' ? '#f59e0b' : '#10b981',
+                    width: `${Math.min(100, ((ledger?.last7d?.pages || 0) / (ledger?.weeklyPageLimit || 3)) * 100)}%`,
+                    background: (ledger?.last7d?.pages || 0) >= (ledger?.weeklyPageLimit || 3) ? '#ef4444' : '#10b981',
                     transition: 'width 0.3s'
                   }}></div>
                 </div>
+                <div style={{ fontSize: 9, color: '#555', marginTop: 4 }}>{ledger?.pagesRemaining || 0} slots remaining</div>
               </div>
 
-              {/* GBP gauge */}
               <div className="card">
-                <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>GBP Posts This Week</div>
+                <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>Blog Posts — Last 7 Days</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
-                  <div style={{ fontSize: 36, fontWeight: 800, color: pub?.gbpStatus === 'at_limit' ? '#ef4444' : pub?.gbpStatus === 'caution' ? '#f59e0b' : '#10b981' }}>
-                    {pub?.gbpThisWeek?.length || 0}
+                  <div style={{ fontSize: 36, fontWeight: 800, color: (ledger?.last7d?.blogs || 0) > (ledger?.weeklyBlogLimit || 1) ? '#ef4444' : '#10b981' }}>
+                    {ledger?.last7d?.blogs || 0}
                   </div>
-                  <div style={{ fontSize: 14, color: '#555' }}>/ {pub?.gbpWeeklyLimit || 3}</div>
+                  <div style={{ fontSize: 14, color: '#555' }}>/ {ledger?.weeklyBlogLimit || 1}</div>
                 </div>
                 <div style={{ height: 8, background: '#1a1a1a', borderRadius: 4, overflow: 'hidden' }}>
                   <div style={{
                     height: 8, borderRadius: 4,
-                    width: `${Math.min(100, ((pub?.gbpThisWeek?.length || 0) / (pub?.gbpWeeklyLimit || 3)) * 100)}%`,
-                    background: pub?.gbpStatus === 'at_limit' ? '#ef4444' : pub?.gbpStatus === 'caution' ? '#f59e0b' : '#10b981',
+                    width: `${Math.min(100, ((ledger?.last7d?.blogs || 0) / (ledger?.weeklyBlogLimit || 1)) * 100)}%`,
+                    background: (ledger?.last7d?.blogs || 0) > (ledger?.weeklyBlogLimit || 1) ? '#ef4444' : '#10b981',
                     transition: 'width 0.3s'
                   }}></div>
                 </div>
               </div>
             </div>
 
-            {/* Safety Rules Reference */}
+            {/* 30-day summary */}
+            <div className="grid2" style={{ marginBottom: 16 }}>
+              <div className="stat-card">
+                <div className="stat-val" style={{ fontSize: 20, color: '#3b82f6' }}>{ledger?.last30d?.pages || 0}</div>
+                <div className="stat-lbl">Suburb Pages (30d)</div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-val" style={{ fontSize: 20, color: '#a855f7' }}>{ledger?.last30d?.blogs || 0}</div>
+                <div className="stat-lbl">Blog Posts (30d)</div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-val" style={{ fontSize: 20, color: '#f59e0b' }}>{ledger?.totalPages || 0}</div>
+                <div className="stat-lbl">Total Suburb Pages</div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-val" style={{ fontSize: 20, color: '#10b981' }}>{ledger?.totalBlogs || 0}</div>
+                <div className="stat-lbl">Total Blog Posts</div>
+              </div>
+            </div>
+
+            {/* Full publish timeline */}
+            <div className="section">
+              <div className="sec-title">Publish Timeline (All Entries)</div>
+              <div className="card">
+                <table>
+                  <thead><tr><th>First Published</th><th>Type</th><th>Page</th></tr></thead>
+                  <tbody>
+                    {(ledger?.entries || []).slice().sort((a, b) => new Date(b.firstPublished) - new Date(a.firstPublished)).map((e, i) => {
+                      const d = new Date(e.firstPublished)
+                      const dateStr = d.getDate() + ' ' + ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()] + ' ' + d.getFullYear()
+                      const isRecent = (Date.now() - d.getTime()) < 7 * 24 * 60 * 60 * 1000
+                      return (
+                        <tr key={i}>
+                          <td style={{ color: isRecent ? '#f59e0b' : '#fff', fontWeight: 600 }}>{dateStr}{isRecent ? ' 🔥' : ''}</td>
+                          <td style={{ color: e.type === 'suburb' ? '#3b82f6' : '#a855f7' }}>{e.type}</td>
+                          <td>{e.title || e.slug}</td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Safety Rules */}
             <div className="grid2" style={{ marginBottom: 16 }}>
               <div className="card">
-                <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>📄 Website Page Limits</div>
+                <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>📄 Publish Limits</div>
                 <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
-                  <span style={{color:'#fff',fontWeight:600}}>Max new pages/week:</span> 3 (suburb + blogs combined)
+                  <span style={{color:'#fff',fontWeight:600}}>Max suburb pages/week:</span> {ledger?.weeklyPageLimit || 3}
                 </div>
                 <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
-                  <span style={{color:'#fff',fontWeight:600}}>Max suburb pages/week:</span> 1-2
-                </div>
-                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
-                  <span style={{color:'#fff',fontWeight:600}}>Cool-down after bulk:</span> 7 days
+                  <span style={{color:'#fff',fontWeight:600}}>Max blog posts/week:</span> {ledger?.weeklyBlogLimit || 1}
                 </div>
                 <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0' }}>
-                  <span style={{color:'#fff',fontWeight:600}}>Rule:</span> Log EVERY publish with date
+                  <span style={{color:'#fff',fontWeight:600}}>Tracked by:</span> Command Centre ledger (timestamped)
                 </div>
               </div>
               <div className="card">
-                <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>📍 Google Business Profile Limits</div>
+                <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>📍 Google Business Profile</div>
                 <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
                   <span style={{color:'#fff',fontWeight:600}}>Max GBP posts/week:</span> 2-3
                 </div>
                 <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
-                  <span style={{color:'#fff',fontWeight:600}}>Post types:</span> Updates, Offers, Events
-                </div>
-                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
                   <span style={{color:'#fff',fontWeight:600}}>Photo uploads/week:</span> 3-5 max
                 </div>
-                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
-                  <span style={{color:'#fff',fontWeight:600}}>Review replies/day:</span> 2-3 (stagger, don't batch)
-                </div>
                 <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0' }}>
-                  <span style={{color:'#fff',fontWeight:600}}>⚠️ Avoid:</span> Bulk photo uploads, keyword-stuffed posts, same-day post spam
+                  <span style={{color:'#fff',fontWeight:600}}>⚠️ Avoid:</span> Bulk uploads, keyword-stuffed posts
                 </div>
               </div>
             </div>
 
-            {/* Published this week */}
-            {pub?.publishedThisWeek?.length > 0 && (
-              <div className="section">
-                <div className="sec-title">Published This Week</div>
-                <div className="card">
-                  <table>
-                    <thead><tr><th>Date</th><th>Type</th><th>Page</th><th>Status</th></tr></thead>
-                    <tbody>
-                      {pub.publishedThisWeek.map((p, i) => (
-                        <tr key={i}>
-                          <td style={{ color: '#fff', fontWeight: 600 }}>{p.date}</td>
-                          <td>{p.type}</td>
-                          <td>{p.page}</td>
-                          <td>{p.status}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            )}
-
-            {/* Queue */}
-            {pub?.queue?.length > 0 && (
-              <div className="section">
-                <div className="sec-title">Queue — Do Not Publish Yet</div>
-                <div className="card">
-                  {pub.queue.map((q, i) => (
-                    <div key={i} style={{ fontSize: 11, color: '#aaa', padding: '5px 0', borderBottom: '1px solid #1a1a1a', display: 'flex', gap: 6 }}>
-                      <span style={{ color: '#f59e0b' }}>⏳</span> {q}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Previous weeks */}
-            {pub?.previousWeeks?.length > 0 && (
-              <div className="section">
-                <div className="sec-title">Publish History (Last 30 Days)</div>
-                <div className="card">
-                  <table>
-                    <thead><tr><th>Week</th><th>Pages Published</th><th>Type</th></tr></thead>
-                    <tbody>
-                      {pub.previousWeeks.map((w, i) => (
-                        <tr key={i}>
-                          <td style={{ color: '#fff' }}>{w.week}</td>
-                          <td>{w.pages}</td>
-                          <td style={{ fontSize: 9, color: '#555' }}>{w.type}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            )}
-
-            {/* Warning callout */}
-            {pub?.warningStatus?.length > 0 && (
-              <div style={{ background: '#3b1010', border: '1px solid #ef4444', borderRadius: 8, padding: 12, marginTop: 12 }}>
-                <div style={{ fontSize: 10, fontWeight: 700, color: '#ef4444', textTransform: 'uppercase', marginBottom: 6 }}>⚠️ Active Warning</div>
-                {pub.warningStatus.map((w, i) => (
-                  <div key={i} style={{ fontSize: 11, color: '#f59e0b', padding: '2px 0' }}>{w}</div>
-                ))}
-              </div>
-            )}
-
-            {!pub && (
+            {!ledger && (
               <div style={{ color: '#555', fontSize: 11, fontStyle: 'italic', padding: 16, textAlign: 'center' }}>
-                Publish log not loaded — NBHW agent hasn't created publish-log.md yet
+                Publish ledger not loaded — waiting for next snapshot refresh
               </div>
             )}
           </>

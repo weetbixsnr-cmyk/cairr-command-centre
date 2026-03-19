@@ -165,6 +165,7 @@ export default function BtsSeoPage() {
           <TabButton active={tab==='matrix'} label="📍 Coverage Matrix" onClick={() => setTab('matrix')} />
           <TabButton active={tab==='framework'} label="📋 Framework" onClick={() => setTab('framework')} />
           <TabButton active={tab==='competitors'} label="🏆 Competitors" onClick={() => setTab('competitors')} />
+          <TabButton active={tab==='safety'} label="🛡️ Google Safety" onClick={() => setTab('safety')} />
         </div>
 
         {/* TAB 1: Rankings */}
@@ -544,6 +545,121 @@ export default function BtsSeoPage() {
             <div style={{ fontSize: 8, color: '#333', marginTop: 8, textAlign: 'right' }}>
               Scan status: {comp?.scanStatus || 'pending'} · Updated: {comp?.updatedAt ? timeAgo(comp.updatedAt) : '—'}
             </div>
+          </>
+        )}
+
+        {/* TAB 5: Google Safety */}
+        {tab === 'safety' && (
+          <>
+            {(() => {
+              const btsLedger = snap?.btsPublishLedger
+              const st = btsLedger?.status || 'green'
+              const bgC = st === 'red' ? '#3b1010' : st === 'amber' ? '#2a2000' : '#0a2a1a'
+              const brC = st === 'red' ? '#ef4444' : st === 'amber' ? '#f59e0b' : '#10b981'
+              return (
+                <>
+                  <div style={{ background: bgC, border: `1px solid ${brC}`, borderRadius: 10, padding: 16, marginBottom: 16, textAlign: 'center' }}>
+                    <div style={{ fontSize: 18, fontWeight: 700, color: brC }}>{btsLedger?.statusLabel || '🟢 No publishes yet'}</div>
+                  </div>
+
+                  <div className="grid2" style={{ marginBottom: 16 }}>
+                    <div className="card">
+                      <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>Location Pages — Last 7 Days</div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
+                        <div style={{ fontSize: 36, fontWeight: 800, color: (btsLedger?.last7d?.pages || 0) >= (btsLedger?.weeklyPageLimit || 3) ? '#ef4444' : '#10b981' }}>
+                          {btsLedger?.last7d?.pages || 0}
+                        </div>
+                        <div style={{ fontSize: 14, color: '#555' }}>/ {btsLedger?.weeklyPageLimit || 3}</div>
+                      </div>
+                      <div style={{ height: 8, background: '#1a1a1a', borderRadius: 4, overflow: 'hidden' }}>
+                        <div style={{
+                          height: 8, borderRadius: 4,
+                          width: `${Math.min(100, ((btsLedger?.last7d?.pages || 0) / (btsLedger?.weeklyPageLimit || 3)) * 100)}%`,
+                          background: (btsLedger?.last7d?.pages || 0) >= (btsLedger?.weeklyPageLimit || 3) ? '#ef4444' : '#10b981',
+                          transition: 'width 0.3s'
+                        }}></div>
+                      </div>
+                      <div style={{ fontSize: 9, color: '#555', marginTop: 4 }}>{btsLedger?.pagesRemaining || btsLedger?.weeklyPageLimit || 3} slots remaining</div>
+                    </div>
+
+                    <div className="card">
+                      <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>Blog Posts — Last 7 Days</div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
+                        <div style={{ fontSize: 36, fontWeight: 800, color: (btsLedger?.last7d?.blogs || 0) > (btsLedger?.weeklyBlogLimit || 1) ? '#ef4444' : '#10b981' }}>
+                          {btsLedger?.last7d?.blogs || 0}
+                        </div>
+                        <div style={{ fontSize: 14, color: '#555' }}>/ {btsLedger?.weeklyBlogLimit || 1}</div>
+                      </div>
+                      <div style={{ height: 8, background: '#1a1a1a', borderRadius: 4, overflow: 'hidden' }}>
+                        <div style={{
+                          height: 8, borderRadius: 4,
+                          width: `${Math.min(100, ((btsLedger?.last7d?.blogs || 0) / (btsLedger?.weeklyBlogLimit || 1)) * 100)}%`,
+                          background: (btsLedger?.last7d?.blogs || 0) > (btsLedger?.weeklyBlogLimit || 1) ? '#ef4444' : '#10b981',
+                          transition: 'width 0.3s'
+                        }}></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid2" style={{ marginBottom: 16 }}>
+                    <div className="stat-card">
+                      <div className="stat-val" style={{ fontSize: 20, color: '#3b82f6' }}>{btsLedger?.last30d?.pages || 0}</div>
+                      <div className="stat-lbl">Location Pages (30d)</div>
+                    </div>
+                    <div className="stat-card">
+                      <div className="stat-val" style={{ fontSize: 20, color: '#a855f7' }}>{btsLedger?.last30d?.blogs || 0}</div>
+                      <div className="stat-lbl">Blog Posts (30d)</div>
+                    </div>
+                    <div className="stat-card">
+                      <div className="stat-val" style={{ fontSize: 20, color: '#f59e0b' }}>{btsLedger?.totalPages || 0}</div>
+                      <div className="stat-lbl">Total Location Pages</div>
+                    </div>
+                    <div className="stat-card">
+                      <div className="stat-val" style={{ fontSize: 20, color: '#10b981' }}>{btsLedger?.totalBlogs || 0}</div>
+                      <div className="stat-lbl">Total Blog Posts</div>
+                    </div>
+                  </div>
+
+                  {btsLedger?.entries?.length > 0 && (
+                    <div className="section">
+                      <div className="sec-title">Publish Timeline</div>
+                      <div className="card">
+                        <table>
+                          <thead><tr><th>First Published</th><th>Type</th><th>Page</th></tr></thead>
+                          <tbody>
+                            {btsLedger.entries.slice().sort((a, b) => new Date(b.firstPublished) - new Date(a.firstPublished)).map((e, i) => {
+                              const d = new Date(e.firstPublished)
+                              const dateStr = d.getDate() + ' ' + ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()] + ' ' + d.getFullYear()
+                              const isRecent = (Date.now() - d.getTime()) < 7 * 24 * 60 * 60 * 1000
+                              return (
+                                <tr key={i}>
+                                  <td style={{ color: isRecent ? '#f59e0b' : '#fff', fontWeight: 600 }}>{dateStr}{isRecent ? ' 🔥' : ''}</td>
+                                  <td style={{ color: e.type === 'location' ? '#3b82f6' : '#a855f7' }}>{e.type}</td>
+                                  <td>{e.title || e.slug}</td>
+                                </tr>
+                              )
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="card" style={{ marginBottom: 16 }}>
+                    <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>📄 Publish Limits</div>
+                    <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
+                      <span style={{color:'#fff',fontWeight:600}}>Max location pages/week:</span> {btsLedger?.weeklyPageLimit || 3}
+                    </div>
+                    <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
+                      <span style={{color:'#fff',fontWeight:600}}>Max blog posts/week:</span> {btsLedger?.weeklyBlogLimit || 1}
+                    </div>
+                    <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0' }}>
+                      <span style={{color:'#fff',fontWeight:600}}>Tracked by:</span> Command Centre ledger (timestamped)
+                    </div>
+                  </div>
+                </>
+              )
+            })()}
           </>
         )}
 

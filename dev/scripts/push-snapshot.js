@@ -625,6 +625,38 @@ function parsePublishLog() {
   const dateMatch = raw.match(/(?:Wait until|earliest)\s*\**(\d{1,2}\s+\w+(?:\s+\d{4})?)\b/i)
   if (dateMatch) result.nextSafeDate = dateMatch[1]
 
+  // Auto-detect from git publish history (supplement manual log)
+  try {
+    const nbhwLive = detectNbhwLivePages()
+    if (nbhwLive?.publishHistory) {
+      const now = new Date()
+      const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000)
+      const recentPublishes = nbhwLive.publishHistory
+        .filter(h => h.message?.startsWith('feat: add') && h.message.includes('suburb page'))
+        .filter(h => new Date(h.date) >= weekAgo)
+      
+      // Add any git-detected publishes not already in the manual log
+      for (const pub of recentPublishes) {
+        const pageMatch = pub.message.match(/add (\w[\w\s]*?) suburb page/)
+        if (pageMatch) {
+          const pageName = pageMatch[1].trim()
+          const alreadyLogged = result.publishedThisWeek.some(
+            p => p.page?.toLowerCase() === pageName.toLowerCase()
+          )
+          if (!alreadyLogged) {
+            const d = new Date(pub.date)
+            result.publishedThisWeek.push({
+              date: `${d.getDate()} ${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()]}`,
+              type: 'Suburb',
+              page: pageName,
+              status: '✅ LIVE (auto-detected from git)'
+            })
+          }
+        }
+      }
+    }
+  } catch {}
+
   // Calculate status
   const pubCount = result.publishedThisWeek.length
   const remaining = result.weeklyLimit - pubCount
@@ -851,6 +883,49 @@ function detectNbhwLivePages() {
   return result
 }
 
+// ── Publish Ledger (Google Safety) ───────────────────────────
+
+function computePublishLedgerStats(filename) {
+  filename = filename || 'nbhw-publish-ledger.json'
+  const ledger = readJSON(path.join(DASHBOARD_DATA, filename))
+  if (!ledger) return null
+
+  const now = new Date()
+  const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000)
+  const monthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000)
+
+  const entries = ledger.entries || []
+  const last7d = entries.filter(e => new Date(e.firstPublished) >= weekAgo)
+  const last30d = entries.filter(e => new Date(e.firstPublished) >= monthAgo)
+
+  const pagesLast7d = last7d.filter(e => e.type === 'suburb').length
+  const blogsLast7d = last7d.filter(e => e.type === 'blog').length
+  const pagesLast30d = last30d.filter(e => e.type === 'suburb').length
+  const blogsLast30d = last30d.filter(e => e.type === 'blog').length
+
+  const weeklyPageLimit = ledger.weeklyPageLimit || 3
+  const weeklyBlogLimit = ledger.weeklyBlogLimit || 1
+
+  let status = 'green'
+  if (pagesLast7d >= weeklyPageLimit || blogsLast7d > weeklyBlogLimit) status = 'red'
+  else if (pagesLast7d >= weeklyPageLimit - 1) status = 'amber'
+
+  return {
+    entries,
+    totalPages: entries.filter(e => e.type === 'suburb').length,
+    totalBlogs: entries.filter(e => e.type === 'blog').length,
+    last7d: { pages: pagesLast7d, blogs: blogsLast7d, total: last7d.length },
+    last30d: { pages: pagesLast30d, blogs: blogsLast30d, total: last30d.length },
+    weeklyPageLimit,
+    weeklyBlogLimit,
+    pagesRemaining: Math.max(0, weeklyPageLimit - pagesLast7d),
+    status,
+    statusLabel: status === 'green' ? `🟢 Safe (${weeklyPageLimit - pagesLast7d} page slots left)` :
+                 status === 'amber' ? `🟡 Almost at limit (${weeklyPageLimit - pagesLast7d} left)` :
+                 '🔴 At weekly limit — hold publishes'
+  }
+}
+
 // ── Build snapshot ───────────────────────────────────────────
 
 console.log('Building dashboard snapshot...')
@@ -880,6 +955,7 @@ const snapshot = {
   services: readJSON(path.join(DASHBOARD_DATA, 'services.json')),
   agentWorkspaces: getAgentWorkspaceData(),
   nbhwPublishLog: parsePublishLog(),
+  nbhwPublishLedger: computePublishLedgerStats(),
   nbhwKeywords: parseKeywordTracker(),
   nbhwLive: detectNbhwLivePages(),
   nbhwCompetitors: readJSON(path.join(PIPELINE, 'nbhw-competitors.json')),
@@ -888,6 +964,7 @@ const snapshot = {
   btsBlogInventory: readJSON(path.join(PIPELINE, 'bts-blog-inventory.json')),
   btsCompetitors: readJSON(path.join(PIPELINE, 'bts-competitors.json')),
   btsKeywords: parseBtsKeywordTracker(),
+  btsPublishLedger: computePublishLedgerStats('bts-publish-ledger.json'),
 }
 
 // ── Write snapshot + bundle into dashboard + push to GitHub ──

@@ -1,0 +1,22 @@
+{
+  "description": "Every NBHW page/blog first-publish timestamp. Owned by Command Centre. Never overwritten on rebuild.",
+  "weeklyPageLimit": 3,
+  "weeklyBlogLimit": 1,
+  "entries": [
+    { "slug": "dee-why", "type": "suburb", "firstPublished": "2026-03-05T10:00:00+11:00", "title": "Dee Why" },
+    { "slug": "freshwater", "type": "suburb", "firstPublished": "2026-03-05T10:00:00+11:00", "title": "Freshwater" },
+    { "slug": "narrabeen", "type": "suburb", "firstPublished": "2026-03-12T10:00:00+11:00", "title": "Narrabeen" },
+    { "slug": "collaroy", "type": "suburb", "firstPublished": "2026-03-18T08:12:00+11:00", "title": "Collaroy" },
+    { "slug": "frenchs-forest", "type": "suburb", "firstPublished": "2026-03-18T08:12:00+11:00", "title": "Frenchs Forest" },
+    { "slug": "manly", "type": "suburb", "firstPublished": "2026-03-18T08:12:00+11:00", "title": "Manly" },
+    { "slug": "all-in-one-heat-pump-install-collaroy", "type": "blog", "firstPublished": "2026-03-18T08:12:00+11:00", "title": "All-in-One Heat Pump Install Collaroy" },
+    { "slug": "electric-hot-water-repair-freshwater", "type": "blog", "firstPublished": "2026-03-05T10:00:00+11:00", "title": "Electric Hot Water Repair Freshwater" },
+    { "slug": "electric-hot-water-repair-radiant", "type": "blog", "firstPublished": "2026-03-05T10:00:00+11:00", "title": "Electric Hot Water Repair Radiant" },
+    { "slug": "emergency-hot-water-burst-rheem", "type": "blog", "firstPublished": "2026-03-05T10:00:00+11:00", "title": "Emergency Hot Water Burst Rheem" },
+    { "slug": "emergency-hot-water-installation-freshwater-storm", "type": "blog", "firstPublished": "2026-03-12T10:00:00+11:00", "title": "Emergency Hot Water Installation Freshwater Storm" },
+    { "slug": "freshwater-autumn-hot-water-maintenance-guide", "type": "blog", "firstPublished": "2026-03-12T10:00:00+11:00", "title": "Freshwater Autumn Hot Water Maintenance Guide" },
+    { "slug": "gas-continuous-flow-vs-storage-which-is-right", "type": "blog", "firstPublished": "2026-03-05T10:00:00+11:00", "title": "Gas Continuous Flow vs Storage" },
+    { "slug": "gas-hot-water-installation-bilgola-plateau", "type": "blog", "firstPublished": "2026-03-12T10:00:00+11:00", "title": "Gas Hot Water Installation Bilgola Plateau" },
+    { "slug": "gas-hot-water-installation-newport-internal", "type": "blog", "firstPublished": "2026-03-12T10:00:00+11:00", "title": "Gas Hot Water Installation Newport" }
+  ]
+}

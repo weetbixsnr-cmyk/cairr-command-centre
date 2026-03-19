@@ -49,6 +49,15 @@ Now owns dashboard deploys end-to-end (exec: full, Vercel auth inherited from sy
 - **Snapshot size:** ~78KB (includes agent workspaces, Vercel projects, crons, CodexBar cost)
 - **Status:** LIVE — Blob REMOVED 2026-03-17, deploy-time snapshots only.
 
+## NBHW Publish Ledger (Google Safety)
+- **Owner:** Command Centre (me) — NOT NBHW agent
+- **File:** `dev/dashboard/nbhw-publish-ledger.json`
+- **Purpose:** Track every page/blog first-publish timestamp to stay safe with Google
+- **Limits:** 3 suburb pages/week, 1 blog/week
+- **Rule:** When NBHW deploys a new page/blog, I must add an entry with the exact `firstPublished` timestamp
+- **Snapshot key:** `nbhwPublishLedger` — includes computed stats (last7d, last30d, status, pagesRemaining)
+- **Created:** 2026-03-19
+
 ## Key Facts
 - All heartbeats currently DISABLED across fleet (by design — §12 FRAMEWORK.md)
 - Don't access other agent workspaces — ask Brain for cross-agent data
