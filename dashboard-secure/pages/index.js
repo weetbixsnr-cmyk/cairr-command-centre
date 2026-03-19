@@ -324,7 +324,7 @@ export default function Dashboard() {
                   const locIcon = LOC_ICONS[s.location] || '📡'
                   const locLabel = LOC_LABELS[s.location] || s.location
                   return (
-                    <div key={i} style={{ background: '#111', border: `1px solid ${pct >= 80 ? '#ef4444' : '#222'}`, borderRadius: 10, padding: 10, borderLeft: `3px solid ${barColor}` }}>
+                    <div key={i} style={{ background: '#111', border: `1px solid ${pct >= 65 ? '#ef4444' : '#222'}`, borderRadius: 10, padding: 10, borderLeft: `3px solid ${barColor}` }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
                         <span style={{ fontSize: 14 }}>{emoji}</span>
                         <span style={{ fontSize: 12, fontWeight: 700, color: '#fff', flex: 1 }}>{s.agent}</span>
