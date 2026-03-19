@@ -2,7 +2,7 @@
  * /api/bts-auth — BTS client login
  * POST { user, pass } → sets bts-client-auth cookie
  * 
- * Env vars required:
+ * Env vars required (set on Vercel dashboard-secure project):
  *   BTS_CLIENT_USER — Sunny's username
  *   BTS_CLIENT_PASS — Sunny's password
  *   BTS_SESSION_TOKEN — session token for cookie validation

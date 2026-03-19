@@ -287,12 +287,17 @@ export default function Dashboard() {
                     </div>
                   </div>
 
-                  {/* Context bar */}
-                  {agentSess?.avgContextPct != null && (
-                    <div className="acard-ctx">
+                  {/* Context bar + compactions */}
+                  <div className="acard-ctx">
+                    {agentSess?.avgContextPct != null && (
                       <CtxBar pct={agentSess.avgContextPct} />
+                    )}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: agentSess?.avgContextPct != null ? 3 : 0 }}>
+                      <span style={{ fontSize: 8, color: (agentSess?.compactionCount || 0) >= 2 ? '#ef4444' : (agentSess?.compactionCount || 0) >= 1 ? '#f59e0b' : '#555', fontWeight: 600 }}>
+                        🗜️ {agentSess?.compactionCount || 0} compaction{(agentSess?.compactionCount || 0) !== 1 ? 's' : ''}
+                      </span>
                     </div>
-                  )}
+                  </div>
 
                   <div className="acard-footer">
                     {(agentSess?.configModel || agentSess?.model) && <span className="acard-model">{(agentSess.configModel || agentSess.model).split('/').pop().replace('claude-', '')}</span>}

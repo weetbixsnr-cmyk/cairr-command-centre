@@ -31,11 +31,12 @@ function hoursAgo(d) {
 const AGENT_META = {
   'main': { label: 'Brain', emoji: '🧠', desc: 'Orchestrator', group: 'Core', goal: 'Coordinate all agents, enforce FRAMEWORK.md' },
   'command-centre': { label: 'Command Centre', emoji: '🎯', desc: 'Dashboard & Monitoring', group: 'Core', goal: 'Single pane of glass for Adam' },
-  'audit': { label: 'Audit', emoji: '🔍', desc: 'Quality Gates', group: 'Core', goal: 'Review all agent work before deploy' },
+  'audit': { label: 'Audit', emoji: '🔍', desc: 'Deploy Gate & Quality', group: 'Core', goal: 'Review all commits, deploy on PASS — only agent with vercel access' },
   'nbhw': { label: 'NBHW', emoji: '🔧', desc: 'Plumbing Site & SEO', group: 'NBHW', goal: 'Rank #1 for NB suburb plumbing keywords' },
   'bts': { label: 'BTS', emoji: '🎓', desc: 'Training Site & SEO', group: 'CAIRR', goal: 'SEO & content for Better Training Solutions (£300/mo)' },
+  'raec': { label: 'RAEC', emoji: '⚡', desc: 'Electrical Quoting', group: 'CAIRR', goal: 'RA Electrical quoting system — CAIRR client' },
   'v3dn': { label: 'V3DN', emoji: '📊', desc: 'Crypto Trading', group: 'Investments', goal: 'Automated trading scripts, portfolio tracking' },
-  'gridpilot': { label: 'GridPilot', emoji: '⚡', desc: 'Energy Platform R&D', group: 'CAIRR', goal: 'Energy platform research & prototype' },
+  'gridpilot': { label: 'GridPilot', emoji: '🔋', desc: 'Energy Platform R&D', group: 'CAIRR', goal: 'Energy platform research & prototype' },
   'alpha': { label: 'Alpha', emoji: '🏠', desc: 'Property Dashboard', group: 'Investments', goal: 'Property scanning & investment dashboard' },
   'property': { label: 'Property', emoji: '🏘️', desc: 'Property Scanner', group: 'Investments', goal: 'Find & evaluate property investment deals' },
   'overdue-office': { label: 'Overdue Office', emoji: '📋', desc: 'Job Tracking', group: 'NBHW', goal: 'Track overdue plumbing jobs & follow-ups' },
@@ -289,6 +290,19 @@ function DetailPanel({ name, snap, onClose }) {
             </a>
           </div>
         )}
+        {name === 'raec' && (
+          <div className="panel-section">
+            <div className="ps-title">🔗 Links</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+              <a href="https://sparkquote-raec.vercel.app" target="_blank" rel="noopener noreferrer" style={{ display: 'block', padding: '6px 8px', background: '#111', borderRadius: 6, border: '1px solid #1a1a1a', fontSize: 11, color: '#3b82f6', fontWeight: 600 }}>
+                ▲ Vercel — sparkquote-raec →
+              </a>
+              <a href="https://github.com/weetbixsnr-cmyk/sparkquote-raec" target="_blank" rel="noopener noreferrer" style={{ display: 'block', padding: '6px 8px', background: '#111', borderRadius: 6, border: '1px solid #1a1a1a', fontSize: 11, color: '#3b82f6', fontWeight: 600 }}>
+                🐙 GitHub — sparkquote-raec →
+              </a>
+            </div>
+          </div>
+        )}
         
         {/* Memory summary */}
         {ws.memorySummary && (
@@ -310,6 +324,94 @@ function DetailPanel({ name, snap, onClose }) {
   )
 }
 
+function DeployPipeline({ snap }) {
+  // Extract recent deploys from NBHW publish history and agent workspace git data
+  const publishHistory = snap?.nbhwLive?.publishHistory || []
+  const recentDeploys = publishHistory.slice(0, 5)
+  
+  // Count audit report pass/fail from agentReports
+  const reports = snap?.agentReports || {}
+  let totalPass = 0, totalFail = 0, totalWarn = 0
+  Object.values(reports).forEach(r => {
+    totalPass += r.pass || 0
+    totalFail += r.fail || 0
+    totalWarn += r.warn || 0
+  })
+  
+  // Get audit agent session info
+  const auditSess = snap?.sessions?.byAgent?.audit
+  const auditActive = auditSess?.sessions?.length > 0
+  const auditLastActivity = auditSess?.lastAgentActivity ? new Date(auditSess.lastAgentActivity).toISOString() : null
+  
+  // Get recent git commits across all agents (last commit per agent)
+  const workspaces = snap?.agentWorkspaces || {}
+  const recentCommits = Object.entries(workspaces)
+    .filter(([_, ws]) => ws?.git?.lastCommitAt)
+    .map(([name, ws]) => ({
+      agent: name,
+      hash: ws.git.hash,
+      message: ws.git.message,
+      time: ws.git.lastCommitAt,
+      emoji: (AGENT_META[name] || {}).emoji || '🤖'
+    }))
+    .sort((a, b) => new Date(b.time) - new Date(a.time))
+    .slice(0, 6)
+
+  return (
+    <div className="floor-section">
+      <div className="section-label">🚀 Deploy Pipeline</div>
+      <div className="deploy-grid">
+        {/* Gate Status */}
+        <div className="deploy-card">
+          <div className="deploy-card-title">🔍 Audit Gate</div>
+          <div className="deploy-gate-status">
+            <span className={`gate-dot ${auditActive ? 'gate-online' : 'gate-standby'}`}></span>
+            <span className="gate-label">{auditActive ? 'ONLINE' : 'STANDBY'}</span>
+          </div>
+          <div className="deploy-stats">
+            <div className="deploy-stat">
+              <span className="ds-val" style={{ color: '#10b981' }}>{totalPass}</span>
+              <span className="ds-lbl">Pass</span>
+            </div>
+            <div className="deploy-stat">
+              <span className="ds-val" style={{ color: totalWarn > 0 ? '#f59e0b' : '#333' }}>{totalWarn}</span>
+              <span className="ds-lbl">Warn</span>
+            </div>
+            <div className="deploy-stat">
+              <span className="ds-val" style={{ color: totalFail > 0 ? '#ef4444' : '#333' }}>{totalFail}</span>
+              <span className="ds-lbl">Fail</span>
+            </div>
+          </div>
+          {auditLastActivity && <div className="deploy-time">Last active: {timeAgo(auditLastActivity)}</div>}
+          <div className="deploy-flow">
+            <span className="flow-step">commit</span>
+            <span className="flow-arrow">→</span>
+            <span className="flow-step">push</span>
+            <span className="flow-arrow">→</span>
+            <span className="flow-step flow-audit">audit</span>
+            <span className="flow-arrow">→</span>
+            <span className="flow-step flow-deploy">deploy</span>
+          </div>
+        </div>
+
+        {/* Recent Commits */}
+        <div className="deploy-card deploy-card-wide">
+          <div className="deploy-card-title">📦 Recent Commits</div>
+          {recentCommits.length === 0 && <div className="deploy-empty">No recent commits</div>}
+          {recentCommits.map((c, i) => (
+            <div className="commit-row" key={i}>
+              <span className="commit-emoji">{c.emoji}</span>
+              <code className="commit-hash">{c.hash}</code>
+              <span className="commit-msg">{c.message?.substring(0, 60)}</span>
+              <span className="commit-time">{timeAgo(c.time)}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function FleetPage() {
   const snap = useSnapshot()
   const [selected, setSelected] = useState(null)
@@ -319,7 +421,7 @@ export default function FleetPage() {
   
   const groups = {
     'Core': ['main', 'command-centre', 'audit'],
-    'CAIRR Clients': ['bts', 'gridpilot'],
+    'CAIRR Clients': ['bts', 'raec', 'gridpilot'],
     'NBHW': ['nbhw', 'overdue-office'],
     'Investments': ['v3dn', 'property', 'alpha'],
   }
@@ -453,6 +555,35 @@ export default function FleetPage() {
           .score-lbl{font-size:7px;color:#999;text-transform:uppercase;letter-spacing:0.5px}
           .score-owner{font-size:8px;color:#888;text-align:right}
           
+          /* ── Deploy Pipeline ── */
+          .deploy-grid{display:grid;grid-template-columns:280px 1fr;gap:10px}
+          @media(max-width:700px){.deploy-grid{grid-template-columns:1fr}}
+          .deploy-card{background:#0d0d10;border:1px solid #1a1a22;border-radius:12px;padding:14px}
+          .deploy-card-wide{min-width:0}
+          .deploy-card-title{font-size:10px;color:#888;font-weight:700;margin-bottom:8px}
+          .deploy-gate-status{display:flex;align-items:center;gap:6px;margin-bottom:8px}
+          .gate-dot{width:10px;height:10px;border-radius:50%}
+          .gate-online{background:#10b981;box-shadow:0 0 8px #10b981}
+          .gate-standby{background:#f59e0b}
+          .gate-label{font-size:12px;font-weight:800;color:#fff;letter-spacing:1px}
+          .deploy-stats{display:flex;gap:8px;margin-bottom:6px}
+          .deploy-stat{text-align:center;flex:1;background:#111;border:1px solid #1a1a1a;border-radius:6px;padding:4px}
+          .ds-val{font-size:16px;font-weight:800;display:block}
+          .ds-lbl{font-size:7px;color:#999;text-transform:uppercase;letter-spacing:0.5px}
+          .deploy-time{font-size:8px;color:#888;margin-bottom:8px}
+          .deploy-flow{display:flex;align-items:center;gap:4px;padding:6px 8px;background:#111;border-radius:6px;border:1px solid #1a1a1a}
+          .flow-step{font-size:8px;color:#999;font-weight:600;padding:2px 6px;background:#1a1a1a;border-radius:4px}
+          .flow-audit{color:#3b82f6;background:#0a1628;border:1px solid #1a3a5c}
+          .flow-deploy{color:#10b981;background:#0a1e14;border:1px solid #1a3e2c}
+          .flow-arrow{color:#333;font-size:10px}
+          .deploy-empty{font-size:10px;color:#555;font-style:italic}
+          .commit-row{display:flex;align-items:center;gap:6px;font-size:10px;padding:4px 0;border-bottom:1px solid #111}
+          .commit-row:last-child{border-bottom:none}
+          .commit-emoji{font-size:12px;flex-shrink:0}
+          .commit-hash{font-family:monospace;color:#a855f7;font-size:9px;background:#1a0a2a;padding:1px 4px;border-radius:3px;flex-shrink:0}
+          .commit-msg{color:#aaa;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+          .commit-time{color:#888;font-size:8px;flex-shrink:0}
+          
           .footer{font-size:8px;color:#1a1a1a;text-align:right;margin-top:24px}
         `}</style>
       </Head>
@@ -486,6 +617,9 @@ export default function FleetPage() {
             </div>
           </div>
         </div>
+
+        {/* Deploy Pipeline Status */}
+        <DeployPipeline snap={snap} />
 
         {Object.entries(groups).map(([groupName, agents]) => (
           <div className="floor-section" key={groupName}>

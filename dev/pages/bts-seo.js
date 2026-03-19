@@ -33,9 +33,10 @@ function ThreatDot({ level }) {
   return <span style={{display:'inline-block',width:8,height:8,borderRadius:'50%',background:c,marginRight:4}}></span>
 }
 
-function WaveBar({ wave }) {
+function WaveBar({ wave, type }) {
   const colors = { active: '#ef4444', planned: '#f59e0b', future: '#333' }
   const spPct = wave.servicePagesTotal > 0 ? Math.round((wave.servicePages / wave.servicePagesTotal) * 100) : 0
+  const items = type === 'locations' ? wave.locations : wave.suburbs
   return (
     <div style={{background:'#111',border:'1px solid #222',borderRadius:8,padding:10,marginBottom:6}}>
       <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:4}}>
@@ -51,9 +52,9 @@ function WaveBar({ wave }) {
       <div style={{height:4,background:'#1a1a1a',borderRadius:2,marginBottom:4,overflow:'hidden'}}>
         <div style={{height:4,width:`${spPct}%`,background:colors[wave.status] || '#333',borderRadius:2,minWidth: spPct > 0 ? 4 : 0}}></div>
       </div>
-      {wave.locations?.length > 0 && (
+      {items?.length > 0 && (
         <div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:4}}>
-          {wave.locations.map(s => (
+          {items.map(s => (
             <span key={s} style={{fontSize:9,padding:'2px 6px',borderRadius:4,background:'#1a1a1a',border:'1px solid #222',color:'#aaa'}}>{s}</span>
           ))}
         </div>
@@ -78,17 +79,20 @@ export default function BtsSeoPage() {
   const snap = useSnapshot()
   const seo = snap?.btsSeo
   const comp = snap?.btsCompetitors
-  const pub = snap?.btsPublishLog
+  const plan = snap?.btsSeoplan
+  const blogs = snap?.btsBlogInventory
   const kw = snap?.btsKeywords
   const [tab, setTab] = useState('rankings')
 
-  const coreRanking = seo?.coreKeywords?.filter(k => k.position <= 10).length || 0
-  const coreTotal = seo?.coreKeywords?.length || 0
-  const locRanking = seo?.locationKeywords?.filter(k => k.position <= 10).length || 0
-  const locTotal = seo?.locationKeywords?.length || 0
-  const totalServicePages = seo?.locationCoverage?.waves?.reduce((a, w) => a + (w.servicePages || 0), 0) || 0
-  const totalServicePagesNeeded = seo?.locationCoverage?.waves?.reduce((a, w) => a + (w.servicePagesTotal || 0), 0) || 0
-  const totalBlogs = seo?.locationCoverage?.waves?.reduce((a, w) => a + (w.blogs || 0), 0) || 0
+  // Stats
+  const totalKeywords = kw?.keywords?.length || 0
+  const ranking = kw?.keywords?.filter(k => k.latest != null && k.latest <= 10).length || 0
+  const locationsCovered = seo?.locationCoverage?.summary?.withContent || 0
+  const locationsTotal = seo?.locationCoverage?.summary?.totalLocations || 0
+  const servicePages = seo?.locationCoverage?.summary?.servicePages || 0
+  const servicePagesNeeded = seo?.locationCoverage?.waves?.reduce((a, w) => a + (w.servicePagesTotal || 0), 0) || 0
+  const blogCount = blogs?.published || 0
+  const services = plan?.services?.length || seo?.assets?.trainingServices || 0
 
   return (
     <>
@@ -126,30 +130,32 @@ export default function BtsSeoPage() {
         <a href="/" className="back">← Dashboard</a>
         <div className="header">
           <h1>🎓 BTS — SEO Command</h1>
-          <span className="meta">{seo?.client} · {seo?.owner} · {seo?.revenue} · Updated: {seo ? timeAgo(seo.lastUpdated) : '—'}</span>
+          <span className="meta">
+            Client: {seo?.owner || 'Sunny'} · {seo?.revenue || '£300/mo'} · Updated: {seo ? timeAgo(seo.lastUpdated) : '—'}
+          </span>
         </div>
 
         {/* Stats */}
         <div className="stats">
           <div className="stat-card">
-            <div className="stat-val" style={{color: coreRanking > 0 ? '#10b981' : '#ef4444'}}>{coreRanking}/{coreTotal}</div>
-            <div className="stat-lbl">Core Keywords in Top 10</div>
+            <div className="stat-val" style={{color: ranking > 0 ? '#10b981' : '#ef4444'}}>{ranking}/{totalKeywords}</div>
+            <div className="stat-lbl">Keywords in Top 10</div>
           </div>
           <div className="stat-card">
-            <div className="stat-val" style={{color: locRanking > 0 ? '#10b981' : '#ef4444'}}>{locRanking}/{locTotal}</div>
-            <div className="stat-lbl">Location Keywords in Top 10</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-val" style={{color:'#10b981'}}>{totalServicePages}</div>
+            <div className="stat-val" style={{color: servicePages > 0 ? '#10b981' : '#ef4444'}}>{servicePages}</div>
             <div className="stat-lbl">Location Pages Live</div>
           </div>
           <div className="stat-card">
-            <div className="stat-val" style={{color:'#3b82f6'}}>{totalBlogs}</div>
+            <div className="stat-val" style={{color:'#3b82f6'}}>{blogCount}</div>
             <div className="stat-lbl">Blog Posts Live</div>
           </div>
           <div className="stat-card">
-            <div className="stat-val" style={{color:'#ef4444'}}>{totalServicePagesNeeded - totalServicePages}</div>
+            <div className="stat-val" style={{color:'#f59e0b'}}>{servicePagesNeeded - servicePages}</div>
             <div className="stat-lbl">Locations Remaining</div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-val" style={{color:'#a855f7'}}>{services}</div>
+            <div className="stat-lbl">Training Services</div>
           </div>
         </div>
 
@@ -159,7 +165,6 @@ export default function BtsSeoPage() {
           <TabButton active={tab==='matrix'} label="📍 Coverage Matrix" onClick={() => setTab('matrix')} />
           <TabButton active={tab==='framework'} label="📋 Framework" onClick={() => setTab('framework')} />
           <TabButton active={tab==='competitors'} label="🏆 Competitors" onClick={() => setTab('competitors')} />
-          <TabButton active={tab==='safety'} label={`🛡️ Google Safety${pub?.status === 'at_limit' ? ' 🔴' : pub?.status === 'caution' ? ' 🟡' : ''}`} onClick={() => setTab('safety')} />
         </div>
 
         {/* TAB 1: Rankings */}
@@ -171,38 +176,58 @@ export default function BtsSeoPage() {
                 <div className="sec-title">🏆 Top 10 Tracked Keywords</div>
                 <div className="card">
                   <table>
-                    <thead><tr><th>Keyword</th><th>Baseline</th><th>Current</th><th>Trend</th><th>Category</th></tr></thead>
+                    <thead><tr><th>Keyword</th><th>Baseline</th><th>Current</th><th>Trend</th><th>Section</th></tr></thead>
                     <tbody>
                       {kw.top10.map((k, i) => {
-                        const hasData = k.latest !== null && k.baseline !== null
-                        const improved = hasData && k.latest < k.baseline
-                        const dropped = hasData && k.latest > k.baseline
+                        const improved = k.latest != null && k.baseline != null && k.latest < k.baseline
+                        const dropped = k.latest != null && k.baseline != null && k.latest > k.baseline
                         return (
                           <tr key={i}>
                             <td style={{color:'#fff',fontWeight:600}}>{k.keyword}</td>
-                            <td>{k.baseline ? <PosCell pos={k.baseline} /> : <span style={{color:'#999'}}>—</span>}</td>
-                            <td>{k.latest ? <PosCell pos={k.latest} /> : <span style={{color:'#999'}}>—</span>}</td>
+                            <td>{k.baseline != null ? <PosCell pos={k.baseline} /> : <span style={{color:'#555'}}>—</span>}</td>
+                            <td>{k.latest != null ? <PosCell pos={k.latest} /> : <span style={{color:'#555'}}>—</span>}</td>
                             <td style={{fontSize:11}}>
                               {improved ? <span style={{color:'#10b981'}}>📈 ↑{k.baseline - k.latest}</span> :
                                dropped ? <span style={{color:'#ef4444'}}>📉 ↓{k.latest - k.baseline}</span> :
-                               <span style={{color:'#999'}}>{k.trend || '—'}</span>}
+                               <span style={{color:'#999'}}>—</span>}
                             </td>
-                            <td style={{fontSize:8,color:'#999'}}>{k.section?.replace(/[🔴🟡🟢🟣📍]\s*/,'')}</td>
+                            <td style={{fontSize:9,color:'#888'}}>{k.section || '—'}</td>
                           </tr>
                         )
                       })}
                     </tbody>
                   </table>
                   <div style={{fontSize:8,color:'#777',marginTop:6,textAlign:'right'}}>
-                    {kw.keywords?.length || 0} keywords tracked · Updated: {kw.lastUpdated || '—'} · First baseline scan pending
+                    Source: bts-keyword-tracker · Updated: {kw?.lastUpdated || '—'}
                   </div>
                 </div>
               </div>
             )}
 
+            {/* All Keywords by Section */}
+            <div className="section">
+              <div className="sec-title">All Tracked Keywords ({totalKeywords})</div>
+              <div className="card">
+                <table>
+                  <thead><tr><th>Keyword</th><th>Baseline</th><th>Current</th><th>Section</th></tr></thead>
+                  <tbody>
+                    {(kw?.keywords || []).map((k, i) => (
+                      <tr key={i}>
+                        <td style={{color:'#fff',fontWeight:500}}>{k.keyword}</td>
+                        <td>{k.baseline != null ? <PosCell pos={k.baseline} /> : <span style={{color:'#555'}}>—</span>}</td>
+                        <td>{k.latest != null ? <PosCell pos={k.latest} /> : <span style={{color:'#555'}}>—</span>}</td>
+                        <td style={{fontSize:9,color:'#888'}}>{k.section || '—'}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Core Keywords */}
             <div className="grid2">
               <div className="section">
-                <div className="sec-title">Core Service Keywords</div>
+                <div className="sec-title">Core Keywords</div>
                 <div className="card">
                   <table>
                     <thead><tr><th>Keyword</th><th>Pos</th></tr></thead>
@@ -215,7 +240,7 @@ export default function BtsSeoPage() {
                 </div>
               </div>
               <div className="section">
-                <div className="sec-title">Location Keywords — Gap</div>
+                <div className="sec-title">Location Keywords</div>
                 <div className="card">
                   <table>
                     <thead><tr><th>Keyword</th><th>Pos</th></tr></thead>
@@ -228,23 +253,6 @@ export default function BtsSeoPage() {
                 </div>
               </div>
             </div>
-            <div className="section">
-              <div className="sec-title">Competitors</div>
-              <div className="card">
-                <table>
-                  <thead><tr><th>Competitor</th><th>Position</th><th>Threat</th></tr></thead>
-                  <tbody>
-                    {seo?.competitors?.map((c, i) => (
-                      <tr key={i}>
-                        <td>{c.name}</td>
-                        <td>{c.position}</td>
-                        <td><ThreatDot level={c.threat} /> {c.threat}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
           </>
         )}
 
@@ -253,15 +261,15 @@ export default function BtsSeoPage() {
           <>
             <div style={{display:'flex',gap:12,marginBottom:16,flexWrap:'wrap'}}>
               <div className="stat-card" style={{minWidth:100}}>
-                <div className="stat-val" style={{fontSize:18,color:'#10b981'}}>{totalServicePages}</div>
+                <div className="stat-val" style={{fontSize:18,color:'#10b981'}}>{servicePages}</div>
                 <div className="stat-lbl">Location Pages Live</div>
               </div>
               <div className="stat-card" style={{minWidth:100}}>
-                <div className="stat-val" style={{fontSize:18,color:'#3b82f6'}}>{totalBlogs}</div>
+                <div className="stat-val" style={{fontSize:18,color:'#3b82f6'}}>{blogCount}</div>
                 <div className="stat-lbl">Blog Posts Live</div>
               </div>
               <div className="stat-card" style={{minWidth:100}}>
-                <div className="stat-val" style={{fontSize:18,color:'#f59e0b'}}>{totalServicePagesNeeded - totalServicePages}</div>
+                <div className="stat-val" style={{fontSize:18,color:'#f59e0b'}}>{servicePagesNeeded - servicePages}</div>
                 <div className="stat-lbl">Locations Remaining</div>
               </div>
               <div className="stat-card" style={{minWidth:100}}>
@@ -269,41 +277,92 @@ export default function BtsSeoPage() {
                 <div className="stat-lbl">Keywords/Location</div>
               </div>
             </div>
-            <div className="section">
-              <div className="sec-title">Execution Waves</div>
-              {seo?.locationCoverage?.waves?.map(wave => {
-                const pct = wave.servicePagesTotal > 0 ? Math.round((wave.servicePages / wave.servicePagesTotal) * 100) : 0
-                const color = pct === 100 ? '#10b981' : pct > 0 ? '#f59e0b' : '#333'
-                const label = pct === 100 ? '✅ COMPLETE' : pct > 0 ? '🟡 IN PROGRESS' : wave.status === 'active' ? '🔴 ACTIVE' : '⬜ NOT STARTED'
-                return (
-                  <div key={wave.id} style={{background:'#111',border:'1px solid #222',borderRadius:8,padding:10,marginBottom:6,borderLeft:`3px solid ${color}`}}>
-                    <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:4}}>
-                      <span style={{fontSize:12,fontWeight:600,color:'#fff'}}>Wave {wave.id}</span>
-                      <span style={{fontSize:9,color:color,fontWeight:600}}>{label}</span>
-                      <span style={{fontSize:9,color:'#999',marginLeft:'auto'}}>{wave.servicePages}/{wave.servicePagesTotal} pages · {wave.blogs || 0} blogs</span>
+
+            {/* Execution Waves */}
+            {seo?.locationCoverage?.waves && (
+              <div className="section">
+                <div className="sec-title">Execution Waves</div>
+                {seo.locationCoverage.waves.map(wave => (
+                  <WaveBar key={wave.id} wave={wave} type="locations" />
+                ))}
+              </div>
+            )}
+
+            {/* Location Tiers */}
+            {plan?.locations && (
+              <div className="section">
+                <div className="sec-title">Location Tiers</div>
+                {Object.entries({
+                  'Tier 1 — Core': plan.locations.tier1,
+                  'Tier 2 — Expansion': plan.locations.tier2,
+                  'Tier 3 — Wider': plan.locations.tier3,
+                  'Tier 4 — Regional': plan.locations.tier4,
+                }).map(([label, locs]) => locs?.length > 0 && (
+                  <div key={label} style={{marginBottom:8}}>
+                    <div style={{fontSize:10,color:'#888',fontWeight:600,marginBottom:4}}>{label}</div>
+                    <div style={{display:'flex',gap:4,flexWrap:'wrap'}}>
+                      {locs.map(l => (
+                        <span key={l} style={{fontSize:9,padding:'2px 6px',borderRadius:4,background:'#1a1a1a',border:'1px solid #222',color:'#aaa'}}>{l}</span>
+                      ))}
                     </div>
-                    <div style={{height:4,background:'#1a1a1a',borderRadius:2,marginBottom:6,overflow:'hidden'}}>
-                      <div style={{height:4,width:`${pct}%`,background:color,borderRadius:2,minWidth:pct > 0 ? 4 : 0,transition:'width 0.3s'}}></div>
-                    </div>
-                    <div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:4}}>
-                      {wave.locations?.map(s => {
-                        const isLive = wave.servicePages > 0 && wave.locations.indexOf(s) < wave.servicePages
-                        return (
-                          <span key={s} style={{fontSize:9,padding:'2px 6px',borderRadius:4,
-                            background: isLive ? '#0a2a1a' : '#1a1a1a',
-                            border: `1px solid ${isLive ? '#10b981' : '#333'}`,
-                            color: isLive ? '#10b981' : '#555'
-                          }}>
-                            {isLive ? '✅' : '⬜'} {s}
-                          </span>
-                        )
-                      })}
-                    </div>
-                    <div style={{fontSize:9,color:'#999'}}>{wave.scope}</div>
                   </div>
-                )
-              })}
-            </div>
+                ))}
+                <div style={{fontSize:9,color:'#555',marginTop:4}}>Total locations: {plan.locations.total}</div>
+              </div>
+            )}
+
+            {/* Content Gaps */}
+            {plan?.contentGaps?.length > 0 && (
+              <div className="section">
+                <div className="sec-title">Priority Content Gaps</div>
+                <div className="card">
+                  {plan.contentGaps.map((g, i) => (
+                    <div key={i} style={{fontSize:11,color:'#aaa',padding:'5px 0',borderBottom:'1px solid #1a1a1a',display:'flex',gap:8}}>
+                      <span style={{color:'#ef4444',fontWeight:700,minWidth:16}}>P{g.priority}</span>
+                      <span style={{color:'#fff',fontWeight:600,flex:1}}>{g.gap}</span>
+                      <span style={{fontSize:9,color:'#999'}}>{g.note}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Blog Inventory */}
+            {blogs && (
+              <div className="section">
+                <div className="sec-title">Blog Inventory</div>
+                <div style={{display:'flex',gap:12,marginBottom:8}}>
+                  <div className="stat-card" style={{minWidth:80}}>
+                    <div className="stat-val" style={{fontSize:16,color:'#10b981'}}>{blogs.published || 0}</div>
+                    <div className="stat-lbl">Published</div>
+                  </div>
+                  <div className="stat-card" style={{minWidth:80}}>
+                    <div className="stat-val" style={{fontSize:16,color:'#f59e0b'}}>{blogs.drafts || 0}</div>
+                    <div className="stat-lbl">Drafts</div>
+                  </div>
+                  <div className="stat-card" style={{minWidth:80}}>
+                    <div className="stat-val" style={{fontSize:16,color:'#3b82f6'}}>{blogs.planned?.length || 0}</div>
+                    <div className="stat-lbl">Planned</div>
+                  </div>
+                </div>
+                {blogs.planned?.length > 0 && (
+                  <div className="card">
+                    <table>
+                      <thead><tr><th>Title</th><th>Service</th><th>Status</th></tr></thead>
+                      <tbody>
+                        {blogs.planned.map((b, i) => (
+                          <tr key={i}>
+                            <td style={{color:'#fff',fontWeight:500}}>{b.title}</td>
+                            <td style={{fontSize:9}}>{b.service}</td>
+                            <td style={{fontSize:9,color: b.status === 'published' ? '#10b981' : b.status === 'draft' ? '#f59e0b' : '#555'}}>{b.status}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+            )}
           </>
         )}
 
@@ -323,7 +382,7 @@ export default function BtsSeoPage() {
                   <strong style={{color:'#fff'}}>Weekly Cadence:</strong> {seo?.framework?.weeklyCadence || '—'}
                 </div>
                 <div style={{fontSize:11,color:'#aaa',padding:'4px 0'}}>
-                  <strong style={{color:'#fff'}}>Review Coaching:</strong> {seo?.framework?.reviewCoaching ? '✅ Active' : '❌ Not yet'}
+                  <strong style={{color:'#fff'}}>Review Coaching:</strong> {seo?.framework?.reviewCoaching ? '✅ Active' : '❌ Off'}
                 </div>
               </div>
             </div>
@@ -338,6 +397,21 @@ export default function BtsSeoPage() {
               </div>
             </div>
             <div className="section">
+              <div className="sec-title">Planned Content Waves</div>
+              <div className="card">
+                {plan?.plannedContent && Object.entries(plan.plannedContent).map(([wave, items]) => (
+                  <div key={wave} style={{marginBottom:8}}>
+                    <div style={{fontSize:10,fontWeight:700,color:'#fff',marginBottom:4,textTransform:'capitalize'}}>{wave.replace(/([0-9])/g, ' $1')}</div>
+                    {items?.map((item, i) => (
+                      <div key={i} style={{fontSize:10,color:'#aaa',padding:'2px 0',paddingLeft:12,display:'flex',gap:6}}>
+                        <span style={{color:'#3b82f6'}}>•</span> {item}
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="section">
               <div className="sec-title">Assets</div>
               <div className="card" style={{display:'flex',gap:16,flexWrap:'wrap'}}>
                 <div style={{textAlign:'center'}}>
@@ -346,12 +420,22 @@ export default function BtsSeoPage() {
                 </div>
                 <div style={{textAlign:'center'}}>
                   <div style={{fontSize:20,fontWeight:700,color:'#3b82f6'}}>{seo?.assets?.courseCertifications || 0}</div>
-                  <div style={{fontSize:9,color:'#999'}}>Course Certifications</div>
+                  <div style={{fontSize:9,color:'#999'}}>Certifications</div>
                 </div>
                 <div style={{textAlign:'center'}}>
                   <div style={{fontSize:20,fontWeight:700,color:'#10b981'}}>{seo?.assets?.trainingServices || 0}</div>
                   <div style={{fontSize:9,color:'#999'}}>Training Services</div>
                 </div>
+              </div>
+            </div>
+            <div className="section">
+              <div className="sec-title">Cadence</div>
+              <div className="card">
+                {plan?.cadence && Object.entries(plan.cadence).map(([k, v]) => (
+                  <div key={k} style={{fontSize:11,color:'#aaa',padding:'4px 0',borderBottom:'1px solid #1a1a1a'}}>
+                    <strong style={{color:'#fff',textTransform:'capitalize'}}>{k.replace(/([A-Z])/g, ' $1')}:</strong> {v}
+                  </div>
+                ))}
               </div>
             </div>
           </>
@@ -420,30 +504,33 @@ export default function BtsSeoPage() {
               })}
             </div>
 
+            {/* Key Keyword Gaps */}
             <div className="section">
               <div className="sec-title">Keyword Gaps — Where They Beat Us</div>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Keyword</th>
-                    <th>Our Position</th>
-                    <th>Top Competitor</th>
-                    <th>Their Position</th>
-                    <th>Opportunity</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {(comp?.keyGaps || []).map((gap, i) => (
-                    <tr key={i}>
-                      <td style={{ color: '#fff', fontWeight: 600 }}>{gap.keyword}</td>
-                      <td style={{ color: '#ef4444', fontWeight: 700 }}>{gap.ourPosition}</td>
-                      <td>{gap.topCompetitor}</td>
-                      <td style={{ color: '#10b981', fontWeight: 700 }}>{gap.competitorPosition}</td>
-                      <td style={{ fontSize: 9 }}>{gap.opportunity}</td>
+              <div className="card">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Keyword</th>
+                      <th>Our Position</th>
+                      <th>Top Competitor</th>
+                      <th>Their Position</th>
+                      <th>Opportunity</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {(comp?.keyGaps || []).map((gap, i) => (
+                      <tr key={i}>
+                        <td style={{ color: '#fff', fontWeight: 600 }}>{gap.keyword}</td>
+                        <td style={{ color: '#ef4444', fontWeight: 700 }}>{gap.ourPosition}</td>
+                        <td>{gap.topCompetitor}</td>
+                        <td style={{ color: '#10b981', fontWeight: 700 }}>{gap.competitorPosition}</td>
+                        <td style={{ fontSize: 9 }}>{gap.opportunity}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
 
             {!comp && (
@@ -460,178 +547,10 @@ export default function BtsSeoPage() {
           </>
         )}
 
-        {/* TAB 5: Google Safety Meter */}
-        {tab === 'safety' && (
-          <>
-            {/* Status Banner */}
-            <div style={{
-              background: pub?.status === 'at_limit' ? '#3b1010' : pub?.status === 'caution' ? '#2a2000' : '#0a2a1a',
-              border: `1px solid ${pub?.status === 'at_limit' ? '#ef4444' : pub?.status === 'caution' ? '#f59e0b' : '#10b981'}`,
-              borderRadius: 10, padding: 16, marginBottom: 16, textAlign: 'center'
-            }}>
-              <div style={{ fontSize: 18, fontWeight: 700, color: pub?.status === 'at_limit' ? '#ef4444' : pub?.status === 'caution' ? '#f59e0b' : '#10b981' }}>
-                {pub?.statusLabel || '🟢 No content published yet — safe to start'}
-              </div>
-              {pub?.nextSafeDate && pub?.status === 'at_limit' && (
-                <div style={{ fontSize: 11, color: '#f59e0b', marginTop: 6 }}>Next safe publish: {pub.nextSafeDate}</div>
-              )}
-            </div>
-
-            {/* Gauges */}
-            <div className="grid2" style={{ marginBottom: 16 }}>
-              <div className="card">
-                <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>Pages Published This Week</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
-                  <div style={{ fontSize: 36, fontWeight: 800, color: pub?.status === 'at_limit' ? '#ef4444' : pub?.status === 'caution' ? '#f59e0b' : '#10b981' }}>
-                    {pub?.publishedThisWeek?.length || 0}
-                  </div>
-                  <div style={{ fontSize: 14, color: '#555' }}>/ {pub?.weeklyLimit || 3}</div>
-                </div>
-                <div style={{ height: 8, background: '#1a1a1a', borderRadius: 4, overflow: 'hidden' }}>
-                  <div style={{
-                    height: 8, borderRadius: 4,
-                    width: `${Math.min(100, ((pub?.publishedThisWeek?.length || 0) / (pub?.weeklyLimit || 3)) * 100)}%`,
-                    background: pub?.status === 'at_limit' ? '#ef4444' : pub?.status === 'caution' ? '#f59e0b' : '#10b981',
-                    transition: 'width 0.3s'
-                  }}></div>
-                </div>
-              </div>
-
-              <div className="card">
-                <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>GBP Posts This Week</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
-                  <div style={{ fontSize: 36, fontWeight: 800, color: pub?.gbpStatus === 'at_limit' ? '#ef4444' : pub?.gbpStatus === 'caution' ? '#f59e0b' : '#10b981' }}>
-                    {pub?.gbpThisWeek?.length || 0}
-                  </div>
-                  <div style={{ fontSize: 14, color: '#555' }}>/ {pub?.gbpWeeklyLimit || 3}</div>
-                </div>
-                <div style={{ height: 8, background: '#1a1a1a', borderRadius: 4, overflow: 'hidden' }}>
-                  <div style={{
-                    height: 8, borderRadius: 4,
-                    width: `${Math.min(100, ((pub?.gbpThisWeek?.length || 0) / (pub?.gbpWeeklyLimit || 3)) * 100)}%`,
-                    background: pub?.gbpStatus === 'at_limit' ? '#ef4444' : pub?.gbpStatus === 'caution' ? '#f59e0b' : '#10b981',
-                    transition: 'width 0.3s'
-                  }}></div>
-                </div>
-              </div>
-            </div>
-
-            {/* Safety Rules Reference */}
-            <div className="grid2" style={{ marginBottom: 16 }}>
-              <div className="card">
-                <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>📄 Website Page Limits</div>
-                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
-                  <span style={{color:'#fff',fontWeight:600}}>Max new pages/week:</span> 3 (location + blogs combined)
-                </div>
-                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
-                  <span style={{color:'#fff',fontWeight:600}}>Max location pages/week:</span> 1-2
-                </div>
-                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
-                  <span style={{color:'#fff',fontWeight:600}}>Cool-down after bulk:</span> 7 days
-                </div>
-                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0' }}>
-                  <span style={{color:'#fff',fontWeight:600}}>Rule:</span> Log EVERY publish with date
-                </div>
-              </div>
-              <div className="card">
-                <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>📍 Google Business Profile Limits</div>
-                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
-                  <span style={{color:'#fff',fontWeight:600}}>Max GBP posts/week:</span> 2-3
-                </div>
-                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
-                  <span style={{color:'#fff',fontWeight:600}}>Post types:</span> Updates, Offers, Events
-                </div>
-                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
-                  <span style={{color:'#fff',fontWeight:600}}>Photo uploads/week:</span> 3-5 max
-                </div>
-                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
-                  <span style={{color:'#fff',fontWeight:600}}>Review replies/day:</span> 2-3 (stagger, don't batch)
-                </div>
-                <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0' }}>
-                  <span style={{color:'#fff',fontWeight:600}}>⚠️ Avoid:</span> Bulk photo uploads, keyword-stuffed posts, same-day post spam
-                </div>
-              </div>
-            </div>
-
-            {/* Published this week */}
-            {pub?.publishedThisWeek?.length > 0 && (
-              <div className="section">
-                <div className="sec-title">Published This Week</div>
-                <div className="card">
-                  <table>
-                    <thead><tr><th>Date</th><th>Type</th><th>Page</th><th>Status</th></tr></thead>
-                    <tbody>
-                      {pub.publishedThisWeek.map((p, i) => (
-                        <tr key={i}>
-                          <td style={{ color: '#fff', fontWeight: 600 }}>{p.date}</td>
-                          <td>{p.type}</td>
-                          <td>{p.page}</td>
-                          <td>{p.status}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            )}
-
-            {/* Queue */}
-            {pub?.queue?.length > 0 && (
-              <div className="section">
-                <div className="sec-title">Queue — Do Not Publish Yet</div>
-                <div className="card">
-                  {pub.queue.map((q, i) => (
-                    <div key={i} style={{ fontSize: 11, color: '#aaa', padding: '5px 0', borderBottom: '1px solid #1a1a1a', display: 'flex', gap: 6 }}>
-                      <span style={{ color: '#f59e0b' }}>⏳</span> {q}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Previous weeks */}
-            {pub?.previousWeeks?.length > 0 && (
-              <div className="section">
-                <div className="sec-title">Publish History</div>
-                <div className="card">
-                  <table>
-                    <thead><tr><th>Week</th><th>Pages Published</th><th>Type</th></tr></thead>
-                    <tbody>
-                      {pub.previousWeeks.map((w, i) => (
-                        <tr key={i}>
-                          <td style={{ color: '#fff' }}>{w.week}</td>
-                          <td>{w.pages}</td>
-                          <td style={{ fontSize: 9, color: '#555' }}>{w.type}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            )}
-
-            {/* Warning callout */}
-            {pub?.warningStatus?.length > 0 && (
-              <div style={{ background: '#3b1010', border: '1px solid #ef4444', borderRadius: 8, padding: 12, marginTop: 12 }}>
-                <div style={{ fontSize: 10, fontWeight: 700, color: '#ef4444', textTransform: 'uppercase', marginBottom: 6 }}>⚠️ Active Warning</div>
-                {pub.warningStatus.map((w, i) => (
-                  <div key={i} style={{ fontSize: 11, color: '#f59e0b', padding: '2px 0' }}>{w}</div>
-                ))}
-              </div>
-            )}
-
-            {!pub && (
-              <div style={{ color: '#555', fontSize: 11, fontStyle: 'italic', padding: 16, textAlign: 'center' }}>
-                No publish log yet — BTS content pipeline hasn't started publishing. This tab will populate automatically once the BTS agent creates a publish log.
-              </div>
-            )}
-          </>
-        )}
-
         {/* Today's Wins — always visible */}
         {seo?.todayWins?.length > 0 && (
           <div className="section" style={{marginTop:20}}>
-            <div className="sec-title">Today's Wins</div>
+            <div className="sec-title">Today&apos;s Wins</div>
             <div className="card">
               {seo.todayWins.map((w, i) => (
                 <div className="win" key={i}>

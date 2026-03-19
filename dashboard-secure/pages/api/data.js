@@ -1,22 +1,58 @@
 /**
  * /api/data — Single API endpoint for all dashboard data
- * Reads from bundled public/snapshot.json (updated by deploy-time cron)
+ * Fetches live from GitHub raw (decoupled from deploys)
+ * Falls back to bundled public/snapshot.json if GitHub fetch fails
  */
 
 import fs from 'fs'
 import path from 'path'
 
-let SNAPSHOT = null
+const GITHUB_RAW_URL = 'https://raw.githubusercontent.com/weetbixsnr-cmyk/cairr-command-centre/agent/command-centre/data/snapshot.json'
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN || ''
+
+// Fallback: bundled snapshot from deploy time
+let BUNDLED_SNAPSHOT = null
 try {
   const bundledPath = path.resolve(process.cwd(), 'public', 'snapshot.json')
   if (fs.existsSync(bundledPath)) {
-    SNAPSHOT = JSON.parse(fs.readFileSync(bundledPath, 'utf8'))
+    BUNDLED_SNAPSHOT = JSON.parse(fs.readFileSync(bundledPath, 'utf8'))
   }
 } catch {}
 
+// In-memory cache (5 min TTL)
+let cachedSnapshot = null
+let cacheExpiry = 0
+
+async function getSnapshot() {
+  const now = Date.now()
+  if (cachedSnapshot && now < cacheExpiry) {
+    return cachedSnapshot
+  }
+
+  try {
+    const headers = { 'Cache-Control': 'no-cache' }
+    if (GITHUB_TOKEN) {
+      headers['Authorization'] = `token ${GITHUB_TOKEN}`
+    }
+    const res = await fetch(GITHUB_RAW_URL, {
+      headers,
+      signal: AbortSignal.timeout(5000)
+    })
+    if (res.ok) {
+      cachedSnapshot = await res.json()
+      cacheExpiry = now + 5 * 60 * 1000 // 5 min cache
+      return cachedSnapshot
+    }
+  } catch {}
+
+  // Fallback to bundled
+  return BUNDLED_SNAPSHOT
+}
+
 export default async function handler(req, res) {
-  // Short cache — snapshot updates with each deploy (~5 min)
   res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=300')
+
+  const SNAPSHOT = await getSnapshot()
 
   if (!SNAPSHOT) {
     return res.status(503).json({ error: 'No snapshot available' })

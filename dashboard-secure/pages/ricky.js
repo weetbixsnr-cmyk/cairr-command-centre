@@ -186,7 +186,7 @@ export default function RickyPage() {
           {/* ── Agent Fleet ── */}
           <Section title={`Agent Fleet (${fh?.total || 0} agents)`}>
             <table>
-              <thead><tr><th></th><th>Agent</th><th>Model</th><th>Sessions</th><th>Context</th><th>Heartbeat</th><th>Gov</th><th>Last Active</th></tr></thead>
+              <thead><tr><th></th><th>Agent</th><th>Model</th><th>Sessions</th><th>Context</th><th>🗜️</th><th>Heartbeat</th><th>Gov</th><th>Last Active</th></tr></thead>
               <tbody>
                 {fh?.agents?.map((agent, i) => {
                   const agentSess = sess?.byAgent?.[agent.name]
@@ -206,6 +206,9 @@ export default function RickyPage() {
                             {agentSess.avgContextPct}%
                           </span>
                         ) : '—'}
+                      </td>
+                      <td style={{ color: (agentSess?.compactionCount || 0) >= 2 ? '#ef4444' : (agentSess?.compactionCount || 0) >= 1 ? '#f59e0b' : '#555' }}>
+                        {agentSess?.compactionCount || 0}
                       </td>
                       <td><span className={`tag ${hb === 'ok' ? 'ok' : hb === 'disabled' ? 'off' : 'warn'}`}>{hb || '—'}</span></td>
                       <td><span className={`tag ${gov?.status === 'ok' ? 'ok' : 'warn'}`}>{gov?.status || '—'}</span></td>

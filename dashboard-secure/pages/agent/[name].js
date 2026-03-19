@@ -184,25 +184,42 @@ export default function AgentPage() {
           </div>
         </div>
 
-        {/* Active Sessions */}
-        {session?.sessions?.length > 0 && (
-          <div className="section">
-            <div className="sec-title">Active Sessions</div>
-            {session.sessions.map((s, i) => (
-              <div className="session-card" key={i}>
-                <div className="row" style={{borderBottom:'none'}}>
-                  <Light ok={true} />
-                  <span style={{flex:1}}>{s.kind} — {s.model}</span>
-                  <span style={{color:'#555',fontSize:'10px'}}>{s.age}</span>
-                </div>
-                <CtxBar pct={s.contextPct||0} height={4} />
-                <div className="session-meta">
-                  {s.tokensUsed}/{s.tokensMax} ({s.contextPct}%) · {s.cachePct!=null?`${s.cachePct}% cached`:''}
-                </div>
-              </div>
-            ))}
+        {/* Session Health */}
+        <div className="section">
+          <div className="sec-title">Session Health</div>
+          <div style={{ display: 'flex', gap: 12, marginBottom: 10 }}>
+            <div style={{ background: '#111', border: '1px solid #222', borderRadius: 8, padding: '8px 14px', textAlign: 'center' }}>
+              <div style={{ fontSize: 18, fontWeight: 700, color: (session?.sessions?.length || 0) > 0 ? '#3b82f6' : '#555' }}>{session?.sessions?.length || 0}</div>
+              <div style={{ fontSize: 8, color: '#999' }}>Active Sessions</div>
+            </div>
+            <div style={{ background: '#111', border: '1px solid #222', borderRadius: 8, padding: '8px 14px', textAlign: 'center' }}>
+              <div style={{ fontSize: 18, fontWeight: 700, color: (session?.compactionCount || 0) >= 2 ? '#ef4444' : (session?.compactionCount || 0) >= 1 ? '#f59e0b' : '#10b981' }}>{session?.compactionCount || 0}</div>
+              <div style={{ fontSize: 8, color: '#999' }}>Compactions</div>
+            </div>
+            <div style={{ background: '#111', border: '1px solid #222', borderRadius: 8, padding: '8px 14px', textAlign: 'center' }}>
+              <div style={{ fontSize: 18, fontWeight: 700, color: (session?.avgContextPct || 0) > 80 ? '#ef4444' : (session?.avgContextPct || 0) > 50 ? '#f59e0b' : '#10b981' }}>{session?.avgContextPct || 0}%</div>
+              <div style={{ fontSize: 8, color: '#999' }}>Avg Context</div>
+            </div>
           </div>
-        )}
+          {(session?.compactionCount || 0) >= 2 && (
+            <div style={{ fontSize: 9, color: '#ef4444', background: '#1a0a0a', border: '1px solid #ef4444', borderRadius: 6, padding: '6px 10px', marginBottom: 10 }}>
+              ⚠️ 2+ compactions — consider starting a new session
+            </div>
+          )}
+          {session?.sessions?.length > 0 && session.sessions.map((s, i) => (
+            <div className="session-card" key={i}>
+              <div className="row" style={{borderBottom:'none'}}>
+                <Light ok={true} />
+                <span style={{flex:1}}>{s.kind} — {s.model}</span>
+                <span style={{color:'#555',fontSize:'10px'}}>{s.age}</span>
+              </div>
+              <CtxBar pct={s.contextPct||0} height={4} />
+              <div className="session-meta">
+                {s.tokensUsed}/{s.tokensMax} ({s.contextPct}%) · {s.cachePct!=null?`${s.cachePct}% cached`:''}
+              </div>
+            </div>
+          ))}
+        </div>
 
         {/* Action Queue for this agent */}
         {agentActions.length > 0 && (
