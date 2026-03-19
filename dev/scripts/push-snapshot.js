@@ -240,6 +240,39 @@ function parseSessions(statusOutput) {
       byAgent[agent].configModel = model
     }
     
+    // Collect per-agent session detail (for Brain token tracking)
+    const agentSessionDetail = {}
+    for (const s of recentSessions) {
+      const agent = s.agentId
+      if (!agent) continue
+      if (!agentSessionDetail[agent]) agentSessionDetail[agent] = []
+      // Deduplicate: cron run entries share sessionId with parent — skip :run: duplicates
+      if (s.key?.includes(':run:')) continue
+      
+      const sessionType = s.key?.includes('cron:') ? 'cron' :
+                           s.key?.includes('discord:') ? 'discord' :
+                           s.key?.includes('terminal:') ? 'terminal' : 'other'
+      agentSessionDetail[agent].push({
+        key: s.key,
+        type: sessionType,
+        model: s.model,
+        totalTokens: s.totalTokens || 0,
+        inputTokens: s.inputTokens || 0,
+        outputTokens: s.outputTokens || 0,
+        cacheRead: s.cacheRead || 0,
+        cacheWrite: s.cacheWrite || 0,
+        contextTokens: s.contextTokens || 200000,
+        remainingTokens: s.remainingTokens || 0,
+        percentUsed: s.percentUsed || 0,
+        updatedAt: s.updatedAt,
+        age: s.age
+      })
+    }
+    // Attach to byAgent
+    for (const [agent, sessions] of Object.entries(agentSessionDetail)) {
+      if (byAgent[agent]) byAgent[agent].sessionDetail = sessions
+    }
+
     // Read compaction counts from session files
     for (const s of recentSessions) {
       const agent = s.agentId
