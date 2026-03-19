@@ -304,43 +304,44 @@ export default function Dashboard() {
           })}
         </div>
 
-        {/* ── Brain Session Tokens ── */}
+        {/* ── Active Sessions ── */}
         {(() => {
-          const brainSess = sess?.byAgent?.['main']
-          const details = brainSess?.sessionDetail || []
-          if (details.length === 0) return null
+          const allSessions = sess?.byAgent?._allSessions || []
+          if (allSessions.length === 0) return null
+          const AGENT_EMOJIS = { main: '🧠', 'command-centre': '🎯', nbhw: '🔧', bts: '🎓', audit: '🔍', v3dn: '📈', property: '🏠', alpha: '🏗️', gridpilot: '⚡', 'overdue-office': '📋' }
+          const LOC_ICONS = { discord: '💬', cron: '⏰', terminal: '🖥️', signal: '📱', whatsapp: '💬' }
+          const LOC_LABELS = { discord: 'Discord', cron: 'Cron', terminal: 'Terminal', signal: 'Signal', whatsapp: 'WhatsApp' }
           return (
             <div style={{ marginBottom: 20 }}>
-              <div className="sec-t">🧠 Brain — Session Token Usage</div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 10 }}>
-                {details.map((s, i) => {
+              <div className="sec-t">📡 Active Sessions — {allSessions.length} total</div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 8 }}>
+                {allSessions.sort((a, b) => (b.percentUsed || 0) - (a.percentUsed || 0)).map((s, i) => {
                   const pct = s.percentUsed || 0
                   const barColor = pct >= 80 ? '#ef4444' : pct >= 50 ? '#f59e0b' : '#10b981'
-                  const typeLabel = s.type === 'discord' ? '💬 Discord' : s.type === 'terminal' ? '🖥️ Terminal' : s.type === 'cron' ? '⏰ Cron' : '📡 ' + s.type
-                  const ageH = s.age ? Math.floor(s.age / 3600000) : null
-                  const ageLabel = ageH !== null ? (ageH < 1 ? '<1h' : ageH < 24 ? `${ageH}h` : `${Math.floor(ageH/24)}d`) : '—'
+                  const ageH = s.age ? s.age / 3600000 : 0
+                  const ageLabel = ageH < 1 ? '<1h' : ageH < 24 ? `${Math.floor(ageH)}h` : `${Math.floor(ageH / 24)}d`
+                  const emoji = AGENT_EMOJIS[s.agent] || '🤖'
+                  const locIcon = LOC_ICONS[s.location] || '📡'
+                  const locLabel = LOC_LABELS[s.location] || s.location
                   return (
-                    <div key={i} style={{ background: '#111', border: '1px solid #222', borderRadius: 10, padding: 12 }}>
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
-                        <span style={{ fontSize: 12, fontWeight: 700, color: '#fff' }}>{typeLabel}</span>
-                        <span style={{ fontSize: 9, color: '#999' }}>{s.model?.replace('claude-', '') || '?'}</span>
+                    <div key={i} style={{ background: '#111', border: `1px solid ${pct >= 80 ? '#ef4444' : '#222'}`, borderRadius: 10, padding: 10, borderLeft: `3px solid ${barColor}` }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
+                        <span style={{ fontSize: 14 }}>{emoji}</span>
+                        <span style={{ fontSize: 12, fontWeight: 700, color: '#fff', flex: 1 }}>{s.agent}</span>
+                        <span style={{ fontSize: 10, color: '#999' }}>{locIcon} {locLabel}</span>
                       </div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
-                        <span style={{ fontSize: 24, fontWeight: 800, color: barColor }}>{pct}%</span>
-                        <span style={{ fontSize: 9, color: '#999' }}>context used</span>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                        <span style={{ fontSize: 20, fontWeight: 800, color: barColor }}>{pct}%</span>
+                        <div style={{ flex: 1, height: 5, background: '#1a1a1a', borderRadius: 3, overflow: 'hidden' }}>
+                          <div style={{ height: 5, width: `${pct}%`, background: barColor, borderRadius: 3 }}></div>
+                        </div>
                       </div>
-                      <div style={{ height: 6, background: '#1a1a1a', borderRadius: 3, overflow: 'hidden', marginBottom: 8 }}>
-                        <div style={{ height: 6, width: `${pct}%`, background: barColor, borderRadius: 3, transition: 'width 0.3s' }}></div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 9, color: '#999' }}>
+                        <span>{(s.totalTokens / 1000).toFixed(0)}k tokens</span>
+                        <span>{(s.remainingTokens / 1000).toFixed(0)}k remaining</span>
+                        <span>{s.model?.replace('claude-', '').replace('-20250514', '') || '?'}</span>
+                        <span>{ageLabel}</span>
                       </div>
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 4, fontSize: 9 }}>
-                        <div><span style={{ color: '#999' }}>Total:</span> <span style={{ color: '#fff' }}>{(s.totalTokens / 1000).toFixed(1)}k</span></div>
-                        <div><span style={{ color: '#999' }}>Remaining:</span> <span style={{ color: '#fff' }}>{(s.remainingTokens / 1000).toFixed(1)}k</span></div>
-                        <div><span style={{ color: '#999' }}>Cache read:</span> <span style={{ color: '#3b82f6' }}>{(s.cacheRead / 1000).toFixed(1)}k</span></div>
-                        <div><span style={{ color: '#999' }}>Cache write:</span> <span style={{ color: '#f59e0b' }}>{(s.cacheWrite / 1000).toFixed(1)}k</span></div>
-                        <div><span style={{ color: '#999' }}>In/Out:</span> <span style={{ color: '#fff' }}>{s.inputTokens}/{s.outputTokens}</span></div>
-                        <div><span style={{ color: '#999' }}>Age:</span> <span style={{ color: '#fff' }}>{ageLabel}</span></div>
-                      </div>
-                      <div style={{ fontSize: 7, color: '#777', marginTop: 6, wordBreak: 'break-all' }}>{s.key}</div>
                     </div>
                   )
                 })}

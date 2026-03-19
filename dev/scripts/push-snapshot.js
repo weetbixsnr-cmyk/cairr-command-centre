@@ -272,6 +272,44 @@ function parseSessions(statusOutput) {
     for (const [agent, sessions] of Object.entries(agentSessionDetail)) {
       if (byAgent[agent]) byAgent[agent].sessionDetail = sessions
     }
+    
+    // Build a flat list of ALL active sessions for the dashboard
+    const allActiveSessions = []
+    for (const s of recentSessions) {
+      if (s.key?.includes(':run:')) continue // skip cron run dupes
+      const key = s.key || ''
+      let location = 'unknown'
+      let channelId = null
+      if (key.includes('discord:channel:')) {
+        channelId = key.split('channel:')[1]?.split(':')[0]
+        location = 'discord'
+      } else if (key.includes('cron:')) {
+        location = 'cron'
+      } else if (key.includes('terminal')) {
+        location = 'terminal'
+      } else if (key.includes('signal')) {
+        location = 'signal'
+      } else if (key.includes('whatsapp')) {
+        location = 'whatsapp'
+      }
+      allActiveSessions.push({
+        agent: s.agentId,
+        key,
+        location,
+        channelId,
+        model: s.model,
+        totalTokens: s.totalTokens || 0,
+        remainingTokens: s.remainingTokens || 0,
+        percentUsed: s.percentUsed || 0,
+        contextTokens: s.contextTokens || 200000,
+        inputTokens: s.inputTokens || 0,
+        outputTokens: s.outputTokens || 0,
+        cacheRead: s.cacheRead || 0,
+        updatedAt: s.updatedAt,
+        age: s.age
+      })
+    }
+    byAgent._allSessions = allActiveSessions
 
     // Read compaction counts from session files
     for (const s of recentSessions) {
