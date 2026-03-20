@@ -1,4 +1,4 @@
-# Governance Drift — 2026-03-20 16:13
+# Governance Drift — 2026-03-21 04:00
 ❌ alpha:
   ❌ FRAMEWORK.md DRIFTED (agent ≠ Brain)
 
