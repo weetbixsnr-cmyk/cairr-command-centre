@@ -1,10 +1,10 @@
-# Governance Drift — 2026-03-21 04:00
+# Governance Drift — 2026-03-22 04:00
 ❌ alpha:
   ❌ FRAMEWORK.md DRIFTED (agent ≠ Brain)
 
 ❌ audit:
   ❌ FRAMEWORK.md DRIFTED (agent ≠ Brain)
-  ⚠️ SOUL.md is 82 lines (limit 60)
+  ⚠️ SOUL.md is 83 lines (limit 60)
 
 ❌ bts:
   ❌ FRAMEWORK.md DRIFTED (agent ≠ Brain)
