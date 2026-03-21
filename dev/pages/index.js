@@ -72,7 +72,7 @@ export default function Dashboard() {
 
   const now = new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })
   const staleMinutes = snap?.timestamp ? Math.floor((Date.now() - new Date(snap.timestamp).getTime()) / 60000) : null
-  const isStale = staleMinutes !== null && staleMinutes > 10
+  const isStale = staleMinutes !== null && staleMinutes > 250
 
   const fh = snap?.fleetHealth
   const healthPct = fh?.pct ?? '—'
