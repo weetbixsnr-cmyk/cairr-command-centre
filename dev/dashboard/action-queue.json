@@ -111,5 +111,16 @@
     "title": "Lent $400 from 7089 wallet to Dad wallet \u2014 needs repaying",
     "created": "2026-03-17T06:57+11:00",
     "status": "pending"
+  },
+  {
+    "id": "aq-012",
+    "type": "task",
+    "priority": "medium",
+    "source": "gridpilot",
+    "title": "Delete old repo weetbixsnr-cmyk/GridPilot-Benchmark — migrated to Gridpilotau/GridPilot-Benchmark",
+    "created": "2026-03-22T10:38+11:00",
+    "status": "pending",
+    "due_date": "2026-03-29",
+    "note": "1 week grace period. Confirm new repo works before deleting."
   }
 ]
