@@ -965,6 +965,7 @@ const snapshot = {
   btsCompetitors: readJSON(path.join(PIPELINE, 'bts-competitors.json')),
   btsKeywords: parseBtsKeywordTracker(),
   btsPublishLedger: computePublishLedgerStats('bts-publish-ledger.json'),
+  cairrFinance: readJSON(path.join(DASHBOARD_DATA, 'cairr-finance.json')),
 }
 
 // ── Write snapshot + bundle into dashboard + push to GitHub ──

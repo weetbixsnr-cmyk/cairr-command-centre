@@ -1,0 +1,45 @@
+{
+  "lastUpdated": "2026-03-22T05:00:00Z",
+  "source": "manual",
+  "currency": "AUD",
+  "stripe": {
+    "connected": false,
+    "note": "Stripe activated 22 Mar 2026 — API keys pending from Bitwarden"
+  },
+  "clients": [
+    {
+      "name": "Sunny (BTS)",
+      "company": "Better Training Solutions",
+      "plan": "£300/mo",
+      "amountAUD": 580,
+      "currency": "GBP",
+      "amountOriginal": 300,
+      "status": "active",
+      "startDate": "2026-03-22",
+      "type": "recurring",
+      "stripeSubscriptionId": null
+    }
+  ],
+  "mrr": {
+    "current": 580,
+    "target": 2000,
+    "currency": "AUD",
+    "note": "£300 GBP ≈ $580 AUD at current rates"
+  },
+  "expenses": {
+    "recurring": [
+      { "name": "Google Workspace", "amount": 11.80, "frequency": "monthly", "category": "infra" },
+      { "name": "cairr.ai domain", "amount": 12.00, "frequency": "monthly", "category": "infra", "note": "~$144/yr" },
+      { "name": "Anthropic API", "amount": 50.00, "frequency": "monthly", "category": "api", "note": "Estimated avg" },
+      { "name": "Vercel Pro", "amount": 20.00, "frequency": "monthly", "category": "infra" },
+      { "name": "OpenAI API", "amount": 10.00, "frequency": "monthly", "category": "api", "note": "Estimated avg" }
+    ],
+    "totalMonthly": 103.80
+  },
+  "pl": {
+    "monthlyIncome": 580,
+    "monthlyExpenses": 103.80,
+    "monthlyProfit": 476.20,
+    "margin": 81.8
+  }
+}
