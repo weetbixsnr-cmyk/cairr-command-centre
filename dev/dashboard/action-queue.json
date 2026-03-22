@@ -122,5 +122,23 @@
     "status": "pending",
     "due_date": "2026-03-29",
     "note": "1 week grace period. Confirm new repo works before deleting."
+  },
+  {
+    "id": "aq-013",
+    "type": "invoice",
+    "priority": "medium",
+    "source": "nbhw",
+    "title": "Invoice Elanora — Saturday callout",
+    "created": "2026-03-22T22:01+11:00",
+    "status": "pending"
+  },
+  {
+    "id": "aq-014",
+    "type": "task",
+    "priority": "medium",
+    "source": "nbhw",
+    "title": "Call back the quote that came through",
+    "created": "2026-03-22T22:58+11:00",
+    "status": "pending"
   }
 ]
