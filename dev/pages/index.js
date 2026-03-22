@@ -102,8 +102,9 @@ export default function Dashboard() {
           .stale{color:#ef4444 !important}
           .live-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:6px;animation:pulse 2s infinite}
           @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
-          .nav{display:flex;gap:8px;margin-bottom:14px}
-          .nav a{font-size:10px;padding:4px 10px;background:#111;border:1px solid #222;border-radius:6px}
+          .nav{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+          .nav::-webkit-scrollbar{display:none}
+          .nav a{font-size:10px;padding:4px 10px;background:#111;border:1px solid #222;border-radius:6px;white-space:nowrap;flex-shrink:0}
           .nav a:hover{border-color:#3b82f6}
 
           /* ── Status Strip (Row 1) ── */
@@ -167,7 +168,25 @@ export default function Dashboard() {
           .aq-btn.complete{color:#3b82f6;border-color:#3b82f6}.aq-btn.complete:hover{background:#0e1a2e}
           .aq-btn.snooze{color:#f59e0b;border-color:#f59e0b}.aq-btn.snooze:hover{background:#2a2000}
 
+          .sess-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px}
           .footer{font-size:8px;color:#1a1a1a;text-align:right;margin-top:16px}
+
+          /* ── Mobile ── */
+          @media(max-width:480px){
+            body{padding:10px 12px}
+            h1{font-size:15px}
+            .strip-item{min-width:calc(50% - 4px);padding:6px 10px}
+            .strip-val{font-size:16px}
+            .acard-stats{grid-template-columns:repeat(2,1fr)}
+            .acard-stat-lbl{font-size:7px}
+            .aq-row{flex-wrap:wrap;gap:4px}
+            .aq-src{min-width:auto}
+            .aq-text{min-width:100%;order:3}
+            .aq-btns{order:4;width:100%;justify-content:flex-end;margin-top:2px}
+            .build-label{font-size:8px}
+            .sec-t{font-size:10px}
+            .sess-grid{grid-template-columns:1fr}
+          }
         `}</style>
       </Head>
 
@@ -320,7 +339,7 @@ export default function Dashboard() {
           return (
             <div style={{ marginBottom: 20 }}>
               <div className="sec-t">📡 Active Sessions — {allSessions.length} total</div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 8 }}>
+              <div className="sess-grid">
                 {allSessions.sort((a, b) => (b.percentUsed || 0) - (a.percentUsed || 0)).map((s, i) => {
                   const pct = s.percentUsed || 0
                   const barColor = pct >= 80 ? '#ef4444' : pct >= 50 ? '#f59e0b' : '#10b981'

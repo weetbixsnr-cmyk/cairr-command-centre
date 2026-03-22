@@ -443,8 +443,9 @@ export default function FleetPage() {
           body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#08080a;color:#e0e0e0;padding:16px 20px}
           a{color:#3b82f6;text-decoration:none}a:hover{text-decoration:underline}
           
-          .nav{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
-          .nav a{font-size:10px;padding:4px 10px;background:#111;border:1px solid #222;border-radius:6px}
+          .nav{display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+          .nav::-webkit-scrollbar{display:none}
+          .nav a{font-size:10px;padding:4px 10px;background:#111;border:1px solid #222;border-radius:6px;white-space:nowrap;flex-shrink:0}
           .nav a:hover{border-color:#3b82f6}
           .nav a.active{border-color:#a855f7;color:#a855f7}
           
@@ -585,6 +586,16 @@ export default function FleetPage() {
           .commit-time{color:#888;font-size:8px;flex-shrink:0}
           
           .footer{font-size:8px;color:#1a1a1a;text-align:right;margin-top:24px}
+
+          @media(max-width:480px){
+            body{padding:10px 12px}
+            .floor-header h1{font-size:17px}
+            .floor-stats{flex-wrap:wrap}
+            .stat{min-width:calc(50% - 4px)}
+            .stat-val{font-size:16px}
+            .score-grid{grid-template-columns:repeat(2,1fr)}
+            .panel{width:100vw}
+          }
         `}</style>
       </Head>
 

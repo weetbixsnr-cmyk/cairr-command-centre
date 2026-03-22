@@ -62,8 +62,9 @@ export default function CairrFinance() {
           .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px}
           h1{font-size:18px;color:#fff}
           .meta{font-size:9px;color:#888}
-          .nav{display:flex;gap:8px;margin-bottom:14px}
-          .nav a{font-size:10px;padding:4px 10px;background:#111;border:1px solid #222;border-radius:6px}
+          .nav{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+          .nav::-webkit-scrollbar{display:none}
+          .nav a{font-size:10px;padding:4px 10px;background:#111;border:1px solid #222;border-radius:6px;white-space:nowrap;flex-shrink:0}
           .nav a:hover{border-color:#3b82f6}
           .nav a.active{border-color:#10b981;color:#10b981}
 
@@ -107,6 +108,18 @@ export default function CairrFinance() {
           .stripe-pending{background:#2a2000;color:#f59e0b}
 
           .footer{font-size:8px;color:#1a1a1a;text-align:right;margin-top:16px}
+
+          @media(max-width:480px){
+            body{padding:10px 12px}
+            .strip{gap:6px}
+            .strip-item{min-width:calc(50% - 3px);padding:8px 10px}
+            .strip-val{font-size:18px}
+            .client-row{flex-wrap:wrap;gap:6px}
+            .client-avatar{width:30px;height:30px;font-size:13px}
+            .client-amount{font-size:14px}
+            .expense-row{flex-wrap:wrap}
+            .expense-note{min-width:auto;margin-left:0;margin-top:2px;width:100%}
+          }
         `}</style>
       </Head>
 

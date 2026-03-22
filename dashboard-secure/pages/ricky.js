@@ -80,8 +80,9 @@ export default function RickyPage() {
           .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px}
           .top h1{font-size:18px;color:#fff}
           .meta{font-size:9px;color:#888}
-          .nav{display:flex;gap:8px;margin-bottom:16px}
-          .nav a{font-size:10px;padding:4px 10px;background:#111;border:1px solid #222;border-radius:6px}
+          .nav{display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+          .nav::-webkit-scrollbar{display:none}
+          .nav a{font-size:10px;padding:4px 10px;background:#111;border:1px solid #222;border-radius:6px;white-space:nowrap;flex-shrink:0}
           .nav a:hover{border-color:#3b82f6}
           .nav a.active{border-color:#a855f7;color:#a855f7}
 
