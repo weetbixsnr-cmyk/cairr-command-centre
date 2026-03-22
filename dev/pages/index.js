@@ -186,6 +186,7 @@ export default function Dashboard() {
           <a href="/fleet">🏢 Fleet</a>
           <a href="/system">🔌 System</a>
           <a href="/ricky">🧠 Ricky</a>
+          <a href="/cairr-finance">💰 CAIRR Finance</a>
         </div>
 
         {/* ── Status Strip ── */}
