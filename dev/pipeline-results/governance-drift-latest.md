@@ -1,4 +1,4 @@
-# Governance Drift — 2026-03-22 04:00
+# Governance Drift — 2026-03-23 04:00
 ❌ alpha:
   ❌ FRAMEWORK.md DRIFTED (agent ≠ Brain)
 
@@ -13,9 +13,7 @@
   ❌ FRAMEWORK.md DRIFTED (agent ≠ Brain)
   ⚠️ MEMORY.md is 95 lines (limit 80)
 
-❌ gridpilot:
-  ❌ FRAMEWORK.md DRIFTED (agent ≠ Brain)
-
+✅ gridpilot: governance aligned
 ❌ nbhw:
   ❌ FRAMEWORK.md DRIFTED (agent ≠ Brain)
   ⚠️ MEMORY.md is 105 lines (limit 80)
