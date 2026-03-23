@@ -1,0 +1,31 @@
+{
+  "timestamp": "2026-03-23T10:26:00Z",
+  "source": "placeholder",
+  "note": "Waiting for NBHW full SEO audit results — skill suite running",
+  "healthScore": null,
+  "healthBreakdown": {
+    "technical": null,
+    "content": null,
+    "onPage": null,
+    "schema": null,
+    "performance": null,
+    "aiSearch": null,
+    "images": null
+  },
+  "geoScore": null,
+  "geoBreakdown": {
+    "citability": null,
+    "structure": null,
+    "multiModal": null,
+    "authority": null,
+    "technicalAccess": null
+  },
+  "crawlers": [],
+  "schema": {
+    "implemented": [],
+    "missing": [],
+    "deprecated": []
+  },
+  "actions": [],
+  "history": []
+}

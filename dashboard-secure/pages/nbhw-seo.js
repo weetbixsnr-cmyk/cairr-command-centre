@@ -83,7 +83,8 @@ export default function NbhwSeoPage() {
   const ledger = snap?.nbhwPublishLedger
   const live = snap?.nbhwLive
   const kw = snap?.nbhwKeywords
-  const [tab, setTab] = useState('rankings')
+  const audit = snap?.nbhwSeoAudit
+  const [tab, setTab] = useState('health')
 
   const coreAt1 = seo?.coreKeywords?.filter(k => k.position === 1).length || 0
   const coreTotal = seo?.coreKeywords?.length || 0
@@ -158,13 +159,242 @@ export default function NbhwSeoPage() {
         </div>
 
         {/* Tab navigation */}
-        <div style={{display:'flex',gap:6,marginBottom:16}}>
+        <div style={{display:'flex',gap:6,marginBottom:16,overflowX:'auto',WebkitOverflowScrolling:'touch',scrollbarWidth:'none'}}>
+          <TabButton active={tab==='health'} label="🏥 Site Health" onClick={() => setTab('health')} />
           <TabButton active={tab==='rankings'} label="📊 Rankings" onClick={() => setTab('rankings')} />
           <TabButton active={tab==='matrix'} label="📍 Coverage Matrix" onClick={() => setTab('matrix')} />
           <TabButton active={tab==='framework'} label="📋 Framework" onClick={() => setTab('framework')} />
           <TabButton active={tab==='competitors'} label="🏆 Competitors" onClick={() => setTab('competitors')} />
           <TabButton active={tab==='safety'} label={`🛡️ Google Safety${ledger?.status === 'red' ? ' 🔴' : ledger?.status === 'amber' ? ' 🟡' : ''}`} onClick={() => setTab('safety')} />
         </div>
+
+        {/* TAB: Site Health */}
+        {tab === 'health' && (
+          <>
+            {/* Hero Gauges */}
+            <div className="grid2" style={{marginBottom:16}}>
+              {/* SEO Health Score */}
+              <div className="card" style={{textAlign:'center',padding:20}}>
+                <div style={{fontSize:10,color:'#555',fontWeight:600,textTransform:'uppercase',letterSpacing:1,marginBottom:12}}>SEO Health Score</div>
+                {(() => {
+                  const score = audit?.healthScore
+                  const hasData = score != null
+                  const color = !hasData ? '#333' : score >= 80 ? '#10b981' : score >= 50 ? '#f59e0b' : '#ef4444'
+                  const circumference = 2 * Math.PI * 54
+                  const offset = hasData ? circumference - (score / 100) * circumference : circumference
+                  return (
+                    <>
+                      <div style={{position:'relative',width:130,height:130,margin:'0 auto'}}>
+                        <svg width="130" height="130" viewBox="0 0 120 120">
+                          <circle cx="60" cy="60" r="54" fill="none" stroke="#1a1a22" strokeWidth="8" />
+                          <circle cx="60" cy="60" r="54" fill="none" stroke={color} strokeWidth="8"
+                            strokeDasharray={circumference} strokeDashoffset={offset}
+                            strokeLinecap="round" transform="rotate(-90 60 60)"
+                            style={{transition:'stroke-dashoffset 1s ease'}} />
+                        </svg>
+                        <div style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)',textAlign:'center'}}>
+                          <div style={{fontSize:32,fontWeight:800,color}}>{hasData ? score : '—'}</div>
+                          <div style={{fontSize:8,color:'#888',letterSpacing:1}}>/ 100</div>
+                        </div>
+                      </div>
+                      {/* Category breakdown bars */}
+                      <div style={{marginTop:14,textAlign:'left'}}>
+                        {['technical','content','onPage','schema','performance','aiSearch','images'].map(cat => {
+                          const val = audit?.healthBreakdown?.[cat]
+                          const label = cat === 'onPage' ? 'On-Page' : cat === 'aiSearch' ? 'AI Search' : cat.charAt(0).toUpperCase() + cat.slice(1)
+                          const c = val == null ? '#333' : val >= 80 ? '#10b981' : val >= 50 ? '#f59e0b' : '#ef4444'
+                          return (
+                            <div key={cat} style={{display:'flex',alignItems:'center',gap:8,marginBottom:5}}>
+                              <span style={{fontSize:9,color:'#999',minWidth:70,textAlign:'right'}}>{label}</span>
+                              <div style={{flex:1,height:6,background:'#1a1a1a',borderRadius:3,overflow:'hidden'}}>
+                                <div style={{height:6,width:val != null ? `${val}%` : '0%',background:c,borderRadius:3,transition:'width 0.5s'}}></div>
+                              </div>
+                              <span style={{fontSize:9,color:c,fontWeight:700,minWidth:28}}>{val != null ? val : '—'}</span>
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </>
+                  )
+                })()}
+              </div>
+
+              {/* GEO Readiness Score */}
+              <div className="card" style={{textAlign:'center',padding:20}}>
+                <div style={{fontSize:10,color:'#555',fontWeight:600,textTransform:'uppercase',letterSpacing:1,marginBottom:12}}>GEO Readiness — AI Search</div>
+                {(() => {
+                  const score = audit?.geoScore
+                  const hasData = score != null
+                  const color = !hasData ? '#333' : score >= 70 ? '#10b981' : score >= 40 ? '#f59e0b' : '#ef4444'
+                  const circumference = 2 * Math.PI * 54
+                  const offset = hasData ? circumference - (score / 100) * circumference : circumference
+                  return (
+                    <>
+                      <div style={{position:'relative',width:130,height:130,margin:'0 auto'}}>
+                        <svg width="130" height="130" viewBox="0 0 120 120">
+                          <circle cx="60" cy="60" r="54" fill="none" stroke="#1a1a22" strokeWidth="8" />
+                          <circle cx="60" cy="60" r="54" fill="none" stroke={color} strokeWidth="8"
+                            strokeDasharray={circumference} strokeDashoffset={offset}
+                            strokeLinecap="round" transform="rotate(-90 60 60)"
+                            style={{transition:'stroke-dashoffset 1s ease'}} />
+                        </svg>
+                        <div style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)',textAlign:'center'}}>
+                          <div style={{fontSize:32,fontWeight:800,color}}>{hasData ? score : '—'}</div>
+                          <div style={{fontSize:8,color:'#888',letterSpacing:1}}>/ 100</div>
+                        </div>
+                      </div>
+                      {/* Pillar breakdown bars */}
+                      <div style={{marginTop:14,textAlign:'left'}}>
+                        {['citability','structure','multiModal','authority','technicalAccess'].map(pillar => {
+                          const val = audit?.geoBreakdown?.[pillar]
+                          const label = pillar === 'multiModal' ? 'Multi-Modal' : pillar === 'technicalAccess' ? 'Tech Access' : pillar.charAt(0).toUpperCase() + pillar.slice(1)
+                          const c = val == null ? '#333' : val >= 70 ? '#10b981' : val >= 40 ? '#f59e0b' : '#ef4444'
+                          return (
+                            <div key={pillar} style={{display:'flex',alignItems:'center',gap:8,marginBottom:5}}>
+                              <span style={{fontSize:9,color:'#999',minWidth:70,textAlign:'right'}}>{label}</span>
+                              <div style={{flex:1,height:6,background:'#1a1a1a',borderRadius:3,overflow:'hidden'}}>
+                                <div style={{height:6,width:val != null ? `${val}%` : '0%',background:c,borderRadius:3,transition:'width 0.5s'}}></div>
+                              </div>
+                              <span style={{fontSize:9,color:c,fontWeight:700,minWidth:28}}>{val != null ? val : '—'}</span>
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </>
+                  )
+                })()}
+              </div>
+            </div>
+
+            {/* AI Crawler Status */}
+            <div className="section">
+              <div className="sec-title">🤖 AI Crawler Access</div>
+              <div className="card">
+                {audit?.crawlers?.length > 0 ? (
+                  <div style={{display:'flex',gap:6,flexWrap:'wrap'}}>
+                    {audit.crawlers.map((c, i) => (
+                      <span key={i} style={{
+                        fontSize:10,padding:'4px 10px',borderRadius:6,fontWeight:600,
+                        background: c.allowed ? '#0a2a1a' : '#3b1010',
+                        color: c.allowed ? '#10b981' : '#ef4444',
+                        border: `1px solid ${c.allowed ? '#10b981' : '#ef4444'}`
+                      }}>
+                        {c.allowed ? '✅' : '❌'} {c.name}
+                      </span>
+                    ))}
+                  </div>
+                ) : (
+                  <div style={{color:'#555',fontSize:11,fontStyle:'italic',textAlign:'center',padding:8}}>
+                    Awaiting audit results…
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Action Plan + Schema Status */}
+            <div className="grid2" style={{marginBottom:16}}>
+              {/* Action Plan */}
+              <div className="card">
+                <div style={{fontSize:10,color:'#555',fontWeight:600,textTransform:'uppercase',letterSpacing:1,marginBottom:10}}>📋 Action Plan</div>
+                {audit?.actions?.length > 0 ? (
+                  <>
+                    {['critical','high','medium','low'].map(sev => {
+                      const items = audit.actions.filter(a => a.severity === sev)
+                      if (items.length === 0) return null
+                      const sevColor = sev === 'critical' ? '#ef4444' : sev === 'high' ? '#f59e0b' : sev === 'medium' ? '#3b82f6' : '#888'
+                      const sevIcon = sev === 'critical' ? '🔴' : sev === 'high' ? '🟠' : sev === 'medium' ? '🟡' : '⚪'
+                      return (
+                        <div key={sev} style={{marginBottom:8}}>
+                          <div style={{fontSize:9,color:sevColor,fontWeight:700,textTransform:'uppercase',letterSpacing:1,marginBottom:4}}>
+                            {sevIcon} {sev} ({items.length})
+                          </div>
+                          {items.map((item, i) => (
+                            <div key={i} style={{fontSize:10,color:'#aaa',padding:'3px 0',borderBottom:'1px solid #1a1a1a',display:'flex',gap:6}}>
+                              <span style={{flex:1}}>{item.title}</span>
+                              {item.page && <span style={{fontSize:8,color:'#555',fontFamily:'monospace'}}>{item.page}</span>}
+                            </div>
+                          ))}
+                        </div>
+                      )
+                    })}
+                  </>
+                ) : (
+                  <div style={{color:'#555',fontSize:11,fontStyle:'italic',textAlign:'center',padding:16}}>
+                    Awaiting audit results…
+                  </div>
+                )}
+              </div>
+
+              {/* Schema Status */}
+              <div className="card">
+                <div style={{fontSize:10,color:'#555',fontWeight:600,textTransform:'uppercase',letterSpacing:1,marginBottom:10}}>
+                  🏗️ Schema Markup
+                  {(audit?.schema?.implemented?.length > 0 || audit?.schema?.missing?.length > 0) && (
+                    <span style={{fontSize:9,color:'#888',fontWeight:400,marginLeft:8}}>
+                      {audit.schema.implemented.length}/{audit.schema.implemented.length + audit.schema.missing.length} implemented
+                    </span>
+                  )}
+                </div>
+                {(audit?.schema?.implemented?.length > 0 || audit?.schema?.missing?.length > 0) ? (
+                  <>
+                    {audit.schema.implemented.map((s, i) => (
+                      <div key={`i-${i}`} style={{fontSize:10,color:'#10b981',padding:'3px 0',borderBottom:'1px solid #1a1a1a'}}>
+                        ✅ {s}
+                      </div>
+                    ))}
+                    {audit.schema.missing.map((s, i) => (
+                      <div key={`m-${i}`} style={{fontSize:10,color:'#ef4444',padding:'3px 0',borderBottom:'1px solid #1a1a1a'}}>
+                        ❌ {s}
+                      </div>
+                    ))}
+                    {audit.schema.deprecated?.map((s, i) => (
+                      <div key={`d-${i}`} style={{fontSize:10,color:'#f59e0b',padding:'3px 0',borderBottom:'1px solid #1a1a1a'}}>
+                        ⚠️ {s} (deprecated)
+                      </div>
+                    ))}
+                  </>
+                ) : (
+                  <div style={{color:'#555',fontSize:11,fontStyle:'italic',textAlign:'center',padding:16}}>
+                    Awaiting audit results…
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Score Trend */}
+            <div className="section">
+              <div className="sec-title">📈 Score Trend</div>
+              <div className="card" style={{textAlign:'center',padding:20}}>
+                {audit?.history?.length > 1 ? (
+                  <div style={{display:'flex',alignItems:'flex-end',gap:3,justifyContent:'center',height:80}}>
+                    {audit.history.map((h, i) => {
+                      const barH = Math.max(4, (h.healthScore / 100) * 70)
+                      const c = h.healthScore >= 80 ? '#10b981' : h.healthScore >= 50 ? '#f59e0b' : '#ef4444'
+                      return (
+                        <div key={i} style={{display:'flex',flexDirection:'column',alignItems:'center',gap:2}}>
+                          <div style={{width:12,height:barH,background:c,borderRadius:2}}></div>
+                          <span style={{fontSize:7,color:'#555'}}>{new Date(h.timestamp).getDate()}/{new Date(h.timestamp).getMonth()+1}</span>
+                        </div>
+                      )
+                    })}
+                  </div>
+                ) : (
+                  <div style={{color:'#333',fontSize:11}}>
+                    <div style={{fontSize:24,marginBottom:8}}>📊</div>
+                    Trend data collecting… scores will appear here as audits run
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Data source notice */}
+            {audit?.source === 'placeholder' && (
+              <div style={{textAlign:'center',padding:12,background:'#111',border:'1px solid #222',borderRadius:8,marginTop:8}}>
+                <span style={{fontSize:10,color:'#f59e0b'}}>⏳ Awaiting NBHW SEO audit results — panels will populate automatically when data lands</span>
+              </div>
+            )}
+          </>
+        )}
 
         {/* TAB 1: Rankings */}
         {tab === 'rankings' && (

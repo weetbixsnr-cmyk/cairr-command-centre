@@ -966,6 +966,7 @@ const snapshot = {
   btsKeywords: parseBtsKeywordTracker(),
   btsPublishLedger: computePublishLedgerStats('bts-publish-ledger.json'),
   cairrFinance: readJSON(path.join(DASHBOARD_DATA, 'cairr-finance.json')),
+  nbhwSeoAudit: readJSON(path.join(DASHBOARD_DATA, 'nbhw-seo-audit.json')),
 }
 
 // ── Write snapshot + bundle into dashboard + push to GitHub ──
