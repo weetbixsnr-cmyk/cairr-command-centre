@@ -159,8 +159,68 @@ export default function BtsSeoPage() {
           </div>
         </div>
 
+        {/* Publish Safety Strip — always visible */}
+        {(() => {
+          const btsL = snap?.btsPublishLedger
+          const st = btsL?.status || 'green'
+          const brC = st === 'red' ? '#ef4444' : st === 'amber' ? '#f59e0b' : '#10b981'
+          return (
+            <div style={{display:'flex',gap:8,marginBottom:16,flexWrap:'wrap'}}>
+              <div style={{flex:1,minWidth:140,background:'#0d0d10',border:`1px solid ${brC}33`,borderRadius:8,padding:'8px 14px',borderLeft:`3px solid ${brC}`}}>
+                <div style={{display:'flex',alignItems:'center',gap:6}}>
+                  <span style={{fontSize:18,fontWeight:800,color:brC}}>{btsL?.last7d?.pages || 0}/{btsL?.weeklyPageLimit || 3}</span>
+                  <span style={{fontSize:9,color:'#888'}}>pages this week</span>
+                </div>
+                <div style={{height:4,background:'#1a1a1a',borderRadius:2,marginTop:4,overflow:'hidden'}}>
+                  <div style={{height:4,width:`${Math.min(100,((btsL?.last7d?.pages||0)/(btsL?.weeklyPageLimit||3))*100)}%`,background:brC,borderRadius:2}}></div>
+                </div>
+              </div>
+              <div style={{flex:1,minWidth:140,background:'#0d0d10',border:`1px solid ${brC}33`,borderRadius:8,padding:'8px 14px',borderLeft:`3px solid ${brC}`}}>
+                <div style={{display:'flex',alignItems:'center',gap:6}}>
+                  <span style={{fontSize:18,fontWeight:800,color:brC}}>{btsL?.last7d?.blogs || 0}/{btsL?.weeklyBlogLimit || 1}</span>
+                  <span style={{fontSize:9,color:'#888'}}>blogs this week</span>
+                </div>
+                <div style={{height:4,background:'#1a1a1a',borderRadius:2,marginTop:4,overflow:'hidden'}}>
+                  <div style={{height:4,width:`${Math.min(100,((btsL?.last7d?.blogs||0)/(btsL?.weeklyBlogLimit||1))*100)}%`,background:brC,borderRadius:2}}></div>
+                </div>
+              </div>
+              <div style={{minWidth:100,background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:8,padding:'8px 14px',textAlign:'center'}}>
+                <div style={{fontSize:16,fontWeight:800,color:brC}}>{btsL?.statusLabel ? (st === 'green' ? '🟢' : st === 'amber' ? '🟡' : '🔴') : '🟢'}</div>
+                <div style={{fontSize:8,color:'#888',textTransform:'uppercase',letterSpacing:0.5}}>Google Safety</div>
+              </div>
+            </div>
+          )
+        })()}
+
+        {/* Blog Pipeline — always visible */}
+        <div style={{background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:10,padding:14,marginBottom:16}}>
+          <div style={{fontSize:9,color:'#aaa',textTransform:'uppercase',letterSpacing:1.2,marginBottom:8,fontWeight:600,borderBottom:'1px solid #1a1a1a',paddingBottom:3}}>
+            📝 Blog Pipeline — {blogs?.published || 0} published · {(blogs?.planned || []).filter(b => b.status === 'draft' || b.status === 'in-progress').length || 0} drafts · {(blogs?.planned || []).filter(b => b.status === 'not-started').length || 0} planned
+          </div>
+          {blogs?.planned?.length > 0 ? (
+            <div>
+              {blogs.planned.slice(0, 8).map((b, i) => {
+                const sColor = b.status === 'published' ? '#10b981' : b.status === 'draft' || b.status === 'in-progress' ? '#f59e0b' : '#555'
+                const sLabel = b.status === 'published' ? '✅ LIVE' : b.status === 'draft' ? '📝 DRAFT' : b.status === 'in-progress' ? '🔨 WIP' : '⬜ PLANNED'
+                return (
+                  <div key={i} style={{display:'flex',alignItems:'center',gap:8,padding:'5px 0',borderBottom:'1px solid #111',fontSize:11}}>
+                    <span style={{fontSize:9,color:sColor,fontWeight:600,minWidth:70}}>{sLabel}</span>
+                    <span style={{color:'#fff',fontWeight:500,flex:1}}>{b.title}</span>
+                    <span style={{fontSize:9,color:'#888'}}>{b.service}</span>
+                  </div>
+                )
+              })}
+              {blogs.planned.length > 8 && (
+                <div style={{fontSize:9,color:'#555',marginTop:4,textAlign:'right'}}>+{blogs.planned.length - 8} more planned</div>
+              )}
+            </div>
+          ) : (
+            <div style={{color:'#333',fontSize:11,fontStyle:'italic'}}>No blogs in pipeline yet</div>
+          )}
+        </div>
+
         {/* Tab navigation */}
-        <div style={{display:'flex',gap:6,marginBottom:16}}>
+        <div style={{display:'flex',gap:6,marginBottom:16,overflowX:'auto',WebkitOverflowScrolling:'touch',scrollbarWidth:'none'}}>
           <TabButton active={tab==='rankings'} label="📊 Rankings" onClick={() => setTab('rankings')} />
           <TabButton active={tab==='matrix'} label="📍 Coverage Matrix" onClick={() => setTab('matrix')} />
           <TabButton active={tab==='framework'} label="📋 Framework" onClick={() => setTab('framework')} />
