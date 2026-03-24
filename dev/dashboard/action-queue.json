@@ -158,5 +158,23 @@
     "title": "Invoice Kurt",
     "created": "2026-03-24T12:08+11:00",
     "status": "pending"
+  },
+  {
+    "id": "aq-017",
+    "type": "invoice",
+    "priority": "medium",
+    "source": "nbhw",
+    "title": "Invoice David — Elanora",
+    "created": "2026-03-24T18:31+11:00",
+    "status": "pending"
+  },
+  {
+    "id": "aq-018",
+    "type": "task",
+    "priority": "medium",
+    "source": "nbhw",
+    "title": "Jeremy Beacon Hill — Ausgrid / service follow up",
+    "created": "2026-03-24T18:31+11:00",
+    "status": "pending"
   }
 ]
