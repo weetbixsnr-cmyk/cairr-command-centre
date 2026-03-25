@@ -84,6 +84,7 @@ export default function NbhwSeoPage() {
   const live = snap?.nbhwLive
   const kw = snap?.nbhwKeywords
   const audit = snap?.nbhwSeoAudit
+  const traffic = snap?.nbhwTraffic
   const [tab, setTab] = useState('health')
 
   const coreAt1 = seo?.coreKeywords?.filter(k => k.position === 1).length || 0
@@ -385,6 +386,162 @@ export default function NbhwSeoPage() {
                   </div>
                 )}
               </div>
+            </div>
+
+            {/* Page Traffic */}
+            <div className="section">
+              <div className="sec-title">📊 Page Traffic — {traffic?.period || 'Last 30 Days'}</div>
+              {traffic?.totals?.views != null ? (
+                <>
+                  {/* KPI row */}
+                  <div style={{display:'flex',gap:8,marginBottom:12,flexWrap:'wrap'}}>
+                    <div className="stat-card" style={{minWidth:90,flex:1}}>
+                      <div className="stat-val" style={{fontSize:20,color:'#3b82f6'}}>{traffic.totals.views?.toLocaleString()}</div>
+                      <div className="stat-lbl">Page Views</div>
+                    </div>
+                    <div className="stat-card" style={{minWidth:90,flex:1}}>
+                      <div className="stat-val" style={{fontSize:20,color:'#a855f7'}}>{traffic.totals.visitors?.toLocaleString()}</div>
+                      <div className="stat-lbl">Unique Visitors</div>
+                    </div>
+                    <div className="stat-card" style={{minWidth:90,flex:1}}>
+                      <div className="stat-val" style={{fontSize:20,color:'#10b981'}}>{traffic.totals.phoneTaps || 0}</div>
+                      <div className="stat-lbl">📞 Phone Taps</div>
+                    </div>
+                    <div className="stat-card" style={{minWidth:90,flex:1}}>
+                      <div className="stat-val" style={{fontSize:20,color:'#f59e0b'}}>{traffic.totals.emailTaps || 0}</div>
+                      <div className="stat-lbl">✉️ Email Taps</div>
+                    </div>
+                    <div className="stat-card" style={{minWidth:90,flex:1}}>
+                      <div className="stat-val" style={{fontSize:20,color: (traffic.totals.conversionRate || 0) >= 3 ? '#10b981' : (traffic.totals.conversionRate || 0) >= 1 ? '#f59e0b' : '#ef4444'}}>
+                        {traffic.totals.conversionRate?.toFixed(1) || '0'}%
+                      </div>
+                      <div className="stat-lbl">Conversion Rate</div>
+                    </div>
+                  </div>
+
+                  {/* Top Pages table */}
+                  {traffic.pages?.length > 0 && (
+                    <div className="card" style={{marginBottom:12}}>
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>Page</th>
+                            <th>Type</th>
+                            <th>Views</th>
+                            <th>📞</th>
+                            <th>✉️</th>
+                            <th>Trend</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {traffic.pages.slice(0, 15).map((p, i) => {
+                            const maxViews = traffic.pages[0]?.views || 1
+                            const barPct = Math.round((p.views / maxViews) * 100)
+                            const typeColor = p.type === 'suburb' ? '#3b82f6' : p.type === 'blog' ? '#a855f7' : p.type === 'service' ? '#f59e0b' : '#888'
+                            const trendIcon = p.trend === 'up' ? '📈' : p.trend === 'down' ? '📉' : '→'
+                            const trendColor = p.trend === 'up' ? '#10b981' : p.trend === 'down' ? '#ef4444' : '#888'
+                            return (
+                              <tr key={i}>
+                                <td style={{color:'#fff',fontWeight:500,maxWidth:200,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>
+                                  {p.path}
+                                  <div style={{height:3,background:'#1a1a1a',borderRadius:2,marginTop:2,overflow:'hidden'}}>
+                                    <div style={{height:3,width:`${barPct}%`,background:typeColor,borderRadius:2}}></div>
+                                  </div>
+                                </td>
+                                <td><span style={{fontSize:8,color:typeColor,fontWeight:600,textTransform:'uppercase',background:`${typeColor}15`,padding:'2px 5px',borderRadius:3}}>{p.type}</span></td>
+                                <td style={{fontWeight:700}}>{p.views?.toLocaleString()}</td>
+                                <td style={{color:p.phoneTaps > 0 ? '#10b981' : '#333'}}>{p.phoneTaps || 0}</td>
+                                <td style={{color:p.emailTaps > 0 ? '#f59e0b' : '#333'}}>{p.emailTaps || 0}</td>
+                                <td style={{color:trendColor}}>{trendIcon}</td>
+                              </tr>
+                            )
+                          })}
+                        </tbody>
+                      </table>
+                      {traffic.pages.length > 15 && (
+                        <div style={{fontSize:9,color:'#555',marginTop:4,textAlign:'right'}}>+{traffic.pages.length - 15} more pages</div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Monthly trend bars */}
+                  {Object.keys(traffic.monthly || {}).length > 0 && (
+                    <div className="card">
+                      <div style={{fontSize:9,color:'#555',fontWeight:600,textTransform:'uppercase',letterSpacing:1,marginBottom:8}}>Monthly Trend</div>
+                      <div style={{display:'flex',alignItems:'flex-end',gap:6,height:80}}>
+                        {Object.entries(traffic.monthly).sort(([a],[b]) => a.localeCompare(b)).map(([month, data]) => {
+                          const maxV = Math.max(...Object.values(traffic.monthly).map(m => m.views || 0), 1)
+                          const barH = Math.max(4, ((data.views || 0) / maxV) * 65)
+                          return (
+                            <div key={month} style={{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:2}}>
+                              <span style={{fontSize:8,color:'#888'}}>{data.views?.toLocaleString()}</span>
+                              <div style={{width:'100%',maxWidth:40,height:barH,background:'#3b82f6',borderRadius:3}}></div>
+                              <div style={{width:'100%',maxWidth:40,height:Math.max(2,((data.contacts||0)/Math.max(...Object.values(traffic.monthly).map(m=>m.contacts||0),1))*20),background:'#10b981',borderRadius:2,marginTop:1}}></div>
+                              <span style={{fontSize:7,color:'#555'}}>{month.split('-')[1]}/{month.split('-')[0].slice(2)}</span>
+                            </div>
+                          )
+                        })}
+                      </div>
+                      <div style={{display:'flex',gap:12,justifyContent:'center',marginTop:6}}>
+                        <span style={{fontSize:8,color:'#3b82f6'}}>■ Views</span>
+                        <span style={{fontSize:8,color:'#10b981'}}>■ Contacts</span>
+                      </div>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <div className="card" style={{textAlign:'center',padding:20}}>
+                  <div style={{fontSize:20,marginBottom:6}}>📊</div>
+                  <div style={{color:'#555',fontSize:11}}>Awaiting GA4 data…</div>
+                  <div style={{color:'#333',fontSize:9,marginTop:4}}>Property: {traffic?.gaPropertyId || 'G-LQBTD620CQ'} · API credentials needed from Bitwarden</div>
+                </div>
+              )}
+            </div>
+
+            {/* Conversion Funnel */}
+            <div className="section">
+              <div className="sec-title">📞 Conversion Funnel</div>
+              {traffic?.totals?.views != null ? (
+                <div className="card" style={{padding:20}}>
+                  <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:0,flexWrap:'wrap'}}>
+                    {/* Visitors */}
+                    <div style={{textAlign:'center',padding:'0 16px'}}>
+                      <div style={{fontSize:28,fontWeight:800,color:'#a855f7'}}>{traffic.totals.visitors?.toLocaleString()}</div>
+                      <div style={{fontSize:9,color:'#888',textTransform:'uppercase',letterSpacing:0.5}}>Visitors</div>
+                    </div>
+                    <div style={{fontSize:18,color:'#333',padding:'0 4px'}}>→</div>
+                    {/* Page Views */}
+                    <div style={{textAlign:'center',padding:'0 16px'}}>
+                      <div style={{fontSize:28,fontWeight:800,color:'#3b82f6'}}>{traffic.totals.views?.toLocaleString()}</div>
+                      <div style={{fontSize:9,color:'#888',textTransform:'uppercase',letterSpacing:0.5}}>Page Views</div>
+                    </div>
+                    <div style={{fontSize:18,color:'#333',padding:'0 4px'}}>→</div>
+                    {/* Contact Clicks */}
+                    <div style={{textAlign:'center',padding:'0 16px'}}>
+                      <div style={{fontSize:28,fontWeight:800,color:'#10b981'}}>{(traffic.totals.phoneTaps || 0) + (traffic.totals.emailTaps || 0)}</div>
+                      <div style={{fontSize:9,color:'#888',textTransform:'uppercase',letterSpacing:0.5}}>Contact Clicks</div>
+                    </div>
+                  </div>
+                  {/* Funnel bar */}
+                  <div style={{marginTop:16,position:'relative',height:24}}>
+                    <div style={{position:'absolute',left:0,right:0,height:24,background:'#a855f720',borderRadius:12}}></div>
+                    <div style={{position:'absolute',left:'10%',right:'10%',height:24,background:'#3b82f630',borderRadius:12}}></div>
+                    <div style={{position:'absolute',left:'30%',right:'30%',height:24,background:'#10b98140',borderRadius:12,display:'flex',alignItems:'center',justifyContent:'center'}}>
+                      <span style={{fontSize:10,fontWeight:700,color:'#10b981'}}>{traffic.totals.conversionRate?.toFixed(1)}%</span>
+                    </div>
+                  </div>
+                  <div style={{display:'flex',justifyContent:'space-between',marginTop:8,fontSize:9,color:'#555'}}>
+                    <span>📞 {traffic.totals.phoneTaps || 0} phone</span>
+                    <span>✉️ {traffic.totals.emailTaps || 0} email</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="card" style={{textAlign:'center',padding:20}}>
+                  <div style={{fontSize:20,marginBottom:6}}>📞</div>
+                  <div style={{color:'#555',fontSize:11}}>Conversion tracking awaiting click event data…</div>
+                  <div style={{color:'#333',fontSize:9,marginTop:4}}>NBHW agent needs to add tel/mailto click tracking JS</div>
+                </div>
+              )}
             </div>
 
             {/* Data source notice */}

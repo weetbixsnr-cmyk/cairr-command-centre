@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-03-26T08:21:00Z",
+  "source": "placeholder",
+  "gaPropertyId": "G-LQBTD620CQ",
+  "note": "Awaiting GA4 API credentials from Bitwarden + NBHW click event tracking JS",
+  "period": "last30d",
+  "totals": {
+    "views": null,
+    "visitors": null,
+    "phoneTaps": null,
+    "emailTaps": null,
+    "conversionRate": null
+  },
+  "pages": [],
+  "monthly": {}
+}
