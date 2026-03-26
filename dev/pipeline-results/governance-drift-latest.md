@@ -1,33 +1,14 @@
-# Governance Drift — 2026-03-26 04:00
-❌ alpha:
-  ❌ FRAMEWORK.md DRIFTED (agent ≠ Brain)
-
+# Governance Drift — 2026-03-27 04:00
+✅ alpha: governance aligned
 ❌ audit:
-  ❌ FRAMEWORK.md DRIFTED (agent ≠ Brain)
-  ⚠️ SOUL.md is 83 lines (limit 60)
+  ⚠️ SOUL.md is 101 lines (limit 60)
 
-❌ bts:
-  ❌ FRAMEWORK.md DRIFTED (agent ≠ Brain)
-
-❌ command-centre:
-  ❌ FRAMEWORK.md DRIFTED (agent ≠ Brain)
-  ⚠️ MEMORY.md is 95 lines (limit 80)
-
+✅ bts: governance aligned
+✅ command-centre: governance aligned
 ✅ gridpilot: governance aligned
-❌ nbhw:
-  ❌ FRAMEWORK.md DRIFTED (agent ≠ Brain)
-  ⚠️ MEMORY.md is 105 lines (limit 80)
-
-❌ overdue-office:
-  ❌ FRAMEWORK.md DRIFTED (agent ≠ Brain)
-
-❌ property:
-  ❌ FRAMEWORK.md DRIFTED (agent ≠ Brain)
-
-❌ raec:
-  ❌ FRAMEWORK.md MISSING
-
-❌ v3dn:
-  ❌ FRAMEWORK.md DRIFTED (agent ≠ Brain)
-
+✅ nbhw: governance aligned
+✅ overdue-office: governance aligned
+✅ property: governance aligned
+✅ raec: governance aligned
+✅ v3dn: governance aligned
 
