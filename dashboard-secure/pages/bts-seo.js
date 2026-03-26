@@ -200,127 +200,7 @@ export default function BtsSeoPage() {
           )
         })()}
 
-        {/* Blog Pipeline — always visible */}
-        <div style={{background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:10,padding:14,marginBottom:16}}>
-          <div style={{fontSize:9,color:'#aaa',textTransform:'uppercase',letterSpacing:1.2,marginBottom:8,fontWeight:600,borderBottom:'1px solid #1a1a1a',paddingBottom:3}}>
-            📝 Blog Pipeline — {blogs?.published || 0} published · {(blogs?.planned || []).filter(b => b.status === 'draft' || b.status === 'in-progress').length || 0} drafts · {(blogs?.planned || []).filter(b => b.status === 'not-started').length || 0} planned
-          </div>
-          {blogs?.planned?.length > 0 ? (
-            <div>
-              {blogs.planned.slice(0, 8).map((b, i) => {
-                const sColor = b.status === 'published' ? '#10b981' : b.status === 'draft' || b.status === 'in-progress' ? '#f59e0b' : '#555'
-                const sLabel = b.status === 'published' ? '✅ LIVE' : b.status === 'draft' ? '📝 DRAFT' : b.status === 'in-progress' ? '🔨 WIP' : '⬜ PLANNED'
-                return (
-                  <div key={i} style={{display:'flex',alignItems:'center',gap:8,padding:'5px 0',borderBottom:'1px solid #111',fontSize:11}}>
-                    <span style={{fontSize:9,color:sColor,fontWeight:600,minWidth:70}}>{sLabel}</span>
-                    <span style={{color:'#fff',fontWeight:500,flex:1}}>{b.title}</span>
-                    <span style={{fontSize:9,color:'#888'}}>{b.service}</span>
-                  </div>
-                )
-              })}
-              {blogs.planned.length > 8 && (
-                <div style={{fontSize:9,color:'#555',marginTop:4,textAlign:'right'}}>+{blogs.planned.length - 8} more planned</div>
-              )}
-            </div>
-          ) : (
-            <div style={{color:'#333',fontSize:11,fontStyle:'italic'}}>No blogs in pipeline yet</div>
-          )}
-        </div>
-
-        {/* Competitor Page Count — Content Gap Visual */}
-        {compPages?.competitors?.length > 0 && (
-          <div style={{background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:10,padding:14,marginBottom:16}}>
-            <div style={{fontSize:9,color:'#aaa',textTransform:'uppercase',letterSpacing:1.2,marginBottom:10,fontWeight:600,borderBottom:'1px solid #1a1a1a',paddingBottom:3}}>
-              📊 Content Gap — Page Counts vs Competitors
-            </div>
-            {(() => {
-              const sorted = [...compPages.competitors].sort((a, b) => b.total - a.total)
-              const maxTotal = sorted[0]?.total || 1
-              return sorted.map((c, i) => {
-                const barPct = Math.max(1, (c.total / maxTotal) * 100)
-                const isUs = c.ours
-                const barColor = isUs ? '#3b82f6' : '#333'
-                const borderColor = isUs ? '#3b82f6' : 'transparent'
-                return (
-                  <div key={i} style={{marginBottom:8,padding:isUs?'8px':'0',borderRadius:isUs?8:0,border:isUs?'1px solid #3b82f630':'none',background:isUs?'#0a1a2e':'transparent'}}>
-                    <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:3}}>
-                      <span style={{fontSize:11,fontWeight:isUs?800:600,color:isUs?'#3b82f6':'#ccc',minWidth:100}}>{c.name}</span>
-                      <span style={{fontSize:13,fontWeight:800,color:isUs?'#3b82f6':'#888',marginLeft:'auto'}}>{c.total.toLocaleString()}</span>
-                    </div>
-                    <div style={{height:isUs?10:6,background:'#1a1a1a',borderRadius:4,overflow:'hidden'}}>
-                      <div style={{display:'flex',height:'100%'}}>
-                        <div style={{width:`${(c.site/maxTotal)*100}%`,background:isUs?'#3b82f6':'#555',minWidth:c.site>0?2:0}} title={`${c.site} site pages`}></div>
-                        <div style={{width:`${(c.courses/maxTotal)*100}%`,background:isUs?'#a855f7':'#444',minWidth:c.courses>0?2:0}} title={`${c.courses} course pages`}></div>
-                        <div style={{width:`${(c.blogs/maxTotal)*100}%`,background:isUs?'#10b981':'#333',minWidth:c.blogs>0?2:0}} title={`${c.blogs} blog posts`}></div>
-                      </div>
-                    </div>
-                    <div style={{display:'flex',gap:10,marginTop:2,fontSize:8,color:'#555'}}>
-                      <span>{c.site} site</span>
-                      <span>{c.courses} courses</span>
-                      <span>{c.blogs} blogs</span>
-                    </div>
-                  </div>
-                )
-              })
-            })()}
-            <div style={{display:'flex',gap:12,justifyContent:'center',marginTop:8,fontSize:8}}>
-              <span style={{color:'#3b82f6'}}>■ Site</span>
-              <span style={{color:'#a855f7'}}>■ Courses</span>
-              <span style={{color:'#10b981'}}>■ Blogs</span>
-            </div>
-          </div>
-        )}
-
-        {/* Course Details Table */}
-        {courseData?.courses?.length > 0 && (
-          <div style={{background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:10,padding:14,marginBottom:16}}>
-            <div style={{fontSize:9,color:'#aaa',textTransform:'uppercase',letterSpacing:1.2,marginBottom:8,fontWeight:600,borderBottom:'1px solid #1a1a1a',paddingBottom:3}}>
-              🎓 Course Details — {courseData.courses.filter(c => c.confirmed).length}/{courseData.courses.length} confirmed
-            </div>
-            <div style={{overflowX:'auto'}}>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Course</th>
-                    <th>Duration</th>
-                    <th>Price</th>
-                    <th>Status</th>
-                    <th>Notes</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {courseData.courses.map((c, i) => (
-                    <tr key={i}>
-                      <td style={{color:'#fff',fontWeight:600}}>{c.name}</td>
-                      <td style={{color:c.confirmed?'#10b981':'#ef4444',fontWeight:c.confirmed?400:600}}>{c.duration}</td>
-                      <td style={{color:c.confirmed?'#f59e0b':'#ef4444'}}>{c.price}</td>
-                      <td>
-                        <span style={{
-                          fontSize:8,padding:'2px 6px',borderRadius:4,fontWeight:600,
-                          background:c.confirmed?'#0a2a1a':'#3b1010',
-                          color:c.confirmed?'#10b981':'#ef4444'
-                        }}>
-                          {c.confirmed ? '✅ CONFIRMED' : '❌ UNCONFIRMED'}
-                        </span>
-                      </td>
-                      <td style={{fontSize:9,color:'#888'}}>{c.note}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            {courseData.issues?.length > 0 && (
-              <div style={{marginTop:8,padding:8,background:'#1a0a0a',border:'1px solid #ef444433',borderRadius:6}}>
-                <div style={{fontSize:8,color:'#ef4444',fontWeight:600,textTransform:'uppercase',letterSpacing:0.5,marginBottom:4}}>⚠️ Issues</div>
-                {courseData.issues.map((issue, i) => (
-                  <div key={i} style={{fontSize:9,color:'#ef4444',padding:'2px 0'}}>• {issue}</div>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Tab navigation */}
+        {/* Tab navigation — RIGHT after stats + safety strip */}
         <div style={{display:'flex',gap:6,marginBottom:16,overflowX:'auto',WebkitOverflowScrolling:'touch',scrollbarWidth:'none'}}>
           <TabButton active={tab==='rankings'} label="📊 Rankings" onClick={() => setTab('rankings')} />
           <TabButton active={tab==='matrix'} label="📍 Coverage Matrix" onClick={() => setTab('matrix')} />
@@ -423,6 +303,25 @@ export default function BtsSeoPage() {
         {/* TAB 2: Coverage Matrix */}
         {tab === 'matrix' && (
           <>
+            {/* Blog Pipeline */}
+            <div className="section" style={{marginBottom:16}}>
+              <div className="sec-title">📝 Blog Pipeline — {blogs?.published || 0} published · {(blogs?.planned || []).filter(b => b.status === 'draft' || b.status === 'in-progress').length || 0} drafts · {(blogs?.planned || []).filter(b => b.status === 'not-started').length || 0} planned</div>
+              <div className="card">
+                {blogs?.planned?.length > 0 ? blogs.planned.slice(0, 10).map((b, i) => {
+                  const sColor = b.status === 'published' ? '#10b981' : b.status === 'draft' || b.status === 'in-progress' ? '#f59e0b' : '#555'
+                  const sLabel = b.status === 'published' ? '✅ LIVE' : b.status === 'draft' ? '📝 DRAFT' : b.status === 'in-progress' ? '🔨 WIP' : '⬜ PLANNED'
+                  return (
+                    <div key={i} style={{display:'flex',alignItems:'center',gap:8,padding:'5px 0',borderBottom:'1px solid #1a1a1a',fontSize:11}}>
+                      <span style={{fontSize:9,color:sColor,fontWeight:600,minWidth:70}}>{sLabel}</span>
+                      <span style={{color:'#fff',fontWeight:500,flex:1}}>{b.title}</span>
+                      <span style={{fontSize:9,color:'#888'}}>{b.service}</span>
+                    </div>
+                  )
+                }) : <div style={{color:'#333',fontSize:11,fontStyle:'italic'}}>No blogs in pipeline</div>}
+                {(blogs?.planned?.length || 0) > 10 && <div style={{fontSize:9,color:'#555',marginTop:4,textAlign:'right'}}>+{blogs.planned.length - 10} more</div>}
+              </div>
+            </div>
+
             <div style={{display:'flex',gap:12,marginBottom:16,flexWrap:'wrap'}}>
               <div className="stat-card" style={{minWidth:100}}>
                 <div className="stat-val" style={{fontSize:18,color:'#10b981'}}>{servicePages}</div>
@@ -658,6 +557,45 @@ export default function BtsSeoPage() {
               </div>
             )}
 
+            {/* Fallback: compPages bar chart if no pageCountCrawl */}
+            {!comp?.pageCountCrawl?.counts && compPages?.competitors?.length > 0 && (
+              <div className="section" style={{marginBottom:16}}>
+                <div className="sec-title">📊 Content Gap — Page Counts</div>
+                <div className="card">
+                  {(() => {
+                    const sorted = [...compPages.competitors].sort((a, b) => b.total - a.total)
+                    const maxTotal = sorted[0]?.total || 1
+                    return sorted.map((c, i) => {
+                      const isUs = c.ours
+                      return (
+                        <div key={i} style={{marginBottom:8,padding:isUs?'8px':'0',borderRadius:isUs?8:0,border:isUs?'1px solid #3b82f630':'none',background:isUs?'#0a1a2e':'transparent'}}>
+                          <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:3}}>
+                            <span style={{fontSize:11,fontWeight:isUs?800:600,color:isUs?'#3b82f6':'#ccc',minWidth:100}}>{c.name}</span>
+                            <span style={{fontSize:13,fontWeight:800,color:isUs?'#3b82f6':'#888',marginLeft:'auto'}}>{c.total.toLocaleString()}</span>
+                          </div>
+                          <div style={{height:isUs?10:6,background:'#1a1a1a',borderRadius:4,overflow:'hidden'}}>
+                            <div style={{display:'flex',height:'100%'}}>
+                              <div style={{width:`${(c.site/maxTotal)*100}%`,background:isUs?'#3b82f6':'#555',minWidth:c.site>0?2:0}}></div>
+                              <div style={{width:`${(c.courses/maxTotal)*100}%`,background:isUs?'#a855f7':'#444',minWidth:c.courses>0?2:0}}></div>
+                              <div style={{width:`${(c.blogs/maxTotal)*100}%`,background:isUs?'#10b981':'#333',minWidth:c.blogs>0?2:0}}></div>
+                            </div>
+                          </div>
+                          <div style={{display:'flex',gap:10,marginTop:2,fontSize:8,color:'#555'}}>
+                            <span>{c.site} site</span><span>{c.courses} courses</span><span>{c.blogs} blogs</span>
+                          </div>
+                        </div>
+                      )
+                    })
+                  })()}
+                  <div style={{display:'flex',gap:12,justifyContent:'center',marginTop:8,fontSize:8}}>
+                    <span style={{color:'#3b82f6'}}>■ Site</span>
+                    <span style={{color:'#a855f7'}}>■ Courses</span>
+                    <span style={{color:'#10b981'}}>■ Blogs</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className="section">
               <div className="sec-title">Competitor Watch ({comp?.competitors?.length || 0})</div>
               {(comp?.competitors || []).map((c, i) => {
@@ -811,6 +749,18 @@ export default function BtsSeoPage() {
                 </div>
               </div>
             </div>
+
+            {/* Issues from courseData if available */}
+            {courseData?.issues?.length > 0 && (
+              <div className="section">
+                <div className="sec-title">⚠️ Known Issues</div>
+                <div className="card" style={{background:'#1a0a0a',border:'1px solid #ef444433'}}>
+                  {courseData.issues.map((issue, i) => (
+                    <div key={i} style={{fontSize:10,color:'#ef4444',padding:'4px 0',borderBottom:'1px solid #1a1a1a'}}>• {issue}</div>
+                  ))}
+                </div>
+              </div>
+            )}
           </>
         )}
 
