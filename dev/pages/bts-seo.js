@@ -702,10 +702,34 @@ export default function BtsSeoPage() {
         {/* TAB 5: Course Details */}
         {tab === 'courses' && (
           <>
+            {/* Summary strip */}
+            <div style={{display:'flex',gap:10,marginBottom:14,flexWrap:'wrap'}}>
+              <div className="stat-card" style={{minWidth:80}}>
+                <div className="stat-val" style={{fontSize:18,color:'#10b981'}}>{courses?.summary?.live || (courses?.courses || []).filter(c => c.status === 'live').length}</div>
+                <div className="stat-lbl">Live Pages</div>
+              </div>
+              <div className="stat-card" style={{minWidth:80}}>
+                <div className="stat-val" style={{fontSize:18,color:'#3b82f6'}}>{courses?.summary?.confirmed || (courses?.courses || []).filter(c => c.confirmed).length}</div>
+                <div className="stat-lbl">Confirmed</div>
+              </div>
+              <div className="stat-card" style={{minWidth:80}}>
+                <div className="stat-val" style={{fontSize:18,color:'#f59e0b'}}>{courses?.summary?.missingInfo || (courses?.courses || []).filter(c => c.status === 'missing-info').length}</div>
+                <div className="stat-lbl">Missing Info</div>
+              </div>
+              <div className="stat-card" style={{minWidth:80}}>
+                <div className="stat-val" style={{fontSize:18,color:'#ef4444'}}>{courses?.summary?.broken || (courses?.courses || []).filter(c => c.status === 'broken').length}</div>
+                <div className="stat-lbl">Broken</div>
+              </div>
+              <div className="stat-card" style={{minWidth:80}}>
+                <div className="stat-val" style={{fontSize:18,color:'#888'}}>{courses?.summary?.noPage || (courses?.courses || []).filter(c => c.status === 'no-page').length}</div>
+                <div className="stat-lbl">No Page</div>
+              </div>
+            </div>
+
             <div className="section">
               <div className="sec-title">📚 Course Details — Source of Truth</div>
               <div style={{fontSize:9,color:'#f59e0b',marginBottom:10,padding:'6px 10px',background:'#1a1800',border:'1px solid #2a2000',borderRadius:6}}>
-                ⚠️ All content sent to Sunny must be cross-checked against these durations before publishing. Flag any UNKNOWN/UNCONFIRMED items.
+                ⚠️ All content sent to Sunny must be cross-checked against these durations before publishing. Courses without confirmed pricing need Sunny to verify.
               </div>
               <div className="card">
                 <table>
@@ -719,33 +743,37 @@ export default function BtsSeoPage() {
                   </thead>
                   <tbody>
                     {(courses?.courses || []).map((c, i) => {
-                      const statusIcon = c.status === 'broken' ? '⚠️' : c.confirmed ? '✅' : '❌'
-                      const statusColor = c.status === 'broken' ? '#f59e0b' : c.confirmed ? '#10b981' : '#ef4444'
-                      const rowBg = c.status === 'broken' ? '#1a1200' : !c.confirmed ? '#1a0a0a' : 'transparent'
+                      const statusMap = {
+                        'live': { icon: '✅', color: '#10b981', label: 'Live', bg: 'transparent' },
+                        'missing-info': { icon: '❓', color: '#f59e0b', label: 'No Info', bg: '#1a1800' },
+                        'broken': { icon: '⚠️', color: '#ef4444', label: '404', bg: '#1a0a0a' },
+                        'no-page': { icon: '🚫', color: '#888', label: 'No Page', bg: '#0d0d0d' }
+                      }
+                      const st = statusMap[c.status] || statusMap['missing-info']
+                      const isIssue = c.status !== 'live'
                       return (
-                        <tr key={i} style={{background: rowBg}}>
-                          <td style={{color:'#fff',fontWeight:600}}>{c.name}</td>
-                          <td style={{color: c.duration === 'UNKNOWN' || c.duration === 'UNCONFIRMED' ? '#ef4444' : '#aaa',fontWeight: c.duration === 'UNKNOWN' ? 600 : 400}}>
+                        <tr key={i} style={{background: st.bg}}>
+                          <td style={{color: isIssue ? '#999' : '#fff', fontWeight:600}}>
+                            {c.name}
+                            {c.url && <div style={{fontSize:8,color:'#555',fontWeight:400}}>{c.url}</div>}
+                          </td>
+                          <td style={{color: c.confirmed ? '#aaa' : st.color, fontWeight: c.confirmed ? 400 : 600}}>
                             {c.duration}
                           </td>
-                          <td style={{color: c.price === 'UNKNOWN' ? '#ef4444' : '#aaa',fontWeight: c.price === 'UNKNOWN' ? 600 : 400}}>
+                          <td style={{color: c.confirmed ? '#aaa' : st.color, fontWeight: c.confirmed ? 400 : 600}}>
                             {c.price}
                           </td>
-                          <td style={{textAlign:'center',color: statusColor,fontWeight:700,fontSize:14}}>
-                            {statusIcon}
+                          <td style={{textAlign:'center'}}>
+                            <span style={{fontSize:11,color: st.color,fontWeight:700}}>{st.icon}</span>
+                            <div style={{fontSize:7,color: st.color,marginTop:1}}>{st.label}</div>
                           </td>
                         </tr>
                       )
                     })}
                   </tbody>
                 </table>
-                <div style={{marginTop:10,padding:'8px 0',borderTop:'1px solid #1a1a1a',display:'flex',gap:16}}>
-                  <div style={{fontSize:9,color:'#10b981'}}>✅ {(courses?.courses || []).filter(c => c.confirmed).length} confirmed</div>
-                  <div style={{fontSize:9,color:'#ef4444'}}>❌ {(courses?.courses || []).filter(c => !c.confirmed && c.status !== 'broken').length} unconfirmed</div>
-                  <div style={{fontSize:9,color:'#f59e0b'}}>⚠️ {(courses?.courses || []).filter(c => c.status === 'broken').length} broken</div>
-                </div>
-                <div style={{fontSize:8,color:'#555',marginTop:4}}>
-                  Source: memory/course-details.md · Updated: {courses?.updatedAt ? timeAgo(courses.updatedAt) : '—'}
+                <div style={{fontSize:8,color:'#555',marginTop:8,borderTop:'1px solid #1a1a1a',paddingTop:6}}>
+                  Source: Brain live crawl · Updated: {courses?.updatedAt ? timeAgo(courses.updatedAt) : '—'}
                 </div>
               </div>
             </div>

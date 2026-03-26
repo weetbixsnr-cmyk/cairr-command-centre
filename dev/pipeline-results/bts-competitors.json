@@ -1,6 +1,18 @@
 {
   "updatedAt": "2026-03-17T23:33:00+11:00",
   "scanStatus": "baseline",
+  "pageCountCrawl": {
+    "crawledAt": "2026-03-23T00:00:00Z",
+    "source": "competitor-analysis/page-count-report.html",
+    "counts": [
+      { "name": "Logic4training", "sitePages": 37, "coursePages": 106, "blogPosts": 453, "total": 596 },
+      { "name": "Able Skills", "sitePages": 36, "coursePages": 0, "blogPosts": 4423, "total": 4459, "courseNote": "incl. in site" },
+      { "name": "Bucks College Group", "sitePages": 395, "coursePages": 14, "blogPosts": 39, "total": 448 },
+      { "name": "Gastec Training", "sitePages": 46, "coursePages": 91, "blogPosts": 68, "total": 205 },
+      { "name": "Gasmark Training", "sitePages": 6, "coursePages": 0, "blogPosts": 0, "total": 6, "courseNote": "incl. in site" },
+      { "name": "BTS", "sitePages": 16, "coursePages": 6, "blogPosts": 3, "total": 19, "isSelf": true }
+    ]
+  },
   "competitors": [
     {
       "name": "Logic4training",

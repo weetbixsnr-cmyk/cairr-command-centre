@@ -1,8 +1,9 @@
 {
-  "timestamp": "2026-03-26T08:21:00Z",
+  "timestamp": "2026-03-26T10:20:00Z",
   "source": "placeholder",
   "gaPropertyId": "G-LQBTD620CQ",
-  "note": "Awaiting GA4 API credentials from Bitwarden + NBHW click event tracking JS",
+  "note": "Click tracking JS live (phone_click + email_click events). GA4 API credentials still needed from Bitwarden for page view data pull.",
+  "clickTrackingLive": true,
   "period": "last30d",
   "totals": {
     "views": null,
