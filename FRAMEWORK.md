@@ -39,18 +39,53 @@ dev/ → self-review → audit → staging/ → Brain review → Adam approves �
 - NEVER build directly in production directories
 - ONE change at a time → show Adam → wait for response
 
-## 6. Audit Gate
+## 6. Audit Gate — CONSTITUTIONAL
+**No agent deploys anything without Audit approval. No exceptions.**
+
+### Code & Content
 Protected branches (`main`, `staging`, `live`) require audit approval before push.
 - `audit-gate-hook.sh` blocks unauthorized pushes. No shortcutting the gate. Ever.
+
+### Deploy Gate
+**Audit agent is the ONLY entity that runs `vercel --prod` or any production deploy command.**
+- Agents commit + push to their branch → send audit request via `sessions_send`
+- Audit reviews code, content, AND assets (photos, images) → PASS or FAIL
+- On PASS: Audit runs the deploy. On FAIL: back to agent with feedback.
+- Agents MUST NOT run `vercel`, `vercel --prod`, `npm run deploy`, or any deploy command themselves.
+- Deploy budget: Audit tracks deploy count. Batches multiple changes into single deploys where possible.
+- If Vercel rate-limited: Audit queues the deploy, does NOT retry in a loop.
+
+### Closed Loop — CONSTITUTIONAL
+```
+Agent commits → hook fires → Audit reviews
+  → PASS → Audit deploys → done
+  → FAIL → Audit posts in #audit + agent channel + sessions_send to Brain
+    → Brain reads full context of what agent was building
+    → Brain instructs agent with specific fix in agent's channel
+    → Agent fixes + recommits → hook fires → Audit reviews again → cycle repeats
+```
+- **Every FAIL must reach Brain.** Audit uses `sessions_send` to Brain after posting the visible FAIL.
+- **Brain owns the fix coordination.** Brain reads the agent's recent work, understands the full picture, and gives the agent targeted instructions — not just "fix it."
+- **Audit stuck/down/confused:** Brain steps in directly — diagnoses, instructs agent, ensures deploy completes or is properly blocked.
 
 ## 7. File Hygiene
 - SOUL.md and RULES.md are read-only (chmod 444). staging/ and live/ (chmod 555) — only Brain deploys.
 - File size limits enforced (SOUL 60, MEMORY 80, HEARTBEAT 20 lines). Hit limit → overflow to `memory/archive/` or `memory/reference-*.md`.
 - No orphan files. Every file referenced by at least one other.
 
-## 8. Communication
-- Agents post to their own Discord channel only. Brain relays between agents.
-- Failures worth sharing → Brain pulls from one agent's log to another.
+## 8. Communication — CONSTITUTIONAL
+**All agent-to-agent work happens IN THE OPEN. No behind-the-scenes sessions_send without a visible post.**
+
+When an agent needs something from another agent:
+1. **Post in the TARGET agent's channel** explaining what you need (using `message` tool)
+2. THEN use `sessions_send` to trigger the workflow
+3. The target agent posts their response/result in THEIR channel too
+
+Example: CC needs Audit to deploy → CC posts in #audit "AUDIT REQUEST: dashboard changes ready, [details]" → Audit reviews → Audit posts result in #audit AND #command-centre.
+
+- Adam sees everything. No invisible handoffs.
+- `sessions_send` is for triggering workflows, NOT for hiding conversations.
+- Every request, every result, every pass/fail — visible in Discord channels.
 
 ## 9. Agent Boundaries
 - Agents work in THEIR workspace only.
