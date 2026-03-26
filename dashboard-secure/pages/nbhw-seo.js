@@ -273,16 +273,21 @@ export default function NbhwSeoPage() {
               <div className="card">
                 {audit?.crawlers?.length > 0 ? (
                   <div style={{display:'flex',gap:6,flexWrap:'wrap'}}>
-                    {audit.crawlers.map((c, i) => (
-                      <span key={i} style={{
-                        fontSize:10,padding:'4px 10px',borderRadius:6,fontWeight:600,
-                        background: c.allowed ? '#0a2a1a' : '#3b1010',
-                        color: c.allowed ? '#10b981' : '#ef4444',
-                        border: `1px solid ${c.allowed ? '#10b981' : '#ef4444'}`
-                      }}>
-                        {c.allowed ? '✅' : '❌'} {c.name}
-                      </span>
-                    ))}
+                    {audit.crawlers.map((c, i) => {
+                      const canAccess = c.allowed && c.canRead !== false
+                      const blocked = !c.allowed
+                      const allowed_no_read = c.allowed && c.canRead === false
+                      const bg = blocked ? '#3b1010' : allowed_no_read ? '#2a2000' : '#0a2a1a'
+                      const clr = blocked ? '#ef4444' : allowed_no_read ? '#f59e0b' : '#10b981'
+                      const icon = blocked ? '❌' : allowed_no_read ? '⚠️' : '✅'
+                      return (
+                        <div key={i} style={{fontSize:10,padding:'4px 10px',borderRadius:6,fontWeight:600,background:bg,color:clr,border:`1px solid ${clr}`}}>
+                          {icon} {c.name}
+                          {allowed_no_read && <div style={{fontSize:8,color:'#f59e0b',fontWeight:400,marginTop:1}}>Allowed but can't read (JS)</div>}
+                          {c.note && canAccess && <div style={{fontSize:8,color:'#888',fontWeight:400,marginTop:1}}>{c.note}</div>}
+                        </div>
+                      )
+                    })}
                   </div>
                 ) : (
                   <div style={{color:'#555',fontSize:11,fontStyle:'italic',textAlign:'center',padding:8}}>
