@@ -82,7 +82,15 @@ export default function BtsSeoPage() {
   const plan = snap?.btsSeoplan
   const blogs = snap?.btsBlogInventory
   const kw = snap?.btsKeywords
+  const courses = snap?.btsCourseDetails
+  const suggestions = snap?.btsSuggestions
+  const compPages = snap?.btsCompetitorPages
+  const courseData = snap?.btsCourses
   const [tab, setTab] = useState('rankings')
+  const [suggText, setSuggText] = useState('')
+  const [suggSending, setSuggSending] = useState(false)
+  const [suggSent, setSuggSent] = useState(false)
+  const [localSuggestions, setLocalSuggestions] = useState(null)
 
   // Stats
   const totalKeywords = kw?.keywords?.length || 0
@@ -219,12 +227,107 @@ export default function BtsSeoPage() {
           )}
         </div>
 
+        {/* Competitor Page Count — Content Gap Visual */}
+        {compPages?.competitors?.length > 0 && (
+          <div style={{background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:10,padding:14,marginBottom:16}}>
+            <div style={{fontSize:9,color:'#aaa',textTransform:'uppercase',letterSpacing:1.2,marginBottom:10,fontWeight:600,borderBottom:'1px solid #1a1a1a',paddingBottom:3}}>
+              📊 Content Gap — Page Counts vs Competitors
+            </div>
+            {(() => {
+              const sorted = [...compPages.competitors].sort((a, b) => b.total - a.total)
+              const maxTotal = sorted[0]?.total || 1
+              return sorted.map((c, i) => {
+                const barPct = Math.max(1, (c.total / maxTotal) * 100)
+                const isUs = c.ours
+                const barColor = isUs ? '#3b82f6' : '#333'
+                const borderColor = isUs ? '#3b82f6' : 'transparent'
+                return (
+                  <div key={i} style={{marginBottom:8,padding:isUs?'8px':'0',borderRadius:isUs?8:0,border:isUs?'1px solid #3b82f630':'none',background:isUs?'#0a1a2e':'transparent'}}>
+                    <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:3}}>
+                      <span style={{fontSize:11,fontWeight:isUs?800:600,color:isUs?'#3b82f6':'#ccc',minWidth:100}}>{c.name}</span>
+                      <span style={{fontSize:13,fontWeight:800,color:isUs?'#3b82f6':'#888',marginLeft:'auto'}}>{c.total.toLocaleString()}</span>
+                    </div>
+                    <div style={{height:isUs?10:6,background:'#1a1a1a',borderRadius:4,overflow:'hidden'}}>
+                      <div style={{display:'flex',height:'100%'}}>
+                        <div style={{width:`${(c.site/maxTotal)*100}%`,background:isUs?'#3b82f6':'#555',minWidth:c.site>0?2:0}} title={`${c.site} site pages`}></div>
+                        <div style={{width:`${(c.courses/maxTotal)*100}%`,background:isUs?'#a855f7':'#444',minWidth:c.courses>0?2:0}} title={`${c.courses} course pages`}></div>
+                        <div style={{width:`${(c.blogs/maxTotal)*100}%`,background:isUs?'#10b981':'#333',minWidth:c.blogs>0?2:0}} title={`${c.blogs} blog posts`}></div>
+                      </div>
+                    </div>
+                    <div style={{display:'flex',gap:10,marginTop:2,fontSize:8,color:'#555'}}>
+                      <span>{c.site} site</span>
+                      <span>{c.courses} courses</span>
+                      <span>{c.blogs} blogs</span>
+                    </div>
+                  </div>
+                )
+              })
+            })()}
+            <div style={{display:'flex',gap:12,justifyContent:'center',marginTop:8,fontSize:8}}>
+              <span style={{color:'#3b82f6'}}>■ Site</span>
+              <span style={{color:'#a855f7'}}>■ Courses</span>
+              <span style={{color:'#10b981'}}>■ Blogs</span>
+            </div>
+          </div>
+        )}
+
+        {/* Course Details Table */}
+        {courseData?.courses?.length > 0 && (
+          <div style={{background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:10,padding:14,marginBottom:16}}>
+            <div style={{fontSize:9,color:'#aaa',textTransform:'uppercase',letterSpacing:1.2,marginBottom:8,fontWeight:600,borderBottom:'1px solid #1a1a1a',paddingBottom:3}}>
+              🎓 Course Details — {courseData.courses.filter(c => c.confirmed).length}/{courseData.courses.length} confirmed
+            </div>
+            <div style={{overflowX:'auto'}}>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Course</th>
+                    <th>Duration</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th>Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {courseData.courses.map((c, i) => (
+                    <tr key={i}>
+                      <td style={{color:'#fff',fontWeight:600}}>{c.name}</td>
+                      <td style={{color:c.confirmed?'#10b981':'#ef4444',fontWeight:c.confirmed?400:600}}>{c.duration}</td>
+                      <td style={{color:c.confirmed?'#f59e0b':'#ef4444'}}>{c.price}</td>
+                      <td>
+                        <span style={{
+                          fontSize:8,padding:'2px 6px',borderRadius:4,fontWeight:600,
+                          background:c.confirmed?'#0a2a1a':'#3b1010',
+                          color:c.confirmed?'#10b981':'#ef4444'
+                        }}>
+                          {c.confirmed ? '✅ CONFIRMED' : '❌ UNCONFIRMED'}
+                        </span>
+                      </td>
+                      <td style={{fontSize:9,color:'#888'}}>{c.note}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            {courseData.issues?.length > 0 && (
+              <div style={{marginTop:8,padding:8,background:'#1a0a0a',border:'1px solid #ef444433',borderRadius:6}}>
+                <div style={{fontSize:8,color:'#ef4444',fontWeight:600,textTransform:'uppercase',letterSpacing:0.5,marginBottom:4}}>⚠️ Issues</div>
+                {courseData.issues.map((issue, i) => (
+                  <div key={i} style={{fontSize:9,color:'#ef4444',padding:'2px 0'}}>• {issue}</div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Tab navigation */}
         <div style={{display:'flex',gap:6,marginBottom:16,overflowX:'auto',WebkitOverflowScrolling:'touch',scrollbarWidth:'none'}}>
           <TabButton active={tab==='rankings'} label="📊 Rankings" onClick={() => setTab('rankings')} />
           <TabButton active={tab==='matrix'} label="📍 Coverage Matrix" onClick={() => setTab('matrix')} />
           <TabButton active={tab==='framework'} label="📋 Framework" onClick={() => setTab('framework')} />
           <TabButton active={tab==='competitors'} label="🏆 Competitors" onClick={() => setTab('competitors')} />
+          <TabButton active={tab==='courses'} label="📚 Courses" onClick={() => setTab('courses')} />
+          <TabButton active={tab==='suggestions'} label="💡 Suggestions" onClick={() => setTab('suggestions')} />
           <TabButton active={tab==='safety'} label="🛡️ Google Safety" onClick={() => setTab('safety')} />
         </div>
 
@@ -505,6 +608,56 @@ export default function BtsSeoPage() {
         {/* TAB 4: Competitors */}
         {tab === 'competitors' && (
           <>
+            {/* Competitor Page Counts */}
+            {comp?.pageCountCrawl?.counts && (
+              <div className="section" style={{marginBottom:20}}>
+                <div className="sec-title">📊 Page Count Comparison — Crawled {comp.pageCountCrawl.crawledAt ? new Date(comp.pageCountCrawl.crawledAt).toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'}) : '—'}</div>
+                <div className="card">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Competitor</th>
+                        <th style={{textAlign:'right'}}>Site Pages</th>
+                        <th style={{textAlign:'right'}}>Courses</th>
+                        <th style={{textAlign:'right'}}>Blog Posts</th>
+                        <th style={{textAlign:'right',fontWeight:700}}>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {comp.pageCountCrawl.counts
+                        .slice()
+                        .sort((a, b) => b.total - a.total)
+                        .map((c, i) => {
+                          const isBts = c.isSelf
+                          const rowStyle = isBts ? {background:'#0a1a2a',fontWeight:700} : {}
+                          return (
+                            <tr key={i} style={rowStyle}>
+                              <td style={{color: isBts ? '#3b82f6' : '#fff', fontWeight: isBts ? 700 : 600}}>
+                                {isBts ? '🎓 ' : ''}{c.name}
+                              </td>
+                              <td style={{textAlign:'right',color:'#aaa'}}>{c.sitePages}</td>
+                              <td style={{textAlign:'right',color:'#aaa'}}>
+                                {c.coursePages > 0 ? c.coursePages : <span style={{fontSize:8,color:'#555'}}>{c.courseNote || '—'}</span>}
+                              </td>
+                              <td style={{textAlign:'right',color:'#aaa'}}>{c.blogPosts.toLocaleString()}</td>
+                              <td style={{textAlign:'right',fontWeight:700,color: isBts ? '#ef4444' : '#10b981',fontSize:13}}>
+                                {c.total.toLocaleString()}
+                              </td>
+                            </tr>
+                          )
+                        })}
+                    </tbody>
+                  </table>
+                  <div style={{marginTop:10,padding:'8px 0',borderTop:'1px solid #1a1a1a'}}>
+                    <div style={{fontSize:9,color:'#ef4444',fontWeight:600}}>
+                      ⚠️ BTS has {comp.pageCountCrawl.counts.find(c => c.isSelf)?.total || 0} pages vs avg competitor {Math.round(comp.pageCountCrawl.counts.filter(c => !c.isSelf).reduce((a, c) => a + c.total, 0) / comp.pageCountCrawl.counts.filter(c => !c.isSelf).length).toLocaleString()}
+                    </div>
+                    <div style={{fontSize:8,color:'#555',marginTop:2}}>Source: sitemap crawl · Re-checked each audit run</div>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className="section">
               <div className="sec-title">Competitor Watch ({comp?.competitors?.length || 0})</div>
               {(comp?.competitors || []).map((c, i) => {
@@ -608,7 +761,154 @@ export default function BtsSeoPage() {
           </>
         )}
 
-        {/* TAB 5: Google Safety */}
+        {/* TAB 5: Course Details */}
+        {tab === 'courses' && (
+          <>
+            <div className="section">
+              <div className="sec-title">📚 Course Details — Source of Truth</div>
+              <div style={{fontSize:9,color:'#f59e0b',marginBottom:10,padding:'6px 10px',background:'#1a1800',border:'1px solid #2a2000',borderRadius:6}}>
+                ⚠️ All content sent to Sunny must be cross-checked against these durations before publishing. Flag any UNKNOWN/UNCONFIRMED items.
+              </div>
+              <div className="card">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Course</th>
+                      <th>Duration</th>
+                      <th>Price</th>
+                      <th style={{textAlign:'center'}}>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {(courses?.courses || []).map((c, i) => {
+                      const statusIcon = c.status === 'broken' ? '⚠️' : c.confirmed ? '✅' : '❌'
+                      const statusColor = c.status === 'broken' ? '#f59e0b' : c.confirmed ? '#10b981' : '#ef4444'
+                      const rowBg = c.status === 'broken' ? '#1a1200' : !c.confirmed ? '#1a0a0a' : 'transparent'
+                      return (
+                        <tr key={i} style={{background: rowBg}}>
+                          <td style={{color:'#fff',fontWeight:600}}>{c.name}</td>
+                          <td style={{color: c.duration === 'UNKNOWN' || c.duration === 'UNCONFIRMED' ? '#ef4444' : '#aaa',fontWeight: c.duration === 'UNKNOWN' ? 600 : 400}}>
+                            {c.duration}
+                          </td>
+                          <td style={{color: c.price === 'UNKNOWN' ? '#ef4444' : '#aaa',fontWeight: c.price === 'UNKNOWN' ? 600 : 400}}>
+                            {c.price}
+                          </td>
+                          <td style={{textAlign:'center',color: statusColor,fontWeight:700,fontSize:14}}>
+                            {statusIcon}
+                          </td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+                <div style={{marginTop:10,padding:'8px 0',borderTop:'1px solid #1a1a1a',display:'flex',gap:16}}>
+                  <div style={{fontSize:9,color:'#10b981'}}>✅ {(courses?.courses || []).filter(c => c.confirmed).length} confirmed</div>
+                  <div style={{fontSize:9,color:'#ef4444'}}>❌ {(courses?.courses || []).filter(c => !c.confirmed && c.status !== 'broken').length} unconfirmed</div>
+                  <div style={{fontSize:9,color:'#f59e0b'}}>⚠️ {(courses?.courses || []).filter(c => c.status === 'broken').length} broken</div>
+                </div>
+                <div style={{fontSize:8,color:'#555',marginTop:4}}>
+                  Source: memory/course-details.md · Updated: {courses?.updatedAt ? timeAgo(courses.updatedAt) : '—'}
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+
+        {/* TAB 6: Suggestions */}
+        {tab === 'suggestions' && (
+          <>
+            <div className="section">
+              <div className="sec-title">💡 Suggestions — Tell Us What Needs Changing</div>
+              <div className="card" style={{marginBottom:16}}>
+                <div style={{fontSize:11,color:'#aaa',marginBottom:10}}>
+                  Got an idea for the website? Spotted something that needs updating? Type it below and we&apos;ll action it.
+                </div>
+                <textarea
+                  value={suggText}
+                  onChange={e => setSuggText(e.target.value)}
+                  placeholder="e.g. 'Update the CCN1 price to £750' or 'Add a new course page for...' or 'The phone number on the contact page is wrong'"
+                  style={{
+                    width:'100%',minHeight:100,padding:12,background:'#0a0a0a',border:'1px solid #222',borderRadius:8,
+                    color:'#fff',fontSize:12,fontFamily:'inherit',resize:'vertical',outline:'none'
+                  }}
+                  onFocus={e => e.target.style.borderColor = '#3b82f6'}
+                  onBlur={e => e.target.style.borderColor = '#222'}
+                />
+                <div style={{display:'flex',alignItems:'center',gap:12,marginTop:10}}>
+                  <button
+                    onClick={async () => {
+                      if (!suggText.trim()) return
+                      setSuggSending(true)
+                      setSuggSent(false)
+                      try {
+                        const res = await fetch('/api/bts-suggestions', {
+                          method: 'POST',
+                          headers: {'Content-Type':'application/json'},
+                          body: JSON.stringify({ text: suggText.trim() })
+                        })
+                        const data = await res.json()
+                        if (data.ok) {
+                          setSuggSent(true)
+                          setSuggText('')
+                          // Add to local list immediately
+                          setLocalSuggestions(prev => {
+                            const list = prev || suggestions?.suggestions || []
+                            return [data.suggestion, ...list]
+                          })
+                          setTimeout(() => setSuggSent(false), 3000)
+                        }
+                      } catch {}
+                      setSuggSending(false)
+                    }}
+                    disabled={suggSending || !suggText.trim()}
+                    style={{
+                      padding:'10px 24px',background: suggSending ? '#333' : '#10b981',border:'none',borderRadius:8,
+                      color:'#fff',fontSize:12,fontWeight:700,cursor: suggSending ? 'not-allowed' : 'pointer',transition:'all .2s'
+                    }}
+                  >
+                    {suggSending ? 'Sending...' : '📨 Submit Suggestion'}
+                  </button>
+                  {suggSent && <span style={{fontSize:11,color:'#10b981',fontWeight:600}}>✅ Submitted! We&apos;ll review it shortly.</span>}
+                </div>
+              </div>
+            </div>
+
+            {/* Previous Suggestions */}
+            {(() => {
+              const allSugg = localSuggestions || suggestions?.suggestions || []
+              if (allSugg.length === 0) return (
+                <div style={{color:'#555',fontSize:11,fontStyle:'italic',padding:16,textAlign:'center'}}>
+                  No suggestions yet — be the first to submit one above!
+                </div>
+              )
+              return (
+                <div className="section">
+                  <div className="sec-title">Previous Suggestions ({allSugg.length})</div>
+                  <div className="card">
+                    {allSugg.map((s, i) => {
+                      const statusColor = s.status === 'done' ? '#10b981' : s.status === 'in-progress' ? '#f59e0b' : '#3b82f6'
+                      const statusLabel = s.status === 'done' ? '✅ Done' : s.status === 'in-progress' ? '🔨 In Progress' : '🆕 New'
+                      return (
+                        <div key={s.id || i} style={{padding:'10px 0',borderBottom:'1px solid #1a1a1a',display:'flex',gap:10,alignItems:'flex-start'}}>
+                          <span style={{fontSize:9,color:statusColor,fontWeight:700,minWidth:80,paddingTop:2}}>{statusLabel}</span>
+                          <div style={{flex:1}}>
+                            <div style={{fontSize:12,color:'#fff',marginBottom:2}}>{s.text}</div>
+                            <div style={{fontSize:8,color:'#555'}}>
+                              {s.submittedBy || 'Sunny'} · {s.submittedAt ? timeAgo(s.submittedAt) : '—'}
+                              {s.response && <span style={{color:'#aaa'}}> · Reply: {s.response}</span>}
+                            </div>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )
+            })()}
+          </>
+        )}
+
+        {/* TAB 7: Google Safety */}
         {tab === 'safety' && (
           <>
             {(() => {

@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-03-26T09:08:00Z",
+  "source": "bts-agent memory/course-details.md (24 Mar 2026)",
+  "courses": [
+    { "name": "Gas MLP", "duration": "13 days + 1 day/wk", "price": "£4,250–£7,549 +VAT", "confirmed": true, "note": "3 tiers" },
+    { "name": "CCN1 Reassessment", "duration": "4 days", "price": "£690 +VAT (offer)", "confirmed": true, "note": "Normally £939" },
+    { "name": "CCN1 Initial", "duration": "UNCONFIRMED", "price": "UNKNOWN", "confirmed": false, "note": "Need to ask Sunny" },
+    { "name": "Water Regulations (WRAS)", "duration": "1 day", "price": "£195 +VAT (offer)", "confirmed": true, "note": "Normally £252" },
+    { "name": "Unvented G3", "duration": "1 day", "price": "£195 +VAT (offer)", "confirmed": true, "note": "Normally £252" },
+    { "name": "Legionella Testing", "duration": "1 day", "price": "£195 +VAT (offer)", "confirmed": true, "note": "Normally £252" },
+    { "name": "LPG Changeover", "duration": "UNCONFIRMED", "price": "UNKNOWN", "confirmed": false, "note": "No course page exists" },
+    { "name": "Heat Pump (Air Source)", "duration": "~1 day (unconfirmed)", "price": "UNKNOWN", "confirmed": false, "note": "Sunny said 1 day verbally" },
+    { "name": "Domestic Cookers", "duration": "UNCONFIRMED", "price": "UNKNOWN", "confirmed": false, "note": "Need to ask Sunny" },
+    { "name": "Domestic Fires", "duration": "UNCONFIRMED", "price": "UNKNOWN", "confirmed": false, "note": "Need to ask Sunny" },
+    { "name": "Better Heating Course", "duration": "3 days", "price": "£2,199 +VAT", "confirmed": true, "note": "" },
+    { "name": "Foundation Skills Gas", "duration": "UNKNOWN", "price": "UNKNOWN", "confirmed": false, "note": "⚠️ 404 — page broken" }
+  ],
+  "issues": [
+    "Foundation Skills Gas Course page is 404",
+    "CCN1 Initial — no duration or price on site",
+    "LPG Changeover — no dedicated course page",
+    "Heat Pump — duration needs reconfirmation"
+  ]
+}

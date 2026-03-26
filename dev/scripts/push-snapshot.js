@@ -963,11 +963,15 @@ const snapshot = {
   btsSeoplan: readJSON(path.join(PIPELINE, 'bts-seo-plan.json')),
   btsBlogInventory: readJSON(path.join(PIPELINE, 'bts-blog-inventory.json')),
   btsCompetitors: readJSON(path.join(PIPELINE, 'bts-competitors.json')),
+  btsCourseDetails: readJSON(path.join(PIPELINE, 'bts-course-details.json')),
+  btsSuggestions: readJSON(path.join(DASHBOARD_DATA, 'bts-suggestions.json')),
   btsKeywords: parseBtsKeywordTracker(),
   btsPublishLedger: computePublishLedgerStats('bts-publish-ledger.json'),
   cairrFinance: readJSON(path.join(DASHBOARD_DATA, 'cairr-finance.json')),
   nbhwSeoAudit: readJSON(path.join(DASHBOARD_DATA, 'nbhw-seo-audit.json')),
   nbhwTraffic: readJSON(path.join(DASHBOARD_DATA, 'nbhw-traffic.json')),
+  btsCompetitorPages: readJSON(path.join(DASHBOARD_DATA, 'bts-competitors-pages.json')),
+  btsCourses: readJSON(path.join(DASHBOARD_DATA, 'bts-courses.json')),
 }
 
 // ── Write snapshot + bundle into dashboard + push to GitHub ──
