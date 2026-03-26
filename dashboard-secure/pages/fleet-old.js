@@ -42,7 +42,7 @@ const GROUPS = {
 
 const DESCS = {
   'main':'Brain (Ricky-Jnr) — orchestrator','command-centre':'Overwatch — this dashboard','audit':'Audit — quality gates',
-  'bts':'BTS — SEO/content (£300/mo)','gridpilot':'GridPilot — energy R&D',
+  'bts':'BTS — SEO/content','gridpilot':'GridPilot — energy R&D',
   'nbhw':'NBHW — website/SEO','nbhw-accounts':'NBHW accounts','overdue-office':'Overdue job tracking',
   'property':'Property scanner','v3dn':'V3DN — crypto trading','alpha':'Alpha — property dashboard',
   'opt-compliance':'Compliance','opt-quality':'Quality','opt-security':'Security',

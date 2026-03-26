@@ -43,7 +43,7 @@ const AGENT_META = {
   'command-centre': { emoji: '🎯', label: 'Command Centre', goal: 'Dashboard & monitoring' },
   'audit': { emoji: '🔍', label: 'Audit', goal: 'Quality gates' },
   'nbhw': { emoji: '🔧', label: 'NBHW', goal: 'Rank #1 NB suburb keywords' },
-  'bts': { emoji: '🎓', label: 'BTS', goal: 'SEO for Better Training (£300/mo)' },
+  'bts': { emoji: '🎓', label: 'BTS', goal: 'SEO for Better Training Solutions' },
   'v3dn': { emoji: '📊', label: 'V3DN', goal: 'Crypto trading scripts' },
   'gridpilot': { emoji: '⚡', label: 'GridPilot', goal: 'Energy platform R&D' },
   'alpha': { emoji: '🏠', label: 'Alpha', goal: 'Property dashboard' },

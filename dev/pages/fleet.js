@@ -33,7 +33,7 @@ const AGENT_META = {
   'command-centre': { label: 'Command Centre', emoji: '🎯', desc: 'Dashboard & Monitoring', group: 'Core', goal: 'Single pane of glass for Adam' },
   'audit': { label: 'Audit', emoji: '🔍', desc: 'Deploy Gate & Quality', group: 'Core', goal: 'Review all commits, deploy on PASS — only agent with vercel access' },
   'nbhw': { label: 'NBHW', emoji: '🔧', desc: 'Plumbing Site & SEO', group: 'NBHW', goal: 'Rank #1 for NB suburb plumbing keywords' },
-  'bts': { label: 'BTS', emoji: '🎓', desc: 'Training Site & SEO', group: 'CAIRR', goal: 'SEO & content for Better Training Solutions (£300/mo)' },
+  'bts': { label: 'BTS', emoji: '🎓', desc: 'Training Site & SEO', group: 'CAIRR', goal: 'SEO & content for Better Training Solutions' },
   'raec': { label: 'RAEC', emoji: '⚡', desc: 'Electrical Quoting', group: 'CAIRR', goal: 'RA Electrical quoting system — CAIRR client' },
   'v3dn': { label: 'V3DN', emoji: '📊', desc: 'Crypto Trading', group: 'Investments', goal: 'Automated trading scripts, portfolio tracking' },
   'gridpilot': { label: 'GridPilot', emoji: '🔋', desc: 'Energy Platform R&D', group: 'CAIRR', goal: 'Energy platform research & prototype' },

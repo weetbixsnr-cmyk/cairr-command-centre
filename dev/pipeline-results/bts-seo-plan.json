@@ -1,7 +1,5 @@
 {
   "client": "Better Training Solutions",
-  "owner": "Sunny",
-  "revenue": "£300/mo",
   "site": "bettertrainingsolutions.co.uk",
   "base": "High Wycombe, HP11 2LB",
   "updatedAt": "2026-03-17T23:27:00+11:00",
@@ -17,10 +15,33 @@
     }
   },
   "locations": {
-    "tier1": ["High Wycombe", "Marlow"],
-    "tier2": ["Aylesbury", "Beaconsfield", "Amersham", "Chesham", "Maidenhead", "Slough", "Reading"],
-    "tier3": ["Oxford", "Hemel Hempstead", "Watford", "Uxbridge", "Milton Keynes", "Luton"],
-    "tier4": ["Buckinghamshire", "Berkshire", "M40 corridor", "South East England"],
+    "tier1": [
+      "High Wycombe",
+      "Marlow"
+    ],
+    "tier2": [
+      "Aylesbury",
+      "Beaconsfield",
+      "Amersham",
+      "Chesham",
+      "Maidenhead",
+      "Slough",
+      "Reading"
+    ],
+    "tier3": [
+      "Oxford",
+      "Hemel Hempstead",
+      "Watford",
+      "Uxbridge",
+      "Milton Keynes",
+      "Luton"
+    ],
+    "tier4": [
+      "Buckinghamshire",
+      "Berkshire",
+      "M40 corridor",
+      "South East England"
+    ],
     "total": 17
   },
   "services": [
@@ -34,17 +55,45 @@
     "Heat Pump Training"
   ],
   "contentGaps": [
-    { "priority": 1, "gap": "ACS Training + Location pages", "note": "Core service, zero local content" },
-    { "priority": 2, "gap": "Near me keywords across all services", "note": "High volume, zero coverage" },
-    { "priority": 3, "gap": "Heat Pump Training + Location", "note": "Growth market, first-mover opportunity" }
+    {
+      "priority": 1,
+      "gap": "ACS Training + Location pages",
+      "note": "Core service, zero local content"
+    },
+    {
+      "priority": 2,
+      "gap": "Near me keywords across all services",
+      "note": "High volume, zero coverage"
+    },
+    {
+      "priority": 3,
+      "gap": "Heat Pump Training + Location",
+      "note": "Growth market, first-mover opportunity"
+    }
   ],
   "plannedContent": {
-    "wave1": ["ACS Training in High Wycombe", "Gas Training Courses Near You — SE England"],
-    "wave2": ["Heat Pump Training in Buckinghamshire", "ACS Reassessment Near Reading/Oxford/M40"],
-    "wave3": ["Water Regs + G3 location content", "Competitor gap-fill articles"],
-    "wave4": ["LPG + Legionella location content", "Tier 3 location expansion"]
+    "wave1": [
+      "ACS Training in High Wycombe",
+      "Gas Training Courses Near You \u2014 SE England"
+    ],
+    "wave2": [
+      "Heat Pump Training in Buckinghamshire",
+      "ACS Reassessment Near Reading/Oxford/M40"
+    ],
+    "wave3": [
+      "Water Regs + G3 location content",
+      "Competitor gap-fill articles"
+    ],
+    "wave4": [
+      "LPG + Legionella location content",
+      "Tier 3 location expansion"
+    ]
   },
-  "competitors": ["Logic4training", "Gasmark Training (Maidenhead)", "Gastec Training (Milton Keynes)"],
+  "competitors": [
+    "Logic4training",
+    "Gasmark Training (Maidenhead)",
+    "Gastec Training (Milton Keynes)"
+  ],
   "cadence": {
     "blogs": "2/week (Mon + Thu)",
     "gbpPosts": "weekly",
