@@ -139,7 +139,7 @@ export default function BtsSeoPage() {
         <div className="header">
           <h1>🎓 BTS — SEO Command</h1>
           <span className="meta">
-            Client: {seo?.owner || 'Sunny'} · {seo?.revenue || '£300/mo'} · Updated: {seo ? timeAgo(seo.lastUpdated) : '—'}
+            Updated: {seo ? timeAgo(seo.lastUpdated) : '—'}
           </span>
         </div>
 
