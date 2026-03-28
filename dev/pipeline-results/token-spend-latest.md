@@ -1,4 +1,4 @@
-# Token Spend Report — 2026-03-27 08:00
+# Token Spend Report — 2026-03-29 08:00
 
 ## Sessions (last 24hrs)
 - **main:** 1468 log entries
