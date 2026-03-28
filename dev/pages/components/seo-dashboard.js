@@ -119,12 +119,12 @@ export default function SeoDashboard({ seoDash, publishLedger, label }) {
 
   // Section mapping to the 8 standardised sections
   const sectionMap = [
-    { key: 'plan-overview', icon: '📋', fallbacks: ['plan', 'overview', 'score', 'progress'] },
+    { key: 'plan-overview', icon: '📋', fallbacks: ['plan', 'overview', 'score', 'progress', 'plan-status'] },
     { key: 'critical-fixes', icon: '🔴', fallbacks: ['critical', 'fixes', 'outstanding', 'blockers'] },
-    { key: 'publish-history', icon: '📅', fallbacks: ['publish', 'history', 'published'] },
-    { key: 'content-pipeline', icon: '🔮', fallbacks: ['pipeline', 'content-plan', 'next-4-weeks', 'upcoming'] },
-    { key: 'coverage-matrix', icon: '📍', fallbacks: ['coverage', 'matrix', 'services-locations'] },
-    { key: 'news-bank', icon: '📰', fallbacks: ['news', 'stories'] },
+    { key: 'publish-history', icon: '📅', fallbacks: ['publish', 'history', 'published', 'content-published'] },
+    { key: 'content-pipeline', icon: '🔮', fallbacks: ['pipeline', 'content-plan', 'next-4-weeks', 'upcoming', 'content-pipeline'] },
+    { key: 'coverage-matrix', icon: '📍', fallbacks: ['coverage', 'matrix', 'services-locations', 'service-suburb', 'service-location'] },
+    { key: 'news-bank', icon: '📰', fallbacks: ['news', 'stories', 'news-bank'] },
     { key: 'competitor-watch', icon: '🏆', fallbacks: ['competitor', 'competitors', 'watch'] },
     { key: 'weekly-audit-log', icon: '📝', fallbacks: ['audit-log', 'weekly-audit', 'monday'] },
   ]
