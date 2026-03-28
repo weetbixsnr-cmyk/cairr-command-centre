@@ -1008,6 +1008,7 @@ const snapshot = {
   cairrFinance: readJSON(path.join(DASHBOARD_DATA, 'cairr-finance.json')),
   nbhwSeoDash: parseSeoDashboard('nbhw'),
   btsSeoDash: parseSeoDashboard('bts'),
+  btsDrafts: readJSON(path.join(DASHBOARD_DATA, 'bts-drafts.json')),
   nbhwSeoAudit: readJSON(path.join(DASHBOARD_DATA, 'nbhw-seo-audit.json')),
   nbhwTraffic: readJSON(path.join(DASHBOARD_DATA, 'nbhw-traffic.json')),
   btsCompetitorPages: readJSON(path.join(DASHBOARD_DATA, 'bts-competitors-pages.json')),
