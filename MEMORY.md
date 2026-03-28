@@ -41,6 +41,11 @@ Owns dashboard deploys end-to-end (exec allowlisted, Vercel auth inherited).
 - Adam = weetbix on Discord. Not a coder. One change at a time.
 - FRAMEWORK.md is the law
 
+## Constitutional Rules (from Brain, 29 Mar 2026)
+1. **LAYOUT LOCK** — NO layout/structure/tab order/colour/design changes without Brain proposal + Adam approval. Data updates only (numbers, stats, new entries in existing sections) are permitted without approval.
+2. **ALL outputs to Adam = clickable links or PDFs.** Never file paths. Never "run this command."
+3. **Client pricing is INTERNAL ONLY** — never on any dashboard surface (learned 26 Mar 2026)
+
 ## Lessons
 - Snapshot-bundled architecture works (no KV dependency)
 - Vercel 100 deploy/day limit — hit 3x. GitHub raw serving for data, deploys only for UI
