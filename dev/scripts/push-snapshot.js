@@ -926,6 +926,44 @@ function computePublishLedgerStats(filename) {
   }
 }
 
+// ── SEO Dashboard (standardised format) ─────────────────────
+
+const AGENTS_SEO = {
+  nbhw: '/Users/cairr/.openclaw/agents/nbhw/workspace/dev/seo',
+  bts: '/Users/cairr/.openclaw/agents/bts/workspace/dev/seo',
+}
+
+function parseSeoDashboard(agentKey) {
+  const dir = AGENTS_SEO[agentKey]
+  if (!dir) return null
+  const md = readFile(path.join(dir, 'SEO-DASHBOARD.md'))
+  const newsBank = readJSON(path.join(dir, 'news-bank.json'))
+  if (!md && !newsBank) return null
+
+  const result = { raw: md, newsBank, sections: {}, lastUpdated: fileMtime(path.join(dir, 'SEO-DASHBOARD.md')) }
+
+  if (md) {
+    // Parse sections by ## headers
+    const sectionRegex = /^## (.+)$/gm
+    let match
+    const headers = []
+    while ((match = sectionRegex.exec(md)) !== null) {
+      headers.push({ title: match[1], index: match.index })
+    }
+    for (let i = 0; i < headers.length; i++) {
+      const start = headers[i].index + headers[i].title.length + 3
+      const end = i + 1 < headers.length ? headers[i + 1].index : md.length
+      const content = md.substring(start, end).trim()
+      const key = headers[i].title.toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+      result.sections[key] = { title: headers[i].title, content, lines: content.split('\n').filter(l => l.trim()) }
+    }
+  }
+
+  return result
+}
+
 // ── Build snapshot ───────────────────────────────────────────
 
 console.log('Building dashboard snapshot...')
@@ -968,6 +1006,8 @@ const snapshot = {
   btsKeywords: parseBtsKeywordTracker(),
   btsPublishLedger: computePublishLedgerStats('bts-publish-ledger.json'),
   cairrFinance: readJSON(path.join(DASHBOARD_DATA, 'cairr-finance.json')),
+  nbhwSeoDash: parseSeoDashboard('nbhw'),
+  btsSeoDash: parseSeoDashboard('bts'),
   nbhwSeoAudit: readJSON(path.join(DASHBOARD_DATA, 'nbhw-seo-audit.json')),
   nbhwTraffic: readJSON(path.join(DASHBOARD_DATA, 'nbhw-traffic.json')),
   btsCompetitorPages: readJSON(path.join(DASHBOARD_DATA, 'bts-competitors-pages.json')),

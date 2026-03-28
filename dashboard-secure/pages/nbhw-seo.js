@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
+import SeoDashboard from './components/seo-dashboard'
 
 function useSnapshot(interval = 30000) {
   const [data, setData] = useState(null)
@@ -85,7 +86,8 @@ export default function NbhwSeoPage() {
   const kw = snap?.nbhwKeywords
   const audit = snap?.nbhwSeoAudit
   const traffic = snap?.nbhwTraffic
-  const [tab, setTab] = useState('health')
+  const seoDash = snap?.nbhwSeoDash
+  const [tab, setTab] = useState(seoDash ? 'seo-plan' : 'health')
 
   const coreAt1 = seo?.coreKeywords?.filter(k => k.position === 1).length || 0
   const coreTotal = seo?.coreKeywords?.length || 0
@@ -161,6 +163,7 @@ export default function NbhwSeoPage() {
 
         {/* Tab navigation */}
         <div style={{display:'flex',gap:6,marginBottom:16,overflowX:'auto',WebkitOverflowScrolling:'touch',scrollbarWidth:'none'}}>
+          <TabButton active={tab==='seo-plan'} label="📋 SEO Plan" onClick={() => setTab('seo-plan')} />
           <TabButton active={tab==='health'} label="🏥 Site Health" onClick={() => setTab('health')} />
           <TabButton active={tab==='rankings'} label="📊 Rankings" onClick={() => setTab('rankings')} />
           <TabButton active={tab==='matrix'} label="📍 Coverage Matrix" onClick={() => setTab('matrix')} />
@@ -168,6 +171,11 @@ export default function NbhwSeoPage() {
           <TabButton active={tab==='competitors'} label="🏆 Competitors" onClick={() => setTab('competitors')} />
           <TabButton active={tab==='safety'} label={`🛡️ Google Safety${ledger?.status === 'red' ? ' 🔴' : ledger?.status === 'amber' ? ' 🟡' : ''}`} onClick={() => setTab('safety')} />
         </div>
+
+        {/* TAB: SEO Plan (standardised format) */}
+        {tab === 'seo-plan' && (
+          <SeoDashboard seoDash={seoDash} publishLedger={snap?.nbhwPublishLedger} label="NBHW" />
+        )}
 
         {/* TAB: Site Health */}
         {tab === 'health' && (

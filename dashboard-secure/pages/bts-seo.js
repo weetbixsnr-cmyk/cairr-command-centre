@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
+import SeoDashboard from './components/seo-dashboard'
 
 function useSnapshot(interval = 30000) {
   const [data, setData] = useState(null)
@@ -86,7 +87,8 @@ export default function BtsSeoPage() {
   const suggestions = snap?.btsSuggestions
   const compPages = snap?.btsCompetitorPages
   const courseData = snap?.btsCourses
-  const [tab, setTab] = useState('rankings')
+  const seoDash = snap?.btsSeoDash
+  const [tab, setTab] = useState(seoDash ? 'seo-plan' : 'rankings')
   const [suggText, setSuggText] = useState('')
   const [suggSending, setSuggSending] = useState(false)
   const [suggSent, setSuggSent] = useState(false)
@@ -202,6 +204,7 @@ export default function BtsSeoPage() {
 
         {/* Tab navigation — RIGHT after stats + safety strip */}
         <div style={{display:'flex',gap:6,marginBottom:16,overflowX:'auto',WebkitOverflowScrolling:'touch',scrollbarWidth:'none'}}>
+          <TabButton active={tab==='seo-plan'} label="📋 SEO Plan" onClick={() => setTab('seo-plan')} />
           <TabButton active={tab==='rankings'} label="📊 Rankings" onClick={() => setTab('rankings')} />
           <TabButton active={tab==='matrix'} label="📍 Coverage Matrix" onClick={() => setTab('matrix')} />
           <TabButton active={tab==='framework'} label="📋 Framework" onClick={() => setTab('framework')} />
@@ -210,6 +213,11 @@ export default function BtsSeoPage() {
           <TabButton active={tab==='suggestions'} label="💡 Suggestions" onClick={() => setTab('suggestions')} />
           <TabButton active={tab==='safety'} label="🛡️ Google Safety" onClick={() => setTab('safety')} />
         </div>
+
+        {/* TAB: SEO Plan (standardised format) */}
+        {tab === 'seo-plan' && (
+          <SeoDashboard seoDash={seoDash} publishLedger={snap?.btsPublishLedger} label="BTS" />
+        )}
 
         {/* TAB 1: Rankings */}
         {tab === 'rankings' && (
