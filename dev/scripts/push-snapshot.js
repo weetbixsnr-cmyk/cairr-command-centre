@@ -1049,17 +1049,7 @@ console.log(`Bundled into: ${BUNDLE_PATH}`)
 // DEPLOY GATE (2026-03-19): CC does NOT deploy directly.
 // Flow: commit+push → send AUDIT REQUEST → Audit agent deploys on PASS.
 // See FRAMEWORK.md §6, decision-log 2026-03-19.
-
-// Still copy pages to dashboard-secure/ so they're ready for Audit to deploy
-const PAGES_SRC = path.join(WORKSPACE, 'dev', 'pages')
-const PAGES_DST = path.join(WORKSPACE, 'dashboard-secure', 'pages')
-try {
-  execSync(`cp -r ${PAGES_SRC}/* ${PAGES_DST}/`, { timeout: 5000 })
-  const mwSrc = path.join(WORKSPACE, 'dev', 'middleware.js')
-  if (fs.existsSync(mwSrc)) {
-    fs.copyFileSync(mwSrc, path.join(WORKSPACE, 'dashboard-secure', 'middleware.js'))
-  }
-  console.log('📦 Pages bundled into dashboard-secure/ (deploy via Audit)')
-} catch (e) {
-  console.warn('Could not bundle pages:', e.message)
-}
+//
+// LAYOUT LOCK (2026-03-29): Page files in dashboard-secure/pages/ are chmod 444.
+// Brain manually copies page files when layout changes are approved.
+// This script only pushes DATA (snapshot.json). No page copy.
