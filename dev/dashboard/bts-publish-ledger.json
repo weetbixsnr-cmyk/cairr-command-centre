@@ -1,6 +1,8 @@
 {
   "description": "Every BTS page/blog first-publish timestamp. Owned by Command Centre.",
   "weeklyPageLimit": 3,
-  "weeklyBlogLimit": 1,
+  "weeklyBlogLimit": 3,
+  "weeklyGbpLimit": 3,
+  "weeklyNewsLimit": 1,
   "entries": []
 }

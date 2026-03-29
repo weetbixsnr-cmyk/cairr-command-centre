@@ -1012,7 +1012,6 @@ const snapshot = {
   nbhwSeoAudit: readJSON(path.join(DASHBOARD_DATA, 'nbhw-seo-audit.json')),
   nbhwTraffic: readJSON(path.join(DASHBOARD_DATA, 'nbhw-traffic.json')),
   btsCompetitorPages: readJSON(path.join(DASHBOARD_DATA, 'bts-competitors-pages.json')),
-  btsCourses: readJSON(path.join(DASHBOARD_DATA, 'bts-courses.json')),
 }
 
 // ── Write snapshot + bundle into dashboard + push to GitHub ──

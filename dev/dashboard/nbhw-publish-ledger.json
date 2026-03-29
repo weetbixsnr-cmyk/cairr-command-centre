@@ -1,7 +1,9 @@
 {
   "description": "Every NBHW page/blog first-publish timestamp. Owned by Command Centre. Never overwritten on rebuild.",
   "weeklyPageLimit": 3,
-  "weeklyBlogLimit": 1,
+  "weeklyBlogLimit": 3,
+  "weeklyGbpLimit": 3,
+  "weeklyNewsLimit": 1,
   "entries": [
     { "slug": "dee-why", "type": "suburb", "firstPublished": "2026-03-05T10:00:00+11:00", "title": "Dee Why" },
     { "slug": "freshwater", "type": "suburb", "firstPublished": "2026-03-05T10:00:00+11:00", "title": "Freshwater" },
