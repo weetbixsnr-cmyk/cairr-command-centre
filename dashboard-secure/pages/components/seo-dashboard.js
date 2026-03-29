@@ -169,15 +169,8 @@ export default function SeoDashboard({ seoDash, publishLedger, label }) {
 
       {/* 8 Sections */}
       {sectionMap.map((map, i) => {
-        // News bank is special — render from JSON
-        if (map.key === 'news-bank') {
-          return (
-            <SectionCard key={i} title={findSection(map)?.title || 'News Bank'} icon={map.icon}>
-              <NewsBank newsBank={seoDash.newsBank} />
-              {findSection(map)?.lines?.length > 0 && <MdLines lines={findSection(map).lines} maxLines={20} />}
-            </SectionCard>
-          )
-        }
+        // News bank has its own dedicated tab — skip here to avoid double-up
+        if (map.key === 'news-bank') return null
 
         const section = findSection(map)
         if (!section) return null
