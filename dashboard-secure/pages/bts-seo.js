@@ -88,6 +88,8 @@ export default function BtsSeoPage() {
   const compPages = snap?.btsCompetitorPages
   const courseData = snap?.btsCourses
   const seoDash = snap?.btsSeoDash
+  const audit = snap?.btsSeoAudit
+  const traffic = snap?.btsTraffic
   const [tab, setTab] = useState(seoDash ? 'seo-plan' : 'rankings')
   const [suggText, setSuggText] = useState('')
   const [suggSending, setSuggSending] = useState(false)
@@ -207,16 +209,146 @@ export default function BtsSeoPage() {
 
         {/* Tab navigation — RIGHT after stats + safety strip */}
         <div style={{display:'flex',gap:6,marginBottom:16,overflowX:'auto',WebkitOverflowScrolling:'touch',scrollbarWidth:'none'}}>
+          <TabButton active={tab==='health'} label="🏥 SEO Health" onClick={() => setTab('health')} />
           <TabButton active={tab==='seo-plan'} label="📋 SEO Plan" onClick={() => setTab('seo-plan')} />
           <TabButton active={tab==='rankings'} label="📊 Rankings" onClick={() => setTab('rankings')} />
           <TabButton active={tab==='matrix'} label="📍 Coverage Matrix" onClick={() => setTab('matrix')} />
-          <TabButton active={tab==='framework'} label="📋 Framework" onClick={() => setTab('framework')} />
           <TabButton active={tab==='competitors'} label="🏆 Competitors" onClick={() => setTab('competitors')} />
-          <TabButton active={tab==='courses'} label="📚 Courses" onClick={() => setTab('courses')} />
-          <TabButton active={tab==='suggestions'} label="💡 Suggestions" onClick={() => setTab('suggestions')} />
           <TabButton active={tab==='safety'} label="🛡️ Google Safety" onClick={() => setTab('safety')} />
+          <TabButton active={tab==='news-bank'} label="📰 News Bank" onClick={() => setTab('news-bank')} />
+          <TabButton active={tab==='suggestions'} label="💡 Suggestions" onClick={() => setTab('suggestions')} />
           <TabButton active={tab==='future-posts'} label="📮 Future Posts" onClick={() => setTab('future-posts')} />
+          <TabButton active={tab==='traffic'} label="📊 Traffic" onClick={() => setTab('traffic')} />
+          <TabButton active={tab==='conversions'} label="📞 Conversions" onClick={() => setTab('conversions')} />
+          <TabButton active={tab==='courses'} label="📚 Courses" onClick={() => setTab('courses')} />
         </div>
+
+        {/* TAB: SEO Health */}
+        {tab === 'health' && (
+          <>
+            <div className="grid2" style={{marginBottom:16}}>
+              {/* SEO Health Score Gauge */}
+              <div className="card" style={{textAlign:'center',padding:20}}>
+                <div style={{fontSize:10,color:'#555',fontWeight:600,textTransform:'uppercase',letterSpacing:1,marginBottom:12}}>SEO Health Score</div>
+                {(() => {
+                  const score = audit?.healthScore
+                  const hasData = score != null
+                  const color = !hasData ? '#333' : score >= 80 ? '#10b981' : score >= 50 ? '#f59e0b' : '#ef4444'
+                  const circumference = 2 * Math.PI * 54
+                  const offset = hasData ? circumference - (score / 100) * circumference : circumference
+                  return (
+                    <>
+                      <div style={{position:'relative',width:130,height:130,margin:'0 auto'}}>
+                        <svg width="130" height="130" viewBox="0 0 120 120">
+                          <circle cx="60" cy="60" r="54" fill="none" stroke="#1a1a22" strokeWidth="8" />
+                          <circle cx="60" cy="60" r="54" fill="none" stroke={color} strokeWidth="8"
+                            strokeDasharray={circumference} strokeDashoffset={offset}
+                            strokeLinecap="round" transform="rotate(-90 60 60)"
+                            style={{transition:'stroke-dashoffset 1s ease'}} />
+                        </svg>
+                        <div style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)',textAlign:'center'}}>
+                          <div style={{fontSize:32,fontWeight:800,color}}>{hasData ? score : '—'}</div>
+                          <div style={{fontSize:8,color:'#888',letterSpacing:1}}>/ 100</div>
+                        </div>
+                      </div>
+                      <div style={{marginTop:14,textAlign:'left'}}>
+                        {['technical','content','onPage','schema','performance','aiSearch','images'].map(cat => {
+                          const val = audit?.healthBreakdown?.[cat]
+                          const label = cat === 'onPage' ? 'On-Page' : cat === 'aiSearch' ? 'AI Search' : cat.charAt(0).toUpperCase() + cat.slice(1)
+                          const c = val == null ? '#333' : val >= 80 ? '#10b981' : val >= 50 ? '#f59e0b' : '#ef4444'
+                          return (
+                            <div key={cat} style={{display:'flex',alignItems:'center',gap:8,marginBottom:5}}>
+                              <span style={{fontSize:9,color:'#999',minWidth:70,textAlign:'right'}}>{label}</span>
+                              <div style={{flex:1,height:6,background:'#1a1a1a',borderRadius:3,overflow:'hidden'}}>
+                                <div style={{height:6,width:val != null ? `${val}%` : '0%',background:c,borderRadius:3,transition:'width 0.5s'}}></div>
+                              </div>
+                              <span style={{fontSize:9,color:c,fontWeight:700,minWidth:28}}>{val != null ? val : '—'}</span>
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </>
+                  )
+                })()}
+              </div>
+
+              {/* GEO Readiness Gauge */}
+              <div className="card" style={{textAlign:'center',padding:20}}>
+                <div style={{fontSize:10,color:'#555',fontWeight:600,textTransform:'uppercase',letterSpacing:1,marginBottom:12}}>GEO Readiness — AI Search</div>
+                {(() => {
+                  const score = audit?.geoScore
+                  const hasData = score != null
+                  const color = !hasData ? '#333' : score >= 70 ? '#10b981' : score >= 40 ? '#f59e0b' : '#ef4444'
+                  const circumference = 2 * Math.PI * 54
+                  const offset = hasData ? circumference - (score / 100) * circumference : circumference
+                  return (
+                    <>
+                      <div style={{position:'relative',width:130,height:130,margin:'0 auto'}}>
+                        <svg width="130" height="130" viewBox="0 0 120 120">
+                          <circle cx="60" cy="60" r="54" fill="none" stroke="#1a1a22" strokeWidth="8" />
+                          <circle cx="60" cy="60" r="54" fill="none" stroke={color} strokeWidth="8"
+                            strokeDasharray={circumference} strokeDashoffset={offset}
+                            strokeLinecap="round" transform="rotate(-90 60 60)"
+                            style={{transition:'stroke-dashoffset 1s ease'}} />
+                        </svg>
+                        <div style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)',textAlign:'center'}}>
+                          <div style={{fontSize:32,fontWeight:800,color}}>{hasData ? score : '—'}</div>
+                          <div style={{fontSize:8,color:'#888',letterSpacing:1}}>/ 100</div>
+                        </div>
+                      </div>
+                      <div style={{marginTop:14,textAlign:'left'}}>
+                        {['citability','structure','multiModal','authority','technicalAccess'].map(pillar => {
+                          const val = audit?.geoBreakdown?.[pillar]
+                          const label = pillar === 'multiModal' ? 'Multi-Modal' : pillar === 'technicalAccess' ? 'Tech Access' : pillar.charAt(0).toUpperCase() + pillar.slice(1)
+                          const c = val == null ? '#333' : val >= 70 ? '#10b981' : val >= 40 ? '#f59e0b' : '#ef4444'
+                          return (
+                            <div key={pillar} style={{display:'flex',alignItems:'center',gap:8,marginBottom:5}}>
+                              <span style={{fontSize:9,color:'#999',minWidth:70,textAlign:'right'}}>{label}</span>
+                              <div style={{flex:1,height:6,background:'#1a1a1a',borderRadius:3,overflow:'hidden'}}>
+                                <div style={{height:6,width:val != null ? `${val}%` : '0%',background:c,borderRadius:3,transition:'width 0.5s'}}></div>
+                              </div>
+                              <span style={{fontSize:9,color:c,fontWeight:700,minWidth:28}}>{val != null ? val : '—'}</span>
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </>
+                  )
+                })()}
+              </div>
+            </div>
+
+            {/* Action Plan */}
+            {audit?.actions?.length > 0 && (
+              <div className="card" style={{marginBottom:16}}>
+                <div style={{fontSize:10,color:'#555',fontWeight:600,textTransform:'uppercase',letterSpacing:1,marginBottom:10}}>📋 Action Plan</div>
+                {['critical','high','medium','low'].map(sev => {
+                  const items = audit.actions.filter(a => a.severity === sev)
+                  if (items.length === 0) return null
+                  const sevColor = sev === 'critical' ? '#ef4444' : sev === 'high' ? '#f59e0b' : sev === 'medium' ? '#3b82f6' : '#888'
+                  const sevIcon = sev === 'critical' ? '🔴' : sev === 'high' ? '🟠' : sev === 'medium' ? '🟡' : '⚪'
+                  return (
+                    <div key={sev} style={{marginBottom:8}}>
+                      <div style={{fontSize:9,color:sevColor,fontWeight:700,textTransform:'uppercase',letterSpacing:1,marginBottom:4}}>{sevIcon} {sev} ({items.length})</div>
+                      {items.map((item, i) => (
+                        <div key={i} style={{fontSize:10,color:'#aaa',padding:'3px 0',borderBottom:'1px solid #1a1a1a',display:'flex',gap:6}}>
+                          <span style={{flex:1}}>{item.title}</span>
+                          {item.page && <span style={{fontSize:8,color:'#555',fontFamily:'monospace'}}>{item.page}</span>}
+                        </div>
+                      ))}
+                    </div>
+                  )
+                })}
+              </div>
+            )}
+
+            {audit?.source === 'placeholder' && (
+              <div style={{textAlign:'center',padding:12,background:'#111',border:'1px solid #222',borderRadius:8}}>
+                <span style={{fontSize:10,color:'#f59e0b'}}>⏳ Awaiting full BTS SEO audit — scores will populate automatically</span>
+              </div>
+            )}
+          </>
+        )}
 
         {/* TAB: SEO Plan (standardised format) */}
         {tab === 'seo-plan' && (
@@ -1369,6 +1501,162 @@ export default function BtsSeoPage() {
                 </>
               )
             })()}
+          </>
+        )}
+
+        {/* TAB: News Bank */}
+        {tab === 'news-bank' && (
+          <>
+            {(() => {
+              const nb = seoDash?.newsBank
+              const stories = nb?.stories || []
+              const published = stories.filter(s => s.status === 'published')
+              const available = stories.filter(s => s.status !== 'published')
+              return (
+                <>
+                  <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
+                    <div className="stat-card" style={{minWidth:80}}>
+                      <div className="stat-val" style={{fontSize:20,color:'#f59e0b'}}>{available.length}</div>
+                      <div className="stat-lbl">Available</div>
+                    </div>
+                    <div className="stat-card" style={{minWidth:80}}>
+                      <div className="stat-val" style={{fontSize:20,color:'#10b981'}}>{published.length}</div>
+                      <div className="stat-lbl">Published</div>
+                    </div>
+                    <div className="stat-card" style={{minWidth:80}}>
+                      <div className="stat-val" style={{fontSize:20,color:'#3b82f6'}}>{stories.length}</div>
+                      <div className="stat-lbl">Total Stories</div>
+                    </div>
+                  </div>
+                  {available.length > 0 && (
+                    <div className="section">
+                      <div className="sec-title">📦 Available Stories ({available.length})</div>
+                      <div className="card">
+                        {available.map((s, i) => (
+                          <div key={i} style={{display:'flex',gap:8,padding:'6px 0',borderBottom:'1px solid #1a1a1a',fontSize:11,alignItems:'center'}}>
+                            <span style={{fontSize:8,color:'#f59e0b',fontWeight:600,minWidth:60,textTransform:'uppercase',background:'#2a200033',padding:'2px 6px',borderRadius:3}}>{s.type || 'story'}</span>
+                            <span style={{color:'#fff',flex:1,fontWeight:500}}>{s.title}</span>
+                            {s.category && <span style={{fontSize:8,color:'#888',background:'#1a1a22',padding:'2px 6px',borderRadius:3}}>{s.category}</span>}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {published.length > 0 && (
+                    <div className="section">
+                      <div className="sec-title">✅ Published ({published.length})</div>
+                      <div className="card">
+                        {published.map((s, i) => (
+                          <div key={i} style={{display:'flex',gap:8,padding:'6px 0',borderBottom:'1px solid #1a1a1a',fontSize:11,alignItems:'center'}}>
+                            <span style={{fontSize:8,color:'#10b981',fontWeight:600,minWidth:60}}>✅ {s.type || 'story'}</span>
+                            <span style={{color:'#888',flex:1}}>{s.title}</span>
+                            {s.publishedAt && <span style={{fontSize:8,color:'#555'}}>{s.publishedAt}</span>}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {stories.length === 0 && (
+                    <div style={{textAlign:'center',padding:30,color:'#333'}}>
+                      <div style={{fontSize:24,marginBottom:8}}>📰</div>
+                      <div style={{fontSize:11,color:'#555'}}>No stories in news bank yet</div>
+                    </div>
+                  )}
+                </>
+              )
+            })()}
+          </>
+        )}
+
+        {/* TAB: Traffic */}
+        {tab === 'traffic' && (
+          <>
+            <div className="section">
+              <div className="sec-title">📊 Page Traffic — {traffic?.period || 'Last 30 Days'}</div>
+              {traffic?.totals?.views != null ? (
+                <>
+                  <div style={{display:'flex',gap:8,marginBottom:12,flexWrap:'wrap'}}>
+                    {[
+                      { label: 'Page Views', val: traffic.totals.views, color: '#3b82f6' },
+                      { label: 'Unique Visitors', val: traffic.totals.visitors, color: '#a855f7' },
+                      { label: '📞 Phone Taps', val: traffic.totals.phoneTaps || 0, color: '#10b981' },
+                      { label: '✉️ Email Taps', val: traffic.totals.emailTaps || 0, color: '#f59e0b' },
+                    ].map((s, i) => (
+                      <div key={i} className="stat-card" style={{minWidth:90,flex:1}}>
+                        <div className="stat-val" style={{fontSize:20,color:s.color}}>{s.val?.toLocaleString()}</div>
+                        <div className="stat-lbl">{s.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                  {traffic.pages?.length > 0 && (
+                    <div className="card">
+                      <table>
+                        <thead><tr><th>Page</th><th>Type</th><th>Views</th><th>📞</th><th>✉️</th></tr></thead>
+                        <tbody>
+                          {traffic.pages.slice(0, 15).map((p, i) => {
+                            const typeColor = p.type === 'location' ? '#3b82f6' : p.type === 'blog' ? '#a855f7' : p.type === 'service' ? '#f59e0b' : '#888'
+                            return (
+                              <tr key={i}>
+                                <td style={{color:'#fff',fontWeight:500}}>{p.path}</td>
+                                <td><span style={{fontSize:8,color:typeColor,fontWeight:600,textTransform:'uppercase'}}>{p.type}</span></td>
+                                <td style={{fontWeight:700}}>{p.views?.toLocaleString()}</td>
+                                <td style={{color:p.phoneTaps > 0 ? '#10b981' : '#333'}}>{p.phoneTaps || 0}</td>
+                                <td style={{color:p.emailTaps > 0 ? '#f59e0b' : '#333'}}>{p.emailTaps || 0}</td>
+                              </tr>
+                            )
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <div className="card" style={{textAlign:'center',padding:20}}>
+                  <div style={{fontSize:20,marginBottom:6}}>📊</div>
+                  <div style={{color:'#555',fontSize:11}}>Awaiting GA4 data…</div>
+                  <div style={{color:'#333',fontSize:9,marginTop:4}}>GA4 not yet connected for BTS</div>
+                </div>
+              )}
+            </div>
+          </>
+        )}
+
+        {/* TAB: Conversions */}
+        {tab === 'conversions' && (
+          <>
+            <div className="section">
+              <div className="sec-title">📞 Conversion Funnel</div>
+              {traffic?.totals?.views != null ? (
+                <div className="card" style={{padding:20}}>
+                  <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:0,flexWrap:'wrap'}}>
+                    <div style={{textAlign:'center',padding:'0 16px'}}>
+                      <div style={{fontSize:28,fontWeight:800,color:'#a855f7'}}>{traffic.totals.visitors?.toLocaleString()}</div>
+                      <div style={{fontSize:9,color:'#888',textTransform:'uppercase'}}>Visitors</div>
+                    </div>
+                    <div style={{fontSize:18,color:'#333',padding:'0 4px'}}>→</div>
+                    <div style={{textAlign:'center',padding:'0 16px'}}>
+                      <div style={{fontSize:28,fontWeight:800,color:'#3b82f6'}}>{traffic.totals.views?.toLocaleString()}</div>
+                      <div style={{fontSize:9,color:'#888',textTransform:'uppercase'}}>Page Views</div>
+                    </div>
+                    <div style={{fontSize:18,color:'#333',padding:'0 4px'}}>→</div>
+                    <div style={{textAlign:'center',padding:'0 16px'}}>
+                      <div style={{fontSize:28,fontWeight:800,color:'#10b981'}}>{(traffic.totals.phoneTaps || 0) + (traffic.totals.emailTaps || 0)}</div>
+                      <div style={{fontSize:9,color:'#888',textTransform:'uppercase'}}>Contact Clicks</div>
+                    </div>
+                  </div>
+                  <div style={{display:'flex',justifyContent:'space-between',marginTop:12,fontSize:9,color:'#555'}}>
+                    <span>📞 {traffic.totals.phoneTaps || 0} phone</span>
+                    <span>✉️ {traffic.totals.emailTaps || 0} email</span>
+                    <span>Rate: {traffic.totals.conversionRate?.toFixed(1) || '0'}%</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="card" style={{textAlign:'center',padding:20}}>
+                  <div style={{fontSize:20,marginBottom:6}}>📞</div>
+                  <div style={{color:'#555',fontSize:11}}>Conversion tracking awaiting GA4 data…</div>
+                </div>
+              )}
+            </div>
           </>
         )}
 
