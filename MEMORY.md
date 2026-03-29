@@ -42,7 +42,7 @@ Owns dashboard deploys end-to-end (exec allowlisted, Vercel auth inherited).
 - FRAMEWORK.md is the law
 
 ## Constitutional Rules (from Brain, 29 Mar 2026)
-1. **LAYOUT LOCK** — NO layout/structure/tab order/colour/design changes without Brain proposal + Adam approval. Data updates only (numbers, stats, new entries in existing sections) are permitted without approval.
+1. **LAYOUT LOCK** — All page files in dev/pages/ and dashboard-secure/pages/ are chmod 444 (read-only). NO layout/structure/tab order/colour/design changes without Brain proposal + Adam approval. To change: propose in #command-centre → Brain reviews → Adam approves → Brain unlocks file → make change → Brain re-locks. Data updates only (numbers, stats, new entries in existing sections) are permitted without approval.
 2. **ALL outputs to Adam = clickable links or PDFs.** Never file paths. Never "run this command."
 3. **Client pricing is INTERNAL ONLY** — never on any dashboard surface (learned 26 Mar 2026)
 
