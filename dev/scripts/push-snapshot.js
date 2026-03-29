@@ -1009,8 +1009,12 @@ const snapshot = {
   nbhwSeoDash: parseSeoDashboard('nbhw'),
   btsSeoDash: parseSeoDashboard('bts'),
   btsDrafts: readJSON(path.join(DASHBOARD_DATA, 'bts-drafts.json')),
+  btsSeoAudit: readJSON(path.join(DASHBOARD_DATA, 'bts-seo-audit.json')),
+  btsTraffic: readJSON(path.join(DASHBOARD_DATA, 'bts-traffic.json')),
   nbhwSeoAudit: readJSON(path.join(DASHBOARD_DATA, 'nbhw-seo-audit.json')),
   nbhwTraffic: readJSON(path.join(DASHBOARD_DATA, 'nbhw-traffic.json')),
+  nbhwSuggestions: readJSON(path.join(DASHBOARD_DATA, 'nbhw-suggestions.json')),
+  nbhwDrafts: readJSON(path.join(DASHBOARD_DATA, 'nbhw-drafts.json')),
   btsCompetitorPages: readJSON(path.join(DASHBOARD_DATA, 'bts-competitors-pages.json')),
 }
 

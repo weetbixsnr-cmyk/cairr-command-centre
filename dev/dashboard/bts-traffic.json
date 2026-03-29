@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-03-29T02:34:00Z",
+  "source": "placeholder",
+  "note": "BTS GA4 not yet connected — needs property ID + credentials",
+  "clickTrackingLive": false,
+  "period": "last30d",
+  "totals": {
+    "views": null,
+    "visitors": null,
+    "phoneTaps": null,
+    "emailTaps": null,
+    "conversionRate": null
+  },
+  "pages": [],
+  "monthly": {}
+}

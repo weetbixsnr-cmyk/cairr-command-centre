@@ -1,0 +1,33 @@
+{
+  "timestamp": "2026-03-29T02:34:00Z",
+  "source": "placeholder",
+  "note": "Awaiting BTS full SEO audit — scores from SEO-DASHBOARD.md Section 1",
+  "healthScore": 19,
+  "healthBreakdown": {
+    "technical": null,
+    "content": null,
+    "onPage": null,
+    "schema": null,
+    "performance": null,
+    "aiSearch": 5,
+    "images": null
+  },
+  "geoScore": 5,
+  "geoBreakdown": {
+    "citability": null,
+    "structure": null,
+    "multiModal": null,
+    "authority": null,
+    "technicalAccess": null
+  },
+  "crawlers": [],
+  "schema": {
+    "implemented": [],
+    "missing": [],
+    "deprecated": []
+  },
+  "actions": [],
+  "history": [
+    { "timestamp": "2026-03-29T02:34:00Z", "healthScore": 19, "geoScore": 5 }
+  ]
+}
