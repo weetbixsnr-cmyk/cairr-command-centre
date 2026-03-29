@@ -1,7 +1,7 @@
-# Governance Drift — 2026-03-27 04:00
+# Governance Drift — 2026-03-30 04:35
 ✅ alpha: governance aligned
 ❌ audit:
-  ⚠️ SOUL.md is 101 lines (limit 60)
+  ⚠️ SOUL.md is 123 lines (limit 60)
 
 ✅ bts: governance aligned
 ✅ command-centre: governance aligned
