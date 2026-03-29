@@ -212,6 +212,7 @@ export default function BtsSeoPage() {
           <TabButton active={tab==='courses'} label="📚 Courses" onClick={() => setTab('courses')} />
           <TabButton active={tab==='suggestions'} label="💡 Suggestions" onClick={() => setTab('suggestions')} />
           <TabButton active={tab==='safety'} label="🛡️ Google Safety" onClick={() => setTab('safety')} />
+          <TabButton active={tab==='future-posts'} label="📮 Future Posts" onClick={() => setTab('future-posts')} />
         </div>
 
         {/* TAB: SEO Plan (standardised format) */}
@@ -1004,6 +1005,170 @@ export default function BtsSeoPage() {
                     </div>
                   </div>
                 </>
+              )
+            })()}
+          </>
+        )}
+
+        {/* TAB: Future Posts */}
+        {tab === 'future-posts' && (
+          <>
+            {(() => {
+              const drafts = snap?.btsDrafts?.drafts || []
+              const [editingId, setEditingId] = [null, () => {}] // Managed via local state below
+              const pending = drafts.filter(d => ['draft', 'sunny-editing', 'approved'].includes(d.status))
+              const visualCheck = drafts.filter(d => d.status === 'visual-check-pending')
+              const signedOff = drafts.filter(d => d.status === 'signed-off')
+
+              const statusColors = {
+                'draft': '#3b82f6', 'sunny-editing': '#f59e0b', 'approved': '#10b981',
+                'visual-check-pending': '#a855f7', 'signed-off': '#10b981'
+              }
+              const statusLabels = {
+                'draft': '📝 Draft', 'sunny-editing': '✏️ Sunny Editing', 'approved': '✅ Approved',
+                'visual-check-pending': '👁️ Visual Check', 'signed-off': '✔️ Signed Off'
+              }
+              const typeColors = { blog: '#3b82f6', news: '#f59e0b', gbp: '#a855f7' }
+
+              async function draftAction(id, action, extraData) {
+                try {
+                  const res = await fetch('/api/bts-draft-action', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id, action, ...extraData })
+                  })
+                  if (res.ok) window.location.reload()
+                } catch {}
+              }
+
+              return (
+                <div>
+                  {/* Summary strip */}
+                  <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
+                    <div style={{flex:1,minWidth:100,background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:8,padding:'8px 14px',textAlign:'center'}}>
+                      <div style={{fontSize:20,fontWeight:800,color:'#3b82f6'}}>{pending.length}</div>
+                      <div style={{fontSize:8,color:'#888',textTransform:'uppercase'}}>Pending</div>
+                    </div>
+                    <div style={{flex:1,minWidth:100,background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:8,padding:'8px 14px',textAlign:'center'}}>
+                      <div style={{fontSize:20,fontWeight:800,color:'#a855f7'}}>{visualCheck.length}</div>
+                      <div style={{fontSize:8,color:'#888',textTransform:'uppercase'}}>Visual Check</div>
+                    </div>
+                    <div style={{flex:1,minWidth:100,background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:8,padding:'8px 14px',textAlign:'center'}}>
+                      <div style={{fontSize:20,fontWeight:800,color:'#10b981'}}>{signedOff.length}</div>
+                      <div style={{fontSize:8,color:'#888',textTransform:'uppercase'}}>Signed Off</div>
+                    </div>
+                  </div>
+
+                  {/* Visual Check cards — urgent, show first */}
+                  {visualCheck.length > 0 && (
+                    <div style={{marginBottom:16}}>
+                      <div style={{fontSize:9,color:'#a855f7',textTransform:'uppercase',letterSpacing:1.2,marginBottom:8,fontWeight:600}}>👁️ Visual Check Required</div>
+                      {visualCheck.map(d => (
+                        <div key={d.id} style={{background:'#0d0d10',border:'1px solid #a855f733',borderRadius:10,padding:14,marginBottom:8,borderLeft:'3px solid #a855f7'}}>
+                          <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:8}}>
+                            <span style={{fontSize:8,color:typeColors[d.type]||'#888',fontWeight:700,textTransform:'uppercase',background:`${typeColors[d.type]||'#888'}15`,padding:'2px 6px',borderRadius:4}}>{d.type}</span>
+                            <span style={{fontSize:13,fontWeight:700,color:'#fff',flex:1}}>{d.title}</span>
+                          </div>
+                          <div style={{display:'flex',gap:12,alignItems:'center'}}>
+                            <label style={{display:'flex',alignItems:'center',gap:6,cursor:'pointer',fontSize:11,color:d.desktopChecked?'#10b981':'#888'}}>
+                              <input type="checkbox" checked={d.desktopChecked} onChange={() => draftAction(d.id, 'check-desktop')}
+                                style={{width:16,height:16,cursor:'pointer'}} />
+                              Checked on Desktop
+                            </label>
+                            <label style={{display:'flex',alignItems:'center',gap:6,cursor:'pointer',fontSize:11,color:d.mobileChecked?'#10b981':'#888'}}>
+                              <input type="checkbox" checked={d.mobileChecked} onChange={() => draftAction(d.id, 'check-mobile')}
+                                style={{width:16,height:16,cursor:'pointer'}} />
+                              Checked on Mobile
+                            </label>
+                          </div>
+                          <div style={{fontSize:8,color:'#555',marginTop:4}}>Published: {d.publishedAt ? new Date(d.publishedAt).toLocaleString() : '—'}</div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Pending drafts */}
+                  {pending.length > 0 ? (
+                    <div style={{marginBottom:16}}>
+                      <div style={{fontSize:9,color:'#aaa',textTransform:'uppercase',letterSpacing:1.2,marginBottom:8,fontWeight:600}}>📝 Pending Posts ({pending.length})</div>
+                      {pending.map(d => (
+                        <div key={d.id} style={{background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:10,padding:14,marginBottom:10}}>
+                          <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6}}>
+                            <span style={{fontSize:8,color:typeColors[d.type]||'#888',fontWeight:700,textTransform:'uppercase',background:`${typeColors[d.type]||'#888'}15`,padding:'2px 6px',borderRadius:4}}>{d.type}</span>
+                            <span style={{fontSize:13,fontWeight:700,color:'#fff',flex:1}}>{d.title}</span>
+                            <span style={{fontSize:9,color:statusColors[d.status],fontWeight:600}}>{statusLabels[d.status]}</span>
+                          </div>
+                          {d.targetDate && <div style={{fontSize:9,color:'#888',marginBottom:6}}>Target: {d.targetDate}</div>}
+                          {d.feedback && <div style={{fontSize:10,color:'#ef4444',background:'#3b101033',padding:'6px 8px',borderRadius:6,marginBottom:8}}>💬 Feedback: {d.feedback}</div>}
+
+                          {/* Content area — editable textarea */}
+                          <textarea
+                            defaultValue={d.editedContent || d.content}
+                            id={`draft-content-${d.id}`}
+                            style={{
+                              width:'100%',minHeight:200,padding:12,background:'#0a0a0a',border:'1px solid #222',borderRadius:8,
+                              color:'#e0e0e0',fontSize:12,fontFamily:'-apple-system,BlinkMacSystemFont,sans-serif',lineHeight:1.6,resize:'vertical',outline:'none'
+                            }}
+                            onFocus={e => e.target.style.borderColor = '#3b82f6'}
+                            onBlur={e => e.target.style.borderColor = '#222'}
+                          />
+
+                          {/* Action buttons */}
+                          <div style={{display:'flex',gap:8,marginTop:10,flexWrap:'wrap'}}>
+                            <button onClick={() => {
+                              const el = document.getElementById(`draft-content-${d.id}`)
+                              if (el) draftAction(d.id, 'edit', { content: el.value })
+                            }} style={{
+                              padding:'8px 16px',background:'#1a1a1a',border:'1px solid #333',borderRadius:6,
+                              color:'#f59e0b',fontSize:11,fontWeight:600,cursor:'pointer'
+                            }}>💾 Save Edits</button>
+
+                            <button onClick={() => {
+                              const el = document.getElementById(`draft-content-${d.id}`)
+                              if (el) draftAction(d.id, 'edit', { content: el.value })
+                              draftAction(d.id, 'approve')
+                            }} style={{
+                              padding:'8px 20px',background:'#10b981',border:'none',borderRadius:6,
+                              color:'#fff',fontSize:11,fontWeight:700,cursor:'pointer'
+                            }}>✅ Good to Go</button>
+
+                            <button onClick={() => {
+                              const fb = prompt('What needs changing?')
+                              if (fb) draftAction(d.id, 'reject', { feedback: fb })
+                            }} style={{
+                              padding:'8px 16px',background:'#1a1a1a',border:'1px solid #ef4444',borderRadius:6,
+                              color:'#ef4444',fontSize:11,fontWeight:600,cursor:'pointer'
+                            }}>↩️ Request Changes</button>
+                          </div>
+
+                          <div style={{fontSize:8,color:'#333',marginTop:6}}>
+                            By: {d.author} · Created: {d.createdAt ? new Date(d.createdAt).toLocaleDateString() : '—'}
+                            {d.editedBy && ` · Edited by ${d.editedBy}`}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div style={{background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:10,padding:30,textAlign:'center',marginBottom:16}}>
+                      <div style={{fontSize:20,marginBottom:8}}>📮</div>
+                      <div style={{color:'#555',fontSize:12}}>No pending posts — BTS agent will add drafts here for review</div>
+                    </div>
+                  )}
+
+                  {/* Signed off history */}
+                  {signedOff.length > 0 && (
+                    <div>
+                      <div style={{fontSize:9,color:'#10b981',textTransform:'uppercase',letterSpacing:1.2,marginBottom:8,fontWeight:600}}>✔️ Signed Off ({signedOff.length})</div>
+                      {signedOff.map(d => (
+                        <div key={d.id} style={{display:'flex',alignItems:'center',gap:8,padding:'6px 0',borderBottom:'1px solid #111',fontSize:11}}>
+                          <span style={{fontSize:8,color:typeColors[d.type]||'#888',fontWeight:600,textTransform:'uppercase'}}>{d.type}</span>
+                          <span style={{color:'#888',flex:1}}>{d.title}</span>
+                          <span style={{fontSize:8,color:'#555'}}>{d.signedOffAt ? new Date(d.signedOffAt).toLocaleDateString() : '—'}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               )
             })()}
           </>
