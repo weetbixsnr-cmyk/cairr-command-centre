@@ -163,13 +163,17 @@ export default function NbhwSeoPage() {
 
         {/* Tab navigation */}
         <div style={{display:'flex',gap:6,marginBottom:16,overflowX:'auto',WebkitOverflowScrolling:'touch',scrollbarWidth:'none'}}>
+          <TabButton active={tab==='health'} label="🏥 SEO Health" onClick={() => setTab('health')} />
           <TabButton active={tab==='seo-plan'} label="📋 SEO Plan" onClick={() => setTab('seo-plan')} />
-          <TabButton active={tab==='health'} label="🏥 Site Health" onClick={() => setTab('health')} />
           <TabButton active={tab==='rankings'} label="📊 Rankings" onClick={() => setTab('rankings')} />
           <TabButton active={tab==='matrix'} label="📍 Coverage Matrix" onClick={() => setTab('matrix')} />
-          <TabButton active={tab==='framework'} label="📋 Framework" onClick={() => setTab('framework')} />
           <TabButton active={tab==='competitors'} label="🏆 Competitors" onClick={() => setTab('competitors')} />
           <TabButton active={tab==='safety'} label={`🛡️ Google Safety${ledger?.status === 'red' ? ' 🔴' : ledger?.status === 'amber' ? ' 🟡' : ''}`} onClick={() => setTab('safety')} />
+          <TabButton active={tab==='news-bank'} label="📰 News Bank" onClick={() => setTab('news-bank')} />
+          <TabButton active={tab==='suggestions'} label="💡 Suggestions" onClick={() => setTab('suggestions')} />
+          <TabButton active={tab==='future-posts'} label="📮 Future Posts" onClick={() => setTab('future-posts')} />
+          <TabButton active={tab==='traffic'} label="📊 Traffic" onClick={() => setTab('traffic')} />
+          <TabButton active={tab==='conversions'} label="📞 Conversions" onClick={() => setTab('conversions')} />
         </div>
 
         {/* TAB: SEO Plan (standardised format) */}
@@ -1061,6 +1065,203 @@ export default function NbhwSeoPage() {
                 Publish ledger not loaded — waiting for next snapshot refresh
               </div>
             )}
+          </>
+        )}
+
+        {/* TAB: News Bank */}
+        {tab === 'news-bank' && (
+          <>
+            {(() => {
+              const nb = seoDash?.newsBank
+              const stories = nb?.stories || []
+              const published = stories.filter(s => s.status === 'published')
+              const available = stories.filter(s => s.status !== 'published')
+              return (
+                <>
+                  <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
+                    <div className="stat-card" style={{minWidth:80}}><div className="stat-val" style={{fontSize:20,color:'#f59e0b'}}>{available.length}</div><div className="stat-lbl">Available</div></div>
+                    <div className="stat-card" style={{minWidth:80}}><div className="stat-val" style={{fontSize:20,color:'#10b981'}}>{published.length}</div><div className="stat-lbl">Published</div></div>
+                    <div className="stat-card" style={{minWidth:80}}><div className="stat-val" style={{fontSize:20,color:'#3b82f6'}}>{stories.length}</div><div className="stat-lbl">Total</div></div>
+                  </div>
+                  {available.length > 0 && (
+                    <div className="section"><div className="sec-title">📦 Available Stories ({available.length})</div><div className="card">
+                      {available.map((s, i) => (
+                        <div key={i} style={{display:'flex',gap:8,padding:'6px 0',borderBottom:'1px solid #1a1a1a',fontSize:11,alignItems:'center'}}>
+                          <span style={{fontSize:8,color:'#f59e0b',fontWeight:600,minWidth:60,textTransform:'uppercase',background:'#2a200033',padding:'2px 6px',borderRadius:3}}>{s.type || 'story'}</span>
+                          <span style={{color:'#fff',flex:1,fontWeight:500}}>{s.title}</span>
+                          {s.category && <span style={{fontSize:8,color:'#888',background:'#1a1a22',padding:'2px 6px',borderRadius:3}}>{s.category}</span>}
+                        </div>
+                      ))}
+                    </div></div>
+                  )}
+                  {published.length > 0 && (
+                    <div className="section"><div className="sec-title">✅ Published ({published.length})</div><div className="card">
+                      {published.map((s, i) => (
+                        <div key={i} style={{display:'flex',gap:8,padding:'6px 0',borderBottom:'1px solid #1a1a1a',fontSize:11}}>
+                          <span style={{fontSize:8,color:'#10b981',fontWeight:600,minWidth:60}}>✅ {s.type || 'story'}</span>
+                          <span style={{color:'#888',flex:1}}>{s.title}</span>
+                        </div>
+                      ))}
+                    </div></div>
+                  )}
+                  {stories.length === 0 && <div style={{textAlign:'center',padding:30,color:'#333'}}><div style={{fontSize:24,marginBottom:8}}>📰</div><div style={{fontSize:11,color:'#555'}}>No stories in news bank yet</div></div>}
+                </>
+              )
+            })()}
+          </>
+        )}
+
+        {/* TAB: Suggestions */}
+        {tab === 'suggestions' && (
+          <>
+            {(() => {
+              const nbhwSugg = snap?.nbhwSuggestions?.suggestions || []
+              return (
+                <>
+                  <div className="section">
+                    <div className="sec-title">💡 Suggestions — What Needs Changing</div>
+                    <div className="card" style={{marginBottom:16}}>
+                      <div style={{fontSize:11,color:'#aaa',marginBottom:10}}>Spotted something that needs updating on the site? Submit it here.</div>
+                      <textarea id="nbhw-sugg-input" placeholder="e.g. 'Update the phone number' or 'Add a new suburb page for...'"
+                        style={{width:'100%',minHeight:80,padding:12,background:'#0a0a0a',border:'1px solid #222',borderRadius:8,color:'#fff',fontSize:12,fontFamily:'inherit',resize:'vertical',outline:'none'}} />
+                      <button onClick={async () => {
+                        const el = document.getElementById('nbhw-sugg-input')
+                        if (!el?.value?.trim()) return
+                        try {
+                          await fetch('/api/nbhw-suggestions', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({text:el.value.trim()}) })
+                          el.value = ''
+                          window.location.reload()
+                        } catch {}
+                      }} style={{marginTop:8,padding:'8px 20px',background:'#10b981',border:'none',borderRadius:6,color:'#fff',fontSize:11,fontWeight:700,cursor:'pointer'}}>
+                        📨 Submit
+                      </button>
+                    </div>
+                  </div>
+                  {nbhwSugg.length > 0 && (
+                    <div className="section">
+                      <div className="sec-title">Previous Suggestions ({nbhwSugg.length})</div>
+                      <div className="card">
+                        {nbhwSugg.map((s, i) => {
+                          const sc = s.status === 'done' ? '#10b981' : s.status === 'in-progress' ? '#f59e0b' : '#3b82f6'
+                          return (
+                            <div key={i} style={{padding:'8px 0',borderBottom:'1px solid #1a1a1a',display:'flex',gap:8}}>
+                              <span style={{fontSize:9,color:sc,fontWeight:700,minWidth:70}}>{s.status === 'done' ? '✅ Done' : s.status === 'in-progress' ? '🔨 WIP' : '🆕 New'}</span>
+                              <div style={{flex:1}}><div style={{fontSize:11,color:'#fff'}}>{s.text}</div><div style={{fontSize:8,color:'#555'}}>{s.submittedBy || 'Adam'} · {s.submittedAt ? new Date(s.submittedAt).toLocaleDateString('en-GB',{day:'numeric',month:'short'}) : '—'}</div></div>
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </div>
+                  )}
+                  {nbhwSugg.length === 0 && <div style={{color:'#555',fontSize:11,fontStyle:'italic',padding:16,textAlign:'center'}}>No suggestions yet</div>}
+                </>
+              )
+            })()}
+          </>
+        )}
+
+        {/* TAB: Future Posts */}
+        {tab === 'future-posts' && (
+          <>
+            {(() => {
+              const drafts = snap?.nbhwDrafts?.drafts || []
+              const pending = drafts.filter(d => ['draft','editing'].includes(d.status))
+              const approved = drafts.filter(d => d.status === 'approved')
+              const visualCheck = drafts.filter(d => d.status === 'visual-check-pending')
+              const signedOff = drafts.filter(d => d.status === 'signed-off')
+
+              const doAction = async (id, action, extra = {}) => {
+                try {
+                  await fetch('/api/nbhw-draft-action', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({id,action,...extra}) })
+                  window.location.reload()
+                } catch {}
+              }
+
+              const statusColor = { 'draft':'#3b82f6','editing':'#f59e0b','approved':'#10b981','visual-check-pending':'#a855f7','signed-off':'#10b981' }
+              const statusLabel = { 'draft':'📝 Draft','editing':'✏️ Editing','approved':'✅ Approved','visual-check-pending':'👁️ Visual Check','signed-off':'🏁 Signed Off' }
+
+              const DraftCard = ({ draft: d }) => (
+                <div style={{background:'#111',border:'1px solid #222',borderRadius:10,padding:14,marginBottom:10,borderLeft:`3px solid ${statusColor[d.status] || '#333'}`}}>
+                  <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:8}}>
+                    <span style={{fontSize:8,padding:'2px 8px',borderRadius:4,fontWeight:600,background:`${statusColor[d.status]}20`,color:statusColor[d.status]}}>{statusLabel[d.status] || d.status}</span>
+                    <span style={{fontSize:8,padding:'2px 8px',borderRadius:4,background:'#1a1a22',color:'#888',textTransform:'uppercase'}}>{d.type}</span>
+                    <span style={{flex:1}}></span>
+                    {d.targetDate && <span style={{fontSize:9,color:'#888'}}>Target: {d.targetDate}</span>}
+                  </div>
+                  <div style={{fontSize:14,fontWeight:700,color:'#fff',marginBottom:8}}>{d.title}</div>
+                  <div style={{background:'#0a0a0d',border:'1px solid #1a1a22',borderRadius:8,padding:12,marginBottom:8,maxHeight:200,overflowY:'auto',fontSize:11,color:'#ccc',lineHeight:1.6,whiteSpace:'pre-wrap'}}>{d.editedContent || d.content}</div>
+                  {d.photos?.length > 0 && (
+                    <div style={{display:'flex',gap:6,flexWrap:'wrap',marginBottom:8}}>
+                      {d.photos.map((p, i) => <div key={i} style={{width:60,height:60,background:'#1a1a22',borderRadius:6,overflow:'hidden'}}><img src={p} style={{width:'100%',height:'100%',objectFit:'cover'}} /></div>)}
+                    </div>
+                  )}
+                  {d.status === 'visual-check-pending' && (
+                    <div style={{display:'flex',gap:12,marginBottom:8,padding:10,background:'#0a0a1a',borderRadius:6,border:'1px solid #a855f733'}}>
+                      <label style={{display:'flex',alignItems:'center',gap:6,cursor:'pointer',fontSize:11,color:d.desktopChecked?'#10b981':'#888'}}>
+                        <input type="checkbox" checked={d.desktopChecked} onChange={() => doAction(d.id,'check-desktop')} style={{width:16,height:16}} /> ✅ Desktop
+                      </label>
+                      <label style={{display:'flex',alignItems:'center',gap:6,cursor:'pointer',fontSize:11,color:d.mobileChecked?'#10b981':'#888'}}>
+                        <input type="checkbox" checked={d.mobileChecked} onChange={() => doAction(d.id,'check-mobile')} style={{width:16,height:16}} /> ✅ Mobile
+                      </label>
+                    </div>
+                  )}
+                  <div style={{display:'flex',gap:6}}>
+                    {['draft','editing'].includes(d.status) && (
+                      <button onClick={() => doAction(d.id,'approve')} style={{padding:'6px 14px',background:'#10b981',border:'none',borderRadius:6,color:'#fff',fontSize:11,fontWeight:700,cursor:'pointer'}}>✅ Good to Go</button>
+                    )}
+                  </div>
+                  <div style={{fontSize:8,color:'#444',marginTop:6}}>By {d.author} · {d.createdAt ? new Date(d.createdAt).toLocaleDateString('en-GB',{day:'numeric',month:'short'}) : '—'}</div>
+                </div>
+              )
+
+              return (
+                <>
+                  <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
+                    {[{label:'Pending',count:pending.length,color:'#3b82f6'},{label:'Approved',count:approved.length,color:'#10b981'},{label:'Visual Check',count:visualCheck.length,color:'#a855f7'},{label:'Signed Off',count:signedOff.length,color:'#10b981'}].map((s,i) => (
+                      <div key={i} style={{background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:8,padding:'6px 14px',textAlign:'center',minWidth:80}}>
+                        <div style={{fontSize:18,fontWeight:800,color:s.color}}>{s.count}</div>
+                        <div style={{fontSize:8,color:'#888',textTransform:'uppercase'}}>{s.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                  {visualCheck.length > 0 && <div style={{marginBottom:14}}><div className="sec-title" style={{color:'#a855f7'}}>👁️ Visual Check Required ({visualCheck.length})</div>{visualCheck.map(d => <DraftCard key={d.id} draft={d} />)}</div>}
+                  {pending.length > 0 && <div style={{marginBottom:14}}><div className="sec-title">📝 Drafts for Review ({pending.length})</div>{pending.map(d => <DraftCard key={d.id} draft={d} />)}</div>}
+                  {approved.length > 0 && <div style={{marginBottom:14}}><div className="sec-title">✅ Approved ({approved.length})</div>{approved.map(d => <DraftCard key={d.id} draft={d} />)}</div>}
+                  {signedOff.length > 0 && <div style={{marginBottom:14}}><div className="sec-title">🏁 Signed Off ({signedOff.length})</div>{signedOff.slice(0,5).map(d => <DraftCard key={d.id} draft={d} />)}</div>}
+                  {drafts.length === 0 && <div style={{textAlign:'center',padding:40,color:'#333'}}><div style={{fontSize:32,marginBottom:8}}>📮</div><div style={{fontSize:13,color:'#555'}}>No future posts yet</div></div>}
+                </>
+              )
+            })()}
+          </>
+        )}
+
+        {/* TAB: Conversions (same data as Traffic, funnel view) */}
+        {tab === 'conversions' && (
+          <>
+            <div className="section">
+              <div className="sec-title">📞 Conversion Funnel</div>
+              {traffic?.totals?.views != null ? (
+                <div className="card" style={{padding:20}}>
+                  <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:0,flexWrap:'wrap'}}>
+                    <div style={{textAlign:'center',padding:'0 16px'}}><div style={{fontSize:28,fontWeight:800,color:'#a855f7'}}>{traffic.totals.visitors?.toLocaleString()}</div><div style={{fontSize:9,color:'#888',textTransform:'uppercase'}}>Visitors</div></div>
+                    <div style={{fontSize:18,color:'#333',padding:'0 4px'}}>→</div>
+                    <div style={{textAlign:'center',padding:'0 16px'}}><div style={{fontSize:28,fontWeight:800,color:'#3b82f6'}}>{traffic.totals.views?.toLocaleString()}</div><div style={{fontSize:9,color:'#888',textTransform:'uppercase'}}>Page Views</div></div>
+                    <div style={{fontSize:18,color:'#333',padding:'0 4px'}}>→</div>
+                    <div style={{textAlign:'center',padding:'0 16px'}}><div style={{fontSize:28,fontWeight:800,color:'#10b981'}}>{(traffic.totals.phoneTaps||0)+(traffic.totals.emailTaps||0)}</div><div style={{fontSize:9,color:'#888',textTransform:'uppercase'}}>Contact Clicks</div></div>
+                  </div>
+                  <div style={{display:'flex',justifyContent:'space-between',marginTop:12,fontSize:9,color:'#555'}}>
+                    <span>📞 {traffic.totals.phoneTaps || 0} phone</span>
+                    <span>✉️ {traffic.totals.emailTaps || 0} email</span>
+                    <span>Rate: {traffic.totals.conversionRate?.toFixed(1) || '0'}%</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="card" style={{textAlign:'center',padding:20}}>
+                  <div style={{fontSize:20,marginBottom:6}}>📞</div>
+                  <div style={{color:'#555',fontSize:11}}>Conversion data in Traffic tab — awaiting GA4</div>
+                </div>
+              )}
+            </div>
           </>
         )}
 
