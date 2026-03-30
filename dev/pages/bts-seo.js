@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import SeoDashboard from './components/seo-dashboard'
+import GbpPosts from './components/gbp-posts'
 
 function useSnapshot(interval = 30000) {
   const [data, setData] = useState(null)
@@ -217,6 +218,7 @@ export default function BtsSeoPage() {
           <TabButton active={tab==='safety'} label="🛡️ Google Safety" onClick={() => setTab('safety')} />
           <TabButton active={tab==='news-bank'} label="📰 News Bank" onClick={() => setTab('news-bank')} />
           <TabButton active={tab==='suggestions'} label="💡 Suggestions" onClick={() => setTab('suggestions')} />
+          <TabButton active={tab==='gbp-posts'} label="📍 GBP Posts" onClick={() => setTab('gbp-posts')} />
           <TabButton active={tab==='future-posts'} label="📮 Future Posts" onClick={() => setTab('future-posts')} />
           <TabButton active={tab==='traffic'} label="📊 Traffic" onClick={() => setTab('traffic')} />
           <TabButton active={tab==='conversions'} label="📞 Conversions" onClick={() => setTab('conversions')} />
@@ -1143,6 +1145,15 @@ export default function BtsSeoPage() {
               )
             })()}
           </>
+        )}
+
+        {/* TAB: GBP Posts */}
+        {tab === 'gbp-posts' && (
+          <GbpPosts
+            posts={(snap?.btsDrafts?.drafts || []).filter(d => d.type === 'gbp')}
+            label="BTS"
+            actionEndpoint="/api/bts-draft-action"
+          />
         )}
 
         {/* TAB: Future Posts */}

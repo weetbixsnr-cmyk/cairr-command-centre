@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import SeoDashboard from './components/seo-dashboard'
+import GbpPosts from './components/gbp-posts'
 
 function useSnapshot(interval = 30000) {
   const [data, setData] = useState(null)
@@ -171,6 +172,7 @@ export default function NbhwSeoPage() {
           <TabButton active={tab==='safety'} label={`🛡️ Google Safety${ledger?.status === 'red' ? ' 🔴' : ledger?.status === 'amber' ? ' 🟡' : ''}`} onClick={() => setTab('safety')} />
           <TabButton active={tab==='news-bank'} label="📰 News Bank" onClick={() => setTab('news-bank')} />
           <TabButton active={tab==='suggestions'} label="💡 Suggestions" onClick={() => setTab('suggestions')} />
+          <TabButton active={tab==='gbp-posts'} label="📍 GBP Posts" onClick={() => setTab('gbp-posts')} />
           <TabButton active={tab==='future-posts'} label="📮 Future Posts" onClick={() => setTab('future-posts')} />
           <TabButton active={tab==='traffic'} label="📊 Traffic" onClick={() => setTab('traffic')} />
           <TabButton active={tab==='conversions'} label="📞 Conversions" onClick={() => setTab('conversions')} />
@@ -1158,6 +1160,15 @@ export default function NbhwSeoPage() {
               )
             })()}
           </>
+        )}
+
+        {/* TAB: GBP Posts */}
+        {tab === 'gbp-posts' && (
+          <GbpPosts
+            posts={snap?.nbhwGmbPosts?.posts || []}
+            label="NBHW"
+            actionEndpoint="/api/nbhw-gbp-action"
+          />
         )}
 
         {/* TAB: Future Posts */}

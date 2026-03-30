@@ -63,7 +63,8 @@ export default async function handler(req, res) {
       break
 
     case 'publish':
-      draft.status = 'visual-check-pending'
+      // GBP posts go straight to published; blog/page drafts go to visual-check-pending
+      draft.status = draft.type === 'gbp' ? 'published' : 'visual-check-pending'
       draft.publishedAt = now
       draft.updatedAt = now
       break
@@ -84,6 +85,12 @@ export default async function handler(req, res) {
         draft.status = 'signed-off'
         draft.signedOffAt = now
       }
+      break
+
+    case 'sign-off':
+      draft.status = 'signed-off'
+      draft.signedOffAt = now
+      draft.updatedAt = now
       break
 
     case 'reject':

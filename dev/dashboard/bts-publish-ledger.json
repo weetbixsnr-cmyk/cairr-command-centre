@@ -4,5 +4,24 @@
   "weeklyBlogLimit": 3,
   "weeklyGbpLimit": 3,
   "weeklyNewsLimit": 1,
-  "entries": []
+  "entries": [
+    {
+      "slug": "acs-reassessment-what-every-gas-engineer-needs-to-know",
+      "title": "ACS Reassessment: What Every Gas Engineer Needs to Know",
+      "type": "blog",
+      "firstPublished": "2026-03-30T05:44:00Z"
+    },
+    {
+      "slug": "heat-pump-training-course-high-wycombe-reading",
+      "title": "Heat Pump Training Course: High Wycombe & Reading",
+      "type": "blog",
+      "firstPublished": "2026-03-30T05:44:00Z"
+    },
+    {
+      "slug": "water-regulations-training-reading-buckinghamshire",
+      "title": "Water Regulations Training: Reading & Buckinghamshire",
+      "type": "blog",
+      "firstPublished": "2026-03-30T05:44:00Z"
+    }
+  ]
 }
