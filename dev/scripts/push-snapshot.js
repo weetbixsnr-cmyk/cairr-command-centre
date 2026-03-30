@@ -1014,6 +1014,7 @@ const snapshot = {
   nbhwSeoAudit: readJSON(path.join(DASHBOARD_DATA, 'nbhw-seo-audit.json')),
   nbhwTraffic: readJSON(path.join(DASHBOARD_DATA, 'nbhw-traffic.json')),
   nbhwSuggestions: readJSON(path.join(DASHBOARD_DATA, 'nbhw-suggestions.json')),
+  nbhwGmbPosts: readJSON(path.join(DASHBOARD_DATA, 'nbhw-gmb-posts.json')),
   nbhwDrafts: readJSON(path.join(DASHBOARD_DATA, 'nbhw-drafts.json')),
   btsCompetitorPages: readJSON(path.join(DASHBOARD_DATA, 'bts-competitors-pages.json')),
 }

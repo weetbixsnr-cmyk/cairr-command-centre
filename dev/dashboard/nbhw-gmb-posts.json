@@ -1,0 +1,55 @@
+{
+  "posts": [
+    {
+      "id": "week-1-2026-03-24",
+      "title": "Week 1",
+      "type": "gbp",
+      "targetDate": "2026-03-24",
+      "status": "published",
+      "content": "**CTA Button:** Call now\n**Target keywords:** heat pump Dee Why, electric hot water replacement, hot water Dee Why",
+      "preview": "",
+      "source": "week-1-2026-03-24.md"
+    },
+    {
+      "id": "week-2-2026-03-31",
+      "title": "Week 2",
+      "type": "gbp",
+      "targetDate": "2026-03-31",
+      "status": "draft",
+      "content": "**CTA Button:** Call now\n**Target keywords:** hot water service Northern Beaches, autumn hot water maintenance, hot water plumber Northern Beaches",
+      "preview": "",
+      "source": "week-2-2026-03-31.md"
+    },
+    {
+      "id": "week-3-2026-04-07",
+      "title": "Week 3",
+      "type": "gbp",
+      "targetDate": "2026-04-07",
+      "status": "draft",
+      "content": "**CTA Button:** Call now\n**Target keywords:** continuous flow hot water Cromer, Rinnai installation Northern Beaches, gas hot water Cromer",
+      "preview": "",
+      "source": "week-3-2026-04-07.md"
+    },
+    {
+      "id": "week-4-2026-04-14",
+      "title": "Week 4",
+      "type": "gbp",
+      "targetDate": "2026-04-14",
+      "status": "draft",
+      "content": "**CTA Button:** Call now\n**Target keywords:** emergency hot water Freshwater, burst hot water tank, hot water plumber Northern Beaches, emergency plumber Freshwater",
+      "preview": "",
+      "source": "week-4-2026-04-14.md"
+    },
+    {
+      "id": "bonus-rinnai-repair-elanora-heights",
+      "title": "Bonus: Rinnai Repair Elanora Heights",
+      "type": "gbp",
+      "targetDate": null,
+      "status": "draft",
+      "content": "## Publishing Notes\n- Post 1 first, Post 2 two days later \u2014 don't stack same day\n- These count as GBP posts only (separate from website publish rate limit)\n- GBP allows 2-3 posts/week\n- Log in dev/seo/gbp-post-log.md after publishing",
+      "preview": "- Post 1 first, Post 2 two days later \u2014 don't stack same day\n- These count as GBP posts only (separate from website publish rate limit)\n- GBP allows 2-3 posts/week",
+      "source": "bonus-rinnai-repair-elanora-heights.md"
+    }
+  ],
+  "timestamp": "2026-03-30T06:41:00Z"
+}
