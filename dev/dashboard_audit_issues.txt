@@ -1,0 +1,37 @@
+DASHBOARD ALIGNMENT AUDIT RESULTS
+=================================
+
+1. CRON JOBS CHECK:
+❌ MISMATCH: Snapshot has 20 cron jobs vs actual 21 cron jobs
+- Current "Daily Dashboard Alignment Audit" showing consecutive errors (1)
+- Two ranking scan jobs both showing error status
+
+2. BTS DATA CONSISTENCY:
+❌ CRITICAL: btsSeoplan lastUpdated is null
+❌ DATA MISMATCH: nbhwSeo lastUpdated shows "20" (seems corrupted)
+❌ DATA MISMATCH: nbhwSeoAudit lastUpdated shows "0" (seems corrupted)
+
+3. STALE DATA (>7 days):
+❌ btsSeoDash: 2026-03-30T05:45:18.667Z (1 day old - marginal)
+
+4. PUBLISH LEDGERS:
+✅ No issues detected with news limits
+
+5. COURSE DETAILS:
+✅ No duplicate sources detected
+
+6. CLIENT PRICING CHECK:
+✅ No £300 pricing found in snapshot
+
+7. AGENT WORKSPACE REFERENCES:
+❌ CRITICAL: Several data sections returning incomplete/null data
+❌ CRITICAL: BTS data appears partially corrupted
+
+8. CRITICAL FINDINGS:
+- Two weekly ranking scan jobs in error state (both message failed)
+- This audit job itself has consecutive errors = 1
+- Several timestamp/data integrity issues in snapshot
+- BTS agent appears to have stale/corrupted data feeds
+
+OVERALL ASSESSMENT: DASHBOARD NOT ALIGNED
+Need to investigate agent data feed issues and cron job failures.
