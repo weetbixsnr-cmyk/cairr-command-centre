@@ -180,29 +180,32 @@ export default function BtsSeoPage() {
           const btsL = snap?.btsPublishLedger
           const st = btsL?.status || 'green'
           const brC = st === 'red' ? '#ef4444' : st === 'amber' ? '#f59e0b' : '#10b981'
+          const gauges = [
+            {label:'blogs',used:btsL?.last7d?.blogs||0,limit:btsL?.weeklyBlogLimit||3},
+            {label:'GBP',used:btsL?.last7d?.gbp||0,limit:btsL?.weeklyGbpLimit||3},
+            {label:'news',used:btsL?.last7d?.news||0,limit:btsL?.weeklyNewsLimit||1},
+            {label:'pages',used:btsL?.last7d?.pages||0,limit:btsL?.weeklyPageLimit||3},
+          ]
           return (
             <div style={{display:'flex',gap:8,marginBottom:16,flexWrap:'wrap'}}>
-              <div style={{flex:1,minWidth:140,background:'#0d0d10',border:`1px solid ${brC}33`,borderRadius:8,padding:'8px 14px',borderLeft:`3px solid ${brC}`}}>
-                <div style={{display:'flex',alignItems:'center',gap:6}}>
-                  <span style={{fontSize:18,fontWeight:800,color:brC}}>{btsL?.last7d?.pages || 0}/{btsL?.weeklyPageLimit || 3}</span>
-                  <span style={{fontSize:9,color:'#888'}}>pages this week</span>
-                </div>
-                <div style={{height:4,background:'#1a1a1a',borderRadius:2,marginTop:4,overflow:'hidden'}}>
-                  <div style={{height:4,width:`${Math.min(100,((btsL?.last7d?.pages||0)/(btsL?.weeklyPageLimit||3))*100)}%`,background:brC,borderRadius:2}}></div>
-                </div>
-              </div>
-              <div style={{flex:1,minWidth:140,background:'#0d0d10',border:`1px solid ${brC}33`,borderRadius:8,padding:'8px 14px',borderLeft:`3px solid ${brC}`}}>
-                <div style={{display:'flex',alignItems:'center',gap:6}}>
-                  <span style={{fontSize:18,fontWeight:800,color:brC}}>{btsL?.last7d?.blogs || 0}/{btsL?.weeklyBlogLimit || 1}</span>
-                  <span style={{fontSize:9,color:'#888'}}>blogs this week</span>
-                </div>
-                <div style={{height:4,background:'#1a1a1a',borderRadius:2,marginTop:4,overflow:'hidden'}}>
-                  <div style={{height:4,width:`${Math.min(100,((btsL?.last7d?.blogs||0)/(btsL?.weeklyBlogLimit||1))*100)}%`,background:brC,borderRadius:2}}></div>
-                </div>
-              </div>
-              <div style={{minWidth:100,background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:8,padding:'8px 14px',textAlign:'center'}}>
-                <div style={{fontSize:16,fontWeight:800,color:brC}}>{btsL?.statusLabel ? (st === 'green' ? '🟢' : st === 'amber' ? '🟡' : '🔴') : '🟢'}</div>
-                <div style={{fontSize:8,color:'#888',textTransform:'uppercase',letterSpacing:0.5}}>Google Safety</div>
+              {gauges.map((g,i) => {
+                const over = g.used > g.limit
+                const gc = over ? '#ef4444' : g.used >= g.limit ? '#f59e0b' : '#10b981'
+                return (
+                  <div key={i} style={{flex:1,minWidth:100,background:'#0d0d10',border:`1px solid ${gc}33`,borderRadius:8,padding:'8px 14px',borderLeft:`3px solid ${gc}`}}>
+                    <div style={{display:'flex',alignItems:'center',gap:6}}>
+                      <span style={{fontSize:18,fontWeight:800,color:gc}}>{g.used}/{g.limit}</span>
+                      <span style={{fontSize:9,color:'#888'}}>{g.label}</span>
+                    </div>
+                    <div style={{height:4,background:'#1a1a1a',borderRadius:2,marginTop:4,overflow:'hidden'}}>
+                      <div style={{height:4,width:`${Math.min(100,(g.used/g.limit)*100)}%`,background:gc,borderRadius:2}}></div>
+                    </div>
+                  </div>
+                )
+              })}
+              <div style={{minWidth:80,background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:8,padding:'8px 14px',textAlign:'center'}}>
+                <div style={{fontSize:16,fontWeight:800,color:brC}}>{st === 'green' ? '🟢' : st === 'amber' ? '🟡' : '🔴'}</div>
+                <div style={{fontSize:8,color:'#888',textTransform:'uppercase',letterSpacing:0.5}}>Safety</div>
               </div>
             </div>
           )
@@ -1040,85 +1043,80 @@ export default function BtsSeoPage() {
               const st = btsLedger?.status || 'green'
               const bgC = st === 'red' ? '#3b1010' : st === 'amber' ? '#2a2000' : '#0a2a1a'
               const brC = st === 'red' ? '#ef4444' : st === 'amber' ? '#f59e0b' : '#10b981'
+              const typeColors = { blog: '#a855f7', news: '#f59e0b', gbp: '#3b82f6', location: '#10b981', suburb: '#10b981' }
+
+              function LimitGauge({ label, used, limit, color }) {
+                const over = used > limit
+                const atLimit = used >= limit
+                const c = over ? '#ef4444' : atLimit ? '#f59e0b' : color || '#10b981'
+                return (
+                  <div className="card" style={{flex:'1 1 140px',minWidth:140}}>
+                    <div style={{fontSize:10,color:'#555',fontWeight:600,textTransform:'uppercase',letterSpacing:1,marginBottom:8}}>{label} — 7 Days</div>
+                    <div style={{display:'flex',alignItems:'center',gap:12,marginBottom:8}}>
+                      <div style={{fontSize:36,fontWeight:800,color:c}}>{used}</div>
+                      <div style={{fontSize:14,color:'#555'}}>/ {limit}</div>
+                    </div>
+                    <div style={{height:8,background:'#1a1a1a',borderRadius:4,overflow:'hidden'}}>
+                      <div style={{height:8,borderRadius:4,width:`${Math.min(100,(used/limit)*100)}%`,background:c,transition:'width 0.3s'}}></div>
+                    </div>
+                    <div style={{fontSize:9,color: over ? '#ef4444' : '#555',marginTop:4,fontWeight: over ? 700 : 400}}>
+                      {over ? `⚠️ ${used - limit} over limit` : `${limit - used} slots remaining`}
+                    </div>
+                  </div>
+                )
+              }
+
               return (
                 <>
-                  <div style={{ background: bgC, border: `1px solid ${brC}`, borderRadius: 10, padding: 16, marginBottom: 16, textAlign: 'center' }}>
-                    <div style={{ fontSize: 18, fontWeight: 700, color: brC }}>{btsLedger?.statusLabel || '🟢 No publishes yet'}</div>
+                  {/* Status Banner */}
+                  <div style={{background:bgC,border:`1px solid ${brC}`,borderRadius:10,padding:16,marginBottom:16,textAlign:'center'}}>
+                    <div style={{fontSize:18,fontWeight:700,color:brC}}>{btsLedger?.statusLabel || '🟢 No publishes yet'}</div>
                   </div>
 
-                  <div className="grid2" style={{ marginBottom: 16 }}>
-                    <div className="card">
-                      <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>Location Pages — Last 7 Days</div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
-                        <div style={{ fontSize: 36, fontWeight: 800, color: (btsLedger?.last7d?.pages || 0) >= (btsLedger?.weeklyPageLimit || 3) ? '#ef4444' : '#10b981' }}>
-                          {btsLedger?.last7d?.pages || 0}
-                        </div>
-                        <div style={{ fontSize: 14, color: '#555' }}>/ {btsLedger?.weeklyPageLimit || 3}</div>
-                      </div>
-                      <div style={{ height: 8, background: '#1a1a1a', borderRadius: 4, overflow: 'hidden' }}>
-                        <div style={{
-                          height: 8, borderRadius: 4,
-                          width: `${Math.min(100, ((btsLedger?.last7d?.pages || 0) / (btsLedger?.weeklyPageLimit || 3)) * 100)}%`,
-                          background: (btsLedger?.last7d?.pages || 0) >= (btsLedger?.weeklyPageLimit || 3) ? '#ef4444' : '#10b981',
-                          transition: 'width 0.3s'
-                        }}></div>
-                      </div>
-                      <div style={{ fontSize: 9, color: '#555', marginTop: 4 }}>{btsLedger?.pagesRemaining || btsLedger?.weeklyPageLimit || 3} slots remaining</div>
-                    </div>
-
-                    <div className="card">
-                      <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>Blog Posts — Last 7 Days</div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
-                        <div style={{ fontSize: 36, fontWeight: 800, color: (btsLedger?.last7d?.blogs || 0) > (btsLedger?.weeklyBlogLimit || 1) ? '#ef4444' : '#10b981' }}>
-                          {btsLedger?.last7d?.blogs || 0}
-                        </div>
-                        <div style={{ fontSize: 14, color: '#555' }}>/ {btsLedger?.weeklyBlogLimit || 1}</div>
-                      </div>
-                      <div style={{ height: 8, background: '#1a1a1a', borderRadius: 4, overflow: 'hidden' }}>
-                        <div style={{
-                          height: 8, borderRadius: 4,
-                          width: `${Math.min(100, ((btsLedger?.last7d?.blogs || 0) / (btsLedger?.weeklyBlogLimit || 1)) * 100)}%`,
-                          background: (btsLedger?.last7d?.blogs || 0) > (btsLedger?.weeklyBlogLimit || 1) ? '#ef4444' : '#10b981',
-                          transition: 'width 0.3s'
-                        }}></div>
-                      </div>
-                    </div>
+                  {/* Weekly Limit Gauges — ALL content types */}
+                  <div style={{display:'flex',gap:12,marginBottom:16,flexWrap:'wrap'}}>
+                    <LimitGauge label="📄 Location Pages" used={btsLedger?.last7d?.pages || 0} limit={btsLedger?.weeklyPageLimit || 3} color="#10b981" />
+                    <LimitGauge label="📝 Blog Posts" used={btsLedger?.last7d?.blogs || 0} limit={btsLedger?.weeklyBlogLimit || 3} color="#a855f7" />
+                    <LimitGauge label="📍 GBP Posts" used={btsLedger?.last7d?.gbp || 0} limit={btsLedger?.weeklyGbpLimit || 3} color="#3b82f6" />
+                    <LimitGauge label="📰 News Posts" used={btsLedger?.last7d?.news || 0} limit={btsLedger?.weeklyNewsLimit || 1} color="#f59e0b" />
                   </div>
 
-                  <div className="grid2" style={{ marginBottom: 16 }}>
-                    <div className="stat-card">
-                      <div className="stat-val" style={{ fontSize: 20, color: '#3b82f6' }}>{btsLedger?.last30d?.pages || 0}</div>
-                      <div className="stat-lbl">Location Pages (30d)</div>
-                    </div>
-                    <div className="stat-card">
-                      <div className="stat-val" style={{ fontSize: 20, color: '#a855f7' }}>{btsLedger?.last30d?.blogs || 0}</div>
-                      <div className="stat-lbl">Blog Posts (30d)</div>
-                    </div>
-                    <div className="stat-card">
-                      <div className="stat-val" style={{ fontSize: 20, color: '#f59e0b' }}>{btsLedger?.totalPages || 0}</div>
-                      <div className="stat-lbl">Total Location Pages</div>
-                    </div>
-                    <div className="stat-card">
-                      <div className="stat-val" style={{ fontSize: 20, color: '#10b981' }}>{btsLedger?.totalBlogs || 0}</div>
-                      <div className="stat-lbl">Total Blog Posts</div>
-                    </div>
+                  {/* 30-day + Total summary */}
+                  <div style={{display:'flex',gap:8,marginBottom:16,flexWrap:'wrap'}}>
+                    {[
+                      {label:'Pages (30d)',val:btsLedger?.last30d?.pages||0,color:'#10b981'},
+                      {label:'Blogs (30d)',val:btsLedger?.last30d?.blogs||0,color:'#a855f7'},
+                      {label:'GBP (30d)',val:btsLedger?.last30d?.gbp||0,color:'#3b82f6'},
+                      {label:'News (30d)',val:btsLedger?.last30d?.news||0,color:'#f59e0b'},
+                      {label:'Total All Time',val:btsLedger?.entries?.length||0,color:'#888'},
+                    ].map((s,i) => (
+                      <div key={i} className="stat-card" style={{minWidth:80,flex:1}}>
+                        <div className="stat-val" style={{fontSize:18,color:s.color}}>{s.val}</div>
+                        <div className="stat-lbl">{s.label}</div>
+                      </div>
+                    ))}
                   </div>
 
+                  {/* Publish Timeline — SINGLE SOURCE OF TRUTH — every published item lives here */}
                   {btsLedger?.entries?.length > 0 && (
                     <div className="section">
-                      <div className="sec-title">Publish Timeline</div>
+                      <div className="sec-title">📋 Publish Timeline — All Published Content</div>
+                      <div style={{fontSize:9,color:'#f59e0b',marginBottom:8,padding:'4px 10px',background:'#1a1800',border:'1px solid #2a2000',borderRadius:6}}>
+                        ⚠️ This is the single source of truth. Every blog, news post, GBP post, and location page is logged here with its publish date.
+                      </div>
                       <div className="card">
                         <table>
-                          <thead><tr><th>First Published</th><th>Type</th><th>Page</th></tr></thead>
+                          <thead><tr><th>Published</th><th>Type</th><th>Title</th></tr></thead>
                           <tbody>
                             {btsLedger.entries.slice().sort((a, b) => new Date(b.firstPublished) - new Date(a.firstPublished)).map((e, i) => {
                               const d = new Date(e.firstPublished)
                               const dateStr = d.getDate() + ' ' + ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()] + ' ' + d.getFullYear()
                               const isRecent = (Date.now() - d.getTime()) < 7 * 24 * 60 * 60 * 1000
+                              const tc = typeColors[e.type] || '#888'
                               return (
                                 <tr key={i}>
-                                  <td style={{ color: isRecent ? '#f59e0b' : '#fff', fontWeight: 600 }}>{dateStr}{isRecent ? ' 🔥' : ''}</td>
-                                  <td style={{ color: e.type === 'location' ? '#3b82f6' : '#a855f7' }}>{e.type}</td>
+                                  <td style={{color: isRecent ? '#f59e0b' : '#fff', fontWeight:600}}>{dateStr}{isRecent ? ' 🔥' : ''}</td>
+                                  <td><span style={{fontSize:8,color:tc,fontWeight:700,textTransform:'uppercase',background:`${tc}15`,padding:'2px 6px',borderRadius:3}}>{e.type}</span></td>
                                   <td>{e.title || e.slug}</td>
                                 </tr>
                               )
@@ -1129,16 +1127,21 @@ export default function BtsSeoPage() {
                     </div>
                   )}
 
-                  <div className="card" style={{ marginBottom: 16 }}>
-                    <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>📄 Publish Limits</div>
-                    <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
-                      <span style={{color:'#fff',fontWeight:600}}>Max location pages/week:</span> {btsLedger?.weeklyPageLimit || 3}
-                    </div>
-                    <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0', borderBottom: '1px solid #1a1a1a' }}>
-                      <span style={{color:'#fff',fontWeight:600}}>Max blog posts/week:</span> {btsLedger?.weeklyBlogLimit || 1}
-                    </div>
-                    <div style={{ fontSize: 10, color: '#aaa', padding: '3px 0' }}>
-                      <span style={{color:'#fff',fontWeight:600}}>Tracked by:</span> Command Centre ledger (timestamped)
+                  {/* Publish Limits Reference */}
+                  <div className="card" style={{marginBottom:16}}>
+                    <div style={{fontSize:10,color:'#555',fontWeight:600,textTransform:'uppercase',letterSpacing:1,marginBottom:8}}>📄 Weekly Publish Limits</div>
+                    {[
+                      {label:'Location pages',val:btsLedger?.weeklyPageLimit||3},
+                      {label:'Blog posts',val:btsLedger?.weeklyBlogLimit||3},
+                      {label:'GBP posts',val:btsLedger?.weeklyGbpLimit||3},
+                      {label:'News posts',val:btsLedger?.weeklyNewsLimit||1},
+                    ].map((r,i) => (
+                      <div key={i} style={{fontSize:10,color:'#aaa',padding:'3px 0',borderBottom:'1px solid #1a1a1a'}}>
+                        <span style={{color:'#fff',fontWeight:600}}>Max {r.label}/week:</span> {r.val}
+                      </div>
+                    ))}
+                    <div style={{fontSize:10,color:'#aaa',padding:'3px 0'}}>
+                      <span style={{color:'#fff',fontWeight:600}}>Tracked by:</span> Command Centre publish ledger (timestamped, deduplicated)
                     </div>
                   </div>
                 </>

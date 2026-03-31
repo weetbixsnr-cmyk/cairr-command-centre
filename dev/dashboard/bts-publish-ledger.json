@@ -1,5 +1,5 @@
 {
-  "description": "Every BTS page/blog first-publish timestamp. Owned by Command Centre.",
+  "description": "Every BTS page/blog/GBP first-publish timestamp. Owned by Command Centre. SINGLE SOURCE OF TRUTH for all published content.",
   "weeklyPageLimit": 3,
   "weeklyBlogLimit": 3,
   "weeklyGbpLimit": 3,
@@ -43,9 +43,45 @@
     },
     {
       "slug": "warm-homes-plan-what-it-means",
-      "title": "Future Homes Standard: What It Means for Training",
-      "type": "blog",
+      "title": "The Future Homes Standard Is Here: What It Means for Gas and Heat Pump Training",
+      "type": "news",
       "firstPublished": "2026-04-01T07:30:00Z"
+    },
+    {
+      "slug": "gbp-heat-pump-training",
+      "title": "GBP: Heat Pump Training",
+      "type": "gbp",
+      "firstPublished": "2026-03-30T10:00:00Z"
+    },
+    {
+      "slug": "gbp-local-training",
+      "title": "GBP: Train Locally in High Wycombe",
+      "type": "gbp",
+      "firstPublished": "2026-03-30T10:00:00Z"
+    },
+    {
+      "slug": "gbp-water-regs",
+      "title": "GBP: Water Regulations Training",
+      "type": "gbp",
+      "firstPublished": "2026-03-30T10:00:00Z"
+    },
+    {
+      "slug": "gbp-acs-reassessment",
+      "title": "GBP: ACS Reassessment",
+      "type": "gbp",
+      "firstPublished": "2026-04-01T09:37:00Z"
+    },
+    {
+      "slug": "gbp-future-homes-standard",
+      "title": "GBP: Future Homes Standard News",
+      "type": "gbp",
+      "firstPublished": "2026-04-01T09:37:00Z"
+    },
+    {
+      "slug": "gbp-legionella-qualification",
+      "title": "GBP: Legionella Qualification",
+      "type": "gbp",
+      "firstPublished": "2026-04-01T09:37:00Z"
     }
   ]
 }
