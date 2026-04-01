@@ -1,12 +1,8 @@
-# Governance Drift — 2026-04-01 04:35
+# Governance Drift — 2026-04-02 04:35
 ✅ alpha: governance aligned
-❌ audit:
-  ⚠️ SOUL.md is 123 lines (limit 60)
-
+✅ audit: governance aligned
 ✅ bts: governance aligned
-❌ command-centre:
-  ⚠️ RULES.md permissions 600 (should be 444)
-
+✅ command-centre: governance aligned
 ✅ gridpilot: governance aligned
 ✅ nbhw: governance aligned
 ✅ overdue-office: governance aligned
