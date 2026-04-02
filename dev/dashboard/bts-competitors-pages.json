@@ -1,11 +1,54 @@
 {
   "timestamp": "2026-03-26T09:08:00Z",
   "competitors": [
-    { "name": "BTS", "ours": true, "site": 16, "courses": 6, "blogs": 3, "total": 19 },
-    { "name": "Able Skills", "ours": false, "site": 36, "courses": 0, "blogs": 4423, "total": 4459 },
-    { "name": "Logic4training", "ours": false, "site": 37, "courses": 106, "blogs": 453, "total": 596 },
-    { "name": "Bucks College", "ours": false, "site": 395, "courses": 14, "blogs": 39, "total": 448 },
-    { "name": "Gastec", "ours": false, "site": 46, "courses": 91, "blogs": 68, "total": 205 },
-    { "name": "Gasmark", "ours": false, "site": 6, "courses": 0, "blogs": 0, "total": 6 }
-  ]
+    {
+      "name": "BTS",
+      "ours": true,
+      "site": 16,
+      "courses": 6,
+      "blogs": 3,
+      "total": 19
+    },
+    {
+      "name": "Able Skills",
+      "ours": false,
+      "site": 36,
+      "courses": 0,
+      "blogs": 4423,
+      "total": 4459
+    },
+    {
+      "name": "Logic4training",
+      "ours": false,
+      "site": 37,
+      "courses": 106,
+      "blogs": 453,
+      "total": 596
+    },
+    {
+      "name": "Bucks College",
+      "ours": false,
+      "site": 395,
+      "courses": 14,
+      "blogs": 39,
+      "total": 448
+    },
+    {
+      "name": "Gastec",
+      "ours": false,
+      "site": 46,
+      "courses": 91,
+      "blogs": 68,
+      "total": 205
+    },
+    {
+      "name": "Gasmark",
+      "ours": false,
+      "site": 6,
+      "courses": 0,
+      "blogs": 0,
+      "total": 6
+    }
+  ],
+  "updatedAt": "2026-04-02T19:23:45Z"
 }

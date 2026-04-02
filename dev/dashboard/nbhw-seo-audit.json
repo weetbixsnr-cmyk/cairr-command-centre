@@ -20,34 +20,133 @@
     "technicalAccess": 20
   },
   "crawlers": [
-    { "name": "GPTBot", "allowed": true, "canRead": false, "note": "JS-only content — sees empty shell" },
-    { "name": "ClaudeBot", "allowed": true, "canRead": false, "note": "JS-only content — sees empty shell" },
-    { "name": "PerplexityBot", "allowed": true, "canRead": false, "note": "JS-only content — sees empty shell" },
-    { "name": "Google-Extended", "allowed": true, "canRead": false, "note": "JS-only content — sees empty shell" },
-    { "name": "Googlebot", "allowed": true, "canRead": true, "note": "Renders JS but delayed" }
+    {
+      "name": "GPTBot",
+      "allowed": true,
+      "canRead": false,
+      "note": "JS-only content \u2014 sees empty shell"
+    },
+    {
+      "name": "ClaudeBot",
+      "allowed": true,
+      "canRead": false,
+      "note": "JS-only content \u2014 sees empty shell"
+    },
+    {
+      "name": "PerplexityBot",
+      "allowed": true,
+      "canRead": false,
+      "note": "JS-only content \u2014 sees empty shell"
+    },
+    {
+      "name": "Google-Extended",
+      "allowed": true,
+      "canRead": false,
+      "note": "JS-only content \u2014 sees empty shell"
+    },
+    {
+      "name": "Googlebot",
+      "allowed": true,
+      "canRead": true,
+      "note": "Renders JS but delayed"
+    }
   ],
   "schema": {
-    "implemented": ["LocalBusiness", "WebSite", "GeoCoordinates", "OpeningHours", "AggregateRating", "OfferCatalog"],
-    "missing": ["BlogPosting/Article", "BreadcrumbList", "Service (individual)", "Review (individual)", "Person (Adam)"],
+    "implemented": [
+      "LocalBusiness",
+      "WebSite",
+      "GeoCoordinates",
+      "OpeningHours",
+      "AggregateRating",
+      "OfferCatalog"
+    ],
+    "missing": [
+      "BlogPosting/Article",
+      "BreadcrumbList",
+      "Service (individual)",
+      "Review (individual)",
+      "Person (Adam)"
+    ],
     "deprecated": []
   },
   "actions": [
-    { "severity": "critical", "title": "JS-only body rendering — AI crawlers see empty shell", "page": "All pages" },
-    { "severity": "critical", "title": "6 suburb pages missing from sitemap.xml", "page": "/sitemap.xml" },
-    { "severity": "critical", "title": "No llms.txt — returns homepage HTML instead", "page": "/llms.txt" },
-    { "severity": "high", "title": "No BlogPosting/Article schema on 55 blog posts", "page": "/blog/*" },
-    { "severity": "high", "title": "No lastmod dates in sitemap", "page": "/sitemap.xml" },
-    { "severity": "high", "title": "www/non-www both serve 200 — no server redirect", "page": "Root" },
-    { "severity": "high", "title": "No BreadcrumbList schema on any page", "page": "All pages" },
-    { "severity": "medium", "title": "No author/expertise page for Adam (E-E-A-T)", "page": "/about" },
-    { "severity": "medium", "title": "No FAQ schema on FAQ page", "page": "/faq" },
-    { "severity": "medium", "title": "Deprecated changefreq/priority in sitemap", "page": "/sitemap.xml" },
-    { "severity": "medium", "title": "Some image alt text uses generic filenames", "page": "/blog/*" },
-    { "severity": "medium", "title": "Some old URL redirects missing (case sensitivity)", "page": "Various" },
-    { "severity": "low", "title": "No Person schema for Adam", "page": "/about" },
-    { "severity": "low", "title": "No Review schema on suburb pages", "page": "/hot-water/*" }
+    {
+      "severity": "critical",
+      "title": "JS-only body rendering \u2014 AI crawlers see empty shell",
+      "page": "All pages"
+    },
+    {
+      "severity": "critical",
+      "title": "6 suburb pages missing from sitemap.xml",
+      "page": "/sitemap.xml"
+    },
+    {
+      "severity": "critical",
+      "title": "No llms.txt \u2014 returns homepage HTML instead",
+      "page": "/llms.txt"
+    },
+    {
+      "severity": "high",
+      "title": "No BlogPosting/Article schema on 55 blog posts",
+      "page": "/blog/*"
+    },
+    {
+      "severity": "high",
+      "title": "No lastmod dates in sitemap",
+      "page": "/sitemap.xml"
+    },
+    {
+      "severity": "high",
+      "title": "www/non-www both serve 200 \u2014 no server redirect",
+      "page": "Root"
+    },
+    {
+      "severity": "high",
+      "title": "No BreadcrumbList schema on any page",
+      "page": "All pages"
+    },
+    {
+      "severity": "medium",
+      "title": "No author/expertise page for Adam (E-E-A-T)",
+      "page": "/about"
+    },
+    {
+      "severity": "medium",
+      "title": "No FAQ schema on FAQ page",
+      "page": "/faq"
+    },
+    {
+      "severity": "medium",
+      "title": "Deprecated changefreq/priority in sitemap",
+      "page": "/sitemap.xml"
+    },
+    {
+      "severity": "medium",
+      "title": "Some image alt text uses generic filenames",
+      "page": "/blog/*"
+    },
+    {
+      "severity": "medium",
+      "title": "Some old URL redirects missing (case sensitivity)",
+      "page": "Various"
+    },
+    {
+      "severity": "low",
+      "title": "No Person schema for Adam",
+      "page": "/about"
+    },
+    {
+      "severity": "low",
+      "title": "No Review schema on suburb pages",
+      "page": "/hot-water/*"
+    }
   ],
   "history": [
-    { "timestamp": "2026-03-23T10:00:00Z", "healthScore": 52, "geoScore": 5 }
-  ]
+    {
+      "timestamp": "2026-03-23T10:00:00Z",
+      "healthScore": 52,
+      "geoScore": 5
+    }
+  ],
+  "updatedAt": "2026-04-02T19:23:45Z"
 }

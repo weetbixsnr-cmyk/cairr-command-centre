@@ -1,7 +1,7 @@
 {
   "timestamp": "2026-03-29T02:34:00Z",
   "source": "placeholder",
-  "note": "Awaiting BTS full SEO audit — scores from SEO-DASHBOARD.md Section 1",
+  "note": "Awaiting BTS full SEO audit \u2014 scores from SEO-DASHBOARD.md Section 1",
   "healthScore": 19,
   "healthBreakdown": {
     "technical": null,
@@ -28,6 +28,11 @@
   },
   "actions": [],
   "history": [
-    { "timestamp": "2026-03-29T02:34:00Z", "healthScore": 19, "geoScore": 5 }
-  ]
+    {
+      "timestamp": "2026-03-29T02:34:00Z",
+      "healthScore": 19,
+      "geoScore": 5
+    }
+  ],
+  "updatedAt": "2026-04-02T19:23:45Z"
 }

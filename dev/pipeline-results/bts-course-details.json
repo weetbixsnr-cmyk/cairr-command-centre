@@ -1,19 +1,109 @@
 {
-  "updatedAt": "2026-03-26T21:04:00+11:00",
-  "source": "Brain live crawl — 26 Mar 2026",
-  "summary": { "live": 9, "broken": 1, "noPage": 2, "confirmed": 6, "missingInfo": 3 },
+  "updatedAt": "2026-04-02T19:23:45Z",
+  "source": "Brain live crawl \u2014 26 Mar 2026",
+  "summary": {
+    "live": 9,
+    "broken": 1,
+    "noPage": 2,
+    "confirmed": 6,
+    "missingInfo": 3
+  },
   "courses": [
-    { "name": "Gas MLP", "url": "/course/gas-managed-learning-programme/", "duration": "13 days initial + 1 day/week ongoing", "price": "£4,250-£7,549 +VAT", "confirmed": true, "status": "live" },
-    { "name": "CCN1 Reassessment", "url": "/course/ccn1-re-assessment/", "duration": "4 days", "price": "£690 +VAT (offer, normally £939)", "confirmed": true, "status": "live" },
-    { "name": "Unvented G3", "url": "/course/unvented-hot-water-systems-safety/", "duration": "1 day", "price": "£195 +VAT (offer, normally £252)", "confirmed": true, "status": "live" },
-    { "name": "Water Regulations (WRAS)", "url": "/course/water-supply-water-fittings-regulations-1999/", "duration": "1 day", "price": "£195 +VAT (offer, normally £252)", "confirmed": true, "status": "live" },
-    { "name": "Legionella Testing", "url": "/course/legionella-prevention-and-water-treatment-managers/", "duration": "1 day", "price": "£195 +VAT (offer, normally £252)", "confirmed": true, "status": "live" },
-    { "name": "Better Heating Course", "url": "/course/better-heating-course/", "duration": "3 days", "price": "£2,199 +VAT", "confirmed": true, "status": "live" },
-    { "name": "Heat Pump", "url": "/course/air-source-heat-pump-low-temperature-heating/", "duration": "NOT ON PAGE", "price": "NOT ON PAGE", "confirmed": false, "status": "missing-info" },
-    { "name": "Domestic Cookers", "url": "/course/domestic-cookers-training-and-re-assessment/", "duration": "NOT ON PAGE", "price": "NOT ON PAGE", "confirmed": false, "status": "missing-info" },
-    { "name": "Domestic Fires & Space Heaters", "url": "/course/domestic-fires-and-space-heaters-training-and-re-assessment/", "duration": "NOT ON PAGE", "price": "NOT ON PAGE", "confirmed": false, "status": "missing-info" },
-    { "name": "Foundation Skills Gas", "url": "/course/foundation-skills-gas-course/", "duration": "—", "price": "—", "confirmed": false, "status": "broken" },
-    { "name": "CCN1 Initial (ACS Initial)", "url": null, "duration": "—", "price": "—", "confirmed": false, "status": "no-page" },
-    { "name": "LPG Changeover", "url": null, "duration": "—", "price": "—", "confirmed": false, "status": "no-page" }
+    {
+      "name": "Gas MLP",
+      "url": "/course/gas-managed-learning-programme/",
+      "duration": "13 days initial + 1 day/week ongoing",
+      "price": "\u00a34,250-\u00a37,549 +VAT",
+      "confirmed": true,
+      "status": "live"
+    },
+    {
+      "name": "CCN1 Reassessment",
+      "url": "/course/ccn1-re-assessment/",
+      "duration": "4 days",
+      "price": "\u00a3690 +VAT (offer, normally \u00a3939)",
+      "confirmed": true,
+      "status": "live"
+    },
+    {
+      "name": "Unvented G3",
+      "url": "/course/unvented-hot-water-systems-safety/",
+      "duration": "1 day",
+      "price": "\u00a3195 +VAT (offer, normally \u00a3252)",
+      "confirmed": true,
+      "status": "live"
+    },
+    {
+      "name": "Water Regulations (WRAS)",
+      "url": "/course/water-supply-water-fittings-regulations-1999/",
+      "duration": "1 day",
+      "price": "\u00a3195 +VAT (offer, normally \u00a3252)",
+      "confirmed": true,
+      "status": "live"
+    },
+    {
+      "name": "Legionella Testing",
+      "url": "/course/legionella-prevention-and-water-treatment-managers/",
+      "duration": "1 day",
+      "price": "\u00a3195 +VAT (offer, normally \u00a3252)",
+      "confirmed": true,
+      "status": "live"
+    },
+    {
+      "name": "Better Heating Course",
+      "url": "/course/better-heating-course/",
+      "duration": "3 days",
+      "price": "\u00a32,199 +VAT",
+      "confirmed": true,
+      "status": "live"
+    },
+    {
+      "name": "Heat Pump",
+      "url": "/course/air-source-heat-pump-low-temperature-heating/",
+      "duration": "NOT ON PAGE",
+      "price": "NOT ON PAGE",
+      "confirmed": false,
+      "status": "missing-info"
+    },
+    {
+      "name": "Domestic Cookers",
+      "url": "/course/domestic-cookers-training-and-re-assessment/",
+      "duration": "NOT ON PAGE",
+      "price": "NOT ON PAGE",
+      "confirmed": false,
+      "status": "missing-info"
+    },
+    {
+      "name": "Domestic Fires & Space Heaters",
+      "url": "/course/domestic-fires-and-space-heaters-training-and-re-assessment/",
+      "duration": "NOT ON PAGE",
+      "price": "NOT ON PAGE",
+      "confirmed": false,
+      "status": "missing-info"
+    },
+    {
+      "name": "Foundation Skills Gas",
+      "url": "/course/foundation-skills-gas-course/",
+      "duration": "\u2014",
+      "price": "\u2014",
+      "confirmed": false,
+      "status": "broken"
+    },
+    {
+      "name": "CCN1 Initial (ACS Initial)",
+      "url": null,
+      "duration": "\u2014",
+      "price": "\u2014",
+      "confirmed": false,
+      "status": "no-page"
+    },
+    {
+      "name": "LPG Changeover",
+      "url": null,
+      "duration": "\u2014",
+      "price": "\u2014",
+      "confirmed": false,
+      "status": "no-page"
+    }
   ]
 }
