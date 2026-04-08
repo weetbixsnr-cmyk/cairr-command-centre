@@ -1,139 +1,77 @@
 {
-  "updatedAt": "2026-04-02T19:23:45Z",
-  "scanStatus": "baseline",
-  "competitors": [
+  "updatedAt": "2026-04-06T20:00:00+11:00",
+  "scanStatus": "weekly",
+  "tier1_high": [
     {
-      "name": "Crystal Hot Water",
-      "domain": "crystalhotwater.com.au",
+      "name": "Cheapa Hot Water",
+      "domain": "cheapahotwater.com.au",
       "threat": "high",
-      "strengths": [
-        "#1 on suburb terms (Narrabeen, Manly, Frenchs Forest)",
-        "Dedicated suburb service pages already built",
-        "Strong local SEO presence"
-      ],
-      "weaknesses": [
-        "Less brand recognition than NBHW",
-        "Lower review count"
-      ],
-      "suburbsRanking": [
-        "Narrabeen",
-        "Manly",
-        "Frenchs Forest"
-      ],
-      "contentStrategy": {
-        "servicePagesEstimate": "10-15 suburb pages",
-        "blogEstimate": "unknown",
-        "updateFrequency": "unknown"
-      },
-      "gapOpportunities": [
-        "Heat pump specific content \u2014 they don't specialise",
-        "Emergency service pages \u2014 weak coverage"
-      ]
+      "strengths": ["#1 multiple core terms", "Dual domain strategy", "Suburb pages built"],
+      "weaknesses": ["Less brand trust than NBHW"],
+      "gapOpportunities": ["Heat pump specialist content", "Real job photo content"]
     },
     {
-      "name": "Hot Water Northern Beaches",
+      "name": "Hot Water Maintenance NB",
       "domain": "hotwaternorthernbeaches.com.au",
       "threat": "high",
-      "strengths": [
-        "#2-3 on core NB terms",
-        "Direct brand name competitor (exact-match domain)",
-        "Competes for same keywords"
-      ],
-      "weaknesses": [
-        "Doesn't appear to rank for suburb-specific terms",
-        "Likely less content depth"
-      ],
-      "suburbsRanking": [],
-      "contentStrategy": {
-        "servicePagesEstimate": "unknown",
-        "blogEstimate": "unknown",
-        "updateFrequency": "unknown"
-      },
-      "gapOpportunities": [
-        "Suburb pages \u2014 we build them first, we win",
-        "Blog content for informational queries"
-      ]
+      "strengths": ["#1 emergency terms", "50+ years claimed", "Strong suburb coverage — Dee Why #5, Manly #3"],
+      "weaknesses": ["Less content depth", "Older site design"],
+      "gapOpportunities": ["Brand pages", "Heat pump specialisation"]
     },
     {
-      "name": "Pure Plumbing Professionals",
-      "domain": "pureplumbingpros.com.au",
-      "threat": "medium",
-      "strengths": [
-        "Top 5 everywhere across suburb searches",
-        "Strong URL structure: /hot-water/sydney/[suburb]",
-        "Broad Sydney coverage"
-      ],
-      "weaknesses": [
-        "Sydney-wide, not NB specialist",
-        "/sydney/ in URL dilutes local relevance for NB",
-        "Generic approach \u2014 not tailored to Northern Beaches"
-      ],
-      "suburbsRanking": [
-        "Freshwater",
-        "Dee Why",
-        "Narrabeen",
-        "Manly"
-      ],
-      "contentStrategy": {
-        "servicePagesEstimate": "50+ suburb pages (all of Sydney)",
-        "blogEstimate": "regular",
-        "updateFrequency": "weekly+"
-      },
-      "gapOpportunities": [
-        "Our /hot-water/[suburb] beats their /hot-water/sydney/[suburb] for local",
-        "NB specialist trust factor vs generic Sydney plumber",
-        "Google reviews \u2014 we have 5.0 with 29 reviews"
-      ]
+      "name": "Anytime Hot Water",
+      "domain": "anytimehotwater.com.au",
+      "threat": "high",
+      "strengths": ["#1 emergency + HP repair", "30+ years experience", "Smart error code pages for Rinnai/Rheem/Bosch/HP"],
+      "weaknesses": ["Not NB specialist"],
+      "gapOpportunities": ["Local suburb targeting", "Reclaim partnership angle"]
     },
     {
-      "name": "Fix N Flow",
-      "domain": "fixnflow.com.au",
-      "threat": "medium",
-      "strengths": [
-        "Consistent presence across all suburb searches",
-        "Good general plumbing coverage"
-      ],
-      "weaknesses": [
-        "General plumber, not hot water specialist",
-        "Less specific content for heat pumps"
-      ],
-      "suburbsRanking": [
-        "Dee Why",
-        "Freshwater"
-      ],
-      "contentStrategy": {
-        "servicePagesEstimate": "many suburb pages",
-        "blogEstimate": "moderate",
-        "updateFrequency": "unknown"
-      },
-      "gapOpportunities": [
-        "Hot water specialisation \u2014 they're generalists",
-        "Heat pump expertise content",
-        "Reclaim partnership / rebate content"
-      ]
+      "name": "DY Plumbers",
+      "domain": "dyplumbers.com.au",
+      "threat": "high",
+      "strengths": ["Rising fast", "#3 HP install NB (outranking NBHW)", "#1 Dee Why"],
+      "weaknesses": ["No dedicated HP page yet — window closing"],
+      "gapOpportunities": ["Build NB HP service page before they do"],
+      "alert": "WATCH — rising fast, window closing on HP gap"
     }
   ],
-  "keyGaps": [
+  "tier2_scale": [
     {
-      "keyword": "hot water [suburb]",
-      "ourPosition": "50+",
-      "topCompetitor": "Crystal Hot Water",
-      "competitorPosition": "1-3",
-      "opportunity": "Build suburb service pages \u2014 immediate ranking potential"
+      "name": "ABCO Plumbing",
+      "domain": "abcoplumbing.com.au",
+      "threat": "high",
+      "strengths": ["430+ suburb pages across Sydney", "#1 Manly (NEW this week)", "Appearing in 4+ NB suburb searches"],
+      "weaknesses": ["Sydney-wide generalist, not NB specialist"],
+      "gapOpportunities": ["NB specialist trust factor", "Heat pump expertise"],
+      "alert": "NEW — #1 Manly this week"
     },
     {
-      "keyword": "heat pump [suburb]",
-      "ourPosition": "50+",
-      "topCompetitor": "None strong",
-      "competitorPosition": "10+",
-      "opportunity": "First-mover advantage \u2014 no competitor has strong heat pump + suburb content"
-    },
-    {
-      "keyword": "hot water rebates northern beaches",
-      "ourPosition": "50+",
-      "topCompetitor": "Various",
-      "competitorPosition": "3-10",
-      "opportunity": "Informational content gap \u2014 rebate guides drive high-intent traffic"
+      "name": "Pure Plumbing Pros",
+      "domain": "pureplumbingpros.com.au",
+      "threat": "medium",
+      "strengths": ["54 suburb pages", "6 brand pages (Rheem, Rinnai, Stiebel Eltron, Bosch, Dux, Vulcan)", "Strong URL structure"],
+      "weaknesses": ["Sydney-wide, not NB specialist", "/sydney/ in URL dilutes local relevance"],
+      "gapOpportunities": ["Our /hot-water/[suburb] beats their /hot-water/sydney/[suburb]", "NB specialist trust", "5.0 rating with 29 reviews"]
     }
+  ],
+  "newEntrants": [
+    { "name": "Wild Water Plumbing", "firstSeen": "2026-04-06", "position": "#1 hot water Manly", "note": "Displaced ABCO" },
+    { "name": "SilverWater Plumbing", "firstSeen": "2026-04-06", "position": "Dee Why #4, Collaroy #1", "note": "New entrant" },
+    { "name": "Tai Irwin", "firstSeen": "2026-04-06", "position": "hot water service NB #7", "note": "New entrant" }
+  ],
+  "nbhwAdvantages": [
+    "Heat pump specialist positioning",
+    "Real job photos (183 unused)",
+    "Reclaim Energy partnership",
+    "5.0 Google rating with 29 reviews",
+    "Content depth and technical SEO",
+    "4-pillar strategy with weekly cadence"
+  ],
+  "keyGaps": [
+    { "keyword": "hot water [suburb]", "ourPosition": "50+", "topCompetitor": "Multiple", "competitorPosition": "1-5", "opportunity": "Suburb pages live but not yet indexed" },
+    { "keyword": "heat pump [suburb]", "ourPosition": "50+", "topCompetitor": "None strong", "competitorPosition": "10+", "opportunity": "First-mover advantage — no competitor has strong HP + suburb content" },
+    { "keyword": "hot water rebates northern beaches", "ourPosition": "50+", "topCompetitor": "Various", "competitorPosition": "3-10", "opportunity": "Rebate guides drive high-intent traffic" },
+    { "keyword": "error code pages", "ourPosition": "none", "topCompetitor": "Anytime Hot Water", "competitorPosition": "1-3", "opportunity": "Anytime has Rinnai/Rheem/Bosch error code pages — gap for NBHW" }
   ]
 }

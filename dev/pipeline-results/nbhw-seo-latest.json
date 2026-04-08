@@ -1,182 +1,95 @@
 {
-  "lastUpdated": "2026-04-02T19:23:45Z",
+  "lastUpdated": "2026-04-08T20:00:00+11:00",
   "source": "nbhw-agent",
+  "healthScore": 67,
+  "healthScorePrevious": 65,
+  "geoReadiness": 5,
+  "pagesLive": 86,
+  "pagesBreakdown": {
+    "service": 8,
+    "brand": 2,
+    "suburb": 8,
+    "blog": 57,
+    "insights": 2,
+    "brandListing": 1,
+    "static": 8
+  },
   "coreKeywords": [
-    {
-      "keyword": "hot water plumber northern beaches",
-      "position": 1,
-      "status": "defending"
-    },
-    {
-      "keyword": "hot water repair northern beaches",
-      "position": 1,
-      "status": "defending"
-    },
-    {
-      "keyword": "emergency hot water plumber northern beaches",
-      "position": 1,
-      "status": "defending"
-    },
-    {
-      "keyword": "heat pump installation northern beaches",
-      "position": 1,
-      "status": "defending"
-    },
-    {
-      "keyword": "northern beaches hot water",
-      "position": 1,
-      "status": "defending"
-    },
-    {
-      "keyword": "hot water system replacement northern beaches",
-      "position": 2,
-      "status": "defending"
-    }
+    { "keyword": "hot water plumber northern beaches", "position": 1, "status": "defending" },
+    { "keyword": "hot water repair northern beaches", "position": 3, "status": "defending" },
+    { "keyword": "northern beaches hot water", "position": 3, "status": "defending" },
+    { "keyword": "emergency hot water plumber northern beaches", "position": 1, "status": "defending" },
+    { "keyword": "heat pump installation northern beaches", "position": 6, "status": "holding", "note": "redirect deployed Apr 6" },
+    { "keyword": "heat pump hot water northern beaches", "position": 6, "status": "improved", "change": "+1" },
+    { "keyword": "hot water service northern beaches", "position": 8, "status": "stable" },
+    { "keyword": "hot water system replacement northern beaches", "position": 2, "status": "defending" },
+    { "keyword": "hot water northern beaches", "position": 1, "status": "defending" }
   ],
+  "coreRanked": 5,
+  "coreTotal": 9,
   "suburbKeywords": [
-    {
-      "keyword": "hot water Freshwater",
-      "position": 50,
-      "status": "not-ranking"
-    },
-    {
-      "keyword": "hot water Narrabeen",
-      "position": 50,
-      "status": "not-ranking"
-    },
-    {
-      "keyword": "hot water Dee Why",
-      "position": 50,
-      "status": "not-ranking"
-    },
-    {
-      "keyword": "hot water Manly",
-      "position": 50,
-      "status": "not-ranking"
-    },
-    {
-      "keyword": "hot water Frenchs Forest",
-      "position": 50,
-      "status": "not-ranking"
-    },
-    {
-      "keyword": "heat pump Freshwater",
-      "position": 50,
-      "status": "not-ranking"
-    },
-    {
-      "keyword": "heat pump Frenchs Forest",
-      "position": 50,
-      "status": "not-ranking"
-    }
+    { "keyword": "hot water Freshwater", "position": 50, "status": "not-ranking" },
+    { "keyword": "hot water Narrabeen", "position": 50, "status": "not-ranking" },
+    { "keyword": "hot water Dee Why", "position": 50, "status": "not-ranking" },
+    { "keyword": "hot water Manly", "position": 50, "status": "not-ranking" },
+    { "keyword": "hot water Frenchs Forest", "position": 50, "status": "not-ranking" },
+    { "keyword": "heat pump Freshwater", "position": 50, "status": "not-ranking" },
+    { "keyword": "heat pump Frenchs Forest", "position": 50, "status": "not-ranking" }
   ],
+  "suburbNote": "noscript injection only 7 days old — expected delay",
   "competitors": [
-    {
-      "name": "hotwaternorthernbeaches.com.au",
-      "position": "2-3 core",
-      "threat": "high"
-    },
-    {
-      "name": "crystalhotwater.com.au",
-      "position": "#1 suburb terms",
-      "threat": "high"
-    },
-    {
-      "name": "pureplumbingpros.com.au",
-      "position": "top 5 everywhere",
-      "threat": "medium"
-    },
-    {
-      "name": "fixnflow.com.au",
-      "position": "consistent presence",
-      "threat": "medium"
-    }
+    { "name": "Cheapa Hot Water", "domain": "cheapahotwater.com.au", "threat": "high", "position": "#1 multiple core terms", "note": "dual domain strategy, suburb pages" },
+    { "name": "Hot Water Maintenance NB", "domain": "hotwaternorthernbeaches.com.au", "threat": "high", "position": "#1 emergency terms", "note": "50+ years claimed, Dee Why #5, Manly #3" },
+    { "name": "Anytime Hot Water", "domain": "anytimehotwater.com.au", "threat": "high", "position": "#1 emergency + HP repair", "note": "smart error code pages for Rinnai/Rheem/Bosch/HP" },
+    { "name": "DY Plumbers", "domain": "dyplumbers.com.au", "threat": "high", "position": "#3 HP install NB, #1 Dee Why", "note": "rising fast, no dedicated HP page yet — window closing" },
+    { "name": "ABCO Plumbing", "domain": "abcoplumbing.com.au", "threat": "high", "position": "#1 Manly (NEW this week)", "note": "430+ suburb pages across Sydney, appearing in 4+ NB suburbs" },
+    { "name": "Pure Plumbing Pros", "domain": "pureplumbingpros.com.au", "threat": "medium", "position": "top 5 everywhere", "note": "54 suburb pages, 6 brand pages (Rheem, Rinnai, Stiebel, Bosch, Dux, Vulcan)" }
+  ],
+  "newEntrants": [
+    { "name": "Wild Water Plumbing", "note": "#1 hot water Manly — displaced ABCO" },
+    { "name": "SilverWater Plumbing", "note": "Dee Why #4, Collaroy #1 — new" },
+    { "name": "Tai Irwin", "note": "hot water service NB #7 — new" }
+  ],
+  "criticalFixes": [
+    { "item": "Cannibalisation redirect /heat-pumps/ → /heat-pump", "status": "LIVE", "date": "2026-04-06" }
   ],
   "suburbCoverage": {
     "summary": {
       "totalSuburbs": 37,
       "keywordsPerSuburb": 10,
       "withBlogCoverage": 21,
-      "servicePages": 0,
+      "servicePages": 8,
       "zeroCoverage": 16
     },
     "waves": [
-      {
-        "id": 1,
-        "status": "active",
-        "suburbs": [
-          "Dee Why",
-          "Freshwater",
-          "Narrabeen"
-        ],
-        "servicePages": 0,
-        "servicePagesTotal": 3,
-        "blogs": 9,
-        "scope": "3 service pages + ~8 blogs"
-      },
-      {
-        "id": 2,
-        "status": "planned",
-        "suburbs": [
-          "Collaroy",
-          "Frenchs Forest",
-          "Manly",
-          "Cromer",
-          "Mosman"
-        ],
-        "servicePages": 0,
-        "servicePagesTotal": 5,
-        "blogs": 13,
-        "scope": "service pages + blogs"
-      },
-      {
-        "id": 3,
-        "status": "planned",
-        "suburbs": [
-          "Balgowlah",
-          "Newport",
-          "Warriewood",
-          "Allambie Heights",
-          "Belrose"
-        ],
-        "servicePages": 0,
-        "servicePagesTotal": 5,
-        "blogs": 0,
-        "scope": "service pages + blogs"
-      },
-      {
-        "id": 4,
-        "status": "future",
-        "suburbs": [],
-        "servicePages": 0,
-        "servicePagesTotal": 16,
-        "blogs": 0,
-        "scope": "16 suburbs with 0-1 blogs"
-      }
+      { "id": 1, "status": "complete", "suburbs": ["Dee Why", "Freshwater", "Narrabeen"], "servicePages": 3, "servicePagesTotal": 3, "blogs": 9 },
+      { "id": 2, "status": "complete", "suburbs": ["Collaroy", "Frenchs Forest", "Manly", "Cromer", "Mosman"], "servicePages": 5, "servicePagesTotal": 5, "blogs": 13 },
+      { "id": 3, "status": "planned", "suburbs": ["Balgowlah", "Newport", "Warriewood", "Allambie Heights", "Belrose"], "servicePages": 0, "servicePagesTotal": 5, "blogs": 0 },
+      { "id": 4, "status": "future", "suburbs": [], "servicePages": 0, "servicePagesTotal": 16, "blogs": 0 }
     ]
   },
-  "framework": {
-    "strategy": "Systematic suburb-by-suburb gap filling, Dee Why outward",
-    "urlStructure": "/hot-water/[suburb]",
-    "contentRules": [
-      "Real photos only",
-      "No duplicate content",
-      "Review integration",
-      "Internal linking"
+  "strategy": {
+    "name": "4-Pillar SEO Content Strategy",
+    "approvedBy": "Adam",
+    "approvedDate": "2026-04-06",
+    "pillars": [
+      { "name": "NB Service Pages", "priority": "highest", "live": 6, "needed": 9 },
+      { "name": "Brand Pages", "priority": "high", "live": 2, "needed": 9, "brands": ["Emerald", "Stiebel Eltron"] },
+      { "name": "Suburb Pages", "priority": "medium", "live": 8, "needed": 38 },
+      { "name": "Blog/News Content", "priority": "ongoing", "live": 59, "note": "57 blog + 2 insights" }
     ],
-    "weeklyCadence": "Mon-Fri defined actions",
-    "reviewCoaching": true
+    "weeklyCadence": "1 page per pillar = 4 pages/week max"
   },
   "assets": {
     "googleReviews": 29,
     "unusedPhotos": 183,
     "photoCategories": 10
   },
-  "todayWins": [
-    "Fixed SEO bug: 3 pages self-canonicalising to homepage (commit a78cbdd)",
-    "Technical SEO audit: site health all green, 0 broken links",
-    "Built master suburb\u00d7keyword matrix",
-    "Build: 70 pre-rendered pages (was 67)",
-    "Future-proofed generate-html.mjs \u2014 new service pages auto-get SEO metadata"
+  "thisWeekPublished": [
+    { "date": "2026-04-07", "title": "Mosman Suburb Page", "url": "/hot-water/mosman", "type": "suburb" },
+    { "date": "2026-04-07", "title": "Heat Pump vs Gas Hot Water", "url": "/blog/heat-pump-vs-gas-hot-water-northern-beaches", "type": "blog" },
+    { "date": "2026-04-07", "title": "North Sydney Council Gas Phase-Out July 2026", "url": "/insights/north-sydney-gas-phase-out-july-2026", "type": "insights" },
+    { "date": "2026-04-08", "title": "Stiebel Eltron Brand Page", "url": "/brands/stiebel-eltron", "type": "brand" },
+    { "date": "2026-04-08", "title": "Brands Listing Page", "url": "/brands", "type": "brandListing" }
   ]
 }

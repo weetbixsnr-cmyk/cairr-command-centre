@@ -1069,6 +1069,15 @@ try {
     console.warn('⚠️ Git push failed (snapshot still written locally):', msg.substring(0, 200))
   }
 }
+// Also copy into the Vercel project's public/ dir for production serving
+const VERCEL_PUBLIC = '/Users/cairr/AI/CAIRR/internal/command-centre/public/snapshot.json'
+try {
+  fs.writeFileSync(VERCEL_PUBLIC, JSON.stringify(snapshot))
+  console.log(`📦 Snapshot copied to Vercel project: ${VERCEL_PUBLIC}`)
+} catch (e) {
+  console.warn('⚠️ Could not copy to Vercel project:', e.message)
+}
+
 const sizeKB = Math.round(fs.statSync(SNAPSHOT_FILE).size / 1024)
 console.log(`Snapshot written: ${SNAPSHOT_FILE} (${sizeKB}KB)`)
 console.log(`Bundled into: ${BUNDLE_PATH}`)
