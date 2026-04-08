@@ -1,9 +1,4 @@
 {
-  "env": {
-    "DASHBOARD_USER": "adam",
-    "DASHBOARD_PASS": "CommandCentre2026!", 
-    "DASHBOARD_SESSION_TOKEN": "cc-auth-token-secure-2026-cairr"
-  },
   "headers": [
     {
       "source": "/(.*)",

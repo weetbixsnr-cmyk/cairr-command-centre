@@ -19,7 +19,7 @@ export function middleware(request) {
     
     if (user === process.env.DASHBOARD_USER && pass === process.env.DASHBOARD_PASS) {
       // Set session cookie and redirect to remove auth header from URL
-      const response = NextResponse.redirect(new URL('/complete', request.url))
+      const response = NextResponse.redirect(new URL('/', request.url))
       response.cookies.set('dashboard-auth', process.env.DASHBOARD_SESSION_TOKEN, {
         httpOnly: true,
         secure: true,
