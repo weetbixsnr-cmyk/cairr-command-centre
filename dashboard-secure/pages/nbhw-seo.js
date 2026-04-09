@@ -632,7 +632,7 @@ export default function NbhwSeoPage() {
                   <table>
                     <thead><tr><th>Keyword</th><th>Pos</th></tr></thead>
                     <tbody>
-                      {seo?.coreKeywords?.map((k, i) => (
+                      {seo?.coreKeywords?.slice().sort((a, b) => a.position - b.position).map((k, i) => (
                         <tr key={i}><td>{k.keyword}</td><td><PosCell pos={k.position} /></td></tr>
                       ))}
                     </tbody>
@@ -645,7 +645,7 @@ export default function NbhwSeoPage() {
                   <table>
                     <thead><tr><th>Keyword</th><th>Pos</th></tr></thead>
                     <tbody>
-                      {seo?.suburbKeywords?.map((k, i) => (
+                      {seo?.suburbKeywords?.slice().sort((a, b) => a.position - b.position).map((k, i) => (
                         <tr key={i}><td>{k.keyword}</td><td><PosCell pos={k.position} /></td></tr>
                       ))}
                     </tbody>
@@ -951,7 +951,19 @@ export default function NbhwSeoPage() {
             })()}
 
             {/* Gauges */}
-            <div className="grid2" style={{ marginBottom: 16 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12, marginBottom: 16 }}>
+              <div className="card">
+                <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>All Content — Last 7 Days</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
+                  <div style={{ fontSize: 36, fontWeight: 800, color: '#3b82f6' }}>
+                    {ledger?.last7d?.total || 0}
+                  </div>
+                </div>
+                <div style={{ fontSize: 9, color: '#666', marginTop: 4 }}>
+                  {ledger?.last7d?.pages || 0} suburb · {ledger?.last7d?.blogs || 0} blog · {(ledger?.last7d?.total || 0) - (ledger?.last7d?.pages || 0) - (ledger?.last7d?.blogs || 0)} other
+                </div>
+              </div>
+
               <div className="card">
                 <div style={{ fontSize: 10, color: '#555', fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>Suburb Pages — Last 7 Days</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>

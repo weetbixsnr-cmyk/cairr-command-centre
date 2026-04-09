@@ -425,7 +425,7 @@ export default function BtsSeoPage() {
                   <table>
                     <thead><tr><th>Keyword</th><th>Pos</th></tr></thead>
                     <tbody>
-                      {seo?.coreKeywords?.map((k, i) => (
+                      {seo?.coreKeywords?.slice().sort((a, b) => a.position - b.position).map((k, i) => (
                         <tr key={i}><td>{k.keyword}</td><td><PosCell pos={k.position} /></td></tr>
                       ))}
                     </tbody>
@@ -438,7 +438,7 @@ export default function BtsSeoPage() {
                   <table>
                     <thead><tr><th>Keyword</th><th>Pos</th></tr></thead>
                     <tbody>
-                      {seo?.locationKeywords?.map((k, i) => (
+                      {seo?.locationKeywords?.slice().sort((a, b) => a.position - b.position).map((k, i) => (
                         <tr key={i}><td>{k.keyword}</td><td><PosCell pos={k.position} /></td></tr>
                       ))}
                     </tbody>
