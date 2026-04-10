@@ -201,6 +201,11 @@ export default function Dashboard() {
           </span>
         </div>
 
+        {/* Pinned Notes */}
+        <div style={{background:'#1a1a00',border:'1px solid #f59e0b',borderRadius:8,padding:'8px 14px',marginBottom:12,fontSize:12,color:'#f59e0b',fontWeight:600}}>
+          📌 Hamish — 6 pack Stone & Wood
+        </div>
+
         <div className="nav">
           <a href="/fleet">🏢 Fleet</a>
           <a href="/system">🔌 System</a>

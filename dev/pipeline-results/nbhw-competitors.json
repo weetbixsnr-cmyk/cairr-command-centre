@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-04-06T20:00:00+11:00",
+  "updatedAt": "2026-04-09T11:00:00+10:00",
   "scanStatus": "weekly",
-  "tier1_high": [
+  "competitors": [
     {
       "name": "Cheapa Hot Water",
       "domain": "cheapahotwater.com.au",
@@ -34,9 +34,7 @@
       "weaknesses": ["No dedicated HP page yet — window closing"],
       "gapOpportunities": ["Build NB HP service page before they do"],
       "alert": "WATCH — rising fast, window closing on HP gap"
-    }
-  ],
-  "tier2_scale": [
+    },
     {
       "name": "ABCO Plumbing",
       "domain": "abcoplumbing.com.au",

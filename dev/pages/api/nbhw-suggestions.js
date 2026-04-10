@@ -1,12 +1,18 @@
 /**
- * /api/nbhw-suggestions — NBHW client suggestions endpoint
- * GET  → returns all suggestions
- * POST → create new suggestion
+ * /api/nbhw-suggestions — NBHW suggestions endpoint
+ * GET  → reads suggestions from GitHub raw (persistent)
+ * POST → writes suggestion via GitHub Contents API (commits to repo)
+ *
+ * Auth: requires admin auth (dashboard-auth cookie)
  */
 
-import fs from 'fs'
+const REPO = 'weetbixsnr-cmyk/cairr-command-centre'
+const BRANCH = 'agent/command-centre'
+const FILE_PATH = 'data/nbhw-suggestions.json'
+const RAW_URL = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/${FILE_PATH}`
+const API_URL = `https://api.github.com/repos/${REPO}/contents/${FILE_PATH}`
 
-const SUGGESTIONS_FILE = '/Users/cairr/.openclaw/agents/command-centre/workspace/dev/dashboard/nbhw-suggestions.json'
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN || ''
 
 function isAuthed(req) {
   const cookie = req.headers.cookie || ''
@@ -15,34 +21,90 @@ function isAuthed(req) {
   return false
 }
 
-function readData() {
-  try { return JSON.parse(fs.readFileSync(SUGGESTIONS_FILE, 'utf8')) } catch { return { suggestions: [] } }
+async function readSuggestions() {
+  try {
+    const headers = { 'Cache-Control': 'no-cache' }
+    if (GITHUB_TOKEN) headers['Authorization'] = `token ${GITHUB_TOKEN}`
+    const res = await fetch(RAW_URL, { headers, signal: AbortSignal.timeout(5000) })
+    if (res.ok) return await res.json()
+  } catch {}
+  return { suggestions: [] }
 }
 
-function writeData(data) {
-  fs.writeFileSync(SUGGESTIONS_FILE, JSON.stringify(data, null, 2))
+async function writeSuggestions(data) {
+  if (!GITHUB_TOKEN) throw new Error('GITHUB_TOKEN not configured')
+
+  let sha = null
+  try {
+    const getRes = await fetch(`${API_URL}?ref=${BRANCH}`, {
+      headers: { Authorization: `token ${GITHUB_TOKEN}` },
+      signal: AbortSignal.timeout(5000)
+    })
+    if (getRes.ok) {
+      const existing = await getRes.json()
+      sha = existing.sha
+    }
+  } catch {}
+
+  const content = Buffer.from(JSON.stringify(data, null, 2) + '\n').toString('base64')
+  const body = {
+    message: `suggestion: new NBHW suggestion`,
+    content,
+    branch: BRANCH
+  }
+  if (sha) body.sha = sha
+
+  const putRes = await fetch(API_URL, {
+    method: 'PUT',
+    headers: {
+      Authorization: `token ${GITHUB_TOKEN}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body),
+    signal: AbortSignal.timeout(10000)
+  })
+
+  if (!putRes.ok) {
+    const err = await putRes.text()
+    throw new Error(`GitHub API error: ${putRes.status} ${err}`)
+  }
 }
 
 export default async function handler(req, res) {
-  if (!isAuthed(req)) return res.status(401).json({ error: 'Not authenticated' })
+  if (!isAuthed(req)) {
+    return res.status(401).json({ error: 'Not authenticated' })
+  }
 
-  if (req.method === 'GET') return res.json(readData())
+  if (req.method === 'GET') {
+    const data = await readSuggestions()
+    return res.json(data)
+  }
 
   if (req.method === 'POST') {
     const { text } = req.body
-    if (!text?.trim()) return res.status(400).json({ error: 'Text required' })
-
-    const data = readData()
-    const suggestion = {
-      id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
-      text: text.trim(),
-      submittedAt: new Date().toISOString(),
-      submittedBy: 'Adam',
-      status: 'new'
+    if (!text || !text.trim()) {
+      return res.status(400).json({ error: 'Text required' })
     }
-    data.suggestions.unshift(suggestion)
-    writeData(data)
-    return res.json({ ok: true, suggestion })
+
+    try {
+      const data = await readSuggestions()
+
+      const suggestion = {
+        id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+        text: text.trim(),
+        submittedAt: new Date().toISOString(),
+        submittedBy: 'Adam',
+        status: 'new'
+      }
+
+      data.suggestions.unshift(suggestion)
+      await writeSuggestions(data)
+
+      return res.json({ ok: true, suggestion })
+    } catch (e) {
+      console.error('Suggestion save failed:', e.message)
+      return res.status(500).json({ error: 'Failed to save suggestion' })
+    }
   }
 
   return res.status(405).json({ error: 'Method not allowed' })

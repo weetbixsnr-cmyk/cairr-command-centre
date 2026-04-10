@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-04-06T20:00:00Z",
+  "lastUpdated": "2026-04-09T11:00:00+10:00",
   "source": "bts-agent",
   "client": "Better Training Solutions",
   "site": "bettertrainingsolutions.co.uk",
@@ -30,7 +30,7 @@
   ],
   "keywordsRanked": 0,
   "keywordsTotal": 35,
-  "keywordsNote": "0/35 — expected after captcha fix on 3 Apr, site still re-indexing",
+  "keywordsNote": "0/35 — confirmed Apr 9, still zero organic visibility. Site indexed (brand search #1) but not ranking for target keywords. 6 days post-captcha fix.",
   "locationKeywords": [
     { "keyword": "ACS training Marlow", "position": 99 },
     { "keyword": "gas training Aylesbury", "position": 99 },
