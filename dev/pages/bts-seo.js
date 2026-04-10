@@ -1193,7 +1193,7 @@ export default function BtsSeoPage() {
                 'draft': '📝 Draft', 'sunny-editing': '✏️ Sunny Editing', 'approved': '✅ Approved',
                 'visual-check-pending': '👁️ Visual Check', 'signed-off': '✔️ Signed Off'
               }
-              const typeColors = { blog: '#3b82f6', news: '#f59e0b', gbp: '#a855f7' }
+              const typeColors = { blog: '#3b82f6', news: '#f59e0b', gbp: '#a855f7', partnership: '#10b981' }
 
               async function draftAction(id, action, extraData) {
                 try {
