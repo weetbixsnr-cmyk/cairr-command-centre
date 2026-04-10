@@ -1,7 +1,7 @@
 /**
- * /api/bts-draft-action — Actions on BTS drafts
+ * /api/bts-draft-action — Actions on BTS drafts (persistent via GitHub API)
  * POST { id, action, content?, feedback? }
- * 
+ *
  * Actions:
  *   edit        — Sunny edits content (saves editedContent)
  *   approve     — "Good to Go" → status = approved
@@ -9,11 +9,18 @@
  *   check-desktop — Tick desktop visual check
  *   check-mobile  — Tick mobile visual check
  *   reject      — Send back with feedback
+ *
+ * On approve/reject: also writes to data/bts-notifications.json so Adam sees it
  */
 
-import fs from 'fs'
+const REPO = 'weetbixsnr-cmyk/cairr-command-centre'
+const BRANCH = 'agent/command-centre'
+const DRAFTS_PATH = 'data/bts-drafts.json'
+const NOTIFICATIONS_PATH = 'data/bts-notifications.json'
+const RAW_BASE = `https://raw.githubusercontent.com/${REPO}/${BRANCH}`
+const API_BASE = `https://api.github.com/repos/${REPO}/contents`
 
-const DRAFTS_FILE = '/Users/cairr/.openclaw/agents/command-centre/workspace/dev/dashboard/bts-drafts.json'
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN || ''
 
 function isAuthed(req) {
   const cookie = req.headers.cookie || ''
@@ -27,12 +34,69 @@ function isAuthed(req) {
   return false
 }
 
-function readDrafts() {
-  try { return JSON.parse(fs.readFileSync(DRAFTS_FILE, 'utf8')) } catch { return { drafts: [] } }
+async function readGitHub(filePath) {
+  try {
+    const headers = { 'Cache-Control': 'no-cache' }
+    if (GITHUB_TOKEN) headers['Authorization'] = `token ${GITHUB_TOKEN}`
+    const res = await fetch(`${RAW_BASE}/${filePath}`, { headers, signal: AbortSignal.timeout(5000) })
+    if (res.ok) return await res.json()
+  } catch {}
+  return null
 }
 
-function writeDrafts(data) {
-  fs.writeFileSync(DRAFTS_FILE, JSON.stringify(data, null, 2))
+async function writeGitHub(filePath, data, commitMsg) {
+  if (!GITHUB_TOKEN) throw new Error('GITHUB_TOKEN not configured')
+
+  let sha = null
+  try {
+    const getRes = await fetch(`${API_BASE}/${filePath}?ref=${BRANCH}`, {
+      headers: { Authorization: `token ${GITHUB_TOKEN}` },
+      signal: AbortSignal.timeout(5000)
+    })
+    if (getRes.ok) {
+      const existing = await getRes.json()
+      sha = existing.sha
+    }
+  } catch {}
+
+  const content = Buffer.from(JSON.stringify(data, null, 2) + '\n').toString('base64')
+  const body = { message: commitMsg, content, branch: BRANCH }
+  if (sha) body.sha = sha
+
+  const putRes = await fetch(`${API_BASE}/${filePath}`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `token ${GITHUB_TOKEN}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body),
+    signal: AbortSignal.timeout(10000)
+  })
+
+  if (!putRes.ok) {
+    const err = await putRes.text()
+    throw new Error(`GitHub API error: ${putRes.status} ${err}`)
+  }
+}
+
+async function addNotification(message, draftTitle, action) {
+  try {
+    const existing = await readGitHub(NOTIFICATIONS_PATH) || { notifications: [] }
+    existing.notifications.unshift({
+      id: Date.now().toString(36),
+      message,
+      draftTitle,
+      action,
+      timestamp: new Date().toISOString(),
+      seen: false
+    })
+    // Keep last 50 notifications
+    existing.notifications = existing.notifications.slice(0, 50)
+    await writeGitHub(NOTIFICATIONS_PATH, existing, `notify: ${message}`)
+  } catch (e) {
+    console.error('Notification failed:', e.message)
+    // Don't block the main action if notification fails
+  }
 }
 
 export default async function handler(req, res) {
@@ -42,67 +106,84 @@ export default async function handler(req, res) {
   const { id, action, content, feedback } = req.body
   if (!id || !action) return res.status(400).json({ error: 'id and action required' })
 
-  const data = readDrafts()
-  const draft = data.drafts.find(d => d.id === id)
-  if (!draft) return res.status(404).json({ error: 'Draft not found' })
+  try {
+    const data = await readGitHub(DRAFTS_PATH) || { drafts: [] }
+    const draft = data.drafts.find(d => d.id === id)
+    if (!draft) return res.status(404).json({ error: 'Draft not found' })
 
-  const now = new Date().toISOString()
+    const now = new Date().toISOString()
+    let commitMsg = `draft: ${action} on "${draft.title}"`
 
-  switch (action) {
-    case 'edit':
-      draft.editedContent = content || draft.editedContent
-      draft.editedBy = 'Sunny'
-      draft.status = 'sunny-editing'
-      draft.updatedAt = now
-      break
+    switch (action) {
+      case 'edit':
+        draft.editedContent = content || draft.editedContent
+        draft.editedBy = 'Sunny'
+        draft.status = 'sunny-editing'
+        draft.updatedAt = now
+        break
 
-    case 'approve':
-      draft.status = 'approved'
-      draft.approvedAt = now
-      draft.updatedAt = now
-      break
+      case 'approve':
+        draft.status = 'approved'
+        draft.approvedAt = now
+        draft.updatedAt = now
+        commitMsg = `approved: Sunny approved "${draft.title}"`
+        break
 
-    case 'publish':
-      // GBP posts go straight to published; blog/page drafts go to visual-check-pending
-      draft.status = draft.type === 'gbp' ? 'published' : 'visual-check-pending'
-      draft.publishedAt = now
-      draft.updatedAt = now
-      break
+      case 'publish':
+        draft.status = draft.type === 'gbp' ? 'published' : 'visual-check-pending'
+        draft.publishedAt = now
+        draft.updatedAt = now
+        break
 
-    case 'check-desktop':
-      draft.desktopChecked = true
-      draft.updatedAt = now
-      if (draft.desktopChecked && draft.mobileChecked) {
+      case 'check-desktop':
+        draft.desktopChecked = true
+        draft.updatedAt = now
+        if (draft.desktopChecked && draft.mobileChecked) {
+          draft.status = 'signed-off'
+          draft.signedOffAt = now
+        }
+        break
+
+      case 'check-mobile':
+        draft.mobileChecked = true
+        draft.updatedAt = now
+        if (draft.desktopChecked && draft.mobileChecked) {
+          draft.status = 'signed-off'
+          draft.signedOffAt = now
+        }
+        break
+
+      case 'sign-off':
         draft.status = 'signed-off'
         draft.signedOffAt = now
-      }
-      break
+        draft.updatedAt = now
+        break
 
-    case 'check-mobile':
-      draft.mobileChecked = true
-      draft.updatedAt = now
-      if (draft.desktopChecked && draft.mobileChecked) {
-        draft.status = 'signed-off'
-        draft.signedOffAt = now
-      }
-      break
+      case 'reject':
+        draft.status = 'draft'
+        draft.feedback = feedback || 'Changes requested'
+        draft.updatedAt = now
+        commitMsg = `rejected: Sunny requested changes on "${draft.title}"`
+        break
 
-    case 'sign-off':
-      draft.status = 'signed-off'
-      draft.signedOffAt = now
-      draft.updatedAt = now
-      break
+      default:
+        return res.status(400).json({ error: `Unknown action: ${action}` })
+    }
 
-    case 'reject':
-      draft.status = 'draft'
-      draft.feedback = feedback || 'Changes requested'
-      draft.updatedAt = now
-      break
+    await writeGitHub(DRAFTS_PATH, data, commitMsg)
 
-    default:
-      return res.status(400).json({ error: `Unknown action: ${action}` })
+    // Send notification for approve/reject actions
+    if (action === 'approve') {
+      await addNotification(`Sunny approved: ${draft.title}`, draft.title, 'approve')
+    } else if (action === 'reject') {
+      await addNotification(`Sunny requested changes: ${draft.title}`, draft.title, 'reject')
+    } else if (action === 'edit') {
+      await addNotification(`Sunny edited: ${draft.title}`, draft.title, 'edit')
+    }
+
+    return res.json({ ok: true, draft })
+  } catch (e) {
+    console.error('Draft action failed:', e.message)
+    return res.status(500).json({ error: 'Failed to update draft' })
   }
-
-  writeDrafts(data)
-  return res.json({ ok: true, draft })
 }

@@ -14,6 +14,7 @@ const { execSync } = require('child_process')
 const WORKSPACE = '/Users/cairr/.openclaw/agents/command-centre/workspace'
 const PIPELINE = path.join(WORKSPACE, 'dev', 'pipeline-results')
 const DASHBOARD_DATA = path.join(WORKSPACE, 'dev', 'dashboard')
+const DATA_DIR = path.join(WORKSPACE, 'data')
 const SNAPSHOTS_DIR = path.join(WORKSPACE, 'dev', 'snapshots')
 const SNAPSHOT_FILE = path.join(SNAPSHOTS_DIR, 'latest.json')
 
@@ -1029,21 +1030,22 @@ const snapshot = {
   btsBlogInventory: readJSON(path.join(PIPELINE, 'bts-blog-inventory.json')),
   btsCompetitors: readJSON(path.join(PIPELINE, 'bts-competitors.json')),
   btsCourseDetails: readJSON(path.join(PIPELINE, 'bts-course-details.json')),
-  btsSuggestions: readJSON(path.join(DASHBOARD_DATA, 'bts-suggestions.json')),
+  btsSuggestions: readJSON(path.join(DATA_DIR, 'bts-suggestions.json')) || readJSON(path.join(DASHBOARD_DATA, 'bts-suggestions.json')),
   btsKeywords: parseBtsKeywordTracker(),
   btsPublishLedger: computePublishLedgerStats('bts-publish-ledger.json'),
   cairrFinance: readJSON(path.join(DASHBOARD_DATA, 'cairr-finance.json')),
   nbhwSeoDash: parseSeoDashboard('nbhw'),
   btsSeoDash: parseSeoDashboard('bts'),
-  btsDrafts: readJSON(path.join(DASHBOARD_DATA, 'bts-drafts.json')),
+  btsDrafts: readJSON(path.join(DATA_DIR, 'bts-drafts.json')) || readJSON(path.join(DASHBOARD_DATA, 'bts-drafts.json')),
   btsSeoAudit: readJSON(path.join(DASHBOARD_DATA, 'bts-seo-audit.json')),
   btsTraffic: readJSON(path.join(DASHBOARD_DATA, 'bts-traffic.json')),
   nbhwSeoAudit: readJSON(path.join(DASHBOARD_DATA, 'nbhw-seo-audit.json')),
   nbhwTraffic: readJSON(path.join(DASHBOARD_DATA, 'nbhw-traffic.json')),
-  nbhwSuggestions: readJSON(path.join(DASHBOARD_DATA, 'nbhw-suggestions.json')),
+  nbhwSuggestions: readJSON(path.join(DATA_DIR, 'nbhw-suggestions.json')) || readJSON(path.join(DASHBOARD_DATA, 'nbhw-suggestions.json')),
   nbhwGmbPosts: readJSON(path.join(DASHBOARD_DATA, 'nbhw-gmb-posts.json')),
-  nbhwDrafts: readJSON(path.join(DASHBOARD_DATA, 'nbhw-drafts.json')),
+  nbhwDrafts: readJSON(path.join(DATA_DIR, 'nbhw-drafts.json')) || readJSON(path.join(DASHBOARD_DATA, 'nbhw-drafts.json')),
   btsCompetitorPages: readJSON(path.join(DASHBOARD_DATA, 'bts-competitors-pages.json')),
+  btsNotifications: readJSON(path.join(DATA_DIR, 'bts-notifications.json')),
 }
 
 // ── Write snapshot + bundle into dashboard + push to GitHub ──
@@ -1053,7 +1055,6 @@ const BUNDLE_PATH = path.join(WORKSPACE, 'dashboard-secure', 'public', 'snapshot
 fs.writeFileSync(BUNDLE_PATH, JSON.stringify(snapshot))
 
 // Push to data/snapshot.json for GitHub raw serving (decoupled from Vercel deploys)
-const DATA_DIR = path.join(WORKSPACE, 'data')
 if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true })
 const DATA_PATH = path.join(DATA_DIR, 'snapshot.json')
 fs.writeFileSync(DATA_PATH, JSON.stringify(snapshot))

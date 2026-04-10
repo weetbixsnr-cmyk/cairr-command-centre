@@ -86,6 +86,7 @@ export default function BtsSeoPage() {
   const kw = snap?.btsKeywords
   const courses = snap?.btsCourseDetails
   const suggestions = snap?.btsSuggestions
+  const notifications = snap?.btsNotifications?.notifications || []
   const compPages = snap?.btsCompetitorPages
   const courseData = snap?.btsCourses
   const seoDash = snap?.btsSeoDash
@@ -150,6 +151,21 @@ export default function BtsSeoPage() {
             Updated: {seo ? timeAgo(seo.lastUpdated) : '—'}
           </span>
         </div>
+
+        {/* Sunny Activity Notifications */}
+        {notifications.filter(n => !n.seen).length > 0 && (
+          <div style={{background:'#10b98115',border:'1px solid #10b98133',borderRadius:10,padding:'10px 14px',marginBottom:14}}>
+            <div style={{fontSize:10,color:'#10b981',fontWeight:700,marginBottom:6,textTransform:'uppercase',letterSpacing:1}}>
+              🔔 Sunny Activity ({notifications.filter(n => !n.seen).length} new)
+            </div>
+            {notifications.filter(n => !n.seen).slice(0, 5).map(n => (
+              <div key={n.id} style={{fontSize:11,color:'#ccc',padding:'3px 0',borderBottom:'1px solid #1a1a1a',display:'flex',justifyContent:'space-between'}}>
+                <span>{n.action === 'approve' ? '✅' : n.action === 'reject' ? '↩️' : '✏️'} {n.message}</span>
+                <span style={{fontSize:9,color:'#666'}}>{n.timestamp ? new Date(n.timestamp).toLocaleString() : ''}</span>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Stats */}
         <div className="stats">
@@ -425,7 +441,7 @@ export default function BtsSeoPage() {
                   <table>
                     <thead><tr><th>Keyword</th><th>Pos</th></tr></thead>
                     <tbody>
-                      {seo?.coreKeywords?.map((k, i) => (
+                      {seo?.coreKeywords?.slice().sort((a, b) => a.position - b.position).map((k, i) => (
                         <tr key={i}><td>{k.keyword}</td><td><PosCell pos={k.position} /></td></tr>
                       ))}
                     </tbody>
@@ -438,7 +454,7 @@ export default function BtsSeoPage() {
                   <table>
                     <thead><tr><th>Keyword</th><th>Pos</th></tr></thead>
                     <tbody>
-                      {seo?.locationKeywords?.map((k, i) => (
+                      {seo?.locationKeywords?.slice().sort((a, b) => a.position - b.position).map((k, i) => (
                         <tr key={i}><td>{k.keyword}</td><td><PosCell pos={k.position} /></td></tr>
                       ))}
                     </tbody>
