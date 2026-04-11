@@ -38,8 +38,8 @@ export function middleware(request) {
   const btsAuthed = btsSession?.value === process.env.BTS_SESSION_TOKEN
   
   if (btsAuthed) {
-    // BTS clients can access: /bts-seo*, /api/data (read-only snapshot)
-    if (pathname.startsWith('/bts-seo') || pathname === '/api/data') {
+    // BTS clients can access: /bts-seo*, /api/data, /api/bts-*
+    if (pathname.startsWith('/bts-seo') || pathname === '/api/data' || pathname.startsWith('/api/bts-')) {
       return NextResponse.next()
     }
     // Block everything else — redirect to BTS SEO
