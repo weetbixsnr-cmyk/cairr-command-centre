@@ -4,7 +4,8 @@
  * Renders from parsed SEO-DASHBOARD.md sections + news-bank.json
  */
 
-function SectionCard({ title, children, icon }) {
+// Exported for use in parent pages (bts-seo, nbhw-seo)
+export function SectionCard({ title, children, icon }) {
   return (
     <div style={{background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:10,padding:14,marginBottom:14}}>
       <div style={{fontSize:10,color:'#aaa',textTransform:'uppercase',letterSpacing:1.2,marginBottom:8,fontWeight:600,borderBottom:'1px solid #1a1a1a',paddingBottom:4}}>
@@ -15,7 +16,7 @@ function SectionCard({ title, children, icon }) {
   )
 }
 
-function MdLines({ lines, maxLines }) {
+export function MdLines({ lines, maxLines }) {
   const display = maxLines ? lines.slice(0, maxLines) : lines
   return (
     <div>
@@ -106,7 +107,29 @@ function NewsBank({ newsBank }) {
   )
 }
 
-export default function SeoDashboard({ seoDash, publishLedger, label }) {
+// Export sectionMap + findSection so parent pages can render individual sections in other tabs
+export const SEO_SECTION_MAP = [
+  { key: 'plan-overview', icon: '📋', fallbacks: ['plan', 'overview', 'score', 'progress', 'plan-status'] },
+  { key: 'critical-fixes', icon: '🔴', fallbacks: ['critical', 'fixes', 'outstanding', 'blockers'] },
+  { key: 'publish-history', icon: '📅', fallbacks: ['publish', 'history', 'published', 'content-published'] },
+  { key: 'content-pipeline', icon: '🔮', fallbacks: ['pipeline', 'content-plan', 'next-4-weeks', 'upcoming', 'content-pipeline'] },
+  { key: 'coverage-matrix', icon: '📍', fallbacks: ['coverage', 'matrix', 'services-locations', 'service-suburb', 'service-location'] },
+  { key: 'news-bank', icon: '📰', fallbacks: ['news', 'stories', 'news-bank'] },
+  { key: 'competitor-watch', icon: '🏆', fallbacks: ['competitor', 'competitors', 'watch'] },
+  { key: 'weekly-audit-log', icon: '📝', fallbacks: ['audit-log', 'weekly-audit', 'monday'] },
+]
+
+export function findSeoDashSection(sections, mapEntry) {
+  if (!sections) return null
+  if (sections[mapEntry.key]) return sections[mapEntry.key]
+  for (const fb of mapEntry.fallbacks) {
+    const found = Object.entries(sections).find(([k]) => k.includes(fb))
+    if (found) return found[1]
+  }
+  return null
+}
+
+export default function SeoDashboard({ seoDash, publishLedger, label, skipSections }) {
   if (!seoDash) return (
     <div style={{textAlign:'center',padding:30,color:'#333'}}>
       <div style={{fontSize:20,marginBottom:8}}>📊</div>
@@ -116,27 +139,7 @@ export default function SeoDashboard({ seoDash, publishLedger, label }) {
   )
 
   const s = seoDash.sections || {}
-
-  // Section mapping to the 8 standardised sections
-  const sectionMap = [
-    { key: 'plan-overview', icon: '📋', fallbacks: ['plan', 'overview', 'score', 'progress', 'plan-status'] },
-    { key: 'critical-fixes', icon: '🔴', fallbacks: ['critical', 'fixes', 'outstanding', 'blockers'] },
-    { key: 'publish-history', icon: '📅', fallbacks: ['publish', 'history', 'published', 'content-published'] },
-    { key: 'content-pipeline', icon: '🔮', fallbacks: ['pipeline', 'content-plan', 'next-4-weeks', 'upcoming', 'content-pipeline'] },
-    { key: 'coverage-matrix', icon: '📍', fallbacks: ['coverage', 'matrix', 'services-locations', 'service-suburb', 'service-location'] },
-    { key: 'news-bank', icon: '📰', fallbacks: ['news', 'stories', 'news-bank'] },
-    { key: 'competitor-watch', icon: '🏆', fallbacks: ['competitor', 'competitors', 'watch'] },
-    { key: 'weekly-audit-log', icon: '📝', fallbacks: ['audit-log', 'weekly-audit', 'monday'] },
-  ]
-
-  function findSection(map) {
-    if (s[map.key]) return s[map.key]
-    for (const fb of map.fallbacks) {
-      const found = Object.entries(s).find(([k]) => k.includes(fb))
-      if (found) return found[1]
-    }
-    return null
-  }
+  const skip = skipSections || []
 
   // Publish safety strip
   const weeklySlots = { blogs: 3, gbp: 3, news: 1 }
@@ -167,12 +170,12 @@ export default function SeoDashboard({ seoDash, publishLedger, label }) {
         </div>
       )}
 
-      {/* 8 Sections */}
-      {sectionMap.map((map, i) => {
-        // News bank has its own dedicated tab — skip here to avoid double-up
+      {/* Sections — skip news-bank (has own tab) + any parent-specified skips */}
+      {SEO_SECTION_MAP.map((map, i) => {
         if (map.key === 'news-bank') return null
+        if (skip.includes(map.key)) return null
 
-        const section = findSection(map)
+        const section = findSeoDashSection(s, map)
         if (!section) return null
 
         return (

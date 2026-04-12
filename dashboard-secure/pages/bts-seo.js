@@ -1,6 +1,50 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import SeoDashboard from './components/seo-dashboard'
+
+// Inline section finder for rendering SEO-DASHBOARD.md sections in native tabs
+function findDashSection(sections, key, fallbacks) {
+  if (!sections) return null
+  if (sections[key]) return sections[key]
+  for (const fb of (fallbacks || [])) {
+    const found = Object.entries(sections).find(([k]) => k.includes(fb))
+    if (found) return found[1]
+  }
+  return null
+}
+
+function DashSection({ section, icon, maxLines }) {
+  if (!section) return null
+  const lines = (maxLines ? section.lines.slice(0, maxLines) : section.lines) || []
+  return (
+    <div style={{background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:10,padding:14,marginBottom:14}}>
+      <div style={{fontSize:10,color:'#aaa',textTransform:'uppercase',letterSpacing:1.2,marginBottom:8,fontWeight:600,borderBottom:'1px solid #1a1a1a',paddingBottom:4}}>
+        {icon} {section.title}
+      </div>
+      {lines.map((line, i) => {
+        const t = (line || '').trim()
+        if (!t) return null
+        if (t.startsWith('|') && !t.startsWith('|--') && !t.startsWith('| -')) {
+          const cells = t.split('|').filter(Boolean).map(c => c.trim())
+          const isHdr = i === 0 || (lines[i+1] && lines[i+1].trim().startsWith('|--'))
+          return <div key={i} style={{display:'flex',gap:8,padding:'3px 0',borderBottom:'1px solid #111',fontSize:10}}>{cells.map((c,j) => <span key={j} style={{flex:1,color:isHdr?'#888':'#ccc',fontWeight:isHdr?600:400,fontSize:isHdr?9:10}}>{c.replace(/\*\*/g,'')}</span>)}</div>
+        }
+        if (/^\|[\s-|]+\|$/.test(t)) return null
+        if (t.startsWith('- [x]')) return <div key={i} style={{fontSize:10,color:'#10b981',padding:'2px 0'}}>✅ {t.replace(/^- \[x\]\s*/,'').replace(/\*\*/g,'')}</div>
+        if (t.startsWith('- [ ]')) return <div key={i} style={{fontSize:10,color:'#888',padding:'2px 0'}}>⬜ {t.replace(/^- \[\s?\]\s*/,'').replace(/\*\*/g,'')}</div>
+        if (t.startsWith('🔴')||t.startsWith('🟠')||t.startsWith('🟡')||t.startsWith('🟢')) {
+          const sc = t.startsWith('🔴')?'#ef4444':t.startsWith('🟠')?'#f59e0b':t.startsWith('🟡')?'#3b82f6':'#10b981'
+          return <div key={i} style={{fontSize:10,color:sc,padding:'2px 0',fontWeight:500}}>{t.replace(/\*\*/g,'')}</div>
+        }
+        if (t.startsWith('- ')||t.startsWith('* ')) return <div key={i} style={{fontSize:10,color:'#aaa',padding:'2px 0',paddingLeft:8}}>• {t.replace(/^[-*]\s*/,'').replace(/\*\*/g,'')}</div>
+        if (/^\d+\./.test(t)) return <div key={i} style={{fontSize:10,color:'#aaa',padding:'2px 0',paddingLeft:8}}>{t.replace(/\*\*/g,'')}</div>
+        if (t.startsWith('**')&&t.endsWith('**')) return <div key={i} style={{fontSize:10,color:'#fff',fontWeight:700,padding:'4px 0 2px'}}>{t.replace(/\*\*/g,'')}</div>
+        return <div key={i} style={{fontSize:10,color:'#aaa',padding:'1px 0'}}>{t.replace(/\*\*/g,'')}</div>
+      })}
+      {maxLines && section.lines.length > maxLines && <div style={{fontSize:9,color:'#555',marginTop:4}}>+{section.lines.length - maxLines} more</div>}
+    </div>
+  )
+}
 import GbpPosts from './components/gbp-posts'
 
 function useSnapshot(interval = 30000) {
@@ -92,7 +136,7 @@ export default function BtsSeoPage() {
   const seoDash = snap?.btsSeoDash
   const audit = snap?.btsSeoAudit
   const traffic = snap?.btsTraffic
-  const [tab, setTab] = useState(seoDash ? 'seo-plan' : 'rankings')
+  const [tab, setTab] = useState(seoDash ? 'health' : 'rankings')
   const [suggText, setSuggText] = useState('')
   const [suggSending, setSuggSending] = useState(false)
   const [editingId, setEditingId] = useState(null)
@@ -260,6 +304,10 @@ export default function BtsSeoPage() {
         {/* TAB: SEO Health */}
         {tab === 'health' && (
           <>
+            {/* Plan Status & Overview + Critical Fixes (from SEO-DASHBOARD.md) */}
+            <DashSection section={findDashSection(seoDash?.sections, 'plan-overview', ['plan', 'overview', 'plan-status'])} icon="📋" maxLines={30} />
+            <DashSection section={findDashSection(seoDash?.sections, 'critical-fixes', ['critical', 'fixes', 'blockers'])} icon="🔴" maxLines={40} />
+
             <div className="grid2" style={{marginBottom:16}}>
               {/* SEO Health Score Gauge */}
               <div className="card" style={{textAlign:'center',padding:20}}>
@@ -386,7 +434,8 @@ export default function BtsSeoPage() {
 
         {/* TAB: SEO Plan (standardised format) */}
         {tab === 'seo-plan' && (
-          <SeoDashboard seoDash={seoDash} publishLedger={snap?.btsPublishLedger} label="BTS" />
+          <SeoDashboard seoDash={seoDash} publishLedger={snap?.btsPublishLedger} label="BTS"
+            skipSections={['plan-overview','critical-fixes','coverage-matrix','publish-history','competitor-watch','plan','critical','coverage','publish','competitor']} />
         )}
 
         {/* TAB 1: Rankings */}
@@ -604,81 +653,9 @@ export default function BtsSeoPage() {
                 )}
               </div>
             )}
-          </>
-        )}
 
-        {/* TAB 3: Framework */}
-        {tab === 'framework' && (
-          <>
-            <div className="section">
-              <div className="sec-title">SEO Strategy</div>
-              <div className="card">
-                <div style={{fontSize:11,color:'#aaa',padding:'4px 0',borderBottom:'1px solid #1a1a1a'}}>
-                  <strong style={{color:'#fff'}}>Strategy:</strong> {seo?.framework?.strategy || '—'}
-                </div>
-                <div style={{fontSize:11,color:'#aaa',padding:'4px 0',borderBottom:'1px solid #1a1a1a'}}>
-                  <strong style={{color:'#fff'}}>URL Pattern:</strong> <code style={{color:'#3b82f6',fontSize:10}}>{seo?.framework?.urlStructure || '—'}</code>
-                </div>
-                <div style={{fontSize:11,color:'#aaa',padding:'4px 0',borderBottom:'1px solid #1a1a1a'}}>
-                  <strong style={{color:'#fff'}}>Weekly Cadence:</strong> {seo?.framework?.weeklyCadence || '—'}
-                </div>
-                <div style={{fontSize:11,color:'#aaa',padding:'4px 0'}}>
-                  <strong style={{color:'#fff'}}>Review Coaching:</strong> {seo?.framework?.reviewCoaching ? '✅ Active' : '❌ Off'}
-                </div>
-              </div>
-            </div>
-            <div className="section">
-              <div className="sec-title">Content Rules</div>
-              <div className="card">
-                {seo?.framework?.contentRules?.map((rule, i) => (
-                  <div key={i} style={{fontSize:11,color:'#aaa',padding:'4px 0',display:'flex',alignItems:'center',gap:6,borderBottom:'1px solid #1a1a1a'}}>
-                    <span style={{color:'#10b981'}}>✓</span> {rule}
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="section">
-              <div className="sec-title">Planned Content Waves</div>
-              <div className="card">
-                {plan?.plannedContent && Object.entries(plan.plannedContent).map(([wave, items]) => (
-                  <div key={wave} style={{marginBottom:8}}>
-                    <div style={{fontSize:10,fontWeight:700,color:'#fff',marginBottom:4,textTransform:'capitalize'}}>{wave.replace(/([0-9])/g, ' $1')}</div>
-                    {items?.map((item, i) => (
-                      <div key={i} style={{fontSize:10,color:'#aaa',padding:'2px 0',paddingLeft:12,display:'flex',gap:6}}>
-                        <span style={{color:'#3b82f6'}}>•</span> {item}
-                      </div>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="section">
-              <div className="sec-title">Assets</div>
-              <div className="card" style={{display:'flex',gap:16,flexWrap:'wrap'}}>
-                <div style={{textAlign:'center'}}>
-                  <div style={{fontSize:20,fontWeight:700,color:'#f59e0b'}}>{seo?.assets?.googleReviews || 0}</div>
-                  <div style={{fontSize:9,color:'#999'}}>Google Reviews</div>
-                </div>
-                <div style={{textAlign:'center'}}>
-                  <div style={{fontSize:20,fontWeight:700,color:'#3b82f6'}}>{seo?.assets?.courseCertifications || 0}</div>
-                  <div style={{fontSize:9,color:'#999'}}>Certifications</div>
-                </div>
-                <div style={{textAlign:'center'}}>
-                  <div style={{fontSize:20,fontWeight:700,color:'#10b981'}}>{seo?.assets?.trainingServices || 0}</div>
-                  <div style={{fontSize:9,color:'#999'}}>Training Services</div>
-                </div>
-              </div>
-            </div>
-            <div className="section">
-              <div className="sec-title">Cadence</div>
-              <div className="card">
-                {plan?.cadence && Object.entries(plan.cadence).map(([k, v]) => (
-                  <div key={k} style={{fontSize:11,color:'#aaa',padding:'4px 0',borderBottom:'1px solid #1a1a1a'}}>
-                    <strong style={{color:'#fff',textTransform:'capitalize'}}>{k.replace(/([A-Z])/g, ' $1')}:</strong> {v}
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* Coverage Matrix (from SEO-DASHBOARD.md) — Content Published removed, already on Google Safety tab as Publish Timeline */}
+            <DashSection section={findDashSection(seoDash?.sections, 'coverage-matrix', ['coverage', 'matrix', 'service-location'])} icon="📍" maxLines={50} />
           </>
         )}
 
@@ -870,6 +847,8 @@ export default function BtsSeoPage() {
                 </div>
               </div>
             )}
+
+            {/* Competitor Watch DashSection removed — structured competitor cards above already show same data */}
 
             <div style={{ fontSize: 8, color: '#333', marginTop: 8, textAlign: 'right' }}>
               Scan status: {comp?.scanStatus || 'pending'} · Updated: {comp?.updatedAt ? timeAgo(comp.updatedAt) : '—'}
