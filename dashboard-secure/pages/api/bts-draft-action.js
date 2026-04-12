@@ -204,7 +204,8 @@ export default async function handler(req, res) {
       await notifyDiscord('↩️ Sunny Requested Changes', `**${draft.title}**\nFeedback: ${draft.feedback || 'No details'}`, 0xef4444)
     } else if (action === 'edit') {
       await addNotification(`Sunny edited: ${draft.title}`, draft.title, 'edit')
-      await notifyDiscord('✏️ Sunny Edited a Post', `**${draft.title}**`, 0xf59e0b)
+      const preview = (draft.editedContent || '').slice(0, 500)
+      await notifyDiscord('✏️ Sunny Edited a Post', `**${draft.title}**\n\n>>> ${preview}${preview.length >= 500 ? '...' : ''}`, 0xf59e0b)
     }
 
     return res.json({ ok: true, draft })
