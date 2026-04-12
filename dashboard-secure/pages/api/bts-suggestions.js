@@ -1,16 +1,18 @@
 /**
  * /api/bts-suggestions — BTS client suggestions endpoint
- * GET  → reads suggestions from Vercel Blob storage
- * POST → writes suggestion to Vercel Blob storage
+ * GET  → reads suggestions from GitHub API (persistent)
+ * POST → writes suggestion via GitHub Contents API (commits to repo)
  *
  * Auth: requires bts-client-auth cookie (set by /api/bts-auth) or admin auth
- * Storage: Vercel Blob (BLOB_READ_WRITE_TOKEN env var)
  */
 
-import { put, list } from '@vercel/blob'
+const REPO = 'weetbixsnr-cmyk/cairr-command-centre'
+const BRANCH = 'agent/command-centre'
+const FILE_PATH = 'data/bts-suggestions.json'
+const API_URL = `https://api.github.com/repos/${REPO}/contents/${FILE_PATH}`
 
-const BLOB_KEY = 'bts-suggestions.json'
 const SESSION_TOKEN = process.env.BTS_SESSION_TOKEN
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN || ''
 const DISCORD_WEBHOOK = process.env.BTS_DISCORD_WEBHOOK || ''
 
 async function notifyDiscord(text) {
@@ -45,24 +47,62 @@ function isAuthed(req) {
 }
 
 async function readSuggestions() {
-  try {
-    // List blobs to find our file
-    const { blobs } = await list({ prefix: BLOB_KEY })
-    if (blobs.length > 0) {
-      const res = await fetch(blobs[0].url, { signal: AbortSignal.timeout(5000) })
-      if (res.ok) return await res.json()
+  // Use Contents API (always fresh)
+  if (GITHUB_TOKEN) {
+    try {
+      const res = await fetch(`${API_URL}?ref=${BRANCH}`, {
+        headers: { Authorization: `token ${GITHUB_TOKEN}` },
+        signal: AbortSignal.timeout(5000)
+      })
+      if (res.ok) {
+        const data = await res.json()
+        return JSON.parse(Buffer.from(data.content, 'base64').toString())
+      }
+    } catch (e) {
+      console.error('GitHub read failed:', e.message)
     }
-  } catch (e) {
-    console.error('Blob read failed:', e.message)
   }
   return { suggestions: [] }
 }
 
 async function writeSuggestions(data) {
-  await put(BLOB_KEY, JSON.stringify(data, null, 2), {
-    access: 'public',
-    addRandomSuffix: false
+  if (!GITHUB_TOKEN) throw new Error('GITHUB_TOKEN not configured')
+
+  // Get current file SHA (needed for updates)
+  let sha = null
+  try {
+    const getRes = await fetch(`${API_URL}?ref=${BRANCH}`, {
+      headers: { Authorization: `token ${GITHUB_TOKEN}` },
+      signal: AbortSignal.timeout(5000)
+    })
+    if (getRes.ok) {
+      const existing = await getRes.json()
+      sha = existing.sha
+    }
+  } catch {}
+
+  const content = Buffer.from(JSON.stringify(data, null, 2) + '\n').toString('base64')
+  const body = {
+    message: `suggestion: new BTS suggestion from Sunny`,
+    content,
+    branch: BRANCH
+  }
+  if (sha) body.sha = sha
+
+  const putRes = await fetch(API_URL, {
+    method: 'PUT',
+    headers: {
+      Authorization: `token ${GITHUB_TOKEN}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body),
+    signal: AbortSignal.timeout(10000)
   })
+
+  if (!putRes.ok) {
+    const err = await putRes.text()
+    throw new Error(`GitHub API error: ${putRes.status} ${err}`)
+  }
 }
 
 export default async function handler(req, res) {
