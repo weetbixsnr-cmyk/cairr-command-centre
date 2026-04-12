@@ -1,0 +1,47 @@
+# CODEOWNERS — Dashboard Governance
+# Defines who can modify which files in the CC workspace.
+# Enforced by pre-commit hook + chmod permissions.
+# Authority: Brain (Ricky-Jnr)
+# Effective: 13 Apr 2026
+
+# ============================================================
+# LAYOUT FILES — Brain (Ricky-Jnr) ONLY
+# ============================================================
+# All page files that define dashboard UI/layout/structure
+dashboard-secure/pages/*.js                    @brain
+dashboard-secure/pages/agent/*.js              @brain
+dashboard-secure/pages/components/*.js         @brain
+
+# Config files that affect build/deployment
+dashboard-secure/middleware.js                 @brain
+dashboard-secure/next.config.js                @brain
+dashboard-secure/package.json                  @brain
+dashboard-secure/package-lock.json             @brain
+
+# ============================================================
+# API FILES — CC Agent (bug fixes only, new endpoints need Brain)
+# ============================================================
+dashboard-secure/pages/api/*.js                @command-centre @brain
+
+# ============================================================
+# DATA FILES — CC Agent (unrestricted)
+# ============================================================
+data/*.json                                    @command-centre
+dev/snapshots/*.json                           @command-centre
+dev/dashboard/*.json                           @command-centre
+dev/pipeline-results/*.json                    @command-centre
+dashboard-secure/public/snapshot.json          @command-centre
+
+# ============================================================
+# GOVERNANCE — Brain ONLY
+# ============================================================
+governance/*                                   @brain
+RULES.md                                       @brain
+SOUL.md                                        @brain
+FRAMEWORK.md                                   @brain
+
+# ============================================================
+# MEMORY — CC Agent (own workspace)
+# ============================================================
+memory/*.md                                    @command-centre
+MEMORY.md                                      @command-centre
