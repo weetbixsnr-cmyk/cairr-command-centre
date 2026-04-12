@@ -201,29 +201,29 @@
       "id": "gbp-career-change",
       "title": "GBP: Career Change Into Gas Engineering",
       "type": "gbp",
-      "status": "approved",
+      "status": "draft",
       "content": "Thinking about a career change? Gas engineering is one of the few trades where demand is outstripping supply. Plumbing apprenticeship starts have dropped 37% since 2021. Over 44% of the existing workforce is over 55. The industry needs qualified people, and it needs them now. Our Gas Managed Learning Programme takes you from no experience through to Gas Safe registration. Structured, practical, hands-on. Based in High Wycombe, easy to reach from Reading, Aylesbury, Oxford, and anywhere along the M40. HP11 2LB. #CareerChange #GasEngineer #GasSafe #MLP #HighWycombe #Buckinghamshire #GasTraining",
       "buttonText": "Learn more",
       "buttonUrl": "https://bettertrainingsolutions.co.uk/course/gas-managed-learning-programme/",
       "author": "BTS Agent",
       "service": "Gas (MLP)",
       "createdAt": "2026-04-12T04:00:00.000Z",
-      "batch": 3,
-      "approvedAt": "2026-04-12T09:19:42.231Z",
-      "updatedAt": "2026-04-12T09:19:42.231Z"
+      "batch": 3
     },
     {
       "id": "gbp-skills-shortage",
       "title": "GBP: Plumber Skills Shortage (NEWS)",
       "type": "gbp",
-      "status": "draft",
+      "status": "approved",
       "content": "The numbers speak for themselves. Plumbing apprenticeship starts have crashed 37%. 69% of firms can't find skilled workers. The UK needs over 40,000 new plumbers by 2033. If you're already qualified, your skills are more valuable than ever. If you're thinking about entering the trade, the timing couldn't be better. We run ACS initial training, water regulations, G3, and Legionella courses from High Wycombe. Small classes, trade-experienced assessors, qualifications that put you straight into a market that's crying out for people. HP11 2LB. #PlumbingTraining #SkillsShortage #GasTraining #ACS #HighWycombe #Buckinghamshire",
       "buttonText": "Learn more",
       "buttonUrl": "https://bettertrainingsolutions.co.uk/course/ccn1-initial/",
       "author": "BTS Agent",
       "service": "Multi-trade",
       "createdAt": "2026-04-12T04:00:00.000Z",
-      "batch": 3
+      "batch": 3,
+      "approvedAt": "2026-04-12T09:20:17.002Z",
+      "updatedAt": "2026-04-12T09:20:17.002Z"
     },
     {
       "id": "gbp-stack-qualifications",
