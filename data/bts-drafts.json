@@ -214,29 +214,30 @@
       "id": "gbp-skills-shortage",
       "title": "GBP: Plumber Skills Shortage (NEWS)",
       "type": "gbp",
-      "status": "approved",
+      "status": "draft",
       "content": "The numbers speak for themselves. Plumbing apprenticeship starts have crashed 37%. 69% of firms can't find skilled workers. The UK needs over 40,000 new plumbers by 2033. If you're already qualified, your skills are more valuable than ever. If you're thinking about entering the trade, the timing couldn't be better. We run ACS initial training, water regulations, G3, and Legionella courses from High Wycombe. Small classes, trade-experienced assessors, qualifications that put you straight into a market that's crying out for people. HP11 2LB. #PlumbingTraining #SkillsShortage #GasTraining #ACS #HighWycombe #Buckinghamshire",
       "buttonText": "Learn more",
       "buttonUrl": "https://bettertrainingsolutions.co.uk/course/ccn1-initial/",
       "author": "BTS Agent",
       "service": "Multi-trade",
       "createdAt": "2026-04-12T04:00:00.000Z",
-      "batch": 3,
-      "approvedAt": "2026-04-12T09:20:17.002Z",
-      "updatedAt": "2026-04-12T09:20:17.002Z"
+      "batch": 3
     },
     {
       "id": "gbp-stack-qualifications",
       "title": "GBP: Stack Your Qualifications",
       "type": "gbp",
-      "status": "draft",
+      "status": "sunny-editing",
       "content": "Water Regulations. G3 Unvented. Legionella Prevention. Three qualifications. Three days. All from our training centre in High Wycombe. Each one opens up new work. Water Regs proves you understand compliance. G3 lets you work on unvented cylinders legally. Legionella risk assessments are required by law for landlords, which means repeat work for you. Stack all three in a single week and walk away with qualifications that set you apart. No wasted travel. No waiting weeks between courses. HP11 2LB, free parking, easy reach from Reading, Aylesbury, and the M40 corridor. #PlumbingTraining #WaterRegulations #G3Training #Legionella #HighWycombe #Buckinghamshire",
       "buttonText": "Learn more",
       "buttonUrl": "https://bettertrainingsolutions.co.uk/our-plumbing-training-courses/",
       "author": "BTS Agent",
       "service": "Plumbing",
       "createdAt": "2026-04-12T04:00:00.000Z",
-      "batch": 3
+      "batch": 3,
+      "editedContent": "Water Regulations. G3 Unvented. Legionella Prevention. Three qualifications. Three days. All from our training centre in High Wycombe. Each one opens up new work. Water Regs proves you understand compliance. G3 lets you work on unvented cylinders legally. Legionella risk assessments are required by law for landlords, which means repeat work for you. Stack all three in a single week and walk away with qualifications that set you apart. No wasted travel. No waiting weeks between courses. HP11 2LB, free parking, easy reach from Reading, Aylesbury, and the M40 corridor. #PlumbingTraining #WaterRegulations #G3Training #Legionella #HighWycombe #Buckinghamshire",
+      "editedBy": "Sunny",
+      "updatedAt": "2026-04-12T09:20:26.254Z"
     }
   ]
 }
