@@ -136,7 +136,7 @@ export default function BtsSeoPage() {
   const seoDash = snap?.btsSeoDash
   const audit = snap?.btsSeoAudit
   const traffic = snap?.btsTraffic
-  const [tab, setTab] = useState(seoDash ? 'seo-plan' : 'rankings')
+  const [tab, setTab] = useState(seoDash ? 'health' : 'rankings')
   const [suggText, setSuggText] = useState('')
   const [suggSending, setSuggSending] = useState(false)
   const [editingId, setEditingId] = useState(null)
@@ -654,84 +654,8 @@ export default function BtsSeoPage() {
               </div>
             )}
 
-            {/* Coverage Matrix & Content Published (from SEO-DASHBOARD.md) */}
+            {/* Coverage Matrix (from SEO-DASHBOARD.md) — Content Published removed, already on Google Safety tab as Publish Timeline */}
             <DashSection section={findDashSection(seoDash?.sections, 'coverage-matrix', ['coverage', 'matrix', 'service-location'])} icon="📍" maxLines={50} />
-            <DashSection section={findDashSection(seoDash?.sections, 'publish-history', ['publish', 'history', 'published', 'content-published'])} icon="📅" maxLines={30} />
-          </>
-        )}
-
-        {/* TAB 3: Framework */}
-        {tab === 'framework' && (
-          <>
-            <div className="section">
-              <div className="sec-title">SEO Strategy</div>
-              <div className="card">
-                <div style={{fontSize:11,color:'#aaa',padding:'4px 0',borderBottom:'1px solid #1a1a1a'}}>
-                  <strong style={{color:'#fff'}}>Strategy:</strong> {seo?.framework?.strategy || '—'}
-                </div>
-                <div style={{fontSize:11,color:'#aaa',padding:'4px 0',borderBottom:'1px solid #1a1a1a'}}>
-                  <strong style={{color:'#fff'}}>URL Pattern:</strong> <code style={{color:'#3b82f6',fontSize:10}}>{seo?.framework?.urlStructure || '—'}</code>
-                </div>
-                <div style={{fontSize:11,color:'#aaa',padding:'4px 0',borderBottom:'1px solid #1a1a1a'}}>
-                  <strong style={{color:'#fff'}}>Weekly Cadence:</strong> {seo?.framework?.weeklyCadence || '—'}
-                </div>
-                <div style={{fontSize:11,color:'#aaa',padding:'4px 0'}}>
-                  <strong style={{color:'#fff'}}>Review Coaching:</strong> {seo?.framework?.reviewCoaching ? '✅ Active' : '❌ Off'}
-                </div>
-              </div>
-            </div>
-            <div className="section">
-              <div className="sec-title">Content Rules</div>
-              <div className="card">
-                {seo?.framework?.contentRules?.map((rule, i) => (
-                  <div key={i} style={{fontSize:11,color:'#aaa',padding:'4px 0',display:'flex',alignItems:'center',gap:6,borderBottom:'1px solid #1a1a1a'}}>
-                    <span style={{color:'#10b981'}}>✓</span> {rule}
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="section">
-              <div className="sec-title">Planned Content Waves</div>
-              <div className="card">
-                {plan?.plannedContent && Object.entries(plan.plannedContent).map(([wave, items]) => (
-                  <div key={wave} style={{marginBottom:8}}>
-                    <div style={{fontSize:10,fontWeight:700,color:'#fff',marginBottom:4,textTransform:'capitalize'}}>{wave.replace(/([0-9])/g, ' $1')}</div>
-                    {items?.map((item, i) => (
-                      <div key={i} style={{fontSize:10,color:'#aaa',padding:'2px 0',paddingLeft:12,display:'flex',gap:6}}>
-                        <span style={{color:'#3b82f6'}}>•</span> {item}
-                      </div>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="section">
-              <div className="sec-title">Assets</div>
-              <div className="card" style={{display:'flex',gap:16,flexWrap:'wrap'}}>
-                <div style={{textAlign:'center'}}>
-                  <div style={{fontSize:20,fontWeight:700,color:'#f59e0b'}}>{seo?.assets?.googleReviews || 0}</div>
-                  <div style={{fontSize:9,color:'#999'}}>Google Reviews</div>
-                </div>
-                <div style={{textAlign:'center'}}>
-                  <div style={{fontSize:20,fontWeight:700,color:'#3b82f6'}}>{seo?.assets?.courseCertifications || 0}</div>
-                  <div style={{fontSize:9,color:'#999'}}>Certifications</div>
-                </div>
-                <div style={{textAlign:'center'}}>
-                  <div style={{fontSize:20,fontWeight:700,color:'#10b981'}}>{seo?.assets?.trainingServices || 0}</div>
-                  <div style={{fontSize:9,color:'#999'}}>Training Services</div>
-                </div>
-              </div>
-            </div>
-            <div className="section">
-              <div className="sec-title">Cadence</div>
-              <div className="card">
-                {plan?.cadence && Object.entries(plan.cadence).map(([k, v]) => (
-                  <div key={k} style={{fontSize:11,color:'#aaa',padding:'4px 0',borderBottom:'1px solid #1a1a1a'}}>
-                    <strong style={{color:'#fff',textTransform:'capitalize'}}>{k.replace(/([A-Z])/g, ' $1')}:</strong> {v}
-                  </div>
-                ))}
-              </div>
-            </div>
           </>
         )}
 
@@ -924,8 +848,7 @@ export default function BtsSeoPage() {
               </div>
             )}
 
-            {/* Competitor Watch (from SEO-DASHBOARD.md) */}
-            <DashSection section={findDashSection(seoDash?.sections, 'competitor-watch', ['competitor', 'competitors', 'watch'])} icon="🏆" maxLines={40} />
+            {/* Competitor Watch DashSection removed — structured competitor cards above already show same data */}
 
             <div style={{ fontSize: 8, color: '#333', marginTop: 8, textAlign: 'right' }}>
               Scan status: {comp?.scanStatus || 'pending'} · Updated: {comp?.updatedAt ? timeAgo(comp.updatedAt) : '—'}
