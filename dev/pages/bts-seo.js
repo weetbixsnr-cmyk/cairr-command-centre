@@ -1188,7 +1188,7 @@ export default function BtsSeoPage() {
         {/* TAB: GBP Posts */}
         {tab === 'gbp-posts' && (
           <GbpPosts
-            posts={(snap?.btsDrafts?.drafts || []).filter(d => d.type === 'gbp')}
+            posts={(snap?.btsDrafts?.drafts || []).filter(d => d.type === 'gbp' && d.status !== 'signed-off')}
             label="BTS"
             actionEndpoint="/api/bts-draft-action"
           />
@@ -1198,10 +1198,9 @@ export default function BtsSeoPage() {
         {tab === 'future-posts' && (
           <>
             {(() => {
-              const allDrafts = localDrafts || snap?.btsDrafts?.drafts || []
+              const allDrafts = (localDrafts || snap?.btsDrafts?.drafts || []).filter(d => d.status !== 'signed-off')
               const pending = allDrafts.filter(d => ['draft', 'sunny-editing', 'approved'].includes(d.status))
               const visualCheck = allDrafts.filter(d => d.status === 'visual-check-pending')
-              const signedOff = allDrafts.filter(d => d.status === 'signed-off')
 
               const statusColors = {
                 'draft': '#3b82f6', 'sunny-editing': '#f59e0b', 'approved': '#10b981',
@@ -1263,10 +1262,6 @@ export default function BtsSeoPage() {
                     <div style={{flex:1,minWidth:100,background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:8,padding:'8px 14px',textAlign:'center'}}>
                       <div style={{fontSize:20,fontWeight:800,color:'#a855f7'}}>{visualCheck.length}</div>
                       <div style={{fontSize:8,color:'#888',textTransform:'uppercase'}}>Visual Check</div>
-                    </div>
-                    <div style={{flex:1,minWidth:100,background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:8,padding:'8px 14px',textAlign:'center'}}>
-                      <div style={{fontSize:20,fontWeight:800,color:'#10b981'}}>{signedOff.length}</div>
-                      <div style={{fontSize:8,color:'#888',textTransform:'uppercase'}}>Signed Off</div>
                     </div>
                   </div>
 
@@ -1384,19 +1379,7 @@ export default function BtsSeoPage() {
                     </div>
                   )}
 
-                  {/* Signed off history */}
-                  {signedOff.length > 0 && (
-                    <div>
-                      <div style={{fontSize:9,color:'#10b981',textTransform:'uppercase',letterSpacing:1.2,marginBottom:8,fontWeight:600}}>✔️ Signed Off ({signedOff.length})</div>
-                      {signedOff.map(d => (
-                        <div key={d.id} style={{display:'flex',alignItems:'center',gap:8,padding:'6px 0',borderBottom:'1px solid #111',fontSize:11}}>
-                          <span style={{fontSize:8,color:typeColors[d.type]||'#888',fontWeight:600,textTransform:'uppercase'}}>{d.type}</span>
-                          <span style={{color:'#888',flex:1}}>{d.title}</span>
-                          <span style={{fontSize:8,color:'#555'}}>{d.signedOffAt ? new Date(d.signedOffAt).toLocaleDateString() : '—'}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
+                  {/* Signed-off posts are removed from this tab — check SEO Plan for published content log */}
                 </div>
               )
             })()}
