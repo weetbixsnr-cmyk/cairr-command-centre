@@ -21,6 +21,29 @@ const RAW_BASE = `https://raw.githubusercontent.com/${REPO}/${BRANCH}`
 const API_BASE = `https://api.github.com/repos/${REPO}/contents`
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN || ''
+const DISCORD_WEBHOOK = process.env.BTS_DISCORD_WEBHOOK || ''
+
+async function notifyDiscord(title, description, color) {
+  if (!DISCORD_WEBHOOK) return
+  try {
+    await fetch(DISCORD_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        embeds: [{
+          title,
+          description: description.length > 2000 ? description.slice(0, 2000) + '...' : description,
+          color,
+          footer: { text: 'BTS Dashboard — Content Review' },
+          timestamp: new Date().toISOString()
+        }]
+      }),
+      signal: AbortSignal.timeout(5000)
+    })
+  } catch (e) {
+    console.error('Discord notify failed:', e.message)
+  }
+}
 
 function isAuthed(req) {
   const cookie = req.headers.cookie || ''
@@ -175,10 +198,23 @@ export default async function handler(req, res) {
     // Send notification for approve/reject actions
     if (action === 'approve') {
       await addNotification(`Sunny approved: ${draft.title}`, draft.title, 'approve')
+      await notifyDiscord('✅ Sunny Approved a Post', `**${draft.title}**\nType: ${draft.type || 'blog'}`, 0x10b981)
     } else if (action === 'reject') {
       await addNotification(`Sunny requested changes: ${draft.title}`, draft.title, 'reject')
+      await notifyDiscord('↩️ Sunny Requested Changes', `**${draft.title}**\nFeedback: ${draft.feedback || 'No details'}`, 0xef4444)
     } else if (action === 'edit') {
       await addNotification(`Sunny edited: ${draft.title}`, draft.title, 'edit')
+      const preview = (draft.editedContent || '').slice(0, 500)
+      await notifyDiscord('✏️ Sunny Edited a Post', `**${draft.title}**\n\n>>> ${preview}${preview.length >= 500 ? '...' : ''}`, 0xf59e0b)
+    } else if (action === 'publish') {
+      await notifyDiscord('🚀 Post Published', `**${draft.title}**\nType: ${draft.type || 'blog'}`, 0x3b82f6)
+    } else if (action === 'sign-off') {
+      await notifyDiscord('🏁 Post Signed Off', `**${draft.title}**\nType: ${draft.type || 'blog'}`, 0xa855f7)
+    } else if (action === 'check-desktop' || action === 'check-mobile') {
+      const check = action === 'check-desktop' ? 'Desktop' : 'Mobile'
+      if (draft.desktopChecked && draft.mobileChecked) {
+        await notifyDiscord('🏁 Visual Check Complete — Signed Off', `**${draft.title}**\nBoth desktop and mobile verified.`, 0xa855f7)
+      }
     }
 
     return res.json({ ok: true, draft })

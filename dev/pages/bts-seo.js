@@ -99,7 +99,20 @@ export default function BtsSeoPage() {
   const [editContent, setEditContent] = useState('')
   const [actionLoading, setActionLoading] = useState(null)
   const [suggSent, setSuggSent] = useState(false)
+  const [suggError, setSuggError] = useState('')
   const [localSuggestions, setLocalSuggestions] = useState(null)
+  const [liveSuggestions, setLiveSuggestions] = useState(null)
+  const [draftResults, setDraftResults] = useState({})
+  const [localDrafts, setLocalDrafts] = useState(null)
+
+  // Fetch suggestions directly from API (not snapshot) so submitted ones persist
+  useEffect(() => {
+    if (tab === 'suggestions') {
+      fetch('/api/bts-suggestions').then(r => r.ok ? r.json() : null)
+        .then(data => { if (data?.suggestions) setLiveSuggestions(data.suggestions) })
+        .catch(() => {})
+    }
+  }, [tab])
 
   // Stats
   const totalKeywords = kw?.keywords?.length || 0
@@ -983,6 +996,7 @@ export default function BtsSeoPage() {
                       if (!suggText.trim()) return
                       setSuggSending(true)
                       setSuggSent(false)
+                      setSuggError('')
                       try {
                         const res = await fetch('/api/bts-suggestions', {
                           method: 'POST',
@@ -995,12 +1009,16 @@ export default function BtsSeoPage() {
                           setSuggText('')
                           // Add to local list immediately
                           setLocalSuggestions(prev => {
-                            const list = prev || suggestions?.suggestions || []
+                            const list = prev || liveSuggestions || suggestions?.suggestions || []
                             return [data.suggestion, ...list]
                           })
                           setTimeout(() => setSuggSent(false), 3000)
+                        } else {
+                          setSuggError(data.error || 'Failed to save — please try again')
                         }
-                      } catch {}
+                      } catch (e) {
+                        setSuggError('Network error — please try again')
+                      }
                       setSuggSending(false)
                     }}
                     disabled={suggSending || !suggText.trim()}
@@ -1012,13 +1030,14 @@ export default function BtsSeoPage() {
                     {suggSending ? 'Sending...' : '📨 Submit Suggestion'}
                   </button>
                   {suggSent && <span style={{fontSize:11,color:'#10b981',fontWeight:600}}>✅ Submitted! We&apos;ll review it shortly.</span>}
+                  {suggError && <span style={{fontSize:11,color:'#ef4444',fontWeight:600}}>{suggError}</span>}
                 </div>
               </div>
             </div>
 
             {/* Previous Suggestions */}
             {(() => {
-              const allSugg = localSuggestions || suggestions?.suggestions || []
+              const allSugg = localSuggestions || liveSuggestions || suggestions?.suggestions || []
               if (allSugg.length === 0) return (
                 <div style={{color:'#555',fontSize:11,fontStyle:'italic',padding:16,textAlign:'center'}}>
                   No suggestions yet — be the first to submit one above!
@@ -1179,11 +1198,10 @@ export default function BtsSeoPage() {
         {tab === 'future-posts' && (
           <>
             {(() => {
-              const drafts = snap?.btsDrafts?.drafts || []
-              const [editingId, setEditingId] = [null, () => {}] // Managed via local state below
-              const pending = drafts.filter(d => ['draft', 'sunny-editing', 'approved'].includes(d.status))
-              const visualCheck = drafts.filter(d => d.status === 'visual-check-pending')
-              const signedOff = drafts.filter(d => d.status === 'signed-off')
+              const allDrafts = localDrafts || snap?.btsDrafts?.drafts || []
+              const pending = allDrafts.filter(d => ['draft', 'sunny-editing', 'approved'].includes(d.status))
+              const visualCheck = allDrafts.filter(d => d.status === 'visual-check-pending')
+              const signedOff = allDrafts.filter(d => d.status === 'signed-off')
 
               const statusColors = {
                 'draft': '#3b82f6', 'sunny-editing': '#f59e0b', 'approved': '#10b981',
@@ -1196,14 +1214,42 @@ export default function BtsSeoPage() {
               const typeColors = { blog: '#3b82f6', news: '#f59e0b', gbp: '#a855f7', partnership: '#10b981' }
 
               async function draftAction(id, action, extraData) {
+                setDraftResults(prev => ({ ...prev, [id]: { loading: true } }))
                 try {
                   const res = await fetch('/api/bts-draft-action', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ id, action, ...extraData })
                   })
-                  if (res.ok) window.location.reload()
-                } catch {}
+                  if (res.ok) {
+                    const msgs = {
+                      edit: '💾 Changes saved successfully!',
+                      approve: '✅ Approved! Adam has been notified.',
+                      reject: '↩️ Changes requested — feedback sent.',
+                      'check-desktop': '✅ Desktop check marked.',
+                      'check-mobile': '✅ Mobile check marked.'
+                    }
+                    setDraftResults(prev => ({ ...prev, [id]: { ok: true, msg: msgs[action] || '✅ Done!' } }))
+                    setLocalDrafts(prev => {
+                      const list = prev || snap?.btsDrafts?.drafts || []
+                      return list.map(d => {
+                        if (d.id !== id) return d
+                        if (action === 'approve') return { ...d, status: 'approved', approvedAt: new Date().toISOString() }
+                        if (action === 'reject') return { ...d, status: 'draft', feedback: extraData?.feedback }
+                        if (action === 'edit') return { ...d, editedContent: extraData?.content, editedBy: 'Sunny', status: 'sunny-editing' }
+                        if (action === 'check-desktop') return { ...d, desktopChecked: true, status: d.mobileChecked ? 'signed-off' : d.status }
+                        if (action === 'check-mobile') return { ...d, mobileChecked: true, status: d.desktopChecked ? 'signed-off' : d.status }
+                        return d
+                      })
+                    })
+                    setTimeout(() => setDraftResults(prev => { const n = {...prev}; delete n[id]; return n }), 4000)
+                  } else {
+                    const err = await res.json().catch(() => ({}))
+                    setDraftResults(prev => ({ ...prev, [id]: { ok: false, msg: err.error || 'Failed — try again' } }))
+                  }
+                } catch (e) {
+                  setDraftResults(prev => ({ ...prev, [id]: { ok: false, msg: 'Network error — try again' } }))
+                }
               }
 
               return (
@@ -1246,6 +1292,9 @@ export default function BtsSeoPage() {
                               Checked on Mobile
                             </label>
                           </div>
+                          {draftResults[d.id] && (
+                            <div style={{fontSize:11,fontWeight:600,marginTop:6,color:draftResults[d.id].ok?'#10b981':'#ef4444'}}>{draftResults[d.id].msg}</div>
+                          )}
                           <div style={{fontSize:8,color:'#555',marginTop:4}}>Published: {d.publishedAt ? new Date(d.publishedAt).toLocaleString() : '—'}</div>
                         </div>
                       ))}
@@ -1279,31 +1328,46 @@ export default function BtsSeoPage() {
                           />
 
                           {/* Action buttons */}
-                          <div style={{display:'flex',gap:8,marginTop:10,flexWrap:'wrap'}}>
-                            <button onClick={() => {
-                              const el = document.getElementById(`draft-content-${d.id}`)
-                              if (el) draftAction(d.id, 'edit', { content: el.value })
-                            }} style={{
-                              padding:'8px 16px',background:'#1a1a1a',border:'1px solid #333',borderRadius:6,
-                              color:'#f59e0b',fontSize:11,fontWeight:600,cursor:'pointer'
-                            }}>💾 Save Edits</button>
+                          <div style={{display:'flex',gap:8,marginTop:10,flexWrap:'wrap',alignItems:'center'}}>
+                            <button
+                              disabled={draftResults[d.id]?.loading}
+                              onClick={() => {
+                                const el = document.getElementById(`draft-content-${d.id}`)
+                                if (el) draftAction(d.id, 'edit', { content: el.value })
+                              }} style={{
+                                padding:'8px 16px',background:'#1a1a1a',border:'1px solid #333',borderRadius:6,
+                                color:'#f59e0b',fontSize:11,fontWeight:600,cursor:'pointer',
+                                opacity: draftResults[d.id]?.loading ? 0.5 : 1
+                              }}>💾 Save Edits</button>
 
-                            <button onClick={() => {
-                              const el = document.getElementById(`draft-content-${d.id}`)
-                              if (el) draftAction(d.id, 'edit', { content: el.value })
-                              draftAction(d.id, 'approve')
-                            }} style={{
-                              padding:'8px 20px',background:'#10b981',border:'none',borderRadius:6,
-                              color:'#fff',fontSize:11,fontWeight:700,cursor:'pointer'
-                            }}>✅ Good to Go</button>
+                            <button
+                              disabled={draftResults[d.id]?.loading}
+                              onClick={async () => {
+                                const el = document.getElementById(`draft-content-${d.id}`)
+                                if (el) await draftAction(d.id, 'edit', { content: el.value })
+                                await draftAction(d.id, 'approve')
+                              }} style={{
+                                padding:'8px 20px',background:'#10b981',border:'none',borderRadius:6,
+                                color:'#fff',fontSize:11,fontWeight:700,cursor:'pointer',
+                                opacity: draftResults[d.id]?.loading ? 0.5 : 1
+                              }}>✅ Good to Go</button>
 
-                            <button onClick={() => {
-                              const fb = prompt('What needs changing?')
-                              if (fb) draftAction(d.id, 'reject', { feedback: fb })
-                            }} style={{
-                              padding:'8px 16px',background:'#1a1a1a',border:'1px solid #ef4444',borderRadius:6,
-                              color:'#ef4444',fontSize:11,fontWeight:600,cursor:'pointer'
-                            }}>↩️ Request Changes</button>
+                            <button
+                              disabled={draftResults[d.id]?.loading}
+                              onClick={() => {
+                                const fb = prompt('What needs changing?')
+                                if (fb) draftAction(d.id, 'reject', { feedback: fb })
+                              }} style={{
+                                padding:'8px 16px',background:'#1a1a1a',border:'1px solid #ef4444',borderRadius:6,
+                                color:'#ef4444',fontSize:11,fontWeight:600,cursor:'pointer',
+                                opacity: draftResults[d.id]?.loading ? 0.5 : 1
+                              }}>↩️ Request Changes</button>
+
+                            {draftResults[d.id] && !draftResults[d.id].loading && (
+                              <span style={{fontSize:11,fontWeight:600,color:draftResults[d.id].ok?'#10b981':'#ef4444'}}>
+                                {draftResults[d.id].msg}
+                              </span>
+                            )}
                           </div>
 
                           <div style={{fontSize:8,color:'#333',marginTop:6}}>
