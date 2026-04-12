@@ -10,7 +10,7 @@
   "pagesLivePrevious": 23,
   "blogsPublished": 18,
   "gbpPosts": 6,
-  "newsPublished": 4,
+  "newsPublished": 3,
   "servicePages": { "live": 6, "target": 11, "missing": 5 },
   "criticalFixes": [
     { "item": "SiteGround captcha blocking crawlers", "status": "FIXED", "date": "2026-04-03", "note": "Google can now crawl" },
@@ -58,19 +58,16 @@
     { "date": "2026-03-18", "title": "Water Regulations (WRAS) Training", "type": "blog" },
     { "date": "2026-04-01", "title": "Legionella Training — Why This One-Day Qualification", "type": "blog" },
     { "date": "2026-04-01", "title": "Gas Training Courses Near You: South East England Guide", "type": "blog" },
-    { "date": "2026-04-01", "title": "G3 Unverted Hot Water Course: Is It Worth It", "type": "blog" },
+    { "date": "2026-04-01", "title": "G3 Unvented Hot Water Course: Is It Worth It", "type": "blog" },
     { "date": "2026-04-01", "title": "Future Homes Standard: What It Means for Gas/Heating Engineers", "type": "news" },
-    { "date": "2026-04-08", "title": "Heat Pump Training in Buckinghamshire", "type": "blog" },
-    { "date": "2026-04-08", "title": "LPG Changeover Training", "type": "blog" },
-    { "date": "2026-04-08", "title": "Nearly Half of UK Builders Delaying Jobs — Skills Shortage Crisis", "type": "news" },
-    { "date": "2026-04-11", "title": "LPG Changeover Training — Complete Guide", "type": "blog" },
+    { "date": "2026-04-11", "title": "LPG Changeover Training", "type": "blog" },
     { "date": "2026-04-11", "title": "Heat Pump Training Buckinghamshire", "type": "blog" },
+    { "date": "2026-04-11", "title": "Nearly Half of UK Builders Delaying Jobs — Skills Shortage", "type": "news" },
     { "date": "2026-04-11", "title": "Career Change to Gas Engineering", "type": "blog" },
     { "date": "2026-04-11", "title": "Gas MLP Complete Guide", "type": "blog" },
     { "date": "2026-04-11", "title": "Gas & Plumbing Training Aylesbury", "type": "blog" },
-    { "date": "2026-04-11", "title": "UK Builders Delaying Jobs — Skills Shortage", "type": "news" },
     { "date": "2026-04-11", "title": "Heat Pump Installer Gap — Industry Report", "type": "news" },
-    { "date": "2026-04-11", "title": "Powered Now Partnership Announcement", "type": "blog" }
+    { "date": "2026-04-11", "title": "Powered Now Partnership Announcement", "type": "partnership" }
   ],
   "gbpPostsPublished": [
     { "date": "2026-03-30", "title": "Heat Pump Training — High Wycombe" },

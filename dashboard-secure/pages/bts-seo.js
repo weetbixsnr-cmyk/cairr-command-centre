@@ -1221,7 +1221,7 @@ export default function BtsSeoPage() {
         {tab === 'future-posts' && (
           <>
             {(() => {
-              const allDrafts = (localDrafts || snap?.btsDrafts?.drafts || []).filter(d => d.status !== 'signed-off')
+              const allDrafts = (localDrafts || snap?.btsDrafts?.drafts || []).filter(d => !['signed-off', 'published'].includes(d.status))
               const pending = allDrafts.filter(d => ['draft', 'sunny-editing', 'approved'].includes(d.status))
               const visualCheck = allDrafts.filter(d => d.status === 'visual-check-pending')
 
@@ -1404,7 +1404,7 @@ export default function BtsSeoPage() {
 
                   {/* Live content — published and signed off */}
                   {(() => {
-                    const livePosts = (localDrafts || snap?.btsDrafts?.drafts || []).filter(d => d.status === 'signed-off' && d.type !== 'gbp')
+                    const livePosts = (localDrafts || snap?.btsDrafts?.drafts || []).filter(d => (d.status === 'signed-off' || d.status === 'published') && d.type !== 'gbp')
                     if (livePosts.length === 0) return null
                     return (
                       <div style={{marginTop:8}}>
