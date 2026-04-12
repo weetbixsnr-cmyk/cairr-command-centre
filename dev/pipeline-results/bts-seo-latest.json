@@ -92,8 +92,13 @@
       "Powered Now Partnership blog — published"
     ],
     "weekOf3": "2026-04-14",
-    "planned3": [
-      "Next wave content TBD"
+    "status3": "awaiting-approval",
+    "queued3": [
+      "Gas & Plumbing Training Near Reading (location blog) — draft",
+      "Gas & Plumbing Training Near Oxford (location blog) — draft",
+      "ACS Initial Training Guide (service blog) — draft",
+      "Plumbing Apprenticeship Crash 37% (news) — draft",
+      "3 new GBP posts (Career Change, Skills Shortage, Stack Qualifications) — draft"
     ]
   },
   "newsBank": {
