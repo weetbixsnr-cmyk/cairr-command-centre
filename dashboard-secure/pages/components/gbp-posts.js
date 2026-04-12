@@ -60,12 +60,14 @@ export default function GbpPosts({ posts = [], label = 'GBP', actionEndpoint }) 
   const published = allPosts.filter(p => p.status === 'published' || p.status === 'signed-off')
   const drafts = allPosts.filter(p => p.status === 'draft' || p.status === 'editing' || p.status === 'sunny-editing')
   const approved = allPosts.filter(p => p.status === 'approved')
+  const readyToSignOff = allPosts.filter(p => p.status === 'visual-check-pending')
 
   const statusColor = {
     'draft': '#3b82f6',
     'editing': '#f59e0b',
     'sunny-editing': '#f59e0b',
     'approved': '#10b981',
+    'visual-check-pending': '#10b981',
     'published': '#10b981',
     'signed-off': '#10b981'
   }
@@ -74,6 +76,7 @@ export default function GbpPosts({ posts = [], label = 'GBP', actionEndpoint }) 
     'editing': '✏️',
     'sunny-editing': '✏️',
     'approved': '✅',
+    'visual-check-pending': '✅',
     'published': '🟢',
     'signed-off': '🏁'
   }
@@ -259,21 +262,19 @@ export default function GbpPosts({ posts = [], label = 'GBP', actionEndpoint }) 
     <>
       {/* Summary strip */}
       <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
-        <div style={{flex:1,minWidth:80,background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:8,padding:'6px 14px',textAlign:'center'}}>
-          <div style={{fontSize:20,fontWeight:800,color:'#10b981'}}>{published.length}</div>
-          <div style={{fontSize:8,color:'#888',textTransform:'uppercase'}}>Published</div>
-        </div>
-        <div style={{flex:1,minWidth:80,background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:8,padding:'6px 14px',textAlign:'center'}}>
-          <div style={{fontSize:20,fontWeight:800,color:'#f59e0b'}}>{approved.length}</div>
-          <div style={{fontSize:8,color:'#888',textTransform:'uppercase'}}>Approved</div>
-        </div>
+        {readyToSignOff.length > 0 && (
+          <div style={{flex:1,minWidth:80,background:'#0d0d10',border:'1px solid #10b98133',borderRadius:8,padding:'6px 14px',textAlign:'center'}}>
+            <div style={{fontSize:20,fontWeight:800,color:'#10b981'}}>{readyToSignOff.length}</div>
+            <div style={{fontSize:8,color:'#888',textTransform:'uppercase'}}>Ready to Sign Off</div>
+          </div>
+        )}
         <div style={{flex:1,minWidth:80,background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:8,padding:'6px 14px',textAlign:'center'}}>
           <div style={{fontSize:20,fontWeight:800,color:'#3b82f6'}}>{drafts.length}</div>
           <div style={{fontSize:8,color:'#888',textTransform:'uppercase'}}>Drafts</div>
         </div>
         <div style={{flex:1,minWidth:80,background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:8,padding:'6px 14px',textAlign:'center'}}>
-          <div style={{fontSize:20,fontWeight:800,color:'#888'}}>{allPosts.length}</div>
-          <div style={{fontSize:8,color:'#888',textTransform:'uppercase'}}>Total</div>
+          <div style={{fontSize:20,fontWeight:800,color:'#10b981'}}>{published.length}</div>
+          <div style={{fontSize:8,color:'#888',textTransform:'uppercase'}}>Published</div>
         </div>
       </div>
 
@@ -302,6 +303,43 @@ export default function GbpPosts({ posts = [], label = 'GBP', actionEndpoint }) 
               )
             })}
           </div>
+        </div>
+      )}
+
+      {/* Ready to Sign Off section */}
+      {readyToSignOff.length > 0 && (
+        <div style={{marginBottom:16}}>
+          <div style={{fontSize:9,color:'#10b981',textTransform:'uppercase',letterSpacing:1.2,marginBottom:8,fontWeight:600,borderBottom:'1px solid #1a1a1a',paddingBottom:4}}>
+            ✅ Ready to Sign Off ({readyToSignOff.length})
+          </div>
+          {readyToSignOff.map(p => (
+            <div key={p.id} style={{background:'#0d0d10',border:'1px solid #10b98133',borderRadius:10,padding:14,marginBottom:10,borderLeft:'3px solid #10b981'}}>
+              <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:8}}>
+                <span style={{fontSize:8,padding:'2px 8px',borderRadius:4,fontWeight:600,background:'#10b98120',color:'#10b981'}}>✅ READY TO SIGN OFF</span>
+                <span style={{flex:1}} />
+                {p.publishedAt && <span style={{fontSize:8,color:'#555'}}>Published: {new Date(p.publishedAt).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</span>}
+              </div>
+              <div style={{fontSize:14,fontWeight:700,color:'#fff',marginBottom:8}}>{p.title}</div>
+              {(p.editedContent || p.content) && (
+                <div style={{background:'#0a0a0d',border:'1px solid #1a1a22',borderRadius:8,padding:12,maxHeight:180,overflowY:'auto',fontSize:11,color:'#ccc',lineHeight:1.6,whiteSpace:'pre-wrap',marginBottom:8}}>
+                  {p.editedContent || p.content}
+                </div>
+              )}
+              {actionEndpoint && (
+                <button
+                  disabled={actionLoading === `${p.id}-sign-off`}
+                  onClick={() => doAction(p.id, 'sign-off')}
+                  style={{padding:'8px 20px',background:'#10b981',border:'none',borderRadius:6,color:'#fff',fontSize:11,fontWeight:700,cursor:'pointer',opacity:actionLoading===`${p.id}-sign-off`?0.5:1}}
+                >
+                  🏁 Sign Off
+                </button>
+              )}
+              <div style={{display:'flex',gap:12,marginTop:8,fontSize:8,color:'#444',flexWrap:'wrap'}}>
+                {p.author && <span>By {p.author}</span>}
+                {p.createdAt && <span>Created: {new Date(p.createdAt).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</span>}
+              </div>
+            </div>
+          ))}
         </div>
       )}
 
