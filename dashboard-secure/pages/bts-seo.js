@@ -1221,7 +1221,7 @@ export default function BtsSeoPage() {
         {tab === 'future-posts' && (
           <>
             {(() => {
-              const allDrafts = (localDrafts || snap?.btsDrafts?.drafts || []).filter(d => !['signed-off', 'published'].includes(d.status))
+              const allDrafts = (localDrafts || snap?.btsDrafts?.drafts || []).filter(d => !['signed-off', 'published'].includes(d.status) && d.type !== 'gbp')
               const pending = allDrafts.filter(d => ['draft', 'sunny-editing', 'approved'].includes(d.status))
               const visualCheck = allDrafts.filter(d => d.status === 'visual-check-pending')
 
