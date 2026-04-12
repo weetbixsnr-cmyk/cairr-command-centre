@@ -11,6 +11,29 @@ import { put, list } from '@vercel/blob'
 
 const BLOB_KEY = 'bts-suggestions.json'
 const SESSION_TOKEN = process.env.BTS_SESSION_TOKEN
+const DISCORD_WEBHOOK = process.env.BTS_DISCORD_WEBHOOK || ''
+
+async function notifyDiscord(text) {
+  if (!DISCORD_WEBHOOK) return
+  try {
+    await fetch(DISCORD_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        embeds: [{
+          title: '💡 New Suggestion from Sunny',
+          description: text.length > 2000 ? text.slice(0, 2000) + '...' : text,
+          color: 0x3b82f6,
+          footer: { text: 'BTS Dashboard — Suggestion Box' },
+          timestamp: new Date().toISOString()
+        }]
+      }),
+      signal: AbortSignal.timeout(5000)
+    })
+  } catch (e) {
+    console.error('Discord notify failed:', e.message)
+  }
+}
 
 function isAuthed(req) {
   const cookie = req.headers.cookie || ''
@@ -71,6 +94,9 @@ export default async function handler(req, res) {
 
       data.suggestions.unshift(suggestion)
       await writeSuggestions(data)
+
+      // Notify Adam in #bts Discord
+      await notifyDiscord(suggestion.text)
 
       return res.json({ ok: true, suggestion })
     } catch (e) {

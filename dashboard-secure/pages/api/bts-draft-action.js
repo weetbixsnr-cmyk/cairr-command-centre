@@ -21,6 +21,29 @@ const RAW_BASE = `https://raw.githubusercontent.com/${REPO}/${BRANCH}`
 const API_BASE = `https://api.github.com/repos/${REPO}/contents`
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN || ''
+const DISCORD_WEBHOOK = process.env.BTS_DISCORD_WEBHOOK || ''
+
+async function notifyDiscord(title, description, color) {
+  if (!DISCORD_WEBHOOK) return
+  try {
+    await fetch(DISCORD_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        embeds: [{
+          title,
+          description: description.length > 2000 ? description.slice(0, 2000) + '...' : description,
+          color,
+          footer: { text: 'BTS Dashboard — Content Review' },
+          timestamp: new Date().toISOString()
+        }]
+      }),
+      signal: AbortSignal.timeout(5000)
+    })
+  } catch (e) {
+    console.error('Discord notify failed:', e.message)
+  }
+}
 
 function isAuthed(req) {
   const cookie = req.headers.cookie || ''
@@ -175,10 +198,13 @@ export default async function handler(req, res) {
     // Send notification for approve/reject actions
     if (action === 'approve') {
       await addNotification(`Sunny approved: ${draft.title}`, draft.title, 'approve')
+      await notifyDiscord('✅ Sunny Approved a Post', `**${draft.title}**\nType: ${draft.type || 'blog'}`, 0x10b981)
     } else if (action === 'reject') {
       await addNotification(`Sunny requested changes: ${draft.title}`, draft.title, 'reject')
+      await notifyDiscord('↩️ Sunny Requested Changes', `**${draft.title}**\nFeedback: ${draft.feedback || 'No details'}`, 0xef4444)
     } else if (action === 'edit') {
       await addNotification(`Sunny edited: ${draft.title}`, draft.title, 'edit')
+      await notifyDiscord('✏️ Sunny Edited a Post', `**${draft.title}**`, 0xf59e0b)
     }
 
     return res.json({ ok: true, draft })
