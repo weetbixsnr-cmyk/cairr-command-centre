@@ -1,16 +1,16 @@
 {
-  "lastUpdated": "2026-04-09T11:00:00+10:00",
+  "lastUpdated": "2026-04-11T18:00:00+10:00",
   "source": "bts-agent",
   "client": "Better Training Solutions",
   "site": "bettertrainingsolutions.co.uk",
-  "healthScore": 28,
-  "healthScorePrevious": 19,
+  "healthScore": 35,
+  "healthScorePrevious": 28,
   "geoReadiness": 5,
-  "pagesLive": 23,
-  "pagesLivePrevious": 19,
-  "blogsPublished": 6,
-  "gbpPosts": 3,
-  "newsPublished": 1,
+  "pagesLive": 31,
+  "pagesLivePrevious": 23,
+  "blogsPublished": 18,
+  "gbpPosts": 6,
+  "newsPublished": 4,
   "servicePages": { "live": 6, "target": 11, "missing": 5 },
   "criticalFixes": [
     { "item": "SiteGround captcha blocking crawlers", "status": "FIXED", "date": "2026-04-03", "note": "Google can now crawl" },
@@ -62,7 +62,15 @@
     { "date": "2026-04-01", "title": "Future Homes Standard: What It Means for Gas/Heating Engineers", "type": "news" },
     { "date": "2026-04-08", "title": "Heat Pump Training in Buckinghamshire", "type": "blog" },
     { "date": "2026-04-08", "title": "LPG Changeover Training", "type": "blog" },
-    { "date": "2026-04-08", "title": "Nearly Half of UK Builders Delaying Jobs — Skills Shortage Crisis", "type": "news" }
+    { "date": "2026-04-08", "title": "Nearly Half of UK Builders Delaying Jobs — Skills Shortage Crisis", "type": "news" },
+    { "date": "2026-04-11", "title": "LPG Changeover Training — Complete Guide", "type": "blog" },
+    { "date": "2026-04-11", "title": "Heat Pump Training Buckinghamshire", "type": "blog" },
+    { "date": "2026-04-11", "title": "Career Change to Gas Engineering", "type": "blog" },
+    { "date": "2026-04-11", "title": "Gas MLP Complete Guide", "type": "blog" },
+    { "date": "2026-04-11", "title": "Gas & Plumbing Training Aylesbury", "type": "blog" },
+    { "date": "2026-04-11", "title": "UK Builders Delaying Jobs — Skills Shortage", "type": "news" },
+    { "date": "2026-04-11", "title": "Heat Pump Installer Gap — Industry Report", "type": "news" },
+    { "date": "2026-04-11", "title": "Powered Now Partnership Announcement", "type": "blog" }
   ],
   "gbpPostsPublished": [
     { "date": "2026-03-30", "title": "Heat Pump Training — High Wycombe" },
@@ -71,38 +79,47 @@
   ],
   "contentPipeline": {
     "weekOf": "2026-04-07",
-    "planned": [
-      "ACS Training High Wycombe blog",
-      "ACS Reassessment Near Reading/M40 blog",
-      "Gas boiler ban / Warm Homes news"
+    "status": "complete",
+    "completed": [
+      "LPG Changeover Training blog — published",
+      "Heat Pump Buckinghamshire blog — published",
+      "UK Builders Skills Shortage news — published"
     ],
-    "weekOf2": "2026-04-14",
-    "planned2": [
-      "LPG Changeover blog",
-      "Heat Pump Buckinghamshire blog",
-      "Installer shortage data news"
+    "weekOf2": "2026-04-11",
+    "status2": "complete",
+    "completed2": [
+      "Career Change to Gas Engineering blog — published",
+      "Gas MLP Complete Guide blog — published",
+      "Gas & Plumbing Training Aylesbury blog — published",
+      "Heat Pump Installer Gap news — published",
+      "Powered Now Partnership blog — published"
+    ],
+    "weekOf3": "2026-04-14",
+    "planned3": [
+      "Next wave content TBD"
     ]
   },
   "newsBank": {
     "totalStories": 36,
-    "published": 1,
-    "drafted": 1,
-    "available": 34,
+    "published": 4,
+    "drafted": 0,
+    "available": 32,
     "newPillar": "UK skills shortage stories — gas, plumbing, HVAC, heat pump, construction trades, apprenticeships, workforce crisis"
   },
   "locationCoverage": {
     "summary": {
       "totalLocations": 17,
-      "withContent": 0,
-      "zeroCoverage": 17,
+      "withContent": 5,
+      "zeroCoverage": 12,
       "servicePages": 0,
-      "keywordsPerLocation": 8
+      "keywordsPerLocation": 8,
+      "note": "5 locations now have blog coverage (High Wycombe, Aylesbury, Reading, Buckinghamshire, South East). Service pages still needed."
     },
     "waves": [
-      { "id": 1, "status": "active", "locations": ["High Wycombe", "Marlow"], "servicePages": 0, "servicePagesTotal": 2, "blogs": 0, "scope": "2 location pages + 2 blogs" },
-      { "id": 2, "status": "planned", "locations": ["Aylesbury", "Beaconsfield", "Amersham", "Chesham", "Maidenhead", "Slough", "Reading"], "servicePages": 0, "servicePagesTotal": 7, "blogs": 0 },
-      { "id": 3, "status": "future", "locations": ["Oxford", "Hemel Hempstead", "Watford", "Uxbridge", "Milton Keynes", "Luton"], "servicePages": 0, "servicePagesTotal": 6, "blogs": 0 },
-      { "id": 4, "status": "future", "locations": ["Buckinghamshire", "Berkshire", "M40 corridor", "South East England"], "servicePages": 0, "servicePagesTotal": 4, "blogs": 0 }
+      { "id": 1, "status": "active", "locations": ["High Wycombe", "Marlow"], "servicePages": 0, "servicePagesTotal": 2, "blogs": 5, "scope": "2 location pages + blogs. Blogs: ACS HW, Legionella, G3, LPG, Gas MLP" },
+      { "id": 2, "status": "active", "locations": ["Aylesbury", "Beaconsfield", "Amersham", "Chesham", "Maidenhead", "Slough", "Reading"], "servicePages": 0, "servicePagesTotal": 7, "blogs": 2, "scope": "ACS Reassessment Reading/Oxford/M40, Gas & Plumbing Training Aylesbury" },
+      { "id": 3, "status": "planned", "locations": ["Oxford", "Hemel Hempstead", "Watford", "Uxbridge", "Milton Keynes", "Luton"], "servicePages": 0, "servicePagesTotal": 6, "blogs": 0 },
+      { "id": 4, "status": "active", "locations": ["Buckinghamshire", "Berkshire", "M40 corridor", "South East England"], "servicePages": 0, "servicePagesTotal": 4, "blogs": 3, "scope": "Heat Pump Bucks x2, Gas Training SE England guide" }
     ]
   },
   "framework": {

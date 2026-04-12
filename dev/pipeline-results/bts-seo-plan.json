@@ -72,22 +72,39 @@
     }
   ],
   "plannedContent": {
-    "wave1": [
-      "ACS Training in High Wycombe",
-      "Gas Training Courses Near You \u2014 SE England"
-    ],
-    "wave2": [
-      "Heat Pump Training in Buckinghamshire",
-      "ACS Reassessment Near Reading/Oxford/M40"
-    ],
-    "wave3": [
-      "Water Regs + G3 location content",
-      "Competitor gap-fill articles"
-    ],
-    "wave4": [
-      "LPG + Legionella location content",
-      "Tier 3 location expansion"
-    ]
+    "wave1": {
+      "status": "complete",
+      "published": [
+        "ACS Training in High Wycombe",
+        "Legionella Training blog",
+        "G3 Unvented Hot Water blog",
+        "LPG Changeover Training blog",
+        "Gas MLP Complete Guide blog"
+      ]
+    },
+    "wave2": {
+      "status": "in-progress",
+      "published": [
+        "ACS Reassessment Near Reading/Oxford/M40",
+        "Gas & Plumbing Training Near Aylesbury"
+      ],
+      "remaining": ["Beaconsfield", "Amersham", "Chesham", "Maidenhead", "Slough location content"]
+    },
+    "wave3": {
+      "status": "planned",
+      "planned": [
+        "Water Regs + G3 location content",
+        "Competitor gap-fill articles"
+      ]
+    },
+    "wave4": {
+      "status": "in-progress",
+      "published": [
+        "Gas Training Courses Near You — SE England",
+        "Heat Pump Training Buckinghamshire (x2)"
+      ],
+      "remaining": ["Berkshire", "M40 corridor regional content"]
+    }
   },
   "competitors": [
     "Logic4training",

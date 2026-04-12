@@ -1,49 +1,140 @@
 {
   "client": "Better Training Solutions",
   "site": "bettertrainingsolutions.co.uk",
-  "updatedAt": "2026-04-01T07:30:00+11:00",
-  "published": 7,
+  "updatedAt": "2026-04-12T11:15:00+10:00",
+  "published": 18,
   "drafts": 0,
   "planned": [
     {
       "id": "bts-blog-001",
-      "title": "ACS Training in High Wycombe \u2014 What to Expect & How to Book",
+      "title": "ACS Training in High Wycombe — What to Expect & How to Book",
       "service": "Initial ACS",
-      "keywords": [
-        "ACS training High Wycombe",
-        "ACS training near me"
-      ],
-      "status": "published"
+      "keywords": ["ACS training High Wycombe", "ACS training near me"],
+      "status": "published",
+      "location": "High Wycombe",
+      "wave": 1
     },
     {
       "id": "bts-blog-002",
-      "title": "Gas Training Courses Near You \u2014 South East England Guide",
+      "title": "Gas Training Courses Near You — South East England Guide",
       "service": "All gas services",
-      "keywords": [
-        "gas training near me",
-        "gas training South East"
-      ],
-      "status": "published"
+      "keywords": ["gas training near me", "gas training South East"],
+      "status": "published",
+      "location": "South East England",
+      "wave": 4
     },
     {
       "id": "bts-blog-003",
-      "title": "Heat Pump Training in Buckinghamshire \u2014 Your Route to Certification",
+      "title": "Heat Pump Training in Buckinghamshire — Your Route to Certification",
       "service": "Heat Pump",
-      "keywords": [
-        "heat pump training Buckinghamshire",
-        "heat pump training near me"
-      ],
-      "status": "published"
+      "keywords": ["heat pump training Buckinghamshire", "heat pump training near me"],
+      "status": "published",
+      "location": "Buckinghamshire",
+      "wave": 4
     },
     {
       "id": "bts-blog-004",
       "title": "ACS Reassessment Near Reading, Oxford & the M40 Corridor",
       "service": "ACS Reassessment",
-      "keywords": [
-        "ACS reassessment near Reading",
-        "ACS reassessment near me"
-      ],
+      "keywords": ["ACS reassessment near Reading", "ACS reassessment near me"],
+      "status": "published",
+      "location": "Reading/Oxford/M40",
+      "wave": 2
+    },
+    {
+      "id": "bts-blog-005",
+      "title": "Legionella Training: Why This One-Day Qualification Could Win You More Work",
+      "service": "Legionella Testing",
+      "keywords": ["Legionella training course", "Legionella qualification"],
+      "status": "published",
+      "location": "High Wycombe/Reading/Buckinghamshire",
+      "wave": 1
+    },
+    {
+      "id": "bts-blog-006",
+      "title": "G3 Unvented Hot Water Course: Is It Worth Adding to Your Qualifications?",
+      "service": "Unvented G3",
+      "keywords": ["G3 training course", "unvented hot water course"],
+      "status": "published",
+      "location": "High Wycombe/Reading/Buckinghamshire",
+      "wave": 1
+    },
+    {
+      "id": "bts-blog-007",
+      "title": "LPG Changeover Training: The Niche Qualification Most Gas Engineers Overlook",
+      "service": "LPG Changeover",
+      "keywords": ["LPG training course UK", "LPG changeover training"],
+      "status": "published",
+      "location": "High Wycombe",
+      "wave": 1
+    },
+    {
+      "id": "bts-blog-008",
+      "title": "Heat Pump Training in Buckinghamshire: Your Route to a Growing Market",
+      "service": "Heat Pump",
+      "keywords": ["heat pump training Buckinghamshire", "heat pump course near me"],
+      "status": "published",
+      "location": "Buckinghamshire",
+      "wave": 4
+    },
+    {
+      "id": "bts-blog-009",
+      "title": "Thinking About a Career Change Into Gas Engineering?",
+      "service": "Gas MLP",
+      "keywords": ["career change gas engineer", "how to become gas engineer"],
+      "status": "published",
+      "location": null,
+      "wave": null
+    },
+    {
+      "id": "bts-blog-010",
+      "title": "The Gas Managed Learning Programme: What It Is, What It Costs, and What You Get",
+      "service": "Gas MLP",
+      "keywords": ["gas managed learning programme", "gas MLP course"],
+      "status": "published",
+      "location": "High Wycombe",
+      "wave": 1
+    },
+    {
+      "id": "bts-blog-011",
+      "title": "Gas and Plumbing Training Near Aylesbury: Courses Within Easy Reach",
+      "service": "All services",
+      "keywords": ["gas training Aylesbury", "plumbing courses Aylesbury"],
+      "status": "published",
+      "location": "Aylesbury",
+      "wave": 2
+    }
+  ],
+  "news": [
+    {
+      "id": "bts-news-001",
+      "title": "The Future Homes Standard Is Here: What It Means for Gas and Heating Engineers",
+      "status": "published"
+    },
+    {
+      "id": "bts-news-002",
+      "title": "Nearly Half of UK Builders Are Delaying Jobs Because They Can't Find Skilled Workers",
+      "status": "published"
+    },
+    {
+      "id": "bts-news-003",
+      "title": "The UK Has Around 2,000 Full-Time Heat Pump Installers. It Needs 33,700.",
       "status": "published"
     }
+  ],
+  "partnerships": [
+    {
+      "id": "bts-partner-001",
+      "title": "Better Training Solutions Partners with Powered Now",
+      "status": "published"
+    }
+  ],
+  "gbpPosts": [
+    { "id": "gbp-001", "title": "Heat Pump Training", "status": "published" },
+    { "id": "gbp-002", "title": "Train Locally in High Wycombe", "status": "published" },
+    { "id": "gbp-003", "title": "Water Regulations Training", "status": "published" },
+    { "id": "gbp-004", "title": "ACS Reassessment", "status": "published" },
+    { "id": "gbp-005", "title": "Future Homes Standard News", "status": "published" },
+    { "id": "gbp-006", "title": "Legionella Qualification", "status": "published" }
   ]
 }
