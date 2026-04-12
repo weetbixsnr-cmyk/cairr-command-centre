@@ -1187,11 +1187,34 @@ export default function BtsSeoPage() {
 
         {/* TAB: GBP Posts */}
         {tab === 'gbp-posts' && (
-          <GbpPosts
-            posts={(snap?.btsDrafts?.drafts || []).filter(d => d.type === 'gbp' && d.status !== 'signed-off')}
-            label="BTS"
-            actionEndpoint="/api/bts-draft-action"
-          />
+          <>
+            <GbpPosts
+              posts={(snap?.btsDrafts?.drafts || []).filter(d => d.type === 'gbp' && !['signed-off', 'published'].includes(d.status))}
+              label="BTS"
+              actionEndpoint="/api/bts-draft-action"
+            />
+            {/* Live GBP posts — published and done */}
+            {(() => {
+              const liveGbp = (snap?.btsDrafts?.drafts || []).filter(d => d.type === 'gbp' && (d.status === 'signed-off' || d.status === 'published'))
+              if (liveGbp.length === 0) return null
+              return (
+                <div style={{marginTop:16}}>
+                  <div style={{fontSize:9,color:'#10b981',textTransform:'uppercase',letterSpacing:1.2,marginBottom:8,fontWeight:600,borderBottom:'1px solid #1a1a22',paddingBottom:4}}>
+                    🟢 Live on Google Business Profile ({liveGbp.length})
+                  </div>
+                  <div className="card">
+                    {liveGbp.map((d, i) => (
+                      <div key={d.id || i} style={{display:'flex',alignItems:'center',gap:8,padding:'6px 0',borderBottom:'1px solid #111',fontSize:11}}>
+                        <span style={{color:'#10b981',fontSize:8,fontWeight:700}}>LIVE</span>
+                        <span style={{color:'#ccc',flex:1}}>{d.title}</span>
+                        <span style={{fontSize:8,color:'#555'}}>{d.publishedAt ? new Date(d.publishedAt).toLocaleDateString('en-GB',{day:'numeric',month:'short'}) : '—'}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )
+            })()}
+          </>
         )}
 
         {/* TAB: Future Posts */}
@@ -1379,7 +1402,30 @@ export default function BtsSeoPage() {
                     </div>
                   )}
 
-                  {/* Signed-off posts are removed from this tab — check SEO Plan for published content log */}
+                  {/* Live content — published and signed off */}
+                  {(() => {
+                    const livePosts = (localDrafts || snap?.btsDrafts?.drafts || []).filter(d => d.status === 'signed-off' && d.type !== 'gbp')
+                    if (livePosts.length === 0) return null
+                    return (
+                      <div style={{marginTop:8}}>
+                        <div style={{fontSize:9,color:'#10b981',textTransform:'uppercase',letterSpacing:1.2,marginBottom:8,fontWeight:600,borderBottom:'1px solid #1a1a22',paddingBottom:4}}>
+                          🟢 Live on Website ({livePosts.length})
+                        </div>
+                        <div className="card">
+                          {livePosts.map((d, i) => {
+                            const tc = { blog: '#a855f7', news: '#f59e0b', partnership: '#10b981' }
+                            return (
+                              <div key={d.id || i} style={{display:'flex',alignItems:'center',gap:8,padding:'6px 0',borderBottom:'1px solid #111',fontSize:11}}>
+                                <span style={{fontSize:8,color:tc[d.type]||'#888',fontWeight:600,textTransform:'uppercase'}}>{d.type}</span>
+                                <span style={{color:'#ccc',flex:1}}>{d.title}</span>
+                                <span style={{fontSize:8,color:'#555'}}>{d.publishedAt ? new Date(d.publishedAt).toLocaleDateString('en-GB',{day:'numeric',month:'short'}) : '—'}</span>
+                              </div>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    )
+                  })()}
                 </div>
               )
             })()}
