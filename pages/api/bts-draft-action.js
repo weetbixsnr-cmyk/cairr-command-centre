@@ -213,7 +213,9 @@ export default async function handler(req, res) {
     } else if (action === 'check-desktop' || action === 'check-mobile') {
       const check = action === 'check-desktop' ? 'Desktop' : 'Mobile'
       if (draft.desktopChecked && draft.mobileChecked) {
-        await notifyDiscord('🏁 Visual Check Complete — Signed Off', `**${draft.title}**\nBoth desktop and mobile verified.`, 0xa855f7)
+        await notifyDiscord('🏁 Visual Check Complete — Signed Off', `**${draft.title}**\nBoth desktop and mobile verified. Post signed off.`, 0xa855f7)
+      } else {
+        await notifyDiscord(`👁️ ${check} Checked`, `**${draft.title}**\n${check} visual check confirmed.\nRemaining: ${draft.desktopChecked ? '✅ Desktop' : '⬜ Desktop'} | ${draft.mobileChecked ? '✅ Mobile' : '⬜ Mobile'}`, 0x3b82f6)
       }
     }
 
