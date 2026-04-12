@@ -1363,10 +1363,9 @@ export default function BtsSeoPage() {
 
                             <button
                               disabled={draftResults[d.id]?.loading}
-                              onClick={async () => {
+                              onClick={() => {
                                 const el = document.getElementById(`draft-content-${d.id}`)
-                                if (el) await draftAction(d.id, 'edit', { content: el.value })
-                                await draftAction(d.id, 'approve')
+                                draftAction(d.id, 'approve', el ? { content: el.value } : {})
                               }} style={{
                                 padding:'8px 20px',background:'#10b981',border:'none',borderRadius:6,
                                 color:'#fff',fontSize:11,fontWeight:700,cursor:'pointer',

@@ -146,6 +146,11 @@ export default async function handler(req, res) {
         break
 
       case 'approve':
+        // Save any edits made before approving
+        if (content) {
+          draft.editedContent = content
+          draft.editedBy = 'Sunny'
+        }
         draft.status = 'approved'
         draft.approvedAt = now
         draft.updatedAt = now

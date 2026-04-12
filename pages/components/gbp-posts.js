@@ -189,8 +189,7 @@ export default function GbpPosts({ posts = [], label = 'GBP', actionEndpoint }) 
                 disabled={actionLoading === `${post.id}-approve`}
                 onClick={() => {
                   const el = document.getElementById(`gbp-content-${post.id}`)
-                  if (el) doAction(post.id, 'edit', { content: el.value })
-                  doAction(post.id, 'approve')
+                  doAction(post.id, 'approve', el ? { content: el.value } : {})
                 }}
                 style={{
                   padding:'8px 20px',background:'#10b981',border:'none',borderRadius:6,
