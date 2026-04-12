@@ -432,10 +432,34 @@ export default function BtsSeoPage() {
           </>
         )}
 
-        {/* TAB: SEO Plan (standardised format) */}
+        {/* TAB: SEO Plan — compact view, detail lives in other tabs */}
         {tab === 'seo-plan' && (
-          <SeoDashboard seoDash={seoDash} publishLedger={snap?.btsPublishLedger} label="BTS"
-            skipSections={['plan-overview','critical-fixes','coverage-matrix','publish-history','competitor-watch','plan','critical','coverage','publish','competitor']} />
+          <>
+            {/* Publish safety strip */}
+            {snap?.btsPublishLedger && (
+              <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
+                {[
+                  { label: 'Blogs/wk', used: snap.btsPublishLedger.last7d?.blogs || 0, max: 3 },
+                  { label: 'Pages/wk', used: snap.btsPublishLedger.last7d?.pages || 0, max: snap.btsPublishLedger.weeklyPageLimit || 3 },
+                ].map((slot, i) => {
+                  const pct = (slot.used / slot.max) * 100
+                  const c = pct >= 100 ? '#ef4444' : pct >= 66 ? '#f59e0b' : '#10b981'
+                  return (
+                    <div key={i} style={{flex:1,minWidth:120,background:'#0d0d10',border:`1px solid ${c}33`,borderRadius:8,padding:'8px 14px',borderLeft:`3px solid ${c}`}}>
+                      <div style={{display:'flex',alignItems:'center',gap:6}}>
+                        <span style={{fontSize:18,fontWeight:800,color:c}}>{slot.used}/{slot.max}</span>
+                        <span style={{fontSize:9,color:'#888'}}>{slot.label}</span>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            )}
+            {/* Content Pipeline — compact */}
+            <DashSection section={findDashSection(seoDash?.sections, 'content-pipeline', ['pipeline', 'content-plan', 'upcoming'])} icon="🔮" maxLines={20} />
+            {/* Weekly Audit Log */}
+            <DashSection section={findDashSection(seoDash?.sections, 'weekly-audit-log', ['audit-log', 'weekly-audit', 'monday'])} icon="📝" maxLines={15} />
+          </>
         )}
 
         {/* TAB 1: Rankings */}
