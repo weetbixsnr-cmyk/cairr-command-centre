@@ -99,7 +99,18 @@ export default function BtsSeoPage() {
   const [editContent, setEditContent] = useState('')
   const [actionLoading, setActionLoading] = useState(null)
   const [suggSent, setSuggSent] = useState(false)
+  const [suggError, setSuggError] = useState('')
   const [localSuggestions, setLocalSuggestions] = useState(null)
+  const [liveSuggestions, setLiveSuggestions] = useState(null)
+
+  // Fetch suggestions directly from API (not snapshot) so submitted ones persist
+  useEffect(() => {
+    if (tab === 'suggestions') {
+      fetch('/api/bts-suggestions').then(r => r.ok ? r.json() : null)
+        .then(data => { if (data?.suggestions) setLiveSuggestions(data.suggestions) })
+        .catch(() => {})
+    }
+  }, [tab])
 
   // Stats
   const totalKeywords = kw?.keywords?.length || 0
@@ -983,6 +994,7 @@ export default function BtsSeoPage() {
                       if (!suggText.trim()) return
                       setSuggSending(true)
                       setSuggSent(false)
+                      setSuggError('')
                       try {
                         const res = await fetch('/api/bts-suggestions', {
                           method: 'POST',
@@ -995,12 +1007,16 @@ export default function BtsSeoPage() {
                           setSuggText('')
                           // Add to local list immediately
                           setLocalSuggestions(prev => {
-                            const list = prev || suggestions?.suggestions || []
+                            const list = prev || liveSuggestions || suggestions?.suggestions || []
                             return [data.suggestion, ...list]
                           })
                           setTimeout(() => setSuggSent(false), 3000)
+                        } else {
+                          setSuggError(data.error || 'Failed to save — please try again')
                         }
-                      } catch {}
+                      } catch (e) {
+                        setSuggError('Network error — please try again')
+                      }
                       setSuggSending(false)
                     }}
                     disabled={suggSending || !suggText.trim()}
@@ -1012,13 +1028,14 @@ export default function BtsSeoPage() {
                     {suggSending ? 'Sending...' : '📨 Submit Suggestion'}
                   </button>
                   {suggSent && <span style={{fontSize:11,color:'#10b981',fontWeight:600}}>✅ Submitted! We&apos;ll review it shortly.</span>}
+                  {suggError && <span style={{fontSize:11,color:'#ef4444',fontWeight:600}}>{suggError}</span>}
                 </div>
               </div>
             </div>
 
             {/* Previous Suggestions */}
             {(() => {
-              const allSugg = localSuggestions || suggestions?.suggestions || []
+              const allSugg = localSuggestions || liveSuggestions || suggestions?.suggestions || []
               if (allSugg.length === 0) return (
                 <div style={{color:'#555',fontSize:11,fontStyle:'italic',padding:16,textAlign:'center'}}>
                   No suggestions yet — be the first to submit one above!

@@ -25,6 +25,20 @@ function isAuthed(req) {
 }
 
 async function readSuggestions() {
+  // Use Contents API (always fresh) instead of raw.githubusercontent.com (cached)
+  if (GITHUB_TOKEN) {
+    try {
+      const res = await fetch(`${API_URL}?ref=${BRANCH}`, {
+        headers: { Authorization: `token ${GITHUB_TOKEN}` },
+        signal: AbortSignal.timeout(5000)
+      })
+      if (res.ok) {
+        const data = await res.json()
+        return JSON.parse(Buffer.from(data.content, 'base64').toString())
+      }
+    } catch {}
+  }
+  // Fallback to raw URL
   try {
     const headers = { 'Cache-Control': 'no-cache' }
     if (GITHUB_TOKEN) headers['Authorization'] = `token ${GITHUB_TOKEN}`
