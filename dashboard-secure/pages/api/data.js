@@ -50,7 +50,7 @@ async function getSnapshot() {
 }
 
 export default async function handler(req, res) {
-  res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=300')
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate')
 
   const SNAPSHOT = await getSnapshot()
 
