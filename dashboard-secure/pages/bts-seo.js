@@ -1206,11 +1206,11 @@ export default function BtsSeoPage() {
 
               const statusColors = {
                 'draft': '#3b82f6', 'sunny-editing': '#f59e0b', 'approved': '#10b981',
-                'visual-check-pending': '#a855f7', 'signed-off': '#10b981'
+                'visual-check-pending': '#10b981', 'signed-off': '#10b981'
               }
               const statusLabels = {
                 'draft': '📝 Draft', 'sunny-editing': '✏️ Sunny Editing', 'approved': '✅ Approved',
-                'visual-check-pending': '👁️ Visual Check', 'signed-off': '✔️ Signed Off'
+                'visual-check-pending': '✅ Ready to Sign Off', 'signed-off': '✔️ Signed Off'
               }
               const typeColors = { blog: '#3b82f6', news: '#f59e0b', gbp: '#a855f7', partnership: '#10b981' }
 
@@ -1262,17 +1262,17 @@ export default function BtsSeoPage() {
                       <div style={{fontSize:8,color:'#888',textTransform:'uppercase'}}>Pending</div>
                     </div>
                     <div style={{flex:1,minWidth:100,background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:8,padding:'8px 14px',textAlign:'center'}}>
-                      <div style={{fontSize:20,fontWeight:800,color:'#a855f7'}}>{visualCheck.length}</div>
-                      <div style={{fontSize:8,color:'#888',textTransform:'uppercase'}}>Visual Check</div>
+                      <div style={{fontSize:20,fontWeight:800,color:'#10b981'}}>{visualCheck.length}</div>
+                      <div style={{fontSize:8,color:'#888',textTransform:'uppercase'}}>Ready to Sign Off</div>
                     </div>
                   </div>
 
                   {/* Visual Check cards — urgent, show first */}
                   {visualCheck.length > 0 && (
                     <div style={{marginBottom:16}}>
-                      <div style={{fontSize:9,color:'#a855f7',textTransform:'uppercase',letterSpacing:1.2,marginBottom:8,fontWeight:600}}>👁️ Visual Check Required</div>
+                      <div style={{fontSize:9,color:'#10b981',textTransform:'uppercase',letterSpacing:1.2,marginBottom:8,fontWeight:600}}>✅ Ready to Sign Off</div>
                       {visualCheck.map(d => (
-                        <div key={d.id} style={{background:'#0d0d10',border:'1px solid #a855f733',borderRadius:10,padding:14,marginBottom:8,borderLeft:'3px solid #a855f7'}}>
+                        <div key={d.id} style={{background:'#0d0d10',border:'1px solid #10b98133',borderRadius:10,padding:14,marginBottom:8,borderLeft:'3px solid #10b981'}}>
                           <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:8}}>
                             <span style={{fontSize:8,color:typeColors[d.type]||'#888',fontWeight:700,textTransform:'uppercase',background:`${typeColors[d.type]||'#888'}15`,padding:'2px 6px',borderRadius:4}}>{d.type}</span>
                             <span style={{fontSize:13,fontWeight:700,color:'#fff',flex:1}}>{d.title}</span>
