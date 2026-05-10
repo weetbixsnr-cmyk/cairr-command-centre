@@ -1,38 +1,34 @@
-# UI Rules — Command Centre Dashboard
+# UI Rules - Command Centre Dashboard
 
 ## Design Philosophy
-- Apple Store clean. No clutter. No noise.
-- Mobile-first — Adam checks on his phone
-- Dark theme, high contrast
-- Touch targets minimum 44px
+- Mobile-first. Adam checks this on his phone.
+- Dark theme, high contrast.
+- Keep the dashboard focused on decisions, blockers, and next actions.
+- Do not rebuild the dashboard UI from scratch without explicit approval.
 
 ## Item States
-| State | Visual | Meaning |
-|-------|--------|---------|
-| New/Unread | Bold text, no icon | Needs Adam's attention |
-| Opened | Tick icon | Adam has seen it |
-| Actioned | REMOVED | Adam dealt with it |
+| State | Meaning |
+| --- | --- |
+| Pending | Needs Adam's attention |
+| Blocked | External dependency or access issue |
+| Manual | Status is maintained in `public/data/*.json` |
+| Completed | Removed from active dashboard view |
 
-## Sections (top to bottom, priority order)
-1. NEEDS ADAM — red accent, always visible
-2. OVERDUE/ALERTS — amber accent
-3. IN PROGRESS — blue accent
-4. FLEET STATUS — green accent, compact table
-5. UPCOMING — grey, next 7 days only
+## Sections
+1. Project status
+2. Blockers
+3. Action queue
+4. BTS SEO status
+5. NBHW SEO status
+6. Parked diagnostics, if retained during cleanup
 
 ## Data Rules
-- Past dates auto-remove from UPCOMING
-- Completed items never appear
-- Reports show as cards with expand/collapse
-- Token spend shows as progress bars against budget
+- Active data comes from `public/data/bts-status.json`, `public/data/nbhw-status.json`, and `public/data/dashboard-status.json`.
+- `public/snapshot.json` is legacy agent-era data and must not be reintroduced as an active source.
+- Completed action items should not stay in active views.
+- Hooks are deferred until project-owned status file contracts are agreed.
 
-## Typography
-- Headers: bold, large
-- Body: regular, readable on mobile
-- Status: emoji + short text
-- No walls of text — tables and bullets only
+## Design Lock
+The old design lock that pointed at `/Users/cairr/.openclaw/workspace/dashboard.html` is retired as an active workflow rule.
 
-## 🔒 DESIGN LOCK (28 Feb 2026)
-The dashboard.html layout is FROZEN. Only data inside existing elements may change.
-Golden master: /Users/cairr/.openclaw/workspace/dashboard.html
-chmod 444 enforced. Unlock requires Adam's approval.
+`public/dashboard.html` remains a historical local reference. It is not an active golden master for new layout work unless Adam explicitly approves retaining it as the new lock.

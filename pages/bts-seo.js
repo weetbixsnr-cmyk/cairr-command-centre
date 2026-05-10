@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import SeoDashboard from './components/seo-dashboard'
+import { buildDashboardSnapshot } from '../lib/dashboard-data'
 
 // Inline section finder for rendering SEO-DASHBOARD.md sections in native tabs
 function findDashSection(sections, key, fallbacks) {
@@ -47,8 +48,8 @@ function DashSection({ section, icon, maxLines }) {
 }
 import GbpPosts from './components/gbp-posts'
 
-function useSnapshot(interval = 30000) {
-  const [data, setData] = useState(null)
+function useSnapshot(initialData, interval = 30000) {
+  const [data, setData] = useState(initialData || null)
   useEffect(() => {
     const load = () => fetch('/api/data').then(r => r.json()).then(setData).catch(() => {})
     load()
@@ -121,8 +122,8 @@ function TabButton({ active, label, onClick }) {
   )
 }
 
-export default function BtsSeoPage() {
-  const snap = useSnapshot()
+export default function BtsSeoPage({ initialSnapshot }) {
+  const snap = useSnapshot(initialSnapshot)
   const seo = snap?.btsSeo
   const comp = snap?.btsCompetitors
   const plan = snap?.btsSeoplan
@@ -1606,4 +1607,12 @@ export default function BtsSeoPage() {
       </div>
     </>
   )
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      initialSnapshot: buildDashboardSnapshot()
+    }
+  }
 }

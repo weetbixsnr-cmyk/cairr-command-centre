@@ -1,66 +1,43 @@
-# Secure Command Centre Dashboard - Deployment Instructions
+# Command Centre Dashboard - Deployment Notes
 
-## Option 1: Local Network Access (Quick & Secure)
+## Local Development
 
-### Start Local Secure Server:
 ```bash
-cd /Users/cairr/.openclaw/workspace/dashboard-secure
 npm run dev
-# Accessible on local network at: http://192.168.0.70:3000
 ```
 
-**Security:** Password protected (adam / CommandCentre2026!)
-**Access:** Any device on your home network
-**Mobile:** Perfect responsive design
+The dashboard is password protected by `middleware.js`.
 
-## Option 2: Vercel Cloud Deployment (Global Access)
+## Production Build
 
-### Deploy to Vercel:
 ```bash
-cd /Users/cairr/.openclaw/workspace/dashboard-secure
-npx vercel --prod
+npm run build
 ```
 
-**Required Environment Variables in Vercel:**
-- DASHBOARD_USER=adam
-- DASHBOARD_PASS=CommandCentre2026!  
-- DASHBOARD_SESSION_TOKEN=cc-auth-token-secure-2026-cairr
+## Vercel Deployment
 
-### Set Environment Variables:
-```bash
-vercel env add DASHBOARD_USER production
-# Enter: adam
+Deploy from this repository after Adam approves production deployment.
 
-vercel env add DASHBOARD_PASS production  
-# Enter: CommandCentre2026!
+Required environment variables:
 
-vercel env add DASHBOARD_SESSION_TOKEN production
-# Enter: cc-auth-token-secure-2026-cairr
+- `DASHBOARD_USER`
+- `DASHBOARD_PASS`
+- `DASHBOARD_SESSION_TOKEN`
+- `BTS_SESSION_TOKEN` if BTS client login is enabled
+- `BTS_DRAFT_API_KEY` if API draft writes are enabled
+- `NBHW_DRAFT_API_KEY` if API draft writes are enabled
+- `BTS_DISCORD_WEBHOOK` only if BTS notifications should be sent
 
-# Redeploy after adding env vars
-npx vercel --prod
-```
+Do not use the old `.openclaw/workspace/dashboard-secure` path.
 
-## Security Features
+## Data Updates
 
-✅ **Password Protection:** HTTP Basic Auth on every request
-✅ **Session Cookies:** 7-day secure authentication  
-✅ **No Search Engine Indexing:** Robots blocked, noindex headers
-✅ **HTTPS Only:** Encrypted connections
-✅ **Environment Variables:** Secure credential storage
+Manual status files are the current source of truth:
 
-## Mobile Access
+- `public/data/bts-status.json`
+- `public/data/nbhw-status.json`
+- `public/data/dashboard-status.json`
 
-📱 **Responsive Design:** Perfect on all screen sizes
-📱 **Touch Optimized:** Easy finger navigation
-📱 **Real-time Data:** Live system status
-📱 **Quick Overview:** Essential info at a glance
+Update those files, build, and verify `/api/data` before deploying.
 
-## Usage
-
-1. Open URL in mobile browser
-2. Enter credentials: adam / CommandCentre2026!
-3. Stay logged in for 7 days
-4. View real-time system status, property scan progress, project health
-
-**The dashboard shows current status of all projects, active scans, overdue items, and system health - perfect for mobile monitoring!**
+Hooks are intentionally not wired yet.

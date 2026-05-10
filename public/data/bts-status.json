@@ -1,0 +1,82 @@
+{
+  "id": "bts",
+  "name": "Better Training Solutions",
+  "label": "BTS",
+  "href": "/bts-seo",
+  "status": "blocked",
+  "statusLabel": "External blockers",
+  "lastUpdated": "2026-05-10T00:00:00+10:00",
+  "source": "manual-status-json",
+  "summary": "De-agenting baseline is complete and tagged. Remaining BTS blockers are external: SiteGround captcha first, then GSC, GBP, GA, and WordPress access.",
+  "metrics": [
+    { "label": "Baseline commit", "value": "d71258f" },
+    { "label": "Baseline tag", "value": "bts-de-agenting-baseline-2026-05-10" },
+    { "label": "SEO health", "value": 35, "unit": "%" },
+    { "label": "Locations with content", "value": "5/17" }
+  ],
+  "blockers": [
+    "SiteGround captcha/access must be cleared before live verification.",
+    "GSC, GBP, GA, and WordPress access remain external follow-ups."
+  ],
+  "nextActions": [
+    "Resolve SiteGround captcha/access.",
+    "Confirm project-owned status file location before hooks are introduced.",
+    "Keep manual status updates in this file until automation is approved."
+  ],
+  "seo": {
+    "lastUpdated": "2026-05-10T00:00:00+10:00",
+    "source": "manual-status-json",
+    "healthScore": 35,
+    "coreKeywords": [
+      { "keyword": "first aid training berkshire", "position": 50, "status": "unknown" },
+      { "keyword": "first aid course high wycombe", "position": 50, "status": "unknown" },
+      { "keyword": "emergency first aid at work", "position": 50, "status": "unknown" }
+    ],
+    "locationCoverage": {
+      "summary": {
+        "totalLocations": 17,
+        "withContent": 5,
+        "zeroCoverage": 12,
+        "servicePages": 0,
+        "keywordsPerLocation": 8,
+        "note": "Manual status seed. Replace with project-owned BTS status export when agreed."
+      },
+      "waves": [
+        {
+          "id": 1,
+          "status": "planned",
+          "locations": ["High Wycombe", "Aylesbury", "Reading", "Buckinghamshire", "South East"],
+          "servicePages": 0,
+          "servicePagesTotal": 5,
+          "blogs": 5,
+          "scope": "Existing content coverage noted from previous dashboard snapshot."
+        }
+      ]
+    },
+    "assets": {
+      "trainingServices": 0
+    }
+  },
+  "keywords": {
+    "lastUpdated": "2026-05-10T00:00:00+10:00",
+    "source": "manual-status-json",
+    "keywords": [
+      { "keyword": "first aid training berkshire", "latest": null },
+      { "keyword": "first aid course high wycombe", "latest": null },
+      { "keyword": "emergency first aid at work", "latest": null }
+    ]
+  },
+  "blogInventory": {
+    "published": 5,
+    "source": "manual-status-json"
+  },
+  "suggestions": {
+    "suggestions": []
+  },
+  "notifications": {
+    "notifications": []
+  },
+  "drafts": {
+    "drafts": []
+  }
+}

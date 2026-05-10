@@ -1,18 +1,11 @@
 /**
- * /api/nbhw-suggestions — NBHW suggestions endpoint
- * GET  → reads suggestions from GitHub raw (persistent)
- * POST → writes suggestion via GitHub Contents API (commits to repo)
- *
- * Auth: requires admin auth (dashboard-auth cookie)
+ * /api/nbhw-suggestions - NBHW suggestions backed by public/data/nbhw-status.json.
  */
 
-const REPO = 'weetbixsnr-cmyk/cairr-command-centre'
-const BRANCH = 'agent/command-centre'
-const FILE_PATH = 'data/nbhw-suggestions.json'
-const RAW_URL = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/${FILE_PATH}`
-const API_URL = `https://api.github.com/repos/${REPO}/contents/${FILE_PATH}`
+import fs from 'fs'
+import path from 'path'
 
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN || ''
+const STATUS_PATH = path.resolve(process.cwd(), 'public', 'data', 'nbhw-status.json')
 
 function isAuthed(req) {
   const cookie = req.headers.cookie || ''
@@ -21,74 +14,29 @@ function isAuthed(req) {
   return false
 }
 
-async function readSuggestions() {
-  try {
-    const headers = { 'Cache-Control': 'no-cache' }
-    if (GITHUB_TOKEN) headers['Authorization'] = `token ${GITHUB_TOKEN}`
-    const res = await fetch(RAW_URL, { headers, signal: AbortSignal.timeout(5000) })
-    if (res.ok) return await res.json()
-  } catch {}
-  return { suggestions: [] }
+function readStatus() {
+  try { return JSON.parse(fs.readFileSync(STATUS_PATH, 'utf8')) } catch { return { suggestions: { suggestions: [] } } }
 }
 
-async function writeSuggestions(data) {
-  if (!GITHUB_TOKEN) throw new Error('GITHUB_TOKEN not configured')
-
-  let sha = null
-  try {
-    const getRes = await fetch(`${API_URL}?ref=${BRANCH}`, {
-      headers: { Authorization: `token ${GITHUB_TOKEN}` },
-      signal: AbortSignal.timeout(5000)
-    })
-    if (getRes.ok) {
-      const existing = await getRes.json()
-      sha = existing.sha
-    }
-  } catch {}
-
-  const content = Buffer.from(JSON.stringify(data, null, 2) + '\n').toString('base64')
-  const body = {
-    message: `suggestion: new NBHW suggestion`,
-    content,
-    branch: BRANCH
-  }
-  if (sha) body.sha = sha
-
-  const putRes = await fetch(API_URL, {
-    method: 'PUT',
-    headers: {
-      Authorization: `token ${GITHUB_TOKEN}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(body),
-    signal: AbortSignal.timeout(10000)
-  })
-
-  if (!putRes.ok) {
-    const err = await putRes.text()
-    throw new Error(`GitHub API error: ${putRes.status} ${err}`)
-  }
+function writeStatus(data) {
+  fs.writeFileSync(STATUS_PATH, JSON.stringify(data, null, 2) + '\n')
 }
 
 export default async function handler(req, res) {
-  if (!isAuthed(req)) {
-    return res.status(401).json({ error: 'Not authenticated' })
-  }
+  if (!isAuthed(req)) return res.status(401).json({ error: 'Not authenticated' })
 
   if (req.method === 'GET') {
-    const data = await readSuggestions()
-    return res.json(data)
+    const data = readStatus()
+    return res.json(data.suggestions || { suggestions: [] })
   }
 
   if (req.method === 'POST') {
     const { text } = req.body
-    if (!text || !text.trim()) {
-      return res.status(400).json({ error: 'Text required' })
-    }
+    if (!text || !text.trim()) return res.status(400).json({ error: 'Text required' })
 
     try {
-      const data = await readSuggestions()
-
+      const data = readStatus()
+      data.suggestions = data.suggestions || { suggestions: [] }
       const suggestion = {
         id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
         text: text.trim(),
@@ -96,10 +44,9 @@ export default async function handler(req, res) {
         submittedBy: 'Adam',
         status: 'new'
       }
-
-      data.suggestions.unshift(suggestion)
-      await writeSuggestions(data)
-
+      data.suggestions.suggestions.unshift(suggestion)
+      data.lastUpdated = suggestion.submittedAt
+      writeStatus(data)
       return res.json({ ok: true, suggestion })
     } catch (e) {
       console.error('Suggestion save failed:', e.message)

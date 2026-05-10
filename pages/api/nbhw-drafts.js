@@ -1,12 +1,11 @@
 /**
- * /api/nbhw-drafts — NBHW Future Posts draft management
- * GET  → returns all drafts
- * POST → create new draft (from NBHW agent)
+ * /api/nbhw-drafts - NBHW drafts backed by public/data/nbhw-status.json.
  */
 
 import fs from 'fs'
+import path from 'path'
 
-const DRAFTS_FILE = '/Users/cairr/.openclaw/agents/command-centre/workspace/dev/dashboard/nbhw-drafts.json'
+const STATUS_PATH = path.resolve(process.cwd(), 'public', 'data', 'nbhw-status.json')
 
 function isAuthed(req) {
   const cookie = req.headers.cookie || ''
@@ -17,34 +16,51 @@ function isAuthed(req) {
   return false
 }
 
-function readDrafts() {
-  try { return JSON.parse(fs.readFileSync(DRAFTS_FILE, 'utf8')) } catch { return { drafts: [] } }
+function readStatus() {
+  try { return JSON.parse(fs.readFileSync(STATUS_PATH, 'utf8')) } catch { return { drafts: { drafts: [] } } }
 }
 
-function writeDrafts(data) {
-  fs.writeFileSync(DRAFTS_FILE, JSON.stringify(data, null, 2))
+function writeStatus(data) {
+  fs.writeFileSync(STATUS_PATH, JSON.stringify(data, null, 2) + '\n')
 }
 
 export default async function handler(req, res) {
   if (!isAuthed(req)) return res.status(401).json({ error: 'Not authenticated' })
 
-  if (req.method === 'GET') return res.json(readDrafts())
+  if (req.method === 'GET') {
+    const data = readStatus()
+    return res.json(data.drafts || { drafts: [] })
+  }
 
   if (req.method === 'POST') {
     const { title, type, content, targetDate, author, photos } = req.body
     if (!title || !content) return res.status(400).json({ error: 'Title and content required' })
 
-    const data = readDrafts()
+    const data = readStatus()
+    data.drafts = data.drafts || { drafts: [] }
     const draft = {
       id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
-      title, type: type || 'blog', content, targetDate: targetDate || null,
-      author: author || 'NBHW Agent', photos: photos || [],
-      status: 'draft', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(),
-      editedContent: null, editedBy: null, approvedAt: null, publishedAt: null,
-      desktopChecked: false, mobileChecked: false, signedOffAt: null, feedback: null
+      title,
+      type: type || 'blog',
+      content,
+      targetDate: targetDate || null,
+      author: author || 'Manual',
+      photos: photos || [],
+      status: 'draft',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      editedContent: null,
+      editedBy: null,
+      approvedAt: null,
+      publishedAt: null,
+      desktopChecked: false,
+      mobileChecked: false,
+      signedOffAt: null,
+      feedback: null
     }
-    data.drafts.unshift(draft)
-    writeDrafts(data)
+    data.drafts.drafts.unshift(draft)
+    data.lastUpdated = draft.updatedAt
+    writeStatus(data)
     return res.json({ ok: true, draft })
   }
 

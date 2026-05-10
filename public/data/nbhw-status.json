@@ -1,0 +1,97 @@
+{
+  "id": "nbhw",
+  "name": "Northern Beaches Hot Water",
+  "label": "NBHW",
+  "href": "/nbhw-seo",
+  "status": "manual",
+  "statusLabel": "Manual status",
+  "lastUpdated": "2026-05-10T00:00:00+10:00",
+  "source": "manual-status-json",
+  "summary": "NBHW dashboard status is now seeded from dashboard-owned manual JSON. Project-owned status export is still to be agreed before hooks are wired.",
+  "metrics": [
+    { "label": "SEO health", "value": 58, "unit": "%" },
+    { "label": "Core keywords tracked", "value": 9 },
+    { "label": "Service pages", "value": 8 },
+    { "label": "Suburbs with blog coverage", "value": "21/37" }
+  ],
+  "blockers": [
+    "Project-owned NBHW status file contract still needs to be confirmed.",
+    "Automation hooks are intentionally not wired in this phase."
+  ],
+  "nextActions": [
+    "Agree NBHW status export fields.",
+    "Replace this manual seed with project-owned data once available.",
+    "Keep draft and GBP approval data dashboard-local until storage ownership is decided."
+  ],
+  "seo": {
+    "lastUpdated": "2026-05-10T00:00:00+10:00",
+    "source": "manual-status-json",
+    "healthScore": 58,
+    "geoReadiness": 5,
+    "pagesLive": 86,
+    "coreKeywords": [
+      { "keyword": "hot water plumber northern beaches", "position": 99, "status": "dropped" },
+      { "keyword": "hot water repair northern beaches", "position": 3, "status": "stable" },
+      { "keyword": "heat pump installation northern beaches", "position": 2, "status": "improved" },
+      { "keyword": "hot water service northern beaches", "position": 9, "status": "dropped" },
+      { "keyword": "hot water northern beaches", "position": 7, "status": "dropped" }
+    ],
+    "suburbKeywords": [
+      { "keyword": "hot water Freshwater", "position": 50, "status": "not-ranking" },
+      { "keyword": "hot water Narrabeen", "position": 50, "status": "not-ranking" },
+      { "keyword": "hot water Dee Why", "position": 50, "status": "not-ranking" }
+    ],
+    "suburbCoverage": {
+      "summary": {
+        "totalSuburbs": 37,
+        "keywordsPerSuburb": 10,
+        "withBlogCoverage": 21,
+        "servicePages": 8,
+        "zeroCoverage": 16
+      },
+      "waves": [
+        {
+          "id": 1,
+          "status": "complete",
+          "suburbs": ["Dee Why", "Freshwater", "Narrabeen"],
+          "servicePages": 3,
+          "servicePagesTotal": 3,
+          "blogs": 9,
+          "scope": "Existing coverage from previous dashboard snapshot."
+        },
+        {
+          "id": 2,
+          "status": "complete",
+          "suburbs": ["Collaroy", "Frenchs Forest", "Manly", "Cromer", "Mosman"],
+          "servicePages": 5,
+          "servicePagesTotal": 5,
+          "blogs": 13,
+          "scope": "Existing coverage from previous dashboard snapshot."
+        },
+        {
+          "id": 3,
+          "status": "planned",
+          "suburbs": ["Balgowlah", "Newport", "Warriewood", "Allambie Heights", "Belrose"],
+          "servicePages": 0,
+          "servicePagesTotal": 5,
+          "blogs": 0,
+          "scope": "Manual placeholder until project-owned status export exists."
+        }
+      ]
+    }
+  },
+  "live": {
+    "totalSuburbPages": 8,
+    "totalBlogPages": 57,
+    "source": "manual-status-json"
+  },
+  "suggestions": {
+    "suggestions": []
+  },
+  "gbpPosts": {
+    "posts": []
+  },
+  "drafts": {
+    "drafts": []
+  }
+}

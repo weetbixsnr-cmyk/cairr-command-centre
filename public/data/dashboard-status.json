@@ -1,0 +1,56 @@
+{
+  "id": "dashboard",
+  "name": "Command Centre Dashboard",
+  "label": "Dashboard",
+  "href": "/",
+  "status": "in-progress",
+  "statusLabel": "De-agenting",
+  "lastUpdated": "2026-05-10T00:00:00+10:00",
+  "source": "manual-status-json",
+  "summary": "Dashboard is being rewired away from Command Centre agent snapshots. Manual project status JSON is the first operating model; hooks are deliberately deferred.",
+  "metrics": [
+    { "label": "Data source", "value": "public/data" },
+    { "label": "Hooks", "value": "not wired" },
+    { "label": "Agent snapshot", "value": "removed from /api/data" }
+  ],
+  "blockers": [
+    "Design lock needs a final retained-or-retired decision before styling/layout work.",
+    "Project-owned BTS/NBHW status file paths need to be agreed before automation."
+  ],
+  "nextActions": [
+    "Use public/data/*.json for manual updates.",
+    "Do not reintroduce public/snapshot.json or agent branch snapshots.",
+    "Document the design lock decision in CLAUDE.md and docs/UI_RULES.md."
+  ],
+  "actionQueue": {
+    "items": [
+      {
+        "id": "dash-001",
+        "type": "task",
+        "priority": "high",
+        "source": "dashboard",
+        "title": "Decide whether to retain the old dashboard design lock and migrate the golden master locally.",
+        "created": "2026-05-10",
+        "status": "pending"
+      },
+      {
+        "id": "dash-002",
+        "type": "task",
+        "priority": "medium",
+        "source": "bts",
+        "title": "Update BTS manual status after SiteGround captcha/access is cleared.",
+        "created": "2026-05-10",
+        "status": "pending"
+      },
+      {
+        "id": "dash-003",
+        "type": "task",
+        "priority": "medium",
+        "source": "nbhw",
+        "title": "Agree NBHW project-owned status export fields before wiring hooks.",
+        "created": "2026-05-10",
+        "status": "pending"
+      }
+    ]
+  }
+}

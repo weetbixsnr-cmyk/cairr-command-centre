@@ -1,40 +1,28 @@
 /**
- * /api/action — Read/update action queue items
- * GET: returns all items
- * POST: { id, action } — updates item (approve/reject/complete/snooze)
+ * /api/action - update dashboard-local manual action queue.
  */
 
 import fs from 'fs'
 import path from 'path'
 
-const QUEUE_PATH = path.resolve(process.cwd(), '..', 'dev', 'dashboard', 'action-queue.json')
-const SNAPSHOT_PATH = path.resolve(process.cwd(), 'public', 'snapshot.json')
+const STATUS_PATH = path.resolve(process.cwd(), 'public', 'data', 'dashboard-status.json')
 
-function readQueue() {
+function readDashboardStatus() {
   try {
-    return JSON.parse(fs.readFileSync(QUEUE_PATH, 'utf8'))
+    return JSON.parse(fs.readFileSync(STATUS_PATH, 'utf8'))
   } catch {
-    try {
-      const snap = JSON.parse(fs.readFileSync(SNAPSHOT_PATH, 'utf8'))
-      return snap.actionQueue?.items || []
-    } catch {
-      return []
-    }
+    return { actionQueue: { items: [] } }
   }
 }
 
-function writeQueue(items) {
-  try {
-    fs.writeFileSync(QUEUE_PATH, JSON.stringify(items, null, 2))
-    return true
-  } catch {
-    return false
-  }
+function writeDashboardStatus(data) {
+  fs.writeFileSync(STATUS_PATH, JSON.stringify(data, null, 2) + '\n')
 }
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
-    return res.json({ items: readQueue() })
+    const data = readDashboardStatus()
+    return res.json({ items: data.actionQueue?.items || [] })
   }
 
   if (req.method === 'POST') {
@@ -47,31 +35,22 @@ export default async function handler(req, res) {
     }
 
     try {
-      const items = readQueue()
+      const data = readDashboardStatus()
+      const items = data.actionQueue?.items || []
       const item = items.find(i => i.id === id)
       if (!item) return res.status(404).json({ error: 'Item not found' })
 
       const now = new Date().toISOString()
-      
-      if (action === 'approve') {
-        item.status = 'approved'
-        item.updatedAt = now
-      } else if (action === 'reject') {
-        item.status = 'rejected'
-        item.updatedAt = now
-      } else if (action === 'complete') {
-        item.status = 'completed'
-        item.updatedAt = now
-      } else if (action === 'snooze') {
-        // Push due date by 24h
-        const newDue = new Date(Date.now() + 86400000).toISOString().slice(0, 10)
-        item.due = newDue
+      if (action === 'snooze') {
+        item.due_date = new Date(Date.now() + 86400000).toISOString().slice(0, 10)
         item.snoozedAt = now
-        item.overdue = false
+      } else {
+        item.status = action === 'complete' ? 'completed' : action
+        item.updatedAt = now
       }
-
-      const wrote = writeQueue(items)
-      return res.json({ success: true, item, persisted: wrote })
+      data.lastUpdated = now
+      writeDashboardStatus(data)
+      return res.json({ success: true, item, persisted: true })
     } catch (e) {
       return res.status(500).json({ error: e.message })
     }

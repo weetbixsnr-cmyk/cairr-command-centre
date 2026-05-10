@@ -2,9 +2,10 @@ import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import SeoDashboard from './components/seo-dashboard'
 import GbpPosts from './components/gbp-posts'
+import { buildDashboardSnapshot } from '../lib/dashboard-data'
 
-function useSnapshot(interval = 30000) {
-  const [data, setData] = useState(null)
+function useSnapshot(initialData, interval = 30000) {
+  const [data, setData] = useState(initialData || null)
   useEffect(() => {
     const load = () => fetch('/api/data').then(r => r.json()).then(setData).catch(() => {})
     load()
@@ -77,8 +78,8 @@ function TabButton({ active, label, onClick }) {
   )
 }
 
-export default function NbhwSeoPage() {
-  const snap = useSnapshot()
+export default function NbhwSeoPage({ initialSnapshot }) {
+  const snap = useSnapshot(initialSnapshot)
   const seo = snap?.nbhwSeo
   const comp = snap?.nbhwCompetitors
   const pub = snap?.nbhwPublishLog
@@ -1304,4 +1305,12 @@ export default function NbhwSeoPage() {
       </div>
     </>
   )
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      initialSnapshot: buildDashboardSnapshot()
+    }
+  }
 }
