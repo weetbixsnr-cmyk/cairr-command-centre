@@ -4,71 +4,128 @@
   "label": "BTS",
   "href": "/bts-seo",
   "status": "blocked",
-  "statusLabel": "External blockers",
-  "lastUpdated": "2026-05-10T00:00:00+10:00",
+  "statusLabel": "SiteGround captcha-noindex P0",
+  "lastUpdated": "2026-05-11T00:00:00+10:00",
   "source": "manual-status-json",
-  "summary": "De-agenting baseline is complete and tagged. Remaining BTS blockers are external: SiteGround captcha first, then GSC, GBP, GA, and WordPress access.",
+  "summary": "Batch 3 is published and recorded in the BTS repo. Public crawl/indexing recovery remains blocked by SiteGround captcha/noindex until Sunny/SiteGround access is resolved.",
   "metrics": [
-    { "label": "Baseline commit", "value": "d71258f" },
-    { "label": "Baseline tag", "value": "bts-de-agenting-baseline-2026-05-10" },
-    { "label": "SEO health", "value": 35, "unit": "%" },
-    { "label": "Locations with content", "value": "5/17" }
+    { "label": "BTS commit", "value": "60b0ab6" },
+    { "label": "Live pages", "value": 35 },
+    { "label": "Blogs live", "value": 14 },
+    { "label": "News/insights live", "value": 4 },
+    { "label": "Pending draft assets", "value": 10 }
   ],
   "blockers": [
-    "SiteGround captcha/access must be cleared before live verification.",
-    "GSC, GBP, GA, and WordPress access remain external follow-ups."
+    "P0: SiteGround captcha/bot protection is serving HTTP 202, sg-captcha: challenge, and x-robots-tag:noindex to unauthenticated crawlers.",
+    "GSC, GBP, GA, and WordPress checks remain blocked or incomplete until SiteGround access/captcha is fixed."
   ],
   "nextActions": [
-    "Resolve SiteGround captcha/access.",
-    "Confirm project-owned status file location before hooks are introduced.",
-    "Keep manual status updates in this file until automation is approved."
+    "Fix SiteGround captcha/bot protection/noindex first.",
+    "Run GSC, GBP, GA, and WordPress checks after crawler access recovers.",
+    "Review and publish Batch 4 only after access/indexing recovery and approval."
   ],
+  "publishedBatch": {
+    "batch": 3,
+    "publishedDate": "2026-05-11",
+    "sourceCommit": "60b0ab6",
+    "items": [
+      {
+        "title": "Gas and Plumbing Training Near Reading",
+        "type": "blog",
+        "url": "/gas-and-plumbing-training-near-reading/",
+        "wpId": 699
+      },
+      {
+        "title": "Gas and Plumbing Training Near Oxford",
+        "type": "blog",
+        "url": "/gas-and-plumbing-training-near-oxford/",
+        "wpId": 700
+      },
+      {
+        "title": "ACS Initial Training: What You Need to Know Before You Book Your First Course",
+        "type": "blog",
+        "url": "/acs-initial-training-what-you-need-to-know/",
+        "wpId": 701
+      },
+      {
+        "title": "Plumbing Apprenticeship Starts Have Crashed 37%. The Industry Is Raising the Alarm.",
+        "type": "news",
+        "url": "/plumbing-apprenticeship-starts-crashed-37-percent/",
+        "wpId": 702
+      }
+    ]
+  },
   "seo": {
-    "lastUpdated": "2026-05-10T00:00:00+10:00",
+    "lastUpdated": "2026-05-11T00:00:00+10:00",
     "source": "manual-status-json",
-    "healthScore": 35,
+    "healthScore": 28,
+    "geoReadiness": 5,
+    "pagesLive": 35,
+    "blogsPublished": 14,
+    "newsInsightsPublished": 4,
+    "pendingDraftAssets": 10,
     "coreKeywords": [
-      { "keyword": "first aid training berkshire", "position": 50, "status": "unknown" },
-      { "keyword": "first aid course high wycombe", "position": 50, "status": "unknown" },
-      { "keyword": "emergency first aid at work", "position": 50, "status": "unknown" }
+      { "keyword": "ACS training High Wycombe", "position": 50, "status": "regressed" },
+      { "keyword": "ACS training course UK", "position": 50, "status": "blocked-by-captcha" },
+      { "keyword": "gas training High Wycombe", "position": 50, "status": "blocked-by-captcha" },
+      { "keyword": "gas training near Reading", "position": 50, "status": "new-batch-3" },
+      { "keyword": "plumbing training near Oxford", "position": 50, "status": "new-batch-3" },
+      { "keyword": "gas managed learning programme", "position": 50, "status": "tracked" },
+      { "keyword": "water regulations course UK", "position": 50, "status": "tracked" },
+      { "keyword": "heat pump training course UK", "position": 50, "status": "tracked" }
     ],
     "locationCoverage": {
       "summary": {
         "totalLocations": 17,
-        "withContent": 5,
-        "zeroCoverage": 12,
-        "servicePages": 0,
+        "withContent": 7,
+        "zeroCoverage": 10,
+        "servicePages": 6,
         "keywordsPerLocation": 8,
-        "note": "Manual status seed. Replace with project-owned BTS status export when agreed."
+        "note": "Batch 3 added Reading and Oxford location content. Rankings remain blocked by SiteGround captcha/noindex recovery."
       },
       "waves": [
         {
           "id": 1,
-          "status": "planned",
-          "locations": ["High Wycombe", "Aylesbury", "Reading", "Buckinghamshire", "South East"],
-          "servicePages": 0,
-          "servicePagesTotal": 5,
-          "blogs": 5,
-          "scope": "Existing content coverage noted from previous dashboard snapshot."
+          "status": "published",
+          "locations": ["High Wycombe", "Aylesbury", "Reading", "Oxford", "Buckinghamshire", "South East"],
+          "servicePages": 6,
+          "servicePagesTotal": 11,
+          "blogs": 14,
+          "scope": "Batch 3 published Reading, Oxford, ACS Initial Training, and Plumbing Apprenticeship Crash."
         }
       ]
     },
     "assets": {
-      "trainingServices": 0
+      "trainingServices": 8
     }
   },
   "keywords": {
-    "lastUpdated": "2026-05-10T00:00:00+10:00",
+    "lastUpdated": "2026-05-11T00:00:00+10:00",
     "source": "manual-status-json",
     "keywords": [
-      { "keyword": "first aid training berkshire", "latest": null },
-      { "keyword": "first aid course high wycombe", "latest": null },
-      { "keyword": "emergency first aid at work", "latest": null }
+      { "keyword": "ACS training High Wycombe", "latest": 50, "status": "regressed" },
+      { "keyword": "ACS training course UK", "latest": 50, "status": "blocked-by-captcha" },
+      { "keyword": "gas training High Wycombe", "latest": 50, "status": "blocked-by-captcha" },
+      { "keyword": "gas training near Reading", "latest": 50, "status": "new-batch-3" },
+      { "keyword": "plumbing training near Oxford", "latest": 50, "status": "new-batch-3" },
+      { "keyword": "gas managed learning programme", "latest": 50, "status": "tracked" },
+      { "keyword": "water regulations course UK", "latest": 50, "status": "tracked" },
+      { "keyword": "heat pump training course UK", "latest": 50, "status": "tracked" }
     ]
   },
   "blogInventory": {
-    "published": 5,
-    "source": "manual-status-json"
+    "published": 14,
+    "newsInsightsPublished": 4,
+    "livePages": 35,
+    "pendingDraftAssets": 10,
+    "source": "manual-status-json",
+    "batch3": [
+      "Gas and Plumbing Training Near Reading",
+      "Gas and Plumbing Training Near Oxford",
+      "ACS Initial Training: What You Need to Know Before You Book Your First Course",
+      "Plumbing Apprenticeship Starts Have Crashed 37%. The Industry Is Raising the Alarm."
+    ],
+    "wpIds": [699, 700, 701, 702]
   },
   "suggestions": {
     "suggestions": []
