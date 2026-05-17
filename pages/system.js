@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
+import { buildDashboardSnapshot } from '../lib/dashboard-data'
 
-function useSnapshot(interval = 30000) {
-  const [data, setData] = useState(null)
+function useSnapshot(initialData, interval = 30000) {
+  const [data, setData] = useState(initialData || null)
   useEffect(() => {
     const load = () => fetch('/api/data').then(r => r.json()).then(setData).catch(() => {})
     load()
@@ -30,8 +31,8 @@ const DATA_FLOW = [
   { from: 'Future hooks', to: 'public/data', detail: 'Deferred until project-owned status contracts are agreed' }
 ]
 
-export default function SystemPage() {
-  const snap = useSnapshot()
+export default function SystemPage({ initialSnapshot }) {
+  const snap = useSnapshot(initialSnapshot)
 
   return (
     <>
@@ -131,4 +132,12 @@ export default function SystemPage() {
       </div>
     </>
   )
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      initialSnapshot: buildDashboardSnapshot()
+    }
+  }
 }

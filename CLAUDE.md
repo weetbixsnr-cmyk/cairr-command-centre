@@ -43,6 +43,7 @@ Inactive/parked sources:
 - Manual action queue
 - BTS SEO status
 - NBHW SEO status
+- Future FAQ question-bank status once project-local banks exist
 - Parked diagnostics where legacy routes still exist
 
 ## Ownership
@@ -61,12 +62,17 @@ Inactive/parked sources:
 - Do not commit credentials, tokens, or copied agent workspace secrets.
 
 ## Design Lock Decision
-The old constitutional design lock pointed at `/Users/cairr/.openclaw/workspace/dashboard.html` and assumed the agent-era HTML dashboard workflow. That lock no longer applies as an active workflow rule.
+The design lock is resolved: keep the existing dashboard layout and page sequence intact.
 
-The historical local reference is `public/dashboard.html`. Treat it as a reference only until Adam approves a new design lock. Do not make styling/layout changes as part of de-agenting unless explicitly approved.
+Do not change structure, navigation order, or visual layout during de-agenting. Update the data flowing into the existing UI shell by reading manual/project-owned status data. Any future layout or styling change needs explicit approval.
+
+The historical local reference is `public/dashboard.html`. Treat it as a reference only; active data must come from `public/data/*.json`.
 
 ## Manual Status Workflow
 1. Update the relevant file in `public/data/`.
 2. Run `npm run build`.
 3. Verify `/api/data` includes the updated project.
 4. Verify `/`, `/bts-seo`, and `/nbhw-seo` render actual values from the manual JSON.
+
+## Future SEO Modules
+- FAQ Question Bank / Intent Coverage System: see `/Users/cairr/AI/CAIRR/seo/docs/FAQ_QUESTION_BANK_SYSTEM.md`. Do not wire this into the dashboard until BTS/NBHW have project-local question banks and a settled status contract.

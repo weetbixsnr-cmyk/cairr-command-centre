@@ -134,7 +134,7 @@ export default function SeoDashboard({ seoDash, publishLedger, label, skipSectio
     <div style={{textAlign:'center',padding:30,color:'#333'}}>
       <div style={{fontSize:20,marginBottom:8}}>📊</div>
       Waiting for {label || 'SEO'} dashboard data…<br/>
-      <span style={{fontSize:9}}>Agent will write SEO-DASHBOARD.md when ready</span>
+      <span style={{fontSize:9}}>Add SEO dashboard data through the project-owned status export when ready</span>
     </div>
   )
 

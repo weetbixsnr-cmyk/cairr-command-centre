@@ -52,7 +52,7 @@ export default function GbpPosts({ posts = [], label = 'GBP', actionEndpoint }) 
       <div style={{textAlign:'center',padding:40,color:'#333'}}>
         <div style={{fontSize:32,marginBottom:8}}>📍</div>
         <div style={{fontSize:13,color:'#555'}}>No GBP posts yet</div>
-        <div style={{fontSize:10,color:'#333',marginTop:4}}>Posts will appear here when {label} agent creates them</div>
+        <div style={{fontSize:10,color:'#333',marginTop:4}}>Posts will appear here when {label} status data is updated</div>
       </div>
     )
   }

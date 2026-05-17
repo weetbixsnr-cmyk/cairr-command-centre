@@ -559,7 +559,7 @@ export default function NbhwSeoPage({ initialSnapshot }) {
                 <div className="card" style={{textAlign:'center',padding:20}}>
                   <div style={{fontSize:20,marginBottom:6}}>📞</div>
                   <div style={{color:'#555',fontSize:11}}>Conversion tracking awaiting click event data…</div>
-                  <div style={{color:'#333',fontSize:9,marginTop:4}}>NBHW agent needs to add tel/mailto click tracking JS</div>
+                  <div style={{color:'#333',fontSize:9,marginTop:4}}>Awaiting project-owned tel/mailto click tracking data</div>
                 </div>
               )}
             </div>

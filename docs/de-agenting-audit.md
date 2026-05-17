@@ -47,7 +47,7 @@ The manifest explicitly covers this dashboard's dirty/untracked state.
 | `pages/bts-login.js` | keep-active | BTS client auth surface retained. |
 | `pages/components/seo-dashboard.js` | keep-active | Shared display component. |
 | `pages/components/gbp-posts.js` | keep-active | Shared display/action component. |
-| `pages.bak/` | archive-later | Existing untracked backup. Preserved untouched. |
+| `pages.bak/` | archive-later | Existing untracked backup archived to `docs/archive/pages-bak-2026-05-15/`. |
 
 ## API Route Classification
 
@@ -83,7 +83,7 @@ The manifest explicitly covers this dashboard's dirty/untracked state.
 | remote `agent/command-centre/data/snapshot.json` | `/api/data` | Removed. |
 | remote `agent/command-centre/data/bts-*.json` | BTS draft/suggestion APIs | Rewired to `public/data/bts-status.json`. |
 | remote `agent/command-centre/data/nbhw-suggestions.json` | NBHW suggestions API | Rewired to `public/data/nbhw-status.json`. |
-| `public/snapshot.json` | `/api/data`, `/api/action` fallback | Removed from active reads. File remains legacy dirty state. |
+| `public/snapshot.json` | `/api/data`, `/api/action` fallback | Removed from active reads. File now contains only a legacy-disabled marker. |
 | `openclaw status` | `/api/system`, `/api/sessions`, `/api/crons` | Parked. No CLI calls. |
 | `openclaw cron list` | `/api/crons` | Parked. No CLI calls. |
 | `../dev/pipeline-results/*.md` | fleet/governance/agents/system APIs | Parked. No parent workspace reads. |
@@ -128,7 +128,7 @@ dashboard-status.json: actionQueue
 
 ## Design Lock Decision
 
-The old design lock does not apply as an active constitutional rule because it points to the agent-era HTML workflow at `/Users/cairr/.openclaw/workspace/dashboard.html`.
+Resolved 2026-05-15: keep the existing dashboard layout and page sequence intact.
 
 Local historical reference:
 
@@ -136,18 +136,19 @@ Local historical reference:
 public/dashboard.html
 ```
 
-That file is a reference only, not an active golden master. A new design lock should be approved before any styling or layout work.
+Do not change structure, navigation order, or visual layout during de-agenting. Update the data flowing into the existing UI shell from manual/project-owned status data. `public/dashboard.html` remains a reference only.
 
 ## Verification
 
-`npm run build` passed after rewiring.
+`npm run build` passed after rewiring and after the 2026-05-17 design-lock cleanup.
 
 Local dev verification was run at `http://127.0.0.1:3000`:
 
 - `/api/data` returns `dataSource.mode = manual-status-json`, `agentSnapshot = false`, and `openclawCli = false`.
 - `/api/data?agent=bts` returns a parked 410 response.
-- `/` renders BTS, NBHW, and Dashboard project cards from `public/data/*.json`, including BTS baseline tag `bts-de-agenting-baseline-2026-05-10`.
-- `/bts-seo` renders BTS manual SEO values including health `35`, `5/17` location coverage, and `first aid training berkshire`.
+- `/` renders BTS, NBHW, and Dashboard project cards from `public/data/*.json`, including BTS `SiteGround captcha-noindex P0`, NBHW `Manual status`, and the dashboard manual status queue.
+- `/bts-seo` renders BTS manual SEO values including 8 tracked keywords, 6 location pages live, 14 blog posts live, and the `SiteGround captcha-noindex P0` blocker.
 - `/nbhw-seo` renders NBHW manual SEO values including health `58`, `21/37` coverage, and `hot water repair northern beaches`.
+- `/system` renders `manual-status-json`, `Agent snapshot: Removed`, `OpenClaw CLI: Not called`, and parked agent-era surfaces.
 
-`public/snapshot.json` remains a pre-existing modified legacy file and is not an active read source.
+`public/snapshot.json` is retained only as a `legacy-disabled` marker and is not an active read source.

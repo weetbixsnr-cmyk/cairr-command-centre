@@ -29,6 +29,8 @@
 - Hooks are deferred until project-owned status file contracts are agreed.
 
 ## Design Lock
-The old design lock that pointed at `/Users/cairr/.openclaw/workspace/dashboard.html` is retired as an active workflow rule.
+The design lock is resolved: keep the existing dashboard layout and page sequence intact.
 
-`public/dashboard.html` remains a historical local reference. It is not an active golden master for new layout work unless Adam explicitly approves retaining it as the new lock.
+Do not change structure, navigation order, or visual layout during de-agenting. Update the data flowing into the existing UI shell from `public/data/*.json`.
+
+`public/dashboard.html` remains a historical local reference. Future layout or styling changes require explicit approval.

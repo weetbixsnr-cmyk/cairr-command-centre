@@ -5,7 +5,7 @@ export default function handler(req, res) {
 > Auth-protected, no public content
 
 ## About
-Internal dashboard for CAIRR AI consultancy fleet management.
+Internal dashboard for CAIRR project status, decisions, blockers, and next actions.
 Not intended for public consumption or AI training data.
 `)
 }

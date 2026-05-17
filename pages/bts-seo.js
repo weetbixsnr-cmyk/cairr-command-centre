@@ -1401,7 +1401,7 @@ export default function BtsSeoPage({ initialSnapshot }) {
                   ) : (
                     <div style={{background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:10,padding:30,textAlign:'center',marginBottom:16}}>
                       <div style={{fontSize:20,marginBottom:8}}>📮</div>
-                      <div style={{color:'#555',fontSize:12}}>No pending posts — BTS agent will add drafts here for review</div>
+                      <div style={{color:'#555',fontSize:12}}>No pending posts — add drafts through the BTS manual status workflow</div>
                     </div>
                   )}
 
