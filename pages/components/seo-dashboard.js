@@ -3,6 +3,7 @@
  * Used by both NBHW and BTS SEO pages
  * Renders from parsed SEO-DASHBOARD.md sections + news-bank.json
  */
+import { formatDashboardDateTime } from '../../lib/date-format'
 
 // Exported for use in parent pages (bts-seo, nbhw-seo)
 export function SectionCard({ title, children, icon }) {
@@ -187,7 +188,7 @@ export default function SeoDashboard({ seoDash, publishLedger, label, skipSectio
 
       {/* Source info */}
       <div style={{fontSize:8,color:'#222',textAlign:'right',marginTop:8}}>
-        SEO-DASHBOARD.md · Updated: {seoDash.lastUpdated ? new Date(seoDash.lastUpdated).toLocaleString() : '—'}
+        SEO-DASHBOARD.md · Updated: {seoDash.lastUpdated ? formatDashboardDateTime(seoDash.lastUpdated) : '—'}
       </div>
     </div>
   )

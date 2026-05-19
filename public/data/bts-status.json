@@ -3,76 +3,226 @@
   "name": "Better Training Solutions",
   "label": "BTS",
   "href": "/bts-seo",
-  "status": "blocked",
-  "statusLabel": "SiteGround captcha-noindex P0",
-  "lastUpdated": "2026-05-11T00:00:00+10:00",
+  "status": "verify",
+  "statusLabel": "GSC/Bing verification P0",
+  "lastUpdated": "2026-05-20T00:00:00+10:00",
   "source": "manual-status-json",
-  "summary": "Batch 3 is published and recorded in the BTS repo. Public crawl/indexing recovery remains blocked by SiteGround captcha/noindex until Sunny/SiteGround access is resolved.",
+  "summary": "BTS is in de-agented operational SEO mode. Batch 3 is published. SiteGround support confirmed normal public pages return HTTP 200 without page-level noindex; real Google/Bing crawler access still needs GSC/Bing URL Inspection.",
   "metrics": [
-    { "label": "BTS commit", "value": "60b0ab6" },
-    { "label": "Live pages", "value": 35 },
-    { "label": "Blogs live", "value": 14 },
-    { "label": "News/insights live", "value": 4 },
-    { "label": "Pending draft assets", "value": 10 }
+    {
+      "label": "SEO score",
+      "value": 28
+    },
+    {
+      "label": "GEO/AI readiness",
+      "value": 5
+    },
+    {
+      "label": "Live pages",
+      "value": 35
+    },
+    {
+      "label": "Blogs live",
+      "value": 14
+    },
+    {
+      "label": "News/insights live",
+      "value": 4
+    },
+    {
+      "label": "GBP posts published",
+      "value": 6
+    },
+    {
+      "label": "Pending draft assets",
+      "value": 10
+    },
+    {
+      "label": "Target keywords top 10",
+      "value": "0/35"
+    }
   ],
   "blockers": [
-    "P0: SiteGround captcha/bot protection is serving HTTP 202, sg-captcha: challenge, and x-robots-tag:noindex to unauthenticated crawlers.",
-    "GSC, GBP, GA, and WordPress checks remain blocked or incomplete until SiteGround access/captcha is fixed."
+    "P0: Verify real Google/Bing crawl access in GSC/Bing URL Inspection.",
+    "Do not treat VPN/datacenter curl sg-captcha responses as confirmed crawler blocking."
   ],
   "nextActions": [
-    "Fix SiteGround captcha/bot protection/noindex first.",
-    "Run GSC, GBP, GA, and WordPress checks after crawler access recovers.",
-    "Review and publish Batch 4 only after access/indexing recovery and approval."
+    "Run GSC URL Inspection on homepage, key course pages, robots.txt, and sitemap.",
+    "Run Bing Webmaster Tools URL Inspection if access is available.",
+    "Activate/verify SG Optimizer when approved."
   ],
   "publishedBatch": {
     "batch": 3,
     "publishedDate": "2026-05-11",
     "sourceCommit": "60b0ab6",
+    "approval": "Sunny approval verified by BTS handoff",
     "items": [
       {
         "title": "Gas and Plumbing Training Near Reading",
         "type": "blog",
         "url": "/gas-and-plumbing-training-near-reading/",
-        "wpId": 699
+        "wpId": 699,
+        "sourceFile": "blog-12-location-reading.md"
       },
       {
         "title": "Gas and Plumbing Training Near Oxford",
         "type": "blog",
         "url": "/gas-and-plumbing-training-near-oxford/",
-        "wpId": 700
+        "wpId": 700,
+        "sourceFile": "blog-13-location-oxford.md"
       },
       {
         "title": "ACS Initial Training: What You Need to Know Before You Book Your First Course",
         "type": "blog",
         "url": "/acs-initial-training-what-you-need-to-know/",
-        "wpId": 701
+        "wpId": 701,
+        "sourceFile": "blog-14-acs-initial-training.md"
       },
       {
         "title": "Plumbing Apprenticeship Starts Have Crashed 37%. The Industry Is Raising the Alarm.",
         "type": "news",
         "url": "/plumbing-apprenticeship-starts-crashed-37-percent/",
-        "wpId": 702
+        "wpId": 702,
+        "sourceFile": "news-4-plumbing-apprenticeship-crash.md"
       }
     ]
   },
   "seo": {
-    "lastUpdated": "2026-05-11T00:00:00+10:00",
-    "source": "manual-status-json",
+    "lastUpdated": "2026-05-20T00:00:00+10:00",
+    "source": "bts-source-of-truth-handoff-plus-siteground-correction",
+    "client": "Better Training Solutions",
+    "site": "bettertrainingsolutions.co.uk",
     "healthScore": 28,
+    "healthScoreTarget": 75,
     "geoReadiness": 5,
+    "geoAiReadinessTarget": 60,
     "pagesLive": 35,
     "blogsPublished": 14,
     "newsInsightsPublished": 4,
+    "gbpPostsPublished": 6,
     "pendingDraftAssets": 10,
+    "rankings": {
+      "targetKeywords": 35,
+      "top10Count": 0,
+      "status": "0/35 target keywords in top 10; 4 May regression; GSC verification outstanding"
+    },
+    "p0Blockers": [
+      "GSC/Bing crawler access verification outstanding",
+      "GSC indexing health unknown after 4 May ranking regression"
+    ],
+    "criticalFixesOutstanding": [
+      "GSC/Bing URL Inspection verification",
+      "SG Optimizer activation",
+      "Course-page inventory confirmation"
+    ],
     "coreKeywords": [
-      { "keyword": "ACS training High Wycombe", "position": 50, "status": "regressed" },
-      { "keyword": "ACS training course UK", "position": 50, "status": "blocked-by-captcha" },
-      { "keyword": "gas training High Wycombe", "position": 50, "status": "blocked-by-captcha" },
-      { "keyword": "gas training near Reading", "position": 50, "status": "new-batch-3" },
-      { "keyword": "plumbing training near Oxford", "position": 50, "status": "new-batch-3" },
-      { "keyword": "gas managed learning programme", "position": 50, "status": "tracked" },
-      { "keyword": "water regulations course UK", "position": 50, "status": "tracked" },
-      { "keyword": "heat pump training course UK", "position": 50, "status": "tracked" }
+      {
+        "keyword": "ACS training High Wycombe",
+        "position": 50,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "gas training courses Buckinghamshire",
+        "position": 50,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "ACS reassessment near me",
+        "position": 50,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "heat pump training Buckinghamshire",
+        "position": 50,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "WRAS training near me",
+        "position": 50,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "G3 unvented training",
+        "position": 50,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "LPG changeover training",
+        "position": 50,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "legionella testing training",
+        "position": 50,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "managed learning program plumbing",
+        "position": 50,
+        "status": "needs-gsc-verification"
+      }
+    ],
+    "locationKeywords": [
+      {
+        "keyword": "ACS training Marlow",
+        "position": 99,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "gas training Aylesbury",
+        "position": 99,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "ACS training Beaconsfield",
+        "position": 99,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "gas training Reading",
+        "position": 99,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "heat pump training Oxford",
+        "position": 99,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "ACS training Maidenhead",
+        "position": 99,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "gas training Milton Keynes",
+        "position": 99,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "ACS training Slough",
+        "position": 99,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "gas training near me South East",
+        "position": 99,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "ACS training Amersham",
+        "position": 99,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "heat pump training Hemel Hempstead",
+        "position": 99,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "gas training Watford",
+        "position": 99,
+        "status": "needs-gsc-verification"
+      }
     ],
     "locationCoverage": {
       "summary": {
@@ -81,13 +231,20 @@
         "zeroCoverage": 10,
         "servicePages": 6,
         "keywordsPerLocation": 8,
-        "note": "Batch 3 added Reading and Oxford location content. Rankings remain blocked by SiteGround captcha/noindex recovery."
+        "note": "Batch 3 added Reading and Oxford location content. Rankings and crawl verification remain blocked by GSC/Bing verification recovery."
       },
       "waves": [
         {
           "id": 1,
           "status": "published",
-          "locations": ["High Wycombe", "Aylesbury", "Reading", "Oxford", "Buckinghamshire", "South East"],
+          "locations": [
+            "High Wycombe",
+            "Aylesbury",
+            "Reading",
+            "Oxford",
+            "Buckinghamshire",
+            "South East"
+          ],
           "servicePages": 6,
           "servicePagesTotal": 11,
           "blogs": 14,
@@ -95,37 +252,704 @@
         }
       ]
     },
+    "framework": {
+      "strategy": "Location-by-location content build, High Wycombe outward by tier",
+      "urlStructure": "/training/[service]/[location]",
+      "contentPillars": [
+        {
+          "name": "Service Explainer",
+          "pct": 30,
+          "weeklyTarget": "1 blog"
+        },
+        {
+          "name": "Location Targeted",
+          "pct": 20,
+          "weeklyTarget": "1 blog"
+        },
+        {
+          "name": "Career/Guide",
+          "pct": 15,
+          "weeklyTarget": "0.5 blog"
+        },
+        {
+          "name": "News & Commentary",
+          "pct": 30,
+          "weeklyTarget": "1 post"
+        },
+        {
+          "name": "GBP Posts",
+          "pct": 5,
+          "weeklyTarget": "3 posts"
+        }
+      ],
+      "weeklyCadence": "Mon + Thu drafts, weekly GBP posts, Friday rankings",
+      "reviewCoaching": false
+    },
     "assets": {
-      "trainingServices": 8
+      "trainingServices": 8,
+      "courseCertifications": 8,
+      "googleReviews": 0
+    },
+    "newsBank": {
+      "totalStories": 36,
+      "total": 36,
+      "available": 30,
+      "drafted": 2,
+      "published": 4
+    },
+    "contentPipeline": {
+      "pendingDraftAssets": 10,
+      "pending": [
+        {
+          "id": "blog-15-slough",
+          "title": "Gas and Plumbing Training Near Slough",
+          "type": "blog",
+          "service": "Multi-trade / Location"
+        },
+        {
+          "id": "blog-16-maidenhead",
+          "title": "Gas and Plumbing Training Near Maidenhead",
+          "type": "blog",
+          "service": "Multi-trade / Location"
+        },
+        {
+          "id": "blog-17-milton-keynes",
+          "title": "Gas and Plumbing Training Near Milton Keynes",
+          "type": "blog",
+          "service": "Multi-trade / Location"
+        },
+        {
+          "id": "blog-18-water-regulations-deep-dive",
+          "title": "Water Regulations Training Deep Dive",
+          "type": "blog",
+          "service": "Water Regulations"
+        },
+        {
+          "id": "blog-19-domestic-cookers",
+          "title": "Domestic Cookers Training Guide",
+          "type": "blog",
+          "service": "Domestic Cookers"
+        },
+        {
+          "id": "news-5-bus-amendments",
+          "title": "BUS Amendments Update",
+          "type": "news",
+          "service": "Heat Pump / Policy"
+        },
+        {
+          "id": "news-6-apprenticeship-funding-april-2026",
+          "title": "Apprenticeship Funding April 2026",
+          "type": "news",
+          "service": "MLP / Apprenticeships"
+        },
+        {
+          "id": "page-about-us",
+          "title": "About Us Page",
+          "type": "page",
+          "service": "About"
+        },
+        {
+          "id": "directory-package-markdown",
+          "title": "Directory Package Markdown",
+          "type": "directory",
+          "service": "Directory package"
+        },
+        {
+          "id": "directory-package-pdf",
+          "title": "Directory Package PDF",
+          "type": "directory",
+          "service": "Directory package"
+        }
+      ]
+    },
+    "crawlerStatusCorrection": {
+      "date": "2026-05-20",
+      "summary": "SiteGround support confirmed normal public pages return HTTP 200 without x-robots-tag:noindex. Prior sg-captcha curl failures were from changing VPN/test IPs hitting SiteGround Antibot/WAF, not proof that Googlebot/Bingbot are globally blocked.",
+      "rule": "Use GSC/Bing URL Inspection or SiteGround verified crawler logs for crawler-blocking claims. Do not use VPN/datacenter curl challenges alone."
     }
   },
   "keywords": {
-    "lastUpdated": "2026-05-11T00:00:00+10:00",
-    "source": "manual-status-json",
+    "lastUpdated": "2026-05-17T00:00:00+10:00",
+    "source": "bts-source-of-truth-handoff plus historical target list",
     "keywords": [
-      { "keyword": "ACS training High Wycombe", "latest": 50, "status": "regressed" },
-      { "keyword": "ACS training course UK", "latest": 50, "status": "blocked-by-captcha" },
-      { "keyword": "gas training High Wycombe", "latest": 50, "status": "blocked-by-captcha" },
-      { "keyword": "gas training near Reading", "latest": 50, "status": "new-batch-3" },
-      { "keyword": "plumbing training near Oxford", "latest": 50, "status": "new-batch-3" },
-      { "keyword": "gas managed learning programme", "latest": 50, "status": "tracked" },
-      { "keyword": "water regulations course UK", "latest": 50, "status": "tracked" },
-      { "keyword": "heat pump training course UK", "latest": 50, "status": "tracked" }
-    ]
+      {
+        "keyword": "ACS training course UK",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🔴 Gas Training Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "gas safety training near me",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🔴 Gas Training Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "gas engineer training courses",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🔴 Gas Training Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "ACS reassessment course",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🔴 Gas Training Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "MLP gas training course",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🔴 Gas Training Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "gas training Buckinghamshire",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🔴 Gas Training Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "domestic gas training High Wycombe",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🔴 Gas Training Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "LPG training course UK",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🔴 Gas Training Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "LPG changeover training",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🔴 Gas Training Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "water regulations course UK",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟡 Plumbing/Water Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "WRAS water regulations training",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟡 Plumbing/Water Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "unvented hot water course",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟡 Plumbing/Water Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "G3 training course",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟡 Plumbing/Water Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "unvented cylinder course",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟡 Plumbing/Water Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "legionella testing training",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟡 Plumbing/Water Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "legionella awareness course",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟡 Plumbing/Water Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "plumbing training High Wycombe",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟡 Plumbing/Water Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "plumbing courses Buckinghamshire",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟡 Plumbing/Water Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "heat pump training course UK",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟢 Heat Pump / Renewable Keywords (7)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "heat pump installer training",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟢 Heat Pump / Renewable Keywords (7)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "heat pump installation course",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟢 Heat Pump / Renewable Keywords (7)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "renewable energy training",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟢 Heat Pump / Renewable Keywords (7)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "green energy training course",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟢 Heat Pump / Renewable Keywords (7)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "BUS training voucher course",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟢 Heat Pump / Renewable Keywords (7)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "heat pump certification UK",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟢 Heat Pump / Renewable Keywords (7)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "multi trade training course",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟣 Multi-trade Keywords (5)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "gas and plumbing training",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟣 Multi-trade Keywords (5)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "trade training High Wycombe",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟣 Multi-trade Keywords (5)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "building services training",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟣 Multi-trade Keywords (5)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "career change training course",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟣 Multi-trade Keywords (5)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "training courses High Wycombe",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "📍 Local Keywords (5)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "trade training Buckinghamshire",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "📍 Local Keywords (5)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "gas training near Reading",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "📍 Local Keywords (5)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "plumbing training near Oxford",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "📍 Local Keywords (5)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "training centre M40 corridor",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "📍 Local Keywords (5)",
+        "status": "needs-gsc-verification"
+      }
+    ],
+    "top10": [],
+    "campaigns": [],
+    "targetKeywords": 35,
+    "top10Count": 0,
+    "status": "0/35 target keywords in top 10; 4 May regression; GSC verification outstanding"
   },
   "blogInventory": {
+    "client": "Better Training Solutions",
+    "site": "bettertrainingsolutions.co.uk",
+    "updatedAt": "2026-05-17T00:00:00+10:00",
     "published": 14,
+    "drafts": 10,
+    "planned": [
+      {
+        "id": "bts-blog-001",
+        "title": "ACS Training in High Wycombe — What to Expect & How to Book",
+        "service": "Initial ACS",
+        "keywords": [
+          "ACS training High Wycombe",
+          "ACS training near me"
+        ],
+        "status": "published",
+        "location": "High Wycombe",
+        "wave": 1
+      },
+      {
+        "id": "bts-blog-002",
+        "title": "Gas Training Courses Near You — South East England Guide",
+        "service": "All gas services",
+        "keywords": [
+          "gas training near me",
+          "gas training South East"
+        ],
+        "status": "published",
+        "location": "South East England",
+        "wave": 4
+      },
+      {
+        "id": "bts-blog-003",
+        "title": "Heat Pump Training in Buckinghamshire — Your Route to Certification",
+        "service": "Heat Pump",
+        "keywords": [
+          "heat pump training Buckinghamshire",
+          "heat pump training near me"
+        ],
+        "status": "published",
+        "location": "Buckinghamshire",
+        "wave": 4
+      },
+      {
+        "id": "bts-blog-004",
+        "title": "ACS Reassessment Near Reading, Oxford & the M40 Corridor",
+        "service": "ACS Reassessment",
+        "keywords": [
+          "ACS reassessment near Reading",
+          "ACS reassessment near me"
+        ],
+        "status": "published",
+        "location": "Reading/Oxford/M40",
+        "wave": 2
+      },
+      {
+        "id": "bts-blog-005",
+        "title": "Legionella Training: Why This One-Day Qualification Could Win You More Work",
+        "service": "Legionella Testing",
+        "keywords": [
+          "Legionella training course",
+          "Legionella qualification"
+        ],
+        "status": "published",
+        "location": "High Wycombe/Reading/Buckinghamshire",
+        "wave": 1
+      },
+      {
+        "id": "bts-blog-006",
+        "title": "G3 Unvented Hot Water Course: Is It Worth Adding to Your Qualifications?",
+        "service": "Unvented G3",
+        "keywords": [
+          "G3 training course",
+          "unvented hot water course"
+        ],
+        "status": "published",
+        "location": "High Wycombe/Reading/Buckinghamshire",
+        "wave": 1
+      },
+      {
+        "id": "bts-blog-007",
+        "title": "LPG Changeover Training: The Niche Qualification Most Gas Engineers Overlook",
+        "service": "LPG Changeover",
+        "keywords": [
+          "LPG training course UK",
+          "LPG changeover training"
+        ],
+        "status": "published",
+        "location": "High Wycombe",
+        "wave": 1
+      },
+      {
+        "id": "bts-blog-008",
+        "title": "Heat Pump Training in Buckinghamshire: Your Route to a Growing Market",
+        "service": "Heat Pump",
+        "keywords": [
+          "heat pump training Buckinghamshire",
+          "heat pump course near me"
+        ],
+        "status": "published",
+        "location": "Buckinghamshire",
+        "wave": 4
+      },
+      {
+        "id": "bts-blog-009",
+        "title": "Thinking About a Career Change Into Gas Engineering?",
+        "service": "Gas MLP",
+        "keywords": [
+          "career change gas engineer",
+          "how to become gas engineer"
+        ],
+        "status": "published",
+        "location": null,
+        "wave": null
+      },
+      {
+        "id": "bts-blog-010",
+        "title": "The Gas Managed Learning Programme: What It Is, What It Costs, and What You Get",
+        "service": "Gas MLP",
+        "keywords": [
+          "gas managed learning programme",
+          "gas MLP course"
+        ],
+        "status": "published",
+        "location": "High Wycombe",
+        "wave": 1
+      },
+      {
+        "id": "bts-blog-011",
+        "title": "Gas and Plumbing Training Near Aylesbury: Courses Within Easy Reach",
+        "service": "All services",
+        "keywords": [
+          "gas training Aylesbury",
+          "plumbing courses Aylesbury"
+        ],
+        "status": "published",
+        "location": "Aylesbury",
+        "wave": 2
+      },
+      {
+        "id": "batch3-1",
+        "title": "Gas and Plumbing Training Near Reading",
+        "service": "SEO content",
+        "keywords": [],
+        "status": "published",
+        "location": "Reading",
+        "wave": 3,
+        "url": "/gas-and-plumbing-training-near-reading/",
+        "wpId": 699
+      },
+      {
+        "id": "batch3-2",
+        "title": "Gas and Plumbing Training Near Oxford",
+        "service": "SEO content",
+        "keywords": [],
+        "status": "published",
+        "location": "Oxford",
+        "wave": 3,
+        "url": "/gas-and-plumbing-training-near-oxford/",
+        "wpId": 700
+      },
+      {
+        "id": "batch3-3",
+        "title": "ACS Initial Training: What You Need to Know Before You Book Your First Course",
+        "service": "SEO content",
+        "keywords": [],
+        "status": "published",
+        "location": null,
+        "wave": 3,
+        "url": "/acs-initial-training-what-you-need-to-know/",
+        "wpId": 701
+      },
+      {
+        "id": "batch3-4",
+        "title": "Plumbing Apprenticeship Starts Have Crashed 37%. The Industry Is Raising the Alarm.",
+        "service": "News/Insights",
+        "keywords": [],
+        "status": "published",
+        "location": null,
+        "wave": 3,
+        "url": "/plumbing-apprenticeship-starts-crashed-37-percent/",
+        "wpId": 702
+      }
+    ],
+    "news": [
+      {
+        "id": "bts-news-001",
+        "title": "The Future Homes Standard Is Here: What It Means for Gas and Heating Engineers",
+        "status": "published"
+      },
+      {
+        "id": "bts-news-002",
+        "title": "Nearly Half of UK Builders Are Delaying Jobs Because They Can't Find Skilled Workers",
+        "status": "published"
+      },
+      {
+        "id": "bts-news-003",
+        "title": "The UK Has Around 2,000 Full-Time Heat Pump Installers. It Needs 33,700.",
+        "status": "published"
+      }
+    ],
+    "partnerships": [
+      {
+        "id": "bts-partner-001",
+        "title": "Better Training Solutions Partners with Powered Now",
+        "status": "published"
+      }
+    ],
+    "gbpPosts": [
+      {
+        "id": "gbp-001",
+        "title": "Heat Pump Training",
+        "status": "published"
+      },
+      {
+        "id": "gbp-002",
+        "title": "Train Locally in High Wycombe",
+        "status": "published"
+      },
+      {
+        "id": "gbp-003",
+        "title": "Water Regulations Training",
+        "status": "published"
+      },
+      {
+        "id": "gbp-004",
+        "title": "ACS Reassessment",
+        "status": "published"
+      },
+      {
+        "id": "gbp-005",
+        "title": "Future Homes Standard News",
+        "status": "published"
+      },
+      {
+        "id": "gbp-006",
+        "title": "Legionella Qualification",
+        "status": "published"
+      }
+    ],
     "newsInsightsPublished": 4,
     "livePages": 35,
     "pendingDraftAssets": 10,
-    "source": "manual-status-json",
+    "gbpPostsPublished": 6,
+    "newsBank": {
+      "total": 36,
+      "available": 30,
+      "drafted": 2,
+      "published": 4
+    },
     "batch3": [
       "Gas and Plumbing Training Near Reading",
       "Gas and Plumbing Training Near Oxford",
       "ACS Initial Training: What You Need to Know Before You Book Your First Course",
       "Plumbing Apprenticeship Starts Have Crashed 37%. The Industry Is Raising the Alarm."
-    ],
-    "wpIds": [699, 700, 701, 702]
+    ]
   },
   "suggestions": {
     "suggestions": []
@@ -134,6 +958,2071 @@
     "notifications": []
   },
   "drafts": {
-    "drafts": []
+    "source": "bts-source-of-truth-handoff plus restored old GBP draft text",
+    "sourceNote": "Pending assets are current; restored GBP texts are drafts only and not marked as published.",
+    "drafts": [
+      {
+        "id": "blog-15-slough",
+        "title": "Gas and Plumbing Training Near Slough",
+        "type": "blog",
+        "status": "draft",
+        "service": "Multi-trade / Location",
+        "content": "Draft text not available in restored manual data.",
+        "author": "BTS manual status",
+        "createdAt": "2026-05-17T00:00:00+10:00"
+      },
+      {
+        "id": "blog-16-maidenhead",
+        "title": "Gas and Plumbing Training Near Maidenhead",
+        "type": "blog",
+        "status": "draft",
+        "service": "Multi-trade / Location",
+        "content": "Draft text not available in restored manual data.",
+        "author": "BTS manual status",
+        "createdAt": "2026-05-17T00:00:00+10:00"
+      },
+      {
+        "id": "blog-17-milton-keynes",
+        "title": "Gas and Plumbing Training Near Milton Keynes",
+        "type": "blog",
+        "status": "draft",
+        "service": "Multi-trade / Location",
+        "content": "Draft text not available in restored manual data.",
+        "author": "BTS manual status",
+        "createdAt": "2026-05-17T00:00:00+10:00"
+      },
+      {
+        "id": "blog-18-water-regulations-deep-dive",
+        "title": "Water Regulations Training Deep Dive",
+        "type": "blog",
+        "status": "draft",
+        "service": "Water Regulations",
+        "content": "Draft text not available in restored manual data.",
+        "author": "BTS manual status",
+        "createdAt": "2026-05-17T00:00:00+10:00"
+      },
+      {
+        "id": "blog-19-domestic-cookers",
+        "title": "Domestic Cookers Training Guide",
+        "type": "blog",
+        "status": "draft",
+        "service": "Domestic Cookers",
+        "content": "Draft text not available in restored manual data.",
+        "author": "BTS manual status",
+        "createdAt": "2026-05-17T00:00:00+10:00"
+      },
+      {
+        "id": "news-5-bus-amendments",
+        "title": "BUS Amendments Update",
+        "type": "news",
+        "status": "draft",
+        "service": "Heat Pump / Policy",
+        "content": "Draft text not available in restored manual data.",
+        "author": "BTS manual status",
+        "createdAt": "2026-05-17T00:00:00+10:00"
+      },
+      {
+        "id": "news-6-apprenticeship-funding-april-2026",
+        "title": "Apprenticeship Funding April 2026",
+        "type": "news",
+        "status": "draft",
+        "service": "MLP / Apprenticeships",
+        "content": "Draft text not available in restored manual data.",
+        "author": "BTS manual status",
+        "createdAt": "2026-05-17T00:00:00+10:00"
+      },
+      {
+        "id": "page-about-us",
+        "title": "About Us Page",
+        "type": "page",
+        "status": "draft",
+        "service": "About",
+        "content": "Draft text not available in restored manual data.",
+        "author": "BTS manual status",
+        "createdAt": "2026-05-17T00:00:00+10:00"
+      },
+      {
+        "id": "directory-package-markdown",
+        "title": "Directory Package Markdown",
+        "type": "directory",
+        "status": "draft",
+        "service": "Directory package",
+        "content": "Draft text not available in restored manual data.",
+        "author": "BTS manual status",
+        "createdAt": "2026-05-17T00:00:00+10:00"
+      },
+      {
+        "id": "directory-package-pdf",
+        "title": "Directory Package PDF",
+        "type": "directory",
+        "status": "draft",
+        "service": "Directory package",
+        "content": "Draft text not available in restored manual data.",
+        "author": "BTS manual status",
+        "createdAt": "2026-05-17T00:00:00+10:00"
+      },
+      {
+        "id": "gbp-acs-reassess",
+        "title": "GBP: ACS Reassessment",
+        "type": "gbp",
+        "status": "draft",
+        "service": "Gas (ACS)",
+        "content": "Draft text not available in restored manual data.",
+        "author": "BTS manual status",
+        "createdAt": "2026-05-17T00:00:00+10:00",
+        "batch": 3
+      },
+      {
+        "id": "gbp-future-homes",
+        "title": "GBP: Future Homes Standard News",
+        "type": "gbp",
+        "status": "draft",
+        "service": "Heat Pump",
+        "content": "Draft text not available in restored manual data.",
+        "author": "BTS manual status",
+        "createdAt": "2026-05-17T00:00:00+10:00",
+        "batch": 3
+      },
+      {
+        "id": "gbp-legionella",
+        "title": "GBP: Legionella Qualification",
+        "type": "gbp",
+        "status": "draft",
+        "service": "Plumbing",
+        "content": "Draft text not available in restored manual data.",
+        "author": "BTS manual status",
+        "createdAt": "2026-05-17T00:00:00+10:00",
+        "batch": 3
+      },
+      {
+        "id": "gbp-career-change",
+        "title": "GBP: Career Change Into Gas Engineering",
+        "type": "gbp",
+        "status": "draft",
+        "service": "Gas (MLP)",
+        "content": "Thinking about a career change? Gas engineering is one of the few trades where demand is outstripping supply. Plumbing apprenticeship starts have dropped 37% since 2021. Over 44% of the existing workforce is over 55. The industry needs qualified people, and it needs them now. Our Gas Managed Learning Programme takes you from no experience through to Gas Safe registration. Structured, practical, hands-on. Based in High Wycombe, easy to reach from Reading, Aylesbury, Oxford, and anywhere along the M40. HP11 2LB. #CareerChange #GasEngineer #GasSafe #MLP #HighWycombe #Buckinghamshire #GasTraining",
+        "author": "BTS manual status",
+        "createdAt": "2026-05-17T00:00:00+10:00",
+        "buttonText": "Learn more",
+        "buttonUrl": "https://bettertrainingsolutions.co.uk/course/gas-managed-learning-programme/",
+        "batch": 3
+      },
+      {
+        "id": "gbp-skills-shortage",
+        "title": "GBP: Plumber Skills Shortage (NEWS)",
+        "type": "gbp",
+        "status": "draft",
+        "service": "Multi-trade",
+        "content": "The numbers speak for themselves. Plumbing apprenticeship starts have crashed 37%. 69% of firms can't find skilled workers. The UK needs over 40,000 new plumbers by 2033. If you're already qualified, your skills are more valuable than ever. If you're thinking about entering the trade, the timing couldn't be better. We run ACS initial training, water regulations, G3, and Legionella courses from High Wycombe. Small classes, trade-experienced assessors, qualifications that put you straight into a market that's crying out for people. HP11 2LB. #PlumbingTraining #SkillsShortage #GasTraining #ACS #HighWycombe #Buckinghamshire",
+        "author": "BTS manual status",
+        "createdAt": "2026-05-17T00:00:00+10:00",
+        "buttonText": "Learn more",
+        "buttonUrl": "https://bettertrainingsolutions.co.uk/course/ccn1-initial/",
+        "batch": 3
+      },
+      {
+        "id": "gbp-stack-qualifications",
+        "title": "GBP: Stack Your Qualifications",
+        "type": "gbp",
+        "status": "draft",
+        "service": "Plumbing",
+        "content": "Water Regulations. G3 Unvented. Legionella Prevention. Three qualifications. Three days. All from our training centre in High Wycombe. Each one opens up new work. Water Regs proves you understand compliance. G3 lets you work on unvented cylinders legally. Legionella risk assessments are required by law for landlords, which means repeat work for you. Stack all three in a single week and walk away with qualifications that set you apart. No wasted travel. No waiting weeks between courses. HP11 2LB, free parking, easy reach from Reading, Aylesbury, and the M40 corridor. #PlumbingTraining #WaterRegulations #G3Training #Legionella #HighWycombe #Buckinghamshire",
+        "author": "BTS manual status",
+        "createdAt": "2026-05-17T00:00:00+10:00",
+        "buttonText": "Learn more",
+        "buttonUrl": "https://bettertrainingsolutions.co.uk/our-plumbing-training-courses/",
+        "batch": 3
+      }
+    ]
+  },
+  "phase": "De-agented operational SEO mode; Batch 3 published; GSC/Bing verification required",
+  "lastLocalVerified": "2026-05-17",
+  "lastExternalCrawlerVerified": "2026-05-11",
+  "seoPlan": {
+    "client": "Better Training Solutions",
+    "site": "bettertrainingsolutions.co.uk",
+    "base": "High Wycombe, HP11 2LB",
+    "updatedAt": "2026-05-17T00:00:00+10:00",
+    "keywordCoverage": {
+      "tracked": 35,
+      "locationTargeted": 0,
+      "categories": {
+        "gas": 9,
+        "plumbingWater": 9,
+        "heatPumpRenewable": 7,
+        "multiTrade": 5,
+        "local": 5
+      }
+    },
+    "locations": {
+      "tier1": [
+        "High Wycombe",
+        "Marlow"
+      ],
+      "tier2": [
+        "Aylesbury",
+        "Beaconsfield",
+        "Amersham",
+        "Chesham",
+        "Maidenhead",
+        "Slough",
+        "Reading"
+      ],
+      "tier3": [
+        "Oxford",
+        "Hemel Hempstead",
+        "Watford",
+        "Uxbridge",
+        "Milton Keynes",
+        "Luton"
+      ],
+      "tier4": [
+        "Buckinghamshire",
+        "Berkshire",
+        "M40 corridor",
+        "South East England"
+      ],
+      "total": 17
+    },
+    "services": [
+      "Managed Learning Program",
+      "Initial ACS",
+      "ACS Reassessment",
+      "Water Regulations",
+      "Unvented G3",
+      "Legionella Testing",
+      "LPG Changeover",
+      "Heat Pump Training"
+    ],
+    "contentGaps": [
+      {
+        "priority": 1,
+        "gap": "ACS Training + Location pages",
+        "note": "Core service, zero local content"
+      },
+      {
+        "priority": 2,
+        "gap": "Near me keywords across all services",
+        "note": "High volume, zero coverage"
+      },
+      {
+        "priority": 3,
+        "gap": "Heat Pump Training + Location",
+        "note": "Growth market, first-mover opportunity"
+      }
+    ],
+    "plannedContent": {
+      "wave1": {
+        "status": "complete",
+        "published": [
+          "ACS Training in High Wycombe",
+          "Legionella Training blog",
+          "G3 Unvented Hot Water blog",
+          "LPG Changeover Training blog",
+          "Gas MLP Complete Guide blog"
+        ]
+      },
+      "wave2": {
+        "status": "in-progress",
+        "published": [
+          "ACS Reassessment Near Reading/Oxford/M40",
+          "Gas & Plumbing Training Near Aylesbury"
+        ],
+        "remaining": [
+          "Beaconsfield",
+          "Amersham",
+          "Chesham",
+          "Maidenhead",
+          "Slough location content"
+        ]
+      },
+      "wave3": {
+        "status": "planned",
+        "planned": [
+          "Water Regs + G3 location content",
+          "Competitor gap-fill articles"
+        ]
+      },
+      "wave4": {
+        "status": "in-progress",
+        "published": [
+          "Gas Training Courses Near You — SE England",
+          "Heat Pump Training Buckinghamshire (x2)"
+        ],
+        "remaining": [
+          "Berkshire",
+          "M40 corridor regional content"
+        ]
+      }
+    },
+    "competitors": [
+      "Logic4training",
+      "Gasmark Training (Maidenhead)",
+      "Gastec Training (Milton Keynes)"
+    ],
+    "cadence": {
+      "blogs": "2/week (Mon + Thu)",
+      "gbpPosts": "weekly",
+      "rankingSnapshot": "Friday",
+      "competitorCheck": "Monday",
+      "summaryReport": "monthly"
+    },
+    "source": "manual-status-json-restored"
+  },
+  "competitors": {
+    "updatedAt": "2026-04-06T20:00:00Z",
+    "scanStatus": "historical-reference-through-2026-05-04",
+    "pageCountCrawl": {
+      "crawledAt": "2026-04-06T00:00:00Z",
+      "counts": [
+        {
+          "name": "Logic4training",
+          "sitePages": 37,
+          "coursePages": 106,
+          "blogPosts": 453,
+          "total": 596,
+          "newContent": "9 new insights since last scan, publishing ~3/week"
+        },
+        {
+          "name": "Able Skills",
+          "sitePages": 36,
+          "coursePages": 0,
+          "blogPosts": 4423,
+          "total": 4459,
+          "courseNote": "incl. in site",
+          "newContent": "7 new articles in 2 weeks, broadening into electrical/tiling"
+        },
+        {
+          "name": "Bucks College Group",
+          "sitePages": 395,
+          "coursePages": 14,
+          "blogPosts": 39,
+          "total": 448
+        },
+        {
+          "name": "Gastec Training",
+          "sitePages": 46,
+          "coursePages": 91,
+          "blogPosts": 68,
+          "total": 205,
+          "newContent": "No new content"
+        },
+        {
+          "name": "Gasmark Training",
+          "sitePages": 6,
+          "coursePages": 0,
+          "blogPosts": 0,
+          "total": 6,
+          "courseNote": "incl. in site",
+          "newContent": "No new content"
+        },
+        {
+          "name": "Tomkat Gas Training",
+          "sitePages": 10,
+          "coursePages": 0,
+          "blogPosts": 0,
+          "total": 10,
+          "newContent": "Static site, not a content threat"
+        },
+        {
+          "name": "BTS",
+          "sitePages": 17,
+          "coursePages": 6,
+          "blogPosts": 6,
+          "total": 23,
+          "isSelf": true,
+          "newContent": "+4 pages since last scan"
+        }
+      ]
+    },
+    "competitors": [
+      {
+        "name": "Logic4training",
+        "domain": "logic4training.co.uk",
+        "threat": "high",
+        "strengths": [
+          "Market leader",
+          "2300+ reviews",
+          "Massive content library",
+          "Multiple centres UK-wide",
+          "Publishing ~3 insights/week"
+        ],
+        "weaknesses": [
+          "National — not local to Bucks",
+          "Generic content",
+          "Corporate feel"
+        ],
+        "gapOpportunities": [
+          "Local Bucks content they don't target",
+          "Near me queries for M40 corridor",
+          "Small business personal touch"
+        ]
+      },
+      {
+        "name": "Gasmark Training",
+        "domain": "gasmarktraining.co.uk",
+        "threat": "high",
+        "strengths": [
+          "Based Maidenhead — local competitor",
+          "30+ years",
+          "Strong Berkshire/Thames Valley"
+        ],
+        "weaknesses": [
+          "Limited content/blog strategy",
+          "Focused on gas — weak on heat pumps",
+          "No new content this week"
+        ],
+        "gapOpportunities": [
+          "Heat pump training — they don't offer it",
+          "Blog content",
+          "Bucks targeting — they focus Berkshire"
+        ]
+      },
+      {
+        "name": "Gastec Training",
+        "domain": "gastectraining.co.uk",
+        "threat": "medium",
+        "strengths": [
+          "Based Milton Keynes — Bucks competitor",
+          "Good ACS/gas reputation"
+        ],
+        "weaknesses": [
+          "Limited online content",
+          "No location SEO",
+          "Weak blog",
+          "No new content"
+        ],
+        "gapOpportunities": [
+          "Every location keyword they miss",
+          "Content marketing",
+          "Heat pump + renewable training"
+        ]
+      },
+      {
+        "name": "Able Skills",
+        "domain": "ableskills.co.uk",
+        "threat": "medium",
+        "strengths": [
+          "ACS specialist",
+          "Broadening into electrical/tiling",
+          "7 new articles in 2 weeks"
+        ],
+        "weaknesses": [
+          "Not local to Bucks",
+          "Content volume over quality"
+        ],
+        "gapOpportunities": [
+          "Local specialisation",
+          "Quality over quantity"
+        ]
+      },
+      {
+        "name": "Tomkat Gas Training",
+        "domain": "tom-kat.co.uk",
+        "threat": "high",
+        "strengths": [
+          "Direct MLP competitor"
+        ],
+        "weaknesses": [
+          "Static site",
+          "Not a content threat",
+          "Minimal digital presence"
+        ],
+        "gapOpportunities": [
+          "Content marketing completely",
+          "SEO entirely"
+        ]
+      }
+    ],
+    "keyGaps": [
+      {
+        "keyword": "ACS training [location]",
+        "ourPosition": "not ranking",
+        "topCompetitor": "Gasmark Training",
+        "competitorPosition": "3-8",
+        "opportunity": "Location-targeted ACS content — immediate ranking potential"
+      },
+      {
+        "keyword": "gas training near me",
+        "ourPosition": "not ranking",
+        "topCompetitor": "Logic4training",
+        "competitorPosition": "1-3",
+        "opportunity": "Near me content + GBP optimisation"
+      },
+      {
+        "keyword": "heat pump training [location]",
+        "ourPosition": "not ranking",
+        "topCompetitor": "None strong",
+        "competitorPosition": "10+",
+        "opportunity": "First-mover advantage — no competitor targets HP + location"
+      },
+      {
+        "keyword": "ACS reassessment Buckinghamshire",
+        "ourPosition": "not ranking",
+        "topCompetitor": "Gastec Training",
+        "competitorPosition": "5-10",
+        "opportunity": "Specific reassessment content for Bucks"
+      },
+      {
+        "keyword": "skills shortage / career change",
+        "ourPosition": "not ranking",
+        "topCompetitor": "Logic4training",
+        "competitorPosition": "varies",
+        "opportunity": "NEW pillar — UK skills shortage angle for career changers"
+      }
+    ],
+    "source": "historical-reference",
+    "referenceNote": "Historical competitor watch retained as reference only; not a current external crawl."
+  },
+  "competitorPages": {
+    "timestamp": "2026-03-26T09:08:00Z",
+    "competitors": [
+      {
+        "name": "BTS",
+        "ours": true,
+        "site": 16,
+        "courses": 6,
+        "blogs": 3,
+        "total": 19
+      },
+      {
+        "name": "Able Skills",
+        "ours": false,
+        "site": 36,
+        "courses": 0,
+        "blogs": 4423,
+        "total": 4459
+      },
+      {
+        "name": "Logic4training",
+        "ours": false,
+        "site": 37,
+        "courses": 106,
+        "blogs": 453,
+        "total": 596
+      },
+      {
+        "name": "Bucks College",
+        "ours": false,
+        "site": 395,
+        "courses": 14,
+        "blogs": 39,
+        "total": 448
+      },
+      {
+        "name": "Gastec",
+        "ours": false,
+        "site": 46,
+        "courses": 91,
+        "blogs": 68,
+        "total": 205
+      },
+      {
+        "name": "Gasmark",
+        "ours": false,
+        "site": 6,
+        "courses": 0,
+        "blogs": 0,
+        "total": 6
+      }
+    ],
+    "updatedAt": "2026-05-04T00:00:00+10:00",
+    "source": "historical-reference",
+    "referenceNote": "Historical competitor page-count crawl retained for dashboard context. Current crawl is blocked until GSC/Bing verification recovery."
+  },
+  "courseDetails": {
+    "updatedAt": "2026-05-17T00:00:00+10:00",
+    "source": "docs/course-details.md verified by BTS handoff",
+    "summary": {
+      "live": 9,
+      "broken": 1,
+      "noPage": 2,
+      "confirmed": 6,
+      "missingInfo": 3
+    },
+    "courseInventoryNote": "docs/course-details.md confirms 9 live course pages as of 2026-04-01. Foundation Skills Gas 404. CCN1 Initial and LPG need Sunny confirmation.",
+    "services": [
+      "Managed Learning Program",
+      "Initial ACS",
+      "ACS Reassessment",
+      "Water Regulations",
+      "Unvented G3",
+      "Legionella Testing",
+      "LPG Changeover",
+      "Heat Pump Training"
+    ],
+    "courses": [
+      {
+        "name": "Gas MLP",
+        "url": "/course/gas-managed-learning-programme/",
+        "duration": "13 days initial + 1 day/week ongoing",
+        "price": "£4,250-£7,549 +VAT",
+        "confirmed": true,
+        "status": "live"
+      },
+      {
+        "name": "CCN1 Reassessment",
+        "url": "/course/ccn1-re-assessment/",
+        "duration": "4 days",
+        "price": "£690 +VAT (offer, normally £939)",
+        "confirmed": true,
+        "status": "live"
+      },
+      {
+        "name": "Unvented G3",
+        "url": "/course/unvented-hot-water-systems-safety/",
+        "duration": "1 day",
+        "price": "£195 +VAT (offer, normally £252)",
+        "confirmed": true,
+        "status": "live"
+      },
+      {
+        "name": "Water Regulations (WRAS)",
+        "url": "/course/water-supply-water-fittings-regulations-1999/",
+        "duration": "1 day",
+        "price": "£195 +VAT (offer, normally £252)",
+        "confirmed": true,
+        "status": "live"
+      },
+      {
+        "name": "Legionella Testing",
+        "url": "/course/legionella-prevention-and-water-treatment-managers/",
+        "duration": "1 day",
+        "price": "£195 +VAT (offer, normally £252)",
+        "confirmed": true,
+        "status": "live"
+      },
+      {
+        "name": "Better Heating Course",
+        "url": "/course/better-heating-course/",
+        "duration": "3 days",
+        "price": "£2,199 +VAT",
+        "confirmed": true,
+        "status": "live"
+      },
+      {
+        "name": "Heat Pump",
+        "url": "/course/air-source-heat-pump-low-temperature-heating/",
+        "duration": "NOT ON PAGE",
+        "price": "NOT ON PAGE",
+        "confirmed": false,
+        "status": "missing-info"
+      },
+      {
+        "name": "Domestic Cookers",
+        "url": "/course/domestic-cookers-training-and-re-assessment/",
+        "duration": "NOT ON PAGE",
+        "price": "NOT ON PAGE",
+        "confirmed": false,
+        "status": "missing-info"
+      },
+      {
+        "name": "Domestic Fires & Space Heaters",
+        "url": "/course/domestic-fires-and-space-heaters-training-and-re-assessment/",
+        "duration": "NOT ON PAGE",
+        "price": "NOT ON PAGE",
+        "confirmed": false,
+        "status": "missing-info"
+      },
+      {
+        "name": "Foundation Skills Gas",
+        "url": "/course/foundation-skills-gas-course/",
+        "duration": "—",
+        "price": "—",
+        "confirmed": false,
+        "status": "broken"
+      },
+      {
+        "name": "CCN1 Initial (ACS Initial)",
+        "url": null,
+        "duration": "—",
+        "price": "—",
+        "confirmed": false,
+        "status": "no-page"
+      },
+      {
+        "name": "LPG Changeover",
+        "url": null,
+        "duration": "—",
+        "price": "—",
+        "confirmed": false,
+        "status": "no-page"
+      }
+    ]
+  },
+  "publishLedger": {
+    "entries": [
+      {
+        "slug": "acs-reassessment-what-every-gas-engineer-needs-to-know",
+        "title": "ACS Reassessment: What Every Gas Engineer Needs to Know",
+        "type": "blog",
+        "firstPublished": "2026-03-17T10:00:00Z"
+      },
+      {
+        "slug": "heat-pump-training-course-high-wycombe-reading",
+        "title": "Heat Pump Training Course: High Wycombe & Reading",
+        "type": "blog",
+        "firstPublished": "2026-03-17T10:00:00Z"
+      },
+      {
+        "slug": "water-regulations-training-reading-buckinghamshire",
+        "title": "Water Regulations Training: Reading & Buckinghamshire",
+        "type": "blog",
+        "firstPublished": "2026-03-17T10:00:00Z"
+      },
+      {
+        "slug": "legionella-training-qualification",
+        "title": "Legionella Training: Why This One-Day Qualification Could Win You More Work",
+        "type": "blog",
+        "firstPublished": "2026-04-01T07:30:00Z"
+      },
+      {
+        "slug": "gas-training-near-me-south-east",
+        "title": "Gas Training Courses Near You: A South East England Guide",
+        "type": "blog",
+        "firstPublished": "2026-04-01T07:30:00Z"
+      },
+      {
+        "slug": "g3-unvented-hot-water-course",
+        "title": "G3 Unvented Hot Water Course: Is It Worth Adding to Your Qualifications?",
+        "type": "blog",
+        "firstPublished": "2026-04-01T07:30:00Z"
+      },
+      {
+        "slug": "warm-homes-plan-what-it-means",
+        "title": "The Future Homes Standard Is Here: What It Means for Gas and Heat Pump Training",
+        "type": "news",
+        "firstPublished": "2026-04-01T07:30:00Z"
+      },
+      {
+        "slug": "gbp-heat-pump-training",
+        "title": "GBP: Heat Pump Training",
+        "type": "gbp",
+        "firstPublished": "2026-03-17T10:00:00Z"
+      },
+      {
+        "slug": "gbp-local-training",
+        "title": "GBP: Train Locally in High Wycombe",
+        "type": "gbp",
+        "firstPublished": "2026-03-17T10:00:00Z"
+      },
+      {
+        "slug": "gbp-water-regs",
+        "title": "GBP: Water Regulations Training",
+        "type": "gbp",
+        "firstPublished": "2026-03-17T10:00:00Z"
+      },
+      {
+        "slug": "gbp-acs-reassessment",
+        "title": "GBP: ACS Reassessment",
+        "type": "gbp",
+        "firstPublished": "2026-04-01T09:37:00Z"
+      },
+      {
+        "slug": "gbp-future-homes-standard",
+        "title": "GBP: Future Homes Standard News",
+        "type": "gbp",
+        "firstPublished": "2026-04-01T09:37:00Z"
+      },
+      {
+        "slug": "gbp-legionella-qualification",
+        "title": "GBP: Legionella Qualification",
+        "type": "gbp",
+        "firstPublished": "2026-04-01T09:37:00Z"
+      },
+      {
+        "slug": "lpg-changeover-training",
+        "title": "LPG Changeover Training: The Niche Qualification Most Gas Engineers Overlook",
+        "type": "blog",
+        "firstPublished": "2026-04-11T18:00:00Z"
+      },
+      {
+        "slug": "heat-pump-training-buckinghamshire",
+        "title": "Heat Pump Training in Buckinghamshire: Your Route to a Growing Market",
+        "type": "blog",
+        "firstPublished": "2026-04-11T18:00:00Z"
+      },
+      {
+        "slug": "skills-shortage-construction-2026",
+        "title": "Nearly Half of UK Builders Are Delaying Jobs Because They Can't Find Skilled Workers",
+        "type": "news",
+        "firstPublished": "2026-04-11T18:00:00Z"
+      },
+      {
+        "slug": "powered-now-partnership",
+        "title": "Better Training Solutions Partners with Powered Now",
+        "type": "blog",
+        "firstPublished": "2026-04-11T18:00:00Z"
+      },
+      {
+        "slug": "career-change-gas-engineering",
+        "title": "Thinking About a Career Change Into Gas Engineering? Here's What You Need to Know",
+        "type": "blog",
+        "firstPublished": "2026-04-11T18:00:00Z"
+      },
+      {
+        "slug": "gas-mlp-complete-guide",
+        "title": "The Gas Managed Learning Programme: What It Is, What It Costs, and What You Get",
+        "type": "blog",
+        "firstPublished": "2026-04-11T18:00:00Z"
+      },
+      {
+        "slug": "gas-plumbing-training-aylesbury",
+        "title": "Gas and Plumbing Training Near Aylesbury: Courses Within Easy Reach",
+        "type": "blog",
+        "firstPublished": "2026-04-11T18:00:00Z"
+      },
+      {
+        "slug": "heat-pump-installer-gap",
+        "title": "The UK Has Around 2,000 Full-Time Heat Pump Installers. It Needs 33,700.",
+        "type": "news",
+        "firstPublished": "2026-04-11T18:00:00Z"
+      },
+      {
+        "title": "Gas and Plumbing Training Near Reading",
+        "type": "blog",
+        "url": "/gas-and-plumbing-training-near-reading/",
+        "wpId": 699,
+        "sourceFile": "blog-12-location-reading.md",
+        "firstPublished": "2026-05-11",
+        "sourceCommit": "60b0ab6"
+      },
+      {
+        "title": "Gas and Plumbing Training Near Oxford",
+        "type": "blog",
+        "url": "/gas-and-plumbing-training-near-oxford/",
+        "wpId": 700,
+        "sourceFile": "blog-13-location-oxford.md",
+        "firstPublished": "2026-05-11",
+        "sourceCommit": "60b0ab6"
+      },
+      {
+        "title": "ACS Initial Training: What You Need to Know Before You Book Your First Course",
+        "type": "blog",
+        "url": "/acs-initial-training-what-you-need-to-know/",
+        "wpId": 701,
+        "sourceFile": "blog-14-acs-initial-training.md",
+        "firstPublished": "2026-05-11",
+        "sourceCommit": "60b0ab6"
+      },
+      {
+        "title": "Plumbing Apprenticeship Starts Have Crashed 37%. The Industry Is Raising the Alarm.",
+        "type": "news",
+        "url": "/plumbing-apprenticeship-starts-crashed-37-percent/",
+        "wpId": 702,
+        "sourceFile": "news-4-plumbing-apprenticeship-crash.md",
+        "firstPublished": "2026-05-11",
+        "sourceCommit": "60b0ab6"
+      }
+    ],
+    "totalPages": 35,
+    "totalBlogs": 14,
+    "totalNews": 4,
+    "totalGbp": 6,
+    "last7d": {
+      "pages": 0,
+      "blogs": 3,
+      "news": 1,
+      "gbp": 0,
+      "total": 4
+    },
+    "last30d": {
+      "pages": 0,
+      "blogs": 3,
+      "news": 1,
+      "gbp": 0,
+      "total": 4
+    },
+    "weeklyPageLimit": 3,
+    "weeklyBlogLimit": 3,
+    "weeklyGbpLimit": 3,
+    "weeklyNewsLimit": 1,
+    "pagesRemaining": 3,
+    "blogsRemaining": 0,
+    "gbpRemaining": 3,
+    "newsRemaining": 0,
+    "status": "amber",
+    "statusLabel": "Batch 3 published; GSC/Bing verification required"
+  },
+  "seoDash": {
+    "lastUpdated": "2026-05-17T00:00:00+10:00",
+    "source": "manual-status-json-restored",
+    "sections": {
+      "section-1-plan-status-overview": {
+        "title": "Section 1: Plan Status Overview",
+        "lines": [
+          "**Current verified status: De-agented operational SEO mode; Batch 3 published; GSC/Bing verification required**",
+          "- SEO score: 28 / 75 target",
+          "- GEO/AI readiness: 5 / 60 target",
+          "- Pages live: 35",
+          "- Blogs published: 14",
+          "- News/insights published: 4",
+          "- GBP posts published: 6",
+          "- Pending draft assets: 10",
+          "- Rankings: 0/35 target keywords in top 10; 4 May regression; GSC verification outstanding",
+          "🔴 GSC/Bing crawler access verification is outstanding.",
+          "🔴 SiteGround support says normal public pages return 200; verify real crawler access in GSC/Bing."
+        ]
+      },
+      "section-2-critical-fixes-tracker": {
+        "title": "Section 2: Critical Fixes Tracker",
+        "lines": [
+          "🔴 GSC/Bing verification — P0 blocker",
+          "🟠 SG Optimizer activation — outstanding",
+          "🟠 GSC verification — outstanding",
+          "**Course-page inventory correction:** docs/course-details.md confirms 9 live course pages as of 2026-04-01. Foundation Skills Gas is 404. CCN1 Initial and LPG need Sunny confirmation.",
+          "**Do not use old 6 of 11 / 5 missing service pages data as current.**"
+        ]
+      },
+      "section-3-content-published-full-history": {
+        "title": "Section 3: Content Published (Full History)",
+        "lines": [
+          "**Batch 3 published:** 2026-05-11",
+          "- blog: Gas and Plumbing Training Near Reading — WP 699 — /gas-and-plumbing-training-near-reading/",
+          "- blog: Gas and Plumbing Training Near Oxford — WP 700 — /gas-and-plumbing-training-near-oxford/",
+          "- blog: ACS Initial Training: What You Need to Know Before You Book Your First Course — WP 701 — /acs-initial-training-what-you-need-to-know/",
+          "- news: Plumbing Apprenticeship Starts Have Crashed 37%. The Industry Is Raising the Alarm. — WP 702 — /plumbing-apprenticeship-starts-crashed-37-percent/",
+          "**Earlier publish ledger:**",
+          "- 2026-03-17 · blog: ACS Reassessment: What Every Gas Engineer Needs to Know",
+          "- 2026-03-17 · blog: Heat Pump Training Course: High Wycombe & Reading",
+          "- 2026-03-17 · blog: Water Regulations Training: Reading & Buckinghamshire",
+          "- 2026-04-01 · blog: Legionella Training: Why This One-Day Qualification Could Win You More Work",
+          "- 2026-04-01 · blog: Gas Training Courses Near You: A South East England Guide",
+          "- 2026-04-01 · blog: G3 Unvented Hot Water Course: Is It Worth Adding to Your Qualifications?",
+          "- 2026-04-01 · news: The Future Homes Standard Is Here: What It Means for Gas and Heat Pump Training",
+          "- 2026-03-17 · gbp: GBP: Heat Pump Training",
+          "- 2026-03-17 · gbp: GBP: Train Locally in High Wycombe",
+          "- 2026-03-17 · gbp: GBP: Water Regulations Training",
+          "- 2026-04-01 · gbp: GBP: ACS Reassessment",
+          "- 2026-04-01 · gbp: GBP: Future Homes Standard News",
+          "- 2026-04-01 · gbp: GBP: Legionella Qualification",
+          "- 2026-04-11 · blog: LPG Changeover Training: The Niche Qualification Most Gas Engineers Overlook",
+          "- 2026-04-11 · blog: Heat Pump Training in Buckinghamshire: Your Route to a Growing Market",
+          "- 2026-04-11 · news: Nearly Half of UK Builders Are Delaying Jobs Because They Can't Find Skilled Workers",
+          "- 2026-04-11 · blog: Better Training Solutions Partners with Powered Now",
+          "- 2026-04-11 · blog: Thinking About a Career Change Into Gas Engineering? Here's What You Need to Know",
+          "- 2026-04-11 · blog: The Gas Managed Learning Programme: What It Is, What It Costs, and What You Get",
+          "- 2026-04-11 · blog: Gas and Plumbing Training Near Aylesbury: Courses Within Easy Reach",
+          "- 2026-04-11 · news: The UK Has Around 2,000 Full-Time Heat Pump Installers. It Needs 33,700."
+        ]
+      },
+      "section-4-content-pipeline": {
+        "title": "Section 4: Content Pipeline",
+        "lines": [
+          "**Pending draft assets: 10**",
+          "- [ ] Gas and Plumbing Training Near Slough (blog)",
+          "- [ ] Gas and Plumbing Training Near Maidenhead (blog)",
+          "- [ ] Gas and Plumbing Training Near Milton Keynes (blog)",
+          "- [ ] Water Regulations Training Deep Dive (blog)",
+          "- [ ] Domestic Cookers Training Guide (blog)",
+          "- [ ] BUS Amendments Update (news)",
+          "- [ ] Apprenticeship Funding April 2026 (news)",
+          "- [ ] About Us Page (page)",
+          "- [ ] Directory Package Markdown (directory)",
+          "- [ ] Directory Package PDF (directory)",
+          "**GBP draft texts restored for future use, not marked as published**",
+          "- [ ] GBP: ACS Reassessment",
+          "- [ ] GBP: Future Homes Standard News",
+          "- [ ] GBP: Legionella Qualification",
+          "- [ ] GBP: Career Change Into Gas Engineering",
+          "- [ ] GBP: Plumber Skills Shortage (NEWS)",
+          "- [ ] GBP: Stack Your Qualifications"
+        ]
+      },
+      "section-5-service-location-coverage-matrix": {
+        "title": "Section 5: Service and Location Coverage Matrix",
+        "lines": [
+          "- Target locations: 17",
+          "- Current pages live: 35",
+          "- Blogs published: 14",
+          "- Batch 3 added Reading, Oxford, ACS Initial Training, and Plumbing Apprenticeship Crash.",
+          "- Crawl/indexing verification requires GSC/Bing URL Inspection.",
+          "**tier1:**",
+          "- High Wycombe",
+          "- Marlow",
+          "**tier2:**",
+          "- Aylesbury",
+          "- Beaconsfield",
+          "- Amersham",
+          "- Chesham",
+          "- Maidenhead",
+          "- Slough",
+          "- Reading",
+          "**tier3:**",
+          "- Oxford",
+          "- Hemel Hempstead",
+          "- Watford",
+          "- Uxbridge",
+          "- Milton Keynes",
+          "- Luton",
+          "**tier4:**",
+          "- Buckinghamshire",
+          "- Berkshire",
+          "- M40 corridor",
+          "- South East England"
+        ]
+      },
+      "section-6-news-bank": {
+        "title": "Section 6: News Bank",
+        "lines": [
+          "- Total stories: 36",
+          "- Available: 30",
+          "- Drafted: 2",
+          "- Published: 4",
+          "- Use restored story bank as content planning data; verify external sources before publishing new items."
+        ]
+      },
+      "section-7-competitor-watch": {
+        "title": "Section 7: Competitor Watch",
+        "lines": [
+          "**Historical/reference through 2026-05-04. Current crawl blocked.**",
+          "- Logic4training (logic4training.co.uk) — high threat",
+          "- Gasmark Training (gasmarktraining.co.uk) — high threat",
+          "- Gastec Training (gastectraining.co.uk) — medium threat",
+          "- Able Skills (ableskills.co.uk) — medium threat",
+          "- Tomkat Gas Training (tom-kat.co.uk) — high threat"
+        ]
+      },
+      "section-8-weekly-audit-log": {
+        "title": "Section 8: Weekly Audit Log",
+        "lines": [
+          "- 2026-05-17: BTS source-of-truth handoff verified.",
+          "- 2026-05-11: Batch 3 published after Sunny approval.",
+          "- P0 remains GSC/Bing verification and crawler access recovery.",
+          "- Traffic/conversion data remains intentionally unavailable until GA/GSC source exists."
+        ]
+      },
+      "appendix-a-technical-seo-scores-baseline-23-mar-2026-updated-12-apr-2026": {
+        "title": "Appendix A: Technical SEO Scores (Baseline: 23 Mar 2026 | Updated: 12 Apr 2026)",
+        "content": "| Category | Baseline (23 Mar) | Est. Current | Notes |\n|----------|-------------------|-------------|-------|\n| Technical SEO | 18/100 | ~40 | Captcha FIXED 3 Apr. Site URL HTTPS. inLanguage en-GB. Sitemap now HTTPS. |\n| Content Quality & E-E-A-T | 32/100 | ~45 | 11 blogs + 3 news + 1 partnership. No About page yet. No author bios. |\n| On-Page SEO | 30/100 | ~35 | FAQ meta updated. Course metas still need work. |\n| Schema / Structured Data | 10/100 | ~60 | ✅ LocalBusiness + 11× Course + FAQPage injected 12 Apr |\n| Performance (CWV) | 0/100 | ~30 | Can now be measured — captcha removed. SG Optimizer not yet activated. |\n| Images | 25/100 | ~35 | 4 training photos uploaded 9 Apr. Still need alt text audit. |\n| AI Search / GEO Readiness | 5/100 | ~10 | Captcha fixed but llms.txt still 404. No YouTube. |\n| Sitemap | 10/100 | ~50 | Now HTTPS. Yoast generating. Accessible to crawlers. |",
+        "lines": [
+          "| Category | Baseline (23 Mar) | Est. Current | Notes |",
+          "|----------|-------------------|-------------|-------|",
+          "| Technical SEO | 18/100 | ~40 | Captcha FIXED 3 Apr. Site URL HTTPS. inLanguage en-GB. Sitemap now HTTPS. |",
+          "| Content Quality & E-E-A-T | 32/100 | ~45 | 11 blogs + 3 news + 1 partnership. No About page yet. No author bios. |",
+          "| On-Page SEO | 30/100 | ~35 | FAQ meta updated. Course metas still need work. |",
+          "| Schema / Structured Data | 10/100 | ~60 | ✅ LocalBusiness + 11× Course + FAQPage injected 12 Apr |",
+          "| Performance (CWV) | 0/100 | ~30 | Can now be measured — captcha removed. SG Optimizer not yet activated. |",
+          "| Images | 25/100 | ~35 | 4 training photos uploaded 9 Apr. Still need alt text audit. |",
+          "| AI Search / GEO Readiness | 5/100 | ~10 | Captcha fixed but llms.txt still 404. No YouTube. |",
+          "| Sitemap | 10/100 | ~50 | Now HTTPS. Yoast generating. Accessible to crawlers. |"
+        ]
+      },
+      "appendix-b-link-building-tracker": {
+        "title": "Appendix B: Link Building Tracker",
+        "content": "### Tier 1 — Industry Bodies\n| Site | Action | Status | Date |\n|------|--------|--------|------|\n| Gas Safe Register | Verify BTS listed | ❌ Pending | — |\n| IGEM | Verify listing | ❌ Pending | — |\n| BPEC | Apply for directory | ❌ Pending | — |\n| MCS Certified | List heat pump courses | ❌ Pending | — |\n| EU Skills | Training provider directory | ❌ Pending | — |\n| GOV.UK Heat Training Grant | List as SE provider | ❌ Pending | — |\n| UKRLP | Register as learning provider | ❌ Pending | — |\n| CIBSE | List CPD courses | ❌ Pending | — |\n\n### Tier 1 — Business Directories\n| Site | Status | Date |\n|------|--------|------|\n| Yell.com | ❌ Pending | — |\n| Bing Places | ❌ Pending | — |\n| Thomson Local | ❌ Pending | — |\n| LinkedIn Company | ❌ Pending | — |\n| Facebook Business | ❌ Pending | — |\n\n### Tier 2-3 — Community, Forums, Guest Posts\n| Target | Status | Date |\n|--------|--------|------|\n| UK Plumbers Forums | ❌ Pending | — |\n| Reddit r/AskUK | ❌ Pending | — |\n| Facebook Groups | ❌ Pending | — |\n| Local Chamber of Commerce | ❌ Pending | — |\n| H&V News (guest post) | ❌ Pending | — |\n| Installer Magazine (guest post) | ❌ Pending | — |\n| Bucks Free Press (press release) | ❌ Pending | — |",
+        "lines": [
+          "### Tier 1 — Industry Bodies",
+          "| Site | Action | Status | Date |",
+          "|------|--------|--------|------|",
+          "| Gas Safe Register | Verify BTS listed | ❌ Pending | — |",
+          "| IGEM | Verify listing | ❌ Pending | — |",
+          "| BPEC | Apply for directory | ❌ Pending | — |",
+          "| MCS Certified | List heat pump courses | ❌ Pending | — |",
+          "| EU Skills | Training provider directory | ❌ Pending | — |",
+          "| GOV.UK Heat Training Grant | List as SE provider | ❌ Pending | — |",
+          "| UKRLP | Register as learning provider | ❌ Pending | — |",
+          "| CIBSE | List CPD courses | ❌ Pending | — |",
+          "### Tier 1 — Business Directories",
+          "| Site | Status | Date |",
+          "|------|--------|------|",
+          "| Yell.com | ❌ Pending | — |",
+          "| Bing Places | ❌ Pending | — |",
+          "| Thomson Local | ❌ Pending | — |",
+          "| LinkedIn Company | ❌ Pending | — |",
+          "| Facebook Business | ❌ Pending | — |",
+          "### Tier 2-3 — Community, Forums, Guest Posts",
+          "| Target | Status | Date |",
+          "|--------|--------|------|",
+          "| UK Plumbers Forums | ❌ Pending | — |",
+          "| Reddit r/AskUK | ❌ Pending | — |",
+          "| Facebook Groups | ❌ Pending | — |",
+          "| Local Chamber of Commerce | ❌ Pending | — |",
+          "| H&V News (guest post) | ❌ Pending | — |",
+          "| Installer Magazine (guest post) | ❌ Pending | — |",
+          "| Bucks Free Press (press release) | ❌ Pending | — |"
+        ]
+      },
+      "appendix-c-target-keywords-35": {
+        "title": "Appendix C: Target Keywords (35)",
+        "content": "_All checked 29 March 2026 via Brave Search. BTS not indexed — 0/35 ranked._\n_Root cause unconfirmed; GSC/Bing verification required. VPN curl challenges are not proof of crawler blocking._\n\n### Gas (9)\n| Keyword | Rank | Our URL |\n|---------|------|---------|\n| ACS training course UK | Not ranked | — |\n| gas safety training near me | Not ranked | — |\n| gas engineer training courses | Not ranked | — |\n| ACS reassessment course | Not ranked | Blog 1 |\n| MLP gas training course | Not ranked | — |\n| gas training Buckinghamshire | Not ranked | — |\n| domestic gas training High Wycombe | Not ranked | — |\n| LPG training course UK | Not ranked | — |\n| LPG changeover training | Not ranked | — |\n\n### Plumbing (9)\n| Keyword | Rank | Our URL |\n|---------|------|---------|\n| water regulations course UK | Not ranked | Blog 3 |\n| WRAS water regulations training | Not ranked | — |\n| unvented hot water course | Not ranked | — |\n| G3 training course | Not ranked | — |\n| unvented cylinder course | Not ranked | — |\n| legionella testing training | Not ranked | — |\n| legionella awareness course | Not ranked | — |\n| plumbing training High Wycombe | Not ranked | Blog 3 |\n| plumbing courses Buckinghamshire | Not ranked | — |\n\n### Heat Pump (7)\n| Keyword | Rank | Our URL |\n|---------|------|---------|\n| heat pump training course UK | Not ranked | Blog 2 |\n| heat pump installer training | Not ranked | — |\n| heat pump installation course | Not ranked | — |\n| renewable energy training | Not ranked | — |\n| green energy training course | Not ranked | — |\n| BUS training voucher course | Not ranked | — |\n| heat pump certification UK | Not ranked | — |\n\n### Multi-trade (5)\n| Keyword | Rank | Our URL |\n|---------|------|---------|\n| multi trade training course | Not ranked | — |\n| gas and plumbing training | Not ranked | — |\n| trade training High Wycombe | Not ranked | — |\n| building services training | Not ranked | — |\n| career change training course | Not ranked | — |\n\n### Local (5)\n| Keyword | Rank | Our URL |\n|---------|------|---------|\n| training courses High Wycombe | Not ranked | — |\n| trade training Buckinghamshire | Not ranked | — |\n| gas training near Reading | Not ranked | — |\n| plumbing training near Oxford | Not ranked | — |\n| training centre M40 corridor | Not ranked | — |",
+        "lines": [
+          "_All checked 29 March 2026 via Brave Search. BTS not indexed — 0/35 ranked._",
+          "_Root cause unconfirmed; GSC/Bing verification required. VPN curl challenges are not proof of crawler blocking._",
+          "### Gas (9)",
+          "| Keyword | Rank | Our URL |",
+          "|---------|------|---------|",
+          "| ACS training course UK | Not ranked | — |",
+          "| gas safety training near me | Not ranked | — |",
+          "| gas engineer training courses | Not ranked | — |",
+          "| ACS reassessment course | Not ranked | Blog 1 |",
+          "| MLP gas training course | Not ranked | — |",
+          "| gas training Buckinghamshire | Not ranked | — |",
+          "| domestic gas training High Wycombe | Not ranked | — |",
+          "| LPG training course UK | Not ranked | — |",
+          "| LPG changeover training | Not ranked | — |",
+          "### Plumbing (9)",
+          "| Keyword | Rank | Our URL |",
+          "|---------|------|---------|",
+          "| water regulations course UK | Not ranked | Blog 3 |",
+          "| WRAS water regulations training | Not ranked | — |",
+          "| unvented hot water course | Not ranked | — |",
+          "| G3 training course | Not ranked | — |",
+          "| unvented cylinder course | Not ranked | — |",
+          "| legionella testing training | Not ranked | — |",
+          "| legionella awareness course | Not ranked | — |",
+          "| plumbing training High Wycombe | Not ranked | Blog 3 |",
+          "| plumbing courses Buckinghamshire | Not ranked | — |",
+          "### Heat Pump (7)",
+          "| Keyword | Rank | Our URL |",
+          "|---------|------|---------|",
+          "| heat pump training course UK | Not ranked | Blog 2 |",
+          "| heat pump installer training | Not ranked | — |",
+          "| heat pump installation course | Not ranked | — |",
+          "| renewable energy training | Not ranked | — |",
+          "| green energy training course | Not ranked | — |",
+          "| BUS training voucher course | Not ranked | — |",
+          "| heat pump certification UK | Not ranked | — |",
+          "### Multi-trade (5)",
+          "| Keyword | Rank | Our URL |",
+          "|---------|------|---------|",
+          "| multi trade training course | Not ranked | — |",
+          "| gas and plumbing training | Not ranked | — |",
+          "| trade training High Wycombe | Not ranked | — |",
+          "| building services training | Not ranked | — |",
+          "| career change training course | Not ranked | — |",
+          "### Local (5)",
+          "| Keyword | Rank | Our URL |",
+          "|---------|------|---------|",
+          "| training courses High Wycombe | Not ranked | — |",
+          "| trade training Buckinghamshire | Not ranked | — |",
+          "| gas training near Reading | Not ranked | — |",
+          "| plumbing training near Oxford | Not ranked | — |",
+          "| training centre M40 corridor | Not ranked | — |"
+        ]
+      },
+      "appendix-d-live-site-pages": {
+        "title": "Appendix D: Live Site Pages",
+        "content": "| Page | URL | Service | Schema |\n|------|-----|---------|--------|\n| Homepage | / | All | ✅ LocalBusiness (injected 12 Apr) |\n| CCN1 Initial | /course/ccn1-initial/ | ACS Initial | ✅ Course (injected 12 Apr) |\n| CCN1 Re-assessment | /course/ccn1-re-assessment/ | ACS Reassessment | ✅ Course (injected 12 Apr) |\n| Domestic Cookers | /course/domestic-cookers-training-and-re-assessment/ | Gas | ✅ Course (injected 12 Apr) |\n| Fires & Space Heaters | /course/domestic-fires-and-space-heaters-training-and-re-assessment/ | Gas | ✅ Course (injected 12 Apr) |\n| Heat Pump | /course/air-source-heat-pump-low-temperature-heating/ | Heat Pump | ✅ Course (injected 12 Apr) |\n| Gas MLP | /course/gas-managed-learning-programme/ | MLP | ✅ Course (injected 12 Apr) |\n| Water Regs | /course/water-supply-water-fittings-regulations-1999/ | Plumbing | ✅ Course (injected 12 Apr) |\n| Unvented G3 | /course/unvented-hot-water-systems-safety/ | Plumbing | ✅ Course (injected 12 Apr) |\n| Legionella | /course/legionella-prevention-and-water-treatment-managers/ | Plumbing | ✅ Course (injected 12 Apr) |\n| LPG Changeover | /course/lpg-changeover/ | Gas | ✅ Course (injected 12 Apr) |\n| Better Heating | /course/better-heating-course/ | Gas | ✅ Course (injected 12 Apr) |\n| Gas Courses Hub | /our-gas-training-courses/ | Gas | — |\n| New Entrant Courses | /our-new-entrant-training-courses/ | MLP/Gas | — |\n| Plumbing Courses | /our-plumbing-training-courses/ | Plumbing | — |\n| Our Partners | /our-partners/ | General | — |\n| Why Train With Us | /why-train-with-us/ | General | — |\n| FAQ | /frequently-asked-questions/ | General | ✅ FAQPage (injected 12 Apr) |\n| Limited Time Offer | /our-limited-time-offer/ | Promo | — |\n| Contact | /contact-us/ | General | — |\n| Latest (Blog) | /latest/ | Blog | — |\n| Blog 1 | /acs-reassessment-what-every-gas-engineer-needs-to-know/ | Gas (ACS) | Yoast BlogPosting |\n| Blog 2 | /heat-pump-training-course-high-wycombe-reading/ | Heat Pump | Yoast BlogPosting |\n| Blog 3 | /water-regulations-training-reading-buckinghamshire/ | Plumbing | Yoast BlogPosting |\n| Blog 4 | /legionella-training-why-this-one-day-qualification-could-win-you-more-work/ | Plumbing | Yoast BlogPosting |\n| Blog 5 | /gas-training-courses-near-you-a-south-east-england-guide/ | Gas (Multi) | Yoast BlogPosting |\n| Blog 6 | /g3-unvented-hot-water-course-is-it-worth-adding-to-your-qualifications/ | Plumbing (G3) | Yoast BlogPosting |\n| Blog 7 | /lpg-changeover-training-the-niche-qualification-most-gas-engineers-overlook/ | Gas (LPG) | Yoast BlogPosting |\n| Blog 8 | /heat-pump-training-in-buckinghamshire-your-route-to-a-growing-market/ | Heat Pump | Yoast BlogPosting |\n| Blog 9 | /thinking-about-a-career-change-into-gas-engineering-heres-what-you-need-to-know/ | Multi-trade | Yoast BlogPosting |\n| Blog 10 | /the-gas-managed-learning-programme-what-it-is-what-it-costs-and-what-you-get/ | Gas (MLP) | Yoast BlogPosting |\n| Blog 11 | /gas-and-plumbing-training-near-aylesbury-courses-within-easy-reach/ | Multi-trade | Yoast BlogPosting |\n| News 1 | /the-future-homes-standard-is-here-what-it-means-for-gas-and-heating-engineers/ | Heat Pump | Yoast BlogPosting |\n| News 2 | /nearly-half-of-uk-builders-are-delaying-jobs-because-they-cant-find-skilled-work/ | Skills | Yoast BlogPosting |\n| News 3 | /the-uk-has-around-2000-full-time-heat-pump-installers-it-needs-33700/ | Heat Pump | Yoast BlogPosting |\n| Partnership | /better-training-solutions-partners-with-powered-now/ | General | Yoast BlogPosting |\n\n### Missing Pages\n| Page | Type | Priority |\n|------|------|----------|\n| About Us / Meet the Team | Trust page | 🔴 HIGH |\n| Water Regulations service page | Service page | 🔴 HIGH |\n| Unvented G3 service page | Service page | 🔴 HIGH |\n| Legionella service page | Service page | 🟡 MEDIUM |\n| LPG Changeover service page | Service page | 🟡 MEDIUM |\n| Multi-Trade Pathway page | Service page | 🟢 LOW |\n| Testimonials / Reviews page | Trust page | 🟡 MEDIUM |",
+        "lines": [
+          "| Page | URL | Service | Schema |",
+          "|------|-----|---------|--------|",
+          "| Homepage | / | All | ✅ LocalBusiness (injected 12 Apr) |",
+          "| CCN1 Initial | /course/ccn1-initial/ | ACS Initial | ✅ Course (injected 12 Apr) |",
+          "| CCN1 Re-assessment | /course/ccn1-re-assessment/ | ACS Reassessment | ✅ Course (injected 12 Apr) |",
+          "| Domestic Cookers | /course/domestic-cookers-training-and-re-assessment/ | Gas | ✅ Course (injected 12 Apr) |",
+          "| Fires & Space Heaters | /course/domestic-fires-and-space-heaters-training-and-re-assessment/ | Gas | ✅ Course (injected 12 Apr) |",
+          "| Heat Pump | /course/air-source-heat-pump-low-temperature-heating/ | Heat Pump | ✅ Course (injected 12 Apr) |",
+          "| Gas MLP | /course/gas-managed-learning-programme/ | MLP | ✅ Course (injected 12 Apr) |",
+          "| Water Regs | /course/water-supply-water-fittings-regulations-1999/ | Plumbing | ✅ Course (injected 12 Apr) |",
+          "| Unvented G3 | /course/unvented-hot-water-systems-safety/ | Plumbing | ✅ Course (injected 12 Apr) |",
+          "| Legionella | /course/legionella-prevention-and-water-treatment-managers/ | Plumbing | ✅ Course (injected 12 Apr) |",
+          "| LPG Changeover | /course/lpg-changeover/ | Gas | ✅ Course (injected 12 Apr) |",
+          "| Better Heating | /course/better-heating-course/ | Gas | ✅ Course (injected 12 Apr) |",
+          "| Gas Courses Hub | /our-gas-training-courses/ | Gas | — |",
+          "| New Entrant Courses | /our-new-entrant-training-courses/ | MLP/Gas | — |",
+          "| Plumbing Courses | /our-plumbing-training-courses/ | Plumbing | — |",
+          "| Our Partners | /our-partners/ | General | — |",
+          "| Why Train With Us | /why-train-with-us/ | General | — |",
+          "| FAQ | /frequently-asked-questions/ | General | ✅ FAQPage (injected 12 Apr) |",
+          "| Limited Time Offer | /our-limited-time-offer/ | Promo | — |",
+          "| Contact | /contact-us/ | General | — |",
+          "| Latest (Blog) | /latest/ | Blog | — |",
+          "| Blog 1 | /acs-reassessment-what-every-gas-engineer-needs-to-know/ | Gas (ACS) | Yoast BlogPosting |",
+          "| Blog 2 | /heat-pump-training-course-high-wycombe-reading/ | Heat Pump | Yoast BlogPosting |",
+          "| Blog 3 | /water-regulations-training-reading-buckinghamshire/ | Plumbing | Yoast BlogPosting |",
+          "| Blog 4 | /legionella-training-why-this-one-day-qualification-could-win-you-more-work/ | Plumbing | Yoast BlogPosting |",
+          "| Blog 5 | /gas-training-courses-near-you-a-south-east-england-guide/ | Gas (Multi) | Yoast BlogPosting |",
+          "| Blog 6 | /g3-unvented-hot-water-course-is-it-worth-adding-to-your-qualifications/ | Plumbing (G3) | Yoast BlogPosting |",
+          "| Blog 7 | /lpg-changeover-training-the-niche-qualification-most-gas-engineers-overlook/ | Gas (LPG) | Yoast BlogPosting |",
+          "| Blog 8 | /heat-pump-training-in-buckinghamshire-your-route-to-a-growing-market/ | Heat Pump | Yoast BlogPosting |",
+          "| Blog 9 | /thinking-about-a-career-change-into-gas-engineering-heres-what-you-need-to-know/ | Multi-trade | Yoast BlogPosting |",
+          "| Blog 10 | /the-gas-managed-learning-programme-what-it-is-what-it-costs-and-what-you-get/ | Gas (MLP) | Yoast BlogPosting |",
+          "| Blog 11 | /gas-and-plumbing-training-near-aylesbury-courses-within-easy-reach/ | Multi-trade | Yoast BlogPosting |",
+          "| News 1 | /the-future-homes-standard-is-here-what-it-means-for-gas-and-heating-engineers/ | Heat Pump | Yoast BlogPosting |",
+          "| News 2 | /nearly-half-of-uk-builders-are-delaying-jobs-because-they-cant-find-skilled-work/ | Skills | Yoast BlogPosting |",
+          "| News 3 | /the-uk-has-around-2000-full-time-heat-pump-installers-it-needs-33700/ | Heat Pump | Yoast BlogPosting |",
+          "| Partnership | /better-training-solutions-partners-with-powered-now/ | General | Yoast BlogPosting |",
+          "### Missing Pages",
+          "| Page | Type | Priority |",
+          "|------|------|----------|",
+          "| About Us / Meet the Team | Trust page | 🔴 HIGH |",
+          "| Water Regulations service page | Service page | 🔴 HIGH |",
+          "| Unvented G3 service page | Service page | 🔴 HIGH |",
+          "| Legionella service page | Service page | 🟡 MEDIUM |",
+          "| LPG Changeover service page | Service page | 🟡 MEDIUM |",
+          "| Multi-Trade Pathway page | Service page | 🟢 LOW |",
+          "| Testimonials / Reviews page | Trust page | 🟡 MEDIUM |"
+        ]
+      },
+      "appendix-e-gbp-status": {
+        "title": "Appendix E: GBP Status",
+        "content": "| Field | Status |\n|-------|--------|\n| Business Name | Better Training Solutions |\n| Address | 1 Marlborough Trading Estate, West Wycombe Road, High Wycombe, HP11 2LB |\n| Phone | ⚠️ Verify from listing |\n| Website | https://bettertrainingsolutions.co.uk |\n| All 8 services listed? | ⚠️ Unverified |\n| Reviews responded to? | ⚠️ Unverified |\n| NAP consistent? | ⚠️ Unverified |\n\n### GBP Posting Schedule\n| Day | Post Type |\n|-----|-----------|\n| Monday | GBP Post 1 — mirrors Blog 1 topic |\n| Wednesday | GBP Post 2 — news/insights teaser |\n| Thursday | GBP Post 3 — mirrors Blog 2 topic |\n\n---\n\n_Dashboard created: 29 March 2026 | Restructured: 29 March 2026_\n_CC reads: SEO-DASHBOARD.md + news-bank.json_",
+        "lines": [
+          "| Field | Status |",
+          "|-------|--------|",
+          "| Business Name | Better Training Solutions |",
+          "| Address | 1 Marlborough Trading Estate, West Wycombe Road, High Wycombe, HP11 2LB |",
+          "| Phone | ⚠️ Verify from listing |",
+          "| Website | https://bettertrainingsolutions.co.uk |",
+          "| All 8 services listed? | ⚠️ Unverified |",
+          "| Reviews responded to? | ⚠️ Unverified |",
+          "| NAP consistent? | ⚠️ Unverified |",
+          "### GBP Posting Schedule",
+          "| Day | Post Type |",
+          "|-----|-----------|",
+          "| Monday | GBP Post 1 — mirrors Blog 1 topic |",
+          "| Wednesday | GBP Post 2 — news/insights teaser |",
+          "| Thursday | GBP Post 3 — mirrors Blog 2 topic |",
+          "---",
+          "_Dashboard created: 29 March 2026 | Restructured: 29 March 2026_",
+          "_CC reads: SEO-DASHBOARD.md + news-bank.json_"
+        ]
+      }
+    },
+    "newsBank": {
+      "total": 36,
+      "available": 30,
+      "drafted": 2,
+      "published": 4,
+      "stories": [
+        {
+          "id": 19,
+          "title": "Future Homes Standard Published — Heat Pumps Mandatory in New Builds from March 2028",
+          "datePublished": "2026-03-27",
+          "source": "https://www.hvnplus.co.uk/news/industry-reacts-to-publication-of-future-homes-standard-27-03-2026/",
+          "sourceLabel": "H&V News",
+          "category": "policy",
+          "summary": "UK Government published the Future Homes Standard. From March 2028, most new homes must have heat pumps or heat networks — gas boilers effectively ruled out. Solar PV mandatory. 75-80% carbon reduction. Industry widely supportive but flags skills shortage. MCS reports 100,000+ certified new-build installations last year. NAPIT says 'significant growth strands' for installers.",
+          "btsServiceLink": [
+            "Heat Pump",
+            "ACS Reassessment",
+            "General"
+          ],
+          "blogAngle": "The Future Homes Standard Is Here — What It Means for Gas and Heating Engineers",
+          "targetKeywords": [
+            "Future Homes Standard 2026",
+            "Future Homes Standard heating engineers",
+            "heat pump new builds UK"
+          ],
+          "status": "published",
+          "sunnyPriority": null,
+          "notes": "MOST RECENT STORY — published 27 March 2026 (2 days ago). This replaces story #3 as the primary FHS piece. Drafted as insight-1.",
+          "published_date": "2026-04-01"
+        },
+        {
+          "id": 20,
+          "title": "Heating Oil & LPG Crisis — Prices Triple as 1.7M Off-Grid Homes Hit Hard",
+          "datePublished": "2026-03-15",
+          "source": "https://www.moneysavingexpert.com/news/2026/03/heating-oil-lpg-dossier-government/",
+          "sourceLabel": "MoneySavingExpert",
+          "category": "industry-data",
+          "summary": "Heating oil prices nearly tripled in a single week — from 55-65p/litre in February to 155p/litre by 9 March. 1.7M UK households without mains gas affected. Martin Lewis presenting dossier to government. LPG also spiking. Drives home the case for alternative heating systems.",
+          "btsServiceLink": [
+            "Heat Pump",
+            "LPG Changeover"
+          ],
+          "blogAngle": "Heating Oil Prices Triple — Why Off-Grid Homes Are Looking at Heat Pumps and LPG Alternatives",
+          "targetKeywords": [
+            "heating oil prices 2026",
+            "LPG heating costs UK",
+            "off grid heating alternatives"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "Very current — March 2026. Strong hook for LPG changeover course. Links heat pump training as alternative for off-grid homes."
+        },
+        {
+          "id": 21,
+          "title": "Ofgem Energy Price Cap Falls 7% from April 2026 — Bills Down £117",
+          "datePublished": "2026-02-25",
+          "source": "https://www.theguardian.com/money/2026/feb/25/energy-bills-fall-households-april-price-cap",
+          "sourceLabel": "The Guardian / Ofgem",
+          "category": "industry-data",
+          "summary": "Ofgem price cap drops to £1,641/year from 1 April 2026, down 7% (£117). First significant fall in years. Gas at 5.9p/kWh, electricity at 27.7p/kWh. July could rise again. Context for heat pump running cost comparisons.",
+          "btsServiceLink": [
+            "General"
+          ],
+          "blogAngle": "Energy Bills Are Falling — But Is Gas Still Cheaper Than a Heat Pump in 2026?",
+          "targetKeywords": [
+            "energy price cap April 2026",
+            "gas vs heat pump running costs",
+            "energy bills 2026"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "Good context piece. Logic4training already covered 'Is Gas or Electric Cheaper in 2026' — our angle needs to be installer-focused, not homeowner."
+        },
+        {
+          "id": 22,
+          "title": "Plumbing Apprenticeship Starts Crashed 37% — Industry Sounds Alarm",
+          "datePublished": "2026-02-09",
+          "source": "https://aphc.co.uk/news/national-apprenticeship-week-2026-strengthening-the-future-of-the-plumbing-and-heating-industry/",
+          "sourceLabel": "APHC",
+          "category": "industry-data",
+          "summary": "Plumbing apprenticeship starts dropped 37% since 2021/22. Government figures show only a few hundred completions this academic year. APHC warns of worsening workforce pipeline at a time when demand is rising for housing, water and net-zero work. National Apprenticeship Week 2026 context.",
+          "btsServiceLink": [
+            "MLP",
+            "General"
+          ],
+          "blogAngle": "Plumbing Apprenticeships Down 37% — What This Means for the Trade and Your Career",
+          "targetKeywords": [
+            "plumbing apprenticeship UK 2026",
+            "plumbing shortage UK",
+            "plumbing career 2026"
+          ],
+          "status": "drafted",
+          "sunnyPriority": null,
+          "notes": "Strong career-change angle. Links directly to MLP course. Shows demand outstripping supply = opportunity. Drafted 12 Apr 2026 — dev/drafts/news-4-plumbing-apprenticeship-crash.md"
+        },
+        {
+          "id": 23,
+          "title": "MCS Redeveloped Installer Scheme — Phased Rollout 2026-2027",
+          "datePublished": "2026-03-15",
+          "source": "https://www.theiaa.co.uk/mcs-redeveloped-installer-scheme/",
+          "sourceLabel": "The IAA",
+          "category": "regulation",
+          "summary": "MCS is overhauling its installer certification scheme. New 'Redeveloped Installer Scheme' being rolled out in phases through 2026 and into 2027. IAA (Installation Assurance Authority) is UKAS-accredited certification body. Changes to how installers get and maintain MCS certification.",
+          "btsServiceLink": [
+            "Heat Pump"
+          ],
+          "blogAngle": "MCS Certification Is Changing — What Heat Pump Installers Need to Know in 2026",
+          "targetKeywords": [
+            "MCS certification changes 2026",
+            "MCS redeveloped scheme",
+            "heat pump installer certification"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "Technical but important for anyone considering heat pump certification. Links to heat pump course."
+        },
+        {
+          "id": 24,
+          "title": "2026 Heating Landscape for Installers — Vokèra Industry Analysis",
+          "datePublished": "2026-02-18",
+          "source": "https://phamnews.co.uk/what-does-the-2026-heating-landscape-look-like-for-installers/",
+          "sourceLabel": "PHAM News",
+          "category": "industry-data",
+          "summary": "Vokèra marketing director Neil Mattock analyses the 2026 installer landscape. Gas boiler ban headlines created uncertainty but reality is more nuanced — both challenges and opportunities. Transition period means multi-skilled engineers are best positioned.",
+          "btsServiceLink": [
+            "General",
+            "Heat Pump"
+          ],
+          "blogAngle": "The 2026 Heating Landscape: Challenges, Opportunities and Where to Focus Your Training",
+          "targetKeywords": [
+            "heating industry 2026 UK",
+            "gas engineer opportunities 2026",
+            "heating installer future"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "Good thought-leadership angle. Manufacturer perspective adds authority."
+        },
+        {
+          "id": 25,
+          "title": "Apprenticeship Funding Reforms March 2026 — New Incentives and Rules",
+          "datePublished": "2026-03-25",
+          "source": "https://www.watertrain.co.uk/apprenticeship-changes-march-2026",
+          "sourceLabel": "Watertrain",
+          "category": "policy",
+          "summary": "New government apprenticeship reforms aim to increase opportunities, address skills shortages, and better target funding. Changes to employer incentives and training requirements. Relevant for MLP route and new entrants.",
+          "btsServiceLink": [
+            "MLP",
+            "General"
+          ],
+          "blogAngle": "Apprenticeship Rules Just Changed — What It Means for Gas and Plumbing Training in 2026",
+          "targetKeywords": [
+            "apprenticeship changes 2026 UK",
+            "plumbing apprenticeship funding",
+            "gas training apprenticeship"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "Very recent (25 Mar). Links to MLP course. Good for career changers and employers considering training staff."
+        },
+        {
+          "id": 26,
+          "title": "BBC: Heat Pumps Work But They're Not Yet a Money Saver",
+          "datePublished": "2026-03-22",
+          "source": "https://www.bbc.co.uk/news/articles/ce358gkx9vpo",
+          "sourceLabel": "BBC News",
+          "category": "industry-data",
+          "summary": "BBC analysis — heat pumps work well technically but running costs aren't yet cheaper than gas for most homes. Heat pumps best at 45°C vs gas boilers at 70°C. Depends on tariff, insulation, and system design. Balanced view from real users.",
+          "btsServiceLink": [
+            "Heat Pump"
+          ],
+          "blogAngle": "Are Heat Pumps Actually Cheaper Than Gas? What the BBC Found — And What Installers Should Know",
+          "targetKeywords": [
+            "heat pump vs gas boiler cost 2026",
+            "heat pump running cost UK",
+            "are heat pumps worth it"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "BBC = high authority source. Balanced angle avoids pushing heat pumps unrealistically. Good for showing BTS gives honest industry advice."
+        },
+        {
+          "id": 27,
+          "title": "Top 5 MCS Umbrella Schemes for UK Heat Pump Installers (2026)",
+          "datePublished": "2026-03-16",
+          "source": "https://todaynews.co.uk/2026/03/16/the-5-best-mcs-umbrella-schemes-supporting-uk-solar-and-heat-pump-installers/",
+          "sourceLabel": "Today News",
+          "category": "brand-product",
+          "summary": "Roundup of the 5 main MCS umbrella schemes — including HPIN, Cinergi and others. Explains how umbrella schemes work: no need for individual MCS cert, but you still need training, insurance (£2M+), and Gas Safe/F-Gas registration. Shows the accessible routes into heat pump work.",
+          "btsServiceLink": [
+            "Heat Pump"
+          ],
+          "blogAngle": "MCS Umbrella Schemes Explained — How to Start Installing Heat Pumps Without Full Certification",
+          "targetKeywords": [
+            "MCS umbrella scheme UK",
+            "heat pump installer no MCS",
+            "HPIN scheme explained"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "Practical piece for gas engineers considering adding heat pumps. Still need training even with umbrella."
+        },
+        {
+          "id": 1,
+          "title": "Warm Homes Plan — £15bn Government Investment in Home Energy Upgrades",
+          "datePublished": "2026-01-20",
+          "source": "https://www.gov.uk/government/publications/warm-homes-plan",
+          "sourceLabel": "GOV.UK",
+          "category": "policy",
+          "summary": "UK Government published the Warm Homes Plan — £15bn over 5 years to upgrade 5 million homes. Includes heat pumps, insulation, solar panels, batteries. Biggest home upgrade programme in British history.",
+          "btsServiceLink": [
+            "Heat Pump",
+            "General"
+          ],
+          "blogAngle": "What the Warm Homes Plan Means for Gas Engineers and Heating Installers",
+          "targetKeywords": [
+            "Warm Homes Plan 2026",
+            "government energy grants UK",
+            "heat pump installer demand"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "Major story — high search volume. Links to heat pump training and multi-trade upskilling."
+        },
+        {
+          "id": 2,
+          "title": "Gas Boiler Ban Scrapped — No 2035 Phase-Out for Existing Homes",
+          "datePublished": "2025-01-06",
+          "source": "https://www.theguardian.com/environment/2025/jan/06/uk-government-scraps-plan-to-ban-sale-of-gas-boilers-by-2035",
+          "sourceLabel": "The Guardian",
+          "category": "policy",
+          "summary": "Labour government scrapped the 2035 gas boiler ban. No forced removal of working boilers. Replaced with Warm Homes Plan and incentive-based approach. Gas engineers still needed for decades.",
+          "btsServiceLink": [
+            "ACS Initial",
+            "ACS Reassessment",
+            "General"
+          ],
+          "blogAngle": "The Gas Boiler Ban Is Dead — What Does This Actually Mean for Your Career?",
+          "targetKeywords": [
+            "gas boiler ban scrapped",
+            "gas boiler ban 2026",
+            "gas engineer career future"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "Evergreen topic — people still searching for clarity. Reassures ACS students their training is worthwhile."
+        },
+        {
+          "id": 3,
+          "title": "Future Homes Standard — New Builds Can't Have Gas Boilers from 2027",
+          "datePublished": "2025-12-18",
+          "source": "https://www.rendesco.com/news/future-homes-standard-2025",
+          "sourceLabel": "Rendesco / GOV.UK",
+          "category": "policy",
+          "summary": "Future Homes Standard mandates all new homes built to low-carbon heating standards. Gas boilers phased out for new builds. Legislation expected December 2026, transition ends December 2027. 75-85% carbon cut vs 2013 levels.",
+          "btsServiceLink": [
+            "Heat Pump",
+            "General"
+          ],
+          "blogAngle": "Future Homes Standard Explained — What It Means for Heating Engineers",
+          "targetKeywords": [
+            "Future Homes Standard 2026",
+            "new build gas boiler ban",
+            "heating engineer future"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "Strong angle — new builds = heat pump demand = need trained installers. Links to heat pump course."
+        },
+        {
+          "id": 4,
+          "title": "Boiler Upgrade Scheme — £7,500 for Heat Pumps, New £2,500 for Air-to-Air",
+          "datePublished": "2026-01-30",
+          "source": "https://www.gov.uk/apply-boiler-upgrade-scheme/what-you-can-get",
+          "sourceLabel": "GOV.UK / OVO Energy",
+          "category": "grants",
+          "summary": "BUS offers £7,500 for air-to-water heat pumps, £7,500 for ground source. New £2,500 grant for air-to-air systems in 2026. EPC requirement removed. Homeowners need MCS-certified installers.",
+          "btsServiceLink": [
+            "Heat Pump"
+          ],
+          "blogAngle": "£7,500 Heat Pump Grants — Are You Qualified to Install Them?",
+          "targetKeywords": [
+            "Boiler Upgrade Scheme 2026",
+            "heat pump grant UK",
+            "MCS certified installer"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "NOTE: Sunny's rule = no government funding claims on BTS content. Angle must be about installer qualifications, not homeowner grants. Frame as 'homeowners are getting grants → they need qualified installers → get trained'."
+        },
+        {
+          "id": 5,
+          "title": "ECO4 Scheme Extended to 31 December 2026",
+          "datePublished": "2026-01-27",
+          "source": "https://heatzen.co.uk/eco4-scheme-extended/",
+          "sourceLabel": "Heatzen / GOV.UK",
+          "category": "grants",
+          "summary": "ECO4 extended 9 months to 31 Dec 2026. Free insulation, heating, solar for eligible low-income homes. No confirmed successor scheme. Drives demand for qualified installers.",
+          "btsServiceLink": [
+            "Heat Pump",
+            "General"
+          ],
+          "blogAngle": "ECO4 Extended — More Demand for Qualified Heating Installers Than Ever",
+          "targetKeywords": [
+            "ECO4 scheme 2026",
+            "free heating grants UK",
+            "heating installer demand"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "Same grant caution as #4. Focus on installer demand, not homeowner eligibility."
+        },
+        {
+          "id": 6,
+          "title": "Heat Pump Installer Shortage — Only 3,000 Qualified vs 600,000 Target",
+          "datePublished": "2025-09-08",
+          "source": "https://www.installeronline.co.uk/heating/edf-heat-pumps-launches-new-mcs-umbrella-scheme-for-installers/",
+          "sourceLabel": "Installer Online / GTEC",
+          "category": "industry-data",
+          "summary": "Only ~3,000 MCS-certified heat pump installers in UK. Government target is 600,000 installations per year by 2028. Certified installers earn £7,000-£10,000 more annually. Massive skills gap = opportunity.",
+          "btsServiceLink": [
+            "Heat Pump"
+          ],
+          "blogAngle": "3,000 Heat Pump Installers vs 600,000 Target — The UK's Biggest Skills Gap",
+          "targetKeywords": [
+            "heat pump installer shortage UK",
+            "heat pump installer salary",
+            "MCS certification training"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "Strong data-driven piece. Links to heat pump training. Career opportunity angle."
+        },
+        {
+          "id": 7,
+          "title": "EDF Launches HPIN Direct — MCS Umbrella Scheme for Smaller Installers",
+          "datePublished": "2025-09-04",
+          "source": "https://www.installeronline.co.uk/heating/edf-heat-pumps-launches-new-mcs-umbrella-scheme-for-installers/",
+          "sourceLabel": "Installer Online",
+          "category": "brand-product",
+          "summary": "EDF Heat Pumps launched HPIN Direct — umbrella scheme letting smaller firms install heat pumps without individual MCS certification. EDF handles design, commissioning, MCS cert and BUS applications. No subscription fees.",
+          "btsServiceLink": [
+            "Heat Pump"
+          ],
+          "blogAngle": "HPIN Direct — How Smaller Heating Firms Can Now Access Heat Pump Work",
+          "targetKeywords": [
+            "HPIN Direct",
+            "MCS umbrella scheme",
+            "heat pump installation small business"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "Good for gas engineers considering adding heat pumps. Still need training even with umbrella scheme."
+        },
+        {
+          "id": 8,
+          "title": "HPIN Partners with City Plumbing — Heat Pump Access for Boiler Installers",
+          "datePublished": "2025-12-16",
+          "source": "https://www.installeronline.co.uk/heating/heat-pump-installer-network-and-city-plumbing-announce-strategic-partnership/",
+          "sourceLabel": "Installer Online",
+          "category": "brand-product",
+          "summary": "HPIN and City Plumbing strategic partnership. Gives thousands of boiler installers access to heat pump market without joining MCS or paying umbrella fees.",
+          "btsServiceLink": [
+            "Heat Pump"
+          ],
+          "blogAngle": "City Plumbing + HPIN — What This Partnership Means for Boiler Engineers",
+          "targetKeywords": [
+            "City Plumbing heat pump",
+            "boiler installer heat pump transition"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "Niche but relevant — shows industry momentum. Pair with #7 or use as standalone."
+        },
+        {
+          "id": 9,
+          "title": "Clean Heat Market Mechanism (CHMM) — Launched April 2025",
+          "datePublished": "2025-04-01",
+          "source": "https://www.gov.uk/government/consultations/clean-heat-market-mechanism-adjustment-to-scheme-introduction-date/",
+          "sourceLabel": "GOV.UK",
+          "category": "regulation",
+          "summary": "CHMM requires boiler manufacturers to sell 6% heat pumps relative to boiler sales in 2025/2026. Dubbed 'boiler tax' but actually targets manufacturers, not homeowners. Drives manufacturer investment in heat pump training and installer networks.",
+          "btsServiceLink": [
+            "Heat Pump",
+            "General"
+          ],
+          "blogAngle": "The 'Boiler Tax' Explained — What the Clean Heat Market Mechanism Really Means",
+          "targetKeywords": [
+            "Clean Heat Market Mechanism",
+            "CHMM UK",
+            "boiler tax explained"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "Technical but high search interest. Demystifies the policy for engineers."
+        },
+        {
+          "id": 10,
+          "title": "F-Gas Regulation Changes — HFC Refrigerant Bans Tightening",
+          "datePublished": "2025-01-01",
+          "source": "https://www.gov.uk/guidance/bans-on-f-gas-in-new-products-and-equipment-current-and-future",
+          "sourceLabel": "GOV.UK",
+          "category": "regulation",
+          "summary": "From Jan 2025, single-split AC systems with GWP >750 refrigerants banned. UK aligning with EU Regulation 2024/573. Affects heat pump and AC installers. More changes expected 2026.",
+          "btsServiceLink": [
+            "Heat Pump"
+          ],
+          "blogAngle": "F-Gas Changes in 2025/26 — What Heat Pump and AC Installers Need to Know",
+          "targetKeywords": [
+            "F-Gas regulations UK 2026",
+            "refrigerant ban heat pump",
+            "F-Gas training"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "Technical audience. Good for positioning BTS as industry-aware. Logic4training already covers this."
+        },
+        {
+          "id": 11,
+          "title": "Gas Engineer Salaries 2026 — Average £42,854, Self-Employed £58.57/hr",
+          "datePublished": "2026-02-25",
+          "source": "https://gasengineersoftware.co.uk/blog/are-you-charging-enough/",
+          "sourceLabel": "Gas Engineer Software / Indeed",
+          "category": "industry-data",
+          "summary": "Average gas engineer salary £42,854/year (Indeed, Jan 2026). Self-employed average £58.57/hr. Apprentices £16,500-£21,000. Heat pump certified earn £7-10K more. Skills shortage driving competitive pay.",
+          "btsServiceLink": [
+            "ACS Initial",
+            "MLP",
+            "General"
+          ],
+          "blogAngle": "What Do Gas Engineers Really Earn in 2026? The Numbers Behind the Trade",
+          "targetKeywords": [
+            "gas engineer salary 2026",
+            "gas engineer earnings UK",
+            "plumber salary 2026"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "High search volume career research keyword. Perfect for career changers considering MLP."
+        },
+        {
+          "id": 12,
+          "title": "Gas Engineer Skills Shortage Persists — Construction Industry Crisis",
+          "datePublished": "2026-03-08",
+          "source": "https://www.ableskills.co.uk/blog/is-a-career-in-gas-still-worth-it-in-2026/",
+          "sourceLabel": "Able Skills",
+          "category": "industry-data",
+          "summary": "Skills shortages remain one of the biggest issues facing construction. Qualified gas engineer shortfall is a significant contributor. Aging workforce, growing demand, energy transition all factors. Career still worth it in 2026.",
+          "btsServiceLink": [
+            "ACS Initial",
+            "MLP",
+            "General"
+          ],
+          "blogAngle": "Is a Career in Gas Engineering Still Worth It in 2026? (Spoiler: Yes)",
+          "targetKeywords": [
+            "gas engineer career 2026",
+            "gas engineer shortage UK",
+            "is gas engineering worth it"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "NOTE: Able Skills (competitor #4) published this already. Our angle needs to be unique — focus on multi-trade + heat pump upskilling, not just gas alone."
+        },
+        {
+          "id": 13,
+          "title": "Gas Safety Regulations (GSIUR) — 2024 Amendment Updates",
+          "datePublished": "2024-04-06",
+          "source": "https://www.hse.gov.uk/pubns/books/l56.htm",
+          "sourceLabel": "HSE",
+          "category": "regulation",
+          "summary": "GSIUR amendments include updated Wobbe Number limits (delayed to April 2025), expanded training scope to cover water/electricity/asbestos dangers, and new 5-yearly review duty for Secretary of State.",
+          "btsServiceLink": [
+            "ACS Initial",
+            "ACS Reassessment"
+          ],
+          "blogAngle": "Gas Safety Regulations Updated — What's Changed and Why It Matters for Your ACS",
+          "targetKeywords": [
+            "GSIUR changes 2025",
+            "gas safety regulations update",
+            "ACS training requirements"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "Slightly older but still relevant. Good for ACS reassessment audience — 'regulations change, stay current'."
+        },
+        {
+          "id": 14,
+          "title": "Warm Homes: Local Grant — Up to £15,000 for Low-Income Households",
+          "datePublished": "2026-02-07",
+          "source": "https://warmhomeuk.co.uk/grants/warm-homes-plan/",
+          "sourceLabel": "WarmHomeUK / GOV.UK",
+          "category": "grants",
+          "summary": "Warm Homes Local Grant provides up to £15,000 for insulation and heat pumps. Income under £36,000, EPC D-G required. Funding allocated to local authorities to deliver. Includes air source heat pump installation.",
+          "btsServiceLink": [
+            "Heat Pump"
+          ],
+          "blogAngle": "Local Authorities Are Funding Heat Pump Installations — Is Your Training Ready?",
+          "targetKeywords": [
+            "Warm Homes Local Grant",
+            "free heat pump installation UK",
+            "local authority energy grants"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "Same grant caution. Installer demand angle, not homeowner eligibility."
+        },
+        {
+          "id": 15,
+          "title": "MCS Certification Fund — 75% of Cert Fees Covered (Scotland, Expanding)",
+          "datePublished": "2025-10-22",
+          "source": "https://energysavingtrust.org.uk/grants-and-loans/mcs-certification-fund/",
+          "sourceLabel": "Energy Saving Trust",
+          "category": "grants",
+          "summary": "Scottish Government MCS Certification Fund pays 75% (up to £1,000) of heat pump certification fees. Runs until March 2026. Addresses barrier of certification cost for smaller firms.",
+          "btsServiceLink": [
+            "Heat Pump"
+          ],
+          "blogAngle": "MCS Certification Made Cheaper — How Grants Are Lowering the Barrier to Heat Pump Work",
+          "targetKeywords": [
+            "MCS certification cost",
+            "MCS certification fund",
+            "heat pump certification UK"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "Scotland-specific fund but principle is UK-wide. Good for explaining MCS pathway."
+        },
+        {
+          "id": 16,
+          "title": "Part L Building Regulations & Future Homes Standard — Legislation December 2026",
+          "datePublished": "2026-01-09",
+          "source": "https://www.pbctoday.co.uk/news/building-control-news/part-l-in-practice-bridging-energy-efficiency-design-and-building-control/156392/",
+          "sourceLabel": "PBC Today",
+          "category": "regulation",
+          "summary": "Future Homes Standard published autumn 2025. Legislation laid December 2025, comes into effect December 2026 with December 2027 transition end. 75-85% carbon reduction vs 2013. No gas boilers in new builds. All extensions and loft conversions must meet new energy standards too.",
+          "btsServiceLink": [
+            "Heat Pump",
+            "General"
+          ],
+          "blogAngle": "Part L Is Changing — What Heating Engineers Need to Know Before December 2026",
+          "targetKeywords": [
+            "Part L building regulations 2026",
+            "Future Homes Standard heating",
+            "building regulations energy efficiency"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "Technical audience. Strong for positioning BTS as industry-current. Overlap with story #3 — could combine or run separately."
+        },
+        {
+          "id": 17,
+          "title": "Worcester Bosch Compress Series 2026 — Heat Pump Range Review",
+          "datePublished": "2026-02-10",
+          "source": "https://futureheatltd.co.uk/heat-pumps/worcester-bosch-heat-pump-review/",
+          "sourceLabel": "Future Heat Ltd",
+          "category": "brand-product",
+          "summary": "Worcester Bosch 2026 Compress series air-to-water heat pumps. Vaillant aroTHERM models from £3,500, SCOP up to 5.2, A+++ efficiency. Major manufacturers investing heavily in heat pump ranges.",
+          "btsServiceLink": [
+            "Heat Pump"
+          ],
+          "blogAngle": "Vaillant, Worcester Bosch, Mitsubishi — Why Boiler Brands Are Going All-In on Heat Pumps",
+          "targetKeywords": [
+            "best heat pumps UK 2026",
+            "Worcester Bosch heat pump",
+            "Vaillant heat pump installer"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "Brand-focused. Good for showing industry direction. Links to heat pump training."
+        },
+        {
+          "id": 18,
+          "title": "Worcester Bosch Launches VAULT — Enhanced Installer Loyalty Scheme",
+          "datePublished": "2025-09-30",
+          "source": "https://www.installeronline.co.uk/heating/worcester-bosch-launches-enhanced-loyalty-scheme-vault/",
+          "sourceLabel": "Installer Online",
+          "category": "brand-product",
+          "summary": "Worcester Bosch evolved its loyalty programme to VAULT. More rewards and support for installers. Shows manufacturers investing in installer relationships as heat pump transition accelerates.",
+          "btsServiceLink": [
+            "Heat Pump",
+            "General"
+          ],
+          "blogAngle": "Manufacturer Loyalty Schemes for Installers — Are They Worth Joining?",
+          "targetKeywords": [
+            "Worcester Bosch VAULT",
+            "installer loyalty scheme",
+            "heating engineer rewards"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "Lower priority — niche topic. Good for variety."
+        },
+        {
+          "id": 28,
+          "date": "2026-04-01",
+          "title": "Apprenticeship funding changes from April 2026 — new starters affected",
+          "category": "Policy & Regulation",
+          "service": "MLP",
+          "source": "https://www.caw.ac.uk/caw-news/apprenticeship-funding-changes-from-april-2026/",
+          "status": "available",
+          "notes": "Several updates to apprenticeship funding and contributions for new starters from 1 April 2026."
+        },
+        {
+          "id": 29,
+          "title": "72% of UK Construction SMEs Hit by Skills Shortages — 49% Reporting Job Delays",
+          "datePublished": "2026-03-31",
+          "source": "https://www.constructionnews.co.uk/financial/construction-upturn-hampered-by-skills-shortages-31-03-2026/",
+          "sourceLabel": "Construction News",
+          "category": "industry-data",
+          "summary": "72% of SME construction firms now affected by skills shortages (up from 61% in H1 2025). 49% of builders report job delays. 22% have cancelled jobs entirely due to lack of skilled workers. Plumbers/HVAC listed as 3rd hardest trade to recruit (23% of firms struggling). Over 140,000 vacancies across the sector.",
+          "btsServiceLink": [
+            "MLP",
+            "ACS Initial",
+            "General"
+          ],
+          "blogAngle": "Nearly Half of UK Builders Are Delaying Jobs — Here's Why Trained Engineers Are in Such High Demand",
+          "targetKeywords": [
+            "construction skills shortage UK 2026",
+            "plumber shortage UK",
+            "HVAC skills gap"
+          ],
+          "status": "published",
+          "sunnyPriority": null,
+          "notes": "Very recent (31 Mar). Strong data-driven piece. Plumbers/HVAC specifically called out. Perfect for career changers — massive demand, not enough supply.",
+          "published_date": "2026-04-11"
+        },
+        {
+          "id": 30,
+          "title": "Half of UK Gas Engineers Over 55 — Mass Retirement Crisis Looming",
+          "datePublished": "2026-03-01",
+          "source": "https://www.gas-training-and-assessment.co.uk/is-there-a-shortage-of-gas-engineers-in-the-uk",
+          "sourceLabel": "Gas Training & Assessment / Gas Safe Register",
+          "category": "industry-data",
+          "summary": "Gas Safe Register data shows half of all registered gas engineers are over 55. Within 10 years the majority will have retired. Fewer young people entering the trade. Lower birth rates compounding the problem. Creates massive replacement demand on top of growth demand from net-zero transition.",
+          "btsServiceLink": [
+            "ACS Initial",
+            "MLP",
+            "General"
+          ],
+          "blogAngle": "Half of Gas Engineers Will Retire Within 10 Years — Who's Going to Replace Them?",
+          "targetKeywords": [
+            "gas engineer shortage UK",
+            "gas engineer retirement crisis",
+            "gas engineer career opportunity 2026"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "SKILLS SHORTAGE FOCUS. Powerful stat — half the workforce retiring. Perfect for career changers and MLP students. Shows urgency."
+        },
+        {
+          "id": 31,
+          "title": "CITB: UK Needs 59,000 Extra HVAC & Plumbing Professionals",
+          "datePublished": "2026-02-01",
+          "source": "https://www.ability.uk.com/plumbing/uks-green-building-boom/",
+          "sourceLabel": "Ability Ltd / CITB",
+          "category": "industry-data",
+          "summary": "Construction Industry Training Board (CITB) data: 59,000 additional HVAC technicians and plumbing professionals needed across the UK within the next few years. Green Building Boom driving demand — net-zero retrofit, new builds, heat pump installations. Skills gap widening as demand outstrips training capacity.",
+          "btsServiceLink": [
+            "MLP",
+            "Heat Pump",
+            "General"
+          ],
+          "blogAngle": "59,000 More Plumbers and HVAC Engineers Needed — The Numbers Behind the UK's Biggest Skills Gap",
+          "targetKeywords": [
+            "CITB skills shortage",
+            "HVAC technicians needed UK",
+            "plumbing skills gap 2026"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "SKILLS SHORTAGE FOCUS. CITB = authoritative source. 59,000 is a concrete number that makes strong headlines. Links to MLP and heat pump courses."
+        },
+        {
+          "id": 32,
+          "title": "750,000 Construction Workers to Retire by 2036 — Industry Needs 48,000 New Workers Per Year",
+          "datePublished": "2026-02-12",
+          "source": "https://www.constructionmagazine.uk/2026/02/uk-construction-workforce-shortage-young-people.html",
+          "sourceLabel": "Construction Magazine",
+          "category": "industry-data",
+          "summary": "750,000 construction workers expected to retire by 2036. Sector needs ~48,000 new workers annually. Under-19% of workers are under 25, while 35% are over 50. Employment has declined 10.8% since the pandemic. Young people not entering the industry. Government responding with Growth and Skills Levy and 30+ Homebuilding Skills Hubs.",
+          "btsServiceLink": [
+            "MLP",
+            "General"
+          ],
+          "blogAngle": "750,000 Tradespeople Retiring in 10 Years — Why Construction Is Crying Out for New Blood",
+          "targetKeywords": [
+            "construction workforce crisis UK",
+            "trades retirement UK",
+            "construction careers 2026"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "SKILLS SHORTAGE FOCUS. Broader construction but directly relevant. Career changer angle — massive opportunity for new entrants. Links to MLP."
+        },
+        {
+          "id": 33,
+          "title": "Heat Pump Training Drop-Off: 39% of Qualified Engineers Don't Install After Training",
+          "datePublished": "2026-01-15",
+          "source": "https://www.nesta.org.uk/press-release/heat-pump-engineers-held-back-on-installations-by-staff-shortages/",
+          "sourceLabel": "Nesta",
+          "category": "industry-data",
+          "summary": "Nesta research: over 9,000 people completed heat pump training in 2024 (up 15% from 2023), but 39% drop-off rate — nearly 4 in 10 don't go on to install. 61% of installers say admin/compliance tasks reduce capacity. 59% report shortage of skilled staff. 130,000 Gas Safe engineers could retrain — the fastest route to expanding national installation capacity.",
+          "btsServiceLink": [
+            "Heat Pump"
+          ],
+          "blogAngle": "Thousands Are Training in Heat Pumps — But Nearly 40% Never Install. Here's What's Going Wrong",
+          "targetKeywords": [
+            "heat pump training UK",
+            "heat pump installer shortage",
+            "heat pump career 2026"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "SKILLS SHORTAGE FOCUS. Interesting angle — training alone isn't enough. BTS can position around practical, job-ready training. Nesta is authoritative source."
+        },
+        {
+          "id": 34,
+          "title": "UK Needs 33,700 Full-Time Heat Pump Installers Now — Has Around 2,000",
+          "datePublished": "2026-02-20",
+          "source": "https://www.nesta.org.uk/blog/the-heat-pump-installer-gap/",
+          "sourceLabel": "Nesta",
+          "category": "industry-data",
+          "summary": "UK has estimated 4,000-10,000 trained heat pump installers, but only ~2,000 working full-time. Needs 33,700 full-time installers short-term, 70,000 by 2035. Government target of 600,000 installations per year by 2028 impossible without massive workforce expansion. Retraining existing Gas Safe engineers (130,000 registered) is the fastest path.",
+          "btsServiceLink": [
+            "Heat Pump"
+          ],
+          "blogAngle": "2,000 Full-Time Heat Pump Installers vs 33,700 Needed — The UK's Most Extreme Skills Gap",
+          "targetKeywords": [
+            "heat pump installer gap UK",
+            "heat pump installer numbers",
+            "heat pump workforce 2026"
+          ],
+          "status": "published",
+          "sunnyPriority": null,
+          "notes": "SKILLS SHORTAGE FOCUS. The 2,000 vs 33,700 stat is incredibly powerful. Perfect for gas engineers considering upskilling. Links directly to heat pump course.",
+          "published_date": "2026-04-11"
+        },
+        {
+          "id": 35,
+          "title": "Higher Labour Costs Forecast as Skills Shortage Meets Rising Construction Demand",
+          "datePublished": "2026-02-23",
+          "source": "https://www.constructionnews.co.uk/government/higher-labour-costs-forecast-amid-skills-shortage-and-rising-demand-23-02-2026/",
+          "sourceLabel": "Construction News",
+          "category": "industry-data",
+          "summary": "Rising construction demand colliding with deepening skills shortage is pushing labour costs up. Wages rising across trades as firms compete for qualified workers. Gas engineers and HVAC specialists among the most in-demand. Salary growth of ~4% expected over 2025 levels.",
+          "btsServiceLink": [
+            "ACS Initial",
+            "MLP",
+            "General"
+          ],
+          "blogAngle": "Trades Wages Are Rising Fast — What the Skills Shortage Means for Your Earning Power",
+          "targetKeywords": [
+            "trades wages rising UK 2026",
+            "gas engineer salary increase",
+            "construction wages skills shortage"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "SKILLS SHORTAGE FOCUS. Money angle — shortage = higher pay. Great for career changers weighing up training investment vs salary return."
+        },
+        {
+          "id": 36,
+          "title": "£50M Government Emergency Fund for Heating Oil Crisis — April 2026",
+          "datePublished": "2026-04-01",
+          "source": "https://www.moneysavingexpert.com/news/2026/03/heating-oil-help/",
+          "sourceLabel": "MoneySavingExpert / GOV.UK",
+          "category": "policy",
+          "summary": "£50M emergency support from 1 April 2026 for households struggling with heating oil/LPG costs. Scottish Emergency Oil Heating Scheme also launches 1 April. Heating oil still ~129-140p/litre (was 55-65p in Feb). 1.7M off-grid homes affected. Drives case for alternative heating systems and qualified installers.",
+          "btsServiceLink": [
+            "Heat Pump",
+            "LPG Changeover"
+          ],
+          "blogAngle": "Government Announces £50M Heating Oil Emergency Fund — What This Means for the Heating Industry",
+          "targetKeywords": [
+            "heating oil crisis UK 2026",
+            "heating oil emergency fund",
+            "off grid heating alternatives"
+          ],
+          "status": "available",
+          "sunnyPriority": null,
+          "notes": "Very current — 1 April 2026. Extends story #20. Good for showing industry disruption driving demand for trained heating engineers."
+        }
+      ]
+    }
+  },
+  "seoAudit": {
+    "timestamp": "2026-05-17T00:00:00+10:00",
+    "source": "bts-source-of-truth-handoff",
+    "healthScore": 28,
+    "healthBreakdown": {
+      "technical": null,
+      "content": null,
+      "onPage": null,
+      "schema": null,
+      "performance": null,
+      "aiSearch": 5,
+      "images": null
+    },
+    "geoScore": 5,
+    "geoBreakdown": {
+      "citability": null,
+      "structure": null,
+      "multiModal": null,
+      "authority": null,
+      "technicalAccess": null
+    },
+    "crawlers": [],
+    "schema": {
+      "implemented": [],
+      "missing": [],
+      "deprecated": []
+    },
+    "actions": [
+      {
+        "severity": "critical",
+        "title": "GSC/Bing crawler access verification is outstanding."
+      },
+      {
+        "severity": "high",
+        "title": "SG Optimizer activation outstanding"
+      },
+      {
+        "severity": "high",
+        "title": "GSC verification outstanding"
+      }
+    ],
+    "history": [
+      {
+        "timestamp": "2026-05-17T00:00:00+10:00",
+        "healthScore": 28,
+        "geoScore": 5
+      }
+    ],
+    "updatedAt": "2026-05-17T00:00:00+10:00"
+  },
+  "traffic": {
+    "timestamp": "2026-05-17T00:00:00+10:00",
+    "source": "manual-status-json",
+    "note": "No current GA/GSC source. Intentionally thin until traffic/conversion source exists.",
+    "clickTrackingLive": false,
+    "period": "last30d",
+    "totals": {},
+    "pages": [],
+    "monthly": {}
   }
 }

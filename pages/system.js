@@ -13,6 +13,12 @@ function useSnapshot(initialData, interval = 30000) {
   return data
 }
 
+function useHydrated() {
+  const [hydrated, setHydrated] = useState(false)
+  useEffect(() => setHydrated(true), [])
+  return hydrated
+}
+
 function timeAgo(d) {
   if (!d) return '-'
   const m = Math.floor((Date.now() - new Date(d).getTime()) / 60000)
@@ -33,6 +39,7 @@ const DATA_FLOW = [
 
 export default function SystemPage({ initialSnapshot }) {
   const snap = useSnapshot(initialSnapshot)
+  const hydrated = useHydrated()
 
   return (
     <>
@@ -79,7 +86,7 @@ export default function SystemPage({ initialSnapshot }) {
 
         <div className="header">
           <h1>System Status</h1>
-          <span className="meta">Manual data model · updated {timeAgo(snap?.timestamp)}</span>
+          <span className="meta">Manual data model · updated {hydrated ? timeAgo(snap?.timestamp) : '-'}</span>
         </div>
 
         <div className="section">

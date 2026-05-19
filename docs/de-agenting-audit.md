@@ -138,6 +138,17 @@ public/dashboard.html
 
 Do not change structure, navigation order, or visual layout during de-agenting. Update the data flowing into the existing UI shell from manual/project-owned status data. `public/dashboard.html` remains a reference only.
 
+## BTS Restored Data Decision
+
+Resolved 2026-05-17 after BTS browser check and source-of-truth review:
+
+- `public/data/bts-status.json` now owns restored BTS dashboard data for the active Command Centre UI.
+- `public/snapshot.json` remains `legacy-disabled` and is not an active read source.
+- BTS competitor data restored into dashboard data is historical/reference only until a fresh competitor scan is run.
+- BTS traffic and conversion fields are intentionally thin because there is no current GA/GSC source data.
+- BTS course prices and durations need Adam/Sunny confirmation before being treated as final dashboard truth.
+- 2026-05-20 correction: SiteGround support confirmed normal public BTS pages return HTTP 200 without page-level noindex. Prior `sg-captcha` failures were caused by changing VPN/test IPs hitting SiteGround Antibot/WAF, not confirmed Googlebot/Bingbot blocking. The BTS P0 is now GSC/Bing URL Inspection verification.
+
 ## Verification
 
 `npm run build` passed after rewiring and after the 2026-05-17 design-lock cleanup.
@@ -146,8 +157,8 @@ Local dev verification was run at `http://127.0.0.1:3000`:
 
 - `/api/data` returns `dataSource.mode = manual-status-json`, `agentSnapshot = false`, and `openclawCli = false`.
 - `/api/data?agent=bts` returns a parked 410 response.
-- `/` renders BTS, NBHW, and Dashboard project cards from `public/data/*.json`, including BTS `SiteGround captcha-noindex P0`, NBHW `Manual status`, and the dashboard manual status queue.
-- `/bts-seo` renders BTS manual SEO values including 8 tracked keywords, 6 location pages live, 14 blog posts live, and the `SiteGround captcha-noindex P0` blocker.
+- `/` renders BTS, NBHW, and Dashboard project cards from `public/data/*.json`, including BTS `GSC/Bing verification P0`, NBHW `Manual status`, and the dashboard manual status queue.
+- `/bts-seo` renders BTS manual SEO values including 8 tracked keywords, 6 location pages live, 14 blog posts live, and the `GSC/Bing verification P0` blocker.
 - `/nbhw-seo` renders NBHW manual SEO values including health `58`, `21/37` coverage, and `hot water repair northern beaches`.
 - `/system` renders `manual-status-json`, `Agent snapshot: Removed`, `OpenClaw CLI: Not called`, and parked agent-era surfaces.
 

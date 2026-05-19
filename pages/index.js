@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import { buildDashboardSnapshot } from '../lib/dashboard-data'
+import { formatDashboardDateTime } from '../lib/date-format'
 
 function useSnapshot(initialData, interval = 30000) {
   const [data, setData] = useState(initialData || null)
@@ -11,6 +12,12 @@ function useSnapshot(initialData, interval = 30000) {
     return () => clearInterval(id)
   }, [interval])
   return data
+}
+
+function useHydrated() {
+  const [hydrated, setHydrated] = useState(false)
+  useEffect(() => setHydrated(true), [])
+  return hydrated
 }
 
 function timeAgo(dateStr) {
@@ -34,6 +41,7 @@ function statusColor(status) {
 
 export default function Dashboard({ initialSnapshot }) {
   const snap = useSnapshot(initialSnapshot)
+  const hydrated = useHydrated()
   const [actionFeedback, setActionFeedback] = useState(null)
 
   const handleAction = async (id, action) => {
@@ -51,8 +59,8 @@ export default function Dashboard({ initialSnapshot }) {
     } catch {}
   }
 
-  const now = new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })
-  const staleMinutes = snap?.timestamp ? Math.floor((Date.now() - new Date(snap.timestamp).getTime()) / 60000) : null
+  const now = hydrated ? formatDashboardDateTime(new Date()) : ''
+  const staleMinutes = hydrated && snap?.timestamp ? Math.floor((Date.now() - new Date(snap.timestamp).getTime()) / 60000) : null
   const isStale = staleMinutes !== null && staleMinutes > 60 * 24 * 7
   const projects = snap?.projects || []
   const blocked = projects.filter(p => p.status === 'blocked')
@@ -137,7 +145,7 @@ export default function Dashboard({ initialSnapshot }) {
             <h1>Adam's Command Centre</h1>
           </div>
           <span className={`meta ${isStale ? 'stale' : ''}`}>
-            {now} · {isStale ? `STALE (${staleMinutes}m)` : 'Manual data'} · Updated {snap?.timestamp ? timeAgo(snap.timestamp) : '-'}
+            {hydrated ? `${now} · ` : ''}{isStale ? `STALE (${staleMinutes}m)` : 'Manual data'} · Updated {hydrated && snap?.timestamp ? timeAgo(snap.timestamp) : '-'}
           </span>
         </div>
 
@@ -190,7 +198,7 @@ export default function Dashboard({ initialSnapshot }) {
                     <div className="build-label">Current Status</div>
                     <div className="build-text" style={{ color }}>{project.statusLabel}</div>
                     <div className="build-label" style={{ marginTop: 8 }}>Source</div>
-                    <div className="build-text">{project.source} · updated {timeAgo(project.lastUpdated)}</div>
+                    <div className="build-text">{project.source} · updated {hydrated ? timeAgo(project.lastUpdated) : '-'}</div>
                   </div>
 
                   <div className="acard-stats">
@@ -212,7 +220,7 @@ export default function Dashboard({ initialSnapshot }) {
 
                   <div className="acard-footer">
                     <span>{project.id}</span>
-                    <span>{timeAgo(project.lastUpdated)}</span>
+                    <span>{hydrated ? timeAgo(project.lastUpdated) : '-'}</span>
                   </div>
                 </div>
               </a>
@@ -243,7 +251,7 @@ export default function Dashboard({ initialSnapshot }) {
             ))}
         </div>
 
-        <div className="footer">Command Centre · manual status JSON · {snap?.timestamp ? timeAgo(snap.timestamp) : 'No data'}</div>
+        <div className="footer">Command Centre · manual status JSON · {hydrated && snap?.timestamp ? timeAgo(snap.timestamp) : 'No data'}</div>
       </div>
     </>
   )
