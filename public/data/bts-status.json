@@ -7,7 +7,7 @@
   "statusLabel": "GSC/Bing verification P0",
   "lastUpdated": "2026-05-20T00:00:00+10:00",
   "source": "manual-status-json",
-  "summary": "BTS is in de-agented operational SEO mode. Batch 3 is published. SiteGround support confirmed normal public pages return HTTP 200 without page-level noindex; real Google/Bing crawler access still needs GSC/Bing URL Inspection.",
+  "summary": "BTS is in de-agented operational SEO mode. Batch 3 is published. Batch 4A QA is final for Blogs 15-19 only and ready for Adam review before Sunny packet prep. SiteGround support confirmed normal public pages return HTTP 200 without page-level noindex; real Google/Bing crawler access still needs GSC/Bing URL Inspection.",
   "metrics": [
     {
       "label": "SEO score",
@@ -47,6 +47,8 @@
     "Do not treat VPN/datacenter curl sg-captcha responses as confirmed crawler blocking."
   ],
   "nextActions": [
+    "Prepare Batch 4A Sunny packet for Blogs 15-19 only after Adam review.",
+    "Exclude News 5 for now; hold News 6 until QA; hold About Us until Sunny bio/team details; hold directory package until listings are ready to action.",
     "Run GSC URL Inspection on homepage, key course pages, robots.txt, and sitemap.",
     "Run Bing Webmaster Tools URL Inspection if access is available.",
     "Activate/verify SG Optimizer when approved."
@@ -304,63 +306,112 @@
           "id": "blog-15-slough",
           "title": "Gas and Plumbing Training Near Slough",
           "type": "blog",
-          "service": "Multi-trade / Location"
+          "service": "Multi-trade / Location",
+          "status": "ready-for-adam-review",
+          "batch": "4A",
+          "qaDecision": "Ready for Adam review as a near/from Slough High Wycombe route article; keep near/from Slough wording and do not imply a BTS Slough site."
         },
         {
           "id": "blog-16-maidenhead",
           "title": "Gas and Plumbing Training Near Maidenhead",
           "type": "blog",
-          "service": "Multi-trade / Location"
+          "service": "Multi-trade / Location",
+          "status": "ready-for-adam-review",
+          "batch": "4A",
+          "qaDecision": "Ready for Adam review as a High Wycombe alternative for Maidenhead engineers; acknowledge local options without claiming BTS is closest."
         },
         {
           "id": "blog-17-milton-keynes",
           "title": "Gas and Plumbing Training Near Milton Keynes",
           "type": "blog",
-          "service": "Multi-trade / Location"
+          "service": "Multi-trade / Location",
+          "status": "ready-for-adam-review-lower-priority",
+          "batch": "4A",
+          "qaDecision": "Ready for Adam review, but lower priority because Milton Keynes has stronger direct local competition."
         },
         {
           "id": "blog-18-water-regulations-deep-dive",
           "title": "Water Regulations Training Deep Dive",
           "type": "blog",
-          "service": "Water Regulations"
+          "service": "Water Regulations",
+          "status": "strongest-approval-candidate",
+          "batch": "4A",
+          "qaDecision": "Strongest Batch 4A approval candidate; terminology is conservative around Water Regulations, Water Fittings Regulations, WRAS and WaterSafe."
         },
         {
           "id": "blog-19-domestic-cookers",
           "title": "Domestic Cookers Training Guide",
           "type": "blog",
-          "service": "Domestic Cookers"
+          "service": "Domestic Cookers",
+          "status": "ready-for-adam-review-with-prerequisite-note",
+          "batch": "4A",
+          "qaDecision": "Ready for Adam review only if the CKR1 prerequisite note remains or Adam confirms exact prerequisite wording before Sunny sees it."
         },
         {
           "id": "news-5-bus-amendments",
           "title": "BUS Amendments Update",
           "type": "news",
-          "service": "Heat Pump / Policy"
+          "service": "Heat Pump / Policy",
+          "status": "hold",
+          "qaDecision": "Exclude from Batch 4A for now; current grant-heavy angle is unsafe under Sunny's no-government-funding-reference rule."
         },
         {
           "id": "news-6-apprenticeship-funding-april-2026",
           "title": "Apprenticeship Funding April 2026",
           "type": "news",
-          "service": "MLP / Apprenticeships"
+          "service": "MLP / Apprenticeships",
+          "status": "hold-pending-qa",
+          "qaDecision": "Hold until QA/source refresh against GOV.UK apprenticeship funding rules updated 2026-04-29."
         },
         {
           "id": "page-about-us",
           "title": "About Us Page",
           "type": "page",
-          "service": "About"
+          "service": "About",
+          "status": "hold",
+          "qaDecision": "Hold until Sunny supplies bio/team details."
         },
         {
           "id": "directory-package-markdown",
           "title": "Directory Package Markdown",
           "type": "directory",
-          "service": "Directory package"
+          "service": "Directory package",
+          "status": "hold",
+          "qaDecision": "Hold until someone is ready to action listings."
         },
         {
           "id": "directory-package-pdf",
           "title": "Directory Package PDF",
           "type": "directory",
-          "service": "Directory package"
+          "service": "Directory package",
+          "status": "hold",
+          "qaDecision": "Hold until someone is ready to action listings."
         }
-      ]
+      ],
+      "batch4A": {
+        "qaDate": "2026-05-20",
+        "scope": "Blogs 15-19 only",
+        "packetState": "Ready for Adam review before Sunny packet prep",
+        "recommendedOrder": [
+          "blog-18-water-regulations-deep-dive",
+          "blog-19-domestic-cookers",
+          "blog-15-slough",
+          "blog-16-maidenhead",
+          "blog-17-milton-keynes"
+        ],
+        "holds": [
+          "News 5 excluded for now",
+          "News 6 held until QA/source refresh",
+          "About Us held until Sunny bio/team details",
+          "Directory package held until listings are ready to action"
+        ],
+        "remainingQuestions": [
+          "Does BTS have a dedicated CCN1 Initial course/page, or should all new-entrant language route through MLP and the gas courses hub?",
+          "Is LPG Changeover currently offered, and does it need a live course page before being used in approval drafts?",
+          "What is the exact CKR1 prerequisite wording for BTS Domestic Cookers Training and Re-assessment?",
+          "Should Blog 17 be included in the first Adam review packet despite stronger direct Milton Keynes competition, or held for a later location batch?"
+        ]
+      }
     },
     "crawlerStatusCorrection": {
       "date": "2026-05-20",
@@ -958,8 +1009,8 @@
     "notifications": []
   },
   "drafts": {
-    "source": "bts-source-of-truth-handoff plus restored old GBP draft text",
-    "sourceNote": "Pending assets are current; restored GBP texts are drafts only and not marked as published.",
+    "source": "bts-source-of-truth-handoff plus Batch 4A QA 2026-05-20 plus restored old GBP draft text",
+    "sourceNote": "Batch 4A Blogs 15-19 are QA-ready for Adam review before Sunny packet prep. News 5, News 6, About Us and directory assets remain held. Restored GBP texts are drafts only and not marked as published.",
     "drafts": [
       {
         "id": "blog-15-slough",
@@ -967,9 +1018,11 @@
         "type": "blog",
         "status": "draft",
         "service": "Multi-trade / Location",
-        "content": "Draft text not available in restored manual data.",
+        "content": "Batch 4A QA final 2026-05-20: ready for Adam review as a near/from Slough High Wycombe route article. Keep near/from Slough language and do not imply BTS has a Slough site. CCN1 Initial and LPG references were removed until Sunny confirms them.",
         "author": "BTS manual status",
-        "createdAt": "2026-05-17T00:00:00+10:00"
+        "createdAt": "2026-05-17T00:00:00+10:00",
+        "batch": "4A",
+        "qaStatus": "ready-for-adam-review"
       },
       {
         "id": "blog-16-maidenhead",
@@ -977,9 +1030,11 @@
         "type": "blog",
         "status": "draft",
         "service": "Multi-trade / Location",
-        "content": "Draft text not available in restored manual data.",
+        "content": "Batch 4A QA final 2026-05-20: ready for Adam review as a High Wycombe alternative for Maidenhead engineers. Acknowledge local/nearby options without attacking Gasmark or claiming BTS is the closest provider. CCN1 Initial and LPG references were removed until Sunny confirms them.",
         "author": "BTS manual status",
-        "createdAt": "2026-05-17T00:00:00+10:00"
+        "createdAt": "2026-05-17T00:00:00+10:00",
+        "batch": "4A",
+        "qaStatus": "ready-for-adam-review"
       },
       {
         "id": "blog-17-milton-keynes",
@@ -987,9 +1042,11 @@
         "type": "blog",
         "status": "draft",
         "service": "Multi-trade / Location",
-        "content": "Draft text not available in restored manual data.",
+        "content": "Batch 4A QA final 2026-05-20: ready for Adam review, but lower priority than Blogs 18, 19, 15 and 16 because Milton Keynes has stronger direct local competition. The draft no longer overclaims convenience or superiority.",
         "author": "BTS manual status",
-        "createdAt": "2026-05-17T00:00:00+10:00"
+        "createdAt": "2026-05-17T00:00:00+10:00",
+        "batch": "4A",
+        "qaStatus": "ready-for-adam-review-lower-priority"
       },
       {
         "id": "blog-18-water-regulations-deep-dive",
@@ -997,9 +1054,11 @@
         "type": "blog",
         "status": "draft",
         "service": "Water Regulations",
-        "content": "Draft text not available in restored manual data.",
+        "content": "Batch 4A QA final 2026-05-20: strongest approval candidate. Terminology is conservative around Water Regulations, Water Fittings Regulations, WRAS product approval and WaterSafe/approved-contractor status.",
         "author": "BTS manual status",
-        "createdAt": "2026-05-17T00:00:00+10:00"
+        "createdAt": "2026-05-17T00:00:00+10:00",
+        "batch": "4A",
+        "qaStatus": "strongest-approval-candidate"
       },
       {
         "id": "blog-19-domestic-cookers",
@@ -1007,9 +1066,11 @@
         "type": "blog",
         "status": "draft",
         "service": "Domestic Cookers",
-        "content": "Draft text not available in restored manual data.",
+        "content": "Batch 4A QA final 2026-05-20: ready for Adam review only if the inline CKR1 prerequisite note remains or Adam confirms exact prerequisite wording before Sunny sees it. Uses confirmed 1-day duration and avoids guaranteed work, earnings, ROI, high-margin, testimonial, pass-rate or BTS history claims.",
         "author": "BTS manual status",
-        "createdAt": "2026-05-17T00:00:00+10:00"
+        "createdAt": "2026-05-17T00:00:00+10:00",
+        "batch": "4A",
+        "qaStatus": "ready-for-adam-review-with-prerequisite-note"
       },
       {
         "id": "news-5-bus-amendments",
@@ -1017,9 +1078,10 @@
         "type": "news",
         "status": "draft",
         "service": "Heat Pump / Policy",
-        "content": "Draft text not available in restored manual data.",
+        "content": "Hold. Exclude from Batch 4A for now. Current BUS/heat-training sources keep the topic relevant, but Sunny's no-government-funding-reference rule makes the current grant-heavy angle unsafe. Needs rewrite before approval.",
         "author": "BTS manual status",
-        "createdAt": "2026-05-17T00:00:00+10:00"
+        "createdAt": "2026-05-17T00:00:00+10:00",
+        "qaStatus": "hold"
       },
       {
         "id": "news-6-apprenticeship-funding-april-2026",
@@ -1027,9 +1089,10 @@
         "type": "news",
         "status": "draft",
         "service": "MLP / Apprenticeships",
-        "content": "Draft text not available in restored manual data.",
+        "content": "Hold until QA/source refresh. GOV.UK apprenticeship funding guidance was updated on 2026-04-29, so this draft should be refreshed from official rules and checked for false BTS history or track-record implications.",
         "author": "BTS manual status",
-        "createdAt": "2026-05-17T00:00:00+10:00"
+        "createdAt": "2026-05-17T00:00:00+10:00",
+        "qaStatus": "hold-pending-qa"
       },
       {
         "id": "page-about-us",
@@ -1037,9 +1100,10 @@
         "type": "page",
         "status": "draft",
         "service": "About",
-        "content": "Draft text not available in restored manual data.",
+        "content": "Hold until Sunny supplies bio/team details.",
         "author": "BTS manual status",
-        "createdAt": "2026-05-17T00:00:00+10:00"
+        "createdAt": "2026-05-17T00:00:00+10:00",
+        "qaStatus": "hold"
       },
       {
         "id": "directory-package-markdown",
@@ -1047,9 +1111,10 @@
         "type": "directory",
         "status": "draft",
         "service": "Directory package",
-        "content": "Draft text not available in restored manual data.",
+        "content": "Hold until someone is ready to action listings.",
         "author": "BTS manual status",
-        "createdAt": "2026-05-17T00:00:00+10:00"
+        "createdAt": "2026-05-17T00:00:00+10:00",
+        "qaStatus": "hold"
       },
       {
         "id": "directory-package-pdf",
@@ -1057,9 +1122,10 @@
         "type": "directory",
         "status": "draft",
         "service": "Directory package",
-        "content": "Draft text not available in restored manual data.",
+        "content": "Hold until someone is ready to action listings.",
         "author": "BTS manual status",
-        "createdAt": "2026-05-17T00:00:00+10:00"
+        "createdAt": "2026-05-17T00:00:00+10:00",
+        "qaStatus": "hold"
       },
       {
         "id": "gbp-acs-reassess",
@@ -1910,16 +1976,18 @@
         "title": "Section 4: Content Pipeline",
         "lines": [
           "**Pending draft assets: 10**",
-          "- [ ] Gas and Plumbing Training Near Slough (blog)",
-          "- [ ] Gas and Plumbing Training Near Maidenhead (blog)",
-          "- [ ] Gas and Plumbing Training Near Milton Keynes (blog)",
-          "- [ ] Water Regulations Training Deep Dive (blog)",
-          "- [ ] Domestic Cookers Training Guide (blog)",
-          "- [ ] BUS Amendments Update (news)",
-          "- [ ] Apprenticeship Funding April 2026 (news)",
-          "- [ ] About Us Page (page)",
-          "- [ ] Directory Package Markdown (directory)",
-          "- [ ] Directory Package PDF (directory)",
+          "**Batch 4A QA final 2026-05-20: Blogs 15-19 only**",
+          "- [ ] Water Regulations Training Deep Dive (blog) — strongest approval candidate",
+          "- [ ] Domestic Cookers Training Guide (blog) — ready for Adam review if CKR1 prerequisite note remains or wording is confirmed",
+          "- [ ] Gas and Plumbing Training Near Slough (blog) — ready for Adam review",
+          "- [ ] Gas and Plumbing Training Near Maidenhead (blog) — ready for Adam review",
+          "- [ ] Gas and Plumbing Training Near Milton Keynes (blog) — ready for Adam review, lower priority due stronger local competition",
+          "**Held out of Batch 4A**",
+          "- [ ] BUS Amendments Update (news) — excluded for now; grant-heavy angle unsafe under Sunny funding-reference rule",
+          "- [ ] Apprenticeship Funding April 2026 (news) — hold until QA/source refresh against GOV.UK 2026-04-29 update",
+          "- [ ] About Us Page (page) — hold until Sunny bio/team details",
+          "- [ ] Directory Package Markdown (directory) — hold until listings are ready to action",
+          "- [ ] Directory Package PDF (directory) — hold until listings are ready to action",
           "**GBP draft texts restored for future use, not marked as published**",
           "- [ ] GBP: ACS Reassessment",
           "- [ ] GBP: Future Homes Standard News",
@@ -1986,6 +2054,7 @@
       "section-8-weekly-audit-log": {
         "title": "Section 8: Weekly Audit Log",
         "lines": [
+          "- 2026-05-20: Batch 4A QA final. Blogs 15-19 only are ready for Adam review before Sunny packet prep; News 5/6, About Us and directory package remain held.",
           "- 2026-05-17: BTS source-of-truth handoff verified.",
           "- 2026-05-11: Batch 3 published after Sunny approval.",
           "- P0 remains GSC/Bing verification and crawler access recovery.",
