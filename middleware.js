@@ -1,14 +1,25 @@
 import { NextResponse } from 'next/server'
 
 export function middleware(request) {
+  const { pathname } = request.nextUrl
+
   // Check for authorization header
   const authHeader = request.headers.get('authorization')
   
   // Check for session cookie
   const sessionCookie = request.cookies.get('dashboard-auth')
+  const btsSessionCookie = request.cookies.get('bts-client-auth')
   
   // If has valid session, allow access
   if (sessionCookie?.value === process.env.DASHBOARD_SESSION_TOKEN) {
+    return NextResponse.next()
+  }
+
+  if (pathname === '/bts-login') {
+    return NextResponse.next()
+  }
+
+  if (pathname === '/bts-seo' && btsSessionCookie?.value === process.env.BTS_SESSION_TOKEN) {
     return NextResponse.next()
   }
   
@@ -27,6 +38,12 @@ export function middleware(request) {
       })
       return response
     }
+  }
+
+  if (pathname === '/bts-seo') {
+    const loginUrl = new URL('/bts-login', request.url)
+    loginUrl.searchParams.set('from', pathname)
+    return NextResponse.redirect(loginUrl)
   }
   
   // Require authentication
