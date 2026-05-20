@@ -220,7 +220,7 @@ export default function BtsSeoPage({ initialSnapshot }) {
   const [liveSuggestions, setLiveSuggestions] = useState(null)
   const [draftResults, setDraftResults] = useState({})
   const [localDrafts, setLocalDrafts] = useState(null)
-  const [draftViewMode, setDraftViewMode] = useState({})
+  const [editOpen, setEditOpen] = useState({})
 
   // Fetch suggestions directly from API (not snapshot) so submitted ones persist
   useEffect(() => {
@@ -1419,9 +1419,7 @@ export default function BtsSeoPage({ initialSnapshot }) {
                             <div style={{fontSize:9,color:group.color,textTransform:'uppercase',letterSpacing:1.2,marginBottom:8,fontWeight:600,borderBottom:`1px solid ${group.color}33`,paddingBottom:4}}>
                               {group.icon} {group.label} ({group.drafts.length})
                             </div>
-                            {group.drafts.map(d => {
-                              const isEditing = draftViewMode[d.id] === 'edit'
-                              return (
+                            {group.drafts.map(d => (
                                 <div key={d.id} style={{background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:10,padding:14,marginBottom:10}}>
                                   <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6,flexWrap:'wrap'}}>
                                     <span style={{fontSize:8,color:typeColors[d.type]||'#888',fontWeight:700,textTransform:'uppercase',background:`${typeColors[d.type]||'#888'}15`,padding:'2px 6px',borderRadius:4}}>{d.type}</span>
@@ -1431,62 +1429,47 @@ export default function BtsSeoPage({ initialSnapshot }) {
                                     <span style={{fontSize:9,color:statusColors[d.status],fontWeight:600}}>{statusLabels[d.status]}</span>
                                   </div>
                                   {d.targetDate && <div style={{fontSize:9,color:'#888',marginBottom:6}}>Target: {d.targetDate}</div>}
-                                  {d.feedback && <div style={{fontSize:10,color:'#ef4444',background:'#3b101033',padding:'6px 8px',borderRadius:6,marginBottom:8}}>💬 Feedback: {d.feedback}</div>}
 
-                                  <div style={{display:'flex',gap:6,marginBottom:8}}>
-                                    <button onClick={() => setDraftViewMode(prev => ({...prev, [d.id]: 'read'}))} style={{
-                                      fontSize:10,padding:'4px 10px',borderRadius:4,border:'1px solid',cursor:'pointer',fontWeight:600,
-                                      background:!isEditing?'#111':'transparent',borderColor:!isEditing?'#3b82f6':'#333',color:!isEditing?'#3b82f6':'#555'
-                                    }}>Read</button>
-                                    <button onClick={() => setDraftViewMode(prev => ({...prev, [d.id]: 'edit'}))} style={{
-                                      fontSize:10,padding:'4px 10px',borderRadius:4,border:'1px solid',cursor:'pointer',fontWeight:600,
-                                      background:isEditing?'#111':'transparent',borderColor:isEditing?'#f59e0b':'#333',color:isEditing?'#f59e0b':'#555'
-                                    }}>Edit</button>
-                                  </div>
-
-                                  {isEditing ? (
-                                    <textarea
-                                      defaultValue={d.editedContent || d.content}
-                                      id={`draft-content-${d.id}`}
-                                      style={{
-                                        width:'100%',minHeight:200,padding:12,background:'#0a0a0a',border:'1px solid #222',borderRadius:8,
-                                        color:'#e0e0e0',fontSize:12,fontFamily:'-apple-system,BlinkMacSystemFont,sans-serif',lineHeight:1.6,resize:'vertical',outline:'none'
-                                      }}
-                                      onFocus={e => e.target.style.borderColor = '#3b82f6'}
-                                      onBlur={e => e.target.style.borderColor = '#222'}
-                                    />
-                                  ) : (
-                                    <>
-                                      {d.qaSummary && (
-                                        <div style={{background:'#0a1a2a',border:'1px solid #1a3a5a',borderRadius:8,padding:'8px 12px',marginBottom:8,fontSize:11,color:'#7cb3d9',lineHeight:1.5}}>
-                                          <span style={{fontWeight:600,color:'#3b82f6',marginRight:6}}>QA:</span>{d.qaSummary}
-                                        </div>
-                                      )}
-                                      <div style={{background:'#0a0a0d',border:'1px solid #1a1a22',borderRadius:8,padding:14,maxHeight:600,overflowY:'auto'}}>
-                                        <RenderMarkdown text={d.editedContent || d.content} />
-                                      </div>
-                                    </>
+                                  {d.qaSummary && (
+                                    <div style={{background:'#0a1a2a',border:'1px solid #1a3a5a',borderRadius:8,padding:'8px 12px',marginBottom:8,fontSize:11,color:'#7cb3d9',lineHeight:1.5}}>
+                                      <span style={{fontWeight:600,color:'#3b82f6',marginRight:6}}>QA:</span>{d.qaSummary}
+                                    </div>
                                   )}
 
-                                  <div style={{display:'flex',gap:8,marginTop:10,flexWrap:'wrap',alignItems:'center'}}>
-                                    {isEditing && (
-                                      <button disabled={draftResults[d.id]?.loading} onClick={() => {
-                                        const el = document.getElementById(`draft-content-${d.id}`)
-                                        if (el) draftAction(d.id, 'edit', { content: el.value })
-                                      }} style={{padding:'8px 16px',background:'#1a1a1a',border:'1px solid #333',borderRadius:6,color:'#f59e0b',fontSize:11,fontWeight:600,cursor:'pointer',opacity:draftResults[d.id]?.loading?0.5:1}}>💾 Save Edits</button>
+                                  <div style={{background:'#0a0a0d',border:'1px solid #1a1a22',borderRadius:8,padding:14,maxHeight:600,overflowY:'auto',marginBottom:10}}>
+                                    <RenderMarkdown text={d.editedContent || d.content} />
+                                  </div>
+
+                                  <div style={{marginBottom:10}}>
+                                    <button onClick={() => setEditOpen(prev => ({...prev, [d.id]: !prev[d.id]}))} style={{
+                                      fontSize:10,color:'#888',background:'none',border:'none',cursor:'pointer',padding:0,fontWeight:600
+                                    }}>{editOpen[d.id] ? '▾ Hide Changes' : '▸ Make Changes'}</button>
+                                    {editOpen[d.id] && (
+                                      <textarea
+                                        defaultValue={d.editedContent || d.content}
+                                        id={`draft-content-${d.id}`}
+                                        style={{
+                                          width:'100%',minHeight:160,padding:12,marginTop:6,background:'#0a0a0a',border:'1px solid #222',borderRadius:8,
+                                          color:'#e0e0e0',fontSize:12,fontFamily:'-apple-system,BlinkMacSystemFont,sans-serif',lineHeight:1.6,resize:'vertical',outline:'none'
+                                        }}
+                                        onFocus={e => e.target.style.borderColor = '#3b82f6'}
+                                        onBlur={e => e.target.style.borderColor = '#222'}
+                                      />
                                     )}
+                                  </div>
+
+                                  <div style={{display:'flex',gap:8,alignItems:'center'}}>
                                     <button disabled={draftResults[d.id]?.loading} onClick={() => {
-                                      if (isEditing) {
-                                        const el = document.getElementById(`draft-content-${d.id}`)
-                                        draftAction(d.id, 'approve', el ? { content: el.value } : {})
-                                      } else {
-                                        draftAction(d.id, 'approve', {})
-                                      }
-                                    }} style={{padding:'8px 20px',background:'#10b981',border:'none',borderRadius:6,color:'#fff',fontSize:11,fontWeight:700,cursor:'pointer',opacity:draftResults[d.id]?.loading?0.5:1}}>✅ Good to Go</button>
+                                      const el = document.getElementById(`draft-content-${d.id}`)
+                                      if (el) draftAction(d.id, 'edit', { content: el.value })
+                                    }} style={{
+                                      padding:'8px 16px',background:'#1a1a1a',border:'1px solid #333',borderRadius:6,
+                                      color:editOpen[d.id]?'#f59e0b':'#333',fontSize:11,fontWeight:600,cursor:editOpen[d.id]?'pointer':'default',
+                                      opacity:(!editOpen[d.id]||draftResults[d.id]?.loading)?0.4:1
+                                    }}>Save Changes</button>
                                     <button disabled={draftResults[d.id]?.loading} onClick={() => {
-                                      const fb = prompt('What needs changing?')
-                                      if (fb) draftAction(d.id, 'reject', { feedback: fb })
-                                    }} style={{padding:'8px 16px',background:'#1a1a1a',border:'1px solid #ef4444',borderRadius:6,color:'#ef4444',fontSize:11,fontWeight:600,cursor:'pointer',opacity:draftResults[d.id]?.loading?0.5:1}}>↩️ Request Changes</button>
+                                      draftAction(d.id, 'approve', {})
+                                    }} style={{padding:'8px 20px',background:'#10b981',border:'none',borderRadius:6,color:'#fff',fontSize:11,fontWeight:700,cursor:'pointer',opacity:draftResults[d.id]?.loading?0.5:1}}>Approve</button>
                                     {draftResults[d.id] && !draftResults[d.id].loading && (
                                       <span style={{fontSize:11,fontWeight:600,color:draftResults[d.id].ok?'#10b981':'#ef4444'}}>{draftResults[d.id].msg}</span>
                                     )}
@@ -1495,11 +1478,9 @@ export default function BtsSeoPage({ initialSnapshot }) {
                                   <div style={{fontSize:8,color:'#333',marginTop:6}}>
                                     By: {d.author} · Created: {d.createdAt ? new Date(d.createdAt).toLocaleDateString() : '—'}
                                     {d.editedBy && ` · Edited by ${d.editedBy}`}
-                                    {d.contentSource && ` · Source: ${d.contentSource}`}
                                   </div>
                                 </div>
-                              )
-                            })}
+                            ))}
                           </div>
                         ))
                       })()}
