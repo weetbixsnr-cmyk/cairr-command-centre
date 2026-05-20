@@ -181,29 +181,35 @@ export default function GbpPosts({ posts = [], label = 'GBP', actionEndpoint }) 
           </div>
         )}
 
-        {/* Action buttons — only in edit mode */}
-        {isEditing && hasActions && (
+        {/* Action buttons — visible in both read and edit modes */}
+        {hasActions && (
           <div style={{display:'flex',gap:8,marginTop:10,flexWrap:'wrap'}}>
-            <button
-              disabled={actionLoading === `${post.id}-edit`}
-              onClick={() => {
-                const el = document.getElementById(`gbp-content-${post.id}`)
-                if (el) doAction(post.id, 'edit', { content: el.value })
-              }}
-              style={{
-                padding:'8px 16px',background:'#1a1a1a',border:'1px solid #333',borderRadius:6,
-                color:'#f59e0b',fontSize:11,fontWeight:600,cursor:'pointer',
-                opacity: actionLoading === `${post.id}-edit` ? 0.5 : 1
-              }}
-            >
-              💾 Save Edits
-            </button>
+            {isEditing && (
+              <button
+                disabled={actionLoading === `${post.id}-edit`}
+                onClick={() => {
+                  const el = document.getElementById(`gbp-content-${post.id}`)
+                  if (el) doAction(post.id, 'edit', { content: el.value })
+                }}
+                style={{
+                  padding:'8px 16px',background:'#1a1a1a',border:'1px solid #333',borderRadius:6,
+                  color:'#f59e0b',fontSize:11,fontWeight:600,cursor:'pointer',
+                  opacity: actionLoading === `${post.id}-edit` ? 0.5 : 1
+                }}
+              >
+                💾 Save Edits
+              </button>
+            )}
             {canApprove && (
               <button
                 disabled={actionLoading === `${post.id}-approve`}
                 onClick={() => {
-                  const el = document.getElementById(`gbp-content-${post.id}`)
-                  doAction(post.id, 'approve', el ? { content: el.value } : {})
+                  if (isEditing) {
+                    const el = document.getElementById(`gbp-content-${post.id}`)
+                    doAction(post.id, 'approve', el ? { content: el.value } : {})
+                  } else {
+                    doAction(post.id, 'approve', {})
+                  }
                 }}
                 style={{
                   padding:'8px 20px',background:'#10b981',border:'none',borderRadius:6,
@@ -230,38 +236,6 @@ export default function GbpPosts({ posts = [], label = 'GBP', actionEndpoint }) 
                 ↩️ Request Changes
               </button>
             )}
-            {canPublish && (
-              <button
-                disabled={actionLoading === `${post.id}-publish`}
-                onClick={() => doAction(post.id, 'publish')}
-                style={{
-                  padding:'8px 20px',background:'#3b82f6',border:'none',borderRadius:6,
-                  color:'#fff',fontSize:11,fontWeight:700,cursor:'pointer',
-                  opacity: actionLoading === `${post.id}-publish` ? 0.5 : 1
-                }}
-              >
-                🚀 Mark Published
-              </button>
-            )}
-            {canSignOff && (
-              <button
-                disabled={actionLoading === `${post.id}-sign-off`}
-                onClick={() => doAction(post.id, 'sign-off')}
-                style={{
-                  padding:'8px 20px',background:'#a855f7',border:'none',borderRadius:6,
-                  color:'#fff',fontSize:11,fontWeight:700,cursor:'pointer',
-                  opacity: actionLoading === `${post.id}-sign-off` ? 0.5 : 1
-                }}
-              >
-                🏁 Sign Off
-              </button>
-            )}
-          </div>
-        )}
-
-        {/* Approve/Publish/SignOff buttons in read mode (non-edit actions) */}
-        {!isEditing && hasActions && (canPublish || canSignOff) && (
-          <div style={{display:'flex',gap:8,marginTop:10,flexWrap:'wrap'}}>
             {canPublish && (
               <button
                 disabled={actionLoading === `${post.id}-publish`}
