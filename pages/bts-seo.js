@@ -327,10 +327,11 @@ export default function BtsSeoPage({ initialSnapshot }) {
           const st = btsL?.status || 'green'
           const brC = st === 'red' ? '#ef4444' : st === 'amber' ? '#f59e0b' : '#10b981'
           const gauges = [
-            {label:'blogs',used:btsL?.last7d?.blogs||0,limit:btsL?.weeklyBlogLimit||3},
-            {label:'GBP',used:btsL?.last7d?.gbp||0,limit:btsL?.weeklyGbpLimit||3},
+            {label:'location',used:btsL?.last7d?.locations||0,limit:btsL?.weeklyLocationLimit||1},
+            {label:'topic',used:btsL?.last7d?.topics||0,limit:btsL?.weeklyTopicLimit||1},
             {label:'news',used:btsL?.last7d?.news||0,limit:btsL?.weeklyNewsLimit||1},
-            {label:'pages',used:btsL?.last7d?.pages||0,limit:btsL?.weeklyPageLimit||3},
+            {label:'blog',used:btsL?.last7d?.blogs||0,limit:btsL?.weeklyBlogLimit||1},
+            {label:'GBP',used:btsL?.last7d?.gbp||0,limit:btsL?.weeklyGbpLimit||3},
           ]
           return (
             <div style={{display:'flex',gap:8,marginBottom:16,flexWrap:'wrap'}}>
@@ -512,8 +513,11 @@ export default function BtsSeoPage({ initialSnapshot }) {
             {snap?.btsPublishLedger && (
               <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
                 {[
-                  { label: 'Blogs/wk', used: snap.btsPublishLedger.last7d?.blogs || 0, max: 3 },
-                  { label: 'Pages/wk', used: snap.btsPublishLedger.last7d?.pages || 0, max: snap.btsPublishLedger.weeklyPageLimit || 3 },
+                  { label: 'Location/wk', used: snap.btsPublishLedger.last7d?.locations || 0, max: snap.btsPublishLedger.weeklyLocationLimit || 1 },
+                  { label: 'Topic/wk', used: snap.btsPublishLedger.last7d?.topics || 0, max: snap.btsPublishLedger.weeklyTopicLimit || 1 },
+                  { label: 'News/wk', used: snap.btsPublishLedger.last7d?.news || 0, max: snap.btsPublishLedger.weeklyNewsLimit || 1 },
+                  { label: 'Blog/wk', used: snap.btsPublishLedger.last7d?.blogs || 0, max: snap.btsPublishLedger.weeklyBlogLimit || 1 },
+                  { label: 'GBP/wk', used: snap.btsPublishLedger.last7d?.gbp || 0, max: snap.btsPublishLedger.weeklyGbpLimit || 3 },
                 ].map((slot, i) => {
                   const pct = (slot.used / slot.max) * 100
                   const c = pct >= 100 ? '#ef4444' : pct >= 66 ? '#f59e0b' : '#10b981'
@@ -1186,10 +1190,11 @@ export default function BtsSeoPage({ initialSnapshot }) {
 
                   {/* Weekly Limit Gauges — ALL content types */}
                   <div style={{display:'flex',gap:12,marginBottom:16,flexWrap:'wrap'}}>
-                    <LimitGauge label="📄 Location Pages" used={btsLedger?.last7d?.pages || 0} limit={btsLedger?.weeklyPageLimit || 3} color="#10b981" />
-                    <LimitGauge label="📝 Blog Posts" used={btsLedger?.last7d?.blogs || 0} limit={btsLedger?.weeklyBlogLimit || 3} color="#a855f7" />
-                    <LimitGauge label="📍 GBP Posts" used={btsLedger?.last7d?.gbp || 0} limit={btsLedger?.weeklyGbpLimit || 3} color="#3b82f6" />
-                    <LimitGauge label="📰 News Posts" used={btsLedger?.last7d?.news || 0} limit={btsLedger?.weeklyNewsLimit || 1} color="#f59e0b" />
+                    <LimitGauge label="📍 Location" used={btsLedger?.last7d?.locations || 0} limit={btsLedger?.weeklyLocationLimit || 1} color="#10b981" />
+                    <LimitGauge label="📘 Topic" used={btsLedger?.last7d?.topics || 0} limit={btsLedger?.weeklyTopicLimit || 1} color="#8b5cf6" />
+                    <LimitGauge label="📰 News" used={btsLedger?.last7d?.news || 0} limit={btsLedger?.weeklyNewsLimit || 1} color="#f59e0b" />
+                    <LimitGauge label="📝 Blog" used={btsLedger?.last7d?.blogs || 0} limit={btsLedger?.weeklyBlogLimit || 1} color="#a855f7" />
+                    <LimitGauge label="📍 GBP" used={btsLedger?.last7d?.gbp || 0} limit={btsLedger?.weeklyGbpLimit || 3} color="#3b82f6" />
                   </div>
 
                   {/* 30-day + Total summary */}
@@ -1242,10 +1247,11 @@ export default function BtsSeoPage({ initialSnapshot }) {
                   <div className="card" style={{marginBottom:16}}>
                     <div style={{fontSize:10,color:'#555',fontWeight:600,textTransform:'uppercase',letterSpacing:1,marginBottom:8}}>📄 Weekly Publish Limits</div>
                     {[
-                      {label:'Location pages',val:btsLedger?.weeklyPageLimit||3},
-                      {label:'Blog posts',val:btsLedger?.weeklyBlogLimit||3},
-                      {label:'GBP posts',val:btsLedger?.weeklyGbpLimit||3},
+                      {label:'Location pages',val:btsLedger?.weeklyLocationLimit||1},
+                      {label:'Topic posts',val:btsLedger?.weeklyTopicLimit||1},
                       {label:'News posts',val:btsLedger?.weeklyNewsLimit||1},
+                      {label:'Blog posts',val:btsLedger?.weeklyBlogLimit||1},
+                      {label:'GBP posts',val:btsLedger?.weeklyGbpLimit||3},
                     ].map((r,i) => (
                       <div key={i} style={{fontSize:10,color:'#aaa',padding:'3px 0',borderBottom:'1px solid #1a1a1a'}}>
                         <span style={{color:'#fff',fontWeight:600}}>Max {r.label}/week:</span> {r.val}
@@ -1309,7 +1315,7 @@ export default function BtsSeoPage({ initialSnapshot }) {
                 'draft': '📝 Draft', 'sunny-editing': '✏️ Sunny Editing', 'approved': '✅ Approved',
                 'visual-check-pending': '✅ Ready to Sign Off', 'signed-off': '✔️ Signed Off'
               }
-              const typeColors = { blog: '#3b82f6', news: '#f59e0b', gbp: '#a855f7', partnership: '#10b981' }
+              const typeColors = { blog: '#3b82f6', news: '#f59e0b', gbp: '#a855f7', partnership: '#10b981', location: '#10b981', topic: '#8b5cf6' }
 
               async function draftAction(id, action, extraData) {
                 setDraftResults(prev => ({ ...prev, [id]: { loading: true } }))
