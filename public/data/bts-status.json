@@ -1010,7 +1010,7 @@
   },
   "drafts": {
     "source": "bts-source-of-truth-handoff plus Batch 4A QA 2026-05-20 plus restored old GBP draft text",
-    "sourceNote": "Batch 4A Blogs 15-19 are QA-ready for Adam review before Sunny packet prep. News 5, News 6, About Us and directory assets remain held. Restored GBP texts are drafts only and not marked as published.",
+    "sourceNote": "Batch 4A Blogs 15-19 are QA-ready for Adam review before Sunny packet prep. News 5, News 6, About Us and directory assets remain held. Only three current GBP draft texts are active; older restored GBP references are retained but hidden from active tabs.",
     "drafts": [
       {
         "id": "blog-15-slough",
@@ -1076,89 +1076,97 @@
         "id": "news-5-bus-amendments",
         "title": "BUS Amendments Update",
         "type": "news",
-        "status": "draft",
+        "status": "hold",
         "service": "Heat Pump / Policy",
         "content": "Hold. Exclude from Batch 4A for now. Current BUS/heat-training sources keep the topic relevant, but Sunny's no-government-funding-reference rule makes the current grant-heavy angle unsafe. Needs rewrite before approval.",
         "author": "BTS manual status",
         "createdAt": "2026-05-17T00:00:00+10:00",
-        "qaStatus": "hold"
+        "qaStatus": "hold",
+        "activePipeline": false
       },
       {
         "id": "news-6-apprenticeship-funding-april-2026",
         "title": "Apprenticeship Funding April 2026",
         "type": "news",
-        "status": "draft",
+        "status": "hold",
         "service": "MLP / Apprenticeships",
         "content": "Hold until QA/source refresh. GOV.UK apprenticeship funding guidance was updated on 2026-04-29, so this draft should be refreshed from official rules and checked for false BTS history or track-record implications.",
         "author": "BTS manual status",
         "createdAt": "2026-05-17T00:00:00+10:00",
-        "qaStatus": "hold-pending-qa"
+        "qaStatus": "hold-pending-qa",
+        "activePipeline": false
       },
       {
         "id": "page-about-us",
         "title": "About Us Page",
         "type": "page",
-        "status": "draft",
+        "status": "hold",
         "service": "About",
         "content": "Hold until Sunny supplies bio/team details.",
         "author": "BTS manual status",
         "createdAt": "2026-05-17T00:00:00+10:00",
-        "qaStatus": "hold"
+        "qaStatus": "hold",
+        "activePipeline": false
       },
       {
         "id": "directory-package-markdown",
         "title": "Directory Package Markdown",
         "type": "directory",
-        "status": "draft",
+        "status": "hold",
         "service": "Directory package",
         "content": "Hold until someone is ready to action listings.",
         "author": "BTS manual status",
         "createdAt": "2026-05-17T00:00:00+10:00",
-        "qaStatus": "hold"
+        "qaStatus": "hold",
+        "activePipeline": false
       },
       {
         "id": "directory-package-pdf",
         "title": "Directory Package PDF",
         "type": "directory",
-        "status": "draft",
+        "status": "hold",
         "service": "Directory package",
         "content": "Hold until someone is ready to action listings.",
         "author": "BTS manual status",
         "createdAt": "2026-05-17T00:00:00+10:00",
-        "qaStatus": "hold"
+        "qaStatus": "hold",
+        "activePipeline": false
       },
       {
         "id": "gbp-acs-reassess",
         "title": "GBP: ACS Reassessment",
         "type": "gbp",
-        "status": "draft",
+        "status": "reference",
         "service": "Gas (ACS)",
-        "content": "Draft text not available in restored manual data.",
+        "content": "Historical/restored GBP reference only. Not a current active GBP draft.",
         "author": "BTS manual status",
         "createdAt": "2026-05-17T00:00:00+10:00",
-        "batch": 3
+        "batch": 3,
+        "activePipeline": false
       },
       {
         "id": "gbp-future-homes",
         "title": "GBP: Future Homes Standard News",
         "type": "gbp",
-        "status": "draft",
+        "status": "reference",
         "service": "Heat Pump",
-        "content": "Draft text not available in restored manual data.",
+        "content": "Historical/restored GBP reference only. Not a current active GBP draft.",
         "author": "BTS manual status",
         "createdAt": "2026-05-17T00:00:00+10:00",
-        "batch": 3
+        "batch": 3,
+        "activePipeline": false
       },
       {
         "id": "gbp-legionella",
         "title": "GBP: Legionella Qualification",
         "type": "gbp",
-        "status": "draft",
+        "status": "reference",
         "service": "Plumbing",
-        "content": "Draft text not available in restored manual data.",
+        "content": "Historical/restored GBP reference only. Not a current active GBP draft.",
         "author": "BTS manual status",
         "createdAt": "2026-05-17T00:00:00+10:00",
-        "batch": 3
+        "batch": 3,
+        "activePipeline": false
       },
       {
         "id": "gbp-career-change",
@@ -1171,7 +1179,8 @@
         "createdAt": "2026-05-17T00:00:00+10:00",
         "buttonText": "Learn more",
         "buttonUrl": "https://bettertrainingsolutions.co.uk/course/gas-managed-learning-programme/",
-        "batch": 3
+        "batch": 3,
+        "activePipeline": true
       },
       {
         "id": "gbp-skills-shortage",
@@ -1184,7 +1193,8 @@
         "createdAt": "2026-05-17T00:00:00+10:00",
         "buttonText": "Learn more",
         "buttonUrl": "https://bettertrainingsolutions.co.uk/course/ccn1-initial/",
-        "batch": 3
+        "batch": 3,
+        "activePipeline": true
       },
       {
         "id": "gbp-stack-qualifications",
@@ -1197,7 +1207,8 @@
         "createdAt": "2026-05-17T00:00:00+10:00",
         "buttonText": "Learn more",
         "buttonUrl": "https://bettertrainingsolutions.co.uk/our-plumbing-training-courses/",
-        "batch": 3
+        "batch": 3,
+        "activePipeline": true
       }
     ]
   },
@@ -1988,13 +1999,14 @@
           "- [ ] About Us Page (page) — hold until Sunny bio/team details",
           "- [ ] Directory Package Markdown (directory) — hold until listings are ready to action",
           "- [ ] Directory Package PDF (directory) — hold until listings are ready to action",
-          "**GBP draft texts restored for future use, not marked as published**",
-          "- [ ] GBP: ACS Reassessment",
-          "- [ ] GBP: Future Homes Standard News",
-          "- [ ] GBP: Legionella Qualification",
+          "**Current active GBP drafts: 3**",
           "- [ ] GBP: Career Change Into Gas Engineering",
           "- [ ] GBP: Plumber Skills Shortage (NEWS)",
-          "- [ ] GBP: Stack Your Qualifications"
+          "- [ ] GBP: Stack Your Qualifications",
+          "**Historical/restored GBP references retained but hidden from active GBP tab**",
+          "- GBP: ACS Reassessment",
+          "- GBP: Future Homes Standard News",
+          "- GBP: Legionella Qualification"
         ]
       },
       "section-5-service-location-coverage-matrix": {
