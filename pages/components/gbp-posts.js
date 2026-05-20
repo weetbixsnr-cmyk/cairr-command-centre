@@ -7,6 +7,7 @@ import { useState } from 'react'
 export default function GbpPosts({ posts = [], label = 'GBP', actionEndpoint }) {
   const [actionLoading, setActionLoading] = useState(null)
   const [localPosts, setLocalPosts] = useState(null)
+  const [viewMode, setViewMode] = useState({})
 
   const allPosts = localPosts || posts
 
@@ -90,6 +91,7 @@ export default function GbpPosts({ posts = [], label = 'GBP', actionEndpoint }) 
     const canSignOff = post.status === 'published'
     const canEdit = ['draft', 'editing', 'sunny-editing'].includes(post.status)
     const hasActions = actionEndpoint && (canApprove || canPublish || canSignOff)
+    const isEditing = canEdit && actionEndpoint && viewMode[post.id] === 'edit'
 
     return (
       <div style={{
@@ -136,8 +138,22 @@ export default function GbpPosts({ posts = [], label = 'GBP', actionEndpoint }) 
           </div>
         )}
 
-        {/* Content — editable for drafts, read-only otherwise */}
-        {canEdit && actionEndpoint ? (
+        {/* Read/Edit toggle for editable posts */}
+        {canEdit && actionEndpoint && (
+          <div style={{display:'flex',gap:6,marginBottom:8}}>
+            <button onClick={() => setViewMode(prev => ({...prev, [post.id]: 'read'}))} style={{
+              fontSize:10,padding:'4px 10px',borderRadius:4,border:'1px solid',cursor:'pointer',fontWeight:600,
+              background:!isEditing?'#111':'transparent',borderColor:!isEditing?'#3b82f6':'#333',color:!isEditing?'#3b82f6':'#555'
+            }}>Read</button>
+            <button onClick={() => setViewMode(prev => ({...prev, [post.id]: 'edit'}))} style={{
+              fontSize:10,padding:'4px 10px',borderRadius:4,border:'1px solid',cursor:'pointer',fontWeight:600,
+              background:isEditing?'#111':'transparent',borderColor:isEditing?'#f59e0b':'#333',color:isEditing?'#f59e0b':'#555'
+            }}>Edit</button>
+          </div>
+        )}
+
+        {/* Content — editable textarea in edit mode, readable preview otherwise */}
+        {isEditing ? (
           <textarea
             defaultValue={post.editedContent || post.content}
             id={`gbp-content-${post.id}`}
@@ -165,25 +181,23 @@ export default function GbpPosts({ posts = [], label = 'GBP', actionEndpoint }) 
           </div>
         )}
 
-        {/* Action buttons */}
-        {hasActions && (
+        {/* Action buttons — only in edit mode */}
+        {isEditing && hasActions && (
           <div style={{display:'flex',gap:8,marginTop:10,flexWrap:'wrap'}}>
-            {canEdit && (
-              <button
-                disabled={actionLoading === `${post.id}-edit`}
-                onClick={() => {
-                  const el = document.getElementById(`gbp-content-${post.id}`)
-                  if (el) doAction(post.id, 'edit', { content: el.value })
-                }}
-                style={{
-                  padding:'8px 16px',background:'#1a1a1a',border:'1px solid #333',borderRadius:6,
-                  color:'#f59e0b',fontSize:11,fontWeight:600,cursor:'pointer',
-                  opacity: actionLoading === `${post.id}-edit` ? 0.5 : 1
-                }}
-              >
-                💾 Save Edits
-              </button>
-            )}
+            <button
+              disabled={actionLoading === `${post.id}-edit`}
+              onClick={() => {
+                const el = document.getElementById(`gbp-content-${post.id}`)
+                if (el) doAction(post.id, 'edit', { content: el.value })
+              }}
+              style={{
+                padding:'8px 16px',background:'#1a1a1a',border:'1px solid #333',borderRadius:6,
+                color:'#f59e0b',fontSize:11,fontWeight:600,cursor:'pointer',
+                opacity: actionLoading === `${post.id}-edit` ? 0.5 : 1
+              }}
+            >
+              💾 Save Edits
+            </button>
             {canApprove && (
               <button
                 disabled={actionLoading === `${post.id}-approve`}
@@ -216,6 +230,38 @@ export default function GbpPosts({ posts = [], label = 'GBP', actionEndpoint }) 
                 ↩️ Request Changes
               </button>
             )}
+            {canPublish && (
+              <button
+                disabled={actionLoading === `${post.id}-publish`}
+                onClick={() => doAction(post.id, 'publish')}
+                style={{
+                  padding:'8px 20px',background:'#3b82f6',border:'none',borderRadius:6,
+                  color:'#fff',fontSize:11,fontWeight:700,cursor:'pointer',
+                  opacity: actionLoading === `${post.id}-publish` ? 0.5 : 1
+                }}
+              >
+                🚀 Mark Published
+              </button>
+            )}
+            {canSignOff && (
+              <button
+                disabled={actionLoading === `${post.id}-sign-off`}
+                onClick={() => doAction(post.id, 'sign-off')}
+                style={{
+                  padding:'8px 20px',background:'#a855f7',border:'none',borderRadius:6,
+                  color:'#fff',fontSize:11,fontWeight:700,cursor:'pointer',
+                  opacity: actionLoading === `${post.id}-sign-off` ? 0.5 : 1
+                }}
+              >
+                🏁 Sign Off
+              </button>
+            )}
+          </div>
+        )}
+
+        {/* Approve/Publish/SignOff buttons in read mode (non-edit actions) */}
+        {!isEditing && hasActions && (canPublish || canSignOff) && (
+          <div style={{display:'flex',gap:8,marginTop:10,flexWrap:'wrap'}}>
             {canPublish && (
               <button
                 disabled={actionLoading === `${post.id}-publish`}

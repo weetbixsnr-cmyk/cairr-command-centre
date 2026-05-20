@@ -122,6 +122,77 @@ function TabButton({ active, label, onClick }) {
   )
 }
 
+function inlineMd(text) {
+  if (!text) return text
+  const parts = []
+  let rest = text
+  let k = 0
+  const rx = /(\*\*(.+?)\*\*)|(__(.+?)__)|(\[([^\]]+)\]\(([^)]+)\))|(`([^`]+)`)/
+  while (rest) {
+    const m = rest.match(rx)
+    if (!m) { parts.push(rest); break }
+    if (m.index > 0) parts.push(rest.slice(0, m.index))
+    if (m[2]) parts.push(<strong key={k++} style={{color:'#fff',fontWeight:600}}>{m[2]}</strong>)
+    else if (m[4]) parts.push(<strong key={k++} style={{color:'#fff',fontWeight:600}}>{m[4]}</strong>)
+    else if (m[6]) parts.push(<a key={k++} href={m[7]} target="_blank" rel="noopener noreferrer" style={{color:'#3b82f6',textDecoration:'underline'}}>{m[6]}</a>)
+    else if (m[9]) parts.push(<code key={k++} style={{background:'#1a1a22',padding:'1px 4px',borderRadius:3,fontSize:'0.9em',color:'#e0e0e0'}}>{m[9]}</code>)
+    rest = rest.slice(m.index + m[0].length)
+  }
+  return parts.length <= 1 ? parts[0] || '' : parts
+}
+
+function RenderMarkdown({ text }) {
+  if (!text) return null
+  const lines = text.split('\n')
+  const els = []
+  let i = 0
+  while (i < lines.length) {
+    const raw = lines[i]
+    const t = raw.trim()
+    if (!t) { i++; continue }
+    if (/^[-*_]{3,}$/.test(t)) { els.push(<hr key={i} style={{border:'none',borderTop:'1px solid #333',margin:'12px 0'}} />); i++; continue }
+    const hm = t.match(/^(#{1,6})\s+(.+)/)
+    if (hm) {
+      const sz = [0,18,16,14,13,12,11][hm[1].length] || 12
+      els.push(<div key={i} style={{fontSize:sz,fontWeight:700,color:'#fff',margin:`${hm[1].length<=2?14:8}px 0 4px`}}>{inlineMd(hm[2])}</div>)
+      i++; continue
+    }
+    if (t.startsWith('|')) {
+      const rows = []
+      while (i < lines.length && lines[i].trim().startsWith('|')) {
+        const r = lines[i].trim()
+        if (!/^\|[\s-:|]+\|$/.test(r)) rows.push(r.split('|').filter(Boolean).map(c => c.trim()))
+        i++
+      }
+      if (rows.length > 0) els.push(
+        <div key={`tbl${i}`} style={{overflowX:'auto',margin:'8px 0'}}>
+          <table style={{width:'100%',borderCollapse:'collapse',fontSize:10}}>
+            <thead><tr>{rows[0].map((c,j) => <th key={j} style={{padding:'4px 8px',borderBottom:'1px solid #333',color:'#888',textAlign:'left',fontWeight:600,fontSize:9}}>{c}</th>)}</tr></thead>
+            <tbody>{rows.slice(1).map((r,ri) => <tr key={ri}>{r.map((c,j) => <td key={j} style={{padding:'4px 8px',borderBottom:'1px solid #1a1a22',color:'#ccc',fontSize:10}}>{inlineMd(c)}</td>)}</tr>)}</tbody>
+          </table>
+        </div>
+      )
+      continue
+    }
+    if (/^\s*[-*+]\s/.test(raw)) {
+      const items = []
+      while (i < lines.length && /^\s*[-*+]\s/.test(lines[i])) { items.push(lines[i].replace(/^\s*[-*+]\s+/,'')); i++ }
+      els.push(<ul key={`ul${i}`} style={{margin:'6px 0',paddingLeft:20}}>{items.map((it,j) => <li key={j} style={{fontSize:12,color:'#ccc',lineHeight:1.6,marginBottom:2}}>{inlineMd(it)}</li>)}</ul>)
+      continue
+    }
+    if (/^\s*\d+[.)]\s/.test(raw)) {
+      const items = []
+      while (i < lines.length && /^\s*\d+[.)]\s/.test(lines[i])) { items.push(lines[i].replace(/^\s*\d+[.)]\s+/,'')); i++ }
+      els.push(<ol key={`ol${i}`} style={{margin:'6px 0',paddingLeft:20}}>{items.map((it,j) => <li key={j} style={{fontSize:12,color:'#ccc',lineHeight:1.6,marginBottom:2}}>{inlineMd(it)}</li>)}</ol>)
+      continue
+    }
+    const pl = []
+    while (i < lines.length && lines[i].trim() && !/^#{1,6}\s/.test(lines[i].trim()) && !/^[-*_]{3,}$/.test(lines[i].trim()) && !lines[i].trim().startsWith('|') && !/^\s*[-*+]\s/.test(lines[i]) && !/^\s*\d+[.)]\s/.test(lines[i])) { pl.push(lines[i].trim()); i++ }
+    if (pl.length > 0) els.push(<p key={`p${i}`} style={{fontSize:12,color:'#ccc',lineHeight:1.7,margin:'6px 0'}}>{inlineMd(pl.join(' '))}</p>)
+  }
+  return <>{els}</>
+}
+
 export default function BtsSeoPage({ initialSnapshot }) {
   const snap = useSnapshot(initialSnapshot)
   const seo = snap?.btsSeo
@@ -149,6 +220,7 @@ export default function BtsSeoPage({ initialSnapshot }) {
   const [liveSuggestions, setLiveSuggestions] = useState(null)
   const [draftResults, setDraftResults] = useState({})
   const [localDrafts, setLocalDrafts] = useState(null)
+  const [draftViewMode, setDraftViewMode] = useState({})
 
   // Fetch suggestions directly from API (not snapshot) so submitted ones persist
   useEffect(() => {
@@ -1323,80 +1395,103 @@ export default function BtsSeoPage({ initialSnapshot }) {
                     </div>
                   )}
 
-                  {/* Pending drafts */}
+                  {/* Pending drafts — grouped by reviewGroup */}
                   {pending.length > 0 ? (
                     <div style={{marginBottom:16}}>
-                      <div style={{fontSize:9,color:'#aaa',textTransform:'uppercase',letterSpacing:1.2,marginBottom:8,fontWeight:600}}>📝 Pending Posts ({pending.length})</div>
-                      {pending.map(d => (
-                        <div key={d.id} style={{background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:10,padding:14,marginBottom:10}}>
-                          <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6}}>
-                            <span style={{fontSize:8,color:typeColors[d.type]||'#888',fontWeight:700,textTransform:'uppercase',background:`${typeColors[d.type]||'#888'}15`,padding:'2px 6px',borderRadius:4}}>{d.type}</span>
-                            <span style={{fontSize:13,fontWeight:700,color:'#fff',flex:1}}>{d.title}</span>
-                            <span style={{fontSize:9,color:statusColors[d.status],fontWeight:600}}>{statusLabels[d.status]}</span>
+                      {(() => {
+                        const sunnyPacket = pending.filter(d => d.reviewGroup === 'sunny-packet').sort((a,b) => (a.priority||99) - (b.priority||99))
+                        const adamReview = pending.filter(d => d.reviewGroup === 'adam-review').sort((a,b) => (a.priority||99) - (b.priority||99))
+                        const ungrouped = pending.filter(d => !d.reviewGroup || (d.reviewGroup !== 'sunny-packet' && d.reviewGroup !== 'adam-review'))
+
+                        const groups = []
+                        if (sunnyPacket.length > 0) groups.push({ label: 'Recommended Sunny Packet', color: '#f59e0b', icon: '📦', drafts: sunnyPacket })
+                        if (adamReview.length > 0) groups.push({ label: 'Adam Review / Lower Priority', color: '#3b82f6', icon: '👁️', drafts: adamReview })
+                        if (ungrouped.length > 0) groups.push({ label: 'Other Pending', color: '#888', icon: '📝', drafts: ungrouped })
+
+                        return groups.map((group, gi) => (
+                          <div key={gi} style={{marginBottom:18}}>
+                            <div style={{fontSize:9,color:group.color,textTransform:'uppercase',letterSpacing:1.2,marginBottom:8,fontWeight:600,borderBottom:`1px solid ${group.color}33`,paddingBottom:4}}>
+                              {group.icon} {group.label} ({group.drafts.length})
+                            </div>
+                            {group.drafts.map(d => {
+                              const isEditing = draftViewMode[d.id] === 'edit'
+                              return (
+                                <div key={d.id} style={{background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:10,padding:14,marginBottom:10}}>
+                                  <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6,flexWrap:'wrap'}}>
+                                    <span style={{fontSize:8,color:typeColors[d.type]||'#888',fontWeight:700,textTransform:'uppercase',background:`${typeColors[d.type]||'#888'}15`,padding:'2px 6px',borderRadius:4}}>{d.type}</span>
+                                    <span style={{fontSize:13,fontWeight:700,color:'#fff',flex:1}}>{d.title}</span>
+                                    {d.batch && <span style={{fontSize:8,color:'#555',background:'#1a1a22',padding:'2px 6px',borderRadius:4}}>Batch {d.batch}</span>}
+                                    {d.priority && <span style={{fontSize:8,color:'#888',background:'#1a1a22',padding:'2px 6px',borderRadius:4}}>P{d.priority}</span>}
+                                    <span style={{fontSize:9,color:statusColors[d.status],fontWeight:600}}>{statusLabels[d.status]}</span>
+                                  </div>
+                                  {d.targetDate && <div style={{fontSize:9,color:'#888',marginBottom:6}}>Target: {d.targetDate}</div>}
+                                  {d.feedback && <div style={{fontSize:10,color:'#ef4444',background:'#3b101033',padding:'6px 8px',borderRadius:6,marginBottom:8}}>💬 Feedback: {d.feedback}</div>}
+
+                                  <div style={{display:'flex',gap:6,marginBottom:8}}>
+                                    <button onClick={() => setDraftViewMode(prev => ({...prev, [d.id]: 'read'}))} style={{
+                                      fontSize:10,padding:'4px 10px',borderRadius:4,border:'1px solid',cursor:'pointer',fontWeight:600,
+                                      background:!isEditing?'#111':'transparent',borderColor:!isEditing?'#3b82f6':'#333',color:!isEditing?'#3b82f6':'#555'
+                                    }}>Read</button>
+                                    <button onClick={() => setDraftViewMode(prev => ({...prev, [d.id]: 'edit'}))} style={{
+                                      fontSize:10,padding:'4px 10px',borderRadius:4,border:'1px solid',cursor:'pointer',fontWeight:600,
+                                      background:isEditing?'#111':'transparent',borderColor:isEditing?'#f59e0b':'#333',color:isEditing?'#f59e0b':'#555'
+                                    }}>Edit</button>
+                                  </div>
+
+                                  {isEditing ? (
+                                    <>
+                                      <textarea
+                                        defaultValue={d.editedContent || d.content}
+                                        id={`draft-content-${d.id}`}
+                                        style={{
+                                          width:'100%',minHeight:200,padding:12,background:'#0a0a0a',border:'1px solid #222',borderRadius:8,
+                                          color:'#e0e0e0',fontSize:12,fontFamily:'-apple-system,BlinkMacSystemFont,sans-serif',lineHeight:1.6,resize:'vertical',outline:'none'
+                                        }}
+                                        onFocus={e => e.target.style.borderColor = '#3b82f6'}
+                                        onBlur={e => e.target.style.borderColor = '#222'}
+                                      />
+                                      <div style={{display:'flex',gap:8,marginTop:10,flexWrap:'wrap',alignItems:'center'}}>
+                                        <button disabled={draftResults[d.id]?.loading} onClick={() => {
+                                          const el = document.getElementById(`draft-content-${d.id}`)
+                                          if (el) draftAction(d.id, 'edit', { content: el.value })
+                                        }} style={{padding:'8px 16px',background:'#1a1a1a',border:'1px solid #333',borderRadius:6,color:'#f59e0b',fontSize:11,fontWeight:600,cursor:'pointer',opacity:draftResults[d.id]?.loading?0.5:1}}>💾 Save Edits</button>
+                                        <button disabled={draftResults[d.id]?.loading} onClick={() => {
+                                          const el = document.getElementById(`draft-content-${d.id}`)
+                                          draftAction(d.id, 'approve', el ? { content: el.value } : {})
+                                        }} style={{padding:'8px 20px',background:'#10b981',border:'none',borderRadius:6,color:'#fff',fontSize:11,fontWeight:700,cursor:'pointer',opacity:draftResults[d.id]?.loading?0.5:1}}>✅ Good to Go</button>
+                                        <button disabled={draftResults[d.id]?.loading} onClick={() => {
+                                          const fb = prompt('What needs changing?')
+                                          if (fb) draftAction(d.id, 'reject', { feedback: fb })
+                                        }} style={{padding:'8px 16px',background:'#1a1a1a',border:'1px solid #ef4444',borderRadius:6,color:'#ef4444',fontSize:11,fontWeight:600,cursor:'pointer',opacity:draftResults[d.id]?.loading?0.5:1}}>↩️ Request Changes</button>
+                                        {draftResults[d.id] && !draftResults[d.id].loading && (
+                                          <span style={{fontSize:11,fontWeight:600,color:draftResults[d.id].ok?'#10b981':'#ef4444'}}>{draftResults[d.id].msg}</span>
+                                        )}
+                                      </div>
+                                    </>
+                                  ) : (
+                                    <>
+                                      {d.qaSummary && (
+                                        <div style={{background:'#0a1a2a',border:'1px solid #1a3a5a',borderRadius:8,padding:'8px 12px',marginBottom:8,fontSize:11,color:'#7cb3d9',lineHeight:1.5}}>
+                                          <span style={{fontWeight:600,color:'#3b82f6',marginRight:6}}>QA:</span>{d.qaSummary}
+                                        </div>
+                                      )}
+                                      <div style={{background:'#0a0a0d',border:'1px solid #1a1a22',borderRadius:8,padding:14,maxHeight:600,overflowY:'auto'}}>
+                                        <RenderMarkdown text={d.editedContent || d.content} />
+                                      </div>
+                                    </>
+                                  )}
+
+                                  <div style={{fontSize:8,color:'#333',marginTop:6}}>
+                                    By: {d.author} · Created: {d.createdAt ? new Date(d.createdAt).toLocaleDateString() : '—'}
+                                    {d.editedBy && ` · Edited by ${d.editedBy}`}
+                                    {d.contentSource && ` · Source: ${d.contentSource}`}
+                                  </div>
+                                </div>
+                              )
+                            })}
                           </div>
-                          {d.targetDate && <div style={{fontSize:9,color:'#888',marginBottom:6}}>Target: {d.targetDate}</div>}
-                          {d.feedback && <div style={{fontSize:10,color:'#ef4444',background:'#3b101033',padding:'6px 8px',borderRadius:6,marginBottom:8}}>💬 Feedback: {d.feedback}</div>}
-
-                          {/* Content area — editable textarea */}
-                          <textarea
-                            defaultValue={d.editedContent || d.content}
-                            id={`draft-content-${d.id}`}
-                            style={{
-                              width:'100%',minHeight:200,padding:12,background:'#0a0a0a',border:'1px solid #222',borderRadius:8,
-                              color:'#e0e0e0',fontSize:12,fontFamily:'-apple-system,BlinkMacSystemFont,sans-serif',lineHeight:1.6,resize:'vertical',outline:'none'
-                            }}
-                            onFocus={e => e.target.style.borderColor = '#3b82f6'}
-                            onBlur={e => e.target.style.borderColor = '#222'}
-                          />
-
-                          {/* Action buttons */}
-                          <div style={{display:'flex',gap:8,marginTop:10,flexWrap:'wrap',alignItems:'center'}}>
-                            <button
-                              disabled={draftResults[d.id]?.loading}
-                              onClick={() => {
-                                const el = document.getElementById(`draft-content-${d.id}`)
-                                if (el) draftAction(d.id, 'edit', { content: el.value })
-                              }} style={{
-                                padding:'8px 16px',background:'#1a1a1a',border:'1px solid #333',borderRadius:6,
-                                color:'#f59e0b',fontSize:11,fontWeight:600,cursor:'pointer',
-                                opacity: draftResults[d.id]?.loading ? 0.5 : 1
-                              }}>💾 Save Edits</button>
-
-                            <button
-                              disabled={draftResults[d.id]?.loading}
-                              onClick={() => {
-                                const el = document.getElementById(`draft-content-${d.id}`)
-                                draftAction(d.id, 'approve', el ? { content: el.value } : {})
-                              }} style={{
-                                padding:'8px 20px',background:'#10b981',border:'none',borderRadius:6,
-                                color:'#fff',fontSize:11,fontWeight:700,cursor:'pointer',
-                                opacity: draftResults[d.id]?.loading ? 0.5 : 1
-                              }}>✅ Good to Go</button>
-
-                            <button
-                              disabled={draftResults[d.id]?.loading}
-                              onClick={() => {
-                                const fb = prompt('What needs changing?')
-                                if (fb) draftAction(d.id, 'reject', { feedback: fb })
-                              }} style={{
-                                padding:'8px 16px',background:'#1a1a1a',border:'1px solid #ef4444',borderRadius:6,
-                                color:'#ef4444',fontSize:11,fontWeight:600,cursor:'pointer',
-                                opacity: draftResults[d.id]?.loading ? 0.5 : 1
-                              }}>↩️ Request Changes</button>
-
-                            {draftResults[d.id] && !draftResults[d.id].loading && (
-                              <span style={{fontSize:11,fontWeight:600,color:draftResults[d.id].ok?'#10b981':'#ef4444'}}>
-                                {draftResults[d.id].msg}
-                              </span>
-                            )}
-                          </div>
-
-                          <div style={{fontSize:8,color:'#333',marginTop:6}}>
-                            By: {d.author} · Created: {d.createdAt ? new Date(d.createdAt).toLocaleDateString() : '—'}
-                            {d.editedBy && ` · Edited by ${d.editedBy}`}
-                          </div>
-                        </div>
-                      ))}
+                        ))
+                      })()}
                     </div>
                   ) : (
                     <div style={{background:'#0d0d10',border:'1px solid #1a1a22',borderRadius:10,padding:30,textAlign:'center',marginBottom:16}}>

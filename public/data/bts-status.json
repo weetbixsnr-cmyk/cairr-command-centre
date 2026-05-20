@@ -1025,7 +1025,9 @@
         "qaStatus": "ready-for-adam-review",
         "qaSummary": "Batch 4A QA final 2026-05-20: ready for Adam review as a near/from Slough High Wycombe route article. Keep near/from Slough language and do not imply BTS has a Slough site. CCN1 Initial and LPG references were removed until Sunny confirms them.",
         "contentSource": "clients/better-training-solutions/content/pending-drafts/blog-15-location-slough.md",
-        "contentSyncedAt": "2026-05-20"
+        "contentSyncedAt": "2026-05-20",
+        "reviewGroup": "sunny-packet",
+        "priority": 3
       },
       {
         "id": "blog-16-maidenhead",
@@ -1040,7 +1042,9 @@
         "qaStatus": "ready-for-adam-review",
         "qaSummary": "Batch 4A QA final 2026-05-20: ready for Adam review as a High Wycombe alternative for Maidenhead engineers. Acknowledge local/nearby options without attacking Gasmark or claiming BTS is the closest provider. CCN1 Initial and LPG references were removed until Sunny confirms them.",
         "contentSource": "clients/better-training-solutions/content/pending-drafts/blog-16-location-maidenhead.md",
-        "contentSyncedAt": "2026-05-20"
+        "contentSyncedAt": "2026-05-20",
+        "reviewGroup": "sunny-packet",
+        "priority": 4
       },
       {
         "id": "blog-17-milton-keynes",
@@ -1055,7 +1059,9 @@
         "qaStatus": "ready-for-adam-review-lower-priority",
         "qaSummary": "Batch 4A QA final 2026-05-20: ready for Adam review, but lower priority than Blogs 18, 19, 15 and 16 because Milton Keynes has stronger direct local competition. The draft no longer overclaims convenience or superiority.",
         "contentSource": "clients/better-training-solutions/content/pending-drafts/blog-17-location-milton-keynes.md",
-        "contentSyncedAt": "2026-05-20"
+        "contentSyncedAt": "2026-05-20",
+        "reviewGroup": "adam-review",
+        "priority": 5
       },
       {
         "id": "blog-18-water-regulations-deep-dive",
@@ -1070,7 +1076,9 @@
         "qaStatus": "strongest-approval-candidate",
         "qaSummary": "Batch 4A QA final 2026-05-20: strongest approval candidate. Terminology is conservative around Water Regulations, Water Fittings Regulations, WRAS product approval and WaterSafe/approved-contractor status.",
         "contentSource": "clients/better-training-solutions/content/pending-drafts/blog-18-water-regulations-deep-dive.md",
-        "contentSyncedAt": "2026-05-20"
+        "contentSyncedAt": "2026-05-20",
+        "reviewGroup": "sunny-packet",
+        "priority": 1
       },
       {
         "id": "blog-19-domestic-cookers",
@@ -1085,7 +1093,9 @@
         "qaStatus": "ready-for-adam-review-with-prerequisite-note",
         "qaSummary": "Batch 4A QA final 2026-05-20: ready for Adam review only if the inline CKR1 prerequisite note remains or Adam confirms exact prerequisite wording before Sunny sees it. Uses confirmed 1-day duration and avoids guaranteed work, earnings, ROI, high-margin, testimonial, pass-rate or BTS history claims.",
         "contentSource": "clients/better-training-solutions/content/pending-drafts/blog-19-domestic-cookers-training.md",
-        "contentSyncedAt": "2026-05-20"
+        "contentSyncedAt": "2026-05-20",
+        "reviewGroup": "sunny-packet",
+        "priority": 2
       },
       {
         "id": "news-5-bus-amendments",
