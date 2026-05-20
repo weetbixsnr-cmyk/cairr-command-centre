@@ -153,6 +153,13 @@ Resolved 2026-05-17 after BTS browser check and source-of-truth review:
 
 `npm run build` passed after rewiring and after the 2026-05-17 design-lock cleanup.
 
+Local dev note:
+
+- If the browser shows a white page and console errors for missing `/_next/static/...` chunks, the local Next dev cache/server is stale.
+- Stop the dev server and run `npm run dev`. The default dev command clears `.next` before starting.
+- Use `npm run dev:fast` only for deliberate cached dev startup.
+- Use `npm run build` for verification, then start a fresh dev server for browser testing. Do not rely on an old dev server after a build/cache change.
+
 Local dev verification was run at `http://127.0.0.1:3000`:
 
 - `/api/data` returns `dataSource.mode = manual-status-json`, `agentSnapshot = false`, and `openclawCli = false`.

@@ -54,6 +54,9 @@ Inactive/parked sources:
 ## Dev Workflow
 - Edit this repo directly.
 - Use `npm run build` before handoff when feasible.
+- Use `npm run dev` for browser testing. It clears `.next` before starting so stale `/_next/static/...` chunks do not cause white screens.
+- Use `npm run dev:fast` only for deliberate cached dev startup.
+- Do not run `npm run build` and then reuse an already-running dev server. Stop dev, clear `.next`, then start dev clean.
 - Do not modify BTS or NBHW project files from this dashboard task unless explicitly asked.
 - Manual status JSON is updated first; hooks are a later phase.
 
