@@ -1442,7 +1442,7 @@ export default function BtsSeoPage({ initialSnapshot }) {
 
                                   <div style={{marginBottom:10}}>
                                     <button onClick={() => setEditOpen(prev => ({...prev, [d.id]: !prev[d.id]}))} style={{
-                                      fontSize:10,color:'#888',background:'none',border:'none',cursor:'pointer',padding:0,fontWeight:600
+                                      fontSize:10,color:'#3b82f6',background:'none',border:'1px solid #3b82f633',borderRadius:4,cursor:'pointer',padding:'4px 10px',fontWeight:600
                                     }}>{editOpen[d.id] ? '▾ Hide Changes' : '▸ Make Changes'}</button>
                                     {editOpen[d.id] && (
                                       <textarea
