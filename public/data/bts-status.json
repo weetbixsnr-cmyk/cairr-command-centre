@@ -1,4 +1,5 @@
 {
+  "_deprecated_notice": "The drafts, blogInventory, publishLedger, and contentPipeline sections in this file are DEPRECATED as of 2026-05-21. The dashboard now derives these views from public/data/bts/content.json. These sections remain as compatibility fallback only. Do not update them — update content.json instead.",
   "id": "bts",
   "name": "Better Training Solutions",
   "label": "BTS",
