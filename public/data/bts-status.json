@@ -5,9 +5,9 @@
   "href": "/bts-seo",
   "status": "verify",
   "statusLabel": "GSC/Bing verification P0",
-  "lastUpdated": "2026-05-20T00:00:00+10:00",
+  "lastUpdated": "2026-05-21T00:00:00+10:00",
   "source": "manual-status-json",
-  "summary": "BTS is in de-agented operational SEO mode. Batch 3 is published. Batch 4A QA is final for Blogs 15-19 only and ready for Adam review before Sunny packet prep. SiteGround support confirmed normal public pages return HTTP 200 without page-level noindex; real Google/Bing crawler access still needs GSC/Bing URL Inspection.",
+  "summary": "BTS de-agented operational SEO mode. Batch 4A published 2026-05-21 (WP IDs 707, 709, 711, 713). Publishing spec and content operations plan documented. GSC/Bing verification still outstanding.",
   "metrics": [
     {
       "label": "SEO score",
@@ -19,15 +19,15 @@
     },
     {
       "label": "Live pages",
-      "value": 35
+      "value": 39
     },
     {
       "label": "Blogs live",
-      "value": 14
+      "value": 17
     },
     {
       "label": "News/insights live",
-      "value": 4
+      "value": 5
     },
     {
       "label": "GBP posts published",
@@ -35,7 +35,7 @@
     },
     {
       "label": "Pending draft assets",
-      "value": 10
+      "value": 7
     },
     {
       "label": "Target keywords top 10",
@@ -47,50 +47,49 @@
     "Do not treat VPN/datacenter curl sg-captcha responses as confirmed crawler blocking."
   ],
   "nextActions": [
-    "Prepare Batch 4A Sunny packet for Blogs 15-19 only after Adam review.",
-    "Exclude News 5 for now; hold News 6 until QA; hold About Us until Sunny bio/team details; hold directory package until listings are ready to action.",
-    "Run GSC URL Inspection on homepage, key course pages, robots.txt, and sitemap.",
-    "Run Bing Webmaster Tools URL Inspection if access is available.",
-    "Activate/verify SG Optimizer when approved."
+    "Sprint 1b: Pilot location page conversion (Slough Post→Page).",
+    "Sprint 2: Create FAQ question bank (internal discovery).",
+    "Rotate WordPress application password (credential exposed).",
+    "Run GSC URL Inspection on Batch 4A URLs.",
+    "Prepare next content: Blog 16 (Maidenhead), Blog 17 (Milton Keynes), plus 1 new topic/career blog."
   ],
   "publishedBatch": {
-    "batch": 3,
-    "publishedDate": "2026-05-11",
-    "sourceCommit": "60b0ab6",
-    "approval": "Sunny approval verified by BTS handoff",
+    "batch": "4A",
+    "publishedDate": "2026-05-21",
+    "approval": "Sunny approved by phone 2026-05-21, published via WP REST API",
     "items": [
       {
-        "title": "Gas and Plumbing Training Near Reading",
-        "type": "blog",
-        "url": "/gas-and-plumbing-training-near-reading/",
-        "wpId": 699,
-        "sourceFile": "blog-12-location-reading.md"
+        "title": "Gas and Plumbing Training Near Slough",
+        "type": "location",
+        "url": "/gas-and-plumbing-training-near-slough/",
+        "wpId": 707,
+        "sourceFile": "clients/better-training-solutions/content/pending-drafts/blog-15-location-slough.md"
       },
       {
-        "title": "Gas and Plumbing Training Near Oxford",
-        "type": "blog",
-        "url": "/gas-and-plumbing-training-near-oxford/",
-        "wpId": 700,
-        "sourceFile": "blog-13-location-oxford.md"
+        "title": "Water Regulations Training Deep Dive",
+        "type": "topic",
+        "url": "/water-regulations-training-wras-compliance-guide/",
+        "wpId": 709,
+        "sourceFile": "clients/better-training-solutions/content/pending-drafts/blog-18-water-regulations-training.md"
       },
       {
-        "title": "ACS Initial Training: What You Need to Know Before You Book Your First Course",
-        "type": "blog",
-        "url": "/acs-initial-training-what-you-need-to-know/",
-        "wpId": 701,
-        "sourceFile": "blog-14-acs-initial-training.md"
+        "title": "Domestic Cookers Training Guide",
+        "type": "topic",
+        "url": "/domestic-cookers-training-ckr1-course-guide/",
+        "wpId": 711,
+        "sourceFile": "clients/better-training-solutions/content/pending-drafts/blog-19-domestic-cookers-training.md"
       },
       {
-        "title": "Plumbing Apprenticeship Starts Have Crashed 37%. The Industry Is Raising the Alarm.",
+        "title": "UK Decoupling Gas From Electricity Prices: What It Means for Heating Engineers",
         "type": "news",
-        "url": "/plumbing-apprenticeship-starts-crashed-37-percent/",
-        "wpId": 702,
-        "sourceFile": "news-4-plumbing-apprenticeship-crash.md"
+        "url": "/uk-decoupling-gas-electricity-prices-what-it-means-for-heating-engineers/",
+        "wpId": 713,
+        "sourceFile": "clients/better-training-solutions/content/pending-drafts/news-7-gas-electricity-price-decoupling.md"
       }
     ]
   },
   "seo": {
-    "lastUpdated": "2026-05-20T00:00:00+10:00",
+    "lastUpdated": "2026-05-21T00:00:00+10:00",
     "source": "bts-source-of-truth-handoff-plus-siteground-correction",
     "client": "Better Training Solutions",
     "site": "bettertrainingsolutions.co.uk",
@@ -98,11 +97,11 @@
     "healthScoreTarget": 75,
     "geoReadiness": 5,
     "geoAiReadinessTarget": 60,
-    "pagesLive": 35,
-    "blogsPublished": 14,
-    "newsInsightsPublished": 4,
+    "pagesLive": 39,
+    "blogsPublished": 17,
+    "newsInsightsPublished": 5,
     "gbpPostsPublished": 6,
-    "pendingDraftAssets": 10,
+    "pendingDraftAssets": 7,
     "rankings": {
       "targetKeywords": 35,
       "top10Count": 0,
@@ -229,8 +228,8 @@
     "locationCoverage": {
       "summary": {
         "totalLocations": 17,
-        "withContent": 7,
-        "zeroCoverage": 10,
+        "withContent": 8,
+        "zeroCoverage": 9,
         "servicePages": 6,
         "keywordsPerLocation": 8,
         "note": "Batch 3 added Reading and Oxford location content. Rankings and crawl verification remain blocked by GSC/Bing verification recovery."
@@ -245,11 +244,12 @@
             "Reading",
             "Oxford",
             "Buckinghamshire",
-            "South East"
+            "South East",
+            "Slough"
           ],
           "servicePages": 6,
           "servicePagesTotal": 11,
-          "blogs": 14,
+          "blogs": 17,
           "scope": "Batch 3 published Reading, Oxford, ACS Initial Training, and Plumbing Apprenticeship Crash."
         }
       ]
@@ -297,20 +297,11 @@
       "total": 36,
       "available": 30,
       "drafted": 2,
-      "published": 4
+      "published": 5
     },
     "contentPipeline": {
-      "pendingDraftAssets": 10,
+      "pendingDraftAssets": 7,
       "pending": [
-        {
-          "id": "blog-15-slough",
-          "title": "Gas and Plumbing Training Near Slough",
-          "type": "location",
-          "service": "Multi-trade / Location",
-          "status": "ready-for-adam-review",
-          "batch": "4A",
-          "qaDecision": "Ready for Adam review as a near/from Slough High Wycombe route article; keep near/from Slough wording and do not imply a BTS Slough site."
-        },
         {
           "id": "blog-16-maidenhead",
           "title": "Gas and Plumbing Training Near Maidenhead",
@@ -328,24 +319,6 @@
           "status": "ready-for-adam-review-lower-priority",
           "batch": "4A",
           "qaDecision": "Ready for Adam review, but lower priority because Milton Keynes has stronger direct local competition."
-        },
-        {
-          "id": "blog-18-water-regulations-deep-dive",
-          "title": "Water Regulations Training Deep Dive",
-          "type": "blog",
-          "service": "Water Regulations",
-          "status": "strongest-approval-candidate",
-          "batch": "4A",
-          "qaDecision": "Strongest Batch 4A approval candidate; terminology is conservative around Water Regulations, Water Fittings Regulations, WRAS and WaterSafe."
-        },
-        {
-          "id": "blog-19-domestic-cookers",
-          "title": "Domestic Cookers Training Guide",
-          "type": "blog",
-          "service": "Domestic Cookers",
-          "status": "ready-for-adam-review-with-prerequisite-note",
-          "batch": "4A",
-          "qaDecision": "Ready for Adam review only if the CKR1 prerequisite note remains or Adam confirms exact prerequisite wording before Sunny sees it."
         },
         {
           "id": "news-5-bus-amendments",
@@ -391,7 +364,7 @@
       "batch4A": {
         "qaDate": "2026-05-20",
         "scope": "Blogs 15-19 only",
-        "packetState": "Ready for Adam review before Sunny packet prep",
+        "packetState": "4 of 5 blogs published 2026-05-21 plus News 7. Blog 16 (Maidenhead) and Blog 17 (Milton Keynes) remain unpublished.",
         "recommendedOrder": [
           "blog-18-water-regulations-deep-dive",
           "blog-19-domestic-cookers",
@@ -987,7 +960,7 @@
     ],
     "newsInsightsPublished": 4,
     "livePages": 35,
-    "pendingDraftAssets": 10,
+    "pendingDraftAssets": 7,
     "gbpPostsPublished": 6,
     "newsBank": {
       "total": 36,
@@ -1016,7 +989,7 @@
         "id": "blog-15-slough",
         "title": "Gas and Plumbing Training Near Slough",
         "type": "location",
-        "status": "draft",
+        "status": "published",
         "service": "Multi-trade / Location",
         "content": "# Gas and Plumbing Training Near Slough: A Short Drive From Berkshire to Bucks\n\n**Type:** Location\n**Service:** Multi-trade (Gas + Plumbing)\n**Primary Keywords:** gas training near Slough, plumbing training Slough, gas courses Berkshire\n**Target URL:** /gas-and-plumbing-training-near-slough/\n**Internal Links:** /course/ccn1-re-assessment/, /course/water-supply-water-fittings-regulations-1999/, /course/air-source-heat-pump-low-temperature-heating/, /our-gas-training-courses/, /our-plumbing-training-courses/, /contact-us/\n**External Links:** Gas Safe Register (gassaferegister.co.uk), WRAS (wras.co.uk)\n**Word Count:** ~950\n**Status:** DRAFT — Awaiting Sunny's Approval\n\n---\n\nIf you're a gas engineer or plumber working in Slough or anywhere across south Buckinghamshire and east Berkshire, High Wycombe is a practical training route to consider before defaulting to London.\n\nBetter Training Solutions runs gas reassessment, water regulations, G3, Legionella, domestic cookers, domestic fires and heat pump courses from our centre at HP11 2LB. From Slough town centre, the drive is typically around 25 to 35 minutes depending on route and traffic. Free parking is available on site.\n\n## What Courses Are Available?\n\nWe offer a practical set of gas, plumbing and renewables qualifications for domestic gas engineers and plumbers who need to keep working, expand their services, or move into renewables.\n\n### Gas\n\n**[ACS Reassessment (CCN1)](/course/ccn1-re-assessment/)** is the five-year renewal. Let it lapse and you're off the register, which means no work. We run reassessment courses regularly throughout the year, so you don't end up scrambling for a slot at the last minute.\n\n### Plumbing\n\n**[Water Regulations](/course/water-supply-water-fittings-regulations-1999/)** covers the Water Supply (Water Fittings) Regulations 1999. If you're installing or maintaining water systems, this qualification helps evidence that you understand compliance. [WRAS](https://www.wras.co.uk/) product approval is one part of the wider water regulations landscape.\n\n**[Unvented Hot Water Systems (G3)](/course/unvented-hot-water-systems-safety/)** is a one-day qualification covering unvented cylinder safety. It's a Building Regulations Part G3 requirement before you can legally work on these systems.\n\n**[Legionella Prevention](/course/legionella-prevention-and-water-treatment-managers/)** is another one-day course. Landlords and building managers are legally required to manage Legionella risk under ACOP L8, so the training fits well alongside other water compliance qualifications.\n\n### Renewables\n\n**[Heat Pump Training](/course/air-source-heat-pump-low-temperature-heating/)** is the five-day air source heat pump and low-temperature heating course. With low-carbon heating becoming more common in new-build work, gas engineers who add heat pump training can keep a broader set of options open.\n\n## Why Train in High Wycombe Rather Than London?\n\nSlough sits between two options for gas and plumbing training. London centres are reachable but mean hours stuck on the M4 and M25. High Wycombe is the other direction, faster, simpler.\n\n- **Straightforward run from Slough.** Use the A355/A40 route or connect to the M40, with journey time depending on traffic.\n- **Free parking on site.** No congestion charge, no parking fees, no scrambling for a metre.\n- **One training location.** Stack compatible courses at the same High Wycombe centre instead of travelling to different providers.\n\n## Getting to High Wycombe From Slough\n\nThe training centre is at 1 Marlborough Trading Estate, West Wycombe Road, High Wycombe, HP11 2LB.\n\n**By car:** A355 to Beaconsfield, then A40 into High Wycombe. Or M40 from junction 2 to junction 4, around 18 miles. Allow around 25 to 35 minutes depending on traffic.\n\n**By train:** Slough to High Wycombe via Maidenhead is around 50 minutes including the change. Short taxi ride from High Wycombe station to the centre.\n\n## Stack Your Qualifications\n\nOne of the practical advantages of training with us is that the one-day plumbing courses can be combined. Water Regulations on Monday, Unvented G3 on Tuesday, Legionella Prevention on Wednesday — three qualifications in one week. No travelling back and forth, no wasted weeks.\n\nFor gas engineers wanting to add heat pumps, the five-day course can be planned as a focused training block alongside other qualifications.\n\n## Who's This For?\n\nEngineers based in:\n\n- Slough, Langley, Datchet\n- Burnham, Stoke Poges, Iver\n- Windsor, Maidenhead (M4 corridor)\n- Gerrards Cross, Beaconsfield (A40 corridor)\n- South Buckinghamshire generally\n\nIf you're an established Gas Safe registered engineer, a plumber looking to upskill, or someone considering a career change, our courses can support progression from core trade training through to specialist qualifications. Confirm the right route with BTS before booking.\n\n## Book a Course\n\nBrowse our [gas training courses](/our-gas-training-courses/) or [plumbing courses](/our-plumbing-training-courses/), or [contact us](/contact-us/) to check availability.\n\n**Better Training Solutions**\n1 Marlborough Trading Estate, West Wycombe Road, High Wycombe, HP11 2LB\n\n---\n\n**Yoast Meta Description:** Gas and plumbing training near Slough. ACS reassessment, water regulations, G3 and heat pump courses in High Wycombe — around 25-35 minutes from Slough.\n\n**Excerpt:** Looking for gas or plumbing training near Slough? Better Training Solutions runs ACS reassessment, water regulations, G3, Legionella, and heat pump courses from High Wycombe.\n\n**Tags:** Gas Training, Plumbing Training, ACS Training, Slough, Berkshire, Buckinghamshire, Heat Pump Training\n**Categories:** Blog, Location",
         "author": "BTS manual status",
@@ -1027,7 +1000,10 @@
         "contentSource": "clients/better-training-solutions/content/pending-drafts/blog-15-location-slough.md",
         "contentSyncedAt": "2026-05-20",
         "reviewGroup": "sunny-packet",
-        "priority": 3
+        "priority": 3,
+        "publishedAt": "2026-05-21T00:00:00+10:00",
+        "wpId": 707,
+        "publishedSlug": "gas-and-plumbing-training-near-slough"
       },
       {
         "id": "blog-16-maidenhead",
@@ -1066,8 +1042,8 @@
       {
         "id": "blog-18-water-regulations-deep-dive",
         "title": "Water Regulations Training Deep Dive",
-        "type": "blog",
-        "status": "draft",
+        "type": "topic",
+        "status": "published",
         "service": "Water Regulations",
         "content": "# Water Regulations Training: A Plumber's Guide to Water Fittings Compliance, Fluid Categories, and What Inspectors Actually Look For\n\n**Type:** Service (Deep-Dive)\n**Service:** Plumbing (Water Regulations)\n**Primary Keywords:** water regulations training, water regulations course UK, water fittings regulations training\n**Target URL:** /water-regulations-training-wras-compliance-guide/\n**Internal Links:** /course/water-supply-water-fittings-regulations-1999/, /course/unvented-hot-water-systems-safety/, /course/legionella-prevention-and-water-treatment-managers/, /our-plumbing-training-courses/, /contact-us/\n**External Links:** WaterSafe (watersafe.org.uk), WRAS (wras.co.uk), Water Supply (Water Fittings) Regulations 1999 (legislation.gov.uk)\n**Word Count:** ~1100\n**Status:** DRAFT — Awaiting Sunny's Approval\n\n---\n\nIf you fit, repair or maintain pipework or water fittings in the UK, you're working under the Water Supply (Water Fittings) Regulations 1999. Get it wrong and you're not just liable for the job, you're liable for any contamination that reaches the public supply.\n\nThis guide covers what the regulations actually require, what fluid categories mean in practice, what inspectors check for, and where formal training fits in.\n\n## What the Regulations Actually Require\n\nThe [Water Supply (Water Fittings) Regulations 1999](https://www.legislation.gov.uk/uksi/1999/1148/contents/made) are a statutory instrument covering water fittings connected to the public supply. The headline requirement is straightforward: water fittings must be of an appropriate quality and standard, fitted in a way that prevents waste, misuse, undue consumption, and contamination of the water supply.\n\nThree things follow from that:\n\n1. **Notification.** Certain installations must be notified to the water supplier before work starts. Examples include unvented hot water systems above 500 litres, garden irrigation, swimming pools, fountains and ponds.\n2. **Approved contractors.** Work undertaken by an approved contractor or WaterSafe-recognised plumber can reduce notification friction where scheme rules apply. Anyone outside those schemes may need to notify and may be inspected.\n3. **Non-compliance is a criminal offence.** The water supplier can disconnect supply, prosecute, or invoice the cost of remedial work.\n\nWaterSafe is the national register for approved plumbers and water services specialists. [WRAS](https://www.wras.co.uk/) product approval is also important, but a compliant product still has to be installed correctly. A Water Regulations course helps prove knowledge of the rules; it does not automatically make someone WaterSafe registered or an approved contractor.\n\n## Fluid Categories — The Bit That Catches People Out\n\nThe regulations classify water by contamination risk. There are five categories, and the protection device required depends on the category of fluid you're protecting against backflow.\n\n| Category | Risk Level | Examples |\n|----------|-----------|----------|\n| Fluid Category 1 | Wholesome water (drinking quality) | Mains supply |\n| Fluid Category 2 | Aesthetic impairment but no health risk | Mixed hot and cold water in a bath |\n| Fluid Category 3 | Slight health hazard | Domestic dishwashers, washing machines |\n| Fluid Category 4 | Significant health hazard | Chemical dosed systems, central heating circuits |\n| Fluid Category 5 | Serious health hazard | Sewage, agricultural fluids, industrial waste |\n\nThe backflow protection rises with the category. A Cat 5 risk needs a Type AA, AB, AD, AF, AG or AUK1 air gap — the strongest protection, with no possibility of backflow regardless of conditions.\n\nMost common installation failures involve picking the wrong device. A double check valve protects against Cat 3 risks but not Cat 4 or 5. Get it wrong on a system with chemical dosing or sewage proximity and you're potentially contaminating the public supply.\n\n## What Inspectors Actually Look For\n\nRegional water suppliers carry out spot inspections and complaint-driven inspections. The most common findings:\n\n- **Backflow protection missing or inadequate.** Especially around outside taps, garden hose connections, washing machine inlets, and commercial premises.\n- **Cross-connections between mains and stored water.** Older properties often have storage tanks plumbed in ways that don't meet current standards.\n- **Non-compliant fittings.** Cheaper imported fittings without recognised water fittings approval. Often visually similar to compliant ones, but missing evidence that they are suitable for use with the public water supply.\n- **Lead pipework.** Still present in many older properties. Replacement is recommended where practical.\n- **Dead legs.** Sections of pipe with no flow that allow stagnation and bacterial growth.\n\nInspectors are particularly sensitive to anything that could let contaminated water back-feed into the supply. If you've fitted a system that creates that risk, you can be required to remove and refit at your own cost.\n\n## Where Training Fits In\n\nMost plumbers come into water regulations work through experience rather than formal training. That works until it doesn't. The cost of a single backflow contamination incident — investigation, remedial work, potential prosecution — dwarfs the cost of a one-day [Water Regulations course](/course/water-supply-water-fittings-regulations-1999/).\n\nOur one-day course covers:\n\n- The regulations and your obligations under them\n- Fluid categories and required protection devices\n- Notification procedures and approved contractor schemes\n- Common compliance failures and how to spot them\n- Documentation and certification requirements\n\nYou leave with a recognised Water Regulations qualification that helps evidence your understanding of the rules. That matters when you're tendering for landlord work, commercial contracts, or housing association jobs where compliance is non-negotiable. Separate scheme membership, such as WaterSafe or an approved contractor route, may have additional requirements.\n\n## Stack Water Regs With G3 and Legionella\n\nThree of the most useful one-day plumbing qualifications fit together neatly:\n\n- **[Water Regulations](/course/water-supply-water-fittings-regulations-1999/)** — compliance with the 1999 regulations.\n- **[Unvented G3](/course/unvented-hot-water-systems-safety/)** — required before you can legally work on unvented hot water systems.\n- **[Legionella Prevention](/course/legionella-prevention-and-water-treatment-managers/)** — required by law for landlord risk assessments under ACOP L8.\n\nBook all three back-to-back at our High Wycombe centre and you can complete three nationally recognised qualifications in three days. Together they support compliance work in commercial premises, landlord properties, and buildings where water systems present meaningful risk.\n\n## Who Should Take This Course?\n\nThe Water Regulations course is suitable for:\n\n- Plumbers and gas engineers who routinely work on water systems\n- Domestic and commercial heating engineers handling hot water installations\n- Maintenance teams in landlord properties, hotels, healthcare, and commercial buildings\n- Multi-trade engineers building out their plumbing offering\n\nThere are no formal entry requirements, but practical plumbing experience is assumed. The course is one day, classroom-based, with assessment at the end.\n\n## Book a Course\n\nBrowse our [plumbing courses](/our-plumbing-training-courses/) or [contact us](/contact-us/) to ask about availability and dates.\n\n**Better Training Solutions**\n1 Marlborough Trading Estate, West Wycombe Road, High Wycombe, HP11 2LB\n\n---\n\n**Yoast Meta Description:** Water Regulations training course in High Wycombe. Water Fittings Regulations, fluid categories, backflow protection. Pairs with G3 and Legionella.\n\n**Excerpt:** A practical guide to the Water Supply (Water Fittings) Regulations 1999 — fluid categories, backflow protection, common compliance failures, and where formal training fits in.\n\n**Tags:** Water Regulations, WRAS, Plumbing Training, Compliance, High Wycombe, Buckinghamshire\n**Categories:** Blog, Service",
         "author": "BTS manual status",
@@ -1078,13 +1054,16 @@
         "contentSource": "clients/better-training-solutions/content/pending-drafts/blog-18-water-regulations-deep-dive.md",
         "contentSyncedAt": "2026-05-20",
         "reviewGroup": "sunny-packet",
-        "priority": 1
+        "priority": 1,
+        "publishedAt": "2026-05-21T00:00:00+10:00",
+        "wpId": 709,
+        "publishedSlug": "water-regulations-training-wras-compliance-guide"
       },
       {
         "id": "blog-19-domestic-cookers",
         "title": "Domestic Cookers Training Guide",
-        "type": "blog",
-        "status": "draft",
+        "type": "topic",
+        "status": "published",
         "service": "Domestic Cookers",
         "content": "# Domestic Cookers Training (CKR1): The Gas Qualification Most Engineers Forget\n\n**Type:** Service Explainer\n**Service:** Gas (Domestic Cookers)\n**Primary Keywords:** domestic cookers gas training, CKR1 training course, gas cooker installation course\n**Target URL:** /domestic-cookers-training-ckr1-course-guide/\n**Internal Links:** /course/domestic-cookers-training-and-re-assessment/, /course/ccn1-re-assessment/, /course/domestic-fires-and-space-heaters-training-and-re-assessment/, /our-gas-training-courses/, /contact-us/\n**External Links:** Gas Safe Register (gassaferegister.co.uk)\n**Word Count:** ~950\n**Status:** DRAFT — Awaiting Sunny's Approval\n\n---\n\nCCN1 gets the attention. Heat pumps get the headlines. But CKR1 — the domestic cookers ACS qualification — is one of the appliance modules gas engineers can overlook when planning their domestic scope.\n\nMany households still have a gas cooker or hob, and cooker work requires the right appliance competence.\n\nIf you're already CCN1 certified, BTS lists Domestic Cookers Training and Re-assessment as a one-day course. It can help you add or renew cooker competence while keeping the focus on scope, safety and registration rather than promised earnings.\n\n**Approval note:** `docs/course-details.md` confirms BTS Domestic Cookers Training and Re-assessment as 1 day and £252 +VAT. It does not give exact CKR1 prerequisite wording, so prerequisites need Adam/Sunny confirmation before publication.\n\n## What Is CKR1?\n\nCKR1 is the appliance-specific ACS module covering domestic cookers. It sits alongside other appliance modules under the wider ACS scheme — CENWAT for boilers and water heaters, HTR1 for fires and space heaters, CKR1 for cookers, MET1 for gas meters, and so on.\n\nCCN1 is the core domestic gas safety qualification. It tells the [Gas Safe Register](https://www.gassaferegister.co.uk/) you're competent to work on domestic gas. But CCN1 alone doesn't authorise you to install or commission specific appliance types. Each appliance has its own assessment.\n\nCKR1 covers:\n\n- Free-standing cookers and slide-in cookers\n- Built-in hobs and ovens\n- Gas connection methods, flexible connectors, isolation valves\n- Ventilation requirements\n- Ignition systems and flame supervision devices\n- Fault diagnosis and servicing\n\nYou hold CCN1 + CKR1, and your Gas Safe registration can reflect domestic cooker scope. Without the relevant appliance competence on your registration, you should not take on that work.\n\n## Why Most Gas Engineers Skip It\n\nDomestic cookers don't have the obvious complexity of boilers or unvented systems. Most gas engineers come up through boiler servicing and assume cookers will follow naturally. They don't.\n\nThe result is a small army of CCN1-certified engineers who can legally work on a boiler but not on the cooker that sits five metres away from it. Customers expect one engineer to handle both. Many engineers say yes and work outside their qualifications. That's a Gas Safe registration issue waiting to happen.\n\nThe engineers who hold CKR1 may be able to offer:\n\n- Cooker installation or replacement support for existing customers\n- Letting agents and landlords needing annual safety checks on rental kitchens\n- Broader domestic appliance coverage alongside boiler work\n\nThe point is not to promise a revenue stream. It is to make sure your service list matches the work you are competent and registered to do.\n\n## The Initial vs Reassessment Pathway\n\nLike all ACS modules, CKR1 runs as an initial assessment for new candidates and a reassessment every five years for engineers who already hold the qualification.\n\n**[Domestic Cookers Training / Reassessment](/course/domestic-cookers-training-and-re-assessment/)** — BTS lists this as a one-day course. Confirm with BTS whether you need initial training, reassessment, or a specific prerequisite route before booking.\n\nThe course is run from the BTS High Wycombe centre. Confirm current dates, assessment route and prerequisite requirements with BTS before booking.\n\n## Stack Cookers With Fires and ACS Reassessment\n\nFor maximum value, CKR1 stacks well with other appliance modules.\n\n- **[ACS Reassessment (CCN1)](/course/ccn1-re-assessment/)** — your core gas safety renewal. Required every five years.\n- **[Domestic Fires & Space Heaters (HTR1)](/course/domestic-fires-and-space-heaters-training-and-re-assessment/)** — appliance module covering open-flue and balanced-flue gas fires.\n\nEngineers who hold CCN1, CKR1, HTR1 and CENWAT (boilers and water heaters) can cover a broader domestic gas appliance scope, subject to their current Gas Safe registration and any scheme requirements.\n\nCombine CKR1 with HTR1 in a single visit to our centre and you've added two appliance qualifications in two days.\n\n## What Is the Practical Value?\n\nCourse cost and time matter, but the main value is scope clarity.\n\nFor some engineers, CKR1 means fewer cooker enquiries have to be declined. For others, it helps keep appliance modules aligned at reassessment. The commercial case depends on your customer base, registration scope and the kind of domestic work you actually want to take on.\n\nIf you're already CCN1, the BTS course detail currently lists Domestic Cookers Training and Re-assessment as one day. Check dates, prerequisites and whether initial or reassessment is the right route before booking.\n\n## Who's This For?\n\nCKR1 makes sense if you're:\n\n- A CCN1-certified domestic gas engineer with cooker enquiries you cannot currently accept\n- A Gas Safe registered installer building out your domestic offering\n- A multi-trade engineer wanting to handle full kitchen installations\n- An engineer up for ACS reassessment and ready to add a new appliance module at the same time\n\nYou'll need the right core gas competence before adding CKR1. Confirm the exact prerequisite route with BTS before booking.\n\n## Book a Course\n\nBrowse our [gas training courses](/our-gas-training-courses/) or [contact us](/contact-us/) to check available dates.\n\n**Better Training Solutions**\n1 Marlborough Trading Estate, West Wycombe Road, High Wycombe, HP11 2LB\n\n---\n\n**Yoast Meta Description:** Domestic Cookers (CKR1) gas training in High Wycombe. One-day BTS course for gas engineers adding or renewing domestic cooker scope.\n\n**Excerpt:** CKR1 is the domestic cookers ACS module for gas engineers who need the right appliance scope for cooker installation, servicing and reassessment.\n\n**Tags:** Gas Training, ACS Training, CKR1, Domestic Cookers, High Wycombe, Buckinghamshire\n**Categories:** Blog, Service",
         "author": "BTS manual status",
@@ -1095,13 +1074,16 @@
         "contentSource": "clients/better-training-solutions/content/pending-drafts/blog-19-domestic-cookers-training.md",
         "contentSyncedAt": "2026-05-20",
         "reviewGroup": "sunny-packet",
-        "priority": 2
+        "priority": 2,
+        "publishedAt": "2026-05-21T00:00:00+10:00",
+        "wpId": 711,
+        "publishedSlug": "domestic-cookers-training-ckr1-course-guide"
       },
       {
         "id": "news-7-gas-electricity-decoupling",
         "title": "UK Decoupling Gas From Electricity Prices: What It Means for Heating Engineers",
         "type": "news",
-        "status": "draft",
+        "status": "published",
         "service": "Heat Pump / Gas",
         "content": "# The UK Is Decoupling Gas From Electricity Prices. Here's What It Means for Heating Engineers.\n\n**Type:** News\n**Service Link:** Heat Pump, ACS Reassessment, General\n**Primary Keywords:** gas electricity price decoupling UK, energy market reform heating engineers, heat pump running costs 2026\n**Target URL:** /uk-decoupling-gas-electricity-prices-what-it-means-for-heating-engineers/\n**Source:** UK Government / DESNZ announcement (21 Apr 2026); Carbon Brief Q&A; Nesta price cap analysis; HVN+\n**Internal Links:** /course/air-source-heat-pump-low-temperature-heating/, /course/ccn1-re-assessment/, /our-gas-training-courses/, /contact-us/\n**External Links:** Carbon Brief (carbonbrief.org), Nesta (nesta.org.uk), GOV.UK (gov.uk)\n**Word Count:** ~900\n**Status:** DRAFT — Awaiting Sunny's Approval\n\n---\n\nOn 21 April 2026, the UK Government announced a package of reforms designed to reduce the influence of gas prices on electricity bills. The Department for Energy Security and Net Zero (DESNZ) described it as \"decisive action to break the link between gas and electricity prices.\"\n\nFor heating engineers, this isn't just an energy policy story. It's a shift in the economics that will shape which heating systems homeowners choose — and which qualifications are worth holding.\n\n## What's Actually Changing?\n\nUnder the current system, electricity prices in Great Britain are set by \"marginal pricing.\" In practice, that means gas-fired power stations set the wholesale price of electricity around 60% of the time, even though renewables now generate a large share of the UK's power. When gas prices spike, electricity prices spike with them.\n\nThe government's reforms aim to weaken that link through two main measures:\n\n**Fixed-price contracts for older renewable generators.** Projects currently earning wholesale market rates — representing roughly a third of UK electricity generation — will be offered voluntary long-term fixed-price contracts. An allocation process is planned for 2027.\n\n**An increase to the Electricity Generator Levy.** The windfall tax on older renewable and nuclear generators rises from 45% to 55% from 1 July 2026. Generators who sign fixed-price contracts would be exempt.\n\nThe goal is to reduce how often gas sets the electricity price, with an ambition to bring it down to around 50% by 2030.\n\n## Why This Matters for Heat Pump Economics\n\nThe electricity-to-gas price ratio is the number that determines whether a heat pump is cheaper to run than a gas boiler. At the April 2026 price cap, that ratio sits at 4.3:1 — down from 4.7:1 in January, according to [Nesta's analysis](https://www.nesta.org.uk/blog/april-2026-price-cap-electrification/).\n\nThat ratio is still higher than the level needed to make heat pumps consistently cheaper than gas for most homes. But the direction of travel is clear: electricity is getting relatively cheaper, and the government is actively working to accelerate that shift.\n\nIf decoupling succeeds in reducing the influence of gas on electricity prices further, the running cost gap between heat pumps and gas boilers will continue to narrow. That changes the conversation homeowners have when they're choosing a heating system — and it changes the kind of work that's available to engineers.\n\n## The Broader Package\n\nThe decoupling announcement didn't come alone. The government also confirmed:\n\n- **Boiler Upgrade Scheme (BUS) grant increased to £9,000** for properties currently heated by oil or LPG (England and Wales)\n- Plans to make heat pumps, solar panels and EV chargers easier to install for renters and flat-dwellers\n- £90 million earmarked for UK-based heat pump manufacturing\n\nThese measures all point the same way: more heat pump installations, in more types of property, backed by larger grants and improving economics.\n\n## What This Means for Engineers\n\nNone of this switches off gas work overnight. There are 27 million homes on the gas grid. Boilers still need servicing, repairing and replacing. [Gas Safe registration](https://www.gassaferegister.co.uk/) and [ACS reassessment](/course/ccn1-re-assessment/) remain essential for any engineer working on gas appliances.\n\nBut the policy direction is now harder to ignore. Every reform that reduces the relative cost of electricity makes heat pumps a more attractive option for homeowners. Every grant increase lowers the upfront barrier. And every new installation needs a qualified engineer to carry it out.\n\nThe UK currently has far fewer full-time heat pump installers than it needs. Gas engineers who add heat pump qualifications are covering both the existing gas market and the growing renewable sector. That combination is increasingly valuable.\n\n## Where BTS Fits\n\nAt Better Training Solutions, we run the [Air Source Heat Pump and Low-Temperature Heating course](/course/air-source-heat-pump-low-temperature-heating/) from our centre in High Wycombe. It's a five-day course covering both low-temperature heating systems and air source heat pump installation.\n\nFor gas engineers already on the register, this sits alongside your existing ACS qualifications. You don't have to choose between gas and heat pumps — the strongest position is holding both.\n\nBrowse our [gas training courses](/our-gas-training-courses/) or [get in touch](/contact-us/) to discuss your options.\n\n**Better Training Solutions**\n1 Marlborough Trading Estate, West Wycombe Road, High Wycombe, HP11 2LB\n\n---\n\n**Yoast Meta Description:** The UK government is decoupling gas from electricity prices. What the April 2026 energy reforms mean for gas engineers, heat pump installers, and your training decisions.\n\n**Excerpt:** The UK government announced reforms to break the link between gas and electricity prices. Here's what the policy shift means for heating engineers, heat pump economics, and your qualifications.\n\n**Tags:** Heat Pump Training, Gas Engineer, Renewable Energy, ACS Training, Buckinghamshire\n**Categories:** News",
         "author": "BTS manual status",
@@ -1113,7 +1095,10 @@
         "contentSyncedAt": "2026-05-20",
         "reviewGroup": "adam-review",
         "priority": 6,
-        "targetUrl": "/uk-decoupling-gas-electricity-prices-what-it-means-for-heating-engineers/"
+        "targetUrl": "/uk-decoupling-gas-electricity-prices-what-it-means-for-heating-engineers/",
+        "publishedAt": "2026-05-21T00:00:00+10:00",
+        "wpId": 713,
+        "publishedSlug": "uk-decoupling-gas-electricity-prices-what-it-means-for-heating-engineers"
       },
       {
         "id": "news-5-bus-amendments",
