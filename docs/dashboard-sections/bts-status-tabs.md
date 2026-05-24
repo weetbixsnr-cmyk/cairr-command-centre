@@ -1,15 +1,19 @@
 # Render Contract: BTS Status Tabs
 
-> How bts-status.json feeds 10 BTS dashboard tabs.
-> bts-status.json is currently CC-owned (temporary). Phase 2 will create BTS-owned domain files.
-> See BTS `docs/dashboard-sections/future-seo-data.md` for Phase 2 migration plan.
+> How bts-status.json and bts/seo.json feed 10 BTS dashboard tabs.
+> Phase 2 Slice B (2026-05-24): SEO data extracted to BTS-owned `seo.json`.
+> Content lifecycle extracted to BTS-owned `content.json` in Phase 1.
 > Last verified: 2026-05-24
 
-## Data File
+## Data Files
 
-`public/data/bts-status.json` (174 KB)
+| File | Owner | Purpose |
+|------|-------|---------|
+| `public/data/bts-status.json` | CC (temporary) | Metadata, operational status, competitors, courses, seoDash, traffic stub |
+| `public/data/bts/content.json` | BTS (Phase 1) | Content lifecycle — drafts, published items, publish ledger |
+| `public/data/bts/seo.json` | BTS (Phase 2 Slice B) | SEO health, keywords, rankings, audit, plan |
 
-This file is the remaining monolith from the pre-Phase-1 data model. Content lifecycle sections (drafts, blogInventory, publishLedger, contentPipeline) are deprecated — replaced by `content.json`. All other sections remain active.
+`dashboard-data.js` merges seo.json onto bts-status.json via `readSeoJson()` + spread overlay before passing to builder functions.
 
 ---
 
@@ -18,13 +22,12 @@ This file is the remaining monolith from the pre-Phase-1 data model. Content lif
 ### Dashboard Tab
 `health` (tab 1 of 13 on `/bts-seo`)
 
+### Data Source
+**`bts/seo.json`** (Phase 2 Slice B) — `.seo`, `.seoAudit`
+
 ### Reader Functions
 - `lib/dashboard-data.js` → `buildSeoAudit()` → `snapshot.btsSeoAudit`
 - `lib/dashboard-data.js` → `buildSeoDash()` → `snapshot.btsSeoDash`
-
-### bts-status.json Sections
-- `.seo` (healthScore, geoReadiness, blogsPublished, pagesLive, pendingDraftAssets)
-- `.seoDash` or `.seoAudit` (health breakdown, geo breakdown, action plan)
 
 ### Key Fields
 | Field | Type | Description |
@@ -44,15 +47,15 @@ Shows 0/100 gauges if seoAudit is missing.
 ### Dashboard Tab
 `seo-plan` (tab 2 of 13 on `/bts-seo`)
 
+### Data Source
+**Mixed:** `bts/seo.json` (SEO data via merge) + `bts-status.json` (blockers, nextActions, seoDash) + `bts/content.json` (publish ledger)
+
 ### Reader Functions
 - `buildPublishLedgerFromContent()` → `snapshot.btsPublishLedger` (from content.json)
-- `buildSeoDash()` → `snapshot.btsSeoDash` (from bts-status.json)
-
-### bts-status.json Sections
-- `.seoDash` sections: plan-overview, critical-fixes, content-pipeline, publish-history, coverage-matrix
+- `buildSeoDash()` → `snapshot.btsSeoDash` (from merged btsWithSeo)
 
 ### Notes
-This tab reads from both content.json (publish safety strip) and bts-status.json (SEO plan sections). Mixed data source.
+This tab reads from three sources: content.json (publish safety strip), seo.json (SEO coverage data via merge), and bts-status.json (blockers, nextActions, seoDash rendering artifact).
 
 ---
 
@@ -61,12 +64,11 @@ This tab reads from both content.json (publish safety strip) and bts-status.json
 ### Dashboard Tab
 `rankings` (tab 3 of 13 on `/bts-seo`)
 
+### Data Source
+**`bts/seo.json`** (Phase 2 Slice B) — `.seo.coreKeywords`, `.seo.locationKeywords`, `.keywords`
+
 ### Reader Function
 `lib/dashboard-data.js` → `normalizeKeywords()` → `snapshot.btsKeywords`
-
-### bts-status.json Sections
-- `.seo.coreKeywords` (service-based keywords)
-- `.seo.locationKeywords` (location-based keywords)
 
 ### Key Fields
 | Field | Type | Description |
@@ -85,15 +87,15 @@ Empty keyword table with "0/35 in top 10" message.
 ### Dashboard Tab
 `matrix` (tab 4 of 13 on `/bts-seo`)
 
+### Data Source
+**Mixed:** `bts/seo.json` (location coverage via merge) + `bts/content.json` (blog inventory)
+
 ### Reader Functions
 - `buildBlogInventoryFromContent()` → `snapshot.btsBlogInventory` (from content.json)
-- `buildSeoPlan()` → `snapshot.btsSeoplan` (from bts-status.json)
-
-### bts-status.json Sections
-- `.seo.locationCoverage` (tier 1-4 locations, content gaps)
+- `buildSeoPlan()` → `snapshot.btsSeoplan` (from merged btsWithSeo)
 
 ### Notes
-Mixed data source: blog inventory from content.json, location tiers from bts-status.json.
+Blog inventory from content.json, location tiers from seo.json (`.seo.locationCoverage`).
 
 ---
 
@@ -102,19 +104,21 @@ Mixed data source: blog inventory from content.json, location tiers from bts-sta
 ### Dashboard Tab
 `competitors` (tab 5 of 13 on `/bts-seo`)
 
+### Data Source
+**`bts-status.json`** (temporary) — `.competitors`, `.competitorPages`
+
 ### Reader Functions
 - `buildCompetitors()` → `snapshot.btsCompetitors`
 - `buildCompetitorPages()` → `snapshot.btsCompetitorPages`
-
-### bts-status.json Sections
-- `.seo.competitors` (competitor profiles, threat levels)
-- `.competitors` (alternative competitor structure)
 
 ### Key Fields
 | Field | Type | Description |
 |-------|------|-------------|
 | `competitors` | array | Competitor name, site, threat level, notes |
 | `keyGaps` | array | Keywords competitors rank for that BTS doesn't |
+
+### Notes
+Deferred to separate `competitors.json` in a future Phase 2 slice.
 
 ---
 
@@ -123,17 +127,19 @@ Mixed data source: blog inventory from content.json, location tiers from bts-sta
 ### Dashboard Tab
 `news-bank` (tab 7 of 13 on `/bts-seo`)
 
+### Data Source
+**Mixed:** `bts/seo.json` (summary counts via `.seo.newsBank`) + `bts-status.json` (seoDash newsBank stories)
+
 ### Reader Function
 `lib/dashboard-data.js` → `newsBankFromStatus()` (helper, feeds into `btsSeoDash`)
-
-### bts-status.json Sections
-- `.newsBank` (curated news stories)
-- `.seoDash` newsBank section
 
 ### Key Fields
 | Field | Type | Description |
 |-------|------|-------------|
 | `stories` | array | News items with title, source, date, status (available/drafted/published) |
+
+### Notes
+Summary counts (total/available/drafted/published) come from seo.json. Full story list comes from seoDash in bts-status.json. Deferred to separate `news-bank.json` in a future Phase 2 slice.
 
 ---
 
@@ -142,11 +148,11 @@ Mixed data source: blog inventory from content.json, location tiers from bts-sta
 ### Dashboard Tab
 `suggestions` (tab 8 of 13 on `/bts-seo`)
 
+### Data Source
+**`bts-status.json`** — `.suggestions`
+
 ### Reader Function
 API route: `/api/bts-suggestions` (direct read/write, not via dashboard-data.js snapshot)
-
-### bts-status.json Section
-- `.suggestions` (array of submitted ideas)
 
 ### Notes
 This tab uses a direct API call rather than the snapshot pattern. Suggestions can be submitted by both Adam and Sunny (via BTS client login).
@@ -157,6 +163,9 @@ This tab uses a direct API call rather than the snapshot pattern. Suggestions ca
 
 ### Dashboard Tab
 `traffic` (tab 11 of 13 on `/bts-seo`)
+
+### Data Source
+**`bts-status.json`** — `.traffic`
 
 ### Reader Function
 `lib/dashboard-data.js` → `buildTraffic()` → `snapshot.btsTraffic`
@@ -184,13 +193,12 @@ Same as Traffic: `snapshot.btsTraffic`
 ### Dashboard Tab
 `courses` (tab 13 of 13 on `/bts-seo`)
 
+### Data Source
+**Mixed:** `bts/seo.json` (training services count via `.seo.assets.trainingServices`) + `bts-status.json` (courseDetails, blockers)
+
 ### Reader Functions
 - `buildCourseDetails()` → `snapshot.btsCourseDetails`
 - `buildCourses()` → `snapshot.btsCourses`
-
-### bts-status.json Sections
-- `.seo.assets.trainingServices` (course inventory)
-- `.blockers` (course-related issues)
 
 ### Key Fields
 | Field | Type | Description |
@@ -198,17 +206,17 @@ Same as Traffic: `snapshot.btsTraffic`
 | `courses` | array | Course name, duration, price, page URL, status |
 | `issues` | array | Course-related blockers (e.g. missing pages) |
 
+### Notes
+Training services count comes from seo.json via merge. Course details and blockers remain in bts-status.json. Deferred to separate `courses.json` in a future Phase 2 slice.
+
 ---
 
-## Phase 2 Migration
+## Remaining Phase 2 Migration
 
-When Phase 2 is approved, these 10 tabs will migrate from bts-status.json to BTS-owned domain files:
-- `seo-metrics.json` → SEO Health, Rankings, Coverage Matrix
-- `competitors.json` → Competitors
-- `courses.json` → Courses
-- `news-bank.json` → News Bank
-- `status.json` → Dashboard home (blockers, next actions)
+These tabs still read from bts-status.json (temporary CC-owned):
+- **Competitors** → planned `competitors.json`
+- **Courses** → planned `courses.json`
+- **News Bank** (full story list) → planned `news-bank.json`
+- **Suggestions, Traffic, Conversions** → no migration planned yet
 
-See BTS `docs/dashboard-sections/future-seo-data.md` for the full migration plan.
-
-Phase 2 is NOT approved. This documents the intended direction only.
+Phase 2 slices beyond Slice B are NOT approved.

@@ -1,0 +1,726 @@
+{
+  "seo": {
+    "lastUpdated": "2026-05-21T00:00:00+10:00",
+    "source": "bts-source-of-truth-handoff-plus-siteground-correction",
+    "client": "Better Training Solutions",
+    "site": "bettertrainingsolutions.co.uk",
+    "healthScore": 28,
+    "healthScoreTarget": 75,
+    "geoReadiness": 5,
+    "geoAiReadinessTarget": 60,
+    "pagesLive": 39,
+    "blogsPublished": 17,
+    "newsInsightsPublished": 5,
+    "gbpPostsPublished": 6,
+    "pendingDraftAssets": 7,
+    "rankings": {
+      "targetKeywords": 35,
+      "top10Count": 0,
+      "status": "0/35 target keywords in top 10; 4 May regression; GSC verification outstanding"
+    },
+    "p0Blockers": [
+      "GSC/Bing crawler access verification outstanding",
+      "GSC indexing health unknown after 4 May ranking regression"
+    ],
+    "criticalFixesOutstanding": [
+      "GSC/Bing URL Inspection verification",
+      "SG Optimizer activation",
+      "Course-page inventory confirmation"
+    ],
+    "coreKeywords": [
+      {
+        "keyword": "ACS training High Wycombe",
+        "position": 50,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "gas training courses Buckinghamshire",
+        "position": 50,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "ACS reassessment near me",
+        "position": 50,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "heat pump training Buckinghamshire",
+        "position": 50,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "WRAS training near me",
+        "position": 50,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "G3 unvented training",
+        "position": 50,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "LPG changeover training",
+        "position": 50,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "legionella testing training",
+        "position": 50,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "managed learning program plumbing",
+        "position": 50,
+        "status": "needs-gsc-verification"
+      }
+    ],
+    "locationKeywords": [
+      {
+        "keyword": "ACS training Marlow",
+        "position": 99,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "gas training Aylesbury",
+        "position": 99,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "ACS training Beaconsfield",
+        "position": 99,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "gas training Reading",
+        "position": 99,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "heat pump training Oxford",
+        "position": 99,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "ACS training Maidenhead",
+        "position": 99,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "gas training Milton Keynes",
+        "position": 99,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "ACS training Slough",
+        "position": 99,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "gas training near me South East",
+        "position": 99,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "ACS training Amersham",
+        "position": 99,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "heat pump training Hemel Hempstead",
+        "position": 99,
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "gas training Watford",
+        "position": 99,
+        "status": "needs-gsc-verification"
+      }
+    ],
+    "locationCoverage": {
+      "summary": {
+        "totalLocations": 17,
+        "withContent": 8,
+        "zeroCoverage": 9,
+        "servicePages": 6,
+        "keywordsPerLocation": 8,
+        "note": "Batch 3 added Reading and Oxford location content. Rankings and crawl verification remain blocked by GSC/Bing verification recovery."
+      },
+      "waves": [
+        {
+          "id": 1,
+          "status": "published",
+          "locations": [
+            "High Wycombe",
+            "Aylesbury",
+            "Reading",
+            "Oxford",
+            "Buckinghamshire",
+            "South East",
+            "Slough"
+          ],
+          "servicePages": 6,
+          "servicePagesTotal": 11,
+          "blogs": 17,
+          "scope": "Batch 3 published Reading, Oxford, ACS Initial Training, and Plumbing Apprenticeship Crash."
+        }
+      ]
+    },
+    "framework": {
+      "strategy": "Location-by-location content build, High Wycombe outward by tier",
+      "urlStructure": "/training/[service]/[location]",
+      "contentPillars": [
+        {
+          "name": "Service Explainer",
+          "pct": 30,
+          "weeklyTarget": "1 blog"
+        },
+        {
+          "name": "Location Targeted",
+          "pct": 20,
+          "weeklyTarget": "1 blog"
+        },
+        {
+          "name": "Career/Guide",
+          "pct": 15,
+          "weeklyTarget": "0.5 blog"
+        },
+        {
+          "name": "News & Commentary",
+          "pct": 30,
+          "weeklyTarget": "1 post"
+        },
+        {
+          "name": "GBP Posts",
+          "pct": 5,
+          "weeklyTarget": "3 posts"
+        }
+      ],
+      "weeklyCadence": "Mon + Thu drafts, weekly GBP posts, Friday rankings",
+      "reviewCoaching": false
+    },
+    "assets": {
+      "trainingServices": 8,
+      "courseCertifications": 8,
+      "googleReviews": 0
+    },
+    "newsBank": {
+      "totalStories": 36,
+      "total": 36,
+      "available": 30,
+      "drafted": 2,
+      "published": 5
+    },
+    "crawlerStatusCorrection": {
+      "date": "2026-05-20",
+      "summary": "SiteGround support confirmed normal public pages return HTTP 200 without x-robots-tag:noindex. Prior sg-captcha curl failures were from changing VPN/test IPs hitting SiteGround Antibot/WAF, not proof that Googlebot/Bingbot are globally blocked.",
+      "rule": "Use GSC/Bing URL Inspection or SiteGround verified crawler logs for crawler-blocking claims. Do not use VPN/datacenter curl challenges alone."
+    }
+  },
+  "seoAudit": {
+    "timestamp": "2026-05-17T00:00:00+10:00",
+    "source": "bts-source-of-truth-handoff",
+    "healthScore": 28,
+    "healthBreakdown": {
+      "technical": null,
+      "content": null,
+      "onPage": null,
+      "schema": null,
+      "performance": null,
+      "aiSearch": 5,
+      "images": null
+    },
+    "geoScore": 5,
+    "geoBreakdown": {
+      "citability": null,
+      "structure": null,
+      "multiModal": null,
+      "authority": null,
+      "technicalAccess": null
+    },
+    "crawlers": [],
+    "schema": {
+      "implemented": [],
+      "missing": [],
+      "deprecated": []
+    },
+    "actions": [
+      {
+        "severity": "critical",
+        "title": "GSC/Bing crawler access verification is outstanding."
+      },
+      {
+        "severity": "high",
+        "title": "SG Optimizer activation outstanding"
+      },
+      {
+        "severity": "high",
+        "title": "GSC verification outstanding"
+      }
+    ],
+    "history": [
+      {
+        "timestamp": "2026-05-17T00:00:00+10:00",
+        "healthScore": 28,
+        "geoScore": 5
+      }
+    ],
+    "updatedAt": "2026-05-17T00:00:00+10:00"
+  },
+  "keywords": {
+    "lastUpdated": "2026-05-17T00:00:00+10:00",
+    "source": "bts-source-of-truth-handoff plus historical target list",
+    "keywords": [
+      {
+        "keyword": "ACS training course UK",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🔴 Gas Training Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "gas safety training near me",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🔴 Gas Training Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "gas engineer training courses",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🔴 Gas Training Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "ACS reassessment course",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🔴 Gas Training Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "MLP gas training course",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🔴 Gas Training Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "gas training Buckinghamshire",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🔴 Gas Training Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "domestic gas training High Wycombe",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🔴 Gas Training Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "LPG training course UK",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🔴 Gas Training Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "LPG changeover training",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🔴 Gas Training Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "water regulations course UK",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟡 Plumbing/Water Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "WRAS water regulations training",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟡 Plumbing/Water Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "unvented hot water course",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟡 Plumbing/Water Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "G3 training course",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟡 Plumbing/Water Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "unvented cylinder course",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟡 Plumbing/Water Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "legionella testing training",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟡 Plumbing/Water Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "legionella awareness course",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟡 Plumbing/Water Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "plumbing training High Wycombe",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟡 Plumbing/Water Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "plumbing courses Buckinghamshire",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟡 Plumbing/Water Keywords (9)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "heat pump training course UK",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟢 Heat Pump / Renewable Keywords (7)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "heat pump installer training",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟢 Heat Pump / Renewable Keywords (7)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "heat pump installation course",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟢 Heat Pump / Renewable Keywords (7)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "renewable energy training",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟢 Heat Pump / Renewable Keywords (7)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "green energy training course",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟢 Heat Pump / Renewable Keywords (7)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "BUS training voucher course",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟢 Heat Pump / Renewable Keywords (7)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "heat pump certification UK",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟢 Heat Pump / Renewable Keywords (7)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "multi trade training course",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟣 Multi-trade Keywords (5)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "gas and plumbing training",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟣 Multi-trade Keywords (5)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "trade training High Wycombe",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟣 Multi-trade Keywords (5)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "building services training",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟣 Multi-trade Keywords (5)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "career change training course",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "🟣 Multi-trade Keywords (5)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "training courses High Wycombe",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "📍 Local Keywords (5)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "trade training Buckinghamshire",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "📍 Local Keywords (5)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "gas training near Reading",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "📍 Local Keywords (5)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "plumbing training near Oxford",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "📍 Local Keywords (5)",
+        "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "training centre M40 corridor",
+        "baseline": null,
+        "latest": 50,
+        "trend": "—",
+        "url": "—",
+        "section": "📍 Local Keywords (5)",
+        "status": "needs-gsc-verification"
+      }
+    ],
+    "top10": [],
+    "campaigns": [],
+    "targetKeywords": 35,
+    "top10Count": 0,
+    "status": "0/35 target keywords in top 10; 4 May regression; GSC verification outstanding"
+  },
+  "seoPlan": {
+    "client": "Better Training Solutions",
+    "site": "bettertrainingsolutions.co.uk",
+    "base": "High Wycombe, HP11 2LB",
+    "updatedAt": "2026-05-17T00:00:00+10:00",
+    "keywordCoverage": {
+      "tracked": 35,
+      "locationTargeted": 0,
+      "categories": {
+        "gas": 9,
+        "plumbingWater": 9,
+        "heatPumpRenewable": 7,
+        "multiTrade": 5,
+        "local": 5
+      }
+    },
+    "locations": {
+      "tier1": [
+        "High Wycombe",
+        "Marlow"
+      ],
+      "tier2": [
+        "Aylesbury",
+        "Beaconsfield",
+        "Amersham",
+        "Chesham",
+        "Maidenhead",
+        "Slough",
+        "Reading"
+      ],
+      "tier3": [
+        "Oxford",
+        "Hemel Hempstead",
+        "Watford",
+        "Uxbridge",
+        "Milton Keynes",
+        "Luton"
+      ],
+      "tier4": [
+        "Buckinghamshire",
+        "Berkshire",
+        "M40 corridor",
+        "South East England"
+      ],
+      "total": 17
+    },
+    "services": [
+      "Managed Learning Program",
+      "Initial ACS",
+      "ACS Reassessment",
+      "Water Regulations",
+      "Unvented G3",
+      "Legionella Testing",
+      "LPG Changeover",
+      "Heat Pump Training"
+    ],
+    "contentGaps": [
+      {
+        "priority": 1,
+        "gap": "ACS Training + Location pages",
+        "note": "Core service, zero local content"
+      },
+      {
+        "priority": 2,
+        "gap": "Near me keywords across all services",
+        "note": "High volume, zero coverage"
+      },
+      {
+        "priority": 3,
+        "gap": "Heat Pump Training + Location",
+        "note": "Growth market, first-mover opportunity"
+      }
+    ],
+    "plannedContent": {
+      "wave1": {
+        "status": "complete",
+        "published": [
+          "ACS Training in High Wycombe",
+          "Legionella Training blog",
+          "G3 Unvented Hot Water blog",
+          "LPG Changeover Training blog",
+          "Gas MLP Complete Guide blog"
+        ]
+      },
+      "wave2": {
+        "status": "in-progress",
+        "published": [
+          "ACS Reassessment Near Reading/Oxford/M40",
+          "Gas & Plumbing Training Near Aylesbury"
+        ],
+        "remaining": [
+          "Beaconsfield",
+          "Amersham",
+          "Chesham",
+          "Maidenhead",
+          "Slough location content"
+        ]
+      },
+      "wave3": {
+        "status": "planned",
+        "planned": [
+          "Water Regs + G3 location content",
+          "Competitor gap-fill articles"
+        ]
+      },
+      "wave4": {
+        "status": "in-progress",
+        "published": [
+          "Gas Training Courses Near You — SE England",
+          "Heat Pump Training Buckinghamshire (x2)"
+        ],
+        "remaining": [
+          "Berkshire",
+          "M40 corridor regional content"
+        ]
+      }
+    },
+    "competitors": [
+      "Logic4training",
+      "Gasmark Training (Maidenhead)",
+      "Gastec Training (Milton Keynes)"
+    ],
+    "cadence": {
+      "blogs": "2/week (Mon + Thu)",
+      "gbpPosts": "weekly",
+      "rankingSnapshot": "Friday",
+      "competitorCheck": "Monday",
+      "summaryReport": "monthly"
+    },
+    "source": "manual-status-json-restored"
+  }
+}
