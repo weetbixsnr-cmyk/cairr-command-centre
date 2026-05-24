@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import SeoDashboard from './components/seo-dashboard'
-import { buildDashboardSnapshot } from '../lib/dashboard-data'
+import { buildPageProps } from '../lib/dashboard-data'
 
 // Inline section finder for rendering SEO-DASHBOARD.md sections in native tabs
 function findDashSection(sections, key, fallbacks) {
@@ -1699,7 +1699,12 @@ export default function BtsSeoPage({ initialSnapshot }) {
 export async function getStaticProps() {
   return {
     props: {
-      initialSnapshot: buildDashboardSnapshot()
+      initialSnapshot: buildPageProps([
+        'btsBlogInventory', 'btsCompetitorPages', 'btsCompetitors',
+        'btsCourseDetails', 'btsCourses', 'btsDrafts', 'btsKeywords',
+        'btsNotifications', 'btsPublishLedger', 'btsSeo', 'btsSeoAudit',
+        'btsSeoDash', 'btsSeoplan', 'btsSuggestions', 'btsTraffic'
+      ])
     }
   }
 }

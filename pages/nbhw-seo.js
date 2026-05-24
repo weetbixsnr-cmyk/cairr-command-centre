@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import SeoDashboard from './components/seo-dashboard'
 import GbpPosts from './components/gbp-posts'
-import { buildDashboardSnapshot } from '../lib/dashboard-data'
+import { buildPageProps } from '../lib/dashboard-data'
 
 function useSnapshot(initialData, interval = 30000) {
   const [data, setData] = useState(initialData || null)
@@ -1310,7 +1310,11 @@ export default function NbhwSeoPage({ initialSnapshot }) {
 export async function getStaticProps() {
   return {
     props: {
-      initialSnapshot: buildDashboardSnapshot()
+      initialSnapshot: buildPageProps([
+        'nbhwCompetitors', 'nbhwDrafts', 'nbhwGmbPosts', 'nbhwKeywords',
+        'nbhwLive', 'nbhwPublishLedger', 'nbhwPublishLog', 'nbhwSeo',
+        'nbhwSeoAudit', 'nbhwSeoDash', 'nbhwSuggestions', 'nbhwTraffic'
+      ])
     }
   }
 }

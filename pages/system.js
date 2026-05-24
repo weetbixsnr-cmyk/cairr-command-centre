@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
-import { buildDashboardSnapshot } from '../lib/dashboard-data'
+import { buildPageProps } from '../lib/dashboard-data'
 
 function useSnapshot(initialData, interval = 30000) {
   const [data, setData] = useState(initialData || null)
@@ -144,7 +144,7 @@ export default function SystemPage({ initialSnapshot }) {
 export async function getStaticProps() {
   return {
     props: {
-      initialSnapshot: buildDashboardSnapshot()
+      initialSnapshot: buildPageProps(['dataSource', 'timestamp'])
     }
   }
 }

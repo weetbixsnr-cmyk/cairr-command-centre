@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
-import { buildDashboardSnapshot } from '../lib/dashboard-data'
+import { buildPageProps } from '../lib/dashboard-data'
 import { formatDashboardDateTime } from '../lib/date-format'
 
 function useSnapshot(initialData, interval = 30000) {
@@ -260,7 +260,7 @@ export default function Dashboard({ initialSnapshot }) {
 export async function getStaticProps() {
   return {
     props: {
-      initialSnapshot: buildDashboardSnapshot()
+      initialSnapshot: buildPageProps(['actionQueue', 'dataSource', 'projects', 'timestamp'])
     }
   }
 }
