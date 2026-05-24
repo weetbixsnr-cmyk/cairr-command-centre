@@ -1,0 +1,33 @@
+{
+  "name": "command-centre-renderer",
+  "owner": "command-centre",
+  "purpose": "Render project dashboards from consumed JSON snapshots",
+  "current_phase": "0.7-validation-exists",
+  "end_state": "Dashboard renders all consumed snapshots with input validation and smoke checks",
+  "phase_gates": {
+    "0.1-identified": true,
+    "0.2-data-contract": true,
+    "0.3-validation": true,
+    "0.4-export-adapter": true,
+    "0.5-consumed-locally": true,
+    "0.6-snapshot-synced": true,
+    "0.7-validation-exists": true,
+    "0.8-dashboard-smoke-check-exists": false,
+    "0.9-ci-wired": false,
+    "1.0-proven": false
+  },
+  "inputs": [
+    "public/data/bts/content.json",
+    "public/data/bts/seo.json",
+    "public/data/bts-status.json",
+    "public/data/nbhw-status.json",
+    "public/data/dashboard-status.json"
+  ],
+  "outputs": [],
+  "scripts": {
+    "validate": "scripts/check-inputs.py"
+  },
+  "adapters": [],
+  "skills_needed": ["json-validation", "dashboard-rendering"],
+  "next_gate": "0.8-dashboard-smoke-check-exists"
+}
