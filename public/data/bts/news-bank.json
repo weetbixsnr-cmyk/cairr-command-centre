@@ -1,0 +1,1031 @@
+{
+  "meta": {
+    "description": "BTS News Bank — catalogue of UK energy/gas/plumbing news stories for insights posts",
+    "created": "2026-03-29",
+    "lastUpdated": "2026-05-20",
+    "totalStories": 46,
+    "available": 31,
+    "drafted": 2,
+    "published": 4,
+    "stale": 9,
+    "categories": [
+      "policy",
+      "grants",
+      "industry-data",
+      "regulation",
+      "brand-product",
+      "real-world"
+    ]
+  },
+  "stories": [
+    {
+      "id": 45,
+      "title": "Trade Courses ROI — Which Qualifications Pay Back Fastest in 2026",
+      "datePublished": "2026-05-13",
+      "source": "https://www.ytatraining.co.uk/blog/trade-courses-roi-2026",
+      "sourceLabel": "YTA Training",
+      "category": "industry-data",
+      "summary": "Analysis of which UK trade qualifications deliver the fastest return on investment in 2026. Gas, plumbing, and heat pump certifications highlighted as high-ROI due to skills shortage and rising wages. Useful context for career changers weighing up training costs.",
+      "btsServiceLink": [
+        "MLP",
+        "ACS Initial",
+        "Heat Pump",
+        "General"
+      ],
+      "blogAngle": "Which Trade Qualifications Pay Back Fastest? A 2026 ROI Breakdown",
+      "targetKeywords": [
+        "trade course ROI UK",
+        "gas training worth it 2026",
+        "best trade qualifications 2026"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "NEW 2026-05-20. Source is a competitor (YTA Training) — our angle must be unique. Strong career-changer hook."
+    },
+    {
+      "id": 44,
+      "title": "Engineering Salary Survey 2026 — Pay Rising Across All Disciplines",
+      "datePublished": "2026-05-06",
+      "source": "https://www.theengineer.co.uk/content/news/engineering-salary-survey-2026",
+      "sourceLabel": "The Engineer",
+      "category": "industry-data",
+      "summary": "Annual engineering salary survey shows pay rising across all disciplines in 2026. Skills shortages driving competition for qualified engineers. HVAC and building services engineering roles among the fastest-growing salary brackets.",
+      "btsServiceLink": [
+        "ACS Initial",
+        "MLP",
+        "General"
+      ],
+      "blogAngle": "Engineering Salaries Are Climbing in 2026 — Where Gas and Heating Engineers Stand",
+      "targetKeywords": [
+        "engineering salary 2026 UK",
+        "gas engineer pay rise",
+        "HVAC engineer salary 2026"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "NEW 2026-05-20. Broader engineering focus but supports the skills-shortage-drives-pay narrative. Pair with story #11 for gas-specific salary data."
+    },
+    {
+      "id": 39,
+      "title": "Boiler Upgrade Scheme Overhauled — Major Changes from April 2026",
+      "datePublished": "2026-04-29",
+      "source": "https://homeenergymodel.co.uk/boiler-upgrade-scheme-2026-changes",
+      "sourceLabel": "Home Energy Model",
+      "category": "regulation",
+      "summary": "Comprehensive overview of all BUS changes effective April 2026. Grant amounts, eligibility criteria, process changes, and what MCS installers need to know. Consolidates multiple BUS amendment announcements into a single reference.",
+      "btsServiceLink": [
+        "Heat Pump"
+      ],
+      "blogAngle": "The Boiler Upgrade Scheme Just Changed — Here's What Installers Need to Know",
+      "targetKeywords": [
+        "Boiler Upgrade Scheme changes 2026",
+        "BUS grant April 2026",
+        "heat pump grant changes"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "NEW 2026-05-20. Complements story #4 (original BUS piece, now drafted as News 5). Could update/supersede that draft or run as standalone."
+    },
+    {
+      "id": 38,
+      "title": "BUS 2026 Changes — What Heating Companies Need to Know",
+      "datePublished": "2026-04-28",
+      "source": "https://www.gasengineersoftware.co.uk/blog/bus-2026-changes-heating-companies",
+      "sourceLabel": "Gas Engineer Software",
+      "category": "regulation",
+      "summary": "Practical breakdown of April 2026 BUS amendments from an installer perspective. Covers new grant amounts, changed eligibility rules, and operational impacts for heating companies applying on behalf of homeowners.",
+      "btsServiceLink": [
+        "Heat Pump"
+      ],
+      "blogAngle": "BUS Grant Changes in April 2026 — A Practical Guide for Heating Installers",
+      "targetKeywords": [
+        "BUS changes heating companies",
+        "Boiler Upgrade Scheme installer guide",
+        "heat pump grants April 2026"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "NEW 2026-05-20. Installer-focused angle (not homeowner). Good complement to story #39."
+    },
+    {
+      "id": 40,
+      "title": "UK Decouples Gas From Electricity Pricing — Major Energy Market Reform",
+      "datePublished": "2026-04-22",
+      "source": "https://www.hvnplus.co.uk/news/uk-decouples-gas-electricity-pricing-2026",
+      "sourceLabel": "HVN+",
+      "category": "policy",
+      "summary": "UK government announces decoupling of gas and electricity wholesale prices. Expected to reduce electricity costs relative to gas, making heat pumps more cost-competitive vs gas boilers. Major structural change to the energy market with direct implications for the gas-to-heat-pump transition.",
+      "btsServiceLink": [
+        "Heat Pump",
+        "General"
+      ],
+      "blogAngle": "Gas and Electricity Prices Are Being Decoupled — What This Means for Heating Engineers",
+      "targetKeywords": [
+        "UK energy price decoupling",
+        "gas vs electricity cost 2026",
+        "heat pump running costs reform"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "NEW 2026-05-20. SIGNIFICANT policy shift. Makes heat pump training even more urgent as economics shift. Updates context for story #26 (BBC heat pump cost analysis)."
+    },
+    {
+      "id": 41,
+      "title": "HVAC Skills Shortages Persist Across UK and Global Markets",
+      "datePublished": "2026-04-22",
+      "source": "https://www.modbs.co.uk/news/hvac-skills-shortages-uk-global-2026",
+      "sourceLabel": "Modern Building Services",
+      "category": "industry-data",
+      "summary": "Global HVAC skills shortage analysis with UK-specific data. Demand for qualified heating, ventilation and air conditioning engineers continues to outstrip supply. Ageing workforce, net-zero transition, and construction boom all contributing factors. UK particularly affected in heat pump and refrigeration sectors.",
+      "btsServiceLink": [
+        "Heat Pump",
+        "ACS Initial",
+        "MLP",
+        "General"
+      ],
+      "blogAngle": "The HVAC Skills Crisis Isn't Just a UK Problem — But It Hits Hardest Here",
+      "targetKeywords": [
+        "HVAC skills shortage 2026",
+        "heating engineer shortage UK",
+        "HVAC career opportunities"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "NEW 2026-05-20. SKILLS SHORTAGE FOCUS. Adds global context to the UK shortage narrative. Complements stories #29, #30, #31."
+    },
+    {
+      "id": 42,
+      "title": "Growth and Skills Levy Replaces Apprenticeship Levy — April 2026 Reforms",
+      "datePublished": "2026-04-14",
+      "source": "https://www.nsar.co.uk/growth-skills-levy-2026-reforms",
+      "sourceLabel": "NSAR",
+      "category": "grants",
+      "summary": "Growth and Skills Levy reforms from April 2026 replace the Apprenticeship Levy. Broader funding for shorter courses and modular training, not just full apprenticeships. Relevant for employers funding gas, plumbing and heat pump training for existing staff.",
+      "btsServiceLink": [
+        "MLP",
+        "General"
+      ],
+      "blogAngle": "The Apprenticeship Levy Is Gone — How the New Growth and Skills Levy Funds Trade Training",
+      "targetKeywords": [
+        "Growth and Skills Levy 2026",
+        "apprenticeship levy replacement",
+        "employer funded trade training"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "NEW 2026-05-20. Relevant for employers considering funding staff training at BTS. Complements stories #25 and #28."
+    },
+    {
+      "id": 43,
+      "title": "BUS Amendments 2026 — Logic4training Analysis",
+      "datePublished": "2026-04-09",
+      "source": "https://www.logic4training.co.uk/blog/bus-amendments-2026",
+      "sourceLabel": "Logic4training",
+      "category": "regulation",
+      "summary": "Logic4training's analysis of the 2026 Boiler Upgrade Scheme amendments. Covers changes to grant amounts, eligibility, and process. Competitor content — their angle focuses on their own training courses.",
+      "btsServiceLink": [
+        "Heat Pump"
+      ],
+      "blogAngle": "BUS Grant Amendments 2026 — What's Changed and What It Means for Your Heat Pump Training",
+      "targetKeywords": [
+        "BUS amendments 2026",
+        "Boiler Upgrade Scheme 2026",
+        "heat pump grant changes UK"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "NEW 2026-05-20. COMPETITOR CONTENT (Logic4training). Use for competitive intelligence — do NOT link to this source. Our angle must differentiate."
+    },
+    {
+      "id": 37,
+      "title": "Boiler Upgrade Scheme Budget Increase — More Grants Available from April 2026",
+      "datePublished": "2026-04-01",
+      "source": "https://www.gov.uk/government/news/boiler-upgrade-scheme-budget-increase-2026",
+      "sourceLabel": "GOV.UK",
+      "category": "grants",
+      "summary": "UK Government increased the BUS budget from April 2026. More grant funding available for heat pump installations. Signals continued government commitment to heat pump rollout and need for qualified installers.",
+      "btsServiceLink": [
+        "Heat Pump"
+      ],
+      "blogAngle": "More Heat Pump Grants Than Ever — Government Increases BUS Budget for 2026/27",
+      "targetKeywords": [
+        "BUS budget increase 2026",
+        "heat pump grants 2026",
+        "Boiler Upgrade Scheme funding"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "NEW 2026-05-20. Official GOV.UK source. Updates context for stories #4, #38, #39. Installer demand angle — more grants = more installations = need more trained engineers."
+    },
+    {
+      "id": 36,
+      "title": "£50M Government Emergency Fund for Heating Oil Crisis — April 2026",
+      "datePublished": "2026-04-01",
+      "source": "https://www.moneysavingexpert.com/news/2026/03/heating-oil-help/",
+      "sourceLabel": "MoneySavingExpert / GOV.UK",
+      "category": "policy",
+      "summary": "£50M emergency support from 1 April 2026 for households struggling with heating oil/LPG costs. Scottish Emergency Oil Heating Scheme also launches 1 April. Heating oil still ~129-140p/litre (was 55-65p in Feb). 1.7M off-grid homes affected. Drives case for alternative heating systems and qualified installers.",
+      "btsServiceLink": [
+        "Heat Pump",
+        "LPG Changeover"
+      ],
+      "blogAngle": "Government Announces £50M Heating Oil Emergency Fund — What This Means for the Heating Industry",
+      "targetKeywords": [
+        "heating oil crisis UK 2026",
+        "heating oil emergency fund",
+        "off grid heating alternatives"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "Very current — 1 April 2026. Extends story #20. Good for showing industry disruption driving demand for trained heating engineers."
+    },
+    {
+      "id": 28,
+      "title": "Apprenticeship Funding Changes from April 2026 — New Starters Affected",
+      "datePublished": "2026-04-01",
+      "source": "https://www.caw.ac.uk/caw-news/apprenticeship-funding-changes-from-april-2026/",
+      "sourceLabel": "CAW",
+      "category": "policy",
+      "summary": "Several updates to apprenticeship funding and contributions for new starters from 1 April 2026.",
+      "btsServiceLink": [
+        "MLP"
+      ],
+      "blogAngle": "Apprenticeship Funding Is Changing — What April 2026 Means for New Starters",
+      "targetKeywords": [
+        "apprenticeship funding changes April 2026",
+        "apprenticeship new starters 2026"
+      ],
+      "status": "drafted",
+      "sunnyPriority": null,
+      "notes": "Schema fixed 2026-05-20 (date→datePublished, category normalised, missing fields added). Drafted as pending News 6: content/pending-drafts/news-6-apprenticeship-funding-april-2026.md."
+    },
+    {
+      "id": 29,
+      "title": "72% of UK Construction SMEs Hit by Skills Shortages — 49% Reporting Job Delays",
+      "datePublished": "2026-03-31",
+      "source": "https://www.constructionnews.co.uk/financial/construction-upturn-hampered-by-skills-shortages-31-03-2026/",
+      "sourceLabel": "Construction News",
+      "category": "industry-data",
+      "summary": "72% of SME construction firms now affected by skills shortages (up from 61% in H1 2025). 49% of builders report job delays. 22% have cancelled jobs entirely due to lack of skilled workers. Plumbers/HVAC listed as 3rd hardest trade to recruit (23% of firms struggling). Over 140,000 vacancies across the sector.",
+      "btsServiceLink": [
+        "MLP",
+        "ACS Initial",
+        "General"
+      ],
+      "blogAngle": "Nearly Half of UK Builders Are Delaying Jobs — Here's Why Trained Engineers Are in Such High Demand",
+      "targetKeywords": [
+        "construction skills shortage UK 2026",
+        "plumber shortage UK",
+        "HVAC skills gap"
+      ],
+      "status": "published",
+      "sunnyPriority": null,
+      "notes": "Very recent (31 Mar). Strong data-driven piece. Plumbers/HVAC specifically called out. Perfect for career changers — massive demand, not enough supply.",
+      "published_date": "2026-04-11"
+    },
+    {
+      "id": 19,
+      "title": "Future Homes Standard Published — Heat Pumps Mandatory in New Builds from March 2028",
+      "datePublished": "2026-03-27",
+      "source": "https://www.hvnplus.co.uk/news/industry-reacts-to-publication-of-future-homes-standard-27-03-2026/",
+      "sourceLabel": "H&V News",
+      "category": "policy",
+      "summary": "UK Government published the Future Homes Standard. From March 2028, most new homes must have heat pumps or heat networks — gas boilers effectively ruled out. Solar PV mandatory. 75-80% carbon reduction. Industry widely supportive but flags skills shortage. MCS reports 100,000+ certified new-build installations last year. NAPIT says 'significant growth strands' for installers.",
+      "btsServiceLink": [
+        "Heat Pump",
+        "ACS Reassessment",
+        "General"
+      ],
+      "blogAngle": "The Future Homes Standard Is Here — What It Means for Gas and Heating Engineers",
+      "targetKeywords": [
+        "Future Homes Standard 2026",
+        "Future Homes Standard heating engineers",
+        "heat pump new builds UK"
+      ],
+      "status": "published",
+      "sunnyPriority": null,
+      "notes": "Published 27 March 2026. This replaces story #3 as the primary FHS piece. Drafted as insight-1.",
+      "published_date": "2026-04-01"
+    },
+    {
+      "id": 25,
+      "title": "Apprenticeship Funding Reforms March 2026 — New Incentives and Rules",
+      "datePublished": "2026-03-25",
+      "source": "https://www.watertrain.co.uk/apprenticeship-changes-march-2026",
+      "sourceLabel": "Watertrain",
+      "category": "policy",
+      "summary": "New government apprenticeship reforms aim to increase opportunities, address skills shortages, and better target funding. Changes to employer incentives and training requirements. Relevant for MLP route and new entrants.",
+      "btsServiceLink": [
+        "MLP",
+        "General"
+      ],
+      "blogAngle": "Apprenticeship Rules Just Changed — What It Means for Gas and Plumbing Training in 2026",
+      "targetKeywords": [
+        "apprenticeship changes 2026 UK",
+        "plumbing apprenticeship funding",
+        "gas training apprenticeship"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "Very recent (25 Mar). Links to MLP course. Good for career changers and employers considering training staff."
+    },
+    {
+      "id": 26,
+      "title": "BBC: Heat Pumps Work But They're Not Yet a Money Saver",
+      "datePublished": "2026-03-22",
+      "source": "https://www.bbc.co.uk/news/articles/ce358gkx9vpo",
+      "sourceLabel": "BBC News",
+      "category": "industry-data",
+      "summary": "BBC analysis — heat pumps work well technically but running costs aren't yet cheaper than gas for most homes. Heat pumps best at 45°C vs gas boilers at 70°C. Depends on tariff, insulation, and system design. Balanced view from real users.",
+      "btsServiceLink": [
+        "Heat Pump"
+      ],
+      "blogAngle": "Are Heat Pumps Actually Cheaper Than Gas? What the BBC Found — And What Installers Should Know",
+      "targetKeywords": [
+        "heat pump vs gas boiler cost 2026",
+        "heat pump running cost UK",
+        "are heat pumps worth it"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "BBC = high authority source. Balanced angle avoids pushing heat pumps unrealistically. Good for showing BTS gives honest industry advice."
+    },
+    {
+      "id": 27,
+      "title": "Top 5 MCS Umbrella Schemes for UK Heat Pump Installers (2026)",
+      "datePublished": "2026-03-16",
+      "source": "https://todaynews.co.uk/2026/03/16/the-5-best-mcs-umbrella-schemes-supporting-uk-solar-and-heat-pump-installers/",
+      "sourceLabel": "Today News",
+      "category": "brand-product",
+      "summary": "Roundup of the 5 main MCS umbrella schemes — including HPIN, Cinergi and others. Explains how umbrella schemes work: no need for individual MCS cert, but you still need training, insurance (£2M+), and Gas Safe/F-Gas registration. Shows the accessible routes into heat pump work.",
+      "btsServiceLink": [
+        "Heat Pump"
+      ],
+      "blogAngle": "MCS Umbrella Schemes Explained — How to Start Installing Heat Pumps Without Full Certification",
+      "targetKeywords": [
+        "MCS umbrella scheme UK",
+        "heat pump installer no MCS",
+        "HPIN scheme explained"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "Practical piece for gas engineers considering adding heat pumps. Still need training even with umbrella."
+    },
+    {
+      "id": 20,
+      "title": "Heating Oil & LPG Crisis — Prices Triple as 1.7M Off-Grid Homes Hit Hard",
+      "datePublished": "2026-03-15",
+      "source": "https://www.moneysavingexpert.com/news/2026/03/heating-oil-lpg-dossier-government/",
+      "sourceLabel": "MoneySavingExpert",
+      "category": "industry-data",
+      "summary": "Heating oil prices nearly tripled in a single week — from 55-65p/litre in February to 155p/litre by 9 March. 1.7M UK households without mains gas affected. Martin Lewis presenting dossier to government. LPG also spiking. Drives home the case for alternative heating systems.",
+      "btsServiceLink": [
+        "Heat Pump",
+        "LPG Changeover"
+      ],
+      "blogAngle": "Heating Oil Prices Triple — Why Off-Grid Homes Are Looking at Heat Pumps and LPG Alternatives",
+      "targetKeywords": [
+        "heating oil prices 2026",
+        "LPG heating costs UK",
+        "off grid heating alternatives"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "Very current — March 2026. Strong hook for LPG changeover course. Links heat pump training as alternative for off-grid homes."
+    },
+    {
+      "id": 23,
+      "title": "MCS Redeveloped Installer Scheme — Phased Rollout 2026-2027",
+      "datePublished": "2026-03-15",
+      "source": "https://www.theiaa.co.uk/mcs-redeveloped-installer-scheme/",
+      "sourceLabel": "The IAA",
+      "category": "regulation",
+      "summary": "MCS is overhauling its installer certification scheme. New 'Redeveloped Installer Scheme' being rolled out in phases through 2026 and into 2027. IAA (Installation Assurance Authority) is UKAS-accredited certification body. Changes to how installers get and maintain MCS certification.",
+      "btsServiceLink": [
+        "Heat Pump"
+      ],
+      "blogAngle": "MCS Certification Is Changing — What Heat Pump Installers Need to Know in 2026",
+      "targetKeywords": [
+        "MCS certification changes 2026",
+        "MCS redeveloped scheme",
+        "heat pump installer certification"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "Technical but important for anyone considering heat pump certification. Links to heat pump course."
+    },
+    {
+      "id": 12,
+      "title": "Gas Engineer Skills Shortage Persists — Construction Industry Crisis",
+      "datePublished": "2026-03-08",
+      "source": "https://www.ableskills.co.uk/blog/is-a-career-in-gas-still-worth-it-in-2026/",
+      "sourceLabel": "Able Skills",
+      "category": "industry-data",
+      "summary": "Skills shortages remain one of the biggest issues facing construction. Qualified gas engineer shortfall is a significant contributor. Aging workforce, growing demand, energy transition all factors. Career still worth it in 2026.",
+      "btsServiceLink": [
+        "ACS Initial",
+        "MLP",
+        "General"
+      ],
+      "blogAngle": "Is a Career in Gas Engineering Still Worth It in 2026? (Spoiler: Yes)",
+      "targetKeywords": [
+        "gas engineer career 2026",
+        "gas engineer shortage UK",
+        "is gas engineering worth it"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "NOTE: Able Skills (competitor #4) published this already. Our angle needs to be unique — focus on multi-trade + heat pump upskilling, not just gas alone."
+    },
+    {
+      "id": 30,
+      "title": "Half of UK Gas Engineers Over 55 — Mass Retirement Crisis Looming",
+      "datePublished": "2026-03-01",
+      "source": "https://www.gas-training-and-assessment.co.uk/is-there-a-shortage-of-gas-engineers-in-the-uk",
+      "sourceLabel": "Gas Training & Assessment / Gas Safe Register",
+      "category": "industry-data",
+      "summary": "Gas Safe Register data shows half of all registered gas engineers are over 55. Within 10 years the majority will have retired. Fewer young people entering the trade. Lower birth rates compounding the problem. Creates massive replacement demand on top of growth demand from net-zero transition.",
+      "btsServiceLink": [
+        "ACS Initial",
+        "MLP",
+        "General"
+      ],
+      "blogAngle": "Half of Gas Engineers Will Retire Within 10 Years — Who's Going to Replace Them?",
+      "targetKeywords": [
+        "gas engineer shortage UK",
+        "gas engineer retirement crisis",
+        "gas engineer career opportunity 2026"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "SKILLS SHORTAGE FOCUS. Powerful stat — half the workforce retiring. Perfect for career changers and MLP students. Shows urgency."
+    },
+    {
+      "id": 46,
+      "title": "CITB Construction Skills Gap Report — Feb 2026 Update",
+      "datePublished": "2026-02-25",
+      "source": "https://www.fixradio.co.uk/news/citb-skills-gap-report-2026",
+      "sourceLabel": "Fix Radio",
+      "category": "industry-data",
+      "summary": "CITB's latest construction skills gap report confirms ongoing workforce shortfalls across trades. Gas, plumbing and HVAC among the hardest-hit sectors. Report calls for increased training capacity and employer engagement. Data supports career-change messaging.",
+      "btsServiceLink": [
+        "MLP",
+        "ACS Initial",
+        "General"
+      ],
+      "blogAngle": "The CITB's Latest Skills Report Confirms What We Already Know — The Industry Needs More Engineers",
+      "targetKeywords": [
+        "CITB skills gap 2026",
+        "construction skills report UK",
+        "gas plumbing training demand"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "NEW 2026-05-20. Adds to the CITB data from story #31. Fix Radio is a trade-focused source — good credibility."
+    },
+    {
+      "id": 21,
+      "title": "Ofgem Energy Price Cap Falls 7% from April 2026 — Bills Down £117",
+      "datePublished": "2026-02-25",
+      "source": "https://www.theguardian.com/money/2026/feb/25/energy-bills-fall-households-april-price-cap",
+      "sourceLabel": "The Guardian / Ofgem",
+      "category": "industry-data",
+      "summary": "Ofgem price cap drops to £1,641/year from 1 April 2026, down 7% (£117). First significant fall in years. Gas at 5.9p/kWh, electricity at 27.7p/kWh. July could rise again. Context for heat pump running cost comparisons.",
+      "btsServiceLink": [
+        "General"
+      ],
+      "blogAngle": "Energy Bills Are Falling — But Is Gas Still Cheaper Than a Heat Pump in 2026?",
+      "targetKeywords": [
+        "energy price cap April 2026",
+        "gas vs heat pump running costs",
+        "energy bills 2026"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "Good context piece. Logic4training already covered 'Is Gas or Electric Cheaper in 2026' — our angle needs to be installer-focused, not homeowner."
+    },
+    {
+      "id": 11,
+      "title": "Gas Engineer Salaries 2026 — Average £42,854, Self-Employed £58.57/hr",
+      "datePublished": "2026-02-25",
+      "source": "https://gasengineersoftware.co.uk/blog/are-you-charging-enough/",
+      "sourceLabel": "Gas Engineer Software / Indeed",
+      "category": "industry-data",
+      "summary": "Average gas engineer salary £42,854/year (Indeed, Jan 2026). Self-employed average £58.57/hr. Apprentices £16,500-£21,000. Heat pump certified earn £7-10K more. Skills shortage driving competitive pay.",
+      "btsServiceLink": [
+        "ACS Initial",
+        "MLP",
+        "General"
+      ],
+      "blogAngle": "What Do Gas Engineers Really Earn in 2026? The Numbers Behind the Trade",
+      "targetKeywords": [
+        "gas engineer salary 2026",
+        "gas engineer earnings UK",
+        "plumber salary 2026"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "High search volume career research keyword. Perfect for career changers considering MLP."
+    },
+    {
+      "id": 35,
+      "title": "Higher Labour Costs Forecast as Skills Shortage Meets Rising Construction Demand",
+      "datePublished": "2026-02-23",
+      "source": "https://www.constructionnews.co.uk/government/higher-labour-costs-forecast-amid-skills-shortage-and-rising-demand-23-02-2026/",
+      "sourceLabel": "Construction News",
+      "category": "industry-data",
+      "summary": "Rising construction demand colliding with deepening skills shortage is pushing labour costs up. Wages rising across trades as firms compete for qualified workers. Gas engineers and HVAC specialists among the most in-demand. Salary growth of ~4% expected over 2025 levels.",
+      "btsServiceLink": [
+        "ACS Initial",
+        "MLP",
+        "General"
+      ],
+      "blogAngle": "Trades Wages Are Rising Fast — What the Skills Shortage Means for Your Earning Power",
+      "targetKeywords": [
+        "trades wages rising UK 2026",
+        "gas engineer salary increase",
+        "construction wages skills shortage"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "SKILLS SHORTAGE FOCUS. Money angle — shortage = higher pay. Great for career changers weighing up training investment vs salary return."
+    },
+    {
+      "id": 34,
+      "title": "UK Needs 33,700 Full-Time Heat Pump Installers Now — Has Around 2,000",
+      "datePublished": "2026-02-20",
+      "source": "https://www.nesta.org.uk/blog/the-heat-pump-installer-gap/",
+      "sourceLabel": "Nesta",
+      "category": "industry-data",
+      "summary": "UK has estimated 4,000-10,000 trained heat pump installers, but only ~2,000 working full-time. Needs 33,700 full-time installers short-term, 70,000 by 2035. Government target of 600,000 installations per year by 2028 impossible without massive workforce expansion. Retraining existing Gas Safe engineers (130,000 registered) is the fastest path.",
+      "btsServiceLink": [
+        "Heat Pump"
+      ],
+      "blogAngle": "2,000 Full-Time Heat Pump Installers vs 33,700 Needed — The UK's Most Extreme Skills Gap",
+      "targetKeywords": [
+        "heat pump installer gap UK",
+        "heat pump installer numbers",
+        "heat pump workforce 2026"
+      ],
+      "status": "published",
+      "sunnyPriority": null,
+      "notes": "SKILLS SHORTAGE FOCUS. The 2,000 vs 33,700 stat is incredibly powerful. Perfect for gas engineers considering upskilling. Links directly to heat pump course.",
+      "published_date": "2026-04-11"
+    },
+    {
+      "id": 24,
+      "title": "2026 Heating Landscape for Installers — Vokèra Industry Analysis",
+      "datePublished": "2026-02-18",
+      "source": "https://phamnews.co.uk/what-does-the-2026-heating-landscape-look-like-for-installers/",
+      "sourceLabel": "PHAM News",
+      "category": "industry-data",
+      "summary": "Vokèra marketing director Neil Mattock analyses the 2026 installer landscape. Gas boiler ban headlines created uncertainty but reality is more nuanced — both challenges and opportunities. Transition period means multi-skilled engineers are best positioned.",
+      "btsServiceLink": [
+        "General",
+        "Heat Pump"
+      ],
+      "blogAngle": "The 2026 Heating Landscape: Challenges, Opportunities and Where to Focus Your Training",
+      "targetKeywords": [
+        "heating industry 2026 UK",
+        "gas engineer opportunities 2026",
+        "heating installer future"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "Good thought-leadership angle. Manufacturer perspective adds authority."
+    },
+    {
+      "id": 32,
+      "title": "750,000 Construction Workers to Retire by 2036 — Industry Needs 48,000 New Workers Per Year",
+      "datePublished": "2026-02-12",
+      "source": "https://www.constructionmagazine.uk/2026/02/uk-construction-workforce-shortage-young-people.html",
+      "sourceLabel": "Construction Magazine",
+      "category": "industry-data",
+      "summary": "750,000 construction workers expected to retire by 2036. Sector needs ~48,000 new workers annually. Under-19% of workers are under 25, while 35% are over 50. Employment has declined 10.8% since the pandemic. Young people not entering the industry. Government responding with Growth and Skills Levy and 30+ Homebuilding Skills Hubs.",
+      "btsServiceLink": [
+        "MLP",
+        "General"
+      ],
+      "blogAngle": "750,000 Tradespeople Retiring in 10 Years — Why Construction Is Crying Out for New Blood",
+      "targetKeywords": [
+        "construction workforce crisis UK",
+        "trades retirement UK",
+        "construction careers 2026"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "SKILLS SHORTAGE FOCUS. Broader construction but directly relevant. Career changer angle — massive opportunity for new entrants. Links to MLP."
+    },
+    {
+      "id": 17,
+      "title": "Worcester Bosch Compress Series 2026 — Heat Pump Range Review",
+      "datePublished": "2026-02-10",
+      "source": "https://futureheatltd.co.uk/heat-pumps/worcester-bosch-heat-pump-review/",
+      "sourceLabel": "Future Heat Ltd",
+      "category": "brand-product",
+      "summary": "Worcester Bosch 2026 Compress series air-to-water heat pumps. Vaillant aroTHERM models from £3,500, SCOP up to 5.2, A+++ efficiency. Major manufacturers investing heavily in heat pump ranges.",
+      "btsServiceLink": [
+        "Heat Pump"
+      ],
+      "blogAngle": "Vaillant, Worcester Bosch, Mitsubishi — Why Boiler Brands Are Going All-In on Heat Pumps",
+      "targetKeywords": [
+        "best heat pumps UK 2026",
+        "Worcester Bosch heat pump",
+        "Vaillant heat pump installer"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "Brand-focused. Good for showing industry direction. Links to heat pump training."
+    },
+    {
+      "id": 22,
+      "title": "Plumbing Apprenticeship Starts Crashed 37% — Industry Sounds Alarm",
+      "datePublished": "2026-02-09",
+      "source": "https://aphc.co.uk/news/national-apprenticeship-week-2026-strengthening-the-future-of-the-plumbing-and-heating-industry/",
+      "sourceLabel": "APHC",
+      "category": "industry-data",
+      "summary": "Plumbing apprenticeship starts dropped 37% since 2021/22. Government figures show only a few hundred completions this academic year. APHC warns of worsening workforce pipeline at a time when demand is rising for housing, water and net-zero work. National Apprenticeship Week 2026 context.",
+      "btsServiceLink": [
+        "MLP",
+        "General"
+      ],
+      "blogAngle": "Plumbing Apprenticeships Down 37% — What This Means for the Trade and Your Career",
+      "targetKeywords": [
+        "plumbing apprenticeship UK 2026",
+        "plumbing shortage UK",
+        "plumbing career 2026"
+      ],
+      "status": "published",
+      "sunnyPriority": null,
+      "notes": "Strong career-change angle. Links directly to MLP course. Shows demand outstripping supply = opportunity. Drafted 12 Apr 2026 and published as News 4 on 11 May 2026.",
+      "published_date": "2026-05-11"
+    },
+    {
+      "id": 14,
+      "title": "Warm Homes: Local Grant — Up to £15,000 for Low-Income Households",
+      "datePublished": "2026-02-07",
+      "source": "https://warmhomeuk.co.uk/grants/warm-homes-plan/",
+      "sourceLabel": "WarmHomeUK / GOV.UK",
+      "category": "grants",
+      "summary": "Warm Homes Local Grant provides up to £15,000 for insulation and heat pumps. Income under £36,000, EPC D-G required. Funding allocated to local authorities to deliver. Includes air source heat pump installation.",
+      "btsServiceLink": [
+        "Heat Pump"
+      ],
+      "blogAngle": "Local Authorities Are Funding Heat Pump Installations — Is Your Training Ready?",
+      "targetKeywords": [
+        "Warm Homes Local Grant",
+        "free heat pump installation UK",
+        "local authority energy grants"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "Same grant caution. Installer demand angle, not homeowner eligibility."
+    },
+    {
+      "id": 31,
+      "title": "CITB: UK Needs 59,000 Extra HVAC & Plumbing Professionals",
+      "datePublished": "2026-02-01",
+      "source": "https://www.ability.uk.com/plumbing/uks-green-building-boom/",
+      "sourceLabel": "Ability Ltd / CITB",
+      "category": "industry-data",
+      "summary": "Construction Industry Training Board (CITB) data: 59,000 additional HVAC technicians and plumbing professionals needed across the UK within the next few years. Green Building Boom driving demand — net-zero retrofit, new builds, heat pump installations. Skills gap widening as demand outstrips training capacity.",
+      "btsServiceLink": [
+        "MLP",
+        "Heat Pump",
+        "General"
+      ],
+      "blogAngle": "59,000 More Plumbers and HVAC Engineers Needed — The Numbers Behind the UK's Biggest Skills Gap",
+      "targetKeywords": [
+        "CITB skills shortage",
+        "HVAC technicians needed UK",
+        "plumbing skills gap 2026"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "SKILLS SHORTAGE FOCUS. CITB = authoritative source. 59,000 is a concrete number that makes strong headlines. Links to MLP and heat pump courses."
+    },
+    {
+      "id": 4,
+      "title": "Boiler Upgrade Scheme — £7,500 for Heat Pumps, New £2,500 for Air-to-Air",
+      "datePublished": "2026-01-30",
+      "source": "https://www.gov.uk/apply-boiler-upgrade-scheme/what-you-can-get",
+      "sourceLabel": "GOV.UK / OVO Energy",
+      "category": "grants",
+      "summary": "BUS offers £7,500 for air-to-water heat pumps, £7,500 for ground source. New £2,500 grant for air-to-air systems in 2026. EPC requirement removed. Homeowners need MCS-certified installers.",
+      "btsServiceLink": [
+        "Heat Pump"
+      ],
+      "blogAngle": "£7,500 Heat Pump Grants — Are You Qualified to Install Them?",
+      "targetKeywords": [
+        "Boiler Upgrade Scheme 2026",
+        "heat pump grant UK",
+        "MCS certified installer"
+      ],
+      "status": "drafted",
+      "sunnyPriority": null,
+      "notes": "NOTE: Sunny's rule = no government funding claims on BTS content. Angle must be about installer qualifications, not homeowner grants. Drafted as pending News 5: content/pending-drafts/news-5-bus-amendments-2026.md."
+    },
+    {
+      "id": 5,
+      "title": "ECO4 Scheme Extended to 31 December 2026",
+      "datePublished": "2026-01-27",
+      "source": "https://heatzen.co.uk/eco4-scheme-extended/",
+      "sourceLabel": "Heatzen / GOV.UK",
+      "category": "grants",
+      "summary": "ECO4 extended 9 months to 31 Dec 2026. Free insulation, heating, solar for eligible low-income homes. No confirmed successor scheme. Drives demand for qualified installers.",
+      "btsServiceLink": [
+        "Heat Pump",
+        "General"
+      ],
+      "blogAngle": "ECO4 Extended — More Demand for Qualified Heating Installers Than Ever",
+      "targetKeywords": [
+        "ECO4 scheme 2026",
+        "free heating grants UK",
+        "heating installer demand"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "Same grant caution as #4. Focus on installer demand, not homeowner eligibility."
+    },
+    {
+      "id": 1,
+      "title": "Warm Homes Plan — £15bn Government Investment in Home Energy Upgrades",
+      "datePublished": "2026-01-20",
+      "source": "https://www.gov.uk/government/publications/warm-homes-plan",
+      "sourceLabel": "GOV.UK",
+      "category": "policy",
+      "summary": "UK Government published the Warm Homes Plan — £15bn over 5 years to upgrade 5 million homes. Includes heat pumps, insulation, solar panels, batteries. Biggest home upgrade programme in British history.",
+      "btsServiceLink": [
+        "Heat Pump",
+        "General"
+      ],
+      "blogAngle": "What the Warm Homes Plan Means for Gas Engineers and Heating Installers",
+      "targetKeywords": [
+        "Warm Homes Plan 2026",
+        "government energy grants UK",
+        "heat pump installer demand"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "Major story — high search volume. Links to heat pump training and multi-trade upskilling."
+    },
+    {
+      "id": 33,
+      "title": "Heat Pump Training Drop-Off: 39% of Qualified Engineers Don't Install After Training",
+      "datePublished": "2026-01-15",
+      "source": "https://www.nesta.org.uk/press-release/heat-pump-engineers-held-back-on-installations-by-staff-shortages/",
+      "sourceLabel": "Nesta",
+      "category": "industry-data",
+      "summary": "Nesta research: over 9,000 people completed heat pump training in 2024 (up 15% from 2023), but 39% drop-off rate — nearly 4 in 10 don't go on to install. 61% of installers say admin/compliance tasks reduce capacity. 59% report shortage of skilled staff. 130,000 Gas Safe engineers could retrain — the fastest route to expanding national installation capacity.",
+      "btsServiceLink": [
+        "Heat Pump"
+      ],
+      "blogAngle": "Thousands Are Training in Heat Pumps — But Nearly 40% Never Install. Here's What's Going Wrong",
+      "targetKeywords": [
+        "heat pump training UK",
+        "heat pump installer shortage",
+        "heat pump career 2026"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "SKILLS SHORTAGE FOCUS. Interesting angle — training alone isn't enough. BTS can position around practical, job-ready training. Nesta is authoritative source."
+    },
+    {
+      "id": 16,
+      "title": "Part L Building Regulations & Future Homes Standard — Legislation December 2026",
+      "datePublished": "2026-01-09",
+      "source": "https://www.pbctoday.co.uk/news/building-control-news/part-l-in-practice-bridging-energy-efficiency-design-and-building-control/156392/",
+      "sourceLabel": "PBC Today",
+      "category": "regulation",
+      "summary": "Future Homes Standard published autumn 2025. Legislation laid December 2025, comes into effect December 2026 with December 2027 transition end. 75-85% carbon reduction vs 2013. No gas boilers in new builds. All extensions and loft conversions must meet new energy standards too.",
+      "btsServiceLink": [
+        "Heat Pump",
+        "General"
+      ],
+      "blogAngle": "Part L Is Changing — What Heating Engineers Need to Know Before December 2026",
+      "targetKeywords": [
+        "Part L building regulations 2026",
+        "Future Homes Standard heating",
+        "building regulations energy efficiency"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "Technical audience. Strong for positioning BTS as industry-current. Overlap with story #3 — could combine or run separately."
+    },
+    {
+      "id": 3,
+      "title": "Future Homes Standard — New Builds Can't Have Gas Boilers from 2027",
+      "datePublished": "2025-12-18",
+      "source": "https://www.rendesco.com/news/future-homes-standard-2025",
+      "sourceLabel": "Rendesco / GOV.UK",
+      "category": "policy",
+      "summary": "Future Homes Standard mandates all new homes built to low-carbon heating standards. Gas boilers phased out for new builds. Legislation expected December 2026, transition ends December 2027. 75-85% carbon cut vs 2013 levels.",
+      "btsServiceLink": [
+        "Heat Pump",
+        "General"
+      ],
+      "blogAngle": "Future Homes Standard Explained — What It Means for Heating Engineers",
+      "targetKeywords": [
+        "Future Homes Standard 2026",
+        "new build gas boiler ban",
+        "heating engineer future"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "Strong angle — new builds = heat pump demand = need trained installers. Links to heat pump course. Superseded by story #19 for the primary FHS piece."
+    },
+    {
+      "id": 8,
+      "title": "HPIN Partners with City Plumbing — Heat Pump Access for Boiler Installers",
+      "datePublished": "2025-12-16",
+      "source": "https://www.installeronline.co.uk/heating/heat-pump-installer-network-and-city-plumbing-announce-strategic-partnership/",
+      "sourceLabel": "Installer Online",
+      "category": "brand-product",
+      "summary": "HPIN and City Plumbing strategic partnership. Gives thousands of boiler installers access to heat pump market without joining MCS or paying umbrella fees.",
+      "btsServiceLink": [
+        "Heat Pump"
+      ],
+      "blogAngle": "City Plumbing + HPIN — What This Partnership Means for Boiler Engineers",
+      "targetKeywords": [
+        "City Plumbing heat pump",
+        "boiler installer heat pump transition"
+      ],
+      "status": "stale",
+      "sunnyPriority": null,
+      "notes": "Marked stale 2026-05-20 (>5 months old, borderline). Niche but relevant — shows industry momentum. Pair with #7 or use as standalone."
+    },
+    {
+      "id": 15,
+      "title": "MCS Certification Fund — 75% of Cert Fees Covered (Scotland, Expanding)",
+      "datePublished": "2025-10-22",
+      "source": "https://energysavingtrust.org.uk/grants-and-loans/mcs-certification-fund/",
+      "sourceLabel": "Energy Saving Trust",
+      "category": "grants",
+      "summary": "Scottish Government MCS Certification Fund pays 75% (up to £1,000) of heat pump certification fees. Runs until March 2026. Addresses barrier of certification cost for smaller firms.",
+      "btsServiceLink": [
+        "Heat Pump"
+      ],
+      "blogAngle": "MCS Certification Made Cheaper — How Grants Are Lowering the Barrier to Heat Pump Work",
+      "targetKeywords": [
+        "MCS certification cost",
+        "MCS certification fund",
+        "heat pump certification UK"
+      ],
+      "status": "stale",
+      "sunnyPriority": null,
+      "notes": "Marked stale 2026-05-20. Scotland-specific fund likely expired (ran until March 2026). May need verification before use."
+    },
+    {
+      "id": 18,
+      "title": "Worcester Bosch Launches VAULT — Enhanced Installer Loyalty Scheme",
+      "datePublished": "2025-09-30",
+      "source": "https://www.installeronline.co.uk/heating/worcester-bosch-launches-enhanced-loyalty-scheme-vault/",
+      "sourceLabel": "Installer Online",
+      "category": "brand-product",
+      "summary": "Worcester Bosch evolved its loyalty programme to VAULT. More rewards and support for installers. Shows manufacturers investing in installer relationships as heat pump transition accelerates.",
+      "btsServiceLink": [
+        "Heat Pump",
+        "General"
+      ],
+      "blogAngle": "Manufacturer Loyalty Schemes for Installers — Are They Worth Joining?",
+      "targetKeywords": [
+        "Worcester Bosch VAULT",
+        "installer loyalty scheme",
+        "heating engineer rewards"
+      ],
+      "status": "stale",
+      "sunnyPriority": null,
+      "notes": "Marked stale 2026-05-20 (>7 months old). Lower priority — niche topic."
+    },
+    {
+      "id": 6,
+      "title": "Heat Pump Installer Shortage — Only 3,000 Qualified vs 600,000 Target",
+      "datePublished": "2025-09-08",
+      "source": "https://www.installeronline.co.uk/heating/edf-heat-pumps-launches-new-mcs-umbrella-scheme-for-installers/",
+      "sourceLabel": "Installer Online / GTEC",
+      "category": "industry-data",
+      "summary": "Only ~3,000 MCS-certified heat pump installers in UK. Government target is 600,000 installations per year by 2028. Certified installers earn £7,000-£10,000 more annually. Massive skills gap = opportunity.",
+      "btsServiceLink": [
+        "Heat Pump"
+      ],
+      "blogAngle": "3,000 Heat Pump Installers vs 600,000 Target — The UK's Biggest Skills Gap",
+      "targetKeywords": [
+        "heat pump installer shortage UK",
+        "heat pump installer salary",
+        "MCS certification training"
+      ],
+      "status": "stale",
+      "sunnyPriority": null,
+      "notes": "Marked stale 2026-05-20 (>8 months old). Data superseded by story #34 (Nesta, Feb 2026) with more recent figures."
+    },
+    {
+      "id": 7,
+      "title": "EDF Launches HPIN Direct — MCS Umbrella Scheme for Smaller Installers",
+      "datePublished": "2025-09-04",
+      "source": "https://www.installeronline.co.uk/heating/edf-heat-pumps-launches-new-mcs-umbrella-scheme-for-installers/",
+      "sourceLabel": "Installer Online",
+      "category": "brand-product",
+      "summary": "EDF Heat Pumps launched HPIN Direct — umbrella scheme letting smaller firms install heat pumps without individual MCS certification. EDF handles design, commissioning, MCS cert and BUS applications. No subscription fees.",
+      "btsServiceLink": [
+        "Heat Pump"
+      ],
+      "blogAngle": "HPIN Direct — How Smaller Heating Firms Can Now Access Heat Pump Work",
+      "targetKeywords": [
+        "HPIN Direct",
+        "MCS umbrella scheme",
+        "heat pump installation small business"
+      ],
+      "status": "stale",
+      "sunnyPriority": null,
+      "notes": "Marked stale 2026-05-20 (>8 months old). Still relevant context but scheme details may have changed. Pair with story #27 (MCS Umbrella overview, Mar 2026)."
+    },
+    {
+      "id": 9,
+      "title": "Clean Heat Market Mechanism (CHMM) — Launched April 2025",
+      "datePublished": "2025-04-01",
+      "source": "https://www.gov.uk/government/consultations/clean-heat-market-mechanism-adjustment-to-scheme-introduction-date/",
+      "sourceLabel": "GOV.UK",
+      "category": "regulation",
+      "summary": "CHMM requires boiler manufacturers to sell 6% heat pumps relative to boiler sales in 2025/2026. Dubbed 'boiler tax' but actually targets manufacturers, not homeowners. Drives manufacturer investment in heat pump training and installer networks.",
+      "btsServiceLink": [
+        "Heat Pump",
+        "General"
+      ],
+      "blogAngle": "The 'Boiler Tax' Explained — What the Clean Heat Market Mechanism Really Means",
+      "targetKeywords": [
+        "Clean Heat Market Mechanism",
+        "CHMM UK",
+        "boiler tax explained"
+      ],
+      "status": "stale",
+      "sunnyPriority": null,
+      "notes": "Marked stale 2026-05-20 (>13 months old). CHMM may have been updated since April 2025. Verify current status before use."
+    },
+    {
+      "id": 2,
+      "title": "Gas Boiler Ban Scrapped — No 2035 Phase-Out for Existing Homes",
+      "datePublished": "2025-01-06",
+      "source": "https://www.theguardian.com/environment/2025/jan/06/uk-government-scraps-plan-to-ban-sale-of-gas-boilers-by-2035",
+      "sourceLabel": "The Guardian",
+      "category": "policy",
+      "summary": "Labour government scrapped the 2035 gas boiler ban. No forced removal of working boilers. Replaced with Warm Homes Plan and incentive-based approach. Gas engineers still needed for decades.",
+      "btsServiceLink": [
+        "ACS Initial",
+        "ACS Reassessment",
+        "General"
+      ],
+      "blogAngle": "The Gas Boiler Ban Is Dead — What Does This Actually Mean for Your Career?",
+      "targetKeywords": [
+        "gas boiler ban scrapped",
+        "gas boiler ban 2026",
+        "gas engineer career future"
+      ],
+      "status": "stale",
+      "sunnyPriority": null,
+      "notes": "Marked stale 2026-05-20 (>16 months old). Evergreen topic — people still searching for clarity. Data may need refreshing but the core story hasn't changed."
+    },
+    {
+      "id": 10,
+      "title": "F-Gas Regulation Changes — HFC Refrigerant Bans Tightening",
+      "datePublished": "2025-01-01",
+      "source": "https://www.gov.uk/guidance/bans-on-f-gas-in-new-products-and-equipment-current-and-future",
+      "sourceLabel": "GOV.UK",
+      "category": "regulation",
+      "summary": "From Jan 2025, single-split AC systems with GWP >750 refrigerants banned. UK aligning with EU Regulation 2024/573. Affects heat pump and AC installers. More changes expected 2026.",
+      "btsServiceLink": [
+        "Heat Pump"
+      ],
+      "blogAngle": "F-Gas Changes in 2025/26 — What Heat Pump and AC Installers Need to Know",
+      "targetKeywords": [
+        "F-Gas regulations UK 2026",
+        "refrigerant ban heat pump",
+        "F-Gas training"
+      ],
+      "status": "stale",
+      "sunnyPriority": null,
+      "notes": "Marked stale 2026-05-20 (>16 months old). Technical audience. Good for positioning BTS as industry-aware. Logic4training already covers this. Verify if 2026 changes have landed."
+    },
+    {
+      "id": 13,
+      "title": "Gas Safety Regulations (GSIUR) — 2024 Amendment Updates",
+      "datePublished": "2024-04-06",
+      "source": "https://www.hse.gov.uk/pubns/books/l56.htm",
+      "sourceLabel": "HSE",
+      "category": "regulation",
+      "summary": "GSIUR amendments include updated Wobbe Number limits (delayed to April 2025), expanded training scope to cover water/electricity/asbestos dangers, and new 5-yearly review duty for Secretary of State.",
+      "btsServiceLink": [
+        "ACS Initial",
+        "ACS Reassessment"
+      ],
+      "blogAngle": "Gas Safety Regulations Updated — What's Changed and Why It Matters for Your ACS",
+      "targetKeywords": [
+        "GSIUR changes 2025",
+        "gas safety regulations update",
+        "ACS training requirements"
+      ],
+      "status": "stale",
+      "sunnyPriority": null,
+      "notes": "Marked stale 2026-05-20 (>25 months old). Regulations may have been further updated since April 2024. Verify with HSE before use."
+    }
+  ]
+}

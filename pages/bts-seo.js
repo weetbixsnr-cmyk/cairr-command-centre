@@ -1526,7 +1526,7 @@ export default function BtsSeoPage({ initialSnapshot }) {
         {tab === 'news-bank' && (
           <>
             {(() => {
-              const nb = seoDash?.newsBank
+              const nb = snap?.btsNewsBank || seoDash?.newsBank
               const stories = nb?.stories || []
               const published = stories.filter(s => s.status === 'published')
               const available = stories.filter(s => s.status !== 'published')
@@ -1702,8 +1702,9 @@ export async function getStaticProps() {
       initialSnapshot: buildPageProps([
         'btsBlogInventory', 'btsCompetitorPages', 'btsCompetitors',
         'btsCourseDetails', 'btsCourses', 'btsDrafts', 'btsKeywords',
-        'btsNotifications', 'btsPublishLedger', 'btsSeo', 'btsSeoAudit',
-        'btsSeoDash', 'btsSeoplan', 'btsSuggestions', 'btsTraffic'
+        'btsNewsBank', 'btsNotifications', 'btsPublishLedger', 'btsSeo',
+        'btsSeoAudit', 'btsSeoDash', 'btsSeoplan', 'btsSuggestions',
+        'btsTraffic'
       ])
     }
   }

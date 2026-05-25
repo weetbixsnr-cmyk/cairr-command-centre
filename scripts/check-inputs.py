@@ -24,6 +24,11 @@ INPUTS = [
         "nested_arrays": [("keywords", "keywords")],
     },
     {
+        "path": "public/data/bts/news-bank.json",
+        "required_keys": ["meta", "stories"],
+        "array_fields": ["stories"],
+    },
+    {
         "path": "public/data/bts-status.json",
         "required_keys": ["id", "name", "status", "lastUpdated"],
         "array_fields": [],
