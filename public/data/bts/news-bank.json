@@ -2,12 +2,12 @@
   "meta": {
     "description": "BTS News Bank — catalogue of UK energy/gas/plumbing news stories for insights posts",
     "created": "2026-03-29",
-    "lastUpdated": "2026-05-20",
-    "totalStories": 46,
+    "lastUpdated": "2026-05-25",
+    "totalStories": 49,
     "available": 31,
     "drafted": 2,
     "published": 4,
-    "stale": 9,
+    "stale": 12,
     "categories": [
       "policy",
       "grants",
@@ -18,6 +18,71 @@
     ]
   },
   "stories": [
+    {
+      "id": 49,
+      "title": "InstallerSHOW 2026 — UK's Largest Heating and Plumbing Trade Show Returns to NEC",
+      "datePublished": "2026-05-20",
+      "source": "https://www.installershow.com/",
+      "sourceLabel": "InstallerSHOW / NEC Birmingham",
+      "category": "industry-data",
+      "summary": "InstallerSHOW 2026 runs 23-25 June at NEC Birmingham. 40,000+ visitors, 900+ exhibitors, 11 CPD-accredited content streams. Co-located with World Plumbing Conference (CIPHE/World Plumbing Council). Covers HVAC, plumbing, renewables, electrical, and built environment. Free registration. Viessmann launching new residential ASHP at the show.",
+      "btsServiceLink": [
+        "General",
+        "Heat Pump"
+      ],
+      "blogAngle": "InstallerSHOW 2026 Is Next Month — What the UK's Biggest Heating Trade Show Tells Us About the Industry",
+      "targetKeywords": [
+        "InstallerSHOW 2026",
+        "heating trade show UK",
+        "plumbing trade event 2026"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "NEW 2026-05-25. TIME-SENSITIVE — event is 23-25 June. Draft insights post before event if using. Scale of event (40k visitors, 900 exhibitors) shows industry health. World Plumbing Conference co-location adds authority."
+    },
+    {
+      "id": 48,
+      "title": "Boiler Upgrade Scheme Confirmed Extended to 2030 — Long-Term Market Signal for Heat Pump Installers",
+      "datePublished": "2026-04-28",
+      "source": "https://www.ofgem.gov.uk/environmental-and-social-schemes/boiler-upgrade-scheme-bus",
+      "sourceLabel": "Ofgem",
+      "category": "grants",
+      "summary": "BUS confirmed extended to 2030 as of 28 April 2026. £7,500 grants for air-to-water and ground-source heat pumps. New £2,500 for air-to-air. Scheme extension gives long-term certainty for installers investing in heat pump training and MCS certification. £295M budget for 2025/26.",
+      "btsServiceLink": [
+        "Heat Pump"
+      ],
+      "blogAngle": "The BUS Is Here Until 2030 — What Five More Years of Heat Pump Grants Means for Installers",
+      "targetKeywords": [
+        "BUS extended 2030",
+        "Boiler Upgrade Scheme future",
+        "heat pump grants long term"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "NEW 2026-05-25. Complements stories #37, #38, #39. Extension to 2030 is the key signal — gives installers confidence to invest in training. Angle: long-term market, not short-term grant grab."
+    },
+    {
+      "id": 47,
+      "title": "BUS Grant Rises to £9,000 for Off-Grid Oil and LPG Homes — July 2026",
+      "datePublished": "2026-05-15",
+      "source": "https://www.infinity-energy.co.uk/news/bus-grant-9000-oil-lpg-homes-july-2026/",
+      "sourceLabel": "Infinity Energy / Ofgem / DESNZ",
+      "category": "grants",
+      "summary": "Government announced temporary BUS uplift from £7,500 to £9,000 for off-gas-grid homes replacing oil or LPG heating with air-to-water or ground-source heat pumps. Extra £1,500 top-up expected from July 2026 through March 2027. Only for properties not connected to gas grid. Biomass and air-to-air excluded from uplift.",
+      "btsServiceLink": [
+        "Heat Pump",
+        "LPG Changeover"
+      ],
+      "blogAngle": "Heat Pump Grants Just Went Up to £9,000 for Off-Grid Homes — What Installers Need to Know",
+      "targetKeywords": [
+        "BUS grant £9000",
+        "heat pump grant off-grid",
+        "oil heating replacement grant 2026"
+      ],
+      "status": "available",
+      "sunnyPriority": null,
+      "notes": "NEW 2026-05-25. SIGNIFICANT UPDATE. Directly connects heat pump AND LPG training — off-grid LPG homes are prime candidates for heat pump conversion. Installer demand angle: bigger grants = more homeowner uptake = need more qualified installers. Same grant caution applies (installer angle, not homeowner eligibility)."
+    },
     {
       "id": 45,
       "title": "Trade Courses ROI — Which Qualifications Pay Back Fastest in 2026",
@@ -633,9 +698,9 @@
         "Worcester Bosch heat pump",
         "Vaillant heat pump installer"
       ],
-      "status": "available",
+      "status": "stale",
       "sunnyPriority": null,
-      "notes": "Brand-focused. Good for showing industry direction. Links to heat pump training."
+      "notes": "Marked stale 2026-05-25 (product launch >3 months old, weak training angle, superseded by newer product launches e.g. Viessmann ASHP at InstallerSHOW June 2026)."
     },
     {
       "id": 22,
@@ -808,9 +873,9 @@
         "Future Homes Standard heating",
         "building regulations energy efficiency"
       ],
-      "status": "available",
+      "status": "stale",
       "sunnyPriority": null,
-      "notes": "Technical audience. Strong for positioning BTS as industry-current. Overlap with story #3 — could combine or run separately."
+      "notes": "Marked stale 2026-05-25 (superseded by story #19 — actual FHS publication Mar 2026). Pre-publication speculation no longer needed."
     },
     {
       "id": 3,
@@ -830,9 +895,9 @@
         "new build gas boiler ban",
         "heating engineer future"
       ],
-      "status": "available",
+      "status": "stale",
       "sunnyPriority": null,
-      "notes": "Strong angle — new builds = heat pump demand = need trained installers. Links to heat pump course. Superseded by story #19 for the primary FHS piece."
+      "notes": "Marked stale 2026-05-25 (superseded by story #19 — actual FHS publication Mar 2026). Pre-publication story from Dec 2025 no longer needed."
     },
     {
       "id": 8,
