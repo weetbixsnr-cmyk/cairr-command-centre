@@ -208,7 +208,10 @@ export default function BtsSeoPage({ initialSnapshot }) {
   const seoDash = snap?.btsSeoDash
   const audit = snap?.btsSeoAudit
   const traffic = snap?.btsTraffic
+  const readiness = snap?.btsReadiness
+  const gateBlocked = readiness?.gate === 'BLOCK'
   const [tab, setTab] = useState(seoDash ? 'health' : 'rankings')
+  const [newsBankView, setNewsBankView] = useState('top10')
   const [suggText, setSuggText] = useState('')
   const [suggSending, setSuggSending] = useState(false)
   const [editingId, setEditingId] = useState(null)
@@ -358,6 +361,44 @@ export default function BtsSeoPage({ initialSnapshot }) {
           )
         })()}
 
+        {/* Weekly Readiness Gate */}
+        {readiness && (() => {
+          const reqTabs = Object.entries(readiness.tabs || {}).filter(([,t]) => t.required)
+          const optTabs = Object.entries(readiness.tabs || {}).filter(([,t]) => !t.required)
+          const staleCount = reqTabs.filter(([,t]) => t.status !== 'fresh').length
+          return (
+            <div style={{background: gateBlocked ? '#1a0a0a' : '#0a1a0a', border: `1px solid ${gateBlocked ? '#ef4444' : '#10b981'}`, borderRadius:10, padding:14, marginBottom:16}}>
+              <div style={{fontSize:12,fontWeight:700,color: gateBlocked ? '#ef4444' : '#10b981',marginBottom:8}}>
+                {gateBlocked ? `🔴 WEEKLY GATE: BLOCKED — ${staleCount} required tab${staleCount !== 1 ? 's' : ''} stale` : '🟢 WEEKLY GATE: READY — Sunny approvals enabled'}
+              </div>
+              <div style={{display:'flex',gap:6,flexWrap:'wrap',marginBottom: optTabs.length > 0 ? 8 : 0}}>
+                {reqTabs.map(([key, t]) => (
+                  <span key={key} style={{fontSize:9,padding:'3px 8px',borderRadius:4,fontWeight:600,background: t.status === 'fresh' ? '#10b98115' : '#ef444415',color: t.status === 'fresh' ? '#10b981' : '#ef4444',border: `1px solid ${t.status === 'fresh' ? '#10b98133' : '#ef444433'}`}}>
+                    {t.status === 'fresh' ? '✅' : '🔴'} {t.label}
+                  </span>
+                ))}
+              </div>
+              {optTabs.length > 0 && (
+                <div style={{display:'flex',gap:8,flexWrap:'wrap',fontSize:9,color:'#888'}}>
+                  {optTabs.map(([key, t]) => (
+                    <span key={key}>{t.label} ({t.thresholdDays}d): {t.status === 'fresh' ? '✅' : '⚠️'} {t.status}</span>
+                  ))}
+                </div>
+              )}
+              {gateBlocked && (
+                <div style={{fontSize:10,color:'#ef4444',marginTop:8,fontWeight:600}}>
+                  Approvals blocked — update stale data sources before sending to Sunny
+                </div>
+              )}
+              {readiness.exceptions?.length > 0 && readiness.exceptions.map((ex, i) => (
+                <div key={i} style={{fontSize:9,color:'#f59e0b',marginTop:4}}>
+                  Exception: {ex.tab} — {ex.reason} (by {ex.owner}, review by {ex.reviewBy})
+                </div>
+              ))}
+            </div>
+          )
+        })()}
+
         {/* Tab navigation — RIGHT after stats + safety strip */}
         <div style={{display:'flex',gap:6,marginBottom:16,overflowX:'auto',WebkitOverflowScrolling:'touch',scrollbarWidth:'none'}}>
           <TabButton active={tab==='health'} label="🏥 SEO Health" onClick={() => setTab('health')} />
@@ -375,9 +416,38 @@ export default function BtsSeoPage({ initialSnapshot }) {
           <TabButton active={tab==='courses'} label="📚 Courses" onClick={() => setTab('courses')} />
         </div>
 
+        {/* Per-tab freshness indicator */}
+        {(() => {
+          const rMap = {'health':'seo-health','seo-plan':'seo-health','rankings':'rankings','matrix':'content','competitors':'competitors','news-bank':'news-bank','gbp-posts':'gbp-posts','future-posts':'content','courses':'courses'}
+          const special = {'safety':'Auto-derived from content lifecycle','suggestions':'No source tracking','traffic':'GA4 not connected — no data source','conversions':'GA4 not connected — no data source'}
+          if (special[tab]) return (
+            <div style={{display:'flex',alignItems:'center',gap:8,padding:'6px 10px',background:'#0d0d10',border:'1px solid #33333355',borderRadius:6,marginBottom:16,fontSize:9,color:'#888'}}>
+              <span style={{fontWeight:600}}>ℹ️ {special[tab]}</span>
+            </div>
+          )
+          const ti = readiness?.tabs?.[rMap[tab]]
+          if (!ti) return null
+          const fc = ti.status === 'fresh' ? '#10b981' : '#ef4444'
+          const dStr = ti.lastUpdated ? new Date(ti.lastUpdated).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : '—'
+          return (
+            <div style={{display:'flex',alignItems:'center',gap:8,padding:'6px 10px',background:'#0d0d10',border:`1px solid ${fc}33`,borderRadius:6,marginBottom:16,fontSize:9,color:'#888',flexWrap:'wrap'}}>
+              <span style={{color:fc,fontWeight:700}}>{ti.status === 'fresh' ? '🟢 FRESH' : '🔴 STALE'}</span>
+              <span>{dStr} ({timeAgo(ti.lastUpdated)})</span>
+              <span style={{color:'#555'}}>·</span>
+              <span style={{fontFamily:'monospace',fontSize:8}}>{ti.source}</span>
+              <span style={{color:'#555'}}>·</span>
+              <span>{ti.updateMethod}</span>
+              {ti.notes && <span style={{color:'#f59e0b',fontSize:8}}>— {ti.notes}</span>}
+            </div>
+          )
+        })()}
+
         {/* TAB: SEO Health */}
         {tab === 'health' && (
           <>
+            <div style={{padding:'8px 12px',background:'#1a1800',border:'1px solid #2a2000',borderRadius:8,marginBottom:14,fontSize:10,color:'#f59e0b'}}>
+              ⚠️ Manual estimate — not a live scan. GSC not connected. Scores are based on manual review.
+            </div>
             {/* Plan Status & Overview + Critical Fixes (from SEO-DASHBOARD.md) */}
             <DashSection section={findDashSection(seoDash?.sections, 'plan-overview', ['plan', 'overview', 'plan-status'])} icon="📋" maxLines={30} />
             <DashSection section={findDashSection(seoDash?.sections, 'critical-fixes', ['critical', 'fixes', 'blockers'])} icon="🔴" maxLines={40} />
@@ -542,6 +612,9 @@ export default function BtsSeoPage({ initialSnapshot }) {
         {/* TAB 1: Rankings */}
         {tab === 'rankings' && (
           <>
+            <div style={{padding:'8px 12px',background:'#1a1800',border:'1px solid #2a2000',borderRadius:8,marginBottom:14,fontSize:10,color:'#f59e0b'}}>
+              ⚠️ Manual Brave search — not GSC verified. Positions are manual spot-checks, not live data.
+            </div>
             {/* Top 10 Tracked Keywords */}
             {kw?.top10?.length > 0 && (
               <div className="section" style={{marginBottom:16}}>
@@ -763,6 +836,11 @@ export default function BtsSeoPage({ initialSnapshot }) {
         {/* TAB 4: Competitors */}
         {tab === 'competitors' && (
           <>
+            {readiness?.tabs?.competitors?.status === 'stale' && (
+              <div style={{padding:'8px 12px',background:'#1a0a0a',border:'1px solid #ef444433',borderRadius:8,marginBottom:14,fontSize:10,color:'#ef4444'}}>
+                🔴 Competitor data is stale — last crawl was {readiness.tabs.competitors.lastUpdated ? new Date(readiness.tabs.competitors.lastUpdated).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : 'unknown'}. Update required.
+              </div>
+            )}
             {/* Competitor Page Counts */}
             {comp?.pageCountCrawl?.counts && (
               <div className="section" style={{marginBottom:20}}>
@@ -1274,6 +1352,8 @@ export default function BtsSeoPage({ initialSnapshot }) {
               posts={(snap?.btsDrafts?.drafts || []).filter(d => d.type === 'gbp' && !['signed-off', 'published'].includes(d.status))}
               label="BTS"
               actionEndpoint="/api/bts-draft-action"
+              disabled={gateBlocked}
+              disabledReason="Weekly gate is blocked — update stale data sources first"
             />
             {/* Live GBP posts — published and done */}
             {(() => {
@@ -1439,6 +1519,11 @@ export default function BtsSeoPage({ initialSnapshot }) {
                                   <div style={{background:'#0a0a0d',border:'1px solid #1a1a22',borderRadius:8,padding:14,maxHeight:600,overflowY:'auto',marginBottom:10}}>
                                     <RenderMarkdown text={d.editedContent || d.content} />
                                   </div>
+                                  {!d.hasFullText && (
+                                    <div style={{fontSize:9,color:'#888',padding:'4px 8px',background:'#111',border:'1px solid #222',borderRadius:4,marginBottom:10}}>
+                                      ℹ️ Excerpt only — full draft text is in the BTS repo
+                                    </div>
+                                  )}
 
                                   <div style={{marginBottom:10}}>
                                     <button onClick={() => setEditOpen(prev => ({...prev, [d.id]: !prev[d.id]}))} style={{
@@ -1467,9 +1552,9 @@ export default function BtsSeoPage({ initialSnapshot }) {
                                       color:editOpen[d.id]?'#f59e0b':'#333',fontSize:11,fontWeight:600,cursor:editOpen[d.id]?'pointer':'default',
                                       opacity:(!editOpen[d.id]||draftResults[d.id]?.loading)?0.4:1
                                     }}>Save Changes</button>
-                                    <button disabled={draftResults[d.id]?.loading} onClick={() => {
+                                    <button disabled={gateBlocked || draftResults[d.id]?.loading} onClick={() => {
                                       draftAction(d.id, 'approve', {})
-                                    }} style={{padding:'8px 20px',background:'#10b981',border:'none',borderRadius:6,color:'#fff',fontSize:11,fontWeight:700,cursor:'pointer',opacity:draftResults[d.id]?.loading?0.5:1}}>Approve</button>
+                                    }} style={{padding:'8px 20px',background: gateBlocked ? '#333' : '#10b981',border:'none',borderRadius:6,color:'#fff',fontSize:11,fontWeight:700,cursor: gateBlocked ? 'not-allowed' : 'pointer',opacity:(gateBlocked || draftResults[d.id]?.loading)?0.5:1}}>{gateBlocked ? '🔒 Gate Blocked' : 'Approve'}</button>
                                     {draftResults[d.id] && !draftResults[d.id].loading && (
                                       <span style={{fontSize:11,fontWeight:600,color:draftResults[d.id].ok?'#10b981':'#ef4444'}}>{draftResults[d.id].msg}</span>
                                     )}
@@ -1558,15 +1643,43 @@ export default function BtsSeoPage({ initialSnapshot }) {
                   </div>
                   {available.length > 0 && (
                     <div className="section">
-                      <div className="sec-title">📦 Available Stories ({available.length})</div>
+                      <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:8}}>
+                        <div className="sec-title" style={{margin:0,border:'none',paddingBottom:0}}>
+                          {newsBankView === 'top10' ? '🏆 Top 10 Stories' : `📦 All Available (${available.length})`}
+                        </div>
+                        <button onClick={() => setNewsBankView(v => v === 'top10' ? 'all' : 'top10')} style={{fontSize:9,padding:'4px 10px',borderRadius:4,border:'1px solid #333',background:'#1a1a22',color:'#888',cursor:'pointer',fontWeight:600}}>
+                          {newsBankView === 'top10' ? `Show all ${available.length}` : 'Show top 10'}
+                        </button>
+                      </div>
                       <div className="card">
-                        {available.map((s, i) => (
-                          <div key={i} style={{display:'flex',gap:8,padding:'6px 0',borderBottom:'1px solid #1a1a1a',fontSize:11,alignItems:'center'}}>
-                            <span style={{fontSize:8,color:'#f59e0b',fontWeight:600,minWidth:60,textTransform:'uppercase',background:'#2a200033',padding:'2px 6px',borderRadius:3}}>{s.type || 'story'}</span>
-                            <span style={{color:'#fff',flex:1,fontWeight:500}}>{s.title}</span>
-                            {s.category && <span style={{fontSize:8,color:'#888',background:'#1a1a22',padding:'2px 6px',borderRadius:3}}>{s.category}</span>}
-                          </div>
-                        ))}
+                        {(() => {
+                          const top10Ids = readiness?.newsBank?.top10 || []
+                          const tsIds = new Set(readiness?.newsBank?.timeSensitive || [])
+                          const newIds = new Set(readiness?.newsBank?.newThisWeek || [])
+                          const displayStories = newsBankView === 'top10'
+                            ? top10Ids.map(id => stories.find(s => s.id === id)).filter(Boolean)
+                            : available
+                          return displayStories.map((s, i) => (
+                            <div key={s.id || i} style={{padding:'8px 0',borderBottom:'1px solid #1a1a1a'}}>
+                              <div style={{display:'flex',gap:8,alignItems:'center',fontSize:11}}>
+                                {newsBankView === 'top10' && <span style={{fontSize:14,fontWeight:800,color:'#3b82f6',minWidth:24}}>#{i+1}</span>}
+                                <span style={{color:'#fff',flex:1,fontWeight:600}}>{s.title}</span>
+                                {tsIds.has(s.id) && <span style={{fontSize:8,padding:'2px 6px',borderRadius:3,background:'#3b1010',color:'#ef4444',fontWeight:700}}>TIME-SENSITIVE</span>}
+                                {newIds.has(s.id) && !tsIds.has(s.id) && <span style={{fontSize:8,padding:'2px 6px',borderRadius:3,background:'#0a1a2a',color:'#3b82f6',fontWeight:700}}>NEW</span>}
+                                {s.category && <span style={{fontSize:8,color:'#888',background:'#1a1a22',padding:'2px 6px',borderRadius:3}}>{s.category}</span>}
+                              </div>
+                              <div style={{display:'flex',gap:8,marginTop:4,fontSize:9,color:'#888',paddingLeft: newsBankView === 'top10' ? 32 : 0}}>
+                                {s.datePublished && <span>{new Date(s.datePublished).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</span>}
+                                {s.blogAngle && <span style={{color:'#aaa',fontStyle:'italic'}}>Angle: {s.blogAngle}</span>}
+                              </div>
+                              {s.services?.length > 0 && (
+                                <div style={{display:'flex',gap:4,flexWrap:'wrap',marginTop:4,paddingLeft: newsBankView === 'top10' ? 32 : 0}}>
+                                  {s.services.map(svc => <span key={svc} style={{fontSize:7,padding:'1px 5px',borderRadius:3,background:'#1a1a22',border:'1px solid #222',color:'#888'}}>{svc}</span>)}
+                                </div>
+                              )}
+                            </div>
+                          ))
+                        })()}
                       </div>
                     </div>
                   )}
@@ -1712,8 +1825,8 @@ export async function getStaticProps() {
       initialSnapshot: buildPageProps([
         'btsBlogInventory', 'btsCompetitorPages', 'btsCompetitors',
         'btsCourseDetails', 'btsCourses', 'btsDrafts', 'btsKeywords',
-        'btsNewsBank', 'btsNotifications', 'btsPublishLedger', 'btsSeo',
-        'btsSeoAudit', 'btsSeoDash', 'btsSeoplan', 'btsSuggestions',
+        'btsNewsBank', 'btsNotifications', 'btsPublishLedger', 'btsReadiness',
+        'btsSeo', 'btsSeoAudit', 'btsSeoDash', 'btsSeoplan', 'btsSuggestions',
         'btsTraffic'
       ])
     }

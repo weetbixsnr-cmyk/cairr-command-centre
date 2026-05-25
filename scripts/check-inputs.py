@@ -43,6 +43,11 @@ INPUTS = [
         "required_keys": ["id", "name", "status", "lastUpdated"],
         "array_fields": [],
     },
+    {
+        "path": "public/data/bts/readiness.json",
+        "required_keys": ["gate", "generatedAt", "weekOf", "tabs"],
+        "array_fields": ["exceptions"],
+    },
 ]
 
 

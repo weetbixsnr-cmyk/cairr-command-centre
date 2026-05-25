@@ -1,0 +1,87 @@
+{
+  "gate": "BLOCK",
+  "generatedAt": "2026-05-26T09:00:00+10:00",
+  "generatedBy": "command-centre",
+  "weekOf": "2026-05-26",
+  "tabs": {
+    "content": {
+      "label": "Content",
+      "lastUpdated": "2026-05-21",
+      "source": "bts/content.json",
+      "updateMethod": "BTS repo sync",
+      "thresholdDays": 7,
+      "required": true,
+      "status": "stale"
+    },
+    "seo-health": {
+      "label": "SEO Health",
+      "lastUpdated": "2026-05-21T00:00:00+10:00",
+      "source": "bts/seo.json",
+      "updateMethod": "Manual check (no live scan)",
+      "thresholdDays": 7,
+      "required": true,
+      "status": "stale",
+      "notes": "GSC not connected. Score is manual estimate."
+    },
+    "rankings": {
+      "label": "Rankings",
+      "lastUpdated": "2026-05-17T00:00:00+10:00",
+      "source": "bts/seo.json",
+      "updateMethod": "Manual Brave search (no GSC)",
+      "thresholdDays": 7,
+      "required": true,
+      "status": "stale",
+      "notes": "GSC not connected. Positions are manual spot-checks, not verified."
+    },
+    "news-bank": {
+      "label": "News Bank",
+      "lastUpdated": "2026-05-25",
+      "source": "bts/news-bank.json",
+      "updateMethod": "BTS repo sync",
+      "thresholdDays": 7,
+      "required": true,
+      "status": "fresh"
+    },
+    "gbp-posts": {
+      "label": "GBP Posts",
+      "lastUpdated": "2026-05-25T20:12:53.689Z",
+      "source": "bts-status.json",
+      "updateMethod": "Dashboard API / manual edit",
+      "thresholdDays": 7,
+      "required": true,
+      "status": "fresh"
+    },
+    "competitors": {
+      "label": "Competitors",
+      "lastUpdated": "2026-04-06T20:00:00Z",
+      "source": "bts-status.json",
+      "updateMethod": "Manual sitemap crawl",
+      "thresholdDays": 30,
+      "required": false,
+      "status": "stale",
+      "notes": "Last crawl was 7+ weeks ago."
+    },
+    "courses": {
+      "label": "Courses",
+      "lastUpdated": "2026-05-17T00:00:00+10:00",
+      "source": "bts-status.json",
+      "updateMethod": "Manual check with Sunny",
+      "thresholdDays": 30,
+      "required": false,
+      "status": "fresh"
+    }
+  },
+  "exceptions": [],
+  "draftTextAvailable": {
+    "blog-16-maidenhead": true,
+    "blog-17-milton-keynes": true,
+    "gbp-career-change": true,
+    "gbp-skills-shortage": true,
+    "gbp-stack-qualifications": true
+  },
+  "newsBank": {
+    "top10": [49, 48, 47, 45, 44, 43, 42, 41, 40, 39],
+    "timeSensitive": [49],
+    "newThisWeek": [49, 48, 47]
+  }
+}

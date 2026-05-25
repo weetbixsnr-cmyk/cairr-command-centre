@@ -4,7 +4,7 @@
  */
 import { useState } from 'react'
 
-export default function GbpPosts({ posts = [], label = 'GBP', actionEndpoint }) {
+export default function GbpPosts({ posts = [], label = 'GBP', actionEndpoint, disabled = false, disabledReason }) {
   const [actionLoading, setActionLoading] = useState(null)
   const [localPosts, setLocalPosts] = useState(null)
   const [editOpen, setEditOpen] = useState({})
@@ -86,11 +86,11 @@ export default function GbpPosts({ posts = [], label = 'GBP', actionEndpoint }) 
     const color = statusColor[post.status] || '#888'
     const icon = statusIcon[post.status] || '📄'
     const isScheduled = post.targetDate && new Date(post.targetDate) > new Date()
-    const canApprove = ['draft', 'editing', 'sunny-editing'].includes(post.status)
-    const canPublish = post.status === 'approved'
-    const canSignOff = post.status === 'published'
-    const canEdit = ['draft', 'editing', 'sunny-editing'].includes(post.status)
-    const hasActions = actionEndpoint && (canApprove || canPublish || canSignOff)
+    const canApprove = !disabled && ['draft', 'editing', 'sunny-editing'].includes(post.status)
+    const canPublish = !disabled && post.status === 'approved'
+    const canSignOff = !disabled && post.status === 'published'
+    const canEdit = !disabled && ['draft', 'editing', 'sunny-editing'].includes(post.status)
+    const hasActions = actionEndpoint && !disabled && (canApprove || canPublish || canSignOff)
 
     return (
       <div style={{
@@ -229,6 +229,11 @@ export default function GbpPosts({ posts = [], label = 'GBP', actionEndpoint }) 
 
   return (
     <>
+      {disabled && disabledReason && (
+        <div style={{padding:'8px 12px',background:'#1a0a0a',border:'1px solid #ef444433',borderRadius:8,marginBottom:14,fontSize:10,color:'#ef4444',fontWeight:600}}>
+          🔒 {disabledReason}
+        </div>
+      )}
       {/* Summary strip */}
       <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
         {readyToSignOff.length > 0 && (
@@ -294,7 +299,7 @@ export default function GbpPosts({ posts = [], label = 'GBP', actionEndpoint }) 
                   {p.editedContent || p.content}
                 </div>
               )}
-              {actionEndpoint && (
+              {actionEndpoint && !disabled && (
                 <button
                   disabled={actionLoading === `${p.id}-sign-off`}
                   onClick={() => doAction(p.id, 'sign-off')}
