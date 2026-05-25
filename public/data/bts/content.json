@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "lastUpdated": "2026-05-21",
+  "version": 2,
+  "lastUpdated": "2026-05-26",
   "source": "Deduplicated from bts-status.json drafts, blogInventory, contentPipeline, and publishLedger sections",
   "statusValues": [
     "draft",
@@ -9,6 +9,21 @@
     "held",
     "reference"
   ],
+  "weeklyReview": {
+    "weekOf": "2026-05-26",
+    "tabs": {
+      "futurePosts": {
+        "reviewedAt": null,
+        "reviewer": null,
+        "status": "stale"
+      },
+      "gbpPosts": {
+        "reviewedAt": null,
+        "reviewer": null,
+        "status": "stale"
+      }
+    }
+  },
   "items": [
     {
       "id": "blog-01-acs-reassessment",
@@ -23,7 +38,8 @@
       "publishedAt": "2026-03-17",
       "sourceFile": "content/published-blogs/blog-4-acs-training-high-wycombe.md",
       "excerpt": "Everything gas engineers need to know about ACS reassessment. How the 5-year renewal works, what to expect, and how to book your course in High Wycombe.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "blog-02-heat-pump-high-wycombe",
@@ -38,7 +54,8 @@
       "publishedAt": "2026-03-17",
       "sourceFile": "content/published-blogs/blog-2-heat-pump-training-high-wycombe.md",
       "excerpt": "Heat pump training course in High Wycombe. 5-day ASHP and low-temperature heating qualification for gas engineers and plumbers in Buckinghamshire and Reading.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "blog-03-water-regs-reading",
@@ -53,7 +70,8 @@
       "publishedAt": "2026-03-17",
       "sourceFile": "content/published-blogs/blog-3-water-regulations-plumbing-reading.md",
       "excerpt": "Water regulations training for plumbers in Reading and Buckinghamshire. WRAS compliance course covering the Water Supply (Water Fittings) Regulations 1999.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "blog-04-legionella",
@@ -68,7 +86,8 @@
       "publishedAt": "2026-04-01",
       "sourceFile": "content/published-blogs/blog-4-legionella-training-qualification.md",
       "excerpt": "Legionella training is a one-day qualification for gas engineers and plumbers. ACOP L8 compliance, landlord risk assessments, and expanding your service offering.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "blog-05-gas-training-near-me",
@@ -83,7 +102,8 @@
       "publishedAt": "2026-04-01",
       "sourceFile": "content/published-blogs/blog-5-gas-training-near-me-south-east.md",
       "excerpt": "Gas training courses in South East England. Compare ACS, water regulations, G3, and heat pump courses available near you in Buckinghamshire and surrounding counties.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "blog-06-g3-unvented",
@@ -98,7 +118,8 @@
       "publishedAt": "2026-04-01",
       "sourceFile": "content/published-blogs/blog-6-g3-unvented-hot-water-course.md",
       "excerpt": "G3 unvented hot water systems course. One-day Building Regulations qualification for plumbers working on unvented cylinders. Courses in High Wycombe.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "blog-07-lpg-changeover",
@@ -113,7 +134,8 @@
       "publishedAt": "2026-04-11",
       "sourceFile": "content/published-blogs/blog-7-lpg-changeover-training.md",
       "excerpt": "LPG changeover training for gas engineers. How to add LPG conversion work to your Gas Safe registration with this specialist qualification.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "blog-08-heat-pump-bucks",
@@ -128,7 +150,8 @@
       "publishedAt": "2026-04-11",
       "sourceFile": "content/published-blogs/blog-8-heat-pump-training-buckinghamshire.md",
       "excerpt": "Heat pump training in Buckinghamshire. 5-day air source heat pump course for gas engineers looking to expand into renewable heating systems.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "blog-09-career-change",
@@ -143,7 +166,8 @@
       "publishedAt": "2026-04-11",
       "sourceFile": "content/published-blogs/blog-9-career-change-gas-engineering.md",
       "excerpt": "Considering a career change into gas engineering? What the Gas Managed Learning Programme involves, what it costs, and whether the trade is right for you.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "blog-10-gas-mlp",
@@ -158,7 +182,8 @@
       "publishedAt": "2026-04-11",
       "sourceFile": "content/published-blogs/blog-10-gas-mlp-complete-guide.md",
       "excerpt": "Complete guide to the Gas Managed Learning Programme. Duration, cost, structure, and what to expect from the MLP route into gas engineering.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "blog-11-aylesbury",
@@ -173,7 +198,8 @@
       "publishedAt": "2026-04-11",
       "sourceFile": "content/published-blogs/blog-11-gas-plumbing-training-aylesbury.md",
       "excerpt": "Gas and plumbing training near Aylesbury. ACS reassessment, water regulations, G3, and heat pump courses in High Wycombe, under 30 minutes from Aylesbury.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "blog-12-reading",
@@ -188,7 +214,8 @@
       "publishedAt": "2026-05-11",
       "sourceFile": "content/published-blogs/blog-12-location-reading.md",
       "excerpt": "Looking for gas or plumbing training near Reading? Better Training Solutions runs ACS, water regulations, G3, Legionella, and heat pump courses from High Wycombe, under 30 minutes away.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "blog-13-oxford",
@@ -203,7 +230,8 @@
       "publishedAt": "2026-05-11",
       "sourceFile": "content/published-blogs/blog-13-location-oxford.md",
       "excerpt": "Gas and plumbing training courses near Oxford. ACS initial, reassessment, water regulations, G3, and heat pump qualifications from High Wycombe. 40 minutes via the M40.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "blog-14-acs-initial",
@@ -218,7 +246,8 @@
       "publishedAt": "2026-05-11",
       "sourceFile": "content/published-blogs/blog-14-acs-initial-training.md",
       "excerpt": "Everything you need to know about ACS initial training. What CCN1 covers, what you need before booking, and how to get on the Gas Safe Register. Courses in High Wycombe.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "blog-15-slough",
@@ -233,7 +262,8 @@
       "publishedAt": "2026-05-21",
       "sourceFile": "content/published-blogs/blog-15-location-slough.md",
       "excerpt": "Looking for gas or plumbing training near Slough? Better Training Solutions runs ACS reassessment, water regulations, G3, Legionella, and heat pump courses from High Wycombe.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "blog-18-water-regs-deep-dive",
@@ -247,8 +277,9 @@
       "featuredImageId": 248,
       "publishedAt": "2026-05-21",
       "sourceFile": "content/published-blogs/blog-18-water-regulations-deep-dive.md",
-      "excerpt": "A practical guide to the Water Supply (Water Fittings) Regulations 1999 \u2014 fluid categories, backflow protection, common compliance failures, and where formal training fits in.",
-      "reviewUrl": null
+      "excerpt": "A practical guide to the Water Supply (Water Fittings) Regulations 1999 — fluid categories, backflow protection, common compliance failures, and where formal training fits in.",
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "blog-19-domestic-cookers",
@@ -263,7 +294,8 @@
       "publishedAt": "2026-05-21",
       "sourceFile": "content/published-blogs/blog-19-domestic-cookers-training.md",
       "excerpt": "CKR1 is the domestic cookers ACS module for gas engineers who need the right appliance scope for cooker installation, servicing and reassessment.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "news-01-future-homes",
@@ -278,7 +310,8 @@
       "publishedAt": "2026-04-01",
       "sourceFile": "content/published-blogs/insight-1-warm-homes-plan-what-it-means.md",
       "excerpt": "The Future Homes Standard means heat pumps in all new builds from March 2028. What this means for gas engineers and why training matters now.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "news-02-skills-shortage",
@@ -293,7 +326,8 @@
       "publishedAt": "2026-04-11",
       "sourceFile": "content/published-blogs/insight-2-skills-shortage-construction-2026.md",
       "excerpt": "Construction skills shortage reaches critical levels. Nearly half of UK builders report project delays due to trade worker shortages. What it means for training.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "news-03-heat-pump-installer-gap",
@@ -308,7 +342,8 @@
       "publishedAt": "2026-04-11",
       "sourceFile": "content/published-blogs/insight-3-heat-pump-installer-gap.md",
       "excerpt": "The UK needs 50,000 heat pump installers to meet net zero targets. With around 2,000 currently certified, the training gap is a major opportunity.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "news-04-apprenticeship-crash",
@@ -323,7 +358,8 @@
       "publishedAt": "2026-05-11",
       "sourceFile": "content/published-blogs/news-4-plumbing-apprenticeship-crash.md",
       "excerpt": "Plumbing apprenticeship starts crashed 37% since 2021/22. APHC and SNIPEF data shows a workforce crisis. What it means for the industry and for anyone considering the trade.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "news-07-gas-electricity-decoupling",
@@ -338,7 +374,8 @@
       "publishedAt": "2026-05-21",
       "sourceFile": "content/published-blogs/news-7-gas-electricity-price-decoupling.md",
       "excerpt": "The UK government announced reforms to break the link between gas and electricity prices. Here is what the policy shift means for heating engineers, heat pump economics, and your qualifications.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "partnership-01-powered-now",
@@ -353,7 +390,8 @@
       "publishedAt": "2026-04-11",
       "sourceFile": "content/published-blogs/partnership-1-powered-now.md",
       "excerpt": "Better Training Solutions partners with Powered Now to support gas engineers and plumbers with business management tools alongside their training.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "gbp-01-heat-pump",
@@ -368,7 +406,8 @@
       "publishedAt": "2026-03-17",
       "sourceFile": null,
       "excerpt": "Google Business Profile post promoting heat pump training courses at BTS.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "gbp-02-local-training",
@@ -383,7 +422,8 @@
       "publishedAt": "2026-03-17",
       "sourceFile": null,
       "excerpt": "Google Business Profile post about local training availability in High Wycombe.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "gbp-03-water-regs",
@@ -398,7 +438,8 @@
       "publishedAt": "2026-03-17",
       "sourceFile": null,
       "excerpt": "Google Business Profile post promoting water regulations training at BTS.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "gbp-04-acs-reassessment",
@@ -413,7 +454,8 @@
       "publishedAt": "2026-04-01",
       "sourceFile": null,
       "excerpt": "Google Business Profile post about ACS reassessment course availability.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "gbp-05-future-homes",
@@ -428,7 +470,8 @@
       "publishedAt": "2026-04-01",
       "sourceFile": null,
       "excerpt": "Google Business Profile post about the Future Homes Standard and heat pump training.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "gbp-06-legionella",
@@ -443,7 +486,8 @@
       "publishedAt": "2026-04-01",
       "sourceFile": null,
       "excerpt": "Google Business Profile post promoting Legionella prevention training.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": null
     },
     {
       "id": "blog-16-maidenhead",
@@ -458,7 +502,8 @@
       "publishedAt": null,
       "sourceFile": "content/pending-drafts/blog-16-location-maidenhead.md",
       "excerpt": "Looking for gas or plumbing training near Maidenhead? Better Training Solutions runs ACS reassessment, water regulations, G3, and heat pump courses from High Wycombe.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": "If you're a gas engineer or plumber based in Maidenhead, you have local and nearby training options. Better Training Solutions in High Wycombe is a practical route to compare, especially if you want gas, plumbing and renewables courses from one centre with direct A404 access. Better Training Sol"
     },
     {
       "id": "blog-17-milton-keynes",
@@ -473,7 +518,8 @@
       "publishedAt": null,
       "sourceFile": "content/pending-drafts/blog-17-location-milton-keynes.md",
       "excerpt": "Looking for gas or plumbing training near Milton Keynes? Better Training Solutions runs ACS reassessment, MLP, water regulations, G3, and heat pump courses from High Wycombe.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": "If you're a gas engineer or plumber working in Milton Keynes, High Wycombe is within reach when the course mix, dates and training environment make the journey worthwhile. Better Training Solutions is around 35 miles from central MK. We run gas reassessment, MLP, water regulations, G3, Legionell"
     },
     {
       "id": "news-05-bus-amendments",
@@ -488,7 +534,8 @@
       "publishedAt": null,
       "sourceFile": "content/pending-drafts/news-5-bus-amendments-2026.md",
       "excerpt": "BUS grants increased to 7,500 pounds with air-to-air grants and relaxed EPC requirements. Held pending review of government funding reference rules.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": "The Boiler Upgrade Scheme has been quietly reshaping the heat pump installation market for the past three years. The 2026 rules tighten that further, and they make one thing clear: the industry's bottleneck is no longer demand. It's qualified installers. ## What's Changed The Boiler Upgrade Sche"
     },
     {
       "id": "news-06-apprenticeship-funding",
@@ -503,7 +550,8 @@
       "publishedAt": null,
       "sourceFile": "content/pending-drafts/news-6-apprenticeship-funding-april-2026.md",
       "excerpt": "April 2026 brought new apprenticeship funding rules affecting employer contributions, funding bands, and eligibility. Held pending review.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": "A set of changes to apprenticeship funding came into effect from 1 April 2026. The detail is technical, but the practical impact for new starters in the gas and plumbing trades — and for the employers who train them — is significant. This is also a useful moment to look at the alternative pathwa"
     },
     {
       "id": "page-about-us",
@@ -518,7 +566,8 @@
       "publishedAt": null,
       "sourceFile": "content/pending-drafts/page-about-us.md",
       "excerpt": "BTS About Us page. Held pending instructor names and qualifications from Sunny.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": "## Hero **Better Training Solutions — gas, plumbing and renewable training that's built for working engineers.** Based in High Wycombe, serving Buckinghamshire, Berkshire, Oxfordshire and the wider South East. --- ## Who We Are Better Training Solutions is a specialist training centre for the do"
     },
     {
       "id": "directory-listings",
@@ -533,7 +582,8 @@
       "publishedAt": null,
       "sourceFile": "content/pending-drafts/bts-directory-listings.md",
       "excerpt": "Directory listing content package for external directory submissions. Not a WordPress publish item.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": "## Quick Wins (Free Business Directories) | Site | Link | What to Do | |------|------|------------| | **Yell.com** | yell.com/free-listing/ | Free listing. Add all 8 services, location, link to site | | **Bing Places** | bingplaces.com | Free listing. Feeds into Bing search results | | **Thomson"
     },
     {
       "id": "gbp-07-career-change",
@@ -548,7 +598,8 @@
       "publishedAt": null,
       "sourceFile": "content/gbp/gbp-post-career-change.md",
       "excerpt": "Draft GBP post about career change opportunities in gas engineering.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": "_For: Google Business Profile | Max 1,500 chars | Category: Update_ _Status: Draft — awaiting content_ --- **Topic:** Career change opportunities in gas engineering via BTS Managed Learning Program. **Service:** Gas MLP **Draft notes:** Placeholder for career change GBP post. Content to be drafted d"
     },
     {
       "id": "gbp-08-skills-shortage",
@@ -563,7 +614,8 @@
       "publishedAt": null,
       "sourceFile": "content/gbp/gbp-post-skills-shortage.md",
       "excerpt": "Draft GBP post about the plumber skills shortage and training opportunities.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": "_For: Google Business Profile | Max 1,500 chars | Category: Update_ _Status: Draft — awaiting content_ --- **Topic:** UK plumber skills shortage and training opportunities at BTS. **Service:** Industry / Plumbing **Draft notes:** Placeholder for skills shortage GBP post. Content to be drafted during"
     },
     {
       "id": "gbp-09-stack-qualifications",
@@ -578,7 +630,8 @@
       "publishedAt": null,
       "sourceFile": "content/gbp/gbp-post-stack-qualifications.md",
       "excerpt": "Draft GBP post about stacking multiple qualifications in a single training week.",
-      "reviewUrl": null
+      "reviewUrl": null,
+      "previewText": "_For: Google Business Profile | Max 1,500 chars | Category: Update_ _Status: Draft — awaiting content_ --- **Topic:** Stacking multiple qualifications in a single training week at BTS. **Service:** Multi-trade **Draft notes:** Placeholder for stacking qualifications GBP post. Content to be drafted d"
     }
   ]
 }

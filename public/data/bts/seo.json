@@ -722,5 +722,52 @@
       "summaryReport": "monthly"
     },
     "source": "manual-status-json-restored"
+  },
+  "weeklyReview": {
+    "weekOf": "2026-05-26",
+    "tabs": {
+      "seoHealth": {
+        "reviewedAt": null,
+        "reviewer": null,
+        "status": "stale"
+      },
+      "rankings": {
+        "reviewedAt": null,
+        "reviewer": null,
+        "status": "stale"
+      },
+      "competitors": {
+        "reviewedAt": null,
+        "reviewer": null,
+        "status": "stale"
+      },
+      "coverageMatrix": {
+        "reviewedAt": null,
+        "reviewer": null,
+        "status": "stale"
+      },
+      "googleSafety": {
+        "reviewedAt": null,
+        "reviewer": null,
+        "status": "stale"
+      },
+      "traffic": {
+        "reviewedAt": null,
+        "reviewer": null,
+        "status": "blocked",
+        "exception": "EX-001"
+      },
+      "conversions": {
+        "reviewedAt": null,
+        "reviewer": null,
+        "status": "blocked",
+        "exception": "EX-001"
+      },
+      "courses": {
+        "reviewedAt": null,
+        "reviewer": null,
+        "status": "stale"
+      }
+    }
   }
 }

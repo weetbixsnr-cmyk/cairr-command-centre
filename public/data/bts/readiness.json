@@ -1,87 +1,90 @@
 {
-  "gate": "BLOCK",
-  "generatedAt": "2026-05-26T09:00:00+10:00",
-  "generatedBy": "command-centre",
   "weekOf": "2026-05-26",
+  "generatedAt": "2026-05-25T20:50:49Z",
+  "gate": "BLOCK",
+  "staleDays": 9,
   "tabs": {
-    "content": {
-      "label": "Content",
-      "lastUpdated": "2026-05-21",
-      "source": "bts/content.json",
-      "updateMethod": "BTS repo sync",
-      "thresholdDays": 7,
-      "required": true,
-      "status": "stale"
-    },
-    "seo-health": {
-      "label": "SEO Health",
-      "lastUpdated": "2026-05-21T00:00:00+10:00",
-      "source": "bts/seo.json",
-      "updateMethod": "Manual check (no live scan)",
-      "thresholdDays": 7,
-      "required": true,
+    "seoHealth": {
+      "reviewedAt": null,
       "status": "stale",
-      "notes": "GSC not connected. Score is manual estimate."
+      "source": "seo/seo.json"
     },
     "rankings": {
-      "label": "Rankings",
-      "lastUpdated": "2026-05-17T00:00:00+10:00",
-      "source": "bts/seo.json",
-      "updateMethod": "Manual Brave search (no GSC)",
-      "thresholdDays": 7,
-      "required": true,
+      "reviewedAt": null,
       "status": "stale",
-      "notes": "GSC not connected. Positions are manual spot-checks, not verified."
-    },
-    "news-bank": {
-      "label": "News Bank",
-      "lastUpdated": "2026-05-25",
-      "source": "bts/news-bank.json",
-      "updateMethod": "BTS repo sync",
-      "thresholdDays": 7,
-      "required": true,
-      "status": "fresh"
-    },
-    "gbp-posts": {
-      "label": "GBP Posts",
-      "lastUpdated": "2026-05-25T20:12:53.689Z",
-      "source": "bts-status.json",
-      "updateMethod": "Dashboard API / manual edit",
-      "thresholdDays": 7,
-      "required": true,
-      "status": "fresh"
+      "source": "seo/seo.json"
     },
     "competitors": {
-      "label": "Competitors",
-      "lastUpdated": "2026-04-06T20:00:00Z",
-      "source": "bts-status.json",
-      "updateMethod": "Manual sitemap crawl",
-      "thresholdDays": 30,
-      "required": false,
+      "reviewedAt": null,
       "status": "stale",
-      "notes": "Last crawl was 7+ weeks ago."
+      "source": "seo/seo.json"
+    },
+    "coverageMatrix": {
+      "reviewedAt": null,
+      "status": "stale",
+      "source": "seo/seo.json"
+    },
+    "googleSafety": {
+      "reviewedAt": null,
+      "status": "stale",
+      "source": "seo/seo.json"
+    },
+    "traffic": {
+      "reviewedAt": null,
+      "status": "blocked",
+      "source": null,
+      "exception": "EX-001"
+    },
+    "conversions": {
+      "reviewedAt": null,
+      "status": "blocked",
+      "source": null,
+      "exception": "EX-001"
     },
     "courses": {
-      "label": "Courses",
-      "lastUpdated": "2026-05-17T00:00:00+10:00",
-      "source": "bts-status.json",
-      "updateMethod": "Manual check with Sunny",
-      "thresholdDays": 30,
-      "required": false,
-      "status": "fresh"
+      "reviewedAt": null,
+      "status": "stale",
+      "source": "seo/seo.json"
+    },
+    "futurePosts": {
+      "reviewedAt": null,
+      "status": "stale",
+      "source": "content/content.json"
+    },
+    "gbpPosts": {
+      "reviewedAt": null,
+      "status": "stale",
+      "source": "content/content.json"
+    },
+    "newsBank": {
+      "reviewedAt": null,
+      "status": "stale",
+      "source": "seo/news-bank.json"
     }
   },
-  "exceptions": [],
-  "draftTextAvailable": {
-    "blog-16-maidenhead": true,
-    "blog-17-milton-keynes": true,
-    "gbp-career-change": true,
-    "gbp-skills-shortage": true,
-    "gbp-stack-qualifications": true
-  },
-  "newsBank": {
-    "top10": [49, 48, 47, 45, 44, 43, 42, 41, 40, 39],
-    "timeSensitive": [49],
-    "newThisWeek": [49, 48, 47]
-  }
+  "exceptions": [
+    {
+      "id": "EX-001",
+      "tabs": [
+        "traffic",
+        "conversions"
+      ],
+      "reason": "GSC/GA access requires Sunny/Adam verification. No data source available.",
+      "raisedAt": "2026-05-26",
+      "owner": "adam",
+      "reviewBy": "2026-06-30",
+      "status": "open"
+    },
+    {
+      "id": "EX-002",
+      "tabs": [
+        "rankings"
+      ],
+      "reason": "Rankings from manual SERP spot-checks only. GSC position data unavailable. Weekly review still required.",
+      "raisedAt": "2026-05-26",
+      "owner": "adam",
+      "reviewBy": "2026-06-30",
+      "status": "open"
+    }
+  ]
 }

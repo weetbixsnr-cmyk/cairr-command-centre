@@ -363,36 +363,34 @@ export default function BtsSeoPage({ initialSnapshot }) {
 
         {/* Weekly Readiness Gate */}
         {readiness && (() => {
-          const reqTabs = Object.entries(readiness.tabs || {}).filter(([,t]) => t.required)
-          const optTabs = Object.entries(readiness.tabs || {}).filter(([,t]) => !t.required)
-          const staleCount = reqTabs.filter(([,t]) => t.status !== 'fresh').length
+          const tabLabels = {seoHealth:'SEO Health',rankings:'Rankings',competitors:'Competitors',coverageMatrix:'Coverage Matrix',googleSafety:'Google Safety',traffic:'Traffic',conversions:'Conversions',courses:'Courses',futurePosts:'Future Posts',gbpPosts:'GBP Posts',newsBank:'News Bank'}
+          const allTabs = Object.entries(readiness.tabs || {})
+          const staleCount = allTabs.filter(([,t]) => t.status === 'stale').length
+          const blockedCount = allTabs.filter(([,t]) => t.status === 'blocked').length
+          const statusColor = s => s === 'current' ? '#10b981' : s === 'blocked' ? '#f59e0b' : '#ef4444'
+          const statusIcon = s => s === 'current' ? '✅' : s === 'blocked' ? '⚠️' : '🔴'
           return (
             <div style={{background: gateBlocked ? '#1a0a0a' : '#0a1a0a', border: `1px solid ${gateBlocked ? '#ef4444' : '#10b981'}`, borderRadius:10, padding:14, marginBottom:16}}>
               <div style={{fontSize:12,fontWeight:700,color: gateBlocked ? '#ef4444' : '#10b981',marginBottom:8}}>
-                {gateBlocked ? `🔴 WEEKLY GATE: BLOCKED — ${staleCount} required tab${staleCount !== 1 ? 's' : ''} stale` : '🟢 WEEKLY GATE: READY — Sunny approvals enabled'}
+                {gateBlocked ? `🔴 WEEKLY GATE: BLOCKED — ${staleCount} stale, ${blockedCount} blocked` : '🟢 WEEKLY GATE: READY — Sunny approvals enabled'}
+                {readiness.weekOf && <span style={{fontSize:9,fontWeight:400,color:'#888',marginLeft:8}}>Week of {readiness.weekOf}</span>}
               </div>
-              <div style={{display:'flex',gap:6,flexWrap:'wrap',marginBottom: optTabs.length > 0 ? 8 : 0}}>
-                {reqTabs.map(([key, t]) => (
-                  <span key={key} style={{fontSize:9,padding:'3px 8px',borderRadius:4,fontWeight:600,background: t.status === 'fresh' ? '#10b98115' : '#ef444415',color: t.status === 'fresh' ? '#10b981' : '#ef4444',border: `1px solid ${t.status === 'fresh' ? '#10b98133' : '#ef444433'}`}}>
-                    {t.status === 'fresh' ? '✅' : '🔴'} {t.label}
+              <div style={{display:'flex',gap:6,flexWrap:'wrap',marginBottom:readiness.exceptions?.length > 0 ? 8 : 0}}>
+                {allTabs.map(([key, t]) => (
+                  <span key={key} style={{fontSize:9,padding:'3px 8px',borderRadius:4,fontWeight:600,background:`${statusColor(t.status)}15`,color:statusColor(t.status),border:`1px solid ${statusColor(t.status)}33`}}>
+                    {statusIcon(t.status)} {tabLabels[key] || key}
                   </span>
                 ))}
               </div>
-              {optTabs.length > 0 && (
-                <div style={{display:'flex',gap:8,flexWrap:'wrap',fontSize:9,color:'#888'}}>
-                  {optTabs.map(([key, t]) => (
-                    <span key={key}>{t.label} ({t.thresholdDays}d): {t.status === 'fresh' ? '✅' : '⚠️'} {t.status}</span>
-                  ))}
-                </div>
-              )}
               {gateBlocked && (
                 <div style={{fontSize:10,color:'#ef4444',marginTop:8,fontWeight:600}}>
                   Approvals blocked — update stale data sources before sending to Sunny
                 </div>
               )}
               {readiness.exceptions?.length > 0 && readiness.exceptions.map((ex, i) => (
-                <div key={i} style={{fontSize:9,color:'#f59e0b',marginTop:4}}>
-                  Exception: {ex.tab} — {ex.reason} (by {ex.owner}, review by {ex.reviewBy})
+                <div key={i} style={{fontSize:9,color:'#f59e0b',marginTop:6,padding:'4px 8px',background:'#1a180033',border:'1px solid #f59e0b22',borderRadius:4}}>
+                  <span style={{fontWeight:700}}>{ex.id}</span> — {ex.reason}
+                  <span style={{color:'#888',marginLeft:6}}>({ex.owner} · review by {ex.reviewBy})</span>
                 </div>
               ))}
             </div>
@@ -418,26 +416,24 @@ export default function BtsSeoPage({ initialSnapshot }) {
 
         {/* Per-tab freshness indicator */}
         {(() => {
-          const rMap = {'health':'seo-health','seo-plan':'seo-health','rankings':'rankings','matrix':'content','competitors':'competitors','news-bank':'news-bank','gbp-posts':'gbp-posts','future-posts':'content','courses':'courses'}
-          const special = {'safety':'Auto-derived from content lifecycle','suggestions':'No source tracking','traffic':'GA4 not connected — no data source','conversions':'GA4 not connected — no data source'}
-          if (special[tab]) return (
+          const rMap = {'health':'seoHealth','seo-plan':'seoHealth','rankings':'rankings','matrix':'coverageMatrix','competitors':'competitors','safety':'googleSafety','news-bank':'newsBank','gbp-posts':'gbpPosts','future-posts':'futurePosts','traffic':'traffic','conversions':'conversions','courses':'courses'}
+          if (tab === 'suggestions') return (
             <div style={{display:'flex',alignItems:'center',gap:8,padding:'6px 10px',background:'#0d0d10',border:'1px solid #33333355',borderRadius:6,marginBottom:16,fontSize:9,color:'#888'}}>
-              <span style={{fontWeight:600}}>ℹ️ {special[tab]}</span>
+              <span style={{fontWeight:600}}>ℹ️ No source tracking</span>
             </div>
           )
           const ti = readiness?.tabs?.[rMap[tab]]
           if (!ti) return null
-          const fc = ti.status === 'fresh' ? '#10b981' : '#ef4444'
-          const dStr = ti.lastUpdated ? new Date(ti.lastUpdated).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : '—'
+          const fc = ti.status === 'current' ? '#10b981' : ti.status === 'blocked' ? '#f59e0b' : '#ef4444'
+          const label = ti.status === 'current' ? '🟢 CURRENT' : ti.status === 'blocked' ? '⚠️ BLOCKED' : '🔴 STALE'
+          const dStr = ti.reviewedAt ? new Date(ti.reviewedAt).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : 'Not reviewed'
+          const ex = ti.exception && readiness.exceptions?.find(e => e.id === ti.exception)
           return (
             <div style={{display:'flex',alignItems:'center',gap:8,padding:'6px 10px',background:'#0d0d10',border:`1px solid ${fc}33`,borderRadius:6,marginBottom:16,fontSize:9,color:'#888',flexWrap:'wrap'}}>
-              <span style={{color:fc,fontWeight:700}}>{ti.status === 'fresh' ? '🟢 FRESH' : '🔴 STALE'}</span>
-              <span>{dStr} ({timeAgo(ti.lastUpdated)})</span>
-              <span style={{color:'#555'}}>·</span>
-              <span style={{fontFamily:'monospace',fontSize:8}}>{ti.source}</span>
-              <span style={{color:'#555'}}>·</span>
-              <span>{ti.updateMethod}</span>
-              {ti.notes && <span style={{color:'#f59e0b',fontSize:8}}>— {ti.notes}</span>}
+              <span style={{color:fc,fontWeight:700}}>{label}</span>
+              <span>{dStr}</span>
+              {ti.source && <><span style={{color:'#555'}}>·</span><span style={{fontFamily:'monospace',fontSize:8}}>{ti.source}</span></>}
+              {ex && <span style={{color:'#f59e0b',fontSize:8}}>— {ex.reason}</span>}
             </div>
           )
         })()}
@@ -838,7 +834,7 @@ export default function BtsSeoPage({ initialSnapshot }) {
           <>
             {readiness?.tabs?.competitors?.status === 'stale' && (
               <div style={{padding:'8px 12px',background:'#1a0a0a',border:'1px solid #ef444433',borderRadius:8,marginBottom:14,fontSize:10,color:'#ef4444'}}>
-                🔴 Competitor data is stale — last crawl was {readiness.tabs.competitors.lastUpdated ? new Date(readiness.tabs.competitors.lastUpdated).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : 'unknown'}. Update required.
+                🔴 Competitor data is stale — last reviewed: {readiness.tabs.competitors.reviewedAt ? new Date(readiness.tabs.competitors.reviewedAt).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : 'never'}. Weekly review required.
               </div>
             )}
             {/* Competitor Page Counts */}
@@ -1653,28 +1649,41 @@ export default function BtsSeoPage({ initialSnapshot }) {
                       </div>
                       <div className="card">
                         {(() => {
-                          const top10Ids = readiness?.newsBank?.top10 || []
-                          const tsIds = new Set(readiness?.newsBank?.timeSensitive || [])
-                          const newIds = new Set(readiness?.newsBank?.newThisWeek || [])
-                          const displayStories = newsBankView === 'top10'
-                            ? top10Ids.map(id => stories.find(s => s.id === id)).filter(Boolean)
-                            : available
+                          const hasCuratedRanks = available.some(s => s.curatedRank != null)
+                          let top10Stories
+                          if (hasCuratedRanks) {
+                            top10Stories = available.filter(s => s.curatedRank != null).sort((a, b) => a.curatedRank - b.curatedRank).slice(0, 10)
+                          } else {
+                            const signalOrder = {rising: 0, stable: 1, fading: 2}
+                            top10Stories = [...available].sort((a, b) => {
+                              const sa = signalOrder[a.attentionSignal] ?? 1
+                              const sb = signalOrder[b.attentionSignal] ?? 1
+                              if (sa !== sb) return sa - sb
+                              return new Date(b.datePublished || 0) - new Date(a.datePublished || 0)
+                            }).slice(0, 10)
+                          }
+                          const displayStories = newsBankView === 'top10' ? top10Stories : available
+                          const signalColor = {rising: '#10b981', stable: '#888', fading: '#ef4444'}
+                          const signalLabel = {rising: 'RISING', stable: 'STABLE', fading: 'FADING'}
                           return displayStories.map((s, i) => (
                             <div key={s.id || i} style={{padding:'8px 0',borderBottom:'1px solid #1a1a1a'}}>
                               <div style={{display:'flex',gap:8,alignItems:'center',fontSize:11}}>
                                 {newsBankView === 'top10' && <span style={{fontSize:14,fontWeight:800,color:'#3b82f6',minWidth:24}}>#{i+1}</span>}
                                 <span style={{color:'#fff',flex:1,fontWeight:600}}>{s.title}</span>
-                                {tsIds.has(s.id) && <span style={{fontSize:8,padding:'2px 6px',borderRadius:3,background:'#3b1010',color:'#ef4444',fontWeight:700}}>TIME-SENSITIVE</span>}
-                                {newIds.has(s.id) && !tsIds.has(s.id) && <span style={{fontSize:8,padding:'2px 6px',borderRadius:3,background:'#0a1a2a',color:'#3b82f6',fontWeight:700}}>NEW</span>}
+                                {s.attentionSignal && s.attentionSignal !== 'stable' && (
+                                  <span style={{fontSize:8,padding:'2px 6px',borderRadius:3,background: s.attentionSignal === 'rising' ? '#0a2a1a' : '#3b1010',color: signalColor[s.attentionSignal],fontWeight:700}}>{signalLabel[s.attentionSignal]}</span>
+                                )}
                                 {s.category && <span style={{fontSize:8,color:'#888',background:'#1a1a22',padding:'2px 6px',borderRadius:3}}>{s.category}</span>}
                               </div>
                               <div style={{display:'flex',gap:8,marginTop:4,fontSize:9,color:'#888',paddingLeft: newsBankView === 'top10' ? 32 : 0}}>
-                                {s.datePublished && <span>{new Date(s.datePublished).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</span>}
+                                {s.datePublished && <span>Published: {new Date(s.datePublished).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</span>}
+                                {s.dateAdded && <span>Added: {new Date(s.dateAdded).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</span>}
+                                {s.attentionSignal && <span style={{color: signalColor[s.attentionSignal]}}>{s.attentionSignal}</span>}
                                 {s.blogAngle && <span style={{color:'#aaa',fontStyle:'italic'}}>Angle: {s.blogAngle}</span>}
                               </div>
-                              {s.services?.length > 0 && (
+                              {s.btsServiceLink?.length > 0 && (
                                 <div style={{display:'flex',gap:4,flexWrap:'wrap',marginTop:4,paddingLeft: newsBankView === 'top10' ? 32 : 0}}>
-                                  {s.services.map(svc => <span key={svc} style={{fontSize:7,padding:'1px 5px',borderRadius:3,background:'#1a1a22',border:'1px solid #222',color:'#888'}}>{svc}</span>)}
+                                  {s.btsServiceLink.map(svc => <span key={svc} style={{fontSize:7,padding:'1px 5px',borderRadius:3,background:'#1a1a22',border:'1px solid #222',color:'#888'}}>{svc}</span>)}
                                 </div>
                               )}
                             </div>

@@ -15,7 +15,17 @@
       "regulation",
       "brand-product",
       "real-world"
-    ]
+    ],
+    "weeklyReview": {
+      "weekOf": "2026-05-26",
+      "tabs": {
+        "newsBank": {
+          "reviewedAt": null,
+          "reviewer": null,
+          "status": "stale"
+        }
+      }
+    }
   },
   "stories": [
     {
@@ -38,7 +48,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "NEW 2026-05-25. TIME-SENSITIVE — event is 23-25 June. Draft insights post before event if using. Scale of event (40k visitors, 900 exhibitors) shows industry health. World Plumbing Conference co-location adds authority."
+      "notes": "NEW 2026-05-25. TIME-SENSITIVE — event is 23-25 June. Draft insights post before event if using. Scale of event (40k visitors, 900 exhibitors) shows industry health. World Plumbing Conference co-location adds authority.",
+      "dateAdded": "2026-05-25",
+      "attentionSignal": "rising",
+      "curatedRank": null
     },
     {
       "id": 48,
@@ -59,7 +72,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "NEW 2026-05-25. Complements stories #37, #38, #39. Extension to 2030 is the key signal — gives installers confidence to invest in training. Angle: long-term market, not short-term grant grab."
+      "notes": "NEW 2026-05-25. Complements stories #37, #38, #39. Extension to 2030 is the key signal — gives installers confidence to invest in training. Angle: long-term market, not short-term grant grab.",
+      "dateAdded": "2026-05-25",
+      "attentionSignal": "rising",
+      "curatedRank": null
     },
     {
       "id": 47,
@@ -81,7 +97,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "NEW 2026-05-25. SIGNIFICANT UPDATE. Directly connects heat pump AND LPG training — off-grid LPG homes are prime candidates for heat pump conversion. Installer demand angle: bigger grants = more homeowner uptake = need more qualified installers. Same grant caution applies (installer angle, not homeowner eligibility)."
+      "notes": "NEW 2026-05-25. SIGNIFICANT UPDATE. Directly connects heat pump AND LPG training — off-grid LPG homes are prime candidates for heat pump conversion. Installer demand angle: bigger grants = more homeowner uptake = need more qualified installers. Same grant caution applies (installer angle, not homeowner eligibility).",
+      "dateAdded": "2026-05-25",
+      "attentionSignal": "rising",
+      "curatedRank": null
     },
     {
       "id": 45,
@@ -105,7 +124,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "NEW 2026-05-20. Source is a competitor (YTA Training) — our angle must be unique. Strong career-changer hook."
+      "notes": "NEW 2026-05-20. Source is a competitor (YTA Training) — our angle must be unique. Strong career-changer hook.",
+      "dateAdded": "2026-05-20",
+      "attentionSignal": "rising",
+      "curatedRank": null
     },
     {
       "id": 44,
@@ -128,7 +150,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "NEW 2026-05-20. Broader engineering focus but supports the skills-shortage-drives-pay narrative. Pair with story #11 for gas-specific salary data."
+      "notes": "NEW 2026-05-20. Broader engineering focus but supports the skills-shortage-drives-pay narrative. Pair with story #11 for gas-specific salary data.",
+      "dateAdded": "2026-05-20",
+      "attentionSignal": "rising",
+      "curatedRank": null
     },
     {
       "id": 39,
@@ -149,7 +174,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "NEW 2026-05-20. Complements story #4 (original BUS piece, now drafted as News 5). Could update/supersede that draft or run as standalone."
+      "notes": "NEW 2026-05-20. Complements story #4 (original BUS piece, now drafted as News 5). Could update/supersede that draft or run as standalone.",
+      "dateAdded": "2026-05-20",
+      "attentionSignal": "rising",
+      "curatedRank": null
     },
     {
       "id": 38,
@@ -170,7 +198,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "NEW 2026-05-20. Installer-focused angle (not homeowner). Good complement to story #39."
+      "notes": "NEW 2026-05-20. Installer-focused angle (not homeowner). Good complement to story #39.",
+      "dateAdded": "2026-05-20",
+      "attentionSignal": "rising",
+      "curatedRank": null
     },
     {
       "id": 40,
@@ -192,7 +223,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "NEW 2026-05-20. SIGNIFICANT policy shift. Makes heat pump training even more urgent as economics shift. Updates context for story #26 (BBC heat pump cost analysis)."
+      "notes": "NEW 2026-05-20. SIGNIFICANT policy shift. Makes heat pump training even more urgent as economics shift. Updates context for story #26 (BBC heat pump cost analysis).",
+      "dateAdded": "2026-05-20",
+      "attentionSignal": "stable",
+      "curatedRank": null
     },
     {
       "id": 41,
@@ -216,7 +250,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "NEW 2026-05-20. SKILLS SHORTAGE FOCUS. Adds global context to the UK shortage narrative. Complements stories #29, #30, #31."
+      "notes": "NEW 2026-05-20. SKILLS SHORTAGE FOCUS. Adds global context to the UK shortage narrative. Complements stories #29, #30, #31.",
+      "dateAdded": "2026-05-20",
+      "attentionSignal": "stable",
+      "curatedRank": null
     },
     {
       "id": 42,
@@ -238,7 +275,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "NEW 2026-05-20. Relevant for employers considering funding staff training at BTS. Complements stories #25 and #28."
+      "notes": "NEW 2026-05-20. Relevant for employers considering funding staff training at BTS. Complements stories #25 and #28.",
+      "dateAdded": "2026-05-20",
+      "attentionSignal": "stable",
+      "curatedRank": null
     },
     {
       "id": 43,
@@ -259,7 +299,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "NEW 2026-05-20. COMPETITOR CONTENT (Logic4training). Use for competitive intelligence — do NOT link to this source. Our angle must differentiate."
+      "notes": "NEW 2026-05-20. COMPETITOR CONTENT (Logic4training). Use for competitive intelligence — do NOT link to this source. Our angle must differentiate.",
+      "dateAdded": "2026-05-20",
+      "attentionSignal": "stable",
+      "curatedRank": null
     },
     {
       "id": 37,
@@ -280,7 +323,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "NEW 2026-05-20. Official GOV.UK source. Updates context for stories #4, #38, #39. Installer demand angle — more grants = more installations = need more trained engineers."
+      "notes": "NEW 2026-05-20. Official GOV.UK source. Updates context for stories #4, #38, #39. Installer demand angle — more grants = more installations = need more trained engineers.",
+      "dateAdded": "2026-05-20",
+      "attentionSignal": "stable",
+      "curatedRank": null
     },
     {
       "id": 36,
@@ -302,7 +348,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "Very current — 1 April 2026. Extends story #20. Good for showing industry disruption driving demand for trained heating engineers."
+      "notes": "Very current — 1 April 2026. Extends story #20. Good for showing industry disruption driving demand for trained heating engineers.",
+      "dateAdded": "2026-05-20",
+      "attentionSignal": "stable",
+      "curatedRank": null
     },
     {
       "id": 28,
@@ -322,7 +371,10 @@
       ],
       "status": "drafted",
       "sunnyPriority": null,
-      "notes": "Schema fixed 2026-05-20 (date→datePublished, category normalised, missing fields added). Drafted as pending News 6: content/pending-drafts/news-6-apprenticeship-funding-april-2026.md."
+      "notes": "Schema fixed 2026-05-20 (date→datePublished, category normalised, missing fields added). Drafted as pending News 6: content/pending-drafts/news-6-apprenticeship-funding-april-2026.md.",
+      "dateAdded": "2026-04-01",
+      "attentionSignal": "stable",
+      "curatedRank": null
     },
     {
       "id": 29,
@@ -346,7 +398,10 @@
       "status": "published",
       "sunnyPriority": null,
       "notes": "Very recent (31 Mar). Strong data-driven piece. Plumbers/HVAC specifically called out. Perfect for career changers — massive demand, not enough supply.",
-      "published_date": "2026-04-11"
+      "published_date": "2026-04-11",
+      "dateAdded": "2026-03-31",
+      "attentionSignal": "stable",
+      "curatedRank": null
     },
     {
       "id": 19,
@@ -370,7 +425,10 @@
       "status": "published",
       "sunnyPriority": null,
       "notes": "Published 27 March 2026. This replaces story #3 as the primary FHS piece. Drafted as insight-1.",
-      "published_date": "2026-04-01"
+      "published_date": "2026-04-01",
+      "dateAdded": "2026-03-27",
+      "attentionSignal": "stable",
+      "curatedRank": null
     },
     {
       "id": 25,
@@ -392,7 +450,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "Very recent (25 Mar). Links to MLP course. Good for career changers and employers considering training staff."
+      "notes": "Very recent (25 Mar). Links to MLP course. Good for career changers and employers considering training staff.",
+      "dateAdded": "2026-03-25",
+      "attentionSignal": "stable",
+      "curatedRank": null
     },
     {
       "id": 26,
@@ -413,7 +474,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "BBC = high authority source. Balanced angle avoids pushing heat pumps unrealistically. Good for showing BTS gives honest industry advice."
+      "notes": "BBC = high authority source. Balanced angle avoids pushing heat pumps unrealistically. Good for showing BTS gives honest industry advice.",
+      "dateAdded": "2026-03-22",
+      "attentionSignal": "stable",
+      "curatedRank": null
     },
     {
       "id": 27,
@@ -434,7 +498,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "Practical piece for gas engineers considering adding heat pumps. Still need training even with umbrella."
+      "notes": "Practical piece for gas engineers considering adding heat pumps. Still need training even with umbrella.",
+      "dateAdded": "2026-03-16",
+      "attentionSignal": "stable",
+      "curatedRank": null
     },
     {
       "id": 20,
@@ -456,7 +523,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "Very current — March 2026. Strong hook for LPG changeover course. Links heat pump training as alternative for off-grid homes."
+      "notes": "Very current — March 2026. Strong hook for LPG changeover course. Links heat pump training as alternative for off-grid homes.",
+      "dateAdded": "2026-03-15",
+      "attentionSignal": "stable",
+      "curatedRank": null
     },
     {
       "id": 23,
@@ -477,7 +547,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "Technical but important for anyone considering heat pump certification. Links to heat pump course."
+      "notes": "Technical but important for anyone considering heat pump certification. Links to heat pump course.",
+      "dateAdded": "2026-03-15",
+      "attentionSignal": "stable",
+      "curatedRank": null
     },
     {
       "id": 12,
@@ -500,7 +573,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "NOTE: Able Skills (competitor #4) published this already. Our angle needs to be unique — focus on multi-trade + heat pump upskilling, not just gas alone."
+      "notes": "NOTE: Able Skills (competitor #4) published this already. Our angle needs to be unique — focus on multi-trade + heat pump upskilling, not just gas alone.",
+      "dateAdded": "2026-03-08",
+      "attentionSignal": "stable",
+      "curatedRank": null
     },
     {
       "id": 30,
@@ -523,7 +599,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "SKILLS SHORTAGE FOCUS. Powerful stat — half the workforce retiring. Perfect for career changers and MLP students. Shows urgency."
+      "notes": "SKILLS SHORTAGE FOCUS. Powerful stat — half the workforce retiring. Perfect for career changers and MLP students. Shows urgency.",
+      "dateAdded": "2026-03-01",
+      "attentionSignal": "stable",
+      "curatedRank": null
     },
     {
       "id": 46,
@@ -546,7 +625,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "NEW 2026-05-20. Adds to the CITB data from story #31. Fix Radio is a trade-focused source — good credibility."
+      "notes": "NEW 2026-05-20. Adds to the CITB data from story #31. Fix Radio is a trade-focused source — good credibility.",
+      "dateAdded": "2026-05-20",
+      "attentionSignal": "stable",
+      "curatedRank": null
     },
     {
       "id": 21,
@@ -567,7 +649,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "Good context piece. Logic4training already covered 'Is Gas or Electric Cheaper in 2026' — our angle needs to be installer-focused, not homeowner."
+      "notes": "Good context piece. Logic4training already covered 'Is Gas or Electric Cheaper in 2026' — our angle needs to be installer-focused, not homeowner.",
+      "dateAdded": "2026-02-25",
+      "attentionSignal": "stable",
+      "curatedRank": null
     },
     {
       "id": 11,
@@ -590,7 +675,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "High search volume career research keyword. Perfect for career changers considering MLP."
+      "notes": "High search volume career research keyword. Perfect for career changers considering MLP.",
+      "dateAdded": "2026-02-25",
+      "attentionSignal": "stable",
+      "curatedRank": null
     },
     {
       "id": 35,
@@ -613,7 +701,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "SKILLS SHORTAGE FOCUS. Money angle — shortage = higher pay. Great for career changers weighing up training investment vs salary return."
+      "notes": "SKILLS SHORTAGE FOCUS. Money angle — shortage = higher pay. Great for career changers weighing up training investment vs salary return.",
+      "dateAdded": "2026-02-23",
+      "attentionSignal": "fading",
+      "curatedRank": null
     },
     {
       "id": 34,
@@ -635,7 +726,10 @@
       "status": "published",
       "sunnyPriority": null,
       "notes": "SKILLS SHORTAGE FOCUS. The 2,000 vs 33,700 stat is incredibly powerful. Perfect for gas engineers considering upskilling. Links directly to heat pump course.",
-      "published_date": "2026-04-11"
+      "published_date": "2026-04-11",
+      "dateAdded": "2026-02-20",
+      "attentionSignal": "fading",
+      "curatedRank": null
     },
     {
       "id": 24,
@@ -657,7 +751,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "Good thought-leadership angle. Manufacturer perspective adds authority."
+      "notes": "Good thought-leadership angle. Manufacturer perspective adds authority.",
+      "dateAdded": "2026-02-18",
+      "attentionSignal": "fading",
+      "curatedRank": null
     },
     {
       "id": 32,
@@ -679,7 +776,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "SKILLS SHORTAGE FOCUS. Broader construction but directly relevant. Career changer angle — massive opportunity for new entrants. Links to MLP."
+      "notes": "SKILLS SHORTAGE FOCUS. Broader construction but directly relevant. Career changer angle — massive opportunity for new entrants. Links to MLP.",
+      "dateAdded": "2026-02-12",
+      "attentionSignal": "fading",
+      "curatedRank": null
     },
     {
       "id": 17,
@@ -700,7 +800,10 @@
       ],
       "status": "stale",
       "sunnyPriority": null,
-      "notes": "Marked stale 2026-05-25 (product launch >3 months old, weak training angle, superseded by newer product launches e.g. Viessmann ASHP at InstallerSHOW June 2026)."
+      "notes": "Marked stale 2026-05-25 (product launch >3 months old, weak training angle, superseded by newer product launches e.g. Viessmann ASHP at InstallerSHOW June 2026).",
+      "dateAdded": "2026-02-10",
+      "attentionSignal": "fading",
+      "curatedRank": null
     },
     {
       "id": 22,
@@ -723,7 +826,10 @@
       "status": "published",
       "sunnyPriority": null,
       "notes": "Strong career-change angle. Links directly to MLP course. Shows demand outstripping supply = opportunity. Drafted 12 Apr 2026 and published as News 4 on 11 May 2026.",
-      "published_date": "2026-05-11"
+      "published_date": "2026-05-11",
+      "dateAdded": "2026-02-09",
+      "attentionSignal": "fading",
+      "curatedRank": null
     },
     {
       "id": 14,
@@ -744,7 +850,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "Same grant caution. Installer demand angle, not homeowner eligibility."
+      "notes": "Same grant caution. Installer demand angle, not homeowner eligibility.",
+      "dateAdded": "2026-02-07",
+      "attentionSignal": "fading",
+      "curatedRank": null
     },
     {
       "id": 31,
@@ -767,7 +876,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "SKILLS SHORTAGE FOCUS. CITB = authoritative source. 59,000 is a concrete number that makes strong headlines. Links to MLP and heat pump courses."
+      "notes": "SKILLS SHORTAGE FOCUS. CITB = authoritative source. 59,000 is a concrete number that makes strong headlines. Links to MLP and heat pump courses.",
+      "dateAdded": "2026-02-01",
+      "attentionSignal": "fading",
+      "curatedRank": null
     },
     {
       "id": 4,
@@ -788,7 +900,10 @@
       ],
       "status": "drafted",
       "sunnyPriority": null,
-      "notes": "NOTE: Sunny's rule = no government funding claims on BTS content. Angle must be about installer qualifications, not homeowner grants. Drafted as pending News 5: content/pending-drafts/news-5-bus-amendments-2026.md."
+      "notes": "NOTE: Sunny's rule = no government funding claims on BTS content. Angle must be about installer qualifications, not homeowner grants. Drafted as pending News 5: content/pending-drafts/news-5-bus-amendments-2026.md.",
+      "dateAdded": "2026-01-30",
+      "attentionSignal": "fading",
+      "curatedRank": null
     },
     {
       "id": 5,
@@ -810,7 +925,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "Same grant caution as #4. Focus on installer demand, not homeowner eligibility."
+      "notes": "Same grant caution as #4. Focus on installer demand, not homeowner eligibility.",
+      "dateAdded": "2026-01-27",
+      "attentionSignal": "fading",
+      "curatedRank": null
     },
     {
       "id": 1,
@@ -832,7 +950,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "Major story — high search volume. Links to heat pump training and multi-trade upskilling."
+      "notes": "Major story — high search volume. Links to heat pump training and multi-trade upskilling.",
+      "dateAdded": "2026-01-20",
+      "attentionSignal": "fading",
+      "curatedRank": null
     },
     {
       "id": 33,
@@ -853,7 +974,10 @@
       ],
       "status": "available",
       "sunnyPriority": null,
-      "notes": "SKILLS SHORTAGE FOCUS. Interesting angle — training alone isn't enough. BTS can position around practical, job-ready training. Nesta is authoritative source."
+      "notes": "SKILLS SHORTAGE FOCUS. Interesting angle — training alone isn't enough. BTS can position around practical, job-ready training. Nesta is authoritative source.",
+      "dateAdded": "2026-01-15",
+      "attentionSignal": "fading",
+      "curatedRank": null
     },
     {
       "id": 16,
@@ -875,7 +999,10 @@
       ],
       "status": "stale",
       "sunnyPriority": null,
-      "notes": "Marked stale 2026-05-25 (superseded by story #19 — actual FHS publication Mar 2026). Pre-publication speculation no longer needed."
+      "notes": "Marked stale 2026-05-25 (superseded by story #19 — actual FHS publication Mar 2026). Pre-publication speculation no longer needed.",
+      "dateAdded": "2026-01-09",
+      "attentionSignal": "fading",
+      "curatedRank": null
     },
     {
       "id": 3,
@@ -897,7 +1024,10 @@
       ],
       "status": "stale",
       "sunnyPriority": null,
-      "notes": "Marked stale 2026-05-25 (superseded by story #19 — actual FHS publication Mar 2026). Pre-publication story from Dec 2025 no longer needed."
+      "notes": "Marked stale 2026-05-25 (superseded by story #19 — actual FHS publication Mar 2026). Pre-publication story from Dec 2025 no longer needed.",
+      "dateAdded": "2025-12-18",
+      "attentionSignal": "fading",
+      "curatedRank": null
     },
     {
       "id": 8,
@@ -917,7 +1047,10 @@
       ],
       "status": "stale",
       "sunnyPriority": null,
-      "notes": "Marked stale 2026-05-20 (>5 months old, borderline). Niche but relevant — shows industry momentum. Pair with #7 or use as standalone."
+      "notes": "Marked stale 2026-05-20 (>5 months old, borderline). Niche but relevant — shows industry momentum. Pair with #7 or use as standalone.",
+      "dateAdded": "2025-12-16",
+      "attentionSignal": "fading",
+      "curatedRank": null
     },
     {
       "id": 15,
@@ -938,7 +1071,10 @@
       ],
       "status": "stale",
       "sunnyPriority": null,
-      "notes": "Marked stale 2026-05-20. Scotland-specific fund likely expired (ran until March 2026). May need verification before use."
+      "notes": "Marked stale 2026-05-20. Scotland-specific fund likely expired (ran until March 2026). May need verification before use.",
+      "dateAdded": "2025-10-22",
+      "attentionSignal": "fading",
+      "curatedRank": null
     },
     {
       "id": 18,
@@ -960,7 +1096,10 @@
       ],
       "status": "stale",
       "sunnyPriority": null,
-      "notes": "Marked stale 2026-05-20 (>7 months old). Lower priority — niche topic."
+      "notes": "Marked stale 2026-05-20 (>7 months old). Lower priority — niche topic.",
+      "dateAdded": "2025-09-30",
+      "attentionSignal": "fading",
+      "curatedRank": null
     },
     {
       "id": 6,
@@ -981,7 +1120,10 @@
       ],
       "status": "stale",
       "sunnyPriority": null,
-      "notes": "Marked stale 2026-05-20 (>8 months old). Data superseded by story #34 (Nesta, Feb 2026) with more recent figures."
+      "notes": "Marked stale 2026-05-20 (>8 months old). Data superseded by story #34 (Nesta, Feb 2026) with more recent figures.",
+      "dateAdded": "2025-09-08",
+      "attentionSignal": "fading",
+      "curatedRank": null
     },
     {
       "id": 7,
@@ -1002,7 +1144,10 @@
       ],
       "status": "stale",
       "sunnyPriority": null,
-      "notes": "Marked stale 2026-05-20 (>8 months old). Still relevant context but scheme details may have changed. Pair with story #27 (MCS Umbrella overview, Mar 2026)."
+      "notes": "Marked stale 2026-05-20 (>8 months old). Still relevant context but scheme details may have changed. Pair with story #27 (MCS Umbrella overview, Mar 2026).",
+      "dateAdded": "2025-09-04",
+      "attentionSignal": "fading",
+      "curatedRank": null
     },
     {
       "id": 9,
@@ -1024,7 +1169,10 @@
       ],
       "status": "stale",
       "sunnyPriority": null,
-      "notes": "Marked stale 2026-05-20 (>13 months old). CHMM may have been updated since April 2025. Verify current status before use."
+      "notes": "Marked stale 2026-05-20 (>13 months old). CHMM may have been updated since April 2025. Verify current status before use.",
+      "dateAdded": "2025-04-01",
+      "attentionSignal": "fading",
+      "curatedRank": null
     },
     {
       "id": 2,
@@ -1047,7 +1195,10 @@
       ],
       "status": "stale",
       "sunnyPriority": null,
-      "notes": "Marked stale 2026-05-20 (>16 months old). Evergreen topic — people still searching for clarity. Data may need refreshing but the core story hasn't changed."
+      "notes": "Marked stale 2026-05-20 (>16 months old). Evergreen topic — people still searching for clarity. Data may need refreshing but the core story hasn't changed.",
+      "dateAdded": "2025-01-06",
+      "attentionSignal": "fading",
+      "curatedRank": null
     },
     {
       "id": 10,
@@ -1068,7 +1219,10 @@
       ],
       "status": "stale",
       "sunnyPriority": null,
-      "notes": "Marked stale 2026-05-20 (>16 months old). Technical audience. Good for positioning BTS as industry-aware. Logic4training already covers this. Verify if 2026 changes have landed."
+      "notes": "Marked stale 2026-05-20 (>16 months old). Technical audience. Good for positioning BTS as industry-aware. Logic4training already covers this. Verify if 2026 changes have landed.",
+      "dateAdded": "2025-01-01",
+      "attentionSignal": "fading",
+      "curatedRank": null
     },
     {
       "id": 13,
@@ -1090,7 +1244,10 @@
       ],
       "status": "stale",
       "sunnyPriority": null,
-      "notes": "Marked stale 2026-05-20 (>25 months old). Regulations may have been further updated since April 2024. Verify with HSE before use."
+      "notes": "Marked stale 2026-05-20 (>25 months old). Regulations may have been further updated since April 2024. Verify with HSE before use.",
+      "dateAdded": "2024-04-06",
+      "attentionSignal": "fading",
+      "curatedRank": null
     }
   ]
 }
