@@ -546,7 +546,7 @@
       "url": null,
       "featuredImageId": null,
       "publishedAt": null,
-      "sourceFile": null,
+      "sourceFile": "content/gbp/gbp-post-career-change.md",
       "excerpt": "Draft GBP post about career change opportunities in gas engineering.",
       "reviewUrl": null
     },
@@ -561,7 +561,7 @@
       "url": null,
       "featuredImageId": null,
       "publishedAt": null,
-      "sourceFile": null,
+      "sourceFile": "content/gbp/gbp-post-skills-shortage.md",
       "excerpt": "Draft GBP post about the plumber skills shortage and training opportunities.",
       "reviewUrl": null
     },
@@ -576,7 +576,7 @@
       "url": null,
       "featuredImageId": null,
       "publishedAt": null,
-      "sourceFile": null,
+      "sourceFile": "content/gbp/gbp-post-stack-qualifications.md",
       "excerpt": "Draft GBP post about stacking multiple qualifications in a single training week.",
       "reviewUrl": null
     }
