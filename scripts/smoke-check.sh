@@ -48,6 +48,9 @@ print('PASS  /api/data keys present')
       echo "PASS  $route (401 auth working)"
     fi
     PASS=$((PASS + 1))
+  elif [ "$code" = "307" ] && [ "$route" != "/api/data" ]; then
+    echo "PASS  $route (307 auth redirect)"
+    PASS=$((PASS + 1))
   else
     echo "FAIL  $route ($code)"
     FAIL=$((FAIL + 1))

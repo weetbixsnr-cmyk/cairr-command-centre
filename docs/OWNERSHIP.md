@@ -1,7 +1,7 @@
 # Data Ownership — Command Centre
 
 > Declares what Command Centre owns, what it imports, and who updates what.
-> Last verified: 2026-05-24
+> Last verified: 2026-05-25
 
 ## This Project Owns (Rendering + Dashboard-Local Data)
 
@@ -21,16 +21,16 @@
 | Source | File | Destination | Sync Method |
 |--------|------|-------------|-------------|
 | BTS repo | `content/content.json` | `public/data/bts/content.json` | Manual copy after every BTS content change |
+| BTS repo | `seo/news-bank.json` | `public/data/bts/news-bank.json` | Manual copy after BTS news-bank updates |
 
 ## Temporary Ownership (Will Transfer in Phase 2)
 
-`public/data/bts-status.json` is currently CC-owned because BTS has no project-side equivalent for SEO metrics, competitors, courses, etc. When Phase 2 is approved:
-- BTS will create domain files (seo-metrics.json, competitors.json, courses.json, news-bank.json)
-- These will be copied to CC `public/data/bts/` like content.json
-- CC dashboard-data.js will be updated to read from domain files
-- Deprecated sections will be removed from bts-status.json
+`public/data/bts-status.json` is currently CC-owned because BTS has no project-side equivalent for SEO metrics, competitors, courses, etc. Completed Phase 2 slices:
+- `bts/seo.json` — SEO health, keywords, rankings, audit, plan (Slice B, 2026-05-24)
+- `bts/news-bank.json` — news story bank (2026-05-25)
 
-Phase 2 is not approved. This documents the intended direction only.
+Remaining Phase 2 candidates (not approved):
+- `competitors.json`, `courses.json`, `status.json`
 
 ## Who Updates What
 

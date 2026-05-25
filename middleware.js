@@ -3,15 +3,11 @@ import { NextResponse } from 'next/server'
 export function middleware(request) {
   const { pathname } = request.nextUrl
 
-  // Check for authorization header
-  const authHeader = request.headers.get('authorization')
-  
-  // Check for session cookie
   const sessionCookie = request.cookies.get('dashboard-auth')
   const btsSessionCookie = request.cookies.get('bts-client-auth')
-  
-  // If has valid session, allow access
-  if (sessionCookie?.value === process.env.DASHBOARD_SESSION_TOKEN) {
+  const dashboardToken = process.env.DASHBOARD_SESSION_TOKEN
+
+  if (dashboardToken && sessionCookie?.value === dashboardToken) {
     return NextResponse.next()
   }
 
@@ -19,22 +15,23 @@ export function middleware(request) {
     return NextResponse.next()
   }
 
-  if (pathname === '/bts-seo' && btsSessionCookie?.value === process.env.BTS_SESSION_TOKEN) {
+  const btsToken = process.env.BTS_SESSION_TOKEN
+  if (pathname === '/bts-seo' && btsToken && btsSessionCookie?.value === btsToken) {
     return NextResponse.next()
   }
-  
-  // Check basic auth
-  if (authHeader) {
+
+  const authHeader = request.headers.get('authorization')
+  const dashUser = process.env.DASHBOARD_USER
+  const dashPass = process.env.DASHBOARD_PASS
+  if (authHeader && dashUser && dashPass && dashboardToken) {
     const auth = authHeader.split(' ')[1]
     const [user, pass] = Buffer.from(auth, 'base64').toString().split(':')
-    
-    if (user === process.env.DASHBOARD_USER && pass === process.env.DASHBOARD_PASS) {
-      // Set session cookie and redirect to remove auth header from URL
+    if (user === dashUser && pass === dashPass) {
       const response = NextResponse.redirect(new URL('/', request.url))
-      response.cookies.set('dashboard-auth', process.env.DASHBOARD_SESSION_TOKEN, {
+      response.cookies.set('dashboard-auth', dashboardToken, {
         httpOnly: true,
         secure: true,
-        maxAge: 60 * 60 * 24 * 7 // 7 days
+        maxAge: 60 * 60 * 24 * 7
       })
       return response
     }
@@ -45,8 +42,7 @@ export function middleware(request) {
     loginUrl.searchParams.set('from', pathname)
     return NextResponse.redirect(loginUrl)
   }
-  
-  // Require authentication
+
   return new Response('Authentication required', {
     status: 401,
     headers: {

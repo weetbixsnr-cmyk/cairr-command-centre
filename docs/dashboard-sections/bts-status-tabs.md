@@ -128,18 +128,29 @@ Deferred to separate `competitors.json` in a future Phase 2 slice.
 `news-bank` (tab 7 of 13 on `/bts-seo`)
 
 ### Data Source
-**Mixed:** `bts/seo.json` (summary counts via `.seo.newsBank`) + `bts-status.json` (seoDash newsBank stories)
+**Primary:** `public/data/bts/news-bank.json` (dedicated BTS domain snapshot, added 2026-05-25)
+**Fallback:** `seoDash.newsBank` derived from `bts-status.json` via `newsBankFromStatus()`
 
 ### Reader Function
-`lib/dashboard-data.js` → `newsBankFromStatus()` (helper, feeds into `btsSeoDash`)
+`lib/dashboard-data.js` → `readNewsBankJson()` → `snapshot.btsNewsBank`
+Fallback: `newsBankFromStatus()` (feeds into `btsSeoDash`) if dedicated file is absent
 
 ### Key Fields
 | Field | Type | Description |
 |-------|------|-------------|
-| `stories` | array | News items with title, source, date, status (available/drafted/published) |
+| `meta` | object | Summary: lastUpdated, totalStories, available, drafted, published, stale, categories |
+| `stories` | array | Full story objects with id, title, source, category, summary, blogAngle, targetKeywords, status |
+
+### Status Filters (bts-seo.js)
+| Status | Meaning |
+|--------|---------|
+| `available` | Ready for drafting |
+| `drafted` | Draft in progress |
+| `published` | Live on WordPress |
+| `stale` | Outdated, needs review |
 
 ### Notes
-Summary counts (total/available/drafted/published) come from seo.json. Full story list comes from seoDash in bts-status.json. Deferred to separate `news-bank.json` in a future Phase 2 slice.
+Dedicated `news-bank.json` provides richer data than the legacy derived path. The tab prefers `snap.btsNewsBank` and falls back to `seoDash.newsBank` for backward compatibility. Adding news-bank.json increased `/bts-seo` pageProps to ~141 kB (non-blocking build warning above 128 kB threshold).
 
 ---
 
@@ -216,7 +227,10 @@ Training services count comes from seo.json via merge. Course details and blocke
 These tabs still read from bts-status.json (temporary CC-owned):
 - **Competitors** → planned `competitors.json`
 - **Courses** → planned `courses.json`
-- **News Bank** (full story list) → planned `news-bank.json`
 - **Suggestions, Traffic, Conversions** → no migration planned yet
+
+**Completed Phase 2 slices:**
+- **SEO data** → `public/data/bts/seo.json` (Slice B, 2026-05-24)
+- **News Bank** → `public/data/bts/news-bank.json` (2026-05-25)
 
 Phase 2 slices beyond Slice B are NOT approved.

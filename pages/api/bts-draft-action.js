@@ -8,17 +8,7 @@ import path from 'path'
 const STATUS_PATH = path.resolve(process.cwd(), 'public', 'data', 'bts-status.json')
 const DISCORD_WEBHOOK = process.env.BTS_DISCORD_WEBHOOK || ''
 
-function isAuthed(req) {
-  const cookie = req.headers.cookie || ''
-  const match = cookie.match(/bts-client-auth=([^;]+)/)
-  const SESSION_TOKEN = process.env.BTS_SESSION_TOKEN
-  if (match && SESSION_TOKEN && match[1] === SESSION_TOKEN) return true
-  const adminCookie = cookie.match(/dashboard-auth=([^;]+)/)
-  if (adminCookie) return true
-  const apiKey = req.headers['x-api-key']
-  if (apiKey && apiKey === process.env.BTS_DRAFT_API_KEY) return true
-  return false
-}
+import { isBtsAuthed, canWriteJson } from '../../lib/auth'
 
 function readStatus() {
   try { return JSON.parse(fs.readFileSync(STATUS_PATH, 'utf8')) } catch { return { drafts: { drafts: [] }, notifications: { notifications: [] } } }
@@ -59,7 +49,8 @@ function addNotification(data, message, draftTitle, action) {
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'POST only' })
-  if (!isAuthed(req)) return res.status(401).json({ error: 'Not authenticated' })
+  if (!isBtsAuthed(req)) return res.status(401).json({ error: 'Not authenticated' })
+  if (!canWriteJson()) return res.status(503).json({ error: 'JSON writes disabled in this environment' })
 
   const { id, action, content, feedback } = req.body
   if (!id || !action) return res.status(400).json({ error: 'id and action required' })

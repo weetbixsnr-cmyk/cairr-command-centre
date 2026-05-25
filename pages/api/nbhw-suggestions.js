@@ -7,12 +7,7 @@ import path from 'path'
 
 const STATUS_PATH = path.resolve(process.cwd(), 'public', 'data', 'nbhw-status.json')
 
-function isAuthed(req) {
-  const cookie = req.headers.cookie || ''
-  const adminCookie = cookie.match(/dashboard-auth=([^;]+)/)
-  if (adminCookie) return true
-  return false
-}
+import { isNbhwAuthed, canWriteJson } from '../../lib/auth'
 
 function readStatus() {
   try { return JSON.parse(fs.readFileSync(STATUS_PATH, 'utf8')) } catch { return { suggestions: { suggestions: [] } } }
@@ -23,7 +18,7 @@ function writeStatus(data) {
 }
 
 export default async function handler(req, res) {
-  if (!isAuthed(req)) return res.status(401).json({ error: 'Not authenticated' })
+  if (!isNbhwAuthed(req)) return res.status(401).json({ error: 'Not authenticated' })
 
   if (req.method === 'GET') {
     const data = readStatus()
@@ -31,6 +26,7 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'POST') {
+    if (!canWriteJson()) return res.status(503).json({ error: 'JSON writes disabled in this environment' })
     const { text } = req.body
     if (!text || !text.trim()) return res.status(400).json({ error: 'Text required' })
 

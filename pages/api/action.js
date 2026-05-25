@@ -4,6 +4,7 @@
 
 import fs from 'fs'
 import path from 'path'
+import { isDashboardAuthed, canWriteJson } from '../../lib/auth'
 
 const STATUS_PATH = path.resolve(process.cwd(), 'public', 'data', 'dashboard-status.json')
 
@@ -26,6 +27,8 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'POST') {
+    if (!isDashboardAuthed(req)) return res.status(401).json({ error: 'Not authenticated' })
+    if (!canWriteJson()) return res.status(503).json({ error: 'JSON writes disabled in this environment' })
     const { id, action } = req.body
     if (!id || !action) return res.status(400).json({ error: 'id and action required' })
 

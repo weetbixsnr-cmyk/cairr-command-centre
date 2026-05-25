@@ -69,6 +69,21 @@ content/content.json ───── copy ──────> public/data/bts/co
 
 **Vercel constraint:** Vercel's filesystem is ephemeral at runtime. The dashboard cannot read files from the BTS repo at request time. All data must be present in the Command Centre repo at build/deploy time. API routes that write JSON (like `bts-drafts.js`) cannot persist changes across deploys. Write actions must either commit back to the repo (triggering a redeploy) or use external storage. For Phase 1, the dashboard is read-only for content lifecycle; all writes happen via Claude Code sessions updating the JSON files directly.
 
+**Write-route classification (2026-05-25):**
+
+| Route | Writes To | Auth | Risk |
+|-------|-----------|------|------|
+| `/api/action` | `dashboard-status.json` | Dashboard cookie | Local-only; ephemeral on Vercel |
+| `/api/bts-draft-action` | `bts-status.json` | BTS cookie / dashboard cookie / API key | Local-only; ephemeral on Vercel |
+| `/api/bts-drafts` | `bts-status.json` | BTS cookie / dashboard cookie / API key | Local-only; ephemeral on Vercel |
+| `/api/bts-suggestions` | `bts-status.json` | BTS cookie / dashboard cookie | Local-only; ephemeral on Vercel |
+| `/api/nbhw-draft-action` | `nbhw-status.json` | Dashboard cookie / API key | Local-only; ephemeral on Vercel |
+| `/api/nbhw-drafts` | `nbhw-status.json` | Dashboard cookie / API key | Local-only; ephemeral on Vercel |
+| `/api/nbhw-gbp-action` | `nbhw-status.json` | Dashboard cookie / API key | Local-only; ephemeral on Vercel |
+| `/api/nbhw-suggestions` | `nbhw-status.json` | Dashboard cookie | Local-only; ephemeral on Vercel |
+
+All write routes are guarded by `canWriteJson()` (`lib/auth.js`): allowed locally, blocked on Vercel unless `ENABLE_JSON_WRITES=true`. Future durable writes require GitHub commit flow or external storage.
+
 ### Split Into Domain Files (Phase 2+ Roadmap)
 
 Future phases will replace the monolith with focused files in `public/data/bts/`:
