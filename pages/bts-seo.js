@@ -1528,8 +1528,10 @@ export default function BtsSeoPage({ initialSnapshot }) {
             {(() => {
               const nb = snap?.btsNewsBank || seoDash?.newsBank
               const stories = nb?.stories || []
+              const available = stories.filter(s => s.status === 'available')
+              const drafted = stories.filter(s => s.status === 'drafted')
               const published = stories.filter(s => s.status === 'published')
-              const available = stories.filter(s => s.status !== 'published')
+              const stale = stories.filter(s => s.status === 'stale')
               return (
                 <>
                   <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
@@ -1538,12 +1540,20 @@ export default function BtsSeoPage({ initialSnapshot }) {
                       <div className="stat-lbl">Available</div>
                     </div>
                     <div className="stat-card" style={{minWidth:80}}>
+                      <div className="stat-val" style={{fontSize:20,color:'#8b5cf6'}}>{drafted.length}</div>
+                      <div className="stat-lbl">Drafted</div>
+                    </div>
+                    <div className="stat-card" style={{minWidth:80}}>
                       <div className="stat-val" style={{fontSize:20,color:'#10b981'}}>{published.length}</div>
                       <div className="stat-lbl">Published</div>
                     </div>
                     <div className="stat-card" style={{minWidth:80}}>
+                      <div className="stat-val" style={{fontSize:20,color:'#6b7280'}}>{stale.length}</div>
+                      <div className="stat-lbl">Stale</div>
+                    </div>
+                    <div className="stat-card" style={{minWidth:80}}>
                       <div className="stat-val" style={{fontSize:20,color:'#3b82f6'}}>{stories.length}</div>
-                      <div className="stat-lbl">Total Stories</div>
+                      <div className="stat-lbl">Total</div>
                     </div>
                   </div>
                   {available.length > 0 && (

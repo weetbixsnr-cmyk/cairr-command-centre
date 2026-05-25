@@ -5,7 +5,7 @@
   "current_phase": "1.0-proven",
   "end_state": "Dashboard renders all consumed snapshots with input validation and smoke checks",
   "proven_date": "2026-05-25",
-  "proven_evidence": "Input validation PASS, build PASS, smoke PASS (5/5), SSR page props scoped (largest 97 kB), git clean",
+  "proven_evidence": "Input validation PASS, build PASS (non-blocking /bts-seo 141 kB page data warning), smoke PASS (5/5), news-bank snapshot consumed, git clean",
   "phase_gates": {
     "0.1-identified": true,
     "0.2-data-contract": true,
