@@ -540,6 +540,32 @@ export default function BtsSeoPage({ initialSnapshot }) {
               </div>
             </div>
 
+            {seo?.healthScan && (
+              <div className="card" style={{marginBottom:16}}>
+                <div style={{fontSize:10,color:'#555',fontWeight:600,textTransform:'uppercase',letterSpacing:1,marginBottom:10}}>Live Technical Scan</div>
+                <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(120px,1fr))',gap:8}}>
+                  {[
+                    ['URLs scanned', seo.healthScan.urlsScanned],
+                    ['HTTP 200', seo.healthScan.status200],
+                    ['Non-200', seo.healthScan.non200],
+                    ['Noindex', seo.healthScan.noindexSignals],
+                    ['Missing titles', seo.healthScan.missingTitles],
+                    ['Missing descriptions', seo.healthScan.missingMetaDescriptions],
+                    ['H1 warnings', seo.healthScan.h1Warnings],
+                    ['Image alt warnings', seo.healthScan.imageAltWarnings],
+                  ].map(([label, value]) => (
+                    <div key={label} style={{background:'#08080a',border:'1px solid #1a1a22',borderRadius:8,padding:10}}>
+                      <div style={{fontSize:18,fontWeight:800,color:value === 0 ? '#10b981' : '#fff'}}>{value ?? '—'}</div>
+                      <div style={{fontSize:9,color:'#888',marginTop:2}}>{label}</div>
+                    </div>
+                  ))}
+                </div>
+                <div style={{fontSize:8,color:'#777',marginTop:8,textAlign:'right'}}>
+                  Robots: {seo.healthScan.robotsStatus || '—'} · Sitemaps: {seo.healthScan.sitemapsChecked || 0} · Updated: {seo.healthScan.generatedAt || audit?.updatedAt || '—'}
+                </div>
+              </div>
+            )}
+
             {/* Action Plan */}
             {audit?.actions?.length > 0 && (
               <div className="card" style={{marginBottom:16}}>
@@ -608,8 +634,11 @@ export default function BtsSeoPage({ initialSnapshot }) {
         {/* TAB 1: Rankings */}
         {tab === 'rankings' && (
           <>
-            <div style={{padding:'8px 12px',background:'#1a1800',border:'1px solid #2a2000',borderRadius:8,marginBottom:14,fontSize:10,color:'#f59e0b'}}>
-              ⚠️ Manual Brave search — not GSC verified. Positions are manual spot-checks, not live data.
+            <div style={{padding:'8px 12px',background:kw?.rankingScan?.status === 'blocked' ? '#1a0808' : '#081a12',border:`1px solid ${kw?.rankingScan?.status === 'blocked' ? '#3a1111' : '#123a24'}`,borderRadius:8,marginBottom:14,fontSize:10,color:kw?.rankingScan?.status === 'blocked' ? '#f87171' : '#10b981'}}>
+              {kw?.rankingScan?.status === 'blocked'
+                ? `Ranking scan blocked — ${kw.rankingScan.blockedReason}`
+                : `Ranking scan current — ${kw?.rankingScan?.matchedKeywords || 0}/${kw?.rankingScan?.targetKeywords || 0} keywords matched`}
+              <span style={{display:'block',fontSize:8,color:'#888',marginTop:3}}>Source: {kw?.rankingScan?.source || '—'} · Updated: {kw?.rankingScan?.generatedAt || kw?.lastUpdated || '—'}</span>
             </div>
             {/* Top 10 Tracked Keywords */}
             {kw?.top10?.length > 0 && (

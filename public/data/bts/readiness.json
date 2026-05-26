@@ -1,6 +1,6 @@
 {
-  "weekOf": "2026-05-26",
-  "generatedAt": "2026-05-25T22:30:19Z",
+  "weekOf": "2026-05-27",
+  "generatedAt": "2026-05-26T21:23:26Z",
   "gate": "PASS",
   "staleDays": 9,
   "tabs": {
@@ -81,7 +81,7 @@
       "tabs": [
         "rankings"
       ],
-      "reason": "Rankings from manual SERP spot-checks only. GSC position data unavailable. Weekly review still required.",
+      "reason": "Ranking scan is automated, but real positions require a GSC/Bing export or approved SERP data source.",
       "raisedAt": "2026-05-26",
       "owner": "adam",
       "reviewBy": "2026-06-30",
