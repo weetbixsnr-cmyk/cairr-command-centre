@@ -727,29 +727,30 @@
     "weekOf": "2026-05-26",
     "tabs": {
       "seoHealth": {
-        "reviewedAt": null,
-        "reviewer": null,
-        "status": "stale"
+        "reviewedAt": "2026-05-26",
+        "reviewer": "claude",
+        "status": "current"
       },
       "rankings": {
-        "reviewedAt": null,
-        "reviewer": null,
-        "status": "stale"
+        "reviewedAt": "2026-05-26",
+        "reviewer": "claude",
+        "status": "current",
+        "exception": "EX-002"
       },
       "competitors": {
-        "reviewedAt": null,
-        "reviewer": null,
-        "status": "stale"
+        "reviewedAt": "2026-05-26",
+        "reviewer": "claude",
+        "status": "current"
       },
       "coverageMatrix": {
-        "reviewedAt": null,
-        "reviewer": null,
-        "status": "stale"
+        "reviewedAt": "2026-05-26",
+        "reviewer": "claude",
+        "status": "current"
       },
       "googleSafety": {
-        "reviewedAt": null,
-        "reviewer": null,
-        "status": "stale"
+        "reviewedAt": "2026-05-26",
+        "reviewer": "claude",
+        "status": "current"
       },
       "traffic": {
         "reviewedAt": null,
@@ -764,9 +765,9 @@
         "exception": "EX-001"
       },
       "courses": {
-        "reviewedAt": null,
-        "reviewer": null,
-        "status": "stale"
+        "reviewedAt": "2026-05-26",
+        "reviewer": "claude",
+        "status": "current"
       }
     }
   }

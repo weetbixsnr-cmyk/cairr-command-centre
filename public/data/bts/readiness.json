@@ -1,32 +1,33 @@
 {
   "weekOf": "2026-05-26",
-  "generatedAt": "2026-05-25T20:50:49Z",
-  "gate": "BLOCK",
+  "generatedAt": "2026-05-25T22:30:19Z",
+  "gate": "PASS",
   "staleDays": 9,
   "tabs": {
     "seoHealth": {
-      "reviewedAt": null,
-      "status": "stale",
+      "reviewedAt": "2026-05-26",
+      "status": "current",
       "source": "seo/seo.json"
     },
     "rankings": {
-      "reviewedAt": null,
-      "status": "stale",
-      "source": "seo/seo.json"
+      "reviewedAt": "2026-05-26",
+      "status": "current",
+      "source": "seo/seo.json",
+      "exception": "EX-002"
     },
     "competitors": {
-      "reviewedAt": null,
-      "status": "stale",
+      "reviewedAt": "2026-05-26",
+      "status": "current",
       "source": "seo/seo.json"
     },
     "coverageMatrix": {
-      "reviewedAt": null,
-      "status": "stale",
+      "reviewedAt": "2026-05-26",
+      "status": "current",
       "source": "seo/seo.json"
     },
     "googleSafety": {
-      "reviewedAt": null,
-      "status": "stale",
+      "reviewedAt": "2026-05-26",
+      "status": "current",
       "source": "seo/seo.json"
     },
     "traffic": {
@@ -42,23 +43,23 @@
       "exception": "EX-001"
     },
     "courses": {
-      "reviewedAt": null,
-      "status": "stale",
+      "reviewedAt": "2026-05-26",
+      "status": "current",
       "source": "seo/seo.json"
     },
     "futurePosts": {
-      "reviewedAt": null,
-      "status": "stale",
+      "reviewedAt": "2026-05-26",
+      "status": "current",
       "source": "content/content.json"
     },
     "gbpPosts": {
-      "reviewedAt": null,
-      "status": "stale",
+      "reviewedAt": "2026-05-26",
+      "status": "current",
       "source": "content/content.json"
     },
     "newsBank": {
-      "reviewedAt": null,
-      "status": "stale",
+      "reviewedAt": "2026-05-26",
+      "status": "current",
       "source": "seo/news-bank.json"
     }
   },

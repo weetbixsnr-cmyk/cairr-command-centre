@@ -13,14 +13,14 @@
     "weekOf": "2026-05-26",
     "tabs": {
       "futurePosts": {
-        "reviewedAt": null,
-        "reviewer": null,
-        "status": "stale"
+        "reviewedAt": "2026-05-26",
+        "reviewer": "claude",
+        "status": "current"
       },
       "gbpPosts": {
-        "reviewedAt": null,
-        "reviewer": null,
-        "status": "stale"
+        "reviewedAt": "2026-05-26",
+        "reviewer": "claude",
+        "status": "current"
       }
     }
   },

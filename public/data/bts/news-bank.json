@@ -20,9 +20,9 @@
       "weekOf": "2026-05-26",
       "tabs": {
         "newsBank": {
-          "reviewedAt": null,
-          "reviewer": null,
-          "status": "stale"
+          "reviewedAt": "2026-05-26",
+          "reviewer": "claude",
+          "status": "current"
         }
       }
     }
