@@ -28,9 +28,10 @@ export default async function handler(req, res) {
   }
 
   if (user === validUser && pass === validPass) {
-    // Set session cookie
+    const secureCookie = process.env.NODE_ENV === 'production' ? '; Secure' : ''
+
     res.setHeader('Set-Cookie', [
-      `bts-client-auth=${sessionToken}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${60 * 60 * 24 * 30}` // 30 days
+      `bts-client-auth=${sessionToken}; Path=/; HttpOnly${secureCookie}; SameSite=Lax; Max-Age=${60 * 60 * 24 * 30}` // 30 days
     ])
     return res.json({ ok: true })
   }
