@@ -1,6 +1,6 @@
 {
   "seo": {
-    "lastUpdated": "2026-05-28T21:14:46Z",
+    "lastUpdated": "2026-05-28T21:21:00Z",
     "source": "live-technical-scan",
     "client": "Better Training Solutions",
     "site": "bettertrainingsolutions.co.uk",
@@ -214,7 +214,7 @@
       "rule": "Use GSC/Bing URL Inspection or SiteGround verified crawler logs for crawler-blocking claims. Do not use VPN/datacenter curl challenges alone."
     },
     "healthScan": {
-      "generatedAt": "2026-05-28T21:14:46Z",
+      "generatedAt": "2026-05-28T21:21:00Z",
       "robotsStatus": 200,
       "sitemapsChecked": 7,
       "urlsScanned": 86,
@@ -320,12 +320,19 @@
         "geoScore": 93,
         "source": "live-technical-scan",
         "urlsScanned": 86
+      },
+      {
+        "timestamp": "2026-05-28T21:21:00Z",
+        "healthScore": 75,
+        "geoScore": 93,
+        "source": "live-technical-scan",
+        "urlsScanned": 86
       }
     ],
-    "updatedAt": "2026-05-28T21:14:46Z"
+    "updatedAt": "2026-05-28T21:21:00Z"
   },
   "keywords": {
-    "lastUpdated": "2026-05-28T21:17:11Z",
+    "lastUpdated": "2026-05-28T21:23:33Z",
     "source": "no-gsc-or-serp-source",
     "keywords": [
       {
@@ -650,7 +657,7 @@
     "top10Count": 0,
     "status": "Ranking scan blocked: No GSC export, Bing Webmaster export, or approved SERP API source was provided.",
     "rankingScan": {
-      "generatedAt": "2026-05-28T21:17:11Z",
+      "generatedAt": "2026-05-28T21:23:33Z",
       "status": "blocked",
       "source": "no-gsc-or-serp-source",
       "targetKeywords": 35,
