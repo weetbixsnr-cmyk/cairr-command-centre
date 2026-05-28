@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-05-26",
+  "lastUpdated": "2026-05-28",
   "source": "Deduplicated from bts-status.json drafts, blogInventory, contentPipeline, and publishLedger sections",
   "statusValues": [
     "draft",
@@ -10,16 +10,16 @@
     "reference"
   ],
   "weeklyReview": {
-    "weekOf": "2026-05-26",
+    "weekOf": "2026-05-28",
     "tabs": {
       "futurePosts": {
-        "reviewedAt": "2026-05-26",
-        "reviewer": "claude",
+        "reviewedAt": "2026-05-28",
+        "reviewer": "codex-bts-owner-audit",
         "status": "current"
       },
       "gbpPosts": {
-        "reviewedAt": "2026-05-26",
-        "reviewer": "claude",
+        "reviewedAt": "2026-05-28",
+        "reviewer": "codex-bts-owner-audit",
         "status": "current"
       }
     }
@@ -607,15 +607,15 @@
       "type": "gbp",
       "service": "Industry",
       "batch": null,
-      "status": "draft",
+      "status": "held",
       "wpId": null,
       "url": null,
       "featuredImageId": null,
       "publishedAt": null,
       "sourceFile": "content/gbp/gbp-post-skills-shortage.md",
-      "excerpt": "Draft GBP post about the plumber skills shortage and training opportunities.",
+      "excerpt": "Held GBP placeholder about the plumber skills shortage. Not approval-ready until full copy exists and is verified.",
       "reviewUrl": null,
-      "previewText": "_For: Google Business Profile | Max 1,500 chars | Category: Update_ _Status: Draft — awaiting content_ --- **Topic:** UK plumber skills shortage and training opportunities at BTS. **Service:** Industry / Plumbing **Draft notes:** Placeholder for skills shortage GBP post. Content to be drafted during"
+      "previewText": "HELD: Placeholder only. This GBP post is not approval-ready because the source file contains draft notes instead of final Google Business Profile copy."
     },
     {
       "id": "gbp-09-stack-qualifications",

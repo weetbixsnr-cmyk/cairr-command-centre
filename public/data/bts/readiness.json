@@ -1,16 +1,16 @@
 {
-  "weekOf": "2026-05-27",
-  "generatedAt": "2026-05-26T21:23:26Z",
+  "weekOf": "2026-05-28",
+  "generatedAt": "2026-05-28T06:50:16Z",
   "gate": "PASS",
   "staleDays": 9,
   "tabs": {
     "seoHealth": {
-      "reviewedAt": "2026-05-26",
+      "reviewedAt": "2026-05-28",
       "status": "current",
       "source": "seo/seo.json"
     },
     "rankings": {
-      "reviewedAt": "2026-05-26",
+      "reviewedAt": "2026-05-28",
       "status": "current",
       "source": "seo/seo.json",
       "exception": "EX-002"
@@ -48,17 +48,17 @@
       "source": "seo/seo.json"
     },
     "futurePosts": {
-      "reviewedAt": "2026-05-26",
+      "reviewedAt": "2026-05-28",
       "status": "current",
       "source": "content/content.json"
     },
     "gbpPosts": {
-      "reviewedAt": "2026-05-26",
+      "reviewedAt": "2026-05-28",
       "status": "current",
       "source": "content/content.json"
     },
     "newsBank": {
-      "reviewedAt": "2026-05-26",
+      "reviewedAt": "2026-05-28",
       "status": "current",
       "source": "seo/news-bank.json"
     }
