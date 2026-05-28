@@ -9,6 +9,20 @@
     "held",
     "reference"
   ],
+  "weeklyOutputContract": {
+    "name": "BTS weekly content build target",
+    "pagesPerWeek": 4,
+    "gbpPostsPerWeek": 3,
+    "pageMix": {
+      "blog": 1,
+      "location": 1,
+      "news": 1,
+      "courseBusinessPartner": 1
+    },
+    "approvalRule": "Sunny approval packets must separate page drafts from GBP posts. Do not replace the 4-page weekly target with GBP posts.",
+    "pageDefinition": "The 4 weekly pages are one general/service blog, one location page, one news/insights page, and one course, business, partner, about, or similar BTS authority page.",
+    "gbpDefinition": "The 3 weekly Google Business Profile posts are separate from the 4 weekly pages."
+  },
   "weeklyReview": {
     "weekOf": "2026-05-28",
     "tabs": {

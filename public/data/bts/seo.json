@@ -170,17 +170,17 @@
         {
           "name": "Service Explainer",
           "pct": 30,
-          "weeklyTarget": "1 blog"
+          "weeklyTarget": "1 page"
         },
         {
           "name": "Location Targeted",
           "pct": 20,
-          "weeklyTarget": "1 blog"
+          "weeklyTarget": "1 page"
         },
         {
-          "name": "Career/Guide",
+          "name": "Course/Business/Partner Authority",
           "pct": 15,
-          "weeklyTarget": "0.5 blog"
+          "weeklyTarget": "1 page"
         },
         {
           "name": "News & Commentary",
@@ -193,7 +193,7 @@
           "weeklyTarget": "3 posts"
         }
       ],
-      "weeklyCadence": "Mon + Thu drafts, weekly GBP posts, Friday rankings",
+      "weeklyCadence": "Weekly target: 4 pages (1 service/blog, 1 location, 1 news, 1 course/business/partner authority page) plus 3 GBP posts. Friday rankings.",
       "reviewCoaching": false
     },
     "assets": {
