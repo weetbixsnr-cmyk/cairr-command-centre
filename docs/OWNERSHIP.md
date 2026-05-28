@@ -1,7 +1,7 @@
 # Data Ownership — Command Centre
 
 > Declares what Command Centre owns, what it imports, and who updates what.
-> Last verified: 2026-05-25
+> Last verified: 2026-05-28
 
 ## This Project Owns (Rendering + Dashboard-Local Data)
 
@@ -12,7 +12,10 @@
 | `pages/nbhw-seo.js` | NBHW dashboard | Renders NBHW tabs |
 | `pages/index.js` | Home dashboard | Project cards, blockers, action queue |
 | `middleware.js` | Authentication | HTTP Basic Auth + session cookies |
-| `public/data/bts-status.json` | BTS non-content data (temporary) | Feeds 10 BTS tabs + 3 write-path API routes |
+| `public/data/bts/seo.json` | BTS SEO health, rankings, audit, and plan snapshot | Imported/current dashboard source |
+| `public/data/bts/news-bank.json` | BTS news-bank snapshot | Imported/current dashboard source |
+| `public/data/bts/readiness.json` | BTS weekly readiness gate | Imported/current dashboard source |
+| `public/data/bts-status.json` | BTS compatibility data (temporary) | Still backs suggestions/notifications and legacy full draft copy where `content.json` only has previews |
 | `public/data/nbhw-status.json` | NBHW status data (temporary) | Pending NBHW project-owned export |
 | `public/data/dashboard-status.json` | Dashboard health | Action queue, de-agenting status |
 
@@ -21,11 +24,13 @@
 | Source | File | Destination | Sync Method |
 |--------|------|-------------|-------------|
 | BTS repo | `content/content.json` | `public/data/bts/content.json` | Manual copy after every BTS content change |
+| BTS repo | `seo/seo.json` | `public/data/bts/seo.json` | Manual copy after BTS SEO/ranking/scan updates |
 | BTS repo | `seo/news-bank.json` | `public/data/bts/news-bank.json` | Manual copy after BTS news-bank updates |
+| BTS repo | readiness export | `public/data/bts/readiness.json` | Manual copy after weekly readiness review |
 
 ## Temporary Ownership (Will Transfer in Phase 2)
 
-`public/data/bts-status.json` is currently CC-owned because BTS has no project-side equivalent for SEO metrics, competitors, courses, etc. Completed Phase 2 slices:
+`public/data/bts-status.json` remains as compatibility storage for dashboard-local suggestions/notifications and legacy full draft bodies where the current BTS content snapshot only has previews. Completed Phase 2 slices:
 - `bts/seo.json` — SEO health, keywords, rankings, audit, plan (Slice B, 2026-05-24)
 - `bts/news-bank.json` — news story bank (2026-05-25)
 
@@ -37,7 +42,8 @@ Remaining Phase 2 candidates (not approved):
 | Action | Who | How |
 |--------|-----|-----|
 | BTS content lifecycle changes | BTS session → manual copy to CC | Update BTS content.json, copy to CC |
-| BTS SEO metrics, keywords, competitors | CC session (temporary) | Direct edit of bts-status.json |
+| BTS SEO health, keywords, rankings | BTS session → manual copy to CC | Update/export BTS seo.json, copy to CC |
+| BTS compatibility suggestions/notifications/full draft bodies | CC session (temporary) | Direct edit of bts-status.json |
 | BTS drafts/suggestions via dashboard | Dashboard API routes | Write to bts-status.json automatically |
 | NBHW status updates | CC session (temporary) | Direct edit of nbhw-status.json |
 | Dashboard health/action queue | CC session | Direct edit of dashboard-status.json |

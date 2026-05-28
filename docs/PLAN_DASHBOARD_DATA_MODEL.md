@@ -257,8 +257,8 @@ Steps 1-6 and 8 can be a single script that takes batch ID and WP IDs as input.
 
 | Step | What | Where | Scriptable |
 |---|---|---|---|
-| 1 | Check rankings (manual Brave search or GSC when available) | External | Manual |
-| 2 | Update keyword positions in `seo-metrics.json` | `public/data/bts/seo-metrics.json` | Partially |
+| 1 | Check rankings from an approved GSC export, Bing Webmaster export, or SERP source; if none exists, record a blocked ranking scan | External | Manual |
+| 2 | Update keyword positions or blocked ranking evidence in `seo.json` | `public/data/bts/seo.json` | Partially |
 | 3 | Update `healthScore` if changed | `seo-metrics.json` | Manual |
 | 4 | Update `status.json` blockers and nextActions | `public/data/bts/status.json` | Manual |
 | 5 | Check competitor activity | External | Manual |

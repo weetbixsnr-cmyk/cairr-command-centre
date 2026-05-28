@@ -6,6 +6,7 @@ import fs from 'fs'
 import path from 'path'
 
 const STATUS_PATH = path.resolve(process.cwd(), 'public', 'data', 'bts-status.json')
+const READINESS_PATH = path.resolve(process.cwd(), 'public', 'data', 'bts', 'readiness.json')
 const DISCORD_WEBHOOK = process.env.BTS_DISCORD_WEBHOOK || ''
 
 import { isBtsAuthed, canWriteJson } from '../../lib/auth'
@@ -16,6 +17,10 @@ function readStatus() {
 
 function writeStatus(data) {
   fs.writeFileSync(STATUS_PATH, JSON.stringify(data, null, 2) + '\n')
+}
+
+function readReadiness() {
+  try { return JSON.parse(fs.readFileSync(READINESS_PATH, 'utf8')) } catch { return null }
 }
 
 async function notifyDiscord(title, description, color) {
@@ -54,6 +59,15 @@ export default async function handler(req, res) {
 
   const { id, action, content, feedback } = req.body
   if (!id || !action) return res.status(400).json({ error: 'id and action required' })
+
+  const readiness = readReadiness()
+  if (readiness?.gate === 'BLOCK' && ['approve', 'publish', 'sign-off', 'check-desktop', 'check-mobile'].includes(action)) {
+    return res.status(423).json({
+      error: 'Readiness gate is BLOCK. Approval, publish, and sign-off actions are disabled until stale or blocked BTS data sources are updated.',
+      gate: readiness.gate,
+      weekOf: readiness.weekOf
+    })
+  }
 
   try {
     const data = readStatus()

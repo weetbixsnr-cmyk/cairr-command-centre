@@ -441,8 +441,8 @@ export default function BtsSeoPage({ initialSnapshot }) {
         {/* TAB: SEO Health */}
         {tab === 'health' && (
           <>
-            <div style={{padding:'8px 12px',background:'#1a1800',border:'1px solid #2a2000',borderRadius:8,marginBottom:14,fontSize:10,color:'#f59e0b'}}>
-              ⚠️ Manual estimate — not a live scan. GSC not connected. Scores are based on manual review.
+            <div style={{padding:'8px 12px',background:'#081a12',border:'1px solid #123a24',borderRadius:8,marginBottom:14,fontSize:10,color:'#10b981'}}>
+              Current BTS technical scan evidence loaded from public/data/bts/seo.json. GSC is not connected, so traffic and ranking evidence remain separately gated.
             </div>
             {/* Plan Status & Overview + Critical Fixes (from SEO-DASHBOARD.md) */}
             <DashSection section={findDashSection(seoDash?.sections, 'plan-overview', ['plan', 'overview', 'plan-status'])} icon="📋" maxLines={30} />
@@ -552,6 +552,7 @@ export default function BtsSeoPage({ initialSnapshot }) {
                     ['Missing titles', seo.healthScan.missingTitles],
                     ['Missing descriptions', seo.healthScan.missingMetaDescriptions],
                     ['H1 warnings', seo.healthScan.h1Warnings],
+                    ['Canonical warnings', seo.healthScan.canonicalWarnings],
                     ['Image alt warnings', seo.healthScan.imageAltWarnings],
                   ].map(([label, value]) => (
                     <div key={label} style={{background:'#08080a',border:'1px solid #1a1a22',borderRadius:8,padding:10}}>

@@ -1,7 +1,7 @@
 # Section Map — Command Centre
 
 > Every logical section inside the Command Centre, its key files, and update frequency.
-> Last verified: 2026-05-24
+> Last verified: 2026-05-28
 
 ## Sections
 
@@ -9,7 +9,10 @@
 |---------|---------|-----------|-----------------|-------|
 | Data Layer | Aggregates all project data into dashboard snapshot | `lib/dashboard-data.js` | On code change | CC session |
 | BTS Content Data | Imported BTS content lifecycle (38 items) | `public/data/bts/content.json` | On BTS publish (manual copy from BTS repo) | BTS (source), CC (copy) |
-| BTS Status Data | BTS SEO, keywords, competitors, courses, news, suggestions | `public/data/bts-status.json` | Manual update | CC session (temporary owner) |
+| BTS SEO Data | BTS SEO health, rankings, technical scan, audit, plan | `public/data/bts/seo.json` | BTS snapshot copy | BTS (source), CC (copy) |
+| BTS News Bank | BTS news story bank | `public/data/bts/news-bank.json` | BTS snapshot copy | BTS (source), CC (copy) |
+| BTS Readiness | Weekly readiness gate and tab freshness | `public/data/bts/readiness.json` | Weekly readiness copy | BTS/CC review |
+| BTS Compatibility Data | Suggestions, notifications, and legacy full draft bodies | `public/data/bts-status.json` | Manual update | CC session (temporary owner) |
 | NBHW Status Data | NBHW SEO, keywords, suburbs, competitors | `public/data/nbhw-status.json` | Manual update | CC session (temporary, pending NBHW audit) |
 | Dashboard Health | De-agenting status, action queue | `public/data/dashboard-status.json` | Manual update | CC session |
 | BTS Dashboard | 13-tab BTS SEO command page | `pages/bts-seo.js` | On code change | CC session |
@@ -24,12 +27,15 @@
 | Source Project | Source File | CC Destination | Sync Method | Current Status |
 |----------------|------------|----------------|-------------|----------------|
 | BTS | `content/content.json` | `public/data/bts/content.json` | Manual copy | Working (Phase 1) |
+| BTS | SEO/ranking/scan export | `public/data/bts/seo.json` | Manual copy | Working |
+| BTS | news-bank export | `public/data/bts/news-bank.json` | Manual copy | Working |
+| BTS | readiness export | `public/data/bts/readiness.json` | Manual copy | Working |
 
 ## Data Files Owned (Dashboard-Local)
 
 | File | Purpose | Size | Status |
 |------|---------|------|--------|
-| `public/data/bts-status.json` | BTS non-content dashboard data | 174 KB | Active (temporary CC-owned, feeds 10 tabs + 3 write-path API routes) |
+| `public/data/bts-status.json` | BTS compatibility dashboard data | 174 KB | Active only for suggestions/notifications and legacy full draft bodies |
 | `public/data/nbhw-status.json` | NBHW project status | 3.3 KB | Active (pending NBHW audit) |
 | `public/data/dashboard-status.json` | Dashboard health + action queue | 1.5 KB | Active |
 

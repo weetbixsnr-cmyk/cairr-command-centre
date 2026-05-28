@@ -1,14 +1,17 @@
 # Protected Files — Command Centre
 
 > Files that must NOT be edited from outside this project's session.
-> Last verified: 2026-05-24
+> Last verified: 2026-05-28
 
 ## Core Data Files
 
 | File | Reason |
 |------|--------|
 | `public/data/bts/content.json` | Imported from BTS repo; only update via BTS copy procedure |
-| `public/data/bts-status.json` | Live backing store for 10 BTS tabs + 3 write-path API routes |
+| `public/data/bts/seo.json` | Imported BTS SEO/ranking/scan snapshot; only update via BTS copy procedure |
+| `public/data/bts/news-bank.json` | Imported BTS news-bank snapshot; only update via BTS copy procedure |
+| `public/data/bts/readiness.json` | Imported BTS readiness gate; only update via weekly readiness copy procedure |
+| `public/data/bts-status.json` | Compatibility backing store for Sunny suggestions/notifications and legacy full draft bodies |
 | `public/data/nbhw-status.json` | Live backing store for NBHW dashboard + 4 API routes |
 | `public/data/dashboard-status.json` | Live backing store for action queue + system diagnostics |
 
@@ -31,7 +34,7 @@
 ## Rules
 
 - Only CC session or Adam edits CC files
-- BTS content.json updates come via copy from BTS repo — never edit the CC copy directly
+- BTS `public/data/bts/*.json` snapshot updates come via copy from BTS repo — never edit the CC copy directly
 - Root orchestrator may read for audits but never edit
 - Do not push to GitHub without Adam's approval
 - Do not modify Vercel configuration without Adam's approval
