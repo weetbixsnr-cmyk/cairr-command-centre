@@ -1,12 +1,12 @@
 {
   "seo": {
-    "lastUpdated": "2026-05-28T06:46:39Z",
+    "lastUpdated": "2026-05-28T21:14:46Z",
     "source": "live-technical-scan",
     "client": "Better Training Solutions",
     "site": "bettertrainingsolutions.co.uk",
     "healthScore": 75,
     "healthScoreTarget": 75,
-    "geoReadiness": 5,
+    "geoReadiness": 93,
     "geoAiReadinessTarget": 60,
     "pagesLive": 39,
     "blogsPublished": 17,
@@ -214,7 +214,7 @@
       "rule": "Use GSC/Bing URL Inspection or SiteGround verified crawler logs for crawler-blocking claims. Do not use VPN/datacenter curl challenges alone."
     },
     "healthScan": {
-      "generatedAt": "2026-05-28T06:46:39Z",
+      "generatedAt": "2026-05-28T21:14:46Z",
       "robotsStatus": 200,
       "sitemapsChecked": 7,
       "urlsScanned": 86,
@@ -230,24 +230,21 @@
   },
   "seoAudit": {
     "timestamp": "2026-05-17T00:00:00+10:00",
-    "source": "bts-source-of-truth-handoff",
-    "healthScore": 28,
+    "source": "live-technical-scan",
+    "healthScore": 75,
     "healthBreakdown": {
-      "technical": null,
-      "content": null,
-      "onPage": null,
-      "schema": null,
-      "performance": null,
-      "aiSearch": 5,
-      "images": null
+      "technical": 100,
+      "onPage": 69,
+      "schema": 100,
+      "canonical": 100,
+      "images": 0
     },
-    "geoScore": 5,
+    "geoScore": 93,
     "geoBreakdown": {
-      "citability": null,
-      "structure": null,
-      "multiModal": null,
-      "authority": null,
-      "technicalAccess": null
+      "schemaCoverage": 100,
+      "metaDescriptionCoverage": 66,
+      "canonicalCoverage": 100,
+      "ogCoverage": 100
     },
     "crawlers": [],
     "schema": {
@@ -302,12 +299,33 @@
         "geoScore": 5,
         "source": "live-technical-scan",
         "urlsScanned": 86
+      },
+      {
+        "timestamp": "2026-05-28T21:07:09Z",
+        "healthScore": 75,
+        "geoScore": 93,
+        "source": "live-technical-scan",
+        "urlsScanned": 86
+      },
+      {
+        "timestamp": "2026-05-28T21:12:35Z",
+        "healthScore": 75,
+        "geoScore": 93,
+        "source": "live-technical-scan",
+        "urlsScanned": 86
+      },
+      {
+        "timestamp": "2026-05-28T21:14:46Z",
+        "healthScore": 75,
+        "geoScore": 93,
+        "source": "live-technical-scan",
+        "urlsScanned": 86
       }
     ],
-    "updatedAt": "2026-05-28T06:46:39Z"
+    "updatedAt": "2026-05-28T21:14:46Z"
   },
   "keywords": {
-    "lastUpdated": "2026-05-28T06:49:59Z",
+    "lastUpdated": "2026-05-28T21:17:11Z",
     "source": "no-gsc-or-serp-source",
     "keywords": [
       {
@@ -632,7 +650,7 @@
     "top10Count": 0,
     "status": "Ranking scan blocked: No GSC export, Bing Webmaster export, or approved SERP API source was provided.",
     "rankingScan": {
-      "generatedAt": "2026-05-28T06:49:59Z",
+      "generatedAt": "2026-05-28T21:17:11Z",
       "status": "blocked",
       "source": "no-gsc-or-serp-source",
       "targetKeywords": 35,
