@@ -400,15 +400,15 @@ export default function BtsSeoPage({ initialSnapshot }) {
         {/* Tab navigation — RIGHT after stats + safety strip */}
         <div style={{display:'flex',gap:6,marginBottom:16,overflowX:'auto',WebkitOverflowScrolling:'touch',scrollbarWidth:'none'}}>
           <TabButton active={tab==='health'} label="🏥 SEO Health" onClick={() => setTab('health')} />
-          <TabButton active={tab==='seo-plan'} label="📋 SEO Plan" onClick={() => setTab('seo-plan')} />
+          <TabButton active={tab==='future-posts'} label="📮 Future Posts" onClick={() => setTab('future-posts')} />
+          <TabButton active={tab==='gbp-posts'} label="📍 GBP Posts" onClick={() => setTab('gbp-posts')} />
           <TabButton active={tab==='rankings'} label="📊 Rankings" onClick={() => setTab('rankings')} />
+          <TabButton active={tab==='seo-plan'} label="📋 SEO Plan" onClick={() => setTab('seo-plan')} />
           <TabButton active={tab==='matrix'} label="📍 Coverage Matrix" onClick={() => setTab('matrix')} />
           <TabButton active={tab==='competitors'} label="🏆 Competitors" onClick={() => setTab('competitors')} />
           <TabButton active={tab==='safety'} label="🛡️ Google Safety" onClick={() => setTab('safety')} />
           <TabButton active={tab==='news-bank'} label="📰 News Bank" onClick={() => setTab('news-bank')} />
           <TabButton active={tab==='suggestions'} label="💡 Suggestions" onClick={() => setTab('suggestions')} />
-          <TabButton active={tab==='gbp-posts'} label="📍 GBP Posts" onClick={() => setTab('gbp-posts')} />
-          <TabButton active={tab==='future-posts'} label="📮 Future Posts" onClick={() => setTab('future-posts')} />
           <TabButton active={tab==='traffic'} label="📊 Traffic" onClick={() => setTab('traffic')} />
           <TabButton active={tab==='conversions'} label="📞 Conversions" onClick={() => setTab('conversions')} />
           <TabButton active={tab==='courses'} label="📚 Courses" onClick={() => setTab('courses')} />
