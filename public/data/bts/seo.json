@@ -1,12 +1,12 @@
 {
   "seo": {
-    "lastUpdated": "2026-05-28T21:31:11Z",
+    "lastUpdated": "2026-05-29T22:25:33Z",
     "source": "live-technical-scan",
     "client": "Better Training Solutions",
     "site": "bettertrainingsolutions.co.uk",
     "healthScore": 75,
     "healthScoreTarget": 75,
-    "geoReadiness": 93,
+    "geoReadiness": 94,
     "geoAiReadinessTarget": 60,
     "pagesLive": 39,
     "blogsPublished": 17,
@@ -16,7 +16,7 @@
     "rankings": {
       "targetKeywords": 35,
       "top10Count": 0,
-      "status": "Ranking scan blocked: No GSC export, Bing Webmaster export, or approved SERP API source was provided."
+      "status": "0/35 target keywords in top 10, 36 more queries discovered from csv:/Users/cairr/AI/CAIRR/clients/better-training-solutions/seo/gsc-export.csv"
     },
     "p0Blockers": [
       "GSC/Bing URL Inspection still required for real crawler indexing confirmation"
@@ -214,18 +214,18 @@
       "rule": "Use GSC/Bing URL Inspection or SiteGround verified crawler logs for crawler-blocking claims. Do not use VPN/datacenter curl challenges alone."
     },
     "healthScan": {
-      "generatedAt": "2026-05-28T21:31:11Z",
+      "generatedAt": "2026-05-29T22:25:33Z",
       "robotsStatus": 200,
       "sitemapsChecked": 7,
-      "urlsScanned": 86,
-      "status200": 86,
+      "urlsScanned": 90,
+      "status200": 90,
       "non200": 0,
       "noindexSignals": 0,
       "missingTitles": 0,
-      "missingMetaDescriptions": 29,
-      "h1Warnings": 60,
+      "missingMetaDescriptions": 27,
+      "h1Warnings": 64,
       "canonicalWarnings": 0,
-      "imageAltWarnings": 86
+      "imageAltWarnings": 90
     }
   },
   "seoAudit": {
@@ -234,15 +234,15 @@
     "healthScore": 75,
     "healthBreakdown": {
       "technical": 100,
-      "onPage": 69,
+      "onPage": 70,
       "schema": 100,
       "canonical": 100,
       "images": 0
     },
-    "geoScore": 93,
+    "geoScore": 94,
     "geoBreakdown": {
       "schemaCoverage": 100,
-      "metaDescriptionCoverage": 66,
+      "metaDescriptionCoverage": 70,
       "canonicalCoverage": 100,
       "ogCoverage": 100
     },
@@ -334,13 +334,20 @@
         "geoScore": 93,
         "source": "live-technical-scan",
         "urlsScanned": 86
+      },
+      {
+        "timestamp": "2026-05-29T22:25:33Z",
+        "healthScore": 75,
+        "geoScore": 94,
+        "source": "live-technical-scan",
+        "urlsScanned": 90
       }
     ],
-    "updatedAt": "2026-05-28T21:31:11Z"
+    "updatedAt": "2026-05-29T22:25:33Z"
   },
   "keywords": {
-    "lastUpdated": "2026-05-28T21:33:55Z",
-    "source": "no-gsc-or-serp-source",
+    "lastUpdated": "2026-05-29T22:28:34Z",
+    "source": "csv:/Users/cairr/AI/CAIRR/clients/better-training-solutions/seo/gsc-export.csv",
     "keywords": [
       {
         "keyword": "ACS training course UK",
@@ -444,11 +451,11 @@
       {
         "keyword": "unvented hot water course",
         "baseline": null,
-        "latest": 50,
-        "trend": "\u2014",
-        "url": "\u2014",
+        "latest": 96.0,
+        "trend": "down",
+        "url": "https://bettertrainingsolutions.co.uk/course/unvented-hot-water-systems-safety/",
         "section": "\ud83d\udfe1 Plumbing/Water Keywords (9)",
-        "status": "needs-gsc-verification"
+        "status": "outside-top-50"
       },
       {
         "keyword": "G3 training course",
@@ -656,26 +663,468 @@
         "url": "\u2014",
         "section": "\ud83d\udccd Local Keywords (5)",
         "status": "needs-gsc-verification"
+      },
+      {
+        "keyword": "better training solutions",
+        "baseline": null,
+        "latest": 1.3,
+        "url": "https://bettertrainingsolutions.co.uk/",
+        "status": "top-3",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "bettertraining",
+        "baseline": null,
+        "latest": 4.5,
+        "url": "https://bettertrainingsolutions.co.uk/",
+        "status": "top-10",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "better training",
+        "baseline": null,
+        "latest": 4.7,
+        "url": "https://bettertrainingsolutions.co.uk/",
+        "status": "top-10",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "better trained",
+        "baseline": null,
+        "latest": 9.0,
+        "url": "https://bettertrainingsolutions.co.uk/",
+        "status": "top-10",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "are gas engineers in demand",
+        "baseline": null,
+        "latest": 17.0,
+        "url": "https://bettertrainingsolutions.co.uk/thinking-about-a-career-change-into-gas-engineering-heres-what-you-need-to-know/",
+        "status": "top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "is there a shortage of gas engineers in the uk",
+        "baseline": null,
+        "latest": 18.0,
+        "url": "https://bettertrainingsolutions.co.uk/thinking-about-a-career-change-into-gas-engineering-heres-what-you-need-to-know/",
+        "status": "top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "is gas engineer a dying trade",
+        "baseline": null,
+        "latest": 20.0,
+        "url": "https://bettertrainingsolutions.co.uk/thinking-about-a-career-change-into-gas-engineering-heres-what-you-need-to-know/",
+        "status": "top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "better solution",
+        "baseline": null,
+        "latest": 22.0,
+        "url": "https://bettertrainingsolutions.co.uk/",
+        "status": "top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "decoupling gas and electricity prices",
+        "baseline": null,
+        "latest": 22.0,
+        "url": "https://bettertrainingsolutions.co.uk/uk-decoupling-gas-electricity-prices-what-it-means-for-heating-engineers/",
+        "status": "top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "train plumber",
+        "baseline": null,
+        "latest": 29.0,
+        "url": "https://bettertrainingsolutions.co.uk/",
+        "status": "top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "better solutions",
+        "baseline": null,
+        "latest": 34.0,
+        "url": "https://bettertrainingsolutions.co.uk/",
+        "status": "top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "training solutions ni antrim",
+        "baseline": null,
+        "latest": 34.0,
+        "url": "https://bettertrainingsolutions.co.uk/",
+        "status": "top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "technical training solutions",
+        "baseline": null,
+        "latest": 39.6,
+        "url": "https://bettertrainingsolutions.co.uk/",
+        "status": "top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "training solution",
+        "baseline": null,
+        "latest": 40.0,
+        "url": "https://bettertrainingsolutions.co.uk/",
+        "status": "top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "industry training solutions",
+        "baseline": null,
+        "latest": 40.5,
+        "url": "https://bettertrainingsolutions.co.uk/",
+        "status": "top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "training solutions",
+        "baseline": null,
+        "latest": 43.5,
+        "url": "https://bettertrainingsolutions.co.uk/",
+        "status": "top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "becoming a gas engineer at 40",
+        "baseline": null,
+        "latest": 44.0,
+        "url": "https://bettertrainingsolutions.co.uk/thinking-about-a-career-change-into-gas-engineering-heres-what-you-need-to-know/",
+        "status": "top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "unvented hwss nuneaton",
+        "baseline": null,
+        "latest": 44.0,
+        "url": "https://bettertrainingsolutions.co.uk/course/unvented-hot-water-systems-safety/",
+        "status": "top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "gas engineering",
+        "baseline": null,
+        "latest": 45.3,
+        "url": "https://bettertrainingsolutions.co.uk/thinking-about-a-career-change-into-gas-engineering-heres-what-you-need-to-know/",
+        "status": "top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "professional training solutions",
+        "baseline": null,
+        "latest": 50.5,
+        "url": "https://bettertrainingsolutions.co.uk/",
+        "status": "outside-top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "becoming a gas engineer at 30",
+        "baseline": null,
+        "latest": 57.0,
+        "url": "https://bettertrainingsolutions.co.uk/thinking-about-a-career-change-into-gas-engineering-heres-what-you-need-to-know/",
+        "status": "outside-top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "unvented hwss coventry",
+        "baseline": null,
+        "latest": 58.0,
+        "url": "https://bettertrainingsolutions.co.uk/course/unvented-hot-water-systems-safety/",
+        "status": "outside-top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "unvented hwss course birmingham",
+        "baseline": null,
+        "latest": 59.3,
+        "url": "https://bettertrainingsolutions.co.uk/course/unvented-hot-water-systems-safety/",
+        "status": "outside-top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "how do you become a gas engineer",
+        "baseline": null,
+        "latest": 64.5,
+        "url": "https://bettertrainingsolutions.co.uk/thinking-about-a-career-change-into-gas-engineering-heres-what-you-need-to-know/",
+        "status": "outside-top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "hot water systems and safety course birmingham",
+        "baseline": null,
+        "latest": 65.0,
+        "url": "https://bettertrainingsolutions.co.uk/course/unvented-hot-water-systems-safety/",
+        "status": "outside-top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "become a gas engineer",
+        "baseline": null,
+        "latest": 65.2,
+        "url": "https://bettertrainingsolutions.co.uk/thinking-about-a-career-change-into-gas-engineering-heres-what-you-need-to-know/",
+        "status": "outside-top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "becoming a heating engineer",
+        "baseline": null,
+        "latest": 66.0,
+        "url": "https://bettertrainingsolutions.co.uk/thinking-about-a-career-change-into-gas-engineering-heres-what-you-need-to-know/",
+        "status": "outside-top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "become gas engineer",
+        "baseline": null,
+        "latest": 69.0,
+        "url": "https://bettertrainingsolutions.co.uk/thinking-about-a-career-change-into-gas-engineering-heres-what-you-need-to-know/",
+        "status": "outside-top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "how to become a heating engineer",
+        "baseline": null,
+        "latest": 71.5,
+        "url": "https://bettertrainingsolutions.co.uk/thinking-about-a-career-change-into-gas-engineering-heres-what-you-need-to-know/",
+        "status": "outside-top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "acs renewal training course dudley",
+        "baseline": null,
+        "latest": 76.0,
+        "url": "https://bettertrainingsolutions.co.uk/course/ccn1-re-assessment/",
+        "status": "outside-top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "unvented hot water training courses london",
+        "baseline": null,
+        "latest": 82.5,
+        "url": "https://bettertrainingsolutions.co.uk/course/unvented-hot-water-systems-safety/",
+        "status": "outside-top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "unvented hot water (g3) training",
+        "baseline": null,
+        "latest": 89.0,
+        "url": "https://bettertrainingsolutions.co.uk/course/unvented-hot-water-systems-safety/",
+        "status": "outside-top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "unvented hot water training course",
+        "baseline": null,
+        "latest": 89.0,
+        "url": "https://bettertrainingsolutions.co.uk/course/unvented-hot-water-systems-safety/",
+        "status": "outside-top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "how to become a gas engineer",
+        "baseline": null,
+        "latest": 92.3,
+        "url": "https://bettertrainingsolutions.co.uk/thinking-about-a-career-change-into-gas-engineering-heres-what-you-need-to-know/",
+        "status": "outside-top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "how do i become a gas engineer",
+        "baseline": null,
+        "latest": 93.0,
+        "url": "https://bettertrainingsolutions.co.uk/thinking-about-a-career-change-into-gas-engineering-heres-what-you-need-to-know/",
+        "status": "outside-top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "g3 unvented course",
+        "baseline": null,
+        "latest": 93.5,
+        "url": "https://bettertrainingsolutions.co.uk/course/unvented-hot-water-systems-safety/",
+        "status": "outside-top-50",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
       }
     ],
-    "top10": [],
+    "top10": [
+      {
+        "keyword": "better training solutions",
+        "baseline": null,
+        "latest": 1.3,
+        "url": "https://bettertrainingsolutions.co.uk/",
+        "status": "top-3",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "bettertraining",
+        "baseline": null,
+        "latest": 4.5,
+        "url": "https://bettertrainingsolutions.co.uk/",
+        "status": "top-10",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "better training",
+        "baseline": null,
+        "latest": 4.7,
+        "url": "https://bettertrainingsolutions.co.uk/",
+        "status": "top-10",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      },
+      {
+        "keyword": "better trained",
+        "baseline": null,
+        "latest": 9.0,
+        "url": "https://bettertrainingsolutions.co.uk/",
+        "status": "top-10",
+        "trend": "new",
+        "section": "discovered",
+        "discovered": true,
+        "source": "gsc-discovered"
+      }
+    ],
     "campaigns": [],
     "targetKeywords": 35,
     "top10Count": 0,
-    "status": "Ranking scan blocked: No GSC export, Bing Webmaster export, or approved SERP API source was provided.",
+    "status": "0/35 target keywords in top 10, 36 more queries discovered from csv:/Users/cairr/AI/CAIRR/clients/better-training-solutions/seo/gsc-export.csv",
     "rankingScan": {
-      "generatedAt": "2026-05-28T21:33:55Z",
-      "status": "blocked",
-      "source": "no-gsc-or-serp-source",
+      "generatedAt": "2026-05-29T22:28:34Z",
+      "status": "current",
+      "source": "csv:/Users/cairr/AI/CAIRR/clients/better-training-solutions/seo/gsc-export.csv",
       "targetKeywords": 35,
-      "evidenceRows": 0,
-      "matchedKeywords": 0,
+      "evidenceRows": 38,
+      "matchedKeywords": 1,
       "top10Count": 0,
-      "discoveredKeywords": 0,
-      "discoveredTop10": 0,
-      "blockedReason": "No GSC export, Bing Webmaster export, or approved SERP API source was provided.",
+      "discoveredKeywords": 36,
+      "discoveredTop10": 4,
+      "blockedReason": null,
       "requiredInput": "Run with --csv path/to/gsc-or-serp-export.csv, or add a SERP/GSC connector before claiming ranking positions."
-    }
+    },
+    "discoveredCount": 36
   },
   "seoPlan": {
     "client": "Better Training Solutions",
@@ -812,15 +1261,14 @@
     "weekOf": "2026-05-26",
     "tabs": {
       "seoHealth": {
-        "reviewedAt": "2026-05-28",
+        "reviewedAt": "2026-05-29",
         "reviewer": "cairr-live-scan",
         "status": "current"
       },
       "rankings": {
-        "reviewedAt": "2026-05-28",
+        "reviewedAt": "2026-05-29",
         "reviewer": "cairr-ranking-scan",
-        "status": "blocked",
-        "exception": "EX-002"
+        "status": "current"
       },
       "competitors": {
         "reviewedAt": "2026-05-26",
