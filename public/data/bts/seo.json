@@ -19,11 +19,19 @@
       "status": "0/35 target keywords in top 10, 36 more queries discovered from csv:/Users/cairr/AI/CAIRR/clients/better-training-solutions/seo/gsc-export.csv"
     },
     "p0Blockers": [
-      "GSC/Bing URL Inspection still required for real crawler indexing confirmation"
+      "Location pages are WordPress Posts, not Pages — all 5 (Aylesbury, Reading, Oxford, Slough, Maidenhead) sit in the blog feed instead of under Our Courses > Training Near You (master plan §1/§4). Conversion not yet done.",
+      "Zero FAQ integration on our built pages — FAQ question bank never built; only the main FAQ page has 13 generic FAQs. No FAQPage schema on any blog/location/news.",
+      "Aylesbury location URL in content.json is a 404 (/gas-plumbing-training-aylesbury/); live page is /gas-and-plumbing-training-near-aylesbury-courses-within-easy-reach/.",
+      "Conversion tracking not configured in GTM — GA4 has no phone-tap/email-tap/form-submit events, so Conversions tab reads 0 (form_start fires, form_submit does not).",
+      "/training-near-you/ hub page does not exist; Training Near You not in nav dropdown."
     ],
     "criticalFixesOutstanding": [
-      "GSC/Bing URL Inspection verification",
-      "Course-page inventory confirmation"
+      "Convert 5 location Posts to Pages (301-safe) + build /training-near-you/ hub + nav",
+      "Build FAQ question bank and integrate FAQs into our pages (blogs/news/locations only)",
+      "Fix Aylesbury URL drift in content.json",
+      "Configure GA4 conversion events (Sunny/GTM) so Conversions tab populates",
+      "GSC/Bing URL Inspection spot-check (crawl confirmed via GSC data; Bing import done)",
+      "Confirm CCN1 Initial + LPG Changeover course pages exist; fix Foundation Skills Gas Course 404"
     ],
     "coreKeywords": [
       {
@@ -137,11 +145,11 @@
     "locationCoverage": {
       "summary": {
         "totalLocations": 17,
-        "withContent": 8,
-        "zeroCoverage": 9,
+        "withContent": 6,
+        "zeroCoverage": 11,
         "servicePages": 6,
         "keywordsPerLocation": 8,
-        "note": "Batch 3 added Reading and Oxford location content. Rankings and crawl verification remain blocked by GSC/Bing verification recovery."
+        "note": "Refreshed 2026-05-30 from live GSC+Bing impression scan + fresh competitor recon. 5 location pages live (as Posts, pending conversion). Wave 2 below = winnable low-competition gaps: the geography moat (no competitor localises) + orphaned qualification-code pages (CKR1/HTR1/G3/WRAS/Legionella/LPG that nationals bundle but never give a dedicated page)."
       },
       "waves": [
         {
@@ -152,14 +160,29 @@
             "Aylesbury",
             "Reading",
             "Oxford",
-            "Buckinghamshire",
-            "South East",
-            "Slough"
+            "Slough",
+            "Maidenhead"
           ],
-          "servicePages": 6,
+          "servicePages": 5,
           "servicePagesTotal": 11,
-          "blogs": 17,
-          "scope": "Batch 3 published Reading, Oxford, ACS Initial Training, and Plumbing Apprenticeship Crash."
+          "blogs": 20,
+          "scope": "Live to date: 5 location pages + 20 blogs + 6 news + 1 topic + 6 GBP. Latest = Batch 4B (Maidenhead, ACS Reassessment Near Me, gas-engineers-heat-pump news, How to Become a Gas Engineer 2026)."
+        },
+        {
+          "id": 2,
+          "status": "planned",
+          "locations": [
+            "Reading (RG)",
+            "Oxford",
+            "Milton Keynes",
+            "Slough",
+            "Aylesbury",
+            "Maidenhead"
+          ],
+          "servicePages": 0,
+          "servicePagesTotal": 12,
+          "blogs": 0,
+          "scope": "WINNABLE-GAP WAVE (2026 fresh scan). Geography moat: no competitor localises course terms to the Bucks/Berks/Oxon corridor. Orphaned qualification codes: dedicated CKR1, HTR1, G3, WRAS, Legionella, LPG-changeover pages (nationals bundle, never give a standalone indexable page). Plus question/career content (ACS 'what if I fail', 'how to become a gas engineer', cost transparency) that Bing/GSC show real impressions for at positions 40-96. Full ranked list in docs/SEO_WAVE_PLAN_2026.md."
         }
       ]
     },
@@ -1192,18 +1215,28 @@
     "contentGaps": [
       {
         "priority": 1,
-        "gap": "ACS Training + Location pages",
-        "note": "Core service, zero local content"
+        "gap": "Location + course-code pages (geography moat)",
+        "note": "No competitor localises: 'CCN1 course High Wycombe', 'ACS reassessment near me', 'gas training near Reading/Oxford'. Geo modifiers seen across GSC+Bing (Birmingham, Luton, Hampshire, Swansea, Dudley). Fastest defensible win."
       },
       {
         "priority": 2,
-        "gap": "Near me keywords across all services",
-        "note": "High volume, zero coverage"
+        "gap": "Orphaned qualification-code pages",
+        "note": "CKR1, HTR1, G3, WRAS, Legionella, LPG changeover — nationals (Logic4/Able/Gastec) bundle these, almost none give a dedicated indexable page. Near-zero competition. Real Bing impressions for 'g3 course', 'g3 unvented qualification cost', 'do you need a g3 qualification'."
       },
       {
         "priority": 3,
-        "gap": "Heat Pump Training + Location",
-        "note": "Growth market, first-mover opportunity"
+        "gap": "ACS/CCN1 question content",
+        "note": "Biggest question-shaped Bing demand: 'what is an ACS course', 'what if I fail my ACS', 'how many papers in a reassessment', 'does the gas course include CCN1'. Perfect FAQ + blog fodder, currently landing on course pages at low positions."
+      },
+      {
+        "priority": 4,
+        "gap": "Career-change question content (localised + cost)",
+        "note": "Strongest Google demand (positions 44-96 = upside): 'how to become a gas engineer', 'becoming a gas engineer at 40', 'is gas a dying trade'. Logic4/VIVA rank generically; BTS wins on local + honest cost/timeline."
+      },
+      {
+        "priority": 5,
+        "gap": "Funding-neutral news strand",
+        "note": "Heat pump skills shortage, Future Homes Standard 2028, MCS 2026 changes, low-temp heating design. Trending, link-worthy. MUST stay funding-neutral (no BUS/grant references per content rules)."
       }
     ],
     "plannedContent": {
@@ -1252,8 +1285,11 @@
     },
     "competitors": [
       "Logic4training",
-      "Gasmark Training (Maidenhead)",
-      "Gastec Training (Milton Keynes)"
+      "Able Skills",
+      "Tom-Kat Training",
+      "Gastec Training (Milton Keynes)",
+      "VIVA Training",
+      "Gasmark Training (Maidenhead)"
     ],
     "cadence": {
       "blogs": "2/week (Mon + Thu)",
@@ -1263,6 +1299,65 @@
       "summaryReport": "monthly"
     },
     "source": "manual-status-json-restored"
+  },
+  "competitors": {
+    "scanStatus": "refreshed",
+    "updatedAt": "2026-05-30",
+    "source": "fresh web competitor recon 2026-05-30 (Logic4/Able/Tom-Kat/Gastec/VIVA)",
+    "competitors": [
+      {
+        "name": "Logic4training",
+        "threat": "high",
+        "domain": "logic4training.co.uk",
+        "strengths": ["Most active blog in sector (~weekly)", "Strong career-change + student case-study content", "Salary/demand data posts", "Regulation-update cadence (IGEM/UP/1B Ed.4)"],
+        "weaknesses": ["Pivoting hard to electrical — gas/plumbing content thinning", "Zero local/geographic targeting", "Bundles CKR1/HTR1 into one 'appliances' page", "All content is self-promotional, no neutral buyer guides"],
+        "gapOpportunities": ["Local intent (Bucks/Berks/Oxon)", "Dedicated qualification-code pages", "Neutral 'how to choose a training centre' content"],
+        "contentStrategy": {"servicePagesEstimate": 25, "blogEstimate": 200}
+      },
+      {
+        "name": "Able Skills",
+        "threat": "medium",
+        "domain": "ableskills.co.uk",
+        "strengths": ["Big national centre", "Strong on combined Plumbing+Gas packages", "Owns 'weekend plumbing' angle"],
+        "weaknesses": ["Update-and-refresh blog, not fresh cadence", "Kent-centric, no southern home-counties intent", "Weak on heat pump/renewables", "No standalone qualification-code pages"],
+        "gapOpportunities": ["Gas weekend/evening angle", "Heat pump content", "Home-counties local intent"],
+        "contentStrategy": {"servicePagesEstimate": 30, "blogEstimate": 80}
+      },
+      {
+        "name": "Tom-Kat Training",
+        "threat": "medium",
+        "domain": "tom-kat.co.uk",
+        "strengths": ["Gas-only specialist", "Strong ACS reassessment eligibility detail (12-month/5-year rules)", "Price-led, clear"],
+        "weaknesses": ["Gas-only: no heat pump, water regs, Legionella standalone", "Thin blog/FAQ", "No location pages", "No career-changer funnel"],
+        "gapOpportunities": ["Match+beat reassessment FAQ then localise", "Career content", "Multi-trade pathway"],
+        "contentStrategy": {"servicePagesEstimate": 10, "blogEstimate": 15}
+      },
+      {
+        "name": "Gastec Training",
+        "threat": "high",
+        "domain": "gastectraining.co.uk",
+        "strengths": ["Best qualification-code content (CCN1/COCN1/CKR1 + code explainer)", "Deep technical authority, ~30 yrs", "Milton Keynes — direct local rival (45 min)", "Heat pump course list"],
+        "weaknesses": ["B2B/utilities tone, weak consumer/career storytelling", "No local targeting beyond MK", "Limited fresh blog cadence"],
+        "gapOpportunities": ["'CCN1 course High Wycombe/Bucks' (they only rank generically)", "Consumer/career-changer angle", "Cleaner code-explainer pillar + local"],
+        "contentStrategy": {"servicePagesEstimate": 35, "blogEstimate": 40}
+      },
+      {
+        "name": "VIVA Training",
+        "threat": "high",
+        "domain": "vivatraining.co.uk",
+        "strengths": ["Best blog SEO structure (Gas/Renewables/Training silos)", "Answers question-queries directly ('What is a CCN1 course', 'How long to be a gas engineer')", "Fast on trends (heat pump apprenticeship Jan 2026)"],
+        "weaknesses": ["Halifax/Yorkshire base — no southern local intent", "National-generic"],
+        "gapOpportunities": ["Localised versions of their question content", "Southern corridor white space"],
+        "contentStrategy": {"servicePagesEstimate": 20, "blogEstimate": 60}
+      }
+    ],
+    "keyGaps": [
+      "STRUCTURAL MOAT: every serious competitor is national-generic — not one targets the Bucks/Berks/Oxon corridor locally for course terms.",
+      "Orphaned qualification codes (CKR1, HTR1, G3, WRAS, Legionella, LPG) get bundled by nationals, rarely a dedicated indexable page.",
+      "No competitor writes neutral buyer-guide content ('how to choose a gas training centre').",
+      "Heat pump window is closing — nationals now publishing heavily; BTS edge is local + qualification-pathway clarity (L3 ASHP + L3 low-temp design).",
+      "Funding-neutral news strand (skills shortage, Future Homes 2028, MCS 2026) is open — competitors lean on government-funding hooks BTS can't use."
+    ]
   },
   "weeklyReview": {
     "weekOf": "2026-05-26",
@@ -1278,13 +1373,13 @@
         "status": "current"
       },
       "competitors": {
-        "reviewedAt": "2026-05-26",
-        "reviewer": "claude",
+        "reviewedAt": "2026-05-30",
+        "reviewer": "claude-fresh-recon",
         "status": "current"
       },
       "coverageMatrix": {
-        "reviewedAt": "2026-05-26",
-        "reviewer": "claude",
+        "reviewedAt": "2026-05-30",
+        "reviewer": "claude-fresh-scan",
         "status": "current"
       },
       "googleSafety": {
@@ -1293,16 +1388,15 @@
         "status": "current"
       },
       "traffic": {
-        "reviewedAt": null,
-        "reviewer": null,
-        "status": "blocked",
-        "exception": "EX-001"
+        "reviewedAt": "2026-05-30",
+        "reviewer": "cairr-ga4-scan",
+        "status": "current"
       },
       "conversions": {
-        "reviewedAt": null,
-        "reviewer": null,
-        "status": "blocked",
-        "exception": "EX-001"
+        "reviewedAt": "2026-05-30",
+        "reviewer": "cairr-ga4-scan",
+        "status": "current",
+        "note": "GA4 live; conversions read 0 until phone/email/form-submit tap events are configured in GTM (Sunny task)."
       },
       "courses": {
         "reviewedAt": "2026-05-26",
