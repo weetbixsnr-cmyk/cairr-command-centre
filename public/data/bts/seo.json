@@ -1,6 +1,6 @@
 {
   "seo": {
-    "lastUpdated": "2026-05-29T22:25:33Z",
+    "lastUpdated": "2026-05-29T22:59:08Z",
     "source": "live-technical-scan",
     "client": "Better Training Solutions",
     "site": "bettertrainingsolutions.co.uk",
@@ -214,7 +214,7 @@
       "rule": "Use GSC/Bing URL Inspection or SiteGround verified crawler logs for crawler-blocking claims. Do not use VPN/datacenter curl challenges alone."
     },
     "healthScan": {
-      "generatedAt": "2026-05-29T22:25:33Z",
+      "generatedAt": "2026-05-29T22:59:08Z",
       "robotsStatus": 200,
       "sitemapsChecked": 7,
       "urlsScanned": 90,
@@ -341,12 +341,19 @@
         "geoScore": 94,
         "source": "live-technical-scan",
         "urlsScanned": 90
+      },
+      {
+        "timestamp": "2026-05-29T22:59:08Z",
+        "healthScore": 75,
+        "geoScore": 94,
+        "source": "live-technical-scan",
+        "urlsScanned": 90
       }
     ],
-    "updatedAt": "2026-05-29T22:25:33Z"
+    "updatedAt": "2026-05-29T22:59:08Z"
   },
   "keywords": {
-    "lastUpdated": "2026-05-29T22:28:34Z",
+    "lastUpdated": "2026-05-29T23:01:47Z",
     "source": "csv:/Users/cairr/AI/CAIRR/clients/better-training-solutions/seo/gsc-export.csv",
     "keywords": [
       {
@@ -452,7 +459,7 @@
         "keyword": "unvented hot water course",
         "baseline": null,
         "latest": 96.0,
-        "trend": "down",
+        "trend": "flat",
         "url": "https://bettertrainingsolutions.co.uk/course/unvented-hot-water-systems-safety/",
         "section": "\ud83d\udfe1 Plumbing/Water Keywords (9)",
         "status": "outside-top-50"
@@ -1112,7 +1119,7 @@
     "top10Count": 0,
     "status": "0/35 target keywords in top 10, 36 more queries discovered from csv:/Users/cairr/AI/CAIRR/clients/better-training-solutions/seo/gsc-export.csv",
     "rankingScan": {
-      "generatedAt": "2026-05-29T22:28:34Z",
+      "generatedAt": "2026-05-29T23:01:47Z",
       "status": "current",
       "source": "csv:/Users/cairr/AI/CAIRR/clients/better-training-solutions/seo/gsc-export.csv",
       "targetKeywords": 35,
@@ -1303,5 +1310,521 @@
         "status": "current"
       }
     }
+  },
+  "traffic": {
+    "period": "Last 30 Days",
+    "source": "ga4",
+    "gaPropertyId": "533884161",
+    "generatedAt": "2026-05-29T23:01:51Z",
+    "totals": {
+      "views": 293,
+      "visitors": 47,
+      "phoneTaps": 0,
+      "emailTaps": 0,
+      "conversionRate": 0.0
+    },
+    "pages": [
+      {
+        "path": "/",
+        "type": "home",
+        "views": 69,
+        "phoneTaps": 0,
+        "emailTaps": 0
+      },
+      {
+        "path": "/blog/",
+        "type": "blog",
+        "views": 37,
+        "phoneTaps": 0,
+        "emailTaps": 0
+      },
+      {
+        "path": "/contact-us/",
+        "type": "page",
+        "views": 23,
+        "phoneTaps": 0,
+        "emailTaps": 0
+      },
+      {
+        "path": "/latest/",
+        "type": "news",
+        "views": 17,
+        "phoneTaps": 0,
+        "emailTaps": 0
+      },
+      {
+        "path": "/course/gas-managed-learning-programme/",
+        "type": "service",
+        "views": 15,
+        "phoneTaps": 0,
+        "emailTaps": 0
+      },
+      {
+        "path": "/our-new-entrant-training-courses/",
+        "type": "service",
+        "views": 13,
+        "phoneTaps": 0,
+        "emailTaps": 0
+      },
+      {
+        "path": "/frequently-asked-questions/",
+        "type": "page",
+        "views": 12,
+        "phoneTaps": 0,
+        "emailTaps": 0
+      },
+      {
+        "path": "/our-gas-training-courses/",
+        "type": "service",
+        "views": 10,
+        "phoneTaps": 0,
+        "emailTaps": 0
+      },
+      {
+        "path": "/our-plumbing-training-courses/",
+        "type": "service",
+        "views": 8,
+        "phoneTaps": 0,
+        "emailTaps": 0
+      },
+      {
+        "path": "/partnerships/",
+        "type": "page",
+        "views": 8,
+        "phoneTaps": 0,
+        "emailTaps": 0
+      },
+      {
+        "path": "/course/ccn1-initial/",
+        "type": "service",
+        "views": 7,
+        "phoneTaps": 0,
+        "emailTaps": 0
+      },
+      {
+        "path": "/g3-unvented-hot-water-course-is-it-worth-adding-to-your-qualifications/",
+        "type": "page",
+        "views": 7,
+        "phoneTaps": 0,
+        "emailTaps": 0
+      },
+      {
+        "path": "/our-limited-time-offer/",
+        "type": "page",
+        "views": 7,
+        "phoneTaps": 0,
+        "emailTaps": 0
+      },
+      {
+        "path": "/why-train-with-us/",
+        "type": "page",
+        "views": 7,
+        "phoneTaps": 0,
+        "emailTaps": 0
+      },
+      {
+        "path": "/course/air-source-heat-pump-low-temperature-heating/",
+        "type": "service",
+        "views": 5,
+        "phoneTaps": 0,
+        "emailTaps": 0
+      },
+      {
+        "path": "/course/legionella-prevention-and-water-treatment-managers/",
+        "type": "service",
+        "views": 5,
+        "phoneTaps": 0,
+        "emailTaps": 0
+      },
+      {
+        "path": "/acs-initial-training-what-you-need-to-know/",
+        "type": "blog",
+        "views": 4,
+        "phoneTaps": 0,
+        "emailTaps": 0
+      },
+      {
+        "path": "/course/unvented-hot-water-systems-safety/",
+        "type": "service",
+        "views": 4,
+        "phoneTaps": 0,
+        "emailTaps": 0
+      },
+      {
+        "path": "/course/water-supply-water-fittings-regulations-1999/",
+        "type": "service",
+        "views": 4,
+        "phoneTaps": 0,
+        "emailTaps": 0
+      },
+      {
+        "path": "/lpg-changeover-training-the-niche-qualification-most-gas-engineers-overlook/",
+        "type": "page",
+        "views": 4,
+        "phoneTaps": 0,
+        "emailTaps": 0
+      },
+      {
+        "path": "/nearly-half-of-uk-builders-are-delaying-jobs-because-they-cant-find-skilled-work/",
+        "type": "page",
+        "views": 4,
+        "phoneTaps": 0,
+        "emailTaps": 0
+      },
+      {
+        "path": "/course/lpg-changeover/",
+        "type": "service",
+        "views": 3,
+        "phoneTaps": 0,
+        "emailTaps": 0
+      },
+      {
+        "path": "/contact-form/",
+        "type": "page",
+        "views": 2,
+        "phoneTaps": 0,
+        "emailTaps": 0
+      },
+      {
+        "path": "/course/better-heating-course/",
+        "type": "service",
+        "views": 2,
+        "phoneTaps": 0,
+        "emailTaps": 0
+      },
+      {
+        "path": "/course/ccn1-re-assessment/",
+        "type": "service",
+        "views": 2,
+        "phoneTaps": 0,
+        "emailTaps": 0
+      }
+    ]
+  },
+  "bingRankings": {
+    "generatedAt": "2026-05-29T23:01:52Z",
+    "site": "https://bettertrainingsolutions.co.uk",
+    "source": "bing-webmaster-api",
+    "totalQueries": 45,
+    "top10Count": 44,
+    "totalImpressions": 57,
+    "totalClicks": 11,
+    "queries": [
+      {
+        "query": "career change gas",
+        "impressions": 1,
+        "clicks": 1,
+        "position": 1.0,
+        "status": "top-3"
+      },
+      {
+        "query": "g3 training is this adequate for commercial properties?",
+        "impressions": 3,
+        "clicks": 1,
+        "position": 1.0,
+        "status": "top-3"
+      },
+      {
+        "query": "changing from a gas engineer to a new career",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 1.0,
+        "status": "top-3"
+      },
+      {
+        "query": "gas engineer career change",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 1.0,
+        "status": "top-3"
+      },
+      {
+        "query": "g3 unvented course buckinghamshire",
+        "impressions": 2,
+        "clicks": 1,
+        "position": 1.0,
+        "status": "top-3"
+      },
+      {
+        "query": "managed learning programme \u2013 gateway to gas cost",
+        "impressions": 1,
+        "clicks": 1,
+        "position": 1.0,
+        "status": "top-3"
+      },
+      {
+        "query": "gas engineer training mlp london plumbing",
+        "impressions": 1,
+        "clicks": 1,
+        "position": 2.0,
+        "status": "top-3"
+      },
+      {
+        "query": "gas engineer training mlp london plumbing",
+        "impressions": 4,
+        "clicks": 0,
+        "position": 2.0,
+        "status": "top-3"
+      },
+      {
+        "query": "better solutions course",
+        "impressions": 2,
+        "clicks": 0,
+        "position": 2.0,
+        "status": "top-3"
+      },
+      {
+        "query": "acs tyraining what is it",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 2.0,
+        "status": "top-3"
+      },
+      {
+        "query": "acs initial training  luton",
+        "impressions": 1,
+        "clicks": 1,
+        "position": 2.0,
+        "status": "top-3"
+      },
+      {
+        "query": "wras water supply water fittings regulations 1999 training course plymouth",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 3.0,
+        "status": "top-3"
+      },
+      {
+        "query": "cccn1 reassessment",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 3.0,
+        "status": "top-3"
+      },
+      {
+        "query": "whats a mlp qualifcation",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 3.0,
+        "status": "top-3"
+      },
+      {
+        "query": "get your lpg qualification if its lapsed",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 3.0,
+        "status": "top-3"
+      },
+      {
+        "query": "gas training  courses aylesbury",
+        "impressions": 1,
+        "clicks": 1,
+        "position": 4.0,
+        "status": "top-10"
+      },
+      {
+        "query": "low temperature heating and ashp design",
+        "impressions": 2,
+        "clicks": 1,
+        "position": 4.0,
+        "status": "top-10"
+      },
+      {
+        "query": "what is an acs course",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 4.0,
+        "status": "top-10"
+      },
+      {
+        "query": "7693979 - do you need a g3 qualification",
+        "impressions": 2,
+        "clicks": 0,
+        "position": 4.0,
+        "status": "top-10"
+      },
+      {
+        "query": "sunny chartergas",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 5.0,
+        "status": "top-10"
+      },
+      {
+        "query": "gaz  courses aylesbury",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 5.0,
+        "status": "top-10"
+      },
+      {
+        "query": "water fittings regulations 1999 training",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 5.0,
+        "status": "top-10"
+      },
+      {
+        "query": "innovo groudomestic gas mlp course cost",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 5.0,
+        "status": "top-10"
+      },
+      {
+        "query": "ccn1 re-assesement hampshire",
+        "impressions": 1,
+        "clicks": 2,
+        "position": 6.0,
+        "status": "top-10"
+      },
+      {
+        "query": "does gas course include ccn1?",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 6.0,
+        "status": "top-10"
+      },
+      {
+        "query": "g3 unvented qualification cost",
+        "impressions": 2,
+        "clicks": 0,
+        "position": 6.0,
+        "status": "top-10"
+      },
+      {
+        "query": "how yo get ccn1",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 6.0,
+        "status": "top-10"
+      },
+      {
+        "query": "ccn1 re-assessment south wales",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 7.0,
+        "status": "top-10"
+      },
+      {
+        "query": "heater training room",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 7.0,
+        "status": "top-10"
+      },
+      {
+        "query": "acs gas training certification",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 7.0,
+        "status": "top-10"
+      },
+      {
+        "query": "g3 qualified",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 7.0,
+        "status": "top-10"
+      },
+      {
+        "query": "unvented hot water systems training ccts",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 7.0,
+        "status": "top-10"
+      },
+      {
+        "query": "ccn1 re-assessment swansea",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 8.0,
+        "status": "top-10"
+      },
+      {
+        "query": "gas managed learning programme fees",
+        "impressions": 2,
+        "clicks": 0,
+        "position": 8.0,
+        "status": "top-10"
+      },
+      {
+        "query": "gas mlp training",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 8.0,
+        "status": "top-10"
+      },
+      {
+        "query": "g3 course",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 8.0,
+        "status": "top-10"
+      },
+      {
+        "query": "when was the acs intdo introduced",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 8.0,
+        "status": "top-10"
+      },
+      {
+        "query": "mlp qualification",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 9.0,
+        "status": "top-10"
+      },
+      {
+        "query": "acs ccn1 test",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 9.0,
+        "status": "top-10"
+      },
+      {
+        "query": "acs ccn1",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 9.0,
+        "status": "top-10"
+      },
+      {
+        "query": "acs gas assessment what if i fail some parts",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 10.0,
+        "status": "top-10"
+      },
+      {
+        "query": "acs gas assessment",
+        "impressions": 1,
+        "clicks": 1,
+        "position": 10.0,
+        "status": "top-10"
+      },
+      {
+        "query": "how many pappers do you have for a reassesment gas commericail - domestic changeover",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 10.0,
+        "status": "top-10"
+      },
+      {
+        "query": "g3 unvented",
+        "impressions": 1,
+        "clicks": 0,
+        "position": 10.0,
+        "status": "top-10"
+      },
+      {
+        "query": "i have failed my acs gas assessments what can i do",
+        "impressions": 2,
+        "clicks": 0,
+        "position": 30.0,
+        "status": "top-50"
+      }
+    ]
   }
 }

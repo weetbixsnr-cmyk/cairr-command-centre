@@ -208,6 +208,7 @@ export default function BtsSeoPage({ initialSnapshot }) {
   const seoDash = snap?.btsSeoDash
   const audit = snap?.btsSeoAudit
   const traffic = snap?.btsTraffic
+  const bing = snap?.btsBing
   const readiness = snap?.btsReadiness
   const gateBlocked = readiness?.gate === 'BLOCK'
   const [tab, setTab] = useState(seoDash ? 'health' : 'rankings')
@@ -641,6 +642,43 @@ export default function BtsSeoPage({ initialSnapshot }) {
                 : `Ranking scan current — ${kw?.rankingScan?.matchedKeywords || 0}/${kw?.rankingScan?.targetKeywords || 0} keywords matched`}
               <span style={{display:'block',fontSize:8,color:'#888',marginTop:3}}>Source: {kw?.rankingScan?.source || '—'} · Updated: {kw?.rankingScan?.generatedAt || kw?.lastUpdated || '—'}</span>
             </div>
+            {/* Bing rankings (Bing Webmaster Tools) */}
+            {bing?.totalQueries > 0 && (
+              <div className="section" style={{marginBottom:16}}>
+                <div className="sec-title">🔎 Bing Rankings</div>
+                <div className="card">
+                  <div style={{display:'flex',gap:8,marginBottom:10,flexWrap:'wrap'}}>
+                    {[
+                      { label: 'Queries', val: bing.totalQueries, color: '#3b82f6' },
+                      { label: 'Top 10', val: bing.top10Count, color: '#10b981' },
+                      { label: 'Impressions', val: bing.totalImpressions, color: '#a855f7' },
+                      { label: 'Clicks', val: bing.totalClicks, color: '#f59e0b' },
+                    ].map((s, i) => (
+                      <div key={i} className="stat-card" style={{minWidth:80,flex:1}}>
+                        <div className="stat-val" style={{fontSize:20,color:s.color}}>{s.val?.toLocaleString()}</div>
+                        <div className="stat-lbl">{s.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                  <table>
+                    <thead><tr><th>Query</th><th>Pos</th><th>Impr</th><th>Clicks</th></tr></thead>
+                    <tbody>
+                      {bing.queries?.slice(0, 12).map((q, i) => (
+                        <tr key={i}>
+                          <td style={{color:'#fff',fontWeight:500}}>{q.query}</td>
+                          <td>{q.position != null ? <PosCell pos={q.position} /> : <span style={{color:'#555'}}>—</span>}</td>
+                          <td>{q.impressions}</td>
+                          <td style={{color:q.clicks > 0 ? '#f59e0b' : '#333'}}>{q.clicks}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  <div style={{fontSize:8,color:'#777',marginTop:6,textAlign:'right'}}>
+                    Source: Bing Webmaster Tools · Updated: {bing.generatedAt || '—'} · Bing index is smaller than Google — high positions reflect low competition
+                  </div>
+                </div>
+              </div>
+            )}
             {/* Top 10 Tracked Keywords */}
             {kw?.top10?.length > 0 && (
               <div className="section" style={{marginBottom:16}}>
@@ -1866,7 +1904,7 @@ export async function getStaticProps() {
         'btsCourseDetails', 'btsCourses', 'btsDrafts', 'btsKeywords',
         'btsNewsBank', 'btsNotifications', 'btsPublishLedger', 'btsReadiness',
         'btsSeo', 'btsSeoAudit', 'btsSeoDash', 'btsSeoplan', 'btsSuggestions',
-        'btsTraffic'
+        'btsTraffic', 'btsBing'
       ])
     }
   }

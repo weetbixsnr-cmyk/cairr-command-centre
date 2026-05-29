@@ -1,19 +1,18 @@
 {
   "weekOf": "2026-05-30",
-  "generatedAt": "2026-05-29T22:25:32Z",
+  "generatedAt": "2026-05-29T22:59:07Z",
   "gate": "PASS",
   "staleDays": 9,
   "tabs": {
     "seoHealth": {
-      "reviewedAt": "2026-05-28",
+      "reviewedAt": "2026-05-29",
       "status": "current",
       "source": "seo/seo.json"
     },
     "rankings": {
-      "reviewedAt": "2026-05-28",
+      "reviewedAt": "2026-05-29",
       "status": "current",
-      "source": "seo/seo.json",
-      "exception": "EX-002"
+      "source": "seo/seo.json"
     },
     "competitors": {
       "reviewedAt": "2026-05-26",
