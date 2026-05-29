@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdated": "2026-05-28",
+  "lastUpdated": "2026-05-29T11:07:03Z",
   "source": "Deduplicated from bts-status.json drafts, blogInventory, contentPipeline, and publishLedger sections",
   "statusValues": [
     "draft",
@@ -646,6 +646,54 @@
       "excerpt": "Draft GBP post about stacking multiple qualifications in a single training week.",
       "reviewUrl": null,
       "previewText": "Water Regulations. G3 Unvented. Legionella Prevention. Three qualifications. Three days. All from our training centre in High Wycombe. Each one opens up new work. Water Regs proves you understand compliance. G3 lets you work on unvented cylinders legally. Legionella risk assessments are required by "
+    },
+    {
+      "id": "news-6-apprenticeship-funding",
+      "title": "Apprenticeship Funding Has Changed From April 2026: What New Starters and Employers Need to Know",
+      "type": "news",
+      "service": "Gas MLP / Career Change",
+      "batch": "4B",
+      "status": "draft",
+      "wpId": null,
+      "url": null,
+      "featuredImageId": null,
+      "publishedAt": null,
+      "sourceFile": "content/pending-drafts/news-6-apprenticeship-funding-april-2026.md",
+      "excerpt": "Apprenticeship funding changed from 1 April 2026. What new starters and employers need to know — and why the Gas Managed Learning Programme is often a faster route into the trade.",
+      "reviewUrl": null,
+      "previewText": "A set of changes to apprenticeship funding came into effect from 1 April 2026. The detail is technical, but the impact for new starters in the gas and plumbing trades — and the employers who train them — is significant. For many career changers, the MLP is a faster route in."
+    },
+    {
+      "id": "news-5-bus-2026",
+      "title": "Boiler Upgrade Scheme 2026: What the Heat Pump Grants Mean for Installers",
+      "type": "news",
+      "service": "Heat Pump",
+      "batch": "4B",
+      "status": "held",
+      "wpId": null,
+      "url": null,
+      "featuredImageId": null,
+      "publishedAt": null,
+      "sourceFile": "content/pending-drafts/news-5-bus-amendments-2026.md",
+      "excerpt": "Draft news piece on the 2026 Boiler Upgrade Scheme changes for heat pump installers.",
+      "reviewUrl": null,
+      "previewText": "HELD — not approval-ready. References government funding and must be rewritten or explicitly approved against Sunny's no-government-funding-reference rule before it can be sent to Sunny."
+    },
+    {
+      "id": "directory-listings-checklist",
+      "title": "BTS Directory Listings — Registration Checklist",
+      "type": "reference",
+      "service": "Directory Listings",
+      "batch": "4B",
+      "status": "reference",
+      "wpId": null,
+      "url": null,
+      "featuredImageId": null,
+      "publishedAt": null,
+      "sourceFile": "content/pending-drafts/bts-directory-listings.md",
+      "excerpt": "Internal registration checklist of free and high-value business directories and industry registers for BTS to be listed on.",
+      "reviewUrl": null,
+      "previewText": "Internal action checklist (not a website page): free directories (Yell, Bing Places, Thomson Local, LinkedIn, Facebook) and high-value industry registers (Gas Safe Register, IGEM) for BTS to register or verify."
     }
   ]
 }
