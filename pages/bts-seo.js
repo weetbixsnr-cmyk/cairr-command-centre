@@ -222,6 +222,7 @@ export default function BtsSeoPage({ initialSnapshot }) {
   const bing = snap?.btsBing
   const readiness = snap?.btsReadiness
   const findings = snap?.btsFindings || []
+  const faqBank = snap?.btsFaqBank || { _meta: {}, faqs: [] }
   const gateBlocked = readiness?.gate === 'BLOCK'
   const [tab, setTab] = useState(seoDash ? 'health' : 'rankings')
   const [newsBankView, setNewsBankView] = useState('top10')
@@ -414,6 +415,7 @@ export default function BtsSeoPage({ initialSnapshot }) {
         <div style={{display:'flex',gap:6,marginBottom:16,overflowX:'auto',WebkitOverflowScrolling:'touch',scrollbarWidth:'none'}}>
           <TabButton active={tab==='health'} label="🏥 SEO Health" onClick={() => setTab('health')} />
           <TabButton active={tab==='fixes-backlog'} label="📝 Fixes / Backlog" onClick={() => setTab('fixes-backlog')} />
+          <TabButton active={tab==='faq-library'} label="❓ FAQ Library" onClick={() => setTab('faq-library')} />
           <TabButton active={tab==='future-posts'} label="📮 Future Posts" onClick={() => setTab('future-posts')} />
           <TabButton active={tab==='gbp-posts'} label="📍 GBP Posts" onClick={() => setTab('gbp-posts')} />
           <TabButton active={tab==='rankings'} label="📊 Rankings" onClick={() => setTab('rankings')} />
@@ -630,6 +632,34 @@ export default function BtsSeoPage({ initialSnapshot }) {
             <div style={{padding:'8px 12px',background:'#081a12',border:'1px solid #123a24',borderRadius:8,marginBottom:14,fontSize:10,color:'#10b981'}}>
               Canonical SEO backlog from public/data/bts/seo-findings-ledger.json. Read-only — findings are authored by the SEO audit; scripts own the numbers.
             </div>
+            {/* Optimisation progress — fixes landed vs open, and FAQ 3-FAQ-bar coverage.
+                Render-only: derived from the ledger + FAQ bank, never written back. */}
+            {(() => {
+              const open = findings.filter(f => f.status === 'open').length
+              const fixed = findings.length - open
+              const fbank = faqBank.faqs || []
+              const pageCount = {}
+              fbank.forEach(q => (q.usedOn || []).forEach(p => { pageCount[p] = (pageCount[p] || 0) + 1 }))
+              const pagesRef = Object.keys(pageCount).length
+              const pagesFull = Object.keys(pageCount).filter(p => pageCount[p] >= 3).length
+              const placed = fbank.filter(q => (q.usedOn || []).length > 0).length
+              const cards = [
+                { label: 'Findings fixed', val: `${fixed}/${findings.length}`, color: fixed > 0 ? '#10b981' : '#888' },
+                { label: 'Findings open', val: open, color: open > 0 ? '#f59e0b' : '#10b981' },
+                { label: 'Pages at 3-FAQ bar', val: `${pagesFull}/${pagesRef}`, color: '#3b82f6' },
+                { label: 'FAQs placed', val: `${placed}/${fbank.length}`, color: '#a855f7' },
+              ]
+              return (
+                <div style={{display:'flex',gap:8,marginBottom:16,flexWrap:'wrap'}}>
+                  {cards.map((c, i) => (
+                    <div key={i} className="stat-card" style={{minWidth:90,flex:1}}>
+                      <div className="stat-val" style={{fontSize:20,color:c.color}}>{c.val}</div>
+                      <div className="stat-lbl">{c.label}</div>
+                    </div>
+                  ))}
+                </div>
+              )
+            })()}
             {findings.length === 0 ? (
               <div style={{color:'#555',fontSize:11,fontStyle:'italic',padding:16,textAlign:'center'}}>
                 No findings loaded yet — will appear on next snapshot refresh.
@@ -666,6 +696,87 @@ export default function BtsSeoPage({ initialSnapshot }) {
             <div style={{fontSize:8,color:'#777',marginTop:6,textAlign:'right'}}>
               Source: seo/seo-findings-ledger.json · {findings.length} findings
             </div>
+          </>
+        )}
+
+        {/* TAB: FAQ Library — read-only view of seo/faq-question-bank.json,
+            grouped by category with status + usedOn page refs. */}
+        {tab === 'faq-library' && (
+          <>
+            <div style={{padding:'8px 12px',background:'#0a1020',border:'1px solid #1a2540',borderRadius:8,marginBottom:14,fontSize:10,color:'#7aa2ff'}}>
+              {faqBank._meta?.title || 'FAQ Question Bank'} — read-only. Master library of page-relevant FAQs; reuse approved answers and keep each page at a full 3-FAQ set.
+            </div>
+            {(() => {
+              const faqs = faqBank.faqs || []
+              if (faqs.length === 0) return (
+                <div style={{color:'#555',fontSize:11,fontStyle:'italic',padding:16,textAlign:'center'}}>
+                  No FAQ bank loaded yet — will appear on next snapshot refresh.
+                </div>
+              )
+              const statusStyle = (s) => s === 'live' ? { c: '#10b981', bg: '#0a2a1a', label: 'LIVE' }
+                : s === 'approved' ? { c: '#3b82f6', bg: '#0a1830', label: 'APPROVED' }
+                : { c: '#f59e0b', bg: '#2a2000', label: 'CANDIDATE' }
+              const tally = faqs.reduce((a, q) => { a[q.status] = (a[q.status] || 0) + 1; return a }, {})
+              // Category order: _meta.categories first, then any leftovers seen in data.
+              const metaCats = faqBank._meta?.categories || []
+              const seen = Array.from(new Set(faqs.map(q => q.category)))
+              const cats = [...metaCats.filter(c => seen.includes(c)), ...seen.filter(c => !metaCats.includes(c))]
+              return (
+                <>
+                  <div style={{display:'flex',gap:8,marginBottom:16,flexWrap:'wrap'}}>
+                    {[
+                      { label: 'Total FAQs', val: faqs.length, color: '#fff' },
+                      { label: 'Live', val: tally.live || 0, color: '#10b981' },
+                      { label: 'Approved', val: tally.approved || 0, color: '#3b82f6' },
+                      { label: 'Candidate', val: tally.candidate || 0, color: '#f59e0b' },
+                    ].map((c, i) => (
+                      <div key={i} className="stat-card" style={{minWidth:80,flex:1}}>
+                        <div className="stat-val" style={{fontSize:20,color:c.color}}>{c.val}</div>
+                        <div className="stat-lbl">{c.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                  {cats.map(cat => {
+                    const items = faqs.filter(q => q.category === cat)
+                    if (items.length === 0) return null
+                    return (
+                      <div key={cat} className="section" style={{marginBottom:16}}>
+                        <div className="sec-title" style={{textTransform:'capitalize'}}>{cat.replace(/-/g, ' ')} ({items.length})</div>
+                        <div className="card">
+                          <table>
+                            <thead><tr><th>Question</th><th>Status</th><th>Used on</th></tr></thead>
+                            <tbody>
+                              {items.map((q, i) => {
+                                const ss = statusStyle(q.status)
+                                return (
+                                  <tr key={q.id || i}>
+                                    <td>
+                                      <div style={{color:'#fff',fontWeight:500}}>{q.question}</div>
+                                      {q.answer && <div style={{fontSize:9,color:'#777',marginTop:2,lineHeight:1.4}}>{q.answer}</div>}
+                                    </td>
+                                    <td style={{whiteSpace:'nowrap'}}>
+                                      <span style={{fontSize:8,fontWeight:700,padding:'2px 6px',borderRadius:3,background:ss.bg,color:ss.c}}>{ss.label}</span>
+                                    </td>
+                                    <td style={{fontSize:9,color:'#888'}}>
+                                      {(q.usedOn && q.usedOn.length > 0)
+                                        ? q.usedOn.map((p, j) => <div key={j}>{p}</div>)
+                                        : <span style={{color:'#555'}}>— not placed</span>}
+                                    </td>
+                                  </tr>
+                                )
+                              })}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    )
+                  })}
+                  <div style={{fontSize:8,color:'#777',marginTop:6,textAlign:'right'}}>
+                    Source: seo/faq-question-bank.json · {faqs.length} FAQs · generated {faqBank._meta?.generatedAt || '—'}
+                  </div>
+                </>
+              )
+            })()}
           </>
         )}
 
@@ -2098,7 +2209,7 @@ export async function getStaticProps() {
         'btsCourseDetails', 'btsCourses', 'btsDrafts', 'btsKeywords',
         'btsNewsBank', 'btsNotifications', 'btsPublishLedger', 'btsReadiness',
         'btsSeo', 'btsSeoAudit', 'btsSeoDash', 'btsSeoplan', 'btsSuggestions',
-        'btsTraffic', 'btsBing', 'btsFindings'
+        'btsTraffic', 'btsBing', 'btsFindings', 'btsFaqBank'
       ])
     }
   }

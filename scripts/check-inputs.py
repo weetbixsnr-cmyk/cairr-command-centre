@@ -29,6 +29,11 @@ INPUTS = [
         "array_fields": ["findings"],
     },
     {
+        "path": "public/data/bts/faq-question-bank.json",
+        "required_keys": ["_meta", "faqs"],
+        "array_fields": ["faqs"],
+    },
+    {
         "path": "public/data/bts/news-bank.json",
         "required_keys": ["meta", "stories"],
         "array_fields": ["stories"],

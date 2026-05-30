@@ -1,0 +1,228 @@
+{
+  "_meta": {
+    "title": "BTS FAQ Question Bank",
+    "description": "Master library of page-relevant FAQs for Better Training Solutions. Operations reference: docs/PLAN_CONTENT_AND_FAQ_OPERATIONS.md (Section 6 — FAQ Strategy). Forward-looking answers only: BTS is a new training centre with courses just started — never claim past students or a training track record. Categories span the 8 services from a single High Wycombe (HP11 2LB) centre with national reach.",
+    "generatedAt": "2026-05-31",
+    "schemaVersion": 1,
+    "categories": [
+      "gas",
+      "heat-pump",
+      "plumbing",
+      "training",
+      "location",
+      "acs",
+      "general"
+    ],
+    "statuses": [
+      "candidate",
+      "approved",
+      "live"
+    ]
+  },
+  "faqs": [
+    {
+      "id": "faq-001",
+      "question": "Where is Better Training Solutions based?",
+      "answer": "We're based at 1 Marlborough Trading Estate, West Wycombe Road, High Wycombe, HP11 2LB. The centre sits just off the M40 and A404, with free parking on site, so it's a straightforward drive from across Buckinghamshire, Berkshire and Oxfordshire.",
+      "category": "location",
+      "status": "approved",
+      "usedOn": [
+        "page-training-near-you-hub"
+      ]
+    },
+    {
+      "id": "faq-002",
+      "question": "Which areas do you cover?",
+      "answer": "We're set up to be an easy reach for engineers right across the South East. We have dedicated area guides for Aylesbury, Reading, Oxford, Slough and Maidenhead, plus a wider South East England overview. If your town isn't named, the regional guide gives the bigger picture and you're welcome to contact us to check your route.",
+      "category": "location",
+      "status": "approved",
+      "usedOn": [
+        "page-training-near-you-hub"
+      ]
+    },
+    {
+      "id": "faq-003",
+      "question": "How do I get to the High Wycombe centre?",
+      "answer": "By car, High Wycombe sits on the M40 (junctions 3 and 4) and the A404, so most South East engineers can reach us without touching the M25 or paying a congestion charge, and there's free parking on site. By train, High Wycombe is on the Chiltern Main Line, with a short taxi from the station to the centre at HP11 2LB.",
+      "category": "location",
+      "status": "approved",
+      "usedOn": [
+        "page-training-near-you-hub"
+      ]
+    },
+    {
+      "id": "faq-004",
+      "question": "What is CCN1 Initial gas training?",
+      "answer": "CCN1 Initial is the core domestic gas safety assessment that an engineer takes for the first time, covering the fundamentals every gas operative needs before moving on to appliance-specific modules. It is usually completed as part of a managed learning route into the trade. Get in touch and we'll explain how the initial assessment fits with the rest of your training plan.",
+      "category": "gas",
+      "status": "candidate",
+      "usedOn": []
+    },
+    {
+      "id": "faq-005",
+      "question": "How often do I need ACS reassessment?",
+      "answer": "ACS certificates run for five years, so gas engineers need to reassess before their current certification expires to stay on the Gas Safe Register. We'd recommend booking your reassessment well ahead of the expiry date so there's no gap in your registration. Contact us to plan your reassessment dates around your renewal.",
+      "category": "acs",
+      "status": "candidate",
+      "usedOn": []
+    },
+    {
+      "id": "faq-006",
+      "question": "What is the ACS Reassessment course (CCN1)?",
+      "answer": "ACS Reassessment is the five-yearly renewal of an engineer's domestic gas qualifications, including the core CCN1 element plus the appliance categories they hold. It confirms competence is current so the engineer can stay on the Gas Safe Register. We can talk you through which categories to renew based on the work you do.",
+      "category": "acs",
+      "status": "candidate",
+      "usedOn": []
+    },
+    {
+      "id": "faq-007",
+      "question": "Do I need G3 for unvented hot water cylinders?",
+      "answer": "Yes. Anyone installing, servicing or working on unvented hot water storage systems over 15 litres needs the G3 (unvented hot water) qualification under Building Regulations. Our Unvented Hot Water Systems Safety course covers the G3 assessment so you can work on these systems compliantly. Get in touch for the next available dates.",
+      "category": "plumbing",
+      "status": "candidate",
+      "usedOn": []
+    },
+    {
+      "id": "faq-008",
+      "question": "What does the Unvented Hot Water (G3) course cover?",
+      "answer": "The course covers the safe installation, commissioning, servicing and fault-finding of unvented hot water storage systems, along with the relevant Building Regulations (G3) and safety controls. It's designed for plumbers and heating engineers who need to work compliantly on unvented cylinders. Contact us to confirm prerequisites and dates.",
+      "category": "plumbing",
+      "status": "candidate",
+      "usedOn": []
+    },
+    {
+      "id": "faq-009",
+      "question": "What is Water Regulations (WRAS) training?",
+      "answer": "Water Regulations training covers the Water Supply (Water Fittings) Regulations 1999, the rules that govern how water fittings and systems must be installed to prevent contamination, waste and misuse. It's essential for plumbers and heating engineers working on drinking water systems. We can explain how it complements your wider plumbing qualifications.",
+      "category": "plumbing",
+      "status": "candidate",
+      "usedOn": []
+    },
+    {
+      "id": "faq-010",
+      "question": "Who needs Water Regulations certification?",
+      "answer": "Plumbers, heating engineers and anyone installing or altering water fittings benefit from Water Regulations certification, as it demonstrates compliance with the 1999 regulations and is often required by water suppliers and contractors. Get in touch and we'll help you decide whether it's the right next step for your work.",
+      "category": "plumbing",
+      "status": "candidate",
+      "usedOn": []
+    },
+    {
+      "id": "faq-011",
+      "question": "What does the Legionella training course cover?",
+      "answer": "Our Legionella prevention and water treatment course covers how Legionella bacteria develop in water systems, how to carry out risk assessments, and the control measures needed to keep commercial and domestic systems safe. It suits engineers and facilities staff responsible for water hygiene. Contact us to talk through the right level for your role.",
+      "category": "plumbing",
+      "status": "candidate",
+      "usedOn": []
+    },
+    {
+      "id": "faq-012",
+      "question": "What does the heat pump training course cover?",
+      "answer": "Our five-day air source heat pump course combines two days of low-temperature heating design with three days of air source heat pump (ASHP) installation and commissioning. It's built for heating engineers moving into renewables who want practical, hands-on coverage of the technology. Get in touch for the next course dates.",
+      "category": "heat-pump",
+      "status": "candidate",
+      "usedOn": []
+    },
+    {
+      "id": "faq-013",
+      "question": "How long is the air source heat pump course?",
+      "answer": "The air source heat pump course runs over five days: two days focused on low-temperature heating design and three days on air source heat pump installation and commissioning. It's a practical course designed to get heating engineers ready for renewable work. Contact us to check upcoming dates and availability.",
+      "category": "heat-pump",
+      "status": "candidate",
+      "usedOn": []
+    },
+    {
+      "id": "faq-014",
+      "question": "Do I need gas experience before training as a heat pump engineer?",
+      "answer": "Our air source heat pump course is aimed at engineers who already have a heating background, as the low-temperature heating design content builds on existing plumbing and heating knowledge. If you're unsure whether it's the right fit, get in touch and we'll talk through your experience and the best route in.",
+      "category": "heat-pump",
+      "status": "candidate",
+      "usedOn": []
+    },
+    {
+      "id": "faq-015",
+      "question": "What is the Managed Learning Programme?",
+      "answer": "The Managed Learning Programme is our structured route for new entrants and career changers into the gas industry. It guides you through the training and assessments needed to work towards becoming a registered gas engineer, with the steps planned out for you. Contact us to discuss your starting point and how the programme is structured.",
+      "category": "training",
+      "status": "candidate",
+      "usedOn": [
+        "blog-20-how-to-become-gas-engineer-2026"
+      ]
+    },
+    {
+      "id": "faq-016",
+      "question": "Can I change careers and become a gas engineer?",
+      "answer": "Yes. Our Managed Learning Programme is designed for career changers and new entrants, taking you through the training and assessments needed to work towards Gas Safe registration. There's no upper age limit on starting, and we'll plan a route that suits your background. Get in touch to talk through the steps.",
+      "category": "training",
+      "status": "candidate",
+      "usedOn": [
+        "blog-20-how-to-become-gas-engineer-2026"
+      ]
+    },
+    {
+      "id": "faq-017",
+      "question": "What is LPG Changeover training?",
+      "answer": "LPG Changeover training equips gas engineers to work safely on liquefied petroleum gas appliances and systems, adding LPG competence alongside their natural gas qualifications. It's useful for engineers working in rural or off-grid areas. Contact us to confirm current availability and how it fits with your existing certifications.",
+      "category": "gas",
+      "status": "candidate",
+      "usedOn": []
+    },
+    {
+      "id": "faq-018",
+      "question": "Do I need to be on the Gas Safe Register to take an ACS course?",
+      "answer": "ACS assessment is the route that supports Gas Safe registration: experienced engineers take ACS reassessment to renew, while new entrants typically work through a managed learning route towards initial registration. We'll explain exactly which assessments apply to your situation. Get in touch and we'll map out the right path.",
+      "category": "acs",
+      "status": "candidate",
+      "usedOn": [
+        "blog-20-how-to-become-gas-engineer-2026"
+      ]
+    },
+    {
+      "id": "faq-019",
+      "question": "How do I book a course at Better Training Solutions?",
+      "answer": "You can get in touch through our contact page to ask about course dates, availability and how to reserve a place. We'll talk through which course suits you and confirm the next available dates. As a new centre with courses now running, we're happy to help you plan the timing that works best.",
+      "category": "general",
+      "status": "candidate",
+      "usedOn": []
+    },
+    {
+      "id": "faq-020",
+      "question": "Is there parking at the training centre?",
+      "answer": "Yes, there's free parking on site at our High Wycombe centre, HP11 2LB. The centre sits just off the M40 and A404, so it's an easy drive in from across Buckinghamshire, Berkshire and Oxfordshire without the M25 or a congestion charge. Contact us if you'd like directions for your route.",
+      "category": "location",
+      "status": "candidate",
+      "usedOn": []
+    },
+    {
+      "id": "faq-021",
+      "question": "What gas and plumbing courses do you offer?",
+      "answer": "We run training across gas and plumbing, including the Managed Learning Programme, ACS reassessment, Water Regulations (WRAS), Unvented Hot Water (G3), Legionella prevention, LPG changeover and a five-day air source heat pump course. Get in touch and we'll point you to the right course for your goals.",
+      "category": "training",
+      "status": "candidate",
+      "usedOn": []
+    },
+    {
+      "id": "faq-022",
+      "question": "Do you offer heat pump training for existing heating engineers?",
+      "answer": "Yes. Our five-day air source heat pump course is aimed at heating engineers looking to move into renewables, combining low-temperature heating design with practical ASHP installation and commissioning. It's a strong next step as demand for heat pump installers grows. Contact us for the next available dates.",
+      "category": "heat-pump",
+      "status": "candidate",
+      "usedOn": []
+    },
+    {
+      "id": "faq-023",
+      "question": "Can I take more than one course to broaden my qualifications?",
+      "answer": "Yes. Many engineers stack qualifications — for example adding Water Regulations, G3 unvented or heat pump training alongside their gas work — to take on a wider range of jobs. We can help you plan a sensible order based on what you already hold. Get in touch to map out a training pathway.",
+      "category": "training",
+      "status": "candidate",
+      "usedOn": []
+    },
+    {
+      "id": "faq-024",
+      "question": "Is Better Training Solutions a new training centre?",
+      "answer": "Yes — Better Training Solutions is a new gas and plumbing training centre, with courses now running from our High Wycombe base. It's led by an engineer with decades of hands-on gas experience, so the training is grounded in real industry practice. Get in touch to find out more about our courses and approach.",
+      "category": "general",
+      "status": "candidate",
+      "usedOn": []
+    }
+  ]
+}
