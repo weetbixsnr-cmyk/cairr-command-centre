@@ -842,16 +842,16 @@
     "referenceNote": "Historical competitor page-count crawl retained for dashboard context. Current crawl is blocked until GSC/Bing verification recovery."
   },
   "courseDetails": {
-    "updatedAt": "2026-05-17T00:00:00+10:00",
-    "source": "docs/course-details.md verified by BTS handoff",
+    "updatedAt": "2026-05-30T00:00:00+10:00",
+    "source": "Live site re-scan (bettertrainingsolutions.co.uk, sitemap-verified) 2026-05-30 + Adam-confirmed pricing",
     "summary": {
-      "live": 9,
+      "live": 11,
       "broken": 1,
-      "noPage": 2,
-      "confirmed": 6,
-      "missingInfo": 3
+      "noPage": 0,
+      "confirmed": 11,
+      "missingInfo": 0
     },
-    "courseInventoryNote": "docs/course-details.md confirms 9 live course pages as of 2026-04-01. Foundation Skills Gas 404. CCN1 Initial and LPG need Sunny confirmation.",
+    "courseInventoryNote": "11 live course pages confirmed via live re-scan 2026-05-30. CCN1 Initial (/course/ccn1-initial/) and LPG Changeover (/course/lpg-changeover/) now confirmed live with pricing. Foundation Skills Gas still returns 404 — dead link from the New Entrant category page; flag to Sunny to fix or remove.",
     "services": [
       "Managed Learning Program",
       "Initial ACS",
@@ -914,26 +914,26 @@
       {
         "name": "Heat Pump",
         "url": "/course/air-source-heat-pump-low-temperature-heating/",
-        "duration": "NOT ON PAGE",
-        "price": "NOT ON PAGE",
-        "confirmed": false,
-        "status": "missing-info"
+        "duration": "5 days",
+        "price": "£850 +VAT",
+        "confirmed": true,
+        "status": "live"
       },
       {
         "name": "Domestic Cookers",
         "url": "/course/domestic-cookers-training-and-re-assessment/",
-        "duration": "NOT ON PAGE",
-        "price": "NOT ON PAGE",
-        "confirmed": false,
-        "status": "missing-info"
+        "duration": "1 day",
+        "price": "£252 +VAT",
+        "confirmed": true,
+        "status": "live"
       },
       {
         "name": "Domestic Fires & Space Heaters",
         "url": "/course/domestic-fires-and-space-heaters-training-and-re-assessment/",
-        "duration": "NOT ON PAGE",
-        "price": "NOT ON PAGE",
-        "confirmed": false,
-        "status": "missing-info"
+        "duration": "1 day",
+        "price": "£252 +VAT",
+        "confirmed": true,
+        "status": "live"
       },
       {
         "name": "Foundation Skills Gas",
@@ -945,19 +945,19 @@
       },
       {
         "name": "CCN1 Initial (ACS Initial)",
-        "url": null,
-        "duration": "—",
-        "price": "—",
-        "confirmed": false,
-        "status": "no-page"
+        "url": "/course/ccn1-initial/",
+        "duration": "4 days",
+        "price": "£1,079 +VAT",
+        "confirmed": true,
+        "status": "live"
       },
       {
         "name": "LPG Changeover",
-        "url": null,
-        "duration": "—",
-        "price": "—",
-        "confirmed": false,
-        "status": "no-page"
+        "url": "/course/lpg-changeover/",
+        "duration": "2 days",
+        "price": "£425 +VAT",
+        "confirmed": true,
+        "status": "live"
       }
     ]
   },
