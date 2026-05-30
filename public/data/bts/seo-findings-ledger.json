@@ -112,7 +112,8 @@
       "status": "open",
       "evidence": "Page meta and Article/Person JSON-LD name 'Adam Rappolt' (CAIRR consultant) as author of YMYL gas-safety content.",
       "firstSeen": "2026-05-30",
-      "target": "2026-06"
+      "target": "2026-06",
+      "progress": "Drafted on blog-20 (how-to-become-a-gas-engineer-2026) page-1 rollout 2026-05-31; pending Adam live review + publish before status->fixed. Author re-attributed to Sunny Sandhu in draft + Person schema; live WP author-field reassignment may need Admin."
     },
     {
       "id": "F5",
@@ -197,7 +198,8 @@
       "status": "open",
       "evidence": "Served HTML of the post contains no <h1>; title renders as styled text.",
       "firstSeen": "2026-05-30",
-      "target": "2026-06"
+      "target": "2026-06",
+      "progress": "Drafted on blog-20 (how-to-become-a-gas-engineer-2026) page-1 rollout 2026-05-31; pending Adam live review + publish before status->fixed. Single H1 present in draft source; served-HTML <h1> depends on WP theme title bar \u2014 verify live."
     },
     {
       "id": "F9",
