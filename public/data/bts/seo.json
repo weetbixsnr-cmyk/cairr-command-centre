@@ -1,6 +1,6 @@
 {
   "seo": {
-    "lastUpdated": "2026-05-30T03:54:00Z",
+    "lastUpdated": "2026-05-30T04:41:31Z",
     "source": "live-technical-scan",
     "client": "Better Training Solutions",
     "site": "bettertrainingsolutions.co.uk",
@@ -229,7 +229,7 @@
       "rule": "Use GSC/Bing URL Inspection or SiteGround verified crawler logs for crawler-blocking claims. Do not use VPN/datacenter curl challenges alone."
     },
     "healthScan": {
-      "generatedAt": "2026-05-30T03:54:00Z",
+      "generatedAt": "2026-05-30T04:41:31Z",
       "robotsStatus": 200,
       "sitemapsChecked": 7,
       "urlsScanned": 90,
@@ -377,12 +377,19 @@
         "geoScore": 94,
         "source": "live-technical-scan",
         "urlsScanned": 90
+      },
+      {
+        "timestamp": "2026-05-30T04:41:31Z",
+        "healthScore": 75,
+        "geoScore": 94,
+        "source": "live-technical-scan",
+        "urlsScanned": 90
       }
     ],
-    "updatedAt": "2026-05-30T03:54:00Z"
+    "updatedAt": "2026-05-30T04:41:31Z"
   },
   "keywords": {
-    "lastUpdated": "2026-05-30T03:56:30Z",
+    "lastUpdated": "2026-05-30T04:44:05Z",
     "source": "csv:/Users/cairr/AI/CAIRR/clients/better-training-solutions/seo/gsc-export.csv",
     "keywords": [
       {
@@ -1148,7 +1155,7 @@
     "top10Count": 0,
     "status": "0/35 target keywords in top 10, 36 more queries discovered from csv:/Users/cairr/AI/CAIRR/clients/better-training-solutions/seo/gsc-export.csv",
     "rankingScan": {
-      "generatedAt": "2026-05-30T03:56:30Z",
+      "generatedAt": "2026-05-30T04:44:05Z",
       "status": "current",
       "source": "csv:/Users/cairr/AI/CAIRR/clients/better-training-solutions/seo/gsc-export.csv",
       "targetKeywords": 35,
@@ -2343,7 +2350,7 @@
         "section": "\ud83d\udfe1 Plumbing/Water Keywords (9)"
       }
     ],
-    "rankedGeneratedAt": "2026-05-30T03:56:34Z",
+    "rankedGeneratedAt": "2026-05-30T04:44:09Z",
     "rankedSummary": {
       "doingWell": 51,
       "needsWork": 67,
@@ -2947,7 +2954,7 @@
     "period": "Last 30 Days",
     "source": "ga4",
     "gaPropertyId": "533884161",
-    "generatedAt": "2026-05-30T03:56:33Z",
+    "generatedAt": "2026-05-30T04:44:08Z",
     "totals": {
       "views": 294,
       "visitors": 47,
@@ -3134,7 +3141,7 @@
     ]
   },
   "bingRankings": {
-    "generatedAt": "2026-05-30T03:56:34Z",
+    "generatedAt": "2026-05-30T04:44:09Z",
     "site": "https://bettertrainingsolutions.co.uk",
     "source": "bing-webmaster-api",
     "totalQueries": 62,
@@ -3227,14 +3234,14 @@
         "status": "top-3"
       },
       {
-        "query": "change of carreer gas safe engineer",
+        "query": "is unvented course easy",
         "impressions": 1,
         "clicks": 0,
         "position": 2.0,
         "status": "top-3"
       },
       {
-        "query": "is unvented course easy",
+        "query": "change of carreer gas safe engineer",
         "impressions": 1,
         "clicks": 0,
         "position": 2.0,
@@ -3255,14 +3262,14 @@
         "status": "top-3"
       },
       {
-        "query": "whats a mlp qualifcation",
+        "query": "get your lpg qualification if its lapsed",
         "impressions": 1,
         "clicks": 0,
         "position": 3.0,
         "status": "top-3"
       },
       {
-        "query": "get your lpg qualification if its lapsed",
+        "query": "whats a mlp qualifcation",
         "impressions": 1,
         "clicks": 0,
         "position": 3.0,
@@ -3409,14 +3416,14 @@
         "status": "top-10"
       },
       {
-        "query": "unvented hot water systems training ccts",
+        "query": "g3 qualified",
         "impressions": 1,
         "clicks": 0,
         "position": 7.0,
         "status": "top-10"
       },
       {
-        "query": "g3 qualified",
+        "query": "unvented hot water systems training ccts",
         "impressions": 1,
         "clicks": 0,
         "position": 7.0,
