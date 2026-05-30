@@ -1,16 +1,16 @@
 {
   "weekOf": "2026-05-30",
-  "generatedAt": "2026-05-30T00:56:12Z",
+  "generatedAt": "2026-05-30T03:53:58Z",
   "gate": "PASS",
   "staleDays": 9,
   "tabs": {
     "seoHealth": {
-      "reviewedAt": "2026-05-29",
+      "reviewedAt": "2026-05-30",
       "status": "current",
       "source": "seo/seo.json"
     },
     "rankings": {
-      "reviewedAt": "2026-05-29",
+      "reviewedAt": "2026-05-30",
       "status": "current",
       "source": "seo/seo.json"
     },
