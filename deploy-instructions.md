@@ -84,3 +84,12 @@ Both production aliases track the latest `main` deploy automatically:
 
 The other long per-deploy URLs (`command-centre-<hash>-…`) are pinned to a single
 build — do not bookmark those; they go stale.
+
+### Cleanup candidates (needs Adam's approval — destructive)
+
+- **`command-centre-git-agent-…vercel.app`** — per-branch preview alias for the
+  `agent/command-centre` branch. Stale (last updated 2026-03-12, ~78 days).
+- **`agent/command-centre` branch** (`origin`) — leftover from the pre-de-agenting
+  era; the dashboard is now de-agented (see CLAUDE.md). The branch and its preview
+  alias can be removed once Adam confirms nothing still references them. Deleting a
+  branch/alias is destructive, so it is flagged here rather than actioned.
