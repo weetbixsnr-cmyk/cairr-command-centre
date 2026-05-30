@@ -18,13 +18,12 @@
       "top10Count": 0,
       "status": "0/35 target keywords in top 10, 36 more queries discovered from csv:/Users/cairr/AI/CAIRR/clients/better-training-solutions/seo/gsc-export.csv"
     },
-    "p0Blockers": [
-      "GSC/Bing URL Inspection still required for real crawler indexing confirmation"
-    ],
-    "criticalFixesOutstanding": [
-      "GSC/Bing URL Inspection verification",
-      "Course-page inventory confirmation"
-    ],
+    "backlogRef": {
+      "source": "seo/seo-findings-ledger.json",
+      "criticalIds": ["F1"],
+      "highIds": ["F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "F13", "F14"],
+      "note": "Canonical backlog = findings ledger; crawler index-verification tracked once in crawlerStatusCorrection."
+    },
     "coreKeywords": [
       {
         "keyword": "ACS training High Wycombe",
@@ -267,20 +266,15 @@
       "missing": [],
       "deprecated": []
     },
-    "actions": [
-      {
-        "severity": "critical",
-        "title": "GSC/Bing crawler access verification is outstanding."
-      },
-      {
-        "severity": "high",
-        "title": "SG Optimizer activation outstanding"
-      },
-      {
-        "severity": "high",
-        "title": "GSC verification outstanding"
-      }
-    ],
+    "actions": [],
+    "actionsRef": {
+      "source": "seo/seo-findings-ledger.json",
+      "criticalIds": ["F1"],
+      "highIds": ["F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "F13", "F14"],
+      "courseInventoryId": "F24",
+      "operationalNote": "Crawler index-verification lives once in seo.crawlerStatusCorrection. SG Optimizer activation + GSC/Bing verification are operational items for Sunny (WP admin), not findings in the ledger.",
+      "note": "Canonical SEO backlog = findings ledger, referenced by id."
+    },
     "history": [
       {
         "timestamp": "2026-05-17T00:00:00+10:00",
@@ -3502,7 +3496,6 @@
     ]
   },
   "blockers": [
-    "P0: Run GSC + Bing URL Inspection on key pages to confirm live crawl/index (health-scan flag; curl sg-captcha is VPN/WAF noise, not proof of blocking).",
     "GA4 conversion events not configured (click-to-call / mailto / form_submit) \u2014 Conversions tab reads 0 until Sunny/GTM-PRWH9GD9 adds them.",
     "Foundation Skills Gas Course page returns 404 \u2014 needs fix or redirect.",
     "Location pages are WordPress Posts, not Pages \u2014 no /training-near-you/ hub or nav; FAQs not yet integrated into our pages.",

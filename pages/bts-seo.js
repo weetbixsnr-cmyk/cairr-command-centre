@@ -221,6 +221,7 @@ export default function BtsSeoPage({ initialSnapshot }) {
   const traffic = snap?.btsTraffic
   const bing = snap?.btsBing
   const readiness = snap?.btsReadiness
+  const findings = snap?.btsFindings || []
   const gateBlocked = readiness?.gate === 'BLOCK'
   const [tab, setTab] = useState(seoDash ? 'health' : 'rankings')
   const [newsBankView, setNewsBankView] = useState('top10')
@@ -412,6 +413,7 @@ export default function BtsSeoPage({ initialSnapshot }) {
         {/* Tab navigation — RIGHT after stats + safety strip */}
         <div style={{display:'flex',gap:6,marginBottom:16,overflowX:'auto',WebkitOverflowScrolling:'touch',scrollbarWidth:'none'}}>
           <TabButton active={tab==='health'} label="🏥 SEO Health" onClick={() => setTab('health')} />
+          <TabButton active={tab==='fixes-backlog'} label="📝 Fixes / Backlog" onClick={() => setTab('fixes-backlog')} />
           <TabButton active={tab==='future-posts'} label="📮 Future Posts" onClick={() => setTab('future-posts')} />
           <TabButton active={tab==='gbp-posts'} label="📍 GBP Posts" onClick={() => setTab('gbp-posts')} />
           <TabButton active={tab==='rankings'} label="📊 Rankings" onClick={() => setTab('rankings')} />
@@ -456,9 +458,20 @@ export default function BtsSeoPage({ initialSnapshot }) {
             <div style={{padding:'8px 12px',background:'#081a12',border:'1px solid #123a24',borderRadius:8,marginBottom:14,fontSize:10,color:'#10b981'}}>
               Current BTS technical scan evidence loaded from public/data/bts/seo.json. GSC is not connected, so traffic and ranking evidence remain separately gated.
             </div>
-            {/* Plan Status & Overview + Critical Fixes (from SEO-DASHBOARD.md) */}
-            <DashSection section={findDashSection(seoDash?.sections, 'plan-overview', ['plan', 'overview', 'plan-status'])} icon="📋" maxLines={30} />
-            <DashSection section={findDashSection(seoDash?.sections, 'critical-fixes', ['critical', 'fixes', 'blockers'])} icon="🔴" maxLines={40} />
+            {/* Backlog pointer — the canonical SEO issue backlog lives in the
+                findings ledger (rendered in the Fixes / Backlog tab). Health
+                keeps only the scores below to avoid duplicating issue lists. */}
+            {(() => {
+              const crit = findings.filter(f => f.severity === 'Critical').length
+              const high = findings.filter(f => f.severity === 'High').length
+              if (findings.length === 0) return null
+              return (
+                <div style={{fontSize:9,color:'#aaa',marginBottom:14,padding:'8px 12px',background:'#0d0d10',border:'1px solid #33333355',borderRadius:6}}>
+                  📝 {findings.length} tracked SEO findings ({crit} critical · {high} high) — full backlog in the <strong>Fixes / Backlog</strong> tab.
+                  Crawler index-verification is tracked once via GSC/Bing URL Inspection (not duplicated here).
+                </div>
+              )
+            })()}
 
             <div className="grid2" style={{marginBottom:16}}>
               {/* SEO Health Score Gauge */}
@@ -611,6 +624,51 @@ export default function BtsSeoPage({ initialSnapshot }) {
           </>
         )}
 
+        {/* TAB: Fixes / Backlog — canonical SEO findings ledger (read-only) */}
+        {tab === 'fixes-backlog' && (
+          <>
+            <div style={{padding:'8px 12px',background:'#081a12',border:'1px solid #123a24',borderRadius:8,marginBottom:14,fontSize:10,color:'#10b981'}}>
+              Canonical SEO backlog from public/data/bts/seo-findings-ledger.json. Read-only — findings are authored by the SEO audit; scripts own the numbers.
+            </div>
+            {findings.length === 0 ? (
+              <div style={{color:'#555',fontSize:11,fontStyle:'italic',padding:16,textAlign:'center'}}>
+                No findings loaded yet — will appear on next snapshot refresh.
+              </div>
+            ) : (
+              ['Critical','High','Medium','Low'].map(sev => {
+                const items = findings.filter(f => f.severity === sev)
+                if (items.length === 0) return null
+                const sevColor = sev === 'Critical' ? '#ef4444' : sev === 'High' ? '#f59e0b' : sev === 'Medium' ? '#3b82f6' : '#888'
+                const sevIcon = sev === 'Critical' ? '🔴' : sev === 'High' ? '🟠' : sev === 'Medium' ? '🟡' : '⚪'
+                return (
+                  <div key={sev} className="section" style={{marginBottom:16}}>
+                    <div className="sec-title" style={{color:sevColor}}>{sevIcon} {sev} ({items.length})</div>
+                    <div className="card">
+                      <table>
+                        <thead><tr><th>ID</th><th>Title</th><th>Owner</th><th>Fixing section</th><th>Target</th></tr></thead>
+                        <tbody>
+                          {items.map((f, i) => (
+                            <tr key={i}>
+                              <td style={{color:sevColor,fontWeight:700}}>{f.id}</td>
+                              <td style={{color:'#fff',fontWeight:500}}>{f.title}</td>
+                              <td><span style={{fontSize:8,fontWeight:700,textTransform:'uppercase',padding:'2px 6px',borderRadius:3,background: f.owner === 'us' ? '#0a2a1a' : '#2a2000', color: f.owner === 'us' ? '#10b981' : '#f59e0b'}}>{f.owner}</span></td>
+                              <td style={{fontSize:9,color:'#888'}}>{f.fixingSection}</td>
+                              <td style={{fontSize:9,color:'#999'}}>{f.target}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )
+              })
+            )}
+            <div style={{fontSize:8,color:'#777',marginTop:6,textAlign:'right'}}>
+              Source: seo/seo-findings-ledger.json · {findings.length} findings
+            </div>
+          </>
+        )}
+
         {/* TAB: SEO Plan — compact view, detail lives in other tabs */}
         {tab === 'seo-plan' && (
           <>
@@ -661,29 +719,12 @@ export default function BtsSeoPage({ initialSnapshot }) {
               </div>
             )}
 
-            {/* Ranked winnable gaps — the holes */}
+            {/* Keyword-gap / ranking detail is rendered in its primary tabs to avoid
+                duplication: ranking positions live in the Rankings tab; the
+                competitor keyword-gap comparison lives in the Competitors tab. */}
             {plan?.winnableGaps?.length > 0 && (
-              <div className="section" style={{marginBottom:16}}>
-                <div className="sec-title">🕳️ Ranked Winnable Gaps — low-competition holes from fresh GSC + Bing + competitor scan</div>
-                <div className="card">
-                  <table>
-                    <thead><tr><th>#</th><th>Target</th><th>Type</th><th>Intent</th><th>Why winnable</th></tr></thead>
-                    <tbody>
-                      {plan.winnableGaps.map((g, i) => (
-                        <tr key={i}>
-                          <td style={{color:'#ef4444',fontWeight:700}}>{g.rank}</td>
-                          <td style={{color:'#fff',fontWeight:500}}>{g.target}</td>
-                          <td><span style={{fontSize:9,padding:'1px 5px',borderRadius:4,background:'#1a1a1a',border:'1px solid #333',color:'#aaa'}}>{g.type}</span></td>
-                          <td style={{fontSize:9,color:'#888'}}>{g.intent}</td>
-                          <td style={{fontSize:9,color:'#999'}}>{g.why}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                  <div style={{fontSize:8,color:'#777',marginTop:6,textAlign:'right'}}>
-                    Source: {plan.source || 'seo.json seoPlan'} · Page types: L=location · B=blog · N=news · T=topic/pillar · F=FAQ enhancement (our pages only)
-                  </div>
-                </div>
+              <div style={{fontSize:9,color:'#888',marginBottom:16,padding:'6px 10px',background:'#0d0d10',border:'1px solid #33333355',borderRadius:6}}>
+                🕳️ {plan.winnableGaps.length} ranked winnable keyword gaps — see the <strong>Rankings</strong> tab for live positions and the <strong>Competitors</strong> tab for the keyword-gap comparison.
               </div>
             )}
 
@@ -2015,7 +2056,7 @@ export async function getStaticProps() {
         'btsCourseDetails', 'btsCourses', 'btsDrafts', 'btsKeywords',
         'btsNewsBank', 'btsNotifications', 'btsPublishLedger', 'btsReadiness',
         'btsSeo', 'btsSeoAudit', 'btsSeoDash', 'btsSeoplan', 'btsSuggestions',
-        'btsTraffic', 'btsBing'
+        'btsTraffic', 'btsBing', 'btsFindings'
       ])
     }
   }

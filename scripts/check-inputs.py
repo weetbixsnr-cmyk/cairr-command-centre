@@ -24,6 +24,11 @@ INPUTS = [
         "nested_arrays": [("keywords", "keywords")],
     },
     {
+        "path": "public/data/bts/seo-findings-ledger.json",
+        "required_keys": ["_meta", "findings"],
+        "array_fields": ["findings"],
+    },
+    {
         "path": "public/data/bts/news-bank.json",
         "required_keys": ["meta", "stories"],
         "array_fields": ["stories"],
