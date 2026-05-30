@@ -626,6 +626,56 @@ export default function BtsSeoPage({ initialSnapshot }) {
                 })}
               </div>
             )}
+
+            {/* Wave Plan — fresh gap-driven sequencing (from seo.json seoPlan) */}
+            {plan?.waves?.length > 0 && (
+              <div className="section" style={{marginBottom:16}}>
+                <div className="sec-title">🌊 Wave Plan — {plan.waves.length} waves · {(plan.winnableGaps || []).length} ranked winnable gaps · updated {plan.updatedAt || '—'}</div>
+                <div className="card">
+                  {plan.waves.map((w, i) => {
+                    const c = w.status === 'complete' ? '#10b981' : w.status === 'in-progress' ? '#f59e0b' : '#3b82f6'
+                    const sLabel = w.status === 'complete' ? '✅ DONE' : w.status === 'in-progress' ? '🔨 WIP' : '📋 PROPOSED'
+                    return (
+                      <div key={i} style={{padding:'7px 0',borderBottom:'1px solid #1a1a1a'}}>
+                        <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:2}}>
+                          <span style={{fontSize:9,color:c,fontWeight:700,minWidth:78}}>{sLabel}</span>
+                          <span style={{color:'#fff',fontWeight:600,fontSize:12,flex:1}}>{w.name}</span>
+                          {w.gaps?.length > 0 && <span style={{fontSize:9,color:'#888'}}>gaps {w.gaps.join(', ')}</span>}
+                        </div>
+                        <div style={{fontSize:10,color:'#999',paddingLeft:86}}>{w.rationale}</div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Ranked winnable gaps — the holes */}
+            {plan?.winnableGaps?.length > 0 && (
+              <div className="section" style={{marginBottom:16}}>
+                <div className="sec-title">🕳️ Ranked Winnable Gaps — low-competition holes from fresh GSC + Bing + competitor scan</div>
+                <div className="card">
+                  <table>
+                    <thead><tr><th>#</th><th>Target</th><th>Type</th><th>Intent</th><th>Why winnable</th></tr></thead>
+                    <tbody>
+                      {plan.winnableGaps.map((g, i) => (
+                        <tr key={i}>
+                          <td style={{color:'#ef4444',fontWeight:700}}>{g.rank}</td>
+                          <td style={{color:'#fff',fontWeight:500}}>{g.target}</td>
+                          <td><span style={{fontSize:9,padding:'1px 5px',borderRadius:4,background:'#1a1a1a',border:'1px solid #333',color:'#aaa'}}>{g.type}</span></td>
+                          <td style={{fontSize:9,color:'#888'}}>{g.intent}</td>
+                          <td style={{fontSize:9,color:'#999'}}>{g.why}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  <div style={{fontSize:8,color:'#777',marginTop:6,textAlign:'right'}}>
+                    Source: {plan.source || 'seo.json seoPlan'} · Page types: L=location · B=blog · N=news · T=topic/pillar · F=FAQ enhancement (our pages only)
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Content Pipeline — compact */}
             <DashSection section={findDashSection(seoDash?.sections, 'content-pipeline', ['pipeline', 'content-plan', 'upcoming'])} icon="🔮" maxLines={20} />
             {/* Weekly Audit Log */}

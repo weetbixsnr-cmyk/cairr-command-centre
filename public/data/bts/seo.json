@@ -1,6 +1,6 @@
 {
   "seo": {
-    "lastUpdated": "2026-05-29T22:59:08Z",
+    "lastUpdated": "2026-05-30T00:56:14Z",
     "source": "live-technical-scan",
     "client": "Better Training Solutions",
     "site": "bettertrainingsolutions.co.uk",
@@ -19,19 +19,11 @@
       "status": "0/35 target keywords in top 10, 36 more queries discovered from csv:/Users/cairr/AI/CAIRR/clients/better-training-solutions/seo/gsc-export.csv"
     },
     "p0Blockers": [
-      "Location pages are WordPress Posts, not Pages — all 5 (Aylesbury, Reading, Oxford, Slough, Maidenhead) sit in the blog feed instead of under Our Courses > Training Near You (master plan §1/§4). Conversion not yet done.",
-      "Zero FAQ integration on our built pages — FAQ question bank never built; only the main FAQ page has 13 generic FAQs. No FAQPage schema on any blog/location/news.",
-      "Aylesbury location URL in content.json is a 404 (/gas-plumbing-training-aylesbury/); live page is /gas-and-plumbing-training-near-aylesbury-courses-within-easy-reach/.",
-      "Conversion tracking not configured in GTM — GA4 has no phone-tap/email-tap/form-submit events, so Conversions tab reads 0 (form_start fires, form_submit does not).",
-      "/training-near-you/ hub page does not exist; Training Near You not in nav dropdown."
+      "GSC/Bing URL Inspection still required for real crawler indexing confirmation"
     ],
     "criticalFixesOutstanding": [
-      "Convert 5 location Posts to Pages (301-safe) + build /training-near-you/ hub + nav",
-      "Build FAQ question bank and integrate FAQs into our pages (blogs/news/locations only)",
-      "Fix Aylesbury URL drift in content.json",
-      "Configure GA4 conversion events (Sunny/GTM) so Conversions tab populates",
-      "GSC/Bing URL Inspection spot-check (crawl confirmed via GSC data; Bing import done)",
-      "Confirm CCN1 Initial + LPG Changeover course pages exist; fix Foundation Skills Gas Course 404"
+      "GSC/Bing URL Inspection verification",
+      "Course-page inventory confirmation"
     ],
     "coreKeywords": [
       {
@@ -237,7 +229,7 @@
       "rule": "Use GSC/Bing URL Inspection or SiteGround verified crawler logs for crawler-blocking claims. Do not use VPN/datacenter curl challenges alone."
     },
     "healthScan": {
-      "generatedAt": "2026-05-29T22:59:08Z",
+      "generatedAt": "2026-05-30T00:56:14Z",
       "robotsStatus": 200,
       "sitemapsChecked": 7,
       "urlsScanned": 90,
@@ -371,12 +363,19 @@
         "geoScore": 94,
         "source": "live-technical-scan",
         "urlsScanned": 90
+      },
+      {
+        "timestamp": "2026-05-30T00:56:14Z",
+        "healthScore": 75,
+        "geoScore": 94,
+        "source": "live-technical-scan",
+        "urlsScanned": 90
       }
     ],
-    "updatedAt": "2026-05-29T22:59:08Z"
+    "updatedAt": "2026-05-30T00:56:14Z"
   },
   "keywords": {
-    "lastUpdated": "2026-05-29T23:01:47Z",
+    "lastUpdated": "2026-05-30T00:59:07Z",
     "source": "csv:/Users/cairr/AI/CAIRR/clients/better-training-solutions/seo/gsc-export.csv",
     "keywords": [
       {
@@ -1142,7 +1141,7 @@
     "top10Count": 0,
     "status": "0/35 target keywords in top 10, 36 more queries discovered from csv:/Users/cairr/AI/CAIRR/clients/better-training-solutions/seo/gsc-export.csv",
     "rankingScan": {
-      "generatedAt": "2026-05-29T23:01:47Z",
+      "generatedAt": "2026-05-30T00:59:07Z",
       "status": "current",
       "source": "csv:/Users/cairr/AI/CAIRR/clients/better-training-solutions/seo/gsc-export.csv",
       "targetKeywords": 35,
@@ -1160,9 +1159,9 @@
     "client": "Better Training Solutions",
     "site": "bettertrainingsolutions.co.uk",
     "base": "High Wycombe, HP11 2LB",
-    "updatedAt": "2026-05-17T00:00:00+10:00",
+    "updatedAt": "2026-05-30",
     "keywordCoverage": {
-      "tracked": 35,
+      "tracked": 71,
       "locationTargeted": 0,
       "categories": {
         "gas": 9,
@@ -1221,7 +1220,7 @@
       {
         "priority": 2,
         "gap": "Orphaned qualification-code pages",
-        "note": "CKR1, HTR1, G3, WRAS, Legionella, LPG changeover — nationals (Logic4/Able/Gastec) bundle these, almost none give a dedicated indexable page. Near-zero competition. Real Bing impressions for 'g3 course', 'g3 unvented qualification cost', 'do you need a g3 qualification'."
+        "note": "CKR1, HTR1, G3, WRAS, Legionella, LPG changeover \u2014 nationals (Logic4/Able/Gastec) bundle these, almost none give a dedicated indexable page. Near-zero competition. Real Bing impressions for 'g3 course', 'g3 unvented qualification cost', 'do you need a g3 qualification'."
       },
       {
         "priority": 3,
@@ -1298,7 +1297,273 @@
       "competitorCheck": "Monday",
       "summaryReport": "monthly"
     },
-    "source": "manual-status-json-restored"
+    "source": "fresh-scan-2026-05-30 (GSC 38q + Bing 45q + competitor recon + trend scan)",
+    "winnableGaps": [
+      {
+        "rank": 1,
+        "target": "ACS reassessment near me / High Wycombe",
+        "intent": "renewal, urgent",
+        "type": "L",
+        "why": "5-yr recurring demand; nationals don't localise"
+      },
+      {
+        "rank": 2,
+        "target": "CCN1 course High Wycombe / Buckinghamshire",
+        "intent": "new entrant",
+        "type": "L",
+        "why": "Gastec owns CCN1 only at MK; HW open"
+      },
+      {
+        "rank": 3,
+        "target": "gas training near Reading (RG)",
+        "intent": "commercial",
+        "type": "L",
+        "why": "230k pop, no local centre"
+      },
+      {
+        "rank": 4,
+        "target": "gas engineer course Oxford / near Oxford",
+        "intent": "commercial",
+        "type": "L",
+        "why": "Oxford corridor white space"
+      },
+      {
+        "rank": 5,
+        "target": "CKR1 / domestic cookers gas course near me",
+        "intent": "niche add-on",
+        "type": "B/F",
+        "why": "Bundled by all; ~no dedicated page"
+      },
+      {
+        "rank": 6,
+        "target": "HTR1 / gas fires heater qualification",
+        "intent": "niche add-on",
+        "type": "B/F",
+        "why": "Bundled; very low competition"
+      },
+      {
+        "rank": 7,
+        "target": "how long does it take to become a gas engineer",
+        "intent": "top-funnel",
+        "type": "B",
+        "why": "VIVA ranks; we localise + MLP-specific"
+      },
+      {
+        "rank": 8,
+        "target": "ACS reassessment eligibility / expired certificate",
+        "intent": "info to commercial",
+        "type": "B/F",
+        "why": "High-anxiety query; Tom-Kat thin; snippet win"
+      },
+      {
+        "rank": 9,
+        "target": "G3 unvented hot water course near me / High Wycombe",
+        "intent": "niche commercial",
+        "type": "L",
+        "why": "No local home-counties option; Bing impressions live"
+      },
+      {
+        "rank": 10,
+        "target": "water regulations (WRAS) course near me / HW",
+        "intent": "niche commercial",
+        "type": "L",
+        "why": "Fragmented WIAPS market; local wins"
+      },
+      {
+        "rank": 11,
+        "target": "Legionella training course near me / Bucks",
+        "intent": "compliance",
+        "type": "L",
+        "why": "PPL B2B-national; local uncontested"
+      },
+      {
+        "rank": 12,
+        "target": "MLP gas course no experience / new entrant 2026",
+        "intent": "career commercial",
+        "type": "B",
+        "why": "High intent; tie to local job market"
+      },
+      {
+        "rank": 13,
+        "target": "retrain as a gas engineer 2026 (localised)",
+        "intent": "career top-funnel",
+        "type": "B",
+        "why": "Logic4/VIVA generic; we localise"
+      },
+      {
+        "rank": 14,
+        "target": "career change to gas engineer over 40",
+        "intent": "career niche",
+        "type": "B",
+        "why": "Under-served demographic; GSC demand at pos 44-57"
+      },
+      {
+        "rank": 15,
+        "target": "how much does gas engineer training cost UK",
+        "intent": "research",
+        "type": "B/F",
+        "why": "Competitors vague on cost; honesty wins trust"
+      },
+      {
+        "rank": 16,
+        "target": "heat pump training Buckinghamshire / High Wycombe",
+        "intent": "renewables",
+        "type": "L",
+        "why": "Locally still open"
+      },
+      {
+        "rank": 17,
+        "target": "qualifications to install heat pumps (L3 ASHP + L3 low-temp)",
+        "intent": "info to commercial",
+        "type": "B/T",
+        "why": "Maps to BTS 5-day course; MCS-timely"
+      },
+      {
+        "rank": 18,
+        "target": "low temperature heating design course",
+        "intent": "niche rising",
+        "type": "B",
+        "why": "Rising MCS requirement; few explain it"
+      },
+      {
+        "rank": 19,
+        "target": "gas-to-heat-pump / add renewables pathway",
+        "intent": "upskilling",
+        "type": "T",
+        "why": "BTS multi-trade pathway unique"
+      },
+      {
+        "rank": 20,
+        "target": "LPG changeover / park homes / caravan gas",
+        "intent": "niche",
+        "type": "B/F",
+        "why": "Only Tom-Kat touches it (confirm BTS offers)"
+      },
+      {
+        "rank": 21,
+        "target": "weekend / evening ACS course",
+        "intent": "scheduling",
+        "type": "B/F",
+        "why": "Able owns 'weekend plumbing'; gas open"
+      },
+      {
+        "rank": 22,
+        "target": "gas engineer salary UK 2026 (Thames Valley)",
+        "intent": "research",
+        "type": "B",
+        "why": "Aggregators generic; local differentiates"
+      },
+      {
+        "rank": 23,
+        "target": "is it worth becoming a gas engineer in 2026",
+        "intent": "decision",
+        "type": "B",
+        "why": "Skills-shortage data = shareable answer"
+      },
+      {
+        "rank": 24,
+        "target": "ACS gas qualification codes explained (pillar)",
+        "intent": "info",
+        "type": "T",
+        "why": "Gastec owns nationally; we build cleaner pillar + internal links"
+      },
+      {
+        "rank": 25,
+        "target": "gas training Aylesbury / Maidenhead / Slough / Milton Keynes",
+        "intent": "commercial",
+        "type": "L",
+        "why": "Confirmed white space; MK + Maidenhead drafted"
+      },
+      {
+        "rank": 26,
+        "target": "how to choose a gas training centre",
+        "intent": "neutral decision",
+        "type": "B",
+        "why": "No competitor writes neutral buyer guides"
+      },
+      {
+        "rank": 27,
+        "target": "Future Homes Standard 2028 for heating engineers",
+        "intent": "news",
+        "type": "N",
+        "why": "Dated, funding-neutral, forward-looking"
+      },
+      {
+        "rank": 28,
+        "target": "heat pump skills shortage UK / installer demand 2026",
+        "intent": "news",
+        "type": "N",
+        "why": "Fresh data; funding-neutral; link-worthy"
+      }
+    ],
+    "waves": [
+      {
+        "id": 1,
+        "name": "Wave 1 \u2014 Foundation (DONE)",
+        "status": "complete",
+        "gaps": [],
+        "rationale": "5 location pages + 20 blogs + 6 news + 1 topic live (incl. Batch 4B). Migration debt: locations are Posts, no FAQs, Aylesbury URL fixed 2026-05-30."
+      },
+      {
+        "id": 2,
+        "name": "Wave 2 \u2014 Quick wins",
+        "status": "proposed",
+        "gaps": [
+          1,
+          5,
+          6,
+          8,
+          24
+        ],
+        "rationale": "Orphaned qualification-code pages (CKR1, HTR1) + ACS eligibility FAQ/blog + code-explainer pillar. Cheapest, near-zero competition."
+      },
+      {
+        "id": 3,
+        "name": "Wave 3 \u2014 Local corridor",
+        "status": "proposed",
+        "gaps": [
+          2,
+          3,
+          4,
+          9,
+          10,
+          11,
+          16,
+          25
+        ],
+        "rationale": "Course+location pages across the Bucks/Berks/Oxon corridor \u2014 the geography moat. Built as Pages under a Training Near You hub."
+      },
+      {
+        "id": 4,
+        "name": "Wave 4 \u2014 Career + cost + decision",
+        "status": "proposed",
+        "gaps": [
+          7,
+          12,
+          13,
+          14,
+          15,
+          21,
+          22,
+          23,
+          26
+        ],
+        "rationale": "Highest top-funnel demand, localised + honest cost. Career-change cluster already ranks 17-57 on Google."
+      },
+      {
+        "id": 5,
+        "name": "Wave 5 \u2014 News strand + heat-pump pathway",
+        "status": "proposed",
+        "gaps": [
+          27,
+          28,
+          17,
+          18,
+          19
+        ],
+        "rationale": "Funding-neutral trend content. Heat-pump head terms closing; edge is local + qualification-pathway clarity."
+      }
+    ]
   },
   "competitors": {
     "scanStatus": "refreshed",
@@ -1309,66 +1574,144 @@
         "name": "Logic4training",
         "threat": "high",
         "domain": "logic4training.co.uk",
-        "strengths": ["Most active blog in sector (~weekly)", "Strong career-change + student case-study content", "Salary/demand data posts", "Regulation-update cadence (IGEM/UP/1B Ed.4)"],
-        "weaknesses": ["Pivoting hard to electrical — gas/plumbing content thinning", "Zero local/geographic targeting", "Bundles CKR1/HTR1 into one 'appliances' page", "All content is self-promotional, no neutral buyer guides"],
-        "gapOpportunities": ["Local intent (Bucks/Berks/Oxon)", "Dedicated qualification-code pages", "Neutral 'how to choose a training centre' content"],
-        "contentStrategy": {"servicePagesEstimate": 25, "blogEstimate": 200}
+        "strengths": [
+          "Most active blog in sector (~weekly)",
+          "Strong career-change + student case-study content",
+          "Salary/demand data posts",
+          "Regulation-update cadence (IGEM/UP/1B Ed.4)"
+        ],
+        "weaknesses": [
+          "Pivoting hard to electrical \u2014 gas/plumbing content thinning",
+          "Zero local/geographic targeting",
+          "Bundles CKR1/HTR1 into one 'appliances' page",
+          "All content is self-promotional, no neutral buyer guides"
+        ],
+        "gapOpportunities": [
+          "Local intent (Bucks/Berks/Oxon)",
+          "Dedicated qualification-code pages",
+          "Neutral 'how to choose a training centre' content"
+        ],
+        "contentStrategy": {
+          "servicePagesEstimate": 25,
+          "blogEstimate": 200
+        }
       },
       {
         "name": "Able Skills",
         "threat": "medium",
         "domain": "ableskills.co.uk",
-        "strengths": ["Big national centre", "Strong on combined Plumbing+Gas packages", "Owns 'weekend plumbing' angle"],
-        "weaknesses": ["Update-and-refresh blog, not fresh cadence", "Kent-centric, no southern home-counties intent", "Weak on heat pump/renewables", "No standalone qualification-code pages"],
-        "gapOpportunities": ["Gas weekend/evening angle", "Heat pump content", "Home-counties local intent"],
-        "contentStrategy": {"servicePagesEstimate": 30, "blogEstimate": 80}
+        "strengths": [
+          "Big national centre",
+          "Strong on combined Plumbing+Gas packages",
+          "Owns 'weekend plumbing' angle"
+        ],
+        "weaknesses": [
+          "Update-and-refresh blog, not fresh cadence",
+          "Kent-centric, no southern home-counties intent",
+          "Weak on heat pump/renewables",
+          "No standalone qualification-code pages"
+        ],
+        "gapOpportunities": [
+          "Gas weekend/evening angle",
+          "Heat pump content",
+          "Home-counties local intent"
+        ],
+        "contentStrategy": {
+          "servicePagesEstimate": 30,
+          "blogEstimate": 80
+        }
       },
       {
         "name": "Tom-Kat Training",
         "threat": "medium",
         "domain": "tom-kat.co.uk",
-        "strengths": ["Gas-only specialist", "Strong ACS reassessment eligibility detail (12-month/5-year rules)", "Price-led, clear"],
-        "weaknesses": ["Gas-only: no heat pump, water regs, Legionella standalone", "Thin blog/FAQ", "No location pages", "No career-changer funnel"],
-        "gapOpportunities": ["Match+beat reassessment FAQ then localise", "Career content", "Multi-trade pathway"],
-        "contentStrategy": {"servicePagesEstimate": 10, "blogEstimate": 15}
+        "strengths": [
+          "Gas-only specialist",
+          "Strong ACS reassessment eligibility detail (12-month/5-year rules)",
+          "Price-led, clear"
+        ],
+        "weaknesses": [
+          "Gas-only: no heat pump, water regs, Legionella standalone",
+          "Thin blog/FAQ",
+          "No location pages",
+          "No career-changer funnel"
+        ],
+        "gapOpportunities": [
+          "Match+beat reassessment FAQ then localise",
+          "Career content",
+          "Multi-trade pathway"
+        ],
+        "contentStrategy": {
+          "servicePagesEstimate": 10,
+          "blogEstimate": 15
+        }
       },
       {
         "name": "Gastec Training",
         "threat": "high",
         "domain": "gastectraining.co.uk",
-        "strengths": ["Best qualification-code content (CCN1/COCN1/CKR1 + code explainer)", "Deep technical authority, ~30 yrs", "Milton Keynes — direct local rival (45 min)", "Heat pump course list"],
-        "weaknesses": ["B2B/utilities tone, weak consumer/career storytelling", "No local targeting beyond MK", "Limited fresh blog cadence"],
-        "gapOpportunities": ["'CCN1 course High Wycombe/Bucks' (they only rank generically)", "Consumer/career-changer angle", "Cleaner code-explainer pillar + local"],
-        "contentStrategy": {"servicePagesEstimate": 35, "blogEstimate": 40}
+        "strengths": [
+          "Best qualification-code content (CCN1/COCN1/CKR1 + code explainer)",
+          "Deep technical authority, ~30 yrs",
+          "Milton Keynes \u2014 direct local rival (45 min)",
+          "Heat pump course list"
+        ],
+        "weaknesses": [
+          "B2B/utilities tone, weak consumer/career storytelling",
+          "No local targeting beyond MK",
+          "Limited fresh blog cadence"
+        ],
+        "gapOpportunities": [
+          "'CCN1 course High Wycombe/Bucks' (they only rank generically)",
+          "Consumer/career-changer angle",
+          "Cleaner code-explainer pillar + local"
+        ],
+        "contentStrategy": {
+          "servicePagesEstimate": 35,
+          "blogEstimate": 40
+        }
       },
       {
         "name": "VIVA Training",
         "threat": "high",
         "domain": "vivatraining.co.uk",
-        "strengths": ["Best blog SEO structure (Gas/Renewables/Training silos)", "Answers question-queries directly ('What is a CCN1 course', 'How long to be a gas engineer')", "Fast on trends (heat pump apprenticeship Jan 2026)"],
-        "weaknesses": ["Halifax/Yorkshire base — no southern local intent", "National-generic"],
-        "gapOpportunities": ["Localised versions of their question content", "Southern corridor white space"],
-        "contentStrategy": {"servicePagesEstimate": 20, "blogEstimate": 60}
+        "strengths": [
+          "Best blog SEO structure (Gas/Renewables/Training silos)",
+          "Answers question-queries directly ('What is a CCN1 course', 'How long to be a gas engineer')",
+          "Fast on trends (heat pump apprenticeship Jan 2026)"
+        ],
+        "weaknesses": [
+          "Halifax/Yorkshire base \u2014 no southern local intent",
+          "National-generic"
+        ],
+        "gapOpportunities": [
+          "Localised versions of their question content",
+          "Southern corridor white space"
+        ],
+        "contentStrategy": {
+          "servicePagesEstimate": 20,
+          "blogEstimate": 60
+        }
       }
     ],
     "keyGaps": [
-      "STRUCTURAL MOAT: every serious competitor is national-generic — not one targets the Bucks/Berks/Oxon corridor locally for course terms.",
+      "STRUCTURAL MOAT: every serious competitor is national-generic \u2014 not one targets the Bucks/Berks/Oxon corridor locally for course terms.",
       "Orphaned qualification codes (CKR1, HTR1, G3, WRAS, Legionella, LPG) get bundled by nationals, rarely a dedicated indexable page.",
       "No competitor writes neutral buyer-guide content ('how to choose a gas training centre').",
-      "Heat pump window is closing — nationals now publishing heavily; BTS edge is local + qualification-pathway clarity (L3 ASHP + L3 low-temp design).",
-      "Funding-neutral news strand (skills shortage, Future Homes 2028, MCS 2026) is open — competitors lean on government-funding hooks BTS can't use."
+      "Heat pump window is closing \u2014 nationals now publishing heavily; BTS edge is local + qualification-pathway clarity (L3 ASHP + L3 low-temp design).",
+      "Funding-neutral news strand (skills shortage, Future Homes 2028, MCS 2026) is open \u2014 competitors lean on government-funding hooks BTS can't use."
     ]
   },
   "weeklyReview": {
     "weekOf": "2026-05-26",
     "tabs": {
       "seoHealth": {
-        "reviewedAt": "2026-05-29",
+        "reviewedAt": "2026-05-30",
         "reviewer": "cairr-live-scan",
         "status": "current"
       },
       "rankings": {
-        "reviewedAt": "2026-05-29",
+        "reviewedAt": "2026-05-30",
         "reviewer": "cairr-ranking-scan",
         "status": "current"
       },
@@ -1409,9 +1752,9 @@
     "period": "Last 30 Days",
     "source": "ga4",
     "gaPropertyId": "533884161",
-    "generatedAt": "2026-05-29T23:01:51Z",
+    "generatedAt": "2026-05-30T00:59:11Z",
     "totals": {
-      "views": 293,
+      "views": 294,
       "visitors": 47,
       "phoneTaps": 0,
       "emailTaps": 0,
@@ -1442,7 +1785,7 @@
       {
         "path": "/latest/",
         "type": "news",
-        "views": 17,
+        "views": 18,
         "phoneTaps": 0,
         "emailTaps": 0
       },
@@ -1596,7 +1939,7 @@
     ]
   },
   "bingRankings": {
-    "generatedAt": "2026-05-29T23:01:52Z",
+    "generatedAt": "2026-05-30T00:59:12Z",
     "site": "https://bettertrainingsolutions.co.uk",
     "source": "bing-webmaster-api",
     "totalQueries": 45,
@@ -1696,14 +2039,14 @@
         "status": "top-3"
       },
       {
-        "query": "whats a mlp qualifcation",
+        "query": "get your lpg qualification if its lapsed",
         "impressions": 1,
         "clicks": 0,
         "position": 3.0,
         "status": "top-3"
       },
       {
-        "query": "get your lpg qualification if its lapsed",
+        "query": "whats a mlp qualifcation",
         "impressions": 1,
         "clicks": 0,
         "position": 3.0,
@@ -1738,14 +2081,14 @@
         "status": "top-10"
       },
       {
-        "query": "sunny chartergas",
+        "query": "gaz  courses aylesbury",
         "impressions": 1,
         "clicks": 0,
         "position": 5.0,
         "status": "top-10"
       },
       {
-        "query": "gaz  courses aylesbury",
+        "query": "sunny chartergas",
         "impressions": 1,
         "clicks": 0,
         "position": 5.0,
@@ -1794,14 +2137,14 @@
         "status": "top-10"
       },
       {
-        "query": "ccn1 re-assessment south wales",
+        "query": "heater training room",
         "impressions": 1,
         "clicks": 0,
         "position": 7.0,
         "status": "top-10"
       },
       {
-        "query": "heater training room",
+        "query": "ccn1 re-assessment south wales",
         "impressions": 1,
         "clicks": 0,
         "position": 7.0,
@@ -1815,14 +2158,14 @@
         "status": "top-10"
       },
       {
-        "query": "g3 qualified",
+        "query": "unvented hot water systems training ccts",
         "impressions": 1,
         "clicks": 0,
         "position": 7.0,
         "status": "top-10"
       },
       {
-        "query": "unvented hot water systems training ccts",
+        "query": "g3 qualified",
         "impressions": 1,
         "clicks": 0,
         "position": 7.0,
@@ -1871,14 +2214,14 @@
         "status": "top-10"
       },
       {
-        "query": "acs ccn1 test",
+        "query": "acs ccn1",
         "impressions": 1,
         "clicks": 0,
         "position": 9.0,
         "status": "top-10"
       },
       {
-        "query": "acs ccn1",
+        "query": "acs ccn1 test",
         "impressions": 1,
         "clicks": 0,
         "position": 9.0,
@@ -1920,5 +2263,25 @@
         "status": "top-50"
       }
     ]
-  }
+  },
+  "blockers": [
+    "P0: Run GSC + Bing URL Inspection on key pages to confirm live crawl/index (health-scan flag; curl sg-captcha is VPN/WAF noise, not proof of blocking).",
+    "GA4 conversion events not configured (click-to-call / mailto / form_submit) \u2014 Conversions tab reads 0 until Sunny/GTM-PRWH9GD9 adds them.",
+    "Foundation Skills Gas Course page returns 404 \u2014 needs fix or redirect.",
+    "Location pages are WordPress Posts, not Pages \u2014 no /training-near-you/ hub or nav; FAQs not yet integrated into our pages.",
+    "CCN1 Initial and LPG Changeover course pages unconfirmed \u2014 do they exist / are they still offered? (needs Sunny).",
+    "SG Optimizer plugin not activated (needs WP admin) \u2014 caching/perf gain pending."
+  ],
+  "nextActions": [
+    "DECIDE: which wave to start. Recommended Wave 2 quick wins \u2014 CKR1 + HTR1 qualification-code pages, ACS reassessment-eligibility FAQ/blog, ACS qualification-codes pillar (near-zero competition).",
+    "Build FAQ question bank from live GSC/Bing question queries (what is an ACS course, does gas course include CCN1, what if I fail my ACS, is G3 adequate for commercial) \u2014 integrate into OUR pages only.",
+    "Sunny: confirm CCN1 Initial + LPG Changeover course status; supply instructor names/qualifications for About Us page.",
+    "Sunny: release held assets \u2014 Milton Keynes location, news-5 (BUS), news-6 (apprenticeship funding), About Us, directory-listing package.",
+    "Security: rotate Bing Webmaster API key (transcript exposure 2026-05-30) and WordPress application password.",
+    "Run GSC/Bing URL Inspection spot-check on Batch 4B URLs (722/724/726/728)."
+  ],
+  "recentlyResolved": [
+    "Aylesbury location URL drift fixed in content.json (now /gas-and-plumbing-training-near-aylesbury-courses-within-easy-reach/, verified HTTP 200) \u2014 2026-05-30.",
+    "Full live-data refresh ran clean: GSC (38 queries), Bing (45), GA4 (294 views/47 visitors), SEO health 75, GEO 94 \u2014 2026-05-30."
+  ]
 }
