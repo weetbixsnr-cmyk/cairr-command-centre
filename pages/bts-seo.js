@@ -75,6 +75,17 @@ function PosCell({ pos }) {
   return <span style={{color:'#ef4444'}}>50+</span>
 }
 
+// Same colour thresholds as PosCell but always shows the true position number,
+// so a #14 reads "#14" (red) instead of collapsing to "50+". Used by the ranked
+// best→worst keyword view where the exact number drives the ordering.
+function RankedPos({ pos }) {
+  if (pos == null) return <span style={{color:'#555'}}>—</span>
+  const color = pos === 1 ? '#10b981' : pos === 2 ? '#f59e0b' : pos <= 5 ? '#3b82f6' : pos <= 10 ? '#888' : '#ef4444'
+  const weight = pos <= 5 ? 700 : 600
+  const medal = pos === 1 ? '🥇 ' : pos === 2 ? '🥈 ' : ''
+  return <span style={{color,fontWeight:weight}}>{medal}#{pos}</span>
+}
+
 function ThreatDot({ level }) {
   const c = level === 'high' ? '#ef4444' : level === 'medium' ? '#f59e0b' : '#10b981'
   return <span style={{display:'inline-block',width:8,height:8,borderRadius:'50%',background:c,marginRight:4}}></span>
@@ -763,25 +774,75 @@ export default function BtsSeoPage({ initialSnapshot }) {
               </div>
             )}
 
-            {/* All Keywords by Section */}
-            <div className="section">
-              <div className="sec-title">All Tracked Keywords ({totalKeywords})</div>
-              <div className="card">
-                <table>
-                  <thead><tr><th>Keyword</th><th>Baseline</th><th>Current</th><th>Section</th></tr></thead>
-                  <tbody>
-                    {(kw?.keywords || []).map((k, i) => (
-                      <tr key={i}>
-                        <td style={{color:'#fff',fontWeight:500}}>{k.keyword}</td>
-                        <td>{k.baseline != null ? <PosCell pos={k.baseline} /> : <span style={{color:'#555'}}>—</span>}</td>
-                        <td>{k.latest != null ? <PosCell pos={k.latest} /> : <span style={{color:'#555'}}>—</span>}</td>
-                        <td style={{fontSize:9,color:'#888'}}>{k.section || '—'}</td>
-                      </tr>
+            {/* All Tracked Keywords — single best→worst view when BTS provides keywords.ranked.
+                Falls back to the by-section render if the BTS agent hasn't produced ranked yet. */}
+            {Array.isArray(kw?.ranked) && kw.ranked.length > 0 ? (
+              <div className="section">
+                <div className="sec-title">All Tracked Keywords — Best to Worst ({kw.rankedSummary?.total ?? kw.ranked.length})</div>
+                <div className="card">
+                  <div style={{display:'flex',gap:8,marginBottom:10,flexWrap:'wrap'}}>
+                    {[
+                      { label: 'Doing well', val: kw.rankedSummary?.doingWell ?? kw.ranked.filter(r => r.position != null && r.position <= 10).length, color: '#10b981' },
+                      { label: 'Needs work', val: kw.rankedSummary?.needsWork ?? kw.ranked.filter(r => r.position == null || r.position > 10).length, color: '#ef4444' },
+                      { label: 'Total', val: kw.rankedSummary?.total ?? kw.ranked.length, color: '#3b82f6' },
+                    ].map((s, i) => (
+                      <div key={i} className="stat-card" style={{minWidth:90,flex:1}}>
+                        <div className="stat-val" style={{fontSize:20,color:s.color}}>{s.val}</div>
+                        <div className="stat-lbl">{s.label}</div>
+                      </div>
                     ))}
-                  </tbody>
-                </table>
+                  </div>
+                  <table>
+                    <thead><tr><th>Keyword</th><th>Pos</th><th>Source</th><th>Page</th><th>Impr</th><th>Clicks</th></tr></thead>
+                    <tbody>
+                      {(() => {
+                        const well = kw.ranked.filter(r => r.position != null && r.position <= 10)
+                        const needs = kw.ranked.filter(r => r.position == null || r.position > 10)
+                        const Row = (r, key) => (
+                          <tr key={key}>
+                            <td style={{color:'#fff',fontWeight:500}}>{r.keyword}</td>
+                            <td><RankedPos pos={r.position} /></td>
+                            <td style={{fontSize:9,color:'#888'}}>{r.source || '—'}</td>
+                            <td style={{fontSize:9,color:'#888',maxWidth:160,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{r.page || '—'}</td>
+                            <td>{r.impressions ?? '—'}</td>
+                            <td style={{color:(r.clicks > 0) ? '#f59e0b' : '#333'}}>{r.clicks ?? 0}</td>
+                          </tr>
+                        )
+                        const band = (key, label, color) => (
+                          <tr key={key}><td colSpan={6} style={{background:'#0e0e0e',color,fontSize:9,fontWeight:700,textTransform:'uppercase',letterSpacing:0.5,padding:'6px 8px'}}>{label}</td></tr>
+                        )
+                        const out = []
+                        if (well.length) { out.push(band('band-well', `✅ Ranking well — top 10 / page 1 (${well.length})`, '#10b981')); well.forEach((r, i) => out.push(Row(r, `w${i}`))) }
+                        if (needs.length) { out.push(band('band-needs', `⚠️ Needs work — 11–50+ (${needs.length})`, '#ef4444')); needs.forEach((r, i) => out.push(Row(r, `n${i}`))) }
+                        return out
+                      })()}
+                    </tbody>
+                  </table>
+                  <div style={{fontSize:8,color:'#777',marginTop:6,textAlign:'right'}}>
+                    Source: bts ranked-keywords · Updated: {kw.rankedGeneratedAt || kw.lastUpdated || '—'}
+                  </div>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="section">
+                <div className="sec-title">All Tracked Keywords ({totalKeywords})</div>
+                <div className="card">
+                  <table>
+                    <thead><tr><th>Keyword</th><th>Baseline</th><th>Current</th><th>Section</th></tr></thead>
+                    <tbody>
+                      {(kw?.keywords || []).map((k, i) => (
+                        <tr key={i}>
+                          <td style={{color:'#fff',fontWeight:500}}>{k.keyword}</td>
+                          <td>{k.baseline != null ? <PosCell pos={k.baseline} /> : <span style={{color:'#555'}}>—</span>}</td>
+                          <td>{k.latest != null ? <PosCell pos={k.latest} /> : <span style={{color:'#555'}}>—</span>}</td>
+                          <td style={{fontSize:9,color:'#888'}}>{k.section || '—'}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
 
             {/* Core Keywords */}
             <div className="grid2">
