@@ -1046,6 +1046,48 @@ export default function BtsSeoPage({ initialSnapshot }) {
 
             {/* Coverage Matrix (from SEO-DASHBOARD.md) — Content Published removed, already on Google Safety tab as Publish Timeline */}
             <DashSection section={findDashSection(seoDash?.sections, 'coverage-matrix', ['coverage', 'matrix', 'service-location'])} icon="📍" maxLines={50} />
+
+            {/* Sub-card: Training Near You hub + location-page coverage (read-only, sourced from content.json items) */}
+            {(() => {
+              const items = snap?.btsContent?.items || []
+              const hub = items.find(i => i.id === 'page-training-near-you-hub')
+              const LOCATION_URLS = [
+                '/gas-training-near-me-south-east/',
+                '/gas-and-plumbing-training-near-aylesbury-courses-within-easy-reach/',
+                '/gas-and-plumbing-training-near-reading/',
+                '/gas-and-plumbing-training-near-oxford/',
+                '/gas-and-plumbing-training-near-slough/',
+                '/gas-and-plumbing-training-near-maidenhead/',
+              ]
+              const locPages = LOCATION_URLS.map(url => items.find(i => i.url === url)).filter(Boolean)
+              if (!hub && locPages.length === 0) return null
+              const sColor = s => s === 'published' ? '#10b981' : (s === 'draft' || s === 'approved') ? '#f59e0b' : s === 'held' ? '#888' : '#555'
+              const sLabel = s => s === 'published' ? '✅ LIVE' : s === 'draft' ? '📝 DRAFT' : s === 'approved' ? '👍 APPROVED' : s === 'held' ? '⏸ HELD' : (s || '—').toUpperCase()
+              return (
+                <div className="section">
+                  <div className="sec-title">🧭 Training Near You — Hub &amp; Location Coverage</div>
+                  <div className="card">
+                    {hub && (
+                      <div style={{display:'flex',alignItems:'center',gap:8,padding:'6px 0',borderBottom:'1px solid #222',fontSize:11}}>
+                        <span style={{fontSize:9,color:sColor(hub.status),fontWeight:700,minWidth:78}}>{sLabel(hub.status)}</span>
+                        <span style={{color:'#fff',fontWeight:600,flex:1}}>Hub: Training Near You</span>
+                        <span style={{fontSize:9,color:'#888'}}>{hub.url}</span>
+                      </div>
+                    )}
+                    {locPages.map((p, i) => (
+                      <div key={i} style={{display:'flex',alignItems:'center',gap:8,padding:'5px 0',borderBottom:'1px solid #1a1a1a',fontSize:11}}>
+                        <span style={{fontSize:9,color:sColor(p.status),fontWeight:600,minWidth:78}}>{sLabel(p.status)}</span>
+                        <span style={{color:'#ddd',flex:1}}>{p.title}</span>
+                        <span style={{fontSize:9,color:'#888'}}>{p.url}</span>
+                      </div>
+                    ))}
+                    <div style={{fontSize:9,color:'#555',marginTop:6}}>
+                      {locPages.length} location pages tracked · read-only from content.json
+                    </div>
+                  </div>
+                </div>
+              )
+            })()}
           </>
         )}
 
